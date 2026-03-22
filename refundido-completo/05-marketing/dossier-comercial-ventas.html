@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlantic Crest Villas — Dossier Comercial de Ventas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            luxury: {
+              50: '#fff7fb', 100: '#ffe9f3', 200: '#ffd0e5', 300: '#ffadd1',
+              400: '#ff7ab6', 500: '#f24b97', 600: '#df2a79', 700: '#bd1d62',
+              800: '#9d1c55', 900: '#831b4a'
+            },
+            gold: '#c8a96a',
+            ink: '#0f172a'
+          },
+          boxShadow: {
+            luxury: '0 24px 80px rgba(131,27,74,.18)',
+            soft: '0 18px 50px rgba(15,23,42,.08)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #fffafc; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: all .9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .glass { background: rgba(255,255,255,.74); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.55); }
+    .gradient-text { background: linear-gradient(135deg, #fff 0%, #ffe4c4 30%, #ffd0e5 60%, #fff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .soft-gradient { background: radial-gradient(circle at top left, rgba(255,255,255,.18), transparent 34%), linear-gradient(135deg, rgba(189,29,98,.94), rgba(15,23,42,.96)); }
+    .section-title { letter-spacing: .22em; text-transform: uppercase; font-size: .75rem; font-weight: 700; color: #bd1d62; }
+    tbody tr:hover { background: rgba(242,75,151,.04); }
+  </style>
+</head>
+<body class="font-sans text-slate-800 antialiased">
+  <nav class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/55 backdrop-blur-xl text-white">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div>
+        <p class="text-[11px] font-semibold uppercase tracking-[0.35em] text-rose-200">Private Sales Collection</p>
+        <p class="text-lg font-semibold">Atlantic Crest Villas</p>
+      </div>
+      <div class="hidden gap-6 text-sm text-slate-200 lg:flex">
+        <a href="#coleccion" class="transition hover:text-white">Colección</a>
+        <a href="#galeria" class="transition hover:text-white">Galería</a>
+        <a href="#villas" class="transition hover:text-white">Villas</a>
+        <a href="#inversion" class="transition hover:text-white">Inversión</a>
+        <a href="#ubicacion" class="transition hover:text-white">Ubicación</a>
+        <a href="#contacto" class="transition hover:text-white">Contacto</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+    <img src="assets/render-exterior-dia.jpg" alt="Atlantic Crest Villas" class="absolute inset-0 h-full w-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/40 to-slate-950/20"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,.15),transparent_32%)]"></div>
+    <div class="relative mx-auto flex min-h-screen max-w-7xl items-end px-6 pb-16 pt-32 lg:pb-24">
+      <div class="max-w-4xl">
+        <p class="mb-5 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-rose-100">Costa Adeje · San Eugenio Alto · Tenerife</p>
+        <h1 class="text-5xl font-extrabold leading-none md:text-7xl lg:text-8xl">Atlantic <span class="gradient-text">Crest</span><br>Villas</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-200 md:text-xl">Private Ocean-View Living Above Costa Adeje.</p>
+        <p class="mt-6 max-w-3xl text-base leading-8 text-slate-300 md:text-lg">Una colección extraordinariamente limitada de seis villas turísticas de lujo con piscina infinity privada, domótica KNX, aerotermia, certificación energética A y vistas abiertas al Atlántico desde una de las cotas residenciales más exclusivas del sur de Tenerife.</p>
+        <div class="mt-8 flex flex-wrap gap-3 text-sm text-white">
+          <span class="rounded-full border border-white/20 bg-white/10 px-4 py-2">6 villas independientes</span>
+          <span class="rounded-full border border-white/20 bg-white/10 px-4 py-2">≈190 m² por villa</span>
+          <span class="rounded-full border border-white/20 bg-white/10 px-4 py-2">Desde 2.200.000 €</span>
+          <span class="rounded-full border border-white/20 bg-white/10 px-4 py-2">Playa del Duque · 10 min</span>
+        </div>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href="#contacto" class="rounded-full bg-white px-7 py-4 text-sm font-bold uppercase tracking-[0.24em] text-slate-950 transition hover:scale-[1.02]">Discover Your Private Paradise</a>
+          <a href="#video" class="rounded-full border border-white/25 bg-white/10 px-7 py-4 text-sm font-bold uppercase tracking-[0.24em] text-white transition hover:bg-white/15">Ver walkthrough</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl space-y-24 px-6 py-20 lg:space-y-28">
+    <section id="coleccion" class="reveal">
+      <div class="grid gap-6 lg:grid-cols-[1.1fr_.9fr]">
+        <div class="rounded-[2rem] soft-gradient p-10 text-white shadow-luxury">
+          <p class="text-sm font-semibold uppercase tracking-[0.35em] text-rose-100">The Collection</p>
+          <h2 class="mt-4 text-3xl font-bold md:text-5xl">Una promoción concebida para compradores que valoran la privacidad, la arquitectura y la escasez.</h2>
+          <p class="mt-6 max-w-2xl text-base leading-8 text-slate-200">Atlantic Crest Villas traduce el estilo de vida de Costa Adeje en una pieza residencial con vocación patrimonial: seis unidades independientes, implantación escalonada sobre ladera, piscinas infinity privadas, materiales contemporáneos de inspiración volcánica y una relación permanente con el horizonte oceánico.</p>
+          <div class="mt-8 grid gap-4 md:grid-cols-3">
+            <div class="rounded-3xl border border-white/10 bg-white/10 p-5"><p class="text-xs uppercase tracking-[0.3em] text-rose-100">Arquitectura</p><p class="mt-2 font-semibold">Diseño bioclimático con lenguaje contemporáneo</p></div>
+            <div class="rounded-3xl border border-white/10 bg-white/10 p-5"><p class="text-xs uppercase tracking-[0.3em] text-rose-100">Tecnología</p><p class="mt-2 font-semibold">KNX, aerotermia, fotovoltaica y preinstalación VE</p></div>
+            <div class="rounded-3xl border border-white/10 bg-white/10 p-5"><p class="text-xs uppercase tracking-[0.3em] text-rose-100">Lifestyle</p><p class="mt-2 font-semibold">Sol anual, mar, privacidad y movilidad premium</p></div>
+          </div>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+          <div class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200">
+            <p class="section-title">Posicionamiento</p>
+            <p class="mt-4 text-2xl font-bold text-ink">Luxury lifestyle investment</p>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Pensado para comprador internacional de alto poder adquisitivo y para inversor que busca un activo de escasez en Costa Adeje.</p>
+          </div>
+          <div class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200">
+            <p class="section-title">Ubicación</p>
+            <p class="mt-4 text-2xl font-bold text-ink">San Eugenio Alto</p>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Altitud aproximada 200 m, vistas abiertas al Atlántico, cercanía inmediata a playas, golf, marinas y resorts de referencia.</p>
+          </div>
+          <div class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200">
+            <p class="section-title">Pricing</p>
+            <p class="mt-4 text-2xl font-bold text-ink">2.200.000 € / villa</p>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Valor total de proyecto: 13.200.000 €. Estrategia de salida premium con early access controlado.</p>
+          </div>
+          <div class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200">
+            <p class="section-title">Hospitality case</p>
+            <p class="mt-4 text-2xl font-bold text-ink">350–600 €/noche</p>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Rango de explotación vacacional premium con ocupación media estimada entre 75% y 85%.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="galeria" class="reveal space-y-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="section-title">Galería curada</p>
+          <h2 class="mt-3 text-3xl font-bold text-ink md:text-5xl">Una lectura visual del proyecto, su entorno y su forma de habitar el paisaje.</h2>
+        </div>
+        <p class="max-w-2xl text-sm leading-7 text-slate-600">Renders generados sobre referencias del proyecto y contexto real de Costa Adeje para transmitir la implantación, el horizonte, la materia y la atmósfera de la promoción.</p>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-[1.2fr_.8fr]">
+        <article class="overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-slate-200">
+          <img src="assets/render-exterior-dia.jpg" alt="Exterior día Atlantic Crest Villas" class="h-[34rem] w-full object-cover">
+          <div class="p-6 md:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <h3 class="text-2xl font-bold text-ink">El exterior principal</h3>
+              <span class="rounded-full bg-rose-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-luxury-700">Golden hour · Atlantic view</span>
+            </div>
+            <p class="mt-4 text-sm leading-7 text-slate-600">La fachada se abre al océano con líneas limpias, piscinas infinity y una composición escalonada que maximiza privacidad, soleamiento y control visual entre villas.</p>
+          </div>
+        </article>
+        <div class="grid gap-6">
+          <article class="overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-slate-200">
+            <img src="assets/render-exterior-noche.jpg" alt="Exterior noche Atlantic Crest Villas" class="h-64 w-full object-cover">
+            <div class="p-5"><h3 class="text-lg font-bold text-ink">Nocturno con iluminación ambiental</h3><p class="mt-2 text-sm leading-7 text-slate-600">Una atmósfera cálida y sofisticada para un activo que funciona también como producto hospitality premium.</p></div>
+          </article>
+          <article class="overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-slate-200">
+            <img src="assets/render-aereo-entorno.jpg" alt="Vista aérea del complejo" class="h-64 w-full object-cover">
+            <div class="p-5"><h3 class="text-lg font-bold text-ink">Integración en el paisaje</h3><p class="mt-2 text-sm leading-7 text-slate-600">Lectura aérea de la relación entre topografía, urbanización premium y frente litoral de Costa Adeje.</p></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-6">
+        <article class="overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-slate-200"><img src="assets/render-interior-salon.jpg" alt="Interior salón" class="h-72 w-full object-cover transition duration-700 hover:scale-105"><div class="p-5"><h3 class="font-bold text-ink">Salón-cocina open plan</h3><p class="mt-2 text-sm leading-7 text-slate-600">Una pieza principal concebida para vivir hacia la terraza y el mar.</p></div></article>
+        <article class="overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-slate-200"><img src="assets/render-dormitorio-master.jpg" alt="Dormitorio master" class="h-72 w-full object-cover transition duration-700 hover:scale-105"><div class="p-5"><h3 class="font-bold text-ink">Dormitorio master</h3><p class="mt-2 text-sm leading-7 text-slate-600">Refugio privado con atmósfera serena, luz suave y horizonte atlántico.</p></div></article>
+        <article class="overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-slate-200"><img src="assets/render-piscina-infinity.jpg" alt="Piscina infinity" class="h-72 w-full object-cover transition duration-700 hover:scale-105"><div class="p-5"><h3 class="font-bold text-ink">Infinity pool &amp; Atlantic skyline</h3><p class="mt-2 text-sm leading-7 text-slate-600">El icono aspiracional de la colección: agua, horizonte y privacidad.</p></div></article>
+        <article class="overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-slate-200"><img src="assets/render-piscina-oceano.jpg" alt="Piscina con vistas al océano" class="h-72 w-full object-cover transition duration-700 hover:scale-105"><div class="p-5"><h3 class="font-bold text-ink">Piscina con vistas al océano</h3><p class="mt-2 text-sm leading-7 text-slate-600">Lectura más cercana del borde infinito fundiéndose con el Atlántico.</p></div></article>
+        <article class="overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-slate-200"><img src="assets/render-terraza-atardecer.jpg" alt="Terraza al atardecer" class="h-72 w-full object-cover transition duration-700 hover:scale-105"><div class="p-5"><h3 class="font-bold text-ink">Terraza al atardecer</h3><p class="mt-2 text-sm leading-7 text-slate-600">Escena de lifestyle pensada para la conversación, el descanso y el mar.</p></div></article>
+        <article class="overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-slate-200"><img src="assets/aerial-real.jpg" alt="Vista aérea real del entorno" class="h-72 w-full object-cover transition duration-700 hover:scale-105"><div class="p-5"><h3 class="font-bold text-ink">Entorno aéreo real</h3><p class="mt-2 text-sm leading-7 text-slate-600">Referencia visual del litoral premium de Costa Adeje y su carácter atlántico.</p></div></article>
+      </div>
+    </section>
+    <section id="video" class="reveal">
+      <div class="overflow-hidden rounded-[2.25rem] soft-gradient p-8 text-white shadow-luxury md:p-10">
+        <div class="grid gap-8 xl:grid-cols-[1.05fr_.95fr] xl:items-center">
+          <div>
+            <p class="section-title !text-rose-100">Walkthrough</p>
+            <h2 class="mt-3 text-3xl font-bold md:text-5xl">Un primer recorrido cinematográfico por la experiencia Atlantic Crest.</h2>
+            <p class="mt-6 text-base leading-8 text-slate-200">El video resume el carácter de la promoción: aproximación aérea, relación entre arquitectura y océano, y una puesta en escena pensada para presentaciones privadas, brokers premium y compradores internacionales.</p>
+            <div class="mt-8 grid gap-4 md:grid-cols-3">
+              <div class="rounded-3xl border border-white/15 bg-white/10 p-5"><p class="text-xs uppercase tracking-[0.3em] text-rose-100">Formato</p><p class="mt-2 font-semibold">16:9 · Full HD</p></div>
+              <div class="rounded-3xl border border-white/15 bg-white/10 p-5"><p class="text-xs uppercase tracking-[0.3em] text-rose-100">Uso</p><p class="mt-2 font-semibold">Web, presentaciones y eventos</p></div>
+              <div class="rounded-3xl border border-white/15 bg-white/10 p-5"><p class="text-xs uppercase tracking-[0.3em] text-rose-100">Narrativa</p><p class="mt-2 font-semibold">Luxury real estate storytelling</p></div>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded-[2rem] border border-white/15 bg-black/40 shadow-2xl">
+            <video controls preload="metadata" class="w-full" src="assets/video-remotion.mp4"></video>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="villas" class="reveal space-y-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="section-title">Private villas</p>
+          <h2 class="mt-3 text-3xl font-bold text-ink md:text-5xl">Seis villas, una misma filosofía: amplitud, tecnología y valor de reventa.</h2>
+        </div>
+        <p class="max-w-2xl text-sm leading-7 text-slate-600">Cada unidad se concibe como una villa turística independiente de alto estándar, con programa familiar, vistas, outdoor living y especificación técnica preparada para una explotación vacacional premium o un uso patrimonial.</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200"><p class="text-xs font-bold uppercase tracking-[0.32em] text-luxury-700">Villa 01</p><h3 class="mt-3 text-2xl font-bold text-ink">Atlantic Residence I</h3><ul class="mt-5 space-y-3 text-sm leading-7 text-slate-600"><li>≈190 m² construidos</li><li>2 plantas · 3 dormitorios en suite</li><li>Piscina infinity y terraza panorámica</li><li>Domótica KNX · aerotermia · Clase A</li><li>Precio recomendado: <strong>2.200.000 €</strong></li></ul></article>
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200"><p class="text-xs font-bold uppercase tracking-[0.32em] text-luxury-700">Villa 02</p><h3 class="mt-3 text-2xl font-bold text-ink">Atlantic Residence II</h3><ul class="mt-5 space-y-3 text-sm leading-7 text-slate-600"><li>≈190 m² construidos</li><li>Configuración familiar de 3 dormitorios</li><li>Outdoor lounge + solárium</li><li>Preinstalación VE y datos de alta velocidad</li><li>Precio recomendado: <strong>2.200.000 €</strong></li></ul></article>
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200"><p class="text-xs font-bold uppercase tracking-[0.32em] text-luxury-700">Villa 03</p><h3 class="mt-3 text-2xl font-bold text-ink">Atlantic Residence III</h3><ul class="mt-5 space-y-3 text-sm leading-7 text-slate-600"><li>≈190 m² construidos</li><li>Vistas abiertas al océano Atlántico</li><li>Piscina privada con efecto horizonte</li><li>Cocina abierta y carpinterías de gran formato</li><li>Precio recomendado: <strong>2.200.000 €</strong></li></ul></article>
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200"><p class="text-xs font-bold uppercase tracking-[0.32em] text-luxury-700">Villa 04</p><h3 class="mt-3 text-2xl font-bold text-ink">Atlantic Residence IV</h3><ul class="mt-5 space-y-3 text-sm leading-7 text-slate-600"><li>≈190 m² construidos</li><li>Implantación escalonada y privacidad visual</li><li>Suite principal orientada al mar</li><li>Acabados premium de inspiración volcánica</li><li>Precio recomendado: <strong>2.200.000 €</strong></li></ul></article>
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200"><p class="text-xs font-bold uppercase tracking-[0.32em] text-luxury-700">Villa 05</p><h3 class="mt-3 text-2xl font-bold text-ink">Atlantic Residence V</h3><ul class="mt-5 space-y-3 text-sm leading-7 text-slate-600"><li>≈190 m² construidos</li><li>Programa turístico premium</li><li>Terrazas y zonas exteriores de gran disfrute</li><li>Gestión inteligente de confort y energía</li><li>Precio recomendado: <strong>2.200.000 €</strong></li></ul></article>
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200"><p class="text-xs font-bold uppercase tracking-[0.32em] text-luxury-700">Villa 06</p><h3 class="mt-3 text-2xl font-bold text-ink">Atlantic Residence VI</h3><ul class="mt-5 space-y-3 text-sm leading-7 text-slate-600"><li>≈190 m² construidos</li><li>Vocación patrimonial y de explotación premium</li><li>Infinity pool privada y solárium</li><li>Entorno consolidado de lujo en Costa Adeje</li><li>Precio recomendado: <strong>2.200.000 €</strong></li></ul></article>
+      </div>
+
+      <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-soft">
+        <div class="border-b border-slate-200 px-6 py-5"><h3 class="text-2xl font-bold text-ink">Ficha técnica resumida</h3></div>
+        <div class="overflow-x-auto px-6 py-6">
+          <table class="min-w-full text-left text-sm">
+            <thead>
+              <tr class="text-slate-500">
+                <th class="px-4 py-3 font-semibold">Concepto</th>
+                <th class="px-4 py-3 font-semibold">Dato comercial</th>
+                <th class="px-4 py-3 font-semibold">Lectura</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              <tr><td class="px-4 py-4 font-medium">Tipología</td><td class="px-4 py-4">Villa turística independiente</td><td class="px-4 py-4">Producto escaso y defendible</td></tr>
+              <tr><td class="px-4 py-4 font-medium">Superficie</td><td class="px-4 py-4">≈190 m² / unidad</td><td class="px-4 py-4">Escala óptima para uso familiar premium</td></tr>
+              <tr><td class="px-4 py-4 font-medium">Programa</td><td class="px-4 py-4">3 dormitorios en suite + zonas abiertas</td><td class="px-4 py-4">Flexibilidad para ocio propio y alquiler premium</td></tr>
+              <tr><td class="px-4 py-4 font-medium">Instalaciones</td><td class="px-4 py-4">KNX, aerotermia, FV, preinst. VE</td><td class="px-4 py-4">Tecnología alineada con comprador internacional</td></tr>
+              <tr><td class="px-4 py-4 font-medium">Exterior</td><td class="px-4 py-4">Piscina infinity, terraza, solárium</td><td class="px-4 py-4">Valor emocional + rentabilidad comercial</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-3">
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200">
+          <p class="section-title">Exterior</p>
+          <ul class="mt-5 space-y-3 text-sm leading-7 text-slate-600">
+            <li>✓ Arquitectura contemporánea y volumetría escalonada</li>
+            <li>✓ Piscina infinity privada en cada unidad</li>
+            <li>✓ Terrazas orientadas al sol y al océano</li>
+            <li>✓ Jardinería subtropical integrada</li>
+          </ul>
+        </article>
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200">
+          <p class="section-title">Interior</p>
+          <ul class="mt-5 space-y-3 text-sm leading-7 text-slate-600">
+            <li>✓ Salón-cocina open plan con grandes ventanales</li>
+            <li>✓ Suites principales con vocación de hotel privado</li>
+            <li>✓ Materialidad premium de inspiración volcánica</li>
+            <li>✓ Distribuciones pensadas para amplitud y luz</li>
+          </ul>
+        </article>
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft ring-1 ring-slate-200">
+          <p class="section-title">Instalaciones</p>
+          <ul class="mt-5 space-y-3 text-sm leading-7 text-slate-600">
+            <li>✓ Domótica KNX para confort y control</li>
+            <li>✓ Aerotermia y apoyo fotovoltaico</li>
+            <li>✓ Certificación energética A</li>
+            <li>✓ Preinstalación de recarga para vehículo eléctrico</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+    <section id="inversion" class="reveal space-y-8">
+      <div class="grid gap-8 xl:grid-cols-[1fr_1fr] xl:items-start">
+        <article class="rounded-[2rem] bg-white p-8 shadow-soft ring-1 ring-slate-200">
+          <p class="section-title">Investment case</p>
+          <h2 class="mt-3 text-3xl font-bold text-ink md:text-5xl">Un activo premium con upside comercial, operativo y patrimonial.</h2>
+          <p class="mt-6 text-sm leading-8 text-slate-600">La propuesta de valor para inversor se apoya en la rareza del producto, la prima locacional de Costa Adeje, el valor del suelo actualizado, la capacidad de explotación vacacional premium y la posibilidad de desinversión individual por unidad.</p>
+          <div class="mt-8 grid gap-4 md:grid-cols-2">
+            <div class="rounded-3xl bg-rose-50 p-5 ring-1 ring-rose-100"><p class="text-xs uppercase tracking-[0.3em] text-luxury-700">Valor del suelo</p><p class="mt-2 text-3xl font-extrabold text-ink">2,5 M€</p></div>
+            <div class="rounded-3xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-luxury-700">Valor total de proyecto</p><p class="mt-2 text-3xl font-extrabold text-ink">13,2 M€</p></div>
+            <div class="rounded-3xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-luxury-700">Margen promotor</p><p class="mt-2 text-3xl font-extrabold text-ink">35–40%</p></div>
+            <div class="rounded-3xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-luxury-700">TIR estimada</p><p class="mt-2 text-3xl font-extrabold text-ink">22–26%</p></div>
+          </div>
+          <div class="mt-8 rounded-[2rem] bg-ink p-6 text-slate-200">
+            <p class="text-xs uppercase tracking-[0.3em] text-rose-200">Pricing strategy</p>
+            <p class="mt-3 text-sm leading-8">Precio de salida recomendado: <strong>2.200.000 € por villa</strong>. Se sugiere un programa early access para las primeras reservas con beneficio no disruptivo sobre precio — preferiblemente hasta un 3% o mediante upgrades de mobiliario / gestión inicial — para proteger el posicionamiento premium sin depreciar la marca.</p>
+          </div>
+        </article>
+
+        <article class="rounded-[2rem] soft-gradient p-8 text-white shadow-luxury">
+          <p class="section-title !text-rose-100">Rental outlook</p>
+          <h3 class="mt-3 text-3xl font-bold">Capacidad de explotación vacacional de alto nivel</h3>
+          <canvas id="investmentChart" class="mt-8 h-80 w-full"></canvas>
+          <div class="mt-8 grid gap-4 md:grid-cols-3">
+            <div class="rounded-3xl border border-white/15 bg-white/10 p-5"><p class="text-xs uppercase tracking-[0.3em] text-rose-100">ADR</p><p class="mt-2 text-2xl font-bold">350–600 €</p></div>
+            <div class="rounded-3xl border border-white/15 bg-white/10 p-5"><p class="text-xs uppercase tracking-[0.3em] text-rose-100">Ocupación</p><p class="mt-2 text-2xl font-bold">75–85%</p></div>
+            <div class="rounded-3xl border border-white/15 bg-white/10 p-5"><p class="text-xs uppercase tracking-[0.3em] text-rose-100">Producto</p><p class="mt-2 text-2xl font-bold">Premium family villas</p></div>
+          </div>
+          <p class="mt-6 text-sm leading-8 text-slate-200">Atlantic Crest Villas encaja en el segmento de escapadas familiares premium, estancias de larga duración invernal y buyer profiles que priorizan privacidad, diseño y servicios de destino consolidados.</p>
+        </article>
+      </div>
+    </section>
+    <section id="ubicacion" class="reveal space-y-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="section-title">Location</p>
+          <h2 class="mt-3 text-3xl font-bold text-ink md:text-5xl">Costa Adeje: uno de los mercados residenciales y turísticos más sólidos del Atlántico europeo.</h2>
+        </div>
+        <p class="max-w-2xl text-sm leading-7 text-slate-600">La combinación de clima anual, conectividad aérea, oferta hotelera de lujo, restauración, golf y servicios premium convierte la zona en una localización especialmente defendible para producto residencial de alto nivel.</p>
+      </div>
+
+      <div class="grid gap-6 xl:grid-cols-[1.1fr_.9fr]">
+        <article class="overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-slate-200">
+          <div class="relative">
+            <img src="assets/aerial-real.jpg" alt="Vista aérea real del entorno" class="h-[32rem] w-full object-cover">
+            <div class="absolute left-6 top-6 rounded-full bg-slate-950/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-white">Referencia aérea del entorno Costa Adeje</div>
+            <div class="absolute bottom-6 left-6 rounded-3xl border border-white/20 bg-white/15 px-5 py-4 text-white backdrop-blur-sm">
+              <p class="text-xs uppercase tracking-[0.3em] text-rose-100">Localización de referencia</p>
+              <p class="mt-2 text-sm font-semibold">Parcela 43-8 · San Eugenio Alto · 28.0834 N / 16.7364 W</p>
+            </div>
+          </div>
+        </article>
+        <article class="rounded-[2rem] bg-white p-8 shadow-soft ring-1 ring-slate-200">
+          <h3 class="text-2xl font-bold text-ink">Highlights locacionales</h3>
+          <div class="mt-6 space-y-4 text-sm leading-8 text-slate-600">
+            <p><strong>Playa del Duque:</strong> aproximadamente 10 minutos.</p>
+            <p><strong>Entorno premium:</strong> proximidad a resorts de referencia, beach clubs, restauración internacional y servicios de alto nivel.</p>
+            <p><strong>Conectividad:</strong> acceso cómodo al aeropuerto Tenerife Sur, marinas, campos de golf y oferta de ocio consolidada.</p>
+            <p><strong>Paisaje:</strong> cota elevada, pendiente natural, visuales largas al océano y vegetación subtropical propia del sur de Tenerife.</p>
+          </div>
+          <div class="mt-8 grid gap-4 md:grid-cols-2">
+            <div class="rounded-3xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-luxury-700">Buyer markets</p><p class="mt-2 font-semibold text-ink">UK · Alemania · países nórdicos · Benelux</p></div>
+            <div class="rounded-3xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-luxury-700">Narrativa de destino</p><p class="mt-2 font-semibold text-ink">Sun, privacy, ocean, performance</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section id="contacto" class="reveal">
+      <div class="overflow-hidden rounded-[2.25rem] soft-gradient p-8 text-white shadow-luxury md:p-10">
+        <div class="grid gap-8 xl:grid-cols-[1fr_.9fr] xl:items-center">
+          <div>
+            <p class="section-title !text-rose-100">Private Sales Desk</p>
+            <h2 class="mt-3 text-3xl font-bold md:text-5xl">Solicite disponibilidad, pricing pack y presentación privada.</h2>
+            <p class="mt-6 max-w-2xl text-base leading-8 text-slate-200">Disponible para comprador final, family office, private investor y broker colaborador. Bajo solicitud se facilita presentación completa, hipótesis de explotación, documentación urbanística y material técnico-comercial del proyecto.</p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <div class="rounded-3xl border border-white/15 bg-white/10 px-5 py-4 text-sm"><strong>Formato de entrega:</strong> dossier privado + walkthrough + documentación soporte</div>
+              <div class="rounded-3xl border border-white/15 bg-white/10 px-5 py-4 text-sm"><strong>Canal:</strong> presentación remota o visita privada en Costa Adeje</div>
+            </div>
+          </div>
+          <div class="rounded-[2rem] border border-white/15 bg-white/10 p-8 backdrop-blur-sm">
+            <p class="text-xs uppercase tracking-[0.3em] text-rose-100">Contacto comercial</p>
+            <div class="mt-5 space-y-4 text-sm leading-8 text-slate-100">
+              <p><strong>Proyecto:</strong> Atlantic Crest Villas</p>
+              <p><strong>Ubicación:</strong> Parcela 43-8 · San Eugenio Alto · Costa Adeje</p>
+              <p><strong>Disponibilidad inicial:</strong> 6 villas</p>
+              <p><strong>Precio recomendado:</strong> desde 2.200.000 € por unidad</p>
+              <p><strong>Contacto:</strong> Private Sales Desk del promotor / agencia mandataria</p>
+            </div>
+            <div class="mt-6 rounded-3xl bg-white px-6 py-4 text-center text-sm font-bold uppercase tracking-[0.24em] text-slate-950">Presentación privada bajo solicitud</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-slate-950 py-12 text-sm text-slate-400">
+    <div class="mx-auto max-w-7xl px-6">
+      <p class="text-white"><strong>Atlantic Crest Villas</strong> — Dossier comercial de ventas</p>
+      <p class="mt-3 max-w-5xl leading-7">Las imágenes y visualizaciones son orientativas y no contractuales. El promotor se reserva el derecho a introducir ajustes de proyecto, superficies, calidades y acabados conforme a la evolución técnica, comercial o administrativa de la promoción.</p>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    const investmentCanvas = document.getElementById('investmentChart');
+    if (investmentCanvas) {
+      new Chart(investmentCanvas, {
+        type: 'bar',
+        data: {
+          labels: ['ADR mínimo', 'ADR objetivo', 'ADR máximo', 'Ocupación mínima', 'Ocupación objetivo', 'Ocupación máxima'],
+          datasets: [{
+            label: 'Indicador comercial',
+            data: [350, 475, 600, 75, 80, 85],
+            backgroundColor: ['#ffd0e5', '#ffadd1', '#f24b97', '#f8c97b', '#c8a96a', '#8b6a2f'],
+            borderRadius: 14
+          }]
+        },
+        options: {
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => ctx.dataIndex < 3 ? `${ctx.raw} €/noche` : `${ctx.raw}%`
+              }
+            }
+          },
+          scales: {
+            x: { ticks: { color: '#f8fafc' }, grid: { display: false } },
+            y: { ticks: { color: '#e2e8f0' }, grid: { color: 'rgba(255,255,255,.12)' } }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

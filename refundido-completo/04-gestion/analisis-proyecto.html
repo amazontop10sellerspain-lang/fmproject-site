@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análisis de Proyecto — Modificación Menor PGO Adeje · Parcela 43-8 San Eugenio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); }
+    html { scroll-behavior: smooth; }
+    tbody tr:hover { background-color: rgba(16,185,129,0.05); }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .agent-card { transition: all 0.3s ease; }
+    .agent-card:hover { transform: scale(1.02); }
+    .timeline-line { position: relative; }
+    .timeline-line::before { content: ''; position: absolute; left: 1.25rem; top: 2.5rem; bottom: 0; width: 2px; background: linear-gradient(to bottom, #10b981, #d1d5db); }
+    .phase-card { border-left: 4px solid; transition: all 0.3s ease; }
+    .phase-card:hover { transform: translateX(4px); }
+    .status-green { animation: pulse-green 2s ease-in-out infinite; }
+    @keyframes pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); } 50% { box-shadow: 0 0 0 8px rgba(16,185,129,0); } }
+    @keyframes count-up { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #10b981; transition: width 0.3s; }
+    .nav-link:hover::after { width: 100%; }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <span class="text-xl font-bold gradient-text">Nexus — Director de Proyecto</span>
+      <div class="hidden lg:flex gap-6 text-sm font-medium text-gray-600">
+        <a href="#resumen" class="nav-link hover:text-emerald-600 transition">Resumen</a>
+        <a href="#datos" class="nav-link hover:text-emerald-600 transition">Datos</a>
+        <a href="#descripcion" class="nav-link hover:text-emerald-600 transition">Descripción</a>
+        <a href="#alternativas" class="nav-link hover:text-emerald-600 transition">Alternativas</a>
+        <a href="#tramitacion" class="nav-link hover:text-emerald-600 transition">Tramitación</a>
+        <a href="#cronograma" class="nav-link hover:text-emerald-600 transition">Cronograma</a>
+        <a href="#equipo" class="nav-link hover:text-emerald-600 transition">Equipo</a>
+        <a href="#riesgos" class="nav-link hover:text-emerald-600 transition">Riesgos</a>
+        <a href="#presupuesto" class="nav-link hover:text-emerald-600 transition">Presupuesto</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-700 text-white">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 80%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px); background-size: 80px 80px;"></div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-green-400/30 rounded-full text-sm font-semibold mb-6 status-green">
+        <span class="w-2 h-2 bg-white rounded-full"></span>
+        APROBADO DEFINITIVAMENTE
+      </div>
+      <p class="text-emerald-200 text-sm font-semibold uppercase tracking-widest mb-4">Refundido Completo — Análisis Integral de Proyecto</p>
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">Modificación Menor del PGO de Adeje<br><span class="text-emerald-200">Parcela 43-8 · San Eugenio Alto</span></h1>
+      <p class="text-lg text-emerald-100 max-w-3xl mx-auto">Modificación de uso, densidad y edificabilidad para desarrollo de 6 villas turísticas de lujo en la Urbanización San Eugenio, Costa Adeje (Tenerife)</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📍 Adeje, Tenerife</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📐 1.566 m² parcela</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm">🏗️ 1.143 m² edificables</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm">🏨 6 Villas turísticas</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm">👤 Herederos Domínguez Sierra</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-16 space-y-24">
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- RESUMEN EJECUTIVO -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="resumen" class="reveal">
+      <div class="text-center mb-12">
+        <p class="text-emerald-600 text-sm font-semibold uppercase tracking-widest mb-2">Visión General</p>
+        <h2 class="text-3xl font-bold text-gray-900">Resumen Ejecutivo</h2>
+      </div>
+      <div class="glass rounded-2xl p-8 shadow-lg">
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-lg font-bold text-gray-900 mb-4">📋 ¿Qué es este proyecto?</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Se trata del <strong>Refundido Completo</strong> de la <strong>Modificación Menor del Plan General de Ordenación (PGO) de Adeje</strong>, aprobado definitivamente. El documento abarca 4 tomos completos (138 páginas) que modifican las determinaciones urbanísticas de la <strong>Parcela 43-8</strong> de la Urbanización San Eugenio Alto en Costa Adeje, Tenerife.
+            </p>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              La modificación cambia el uso pormenorizado de la parcela (de mixto residencial/turístico a <strong>exclusivamente turístico</strong>), incrementa la <strong>edificabilidad</strong> de 0,33 a <strong>0,73 m²c/m²s</strong> y mantiene la densidad vigente de 75 m²s/plaza. El resultado: <strong>6 villas turísticas de lujo</strong> con hasta <strong>1.143 m² de superficie edificable</strong>.
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+              El proyecto ha sido redactado por el arquitecto <strong>José Manuel Sabina Santos</strong> (Colegiado nº 2.524) y promovido por los <strong>Herederos de D. Eduardo Domínguez Sierra</strong> (D. Eduardo Pedro Domínguez Sierra). La documentación ambiental fue elaborada por <strong>José Luis Roig Izquierdo</strong> (Geólogo).
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-gray-900 mb-4">✅ Estado del Proyecto</h3>
+            <div class="space-y-3">
+              <div class="flex items-start gap-3 p-3 bg-green-50 rounded-xl border border-green-100">
+                <span class="text-green-500 text-xl">🟢</span>
+                <div>
+                  <p class="font-semibold text-green-700">Aprobado Definitivamente</p>
+                  <p class="text-sm text-green-600">Modificación del PGO completamente tramitada y aprobada</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 p-3 bg-green-50 rounded-xl border border-green-100">
+                <span class="text-green-500 text-xl">🟢</span>
+                <div>
+                  <p class="font-semibold text-green-700">Evaluación Ambiental Favorable</p>
+                  <p class="text-sm text-green-600">Sin efectos significativos sobre el medio ambiente (Comisión Evaluación Ambiental, 05/08/2022)</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-xl border border-blue-100">
+                <span class="text-blue-500 text-xl">🔵</span>
+                <div>
+                  <p class="font-semibold text-blue-700">Pendiente: Proyecto de Edificación</p>
+                  <p class="text-sm text-blue-600">Se requiere proyecto arquitectónico + licencia de obras para construir</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 p-3 bg-amber-50 rounded-xl border border-amber-100">
+                <span class="text-amber-500 text-xl">🟡</span>
+                <div>
+                  <p class="font-semibold text-amber-700">Disputa con Cabildo (Edificabilidad)</p>
+                  <p class="text-sm text-amber-600">Informe desfavorable del Servicio Técnico de Turismo del Cabildo — rebatido jurídicamente en el documento</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- DATOS CLAVE DEL INMUEBLE -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="datos" class="reveal">
+      <div class="text-center mb-12">
+        <p class="text-emerald-600 text-sm font-semibold uppercase tracking-widest mb-2">Información del Inmueble</p>
+        <h2 class="text-3xl font-bold text-gray-900">Datos Clave del Proyecto</h2>
+      </div>
+
+      <!-- KPIs -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+        <div class="bg-white rounded-2xl p-6 shadow-md text-center card-hover">
+          <p class="text-3xl font-extrabold text-emerald-600" data-count="1566" data-suffix=" m²">1.566 m²</p>
+          <p class="text-sm text-gray-500 mt-2">Superficie Parcela</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-md text-center card-hover">
+          <p class="text-3xl font-extrabold text-emerald-600" data-count="1143" data-suffix=" m²t">1.143 m²t</p>
+          <p class="text-sm text-gray-500 mt-2">Edificabilidad Máxima</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-md text-center card-hover">
+          <p class="text-3xl font-extrabold text-emerald-600">6</p>
+          <p class="text-sm text-gray-500 mt-2">Villas Turísticas</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-md text-center card-hover">
+          <p class="text-3xl font-extrabold text-emerald-600">0,73</p>
+          <p class="text-sm text-gray-500 mt-2">m²c/m²s Edificabilidad</p>
+        </div>
+      </div>
+
+      <!-- Tabla principal -->
+      <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+        <div class="bg-emerald-50 px-6 py-4 border-b border-emerald-100">
+          <h3 class="font-bold text-emerald-800">📊 Ficha Técnica Completa</h3>
+        </div>
+        <table class="w-full text-left">
+          <tbody class="divide-y divide-gray-100">
+            <tr><td class="px-6 py-3 font-medium text-gray-700 w-2/5 bg-gray-50">Denominación</td><td class="px-6 py-3 text-gray-600">Modificación Menor del PGO de Adeje — Parcela 43-8 San Eugenio</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Municipio</td><td class="px-6 py-3 text-gray-600">Adeje, Santa Cruz de Tenerife (Canarias)</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Ubicación</td><td class="px-6 py-3 text-gray-600">Urbanización San Eugenio Alto — Zona AU-2, Costa Adeje (Sur de Tenerife)</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Parcela catastral</td><td class="px-6 py-3 text-gray-600 font-mono text-sm">0868013 (Parcela 43-8)</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Superficie parcela</td><td class="px-6 py-3 text-gray-600"><strong>1.566,02 m²</strong></td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Altitud media</td><td class="px-6 py-3 text-gray-600">180–200 m sobre el nivel del mar</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Clima</td><td class="px-6 py-3 text-gray-600">Subtropical semiárido. Temp. media: 21,2 °C — Precipitación media: 116 mm/año — Insolación: 3.078 h/año</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Clasificación suelo</td><td class="px-6 py-3 text-gray-600">Suelo Urbano Consolidado</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Zona urbanística PGO</td><td class="px-6 py-3 text-gray-600">U 12-3 (antes: mixto residencial + turístico)</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Uso principal aprobado</td><td class="px-6 py-3 text-gray-600"><strong>Turístico alojativo exclusivo</strong> (tipología: Villa turística extrahotelera)</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Uso residencial</td><td class="px-6 py-3 text-gray-600"><span class="text-red-600 font-semibold">Prohibido expresamente</span></td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Edificabilidad anterior</td><td class="px-6 py-3 text-gray-600">0,33 m²c/m²s (≈ 517 m²t máximo)</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Edificabilidad aprobada</td><td class="px-6 py-3 text-gray-600"><strong>0,73 m²c/m²s</strong> (≈ <strong>1.143 m²t</strong> máximo) — <span class="text-emerald-600">+121% incremento</span></td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Densidad alojativa</td><td class="px-6 py-3 text-gray-600">75 m²s/plaza (mantenida del PGO vigente)</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Estándar de calidad</td><td class="px-6 py-3 text-gray-600">55 m²t/plaza (indicador de calidad turística)</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Nº unidades alojativas</td><td class="px-6 py-3 text-gray-600"><strong>6 villas turísticas</strong> (≈190 m²t cada una)</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Plazas alojativas</td><td class="px-6 py-3 text-gray-600">20 plazas turísticas</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Nº plantas máximo</td><td class="px-6 py-3 text-gray-600">2 plantas (PB + P1) — según zona U 12-3 PGO</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Promotor</td><td class="px-6 py-3 text-gray-600"><strong>Herederos de D. Eduardo Domínguez Sierra</strong> (D. Eduardo Pedro Domínguez Sierra)</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Arquitecto redactor</td><td class="px-6 py-3 text-gray-600">José Manuel Sabina Santos — Arquitecto, Col. nº 2.524</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Geólogo (DAE)</td><td class="px-6 py-3 text-gray-600">José Luis Roig Izquierdo — Geólogo</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Planeamiento aplicable</td><td class="px-6 py-3 text-gray-600">PGO Adeje + PIOT + PTEOTT + Ley 4/2017 (Suelo y ENP Canarias)</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Patrimonio cultural</td><td class="px-6 py-3 text-gray-600">No afectado — Sin BIC ni bienes catalogados</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Red Natura 2000</td><td class="px-6 py-3 text-gray-600">No afectada</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-gray-700 bg-gray-50">Entorno paisajístico</td><td class="px-6 py-3 text-gray-600">Paisaje turístico costero, vista a La Gomera. Parcela vacante rodeada de suelo urbano consolidado</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- DESCRIPCIÓN DEL PROYECTO -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="descripcion" class="reveal">
+      <div class="text-center mb-12">
+        <p class="text-emerald-600 text-sm font-semibold uppercase tracking-widest mb-2">Contenido del Refundido</p>
+        <h2 class="text-3xl font-bold text-gray-900">Descripción del Proyecto</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Tomo I -->
+        <div class="bg-white rounded-2xl p-6 shadow-md card-hover border-t-4 border-emerald-400">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 font-bold">I</span>
+            <h3 class="font-bold text-gray-900">Tomo I — Memoria Justificativa</h3>
+          </div>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>📋 Objeto y justificación de la modificación</li>
+            <li>📍 Situación y emplazamiento de la parcela</li>
+            <li>⚖️ Marco normativo: PGOU Adeje, PIOT, PTEOTT, Ley 4/2017</li>
+            <li>🏗️ Determinaciones urbanísticas vigentes vs. propuestas</li>
+            <li>📊 Justificación del incremento de edificabilidad (0,33 → 0,73 m²c/m²s)</li>
+            <li>🏨 Uso turístico alojativo como único uso principal</li>
+            <li>📐 Ficha urbanística de la parcela modificada</li>
+          </ul>
+        </div>
+        <!-- Tomo II -->
+        <div class="bg-white rounded-2xl p-6 shadow-md card-hover border-t-4 border-blue-400">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 font-bold">II</span>
+            <h3 class="font-bold text-gray-900">Tomo II — Normativa Urbanística</h3>
+          </div>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>📖 Articulado normativo de la modificación</li>
+            <li>🏠 Condiciones de uso: turístico alojativo (Villa extrahotelera)</li>
+            <li>📏 Parámetros de edificación: edificabilidad 0,73 m²c/m²s</li>
+            <li>🚫 Usos prohibidos: residencial expresamente</li>
+            <li>✅ Usos complementarios admisibles</li>
+            <li>🗺️ Planos de ordenación</li>
+          </ul>
+        </div>
+        <!-- Tomo III -->
+        <div class="bg-white rounded-2xl p-6 shadow-md card-hover border-t-4 border-purple-400">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 font-bold">III</span>
+            <h3 class="font-bold text-gray-900">Tomo III — Documento Ambiental Estratégico</h3>
+          </div>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>🌿 Caracterización ambiental completa (120 páginas)</li>
+            <li>🌡️ Clima, geología, hidrología, suelos</li>
+            <li>🦎 Flora y fauna: tabaibal-cardonal, lagarto tizón, pinzón vulgar</li>
+            <li>🏞️ Análisis paisajístico y cuenca visual</li>
+            <li>📊 8 alternativas evaluadas ambientalmente</li>
+            <li>✅ Conclusión: sin efectos ambientales significativos</li>
+          </ul>
+        </div>
+        <!-- Tomo IV -->
+        <div class="bg-white rounded-2xl p-6 shadow-md card-hover border-t-4 border-amber-400">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600 font-bold">IV</span>
+            <h3 class="font-bold text-gray-900">Tomo IV — Anexos</h3>
+          </div>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>👩‍👧 Informe de impacto de género</li>
+            <li>👶 Impacto en infancia, adolescencia y familia</li>
+            <li>♿ Accesibilidad (aplazado a proyecto de edificación)</li>
+            <li>💰 Sostenibilidad económica</li>
+            <li>📑 Resumen ejecutivo y resumen no técnico del DAE</li>
+            <li>⚖️ Argumentación jurídica contra informe desfavorable del Cabildo</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Situación actual de la parcela -->
+      <div class="mt-10 glass rounded-2xl p-8 shadow-lg">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">🏝️ Estado Actual de la Parcela</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="text-center p-4 bg-white/70 rounded-xl">
+            <span class="text-3xl">🏜️</span>
+            <p class="font-semibold text-gray-800 mt-2">Solar Vacante</p>
+            <p class="text-sm text-gray-500 mt-1">Parcela sin edificar, 1.566 m² en suelo urbano consolidado</p>
+          </div>
+          <div class="text-center p-4 bg-white/70 rounded-xl">
+            <span class="text-3xl">🌱</span>
+            <p class="font-semibold text-gray-800 mt-2">Vegetación Oportunista</p>
+            <p class="text-sm text-gray-500 mt-1">Matorral de balos, inciensos, vinagreras. Palmeras Washingtonia en borde</p>
+          </div>
+          <div class="text-center p-4 bg-white/70 rounded-xl">
+            <span class="text-3xl">🏘️</span>
+            <p class="font-semibold text-gray-800 mt-2">Entorno Consolidado</p>
+            <p class="text-sm text-gray-500 mt-1">Perimetrada por usos urbanos turísticos, cerca de Caldera del Rey</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- ALTERNATIVAS EVALUADAS -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="alternativas" class="reveal">
+      <div class="text-center mb-12">
+        <p class="text-emerald-600 text-sm font-semibold uppercase tracking-widest mb-2">Análisis de Opciones</p>
+        <h2 class="text-3xl font-bold text-gray-900">8 Alternativas Evaluadas</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">El documento analizó 8 combinaciones de uso, densidad y edificabilidad. La alternativa seleccionada es la <strong>nº 2</strong>.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead>
+            <tr class="bg-emerald-50 border-b border-emerald-100">
+              <th class="px-4 py-3 font-semibold text-emerald-700">Alt.</th>
+              <th class="px-4 py-3 font-semibold text-emerald-700">Uso</th>
+              <th class="px-4 py-3 font-semibold text-emerald-700">Densidad (m²s/plaza)</th>
+              <th class="px-4 py-3 font-semibold text-emerald-700">Edificabilidad (m²c/m²s)</th>
+              <th class="px-4 py-3 font-semibold text-emerald-700">Unidades</th>
+              <th class="px-4 py-3 font-semibold text-emerald-700">Sup. Edificable</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr><td class="px-4 py-3 text-gray-600">1</td><td class="px-4 py-3">🏨 Turístico</td><td class="px-4 py-3">75</td><td class="px-4 py-3">0,53</td><td class="px-4 py-3">6 villas</td><td class="px-4 py-3">830 m²t</td></tr>
+            <tr class="bg-emerald-50/50 border-l-4 border-emerald-500"><td class="px-4 py-3 font-bold text-emerald-700">2 ✅</td><td class="px-4 py-3 font-semibold">🏨 Turístico</td><td class="px-4 py-3 font-semibold">75</td><td class="px-4 py-3 font-semibold">0,73</td><td class="px-4 py-3 font-semibold">6 villas</td><td class="px-4 py-3 font-semibold">1.143 m²t</td></tr>
+            <tr><td class="px-4 py-3 text-gray-600">3</td><td class="px-4 py-3">🏨 Turístico</td><td class="px-4 py-3">60</td><td class="px-4 py-3">0,67</td><td class="px-4 py-3">8 villas</td><td class="px-4 py-3">1.049 m²t</td></tr>
+            <tr><td class="px-4 py-3 text-gray-600">4</td><td class="px-4 py-3">🏨 Turístico</td><td class="px-4 py-3">60</td><td class="px-4 py-3">0,92</td><td class="px-4 py-3">8 villas</td><td class="px-4 py-3">1.440 m²t</td></tr>
+            <tr><td class="px-4 py-3 text-gray-600">5</td><td class="px-4 py-3">🏠 Residencial</td><td class="px-4 py-3">75</td><td class="px-4 py-3">0,53</td><td class="px-4 py-3">6 viviendas</td><td class="px-4 py-3">830 m²t</td></tr>
+            <tr><td class="px-4 py-3 text-gray-600">6</td><td class="px-4 py-3">🏠 Residencial</td><td class="px-4 py-3">75</td><td class="px-4 py-3">0,73</td><td class="px-4 py-3">6 viviendas</td><td class="px-4 py-3">1.143 m²t</td></tr>
+            <tr><td class="px-4 py-3 text-gray-600">7</td><td class="px-4 py-3">🏠 Residencial</td><td class="px-4 py-3">60</td><td class="px-4 py-3">0,67</td><td class="px-4 py-3">8 viviendas</td><td class="px-4 py-3">1.049 m²t</td></tr>
+            <tr><td class="px-4 py-3 text-gray-600">8</td><td class="px-4 py-3">🏠 Residencial</td><td class="px-4 py-3">60</td><td class="px-4 py-3">0,92</td><td class="px-4 py-3">8 viviendas</td><td class="px-4 py-3">1.440 m²t</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-6 bg-emerald-50 rounded-xl p-6 border border-emerald-200">
+        <h4 class="font-bold text-emerald-800 mb-2">🎯 Alternativa Seleccionada: Nº 2</h4>
+        <p class="text-emerald-700 text-sm">Uso <strong>turístico</strong>, densidad vigente 75 m²s/plaza, estándar 55 m²t/plaza = <strong>0,73 m²c/m²s</strong>. Resultado: <strong>6 villas turísticas</strong> con hasta <strong>1.143 m²t</strong> construidos. Se mantiene la densidad del PGO vigente mientras se incrementa la calidad edificatoria (de 40 a 55 m²t/plaza).</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- ESTADO DE TRAMITACIÓN -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="tramitacion" class="reveal">
+      <div class="text-center mb-12">
+        <p class="text-emerald-600 text-sm font-semibold uppercase tracking-widest mb-2">Historial Administrativo</p>
+        <h2 class="text-3xl font-bold text-gray-900">Estado de Tramitación</h2>
+      </div>
+
+      <div class="relative timeline-line space-y-6 pl-4">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 z-10 border-2 border-emerald-400"><span class="text-emerald-600 text-sm font-bold">1</span></div>
+          <div class="bg-white rounded-xl p-5 shadow-sm flex-1">
+            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded">Sep 2021</span>
+            <p class="text-gray-700 mt-2">Inicio del procedimiento de evaluación ambiental estratégica simplificada. Presentación del DAE.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 z-10 border-2 border-emerald-400"><span class="text-emerald-600 text-sm font-bold">2</span></div>
+          <div class="bg-white rounded-xl p-5 shadow-sm flex-1">
+            <span class="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-1 rounded">16 Mar 2022</span>
+            <p class="text-gray-700 mt-2">Requerimiento de subsanación del DAE por el Órgano de Evaluación Ambiental de Adeje.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 z-10 border-2 border-emerald-400"><span class="text-emerald-600 text-sm font-bold">3</span></div>
+          <div class="bg-white rounded-xl p-5 shadow-sm flex-1">
+            <span class="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-1 rounded">12 Abr 2022</span>
+            <p class="text-gray-700 mt-2">Presentación del DAE subsanado por el promotor.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 z-10 border-2 border-emerald-400"><span class="text-emerald-600 text-sm font-bold">4</span></div>
+          <div class="bg-white rounded-xl p-5 shadow-sm flex-1">
+            <span class="text-xs font-semibold text-green-700 bg-green-50 px-2 py-1 rounded">05 Ago 2022</span>
+            <p class="text-gray-700 mt-2">La <strong>Comisión de Evaluación Ambiental de Adeje</strong> emite Informe Ambiental Estratégico <strong class="text-green-600">FAVORABLE</strong>. Sin efectos significativos.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 z-10 border-2 border-amber-400"><span class="text-amber-600 text-sm font-bold">5</span></div>
+          <div class="bg-white rounded-xl p-5 shadow-sm flex-1">
+            <span class="text-xs font-semibold text-amber-700 bg-amber-50 px-2 py-1 rounded">Trámite consultas</span>
+            <p class="text-gray-700 mt-2">Consultas a administraciones (Cabildo, CIATIS, FECAM, ayuntamientos colindantes, consejerías). El <strong>Servicio Técnico de Turismo del Cabildo</strong> emite informe <span class="text-red-600 font-semibold">DESFAVORABLE</span> sobre edificabilidad.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 z-10 border-2 border-emerald-400"><span class="text-emerald-600 text-sm font-bold">6</span></div>
+          <div class="bg-white rounded-xl p-5 shadow-sm flex-1">
+            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded">Oct 2023</span>
+            <p class="text-gray-700 mt-2">Elaboración del Tomo IV con Anexos, incluyendo argumentación jurídica que rebate el informe desfavorable del Cabildo (3 argumentos: no prohíbe aumentar edificabilidad individual, la densidad lo exige, y la disposición está derogada por la LSENPC).</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-full bg-green-200 flex items-center justify-center flex-shrink-0 z-10 border-2 border-green-500"><span class="text-green-700 text-sm font-bold">✅</span></div>
+          <div class="bg-green-50 rounded-xl p-5 shadow-sm flex-1 border border-green-200">
+            <span class="text-xs font-semibold text-white bg-green-500 px-2 py-1 rounded">10 Ene 2024</span>
+            <p class="text-gray-700 mt-2 font-semibold">Refundido Completo — <strong class="text-green-700">APROBADO DEFINITIVAMENTE</strong> por el Ayuntamiento de Adeje.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CRONOGRAMA PROPUESTO -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="cronograma" class="reveal">
+      <div class="text-center mb-12">
+        <p class="text-emerald-600 text-sm font-semibold uppercase tracking-widest mb-2">Planificación</p>
+        <h2 class="text-3xl font-bold text-gray-900">Cronograma de Fases Propuesto</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Con la modificación ya aprobada, estas son las fases necesarias para llevar el proyecto a la realidad.</p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="phase-card bg-white rounded-xl p-6 shadow-sm border-emerald-500">
+          <div class="flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-4">
+              <span class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 font-bold">F1</span>
+              <div>
+                <h4 class="font-bold text-gray-900">Estudio de Viabilidad y Mercado</h4>
+                <p class="text-sm text-gray-500">Análisis de mercado turístico, valoración, definición de producto</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">1-2 meses</span>
+              <div class="w-32 bg-gray-200 rounded-full h-2"><div class="bg-emerald-500 h-2 rounded-full" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card bg-white rounded-xl p-6 shadow-sm border-purple-500">
+          <div class="flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-4">
+              <span class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 font-bold">F2</span>
+              <div>
+                <h4 class="font-bold text-gray-900">Proyecto de Arquitectura y Edificación</h4>
+                <p class="text-sm text-gray-500">Diseño de las 6 villas turísticas, proyecto básico + ejecutivo, CTE</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-semibold text-purple-700 bg-purple-50 px-3 py-1 rounded-full">4-6 meses</span>
+              <div class="w-32 bg-gray-200 rounded-full h-2"><div class="bg-purple-500 h-2 rounded-full" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card bg-white rounded-xl p-6 shadow-sm border-blue-500">
+          <div class="flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-4">
+              <span class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 font-bold">F3</span>
+              <div>
+                <h4 class="font-bold text-gray-900">Licencia de Obras</h4>
+                <p class="text-sm text-gray-500">Solicitud de licencia municipal, subsanaciones, resolución</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-semibold text-blue-700 bg-blue-50 px-3 py-1 rounded-full">3-6 meses</span>
+              <div class="w-32 bg-gray-200 rounded-full h-2"><div class="bg-blue-500 h-2 rounded-full" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card bg-white rounded-xl p-6 shadow-sm border-amber-500">
+          <div class="flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-4">
+              <span class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600 font-bold">F4</span>
+              <div>
+                <h4 class="font-bold text-gray-900">Construcción</h4>
+                <p class="text-sm text-gray-500">Ejecución de obra: urbanización parcela + 6 villas turísticas</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-semibold text-amber-700 bg-amber-50 px-3 py-1 rounded-full">12-18 meses</span>
+              <div class="w-32 bg-gray-200 rounded-full h-2"><div class="bg-amber-500 h-2 rounded-full" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card bg-white rounded-xl p-6 shadow-sm border-pink-500">
+          <div class="flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-4">
+              <span class="w-10 h-10 bg-pink-100 rounded-xl flex items-center justify-center text-pink-600 font-bold">F5</span>
+              <div>
+                <h4 class="font-bold text-gray-900">Comercialización y Operación</h4>
+                <p class="text-sm text-gray-500">Marketing, licencias turísticas, puesta en mercado, explotación</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-semibold text-pink-700 bg-pink-50 px-3 py-1 rounded-full">3-6 meses</span>
+              <div class="w-32 bg-gray-200 rounded-full h-2"><div class="bg-pink-500 h-2 rounded-full" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 text-center">
+        <span class="inline-block bg-gray-100 text-gray-600 px-6 py-3 rounded-full text-sm font-semibold">⏱️ Plazo total estimado: <strong>24 — 36 meses</strong> desde el inicio de la fase de diseño</span>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- EQUIPO / AGENTES -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="equipo" class="reveal">
+      <div class="text-center mb-12">
+        <p class="text-emerald-600 text-sm font-semibold uppercase tracking-widest mb-2">Asignación de Agentes</p>
+        <h2 class="text-3xl font-bold text-gray-900">Tareas Específicas por Agente</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Cada agente recibirá tareas basadas directamente en el contenido del Refundido aprobado.</p>
+      </div>
+
+      <div class="space-y-6">
+
+        <!-- ARQON -->
+        <div class="agent-card bg-gradient-to-r from-purple-50 to-violet-50 rounded-2xl p-6 shadow-md border border-purple-200">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 bg-purple-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">A</div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Arqon <span class="text-purple-600">— Arquitecto</span></h3>
+              <span class="text-xs font-semibold text-white bg-red-500 px-2 py-1 rounded">🔴 CRÍTICO — PRIMERA PRIORIDAD</span>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-white/70 rounded-xl p-4">
+              <h4 class="font-semibold text-gray-800 mb-2">Tareas específicas del proyecto</h4>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>🏗️ <strong>Diseño de 6 villas turísticas</strong> en parcela de 1.566 m² con máx. 1.143 m²t de edificabilidad</li>
+                <li>📐 Tipología: <strong>Villa turística extrahotelera</strong> — ≈190 m² por villa, 2 plantas (PB+P1)</li>
+                <li>🏞️ Integración paisajística con el entorno de San Eugenio Alto (vista a La Gomera, clima subtropical)</li>
+                <li>📏 Cumplir parámetros: edificabilidad 0,73 m²c/m²s, densidad 75 m²s/plaza, 20 plazas turísticas</li>
+                <li>♿ Accesibilidad según Ley 8/1995 de Canarias y CTE DB-SUA</li>
+                <li>🌿 Zonas ajardinadas con especies autóctonas (tabaibal, cardonal — piso basal)</li>
+                <li>🌡️ Diseño bioclimático: 3.078 h sol/año, 21,2°C media, orientación óptima</li>
+                <li>📝 Proyecto básico + ejecutivo con toda la documentación CTE</li>
+                <li>🎨 Renders fotorrealistas (usar fal-ai: flux-2-pro) para presentación al promotor</li>
+              </ul>
+            </div>
+            <div class="bg-white/70 rounded-xl p-4">
+              <h4 class="font-semibold text-gray-800 mb-2">Datos del PDF para Arqon</h4>
+              <ul class="text-sm text-gray-500 space-y-1">
+                <li>• Parcela: 1.566,02 m² — Catastral: 0868013</li>
+                <li>• Edificabilidad: 0,73 m²c/m²s = 1.143 m²t máx.</li>
+                <li>• Altitud: 180-200 m s.n.m.</li>
+                <li>• Orientación: Sotavento, vista costera a La Gomera</li>
+                <li>• Entorno: Urbano turístico consolidado</li>
+                <li>• Suelo: volcánico (basaltos), buena capacidad portante</li>
+                <li>• Riesgo sísmico: bajo (zona volcánica estable)</li>
+                <li>• Vientos dominantes: alisios NE</li>
+                <li>• Precipitación: 116 mm/año (muy seco)</li>
+                <li>• Sin patrimonio cultural ni BIC en parcela</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- BUILDERO -->
+        <div class="agent-card bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-6 shadow-md border border-amber-200">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 bg-amber-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">B</div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Buildero <span class="text-amber-600">— Jefe de Obra</span></h3>
+              <span class="text-xs font-semibold text-amber-700 bg-amber-100 px-2 py-1 rounded">🟡 ALTA — FASE 2-4</span>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-white/70 rounded-xl p-4">
+              <h4 class="font-semibold text-gray-800 mb-2">Tareas específicas del proyecto</h4>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>💰 <strong>Presupuesto de Ejecución Material (PEM)</strong> para 6 villas turísticas + urbanización parcela</li>
+                <li>🏗️ Estimación de coste de construcción por m² en zona turística de Adeje (referencia: mercado actual Tenerife)</li>
+                <li>📐 Análisis de cimentación sobre <strong>suelo volcánico basáltico</strong> — buena capacidad portante</li>
+                <li>💧 Infraestructuras: parcela en <strong>suelo urbano consolidado con todos los servicios</strong> (agua, saneamiento, electricidad, telecomunicaciones)</li>
+                <li>🌧️ Drenaje pluvial: precipitación escasa (116 mm/año) pero torrencial cuando llueve</li>
+                <li>🏗️ Cronograma de obra detallado (estimar 12-18 meses)</li>
+                <li>📋 Plan de seguridad y salud</li>
+                <li>🌿 Movimiento de tierras y desbroce inicial (parcela con vegetación oportunista)</li>
+                <li>♻️ Gestión de residuos de obra según PTEOR de Tenerife</li>
+              </ul>
+            </div>
+            <div class="bg-white/70 rounded-xl p-4">
+              <h4 class="font-semibold text-gray-800 mb-2">Datos del PDF para Buildero</h4>
+              <ul class="text-sm text-gray-500 space-y-1">
+                <li>• Parcela vacante, sin edificaciones previas</li>
+                <li>• Suelo volcánico: coladas basálticas Pleistocenas</li>
+                <li>• Topografía: rampa suave hacia la costa</li>
+                <li>• Servicios urbanos completos en calle perimetral</li>
+                <li>• Clima árido: escasa lluvia, alta evaporación</li>
+                <li>• 2 plantas máximo (PB+P1)</li>
+                <li>• 1.143 m²t máximo a construir</li>
+                <li>• No requiere urbanización previa (SUC)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- VALOREX -->
+        <div class="agent-card bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 shadow-md border border-blue-200">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 bg-indigo-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">V</div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Valorex <span class="text-indigo-600">— Tasador</span></h3>
+              <span class="text-xs font-semibold text-white bg-red-500 px-2 py-1 rounded">🔴 CRÍTICO — ACTIVAR YA</span>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-white/70 rounded-xl p-4">
+              <h4 class="font-semibold text-gray-800 mb-2">Tareas específicas del proyecto</h4>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>📊 <strong>Valoración de la parcela</strong> con la nueva edificabilidad aprobada (0,73 m²c/m²s vs antigua 0,33 m²c/m²s)</li>
+                <li>💹 <strong>Estudio de mercado de villas turísticas de lujo</strong> en Costa Adeje / San Eugenio Alto</li>
+                <li>📈 Análisis de viabilidad económica: coste de construcción vs. valor de venta/explotación de 6 villas turísticas</li>
+                <li>🏨 Comparables: villas turísticas extrahoteleras en la zona turística Los Cristianos – Las Américas</li>
+                <li>📋 Valor del suelo: €/m² de suelo urbanizable turístico en Adeje</li>
+                <li>💰 Estimación de <strong>plusvalía generada</strong> por la modificación (+121% de edificabilidad)</li>
+                <li>🌴 Análisis del mercado turístico: ocupación, ADR, RevPAR en zona Costa Adeje</li>
+                <li>📊 ROI estimado del proyecto completo (inversión total vs. retorno)</li>
+              </ul>
+            </div>
+            <div class="bg-white/70 rounded-xl p-4">
+              <h4 class="font-semibold text-gray-800 mb-2">Datos del PDF para Valorex</h4>
+              <ul class="text-sm text-gray-500 space-y-1">
+                <li>• Parcela: 1.566 m² en San Eugenio Alto</li>
+                <li>• Zona: turística Los Cristianos – Las Américas (PTEOTT)</li>
+                <li>• Uso exclusivo: turístico alojativo (Villa)</li>
+                <li>• Edificabilidad aprobada: 0,73 m²c/m²s (1.143 m²t)</li>
+                <li>• 6 unidades × ~190 m² = producto premium</li>
+                <li>• 20 plazas turísticas</li>
+                <li>• Incremento edificabilidad: +121% respecto PGO anterior</li>
+                <li>• Caldera del Rey y costa cercanas</li>
+                <li>• 3.078 h sol/año — destino turístico todo el año</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- VENDEX -->
+        <div class="agent-card bg-gradient-to-r from-pink-50 to-rose-50 rounded-2xl p-6 shadow-md border border-pink-200">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 bg-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">V</div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Vendex <span class="text-pink-600">— Marketing</span></h3>
+              <span class="text-xs font-semibold text-blue-700 bg-blue-100 px-2 py-1 rounded">🔵 MEDIA — ACTIVAR EN PARALELO</span>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-white/70 rounded-xl p-4">
+              <h4 class="font-semibold text-gray-800 mb-2">Tareas específicas del proyecto</h4>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>🎨 <strong>Renders conceptuales</strong> de las villas turísticas en parcela de Costa Adeje (fal-ai)</li>
+                <li>📹 <strong>Vídeo walkthrough conceptual</strong> del proyecto (fal-ai veo3.1)</li>
+                <li>📄 <strong>Ficha comercial del proyecto</strong>: 6 villas de lujo, 1.566 m² parcela, San Eugenio Alto</li>
+                <li>🏷️ Naming y branding del proyecto (concepto: lujo, exclusividad, Tenerife, sol)</li>
+                <li>🌐 Dossier de presentación para inversores</li>
+                <li>📊 Benchmark visual de competidores en Costa Adeje</li>
+                <li>📸 Renders con paisaje real: vista La Gomera, Caldera del Rey, costa</li>
+              </ul>
+            </div>
+            <div class="bg-white/70 rounded-xl p-4">
+              <h4 class="font-semibold text-gray-800 mb-2">Datos del PDF para Vendex</h4>
+              <ul class="text-sm text-gray-500 space-y-1">
+                <li>• Producto: 6 villas turísticas de lujo</li>
+                <li>• Ubicación premium: San Eugenio Alto, Costa Adeje</li>
+                <li>• Vista: costa + La Gomera</li>
+                <li>• Clima: 21,2°C media, 3.078 h sol/año</li>
+                <li>• Entorno: zona turística consolidada, top Tenerife</li>
+                <li>• ~190 m² por villa (producto exclusivo)</li>
+                <li>• 2 plantas con jardín/terraza</li>
+                <li>• Paisaje: tabaibal nativo integrado</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEXUS -->
+        <div class="agent-card bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-6 shadow-md border border-emerald-200">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 bg-emerald-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">N</div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Nexus <span class="text-emerald-600">— Director de Proyecto</span></h3>
+              <span class="text-xs font-semibold text-emerald-700 bg-emerald-100 px-2 py-1 rounded">🟢 ACTIVO — COORDINACIÓN CONTINUA</span>
+            </div>
+          </div>
+          <div class="bg-white/70 rounded-xl p-4">
+            <ul class="text-sm text-gray-600 space-y-2 grid md:grid-cols-2 gap-x-6">
+              <li>✅ Análisis inicial del proyecto (este informe)</li>
+              <li>📋 Crear proyecto en Notion con toda la documentación</li>
+              <li>🔗 Coordinar entre agentes (Arqon → Buildero → Valorex → Vendex)</li>
+              <li>📊 Seguimiento de hitos y plazos</li>
+              <li>⚖️ Monitorizar resolución disputa con Cabildo sobre PTEOTT</li>
+              <li>👤 Comunicación continua con promotor (Herederos Domínguez Sierra)</li>
+              <li>📝 Actas de reuniones y decisiones</li>
+              <li>💼 Gestión de licencias y trámites administrativos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- RIESGOS -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="riesgos" class="reveal">
+      <div class="text-center mb-12">
+        <p class="text-emerald-600 text-sm font-semibold uppercase tracking-widest mb-2">Gestión de Riesgos</p>
+        <h2 class="text-3xl font-bold text-gray-900">⚠️ Riesgos y Puntos Críticos</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-red-50 rounded-2xl p-6 border border-red-200 card-hover">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl">🚨</span>
+            <span class="text-xs font-bold text-white bg-red-500 px-2 py-1 rounded">ALTO</span>
+          </div>
+          <h3 class="font-bold text-red-800">Disputa con Cabildo (PTEOTT)</h3>
+          <p class="text-sm text-red-700 mt-2">El Servicio Técnico de Turismo del Cabildo emitió informe desfavorable al incremento de edificabilidad. Aunque el documento lo rebate con 3 argumentos jurídicos sólidos (y la modificación se aprobó), <strong>podría derivar en recurso contencioso-administrativo</strong> si el Cabildo impugna.</p>
+          <p class="text-xs text-red-500 mt-2 font-semibold">Mitigación: Seguimiento jurídico, preparar defensa ante posible contencioso.</p>
+        </div>
+        <div class="bg-amber-50 rounded-2xl p-6 border border-amber-200 card-hover">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl">⏰</span>
+            <span class="text-xs font-bold text-white bg-amber-500 px-2 py-1 rounded">MEDIO</span>
+          </div>
+          <h3 class="font-bold text-amber-800">Plazos de Licencia de Obras</h3>
+          <p class="text-sm text-amber-700 mt-2">La obtención de licencia de obras en Adeje puede dilatarse. El proyecto arquitectónico deberá cumplir todos los requisitos CTE, accesibilidad (Ley 8/1995 Canarias) y normativa turística. Posibles requerimientos de subsanación.</p>
+          <p class="text-xs text-amber-500 mt-2 font-semibold">Mitigación: Proyecto técnico riguroso desde el inicio. Buildero + Arqon coordinados.</p>
+        </div>
+        <div class="bg-amber-50 rounded-2xl p-6 border border-amber-200 card-hover">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl">💧</span>
+            <span class="text-xs font-bold text-white bg-amber-500 px-2 py-1 rounded">MEDIO</span>
+          </div>
+          <h3 class="font-bold text-amber-800">Recursos Hídricos</h3>
+          <p class="text-sm text-amber-700 mt-2">Zona con <strong>precipitación de solo 116 mm/año</strong> y acuífero en descenso progresivo según el Plan Hidrológico de Tenerife. Las villas turísticas con jardines y piscinas requerirán un diseño eficiente en consumo de agua.</p>
+          <p class="text-xs text-amber-500 mt-2 font-semibold">Mitigación: Diseño de ahorro hídrico, reutilización aguas grises, xerojardinería.</p>
+        </div>
+        <div class="bg-blue-50 rounded-2xl p-6 border border-blue-200 card-hover">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl">📈</span>
+            <span class="text-xs font-bold text-blue-700 bg-blue-200 px-2 py-1 rounded">BAJO</span>
+          </div>
+          <h3 class="font-bold text-blue-800">Costes de Construcción</h3>
+          <p class="text-sm text-blue-700 mt-2">Tenerife es zona insular con costes de materiales elevados. El mercado de construcción turística de lujo en Costa Adeje tiene precios altos. Necesario control de presupuesto desde el diseño.</p>
+          <p class="text-xs text-blue-500 mt-2 font-semibold">Mitigación: PEM detallado por Buildero antes de empezar. Control de costes periódico.</p>
+        </div>
+        <div class="bg-blue-50 rounded-2xl p-6 border border-blue-200 card-hover">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl">🌿</span>
+            <span class="text-xs font-bold text-blue-700 bg-blue-200 px-2 py-1 rounded">BAJO</span>
+          </div>
+          <h3 class="font-bold text-blue-800">Condicionantes Ambientales</h3>
+          <p class="text-sm text-blue-700 mt-2">Aunque la evaluación ambiental fue favorable, el Informe Ambiental Estratégico incluye medidas de integración paisajística y mitigación del cambio climático que deberán cumplirse en el proyecto edificatorio.</p>
+          <p class="text-xs text-blue-500 mt-2 font-semibold">Mitigación: Arqon debe integrar las medidas ambientales en el diseño desde el inicio.</p>
+        </div>
+        <div class="bg-green-50 rounded-2xl p-6 border border-green-200 card-hover">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl">✅</span>
+            <span class="text-xs font-bold text-green-700 bg-green-200 px-2 py-1 rounded">OPORTUNIDAD</span>
+          </div>
+          <h3 class="font-bold text-green-800">Mercado Turístico Fuerte</h3>
+          <p class="text-sm text-green-700 mt-2">Costa Adeje es el destino turístico premium nº1 de Tenerife. Villas turísticas de lujo con 3.078 h de sol/año, vistas a La Gomera y ubicación privilegiada tienen demanda internacional altísima.</p>
+          <p class="text-xs text-green-500 mt-2 font-semibold">Acción: Valorex debe cuantificar el potencial de mercado. Vendex debe posicionar el producto.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- PRESUPUESTO ESTIMADO -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="presupuesto" class="reveal">
+      <div class="text-center mb-12">
+        <p class="text-emerald-600 text-sm font-semibold uppercase tracking-widest mb-2">Estimación Económica</p>
+        <h2 class="text-3xl font-bold text-gray-900">Presupuesto Global Estimado</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Estimación preliminar basada en los parámetros del proyecto y valores de mercado de referencia en zona turística de Tenerife. <strong>Valorex y Buildero deberán refinar estas cifras.</strong></p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="bg-emerald-50 border-b border-emerald-100">
+              <th class="px-6 py-4 text-sm font-semibold text-emerald-700">Concepto</th>
+              <th class="px-6 py-4 text-sm font-semibold text-emerald-700 text-right">Estimación (€)</th>
+              <th class="px-6 py-4 text-sm font-semibold text-emerald-700">Notas</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr>
+              <td class="px-6 py-4 font-medium text-gray-700">🏗️ Construcción (PEM)</td>
+              <td class="px-6 py-4 text-right font-bold text-gray-800">1.714.500 — 2.286.000 €</td>
+              <td class="px-6 py-4 text-sm text-gray-500">1.143 m²t × 1.500 — 2.000 €/m² (construcción turística lujo insular)</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 font-medium text-gray-700">📐 Honorarios técnicos</td>
+              <td class="px-6 py-4 text-right font-bold text-gray-800">150.000 — 200.000 €</td>
+              <td class="px-6 py-4 text-sm text-gray-500">Arquitecto + ingenieros + dirección de obra + coordinador SS</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 font-medium text-gray-700">📋 Licencias y tasas</td>
+              <td class="px-6 py-4 text-right font-bold text-gray-800">80.000 — 120.000 €</td>
+              <td class="px-6 py-4 text-sm text-gray-500">ICIO (≈4%), tasa urbanística, licencia actividad turística</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 font-medium text-gray-700">🏞️ Urbanización parcela</td>
+              <td class="px-6 py-4 text-right font-bold text-gray-800">100.000 — 150.000 €</td>
+              <td class="px-6 py-4 text-sm text-gray-500">Movimiento tierras, acometidas, viales internos, ajardinamiento</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 font-medium text-gray-700">🎨 Marketing y comercialización</td>
+              <td class="px-6 py-4 text-right font-bold text-gray-800">30.000 — 60.000 €</td>
+              <td class="px-6 py-4 text-sm text-gray-500">Renders, vídeos, web, branding, dossier inversores</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 font-medium text-gray-700">⚖️ Asesoría jurídica</td>
+              <td class="px-6 py-4 text-right font-bold text-gray-800">15.000 — 30.000 €</td>
+              <td class="px-6 py-4 text-sm text-gray-500">Gestión disputa Cabildo, contratos, licencias turísticas</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 font-medium text-gray-700">📊 Contingencias (10%)</td>
+              <td class="px-6 py-4 text-right font-bold text-gray-800">209.000 — 285.000 €</td>
+              <td class="px-6 py-4 text-sm text-gray-500">Imprevistos, sobrecostes, retrasos</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-emerald-100 border-t-2 border-emerald-300">
+              <td class="px-6 py-5 font-extrabold text-emerald-800 text-lg">TOTAL ESTIMADO</td>
+              <td class="px-6 py-5 text-right font-extrabold text-emerald-800 text-lg">2.300.000 — 3.130.000 €</td>
+              <td class="px-6 py-5 text-sm text-emerald-600 font-semibold">Sin incluir valor del suelo</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="mt-6 grid md:grid-cols-2 gap-6">
+        <div class="bg-green-50 rounded-xl p-6 border border-green-200">
+          <h4 class="font-bold text-green-800 mb-2">📈 Valor estimado producto final</h4>
+          <p class="text-sm text-green-700">6 villas turísticas de lujo en Costa Adeje, ~190 m² cada una. Estimación conservadora de valor de mercado: <strong>4.500.000 — 7.000.000 €</strong> (venta) o <strong>300.000 — 500.000 €/año</strong> (explotación turística con ADR premium).</p>
+          <p class="text-xs text-green-500 mt-2">⚠️ Valorex debe validar estas estimaciones con datos reales de mercado.</p>
+        </div>
+        <div class="bg-blue-50 rounded-xl p-6 border border-blue-200">
+          <h4 class="font-bold text-blue-800 mb-2">💡 Plusvalía por modificación del PGO</h4>
+          <p class="text-sm text-blue-700">La edificabilidad pasó de 0,33 a 0,73 m²c/m²s (<strong>+121%</strong>). Esto significa que la parcela pasó de permitir ~517 m²t a <strong>1.143 m²t</strong>. La plusvalía generada solo por el cambio normativo es significativa y es el mayor activo actual del proyecto.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- PRÓXIMOS PASOS -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="reveal">
+      <div class="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-8 text-white shadow-lg">
+        <h2 class="text-2xl font-bold mb-6">🚀 Próximos Pasos Inmediatos</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-white/10 rounded-xl p-5">
+            <h3 class="font-bold text-lg mb-3">Semana 1-2</h3>
+            <ul class="text-sm text-emerald-50 space-y-2">
+              <li>1️⃣ Reunión con promotor para definir expectations y presupuesto disponible</li>
+              <li>2️⃣ <strong>Valorex</strong>: Iniciar estudio de mercado de villas turísticas en Costa Adeje</li>
+              <li>3️⃣ Confirmar estado legal de la disputa con el Cabildo</li>
+            </ul>
+          </div>
+          <div class="bg-white/10 rounded-xl p-5">
+            <h3 class="font-bold text-lg mb-3">Semana 3-6</h3>
+            <ul class="text-sm text-emerald-50 space-y-2">
+              <li>4️⃣ <strong>Arqon</strong>: Primeros diseños conceptuales de las 6 villas</li>
+              <li>5️⃣ <strong>Vendex</strong>: Renders conceptuales para presentar al promotor</li>
+              <li>6️⃣ <strong>Buildero</strong>: Primera estimación de PEM</li>
+            </ul>
+          </div>
+          <div class="bg-white/10 rounded-xl p-5">
+            <h3 class="font-bold text-lg mb-3">Mes 2-3</h3>
+            <ul class="text-sm text-emerald-50 space-y-2">
+              <li>7️⃣ Presentar viabilidad económica completa al promotor</li>
+              <li>8️⃣ Decisión GO/NO GO del proyecto</li>
+              <li>9️⃣ Si GO: arrancar proyecto básico de arquitectura</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+      <p class="mb-2">Informe generado por <strong class="text-white">Nexus</strong> — Director de Proyecto · Sistema de Agentes Inmobiliarios IA</p>
+      <p class="mb-2">Proyecto: <strong class="text-gray-300">Modificación Menor PGO Adeje — Parcela 43-8 San Eugenio Alto</strong></p>
+      <p class="mb-4 text-gray-500">Documento fuente: Refundido Completo_24_01_10_F (aprobado definitivamente).pdf — 138 páginas, 4 tomos</p>
+      <p class="text-gray-600 text-xs max-w-2xl mx-auto">Este análisis es orientativo y no sustituye el asesoramiento jurídico-técnico-urbanístico profesional. Basado en el Refundido Completo de la Modificación Menor del PGO de Adeje aprobado definitivamente. Las estimaciones de presupuesto son preliminares y deben ser validadas por los agentes especializados (Valorex, Buildero).</p>
+    </div>
+  </footer>
+
+  <!-- SCROLL REVEAL -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); }});
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      const prefix = el.dataset.prefix || '';
+      let current = 0;
+      const step = target / 60;
+      const animate = () => {
+        current += step;
+        if(current >= target) { el.textContent = prefix + target.toLocaleString('es-ES') + suffix; return; }
+        el.textContent = prefix + Math.floor(current).toLocaleString('es-ES') + suffix;
+        requestAnimationFrame(animate);
+      };
+      const obs = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) { animate(); obs.disconnect(); }
+      });
+      obs.observe(el);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM Project — E Propiety</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            min-height: 100vh;
+        }
+        .hero {
+            position: relative;
+            height: 50vh;
+            min-height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            z-index: 0;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 30%, rgba(200,169,106,0.15) 0%, transparent 60%);
+            z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 2; padding: 2rem; }
+        .hero-content img { height: 80px; margin-bottom: 1.5rem; filter: brightness(1.1); }
+        .hero-content h1 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            color: #c8a96a;
+            margin-bottom: 0.5rem;
+        }
+        .hero-content p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 0.05em;
+        }
+        .projects {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .projects h2 {
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: #c8a96a;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 2.5rem;
+        }
+        .project-card {
+            background: #141414;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .project-card:hover {
+            border-color: #c8a96a;
+            transform: translateY(-4px);
+        }
+        .project-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+        .project-card .card-body {
+            padding: 1.8rem;
+        }
+        .project-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        .project-card .location {
+            font-size: 0.9rem;
+            color: #c8a96a;
+            margin-bottom: 1rem;
+        }
+        .project-card .description {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .doc-list { list-style: none; }
+        .doc-list li { margin-bottom: 0.6rem; }
+        .doc-list a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.88rem;
+            padding: 0.4rem 0.8rem;
+            background: rgba(200,169,106,0.08);
+            border: 1px solid rgba(200,169,106,0.15);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .doc-list a:hover {
+            background: rgba(200,169,106,0.18);
+            border-color: #c8a96a;
+            color: #c8a96a;
+        }
+        .doc-list a .icon { font-size: 1rem; }
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid #1a1a1a;
+            color: rgba(255,255,255,0.35);
+            font-size: 0.8rem;
+        }
+        .footer span { color: #c8a96a; }
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.8rem;
+        }
+        .badge-luxury { background: rgba(200,169,106,0.2); color: #c8a96a; }
+        .badge-commercial { background: rgba(59,130,246,0.2); color: #60a5fa; }
+        @media (max-width: 600px) {
+            .hero-content h1 { font-size: 1.8rem; }
+            .project-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <img src="refundido-completo/05-marketing/assets/logo-epropiety.png" alt="E Propiety">
+            <h1>FM PROJECT</h1>
+            <p>Documentación Técnica &amp; Comercial — E Propiety</p>
+        </div>
+    </div>
+    <section class="projects">
+        <h2>Proyectos</h2>
+        <div class="project-grid">
+
+            <!-- REFUNDIDO COMPLETO -->
+            <div class="project-card">
+                <img src="refundido-completo/05-marketing/assets/render-exterior-dia.jpg" alt="Atlantic Crest Villas">
+                <div class="card-body">
+                    <span class="badge badge-luxury">Turístico Luxury</span>
+                    <h3>Refundido Completo — Atlantic Crest Villas</h3>
+                    <p class="location">Parcela 43-8, San Eugenio Alto, Costa Adeje, Tenerife</p>
+                    <p class="description">6 villas turísticas independientes de lujo · 1.566 m² parcela · 1.143 m²t edificabilidad · 20 plazas alojativas · Piscinas infinity · Domótica KNX · Certificación energética A</p>
+                    <ul class="doc-list">
+                        <li><a href="refundido-completo/01-diseno/informe-arquitectura.html"><span class="icon">📐</span> Informe de Arquitectura</a></li>
+                        <li><a href="refundido-completo/02-obra/presupuesto-obra.html"><span class="icon">🏗️</span> Presupuesto de Obra</a></li>
+                        <li><a href="refundido-completo/03-tasacion/informe-tasacion-viabilidad.html"><span class="icon">📊</span> Tasación y Viabilidad</a></li>
+                        <li><a href="refundido-completo/04-gestion/analisis-proyecto.html"><span class="icon">📋</span> Análisis de Proyecto</a></li>
+                        <li><a href="refundido-completo/05-marketing/dossier-comercial-ventas.html"><span class="icon">🏠</span> Dossier Comercial</a></li>
+                        <li><a href="refundido-completo/05-marketing/plan-marketing-dossier-comercial.html"><span class="icon">📈</span> Plan de Marketing</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- STRASSE FUJI -->
+            <div class="project-card">
+                <img src="refundido-completo/05-marketing/assets/render-interior-salon.jpg" alt="Strasse Fuji">
+                <div class="card-body">
+                    <span class="badge badge-commercial">Comercial Hostelería</span>
+                    <h3>Strasse Fuji — Restaurante Bar</h3>
+                    <p class="location">C/ Celia Cruz 2, Santa Cruz de Tenerife</p>
+                    <p class="description">Legalización de unión de dos locales comerciales · 358,79 m² en 2 plantas · Restaurante-bar con terraza · Aforo 122 personas · Sistema VRV climatización</p>
+                    <ul class="doc-list">
+                        <li><a href="strasse-fuji/01-diseno/memoria-arquitectura.html"><span class="icon">📐</span> Memoria de Arquitectura</a></li>
+                        <li><a href="strasse-fuji/03-tasacion/informe-tasacion.html"><span class="icon">📊</span> Informe de Tasación</a></li>
+                        <li><a href="strasse-fuji/04-gestion/analisis-notificacion.html"><span class="icon">📋</span> Análisis y Notificación</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <footer class="footer">
+        <p><span>E Propiety</span> — Fernando Martinez · +34 653 934 066</p>
+        <p style="margin-top: 0.4rem;">© 2026 FM Project. Documentación confidencial.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memoria Arquitectónica — Proyecto Strasse Fuji</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+              900: '#581c87',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glass { background: rgba(255,255,255,0.8); backdrop-filter: blur(12px); border: 1px solid rgba(168,85,247,0.2); }
+    html { scroll-behavior: smooth; }
+    tbody tr:hover { background-color: rgba(168,85,247,0.05); }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <span class="text-xl font-bold gradient-text">ARQON</span>
+      <div class="hidden md:flex gap-6 text-sm font-medium text-gray-600">
+        <a href="#resumen" class="hover:text-brand-600 transition">Resumen</a>
+        <a href="#descripcion" class="hover:text-brand-600 transition">Descripción</a>
+        <a href="#accesibilidad" class="hover:text-brand-600 transition">DB-SUA</a>
+        <a href="#incendios" class="hover:text-brand-600 transition">DB-SI</a>
+        <a href="#planos" class="hover:text-brand-600 transition">Planimetría</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-brand-500 via-brand-600 to-brand-900 text-white">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'0.2\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3Cg/%3E%3C/svg%3E')] opacity-20"></div>
+    <div class="relative max-w-6xl mx-auto px-6 py-24 text-center">
+      <p class="text-brand-100 text-sm font-semibold uppercase tracking-widest mb-4">MEMORIA ARQUITECTÓNICA Y PLANIMETRÍA</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-6">PROYECTO STRASSE FUJI</h1>
+      <p class="text-xl text-brand-50 max-w-3xl mx-auto">Legalización de reforma de unión de locales comerciales para Restaurante-Bar con terraza. Subsanación de deficiencias técnicas.</p>
+      <div class="mt-8 flex justify-center gap-4 flex-wrap">
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm">📍 C/ Celia Cruz 2, S/C de Tenerife</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm">📐 358,79 m²</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm">👥 Aforo: 122 pax</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-16 space-y-20">
+
+    <!-- DESCRIPCIÓN TÉCNICA -->
+    <section id="descripcion" class="reveal">
+      <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-brand-100 pb-2">1. Descripción Técnica del Proyecto</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="glass p-8 rounded-2xl shadow-sm">
+          <h3 class="text-xl font-bold text-brand-700 mb-4 flex items-center gap-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+            Planta Baja (Local 4)
+          </h3>
+          <p class="text-gray-600 mb-4">Destinada al uso principal de Restaurante y zonas de servicio. Cuenta con acceso principal desde la calle, adaptado mediante nueva rampa (DB-SUA).</p>
+          <ul class="space-y-2 text-gray-700">
+            <li><strong class="text-gray-900">Zonas:</strong> Salón comedor principal, Cocina industrial, Almacén y Núcleo de Aseos (incluido adaptado).</li>
+            <li><strong class="text-gray-900">Comunicación:</strong> Escalera interior de conexión con Planta Primera.</li>
+            <li><strong class="text-gray-900">Linderos:</strong> Conexión compartimentada (Puertas RF) con Local 5 anexo.</li>
+          </ul>
+        </div>
+        <div class="glass p-8 rounded-2xl shadow-sm">
+          <h3 class="text-xl font-bold text-brand-700 mb-4 flex items-center gap-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+            Planta Primera (Local 3)
+          </h3>
+          <p class="text-gray-600 mb-4">Concebida como zona de Bar y esparcimiento con terraza cubierta, conectada espacialmente con la planta baja a través del hueco de escalera.</p>
+          <ul class="space-y-2 text-gray-700">
+            <li><strong class="text-gray-900">Zonas:</strong> Área de Bar/Coctelería, Terraza Cubierta.</li>
+            <li><strong class="text-gray-900">Aforo Terraza:</strong> 50 personas.</li>
+            <li><strong class="text-gray-900">Forjado:</strong> Chapa colaborante, detalle en secciones constructivas.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCESIBILIDAD Y DB-SI -->
+    <section class="reveal grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Accesibilidad -->
+      <div id="accesibilidad" class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-brand-500">
+        <h2 class="text-2xl font-bold mb-4 text-gray-900">2. Accesibilidad (DB-SUA)</h2>
+        <p class="text-gray-600 mb-6">Subsanación de deficiencia: Diseño de nueva rampa de acceso principal.</p>
+        <div class="space-y-3 text-sm">
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <span class="text-gray-500">Pendiente longitudinal</span>
+            <span class="font-semibold text-gray-900">&le; 8% (cumple DB-SUA 1)</span>
+          </div>
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <span class="text-gray-500">Anchura libre mínima</span>
+            <span class="font-semibold text-gray-900">1,20 m</span>
+          </div>
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <span class="text-gray-500">Mesetas</span>
+            <span class="font-semibold text-gray-900">Inicio y fin (Ø 1,50 m libre)</span>
+          </div>
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <span class="text-gray-500">Pasamanos</span>
+            <span class="font-semibold text-gray-900">Doble (h=0.90m y h=0.70m), prolongado 30cm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DB-SI -->
+      <div id="incendios" class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-red-500">
+        <h2 class="text-2xl font-bold mb-4 text-gray-900">3. Seguridad Incendios (DB-SI)</h2>
+        <p class="text-gray-600 mb-6">Aforo total: 122 personas (72 interior + 50 terraza). Sectorización y evacuación.</p>
+        <div class="space-y-3 text-sm">
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <span class="text-gray-500">Sectores de Incendio</span>
+            <span class="font-semibold text-gray-900">Sector Único (Local 3+4)</span>
+          </div>
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <span class="text-gray-500">Riesgo Especial</span>
+            <span class="font-semibold text-gray-900">Cocina (Local de Riesgo Bajo)</span>
+          </div>
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <span class="text-gray-500">Comunicación Local 5</span>
+            <span class="font-semibold text-red-600">Vestíbulo previo + Puertas EI2 60-C5</span>
+          </div>
+          <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+            <span class="text-gray-500">Recorridos Evacuación</span>
+            <span class="font-semibold text-gray-900">&lt; 25m hasta salida de planta</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANIMETRÍA -->
+    <section id="planos" class="reveal">
+      <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-brand-100 pb-2">4. Relación de Planos Generados</h2>
+      <div class="overflow-hidden rounded-xl shadow-sm border border-gray-200">
+        <table class="w-full text-left bg-white">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th class="px-6 py-4 font-semibold text-gray-700">Cód.</th>
+              <th class="px-6 py-4 font-semibold text-gray-700">Plano</th>
+              <th class="px-6 py-4 font-semibold text-gray-700">Contenido / Subsanación</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr>
+              <td class="px-6 py-4 text-brand-600 font-medium">ARQ-01</td>
+              <td class="px-6 py-4 font-medium text-gray-900">Plantas de Arquitectura</td>
+              <td class="px-6 py-4 text-gray-600">Plantas Baja y Primera acotadas y amuebladas.</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-brand-600 font-medium">ARQ-02</td>
+              <td class="px-6 py-4 font-medium text-gray-900">Secciones y Alzados</td>
+              <td class="px-6 py-4 text-gray-600">Sección longitudinal, transversal y plano de cubiertas.</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-brand-600 font-medium">ARQ-03</td>
+              <td class="px-6 py-4 font-medium text-gray-900">Secciones Constructivas</td>
+              <td class="px-6 py-4 text-gray-600">Detalle forjado chapa colaborante y escalera interior.</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-brand-600 font-medium">SUA-01</td>
+              <td class="px-6 py-4 font-medium text-gray-900">Accesibilidad</td>
+              <td class="px-6 py-4 text-gray-600">Detalle nueva rampa de acceso (pendientes, mesetas).</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-brand-600 font-medium">SI-01</td>
+              <td class="px-6 py-4 font-medium text-gray-900">Seguridad Contra Incendios</td>
+              <td class="px-6 py-4 text-gray-600">Sectores, evacuación, señalización y puertas RF a Local 5.</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-brand-600 font-medium">INST-01</td>
+              <td class="px-6 py-4 font-medium text-gray-900">Climatización y Ventilación</td>
+              <td class="px-6 py-4 text-gray-600">Sistema VRV, conductos y extracción de campana cocina.</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-brand-600 font-medium">INST-02</td>
+              <td class="px-6 py-4 font-medium text-gray-900">Fontanería y Saneamiento</td>
+              <td class="px-6 py-4 text-gray-600">Red AF/ACS y red separativa saneamiento hasta arqueta.</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-brand-600 font-medium">INST-03</td>
+              <td class="px-6 py-4 font-medium text-gray-900">Baja Tensión</td>
+              <td class="px-6 py-4 text-gray-600">Cuadros, luminarias, emergencias y tomas de fuerza.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+      <p class="mb-2">Documentación técnica generada por <strong class="text-white">ARQON</strong> — Arquitecto Principal</p>
+      <p>Sistema de Agentes Inmobiliarios IA • Proyecto Strasse Fuji</p>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); }});
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

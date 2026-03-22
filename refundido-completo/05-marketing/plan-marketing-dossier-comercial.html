@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan de Marketing y Dossier Comercial — Atlantic Crest Villas · Costa Adeje</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            vendex: {
+              50: '#fff1f6', 100: '#ffe4ee', 200: '#fecddf', 300: '#fda4c5',
+              400: '#fb7185', 500: '#f43f5e', 600: '#e11d48', 700: '#be123c',
+              800: '#9f1239', 900: '#881337'
+            }
+          },
+          boxShadow: {
+            glow: '0 20px 60px rgba(244,63,94,.18)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: linear-gradient(180deg, #fff8fb 0%, #fff 30%, #fff7fa 100%); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: all .8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #ec4899 0%, #e11d48 50%, #fb7185 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glass { background: rgba(255,255,255,.72); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.65); }
+    .hero-grid { background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.18) 1px, transparent 0); background-size: 24px 24px; }
+    tbody tr:hover { background-color: rgba(244,63,94,.05); }
+  </style>
+</head>
+<body class="font-sans text-slate-800 antialiased">
+  <nav class="sticky top-0 z-50 border-b border-white/60 bg-white/80 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.35em] text-vendex-500">Vendex</p>
+        <p class="text-lg font-bold text-slate-900">Plan de Marketing · 6 Villas Turísticas de Lujo</p>
+      </div>
+      <div class="hidden gap-5 text-sm font-medium text-slate-600 lg:flex">
+        <a href="#resumen" class="hover:text-vendex-600">Resumen</a>
+        <a href="#branding" class="hover:text-vendex-600">Branding</a>
+        <a href="#digital" class="hover:text-vendex-600">Estrategia digital</a>
+        <a href="#dossier" class="hover:text-vendex-600">Dossier comercial</a>
+        <a href="#ventas" class="hover:text-vendex-600">Ventas</a>
+        <a href="#activos" class="hover:text-vendex-600">Audiovisual</a>
+        <a href="#calendario" class="hover:text-vendex-600">Calendario</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="relative overflow-hidden bg-gradient-to-br from-rose-600 via-fuchsia-600 to-orange-500 text-white">
+    <div class="hero-grid absolute inset-0 opacity-30"></div>
+    <div class="absolute -left-16 top-10 h-72 w-72 rounded-full bg-white/10 blur-3xl"></div>
+    <div class="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-orange-300/20 blur-3xl"></div>
+    <div class="relative mx-auto max-w-7xl px-6 py-24 lg:py-28">
+      <div class="max-w-4xl">
+        <p class="mb-4 text-sm font-semibold uppercase tracking-[0.35em] text-rose-100">Plan de marketing integral · Comercialización luxury real estate</p>
+        <h1 class="mb-6 text-5xl font-extrabold leading-tight md:text-7xl">Branding, comercialización y lanzamiento para el complejo de <span class="text-rose-100">6 villas turísticas de lujo</span> en Costa Adeje.</h1>
+        <p class="max-w-3xl text-lg text-rose-50 md:text-xl">Documento ejecutivo de Vendex para posicionar el activo como producto premium para inversores internacionales, family offices y operadores de turismo de alto poder adquisitivo, alineado con Nexus, Arqon, Buildero y Valorex.</p>
+        <div class="mt-8 flex flex-wrap gap-3 text-sm">
+          <span class="rounded-full bg-white/15 px-4 py-2">📍 Parcela 43-8 · San Eugenio Alto · Adeje</span>
+          <span class="rounded-full bg-white/15 px-4 py-2">🏡 6 villas · 20 plazas</span>
+          <span class="rounded-full bg-white/15 px-4 py-2">🌊 Vistas al Atlántico y La Gomera</span>
+          <span class="rounded-full bg-white/15 px-4 py-2">⚡ KNX · Aerotermia · Clase A</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl space-y-20 px-6 py-16 lg:space-y-24">
+    <section id="resumen" class="reveal">
+      <div class="grid gap-8 lg:grid-cols-[1.1fr_.9fr]">
+        <div class="glass rounded-3xl p-8 shadow-glow">
+          <div class="mb-6 flex items-center gap-3">
+            <span class="rounded-full bg-vendex-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.3em] text-vendex-700">Resumen ejecutivo</span>
+            <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">Activo listo para marketing de preventa</span>
+          </div>
+          <h2 class="mb-4 text-3xl font-bold text-slate-900">Hipótesis comercial: vender exclusividad escasa, no solo metros cuadrados.</h2>
+          <p class="mb-4 text-slate-600">El proyecto aprobado definitivamente combina seguridad urbanística, topografía escalonada con privacidad visual, diseño bioclimático y una narrativa clara de hospitality-luxury. La oportunidad comercial está en presentarlo como <strong>micro-colección de branded villas de inversión</strong>, no como promoción masiva.</p>
+          <p class="text-slate-600">La estrategia propuesta adopta el posicionamiento premium de Valorex, apoya el storytelling arquitectónico de Arqon, usa la robustez técnica/costes de Buildero y aprovecha la seguridad de tramitación reportada por Nexus para reducir fricción comercial y justificar pricing alto.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="rounded-3xl bg-slate-900 p-6 text-white shadow-2xl">
+            <p class="text-sm uppercase tracking-[0.3em] text-rose-200">Producto terminado</p>
+            <p class="mt-3 text-4xl font-extrabold">13,2 M€</p>
+            <p class="mt-3 text-sm text-slate-300">Valoración Valorex en posicionamiento medio-alto: 2,2 M€ por villa.</p>
+          </div>
+          <div class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+            <p class="text-sm uppercase tracking-[0.3em] text-vendex-600">PEM obra</p>
+            <p class="mt-3 text-4xl font-extrabold text-slate-900">2,856 M€</p>
+            <p class="mt-3 text-sm text-slate-600">Buildero estima 18 meses de ejecución en dos fases.</p>
+          </div>
+          <div class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+            <p class="text-sm uppercase tracking-[0.3em] text-vendex-600">Ingreso vacacional</p>
+            <p class="mt-3 text-4xl font-extrabold text-slate-900">1,38 M€/año</p>
+            <p class="mt-3 text-sm text-slate-600">Escenario Valorex con ocupación anualizada del 78%.</p>
+          </div>
+          <div class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+            <p class="text-sm uppercase tracking-[0.3em] text-vendex-600">Margen / TIR</p>
+            <p class="mt-3 text-4xl font-extrabold text-slate-900">43,8% / 28,5%</p>
+            <p class="mt-3 text-sm text-slate-600">Base para discurso de inversión y captación de family offices.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="branding" class="reveal space-y-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="mb-3 inline-flex rounded-full bg-vendex-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.3em] text-vendex-700">Branding del proyecto</p>
+          <h2 class="text-3xl font-bold text-slate-900 md:text-4xl">Nombre, identidad visual y posicionamiento luxury</h2>
+        </div>
+        <div class="max-w-2xl text-sm text-slate-600">Propuesta pensada para transmitir altura, vistas abiertas, privacidad y hospitality premium. Se prioriza un naming fácil de pronunciar para mercado internacional, elegante en web y potente en portales luxury.</div>
+      </div>
+
+      <div class="grid gap-6 xl:grid-cols-[1.1fr_.9fr]">
+        <article class="rounded-3xl bg-slate-950 p-8 text-white shadow-2xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.35em] text-rose-200">Nombre recomendado</p>
+          <h3 class="mt-3 text-4xl font-extrabold gradient-text" style="-webkit-text-fill-color:inherit; background:linear-gradient(135deg,#fda4af,#fff,#fdba74); -webkit-background-clip:text;">Atlantic Crest Villas</h3>
+          <p class="mt-4 text-lg text-slate-200">Tagline: <strong>Private Ocean-View Living Above Costa Adeje.</strong></p>
+          <div class="mt-6 grid gap-4 md:grid-cols-2">
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p class="text-xs uppercase tracking-[0.3em] text-rose-200">Posicionamiento</p>
+              <p class="mt-2 text-sm text-slate-200">Micro-colección de 6 villas turísticas de autor con enfoque de inversión patrimonial, rentabilidad premium y exclusividad de oferta.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p class="text-xs uppercase tracking-[0.3em] text-rose-200">Promesa de marca</p>
+              <p class="mt-2 text-sm text-slate-200">Combinar lifestyle canario de alto nivel, domótica y eficiencia energética con una localización elevada y vistas oceánicas permanentes.</p>
+            </div>
+          </div>
+          <div class="mt-6 grid gap-3 sm:grid-cols-3">
+            <div class="rounded-2xl bg-white/5 p-4"><p class="text-xs uppercase tracking-[0.28em] text-slate-300">Arquetipo</p><p class="mt-2 font-semibold">The Curated Retreat</p></div>
+            <div class="rounded-2xl bg-white/5 p-4"><p class="text-xs uppercase tracking-[0.28em] text-slate-300">Tono</p><p class="mt-2 font-semibold">Sereno · sofisticado · internacional</p></div>
+            <div class="rounded-2xl bg-white/5 p-4"><p class="text-xs uppercase tracking-[0.28em] text-slate-300">Buyer emotion</p><p class="mt-2 font-semibold">Escasez + seguridad + deseo aspiracional</p></div>
+          </div>
+        </article>
+
+        <article class="glass rounded-3xl p-8 shadow-xl">
+          <h3 class="text-xl font-bold text-slate-900">Shortlist de naming</h3>
+          <div class="mt-5 space-y-4">
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <div class="flex items-center justify-between gap-4"><p class="font-semibold">Atlantic Crest Villas</p><span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">Elegido</span></div>
+              <p class="mt-2 text-sm text-slate-600">Evoca altura, dominio visual del horizonte y prestigio internacional.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <p class="font-semibold">Adeje Horizon Collection</p>
+              <p class="mt-2 text-sm text-slate-600">Más institucional, útil para family offices y producto patrimonial.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <p class="font-semibold">La Gomera View Residences</p>
+              <p class="mt-2 text-sm text-slate-600">Muy anclado a la vista, algo menos flexible para branding futuro.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <p class="font-semibold">Costa Adeje Elevated Villas</p>
+              <p class="mt-2 text-sm text-slate-600">Muy descriptivo, más racional que emocional.</p>
+            </div>
+          </div>
+          <div class="mt-6 rounded-2xl bg-gradient-to-r from-rose-50 to-orange-50 p-5 ring-1 ring-rose-100">
+            <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-700">Identidad visual sugerida</p>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <span class="h-10 w-10 rounded-full bg-[#F7E6DE]"></span>
+              <span class="h-10 w-10 rounded-full bg-[#D9BFA3]"></span>
+              <span class="h-10 w-10 rounded-full bg-[#86715F]"></span>
+              <span class="h-10 w-10 rounded-full bg-[#1E293B]"></span>
+              <span class="h-10 w-10 rounded-full bg-[#0F766E]"></span>
+            </div>
+            <p class="mt-4 text-sm text-slate-600">Paleta basada en arena volcánica clara, piedra basáltica, atardecer atlántico y acentos jade para sofisticación resort.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-3">
+        <div class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Pilares de marca</p>
+          <ul class="mt-4 space-y-3 text-sm text-slate-600">
+            <li><strong>Rareza:</strong> solo 6 unidades frente a complejos comparables de 24-27 villas.</li>
+            <li><strong>Privacidad escalonada:</strong> ventaja arquitectónica clave según Arqon.</li>
+            <li><strong>Security of delivery:</strong> PGO aprobado definitivamente según Nexus.</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">USP comercial</p>
+          <ul class="mt-4 space-y-3 text-sm text-slate-600">
+            <li>Villas turísticas de lujo con piscina infinity privada y domótica KNX.</li>
+            <li>Arquitectura bioclimática con aerotermia, FV y objetivo de certificación A.</li>
+            <li>A 10 minutos de Playa del Duque, pero en cota alta de máxima vista.</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Claim comercial corto</p>
+          <p class="mt-4 text-lg font-semibold text-slate-900">Six private ocean-view villas for investment-grade hospitality living.</p>
+          <p class="mt-3 text-sm text-slate-600">Versión española: <em>Seis villas privadas con vocación patrimonial y alma de resort frente al Atlántico.</em></p>
+        </div>
+      </div>
+    </section>
+    <section id="digital" class="reveal space-y-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="mb-3 inline-flex rounded-full bg-vendex-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.3em] text-vendex-700">Estrategia digital</p>
+          <h2 class="text-3xl font-bold text-slate-900 md:text-4xl">Embudo digital premium: autoridad, captación cualificada y cierre asistido</h2>
+        </div>
+        <p class="max-w-2xl text-sm text-slate-600">La web no debe comportarse como un portal inmobiliario genérico. Debe funcionar como un <strong>microsite de private placement</strong> con piezas audiovisuales premium, lead scoring y acceso escalonado a documentación.</p>
+      </div>
+
+      <div class="grid gap-6 xl:grid-cols-[1.05fr_.95fr]">
+        <article class="rounded-3xl bg-white p-8 shadow-xl ring-1 ring-slate-200">
+          <h3 class="text-2xl font-bold text-slate-900">1. Landing page / web comercial</h3>
+          <div class="mt-6 grid gap-4 md:grid-cols-2">
+            <div class="rounded-2xl bg-rose-50 p-5 ring-1 ring-rose-100">
+              <p class="font-semibold text-slate-900">Arquitectura de contenidos</p>
+              <ul class="mt-3 space-y-2 text-sm text-slate-600">
+                <li>Hero cinematográfico con vídeo corto y claim.</li>
+                <li>Sección “Investment Highlights” con rentabilidad, escasez y status urbanístico.</li>
+                <li>Ficha por villa con superficies, programa, vistas y acabados.</li>
+                <li>Formulario con calificación de lead: uso propio / inversión / operador.</li>
+              </ul>
+            </div>
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200">
+              <p class="font-semibold text-slate-900">UX recomendada</p>
+              <ul class="mt-3 space-y-2 text-sm text-slate-600">
+                <li>Modo storytelling largo + CTA persistente “Request Private Presentation”.</li>
+                <li>Descarga de dossier solo tras lead capture.</li>
+                <li>Calendly / visita virtual / data room tras pre-cualificación.</li>
+                <li>Versiones EN/ES; si hay budget, añadir DE y FR.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-6 overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 p-6 text-white">
+            <p class="text-xs uppercase tracking-[0.3em] text-rose-200">SEO core</p>
+            <div class="mt-4 grid gap-4 md:grid-cols-2 text-sm text-slate-300">
+              <ul class="space-y-2">
+                <li>luxury villas Costa Adeje</li>
+                <li>investment villas Tenerife south</li>
+                <li>tourist villas for sale Adeje</li>
+                <li>branded villas Costa Adeje</li>
+              </ul>
+              <ul class="space-y-2">
+                <li>villas with infinity pool Tenerife</li>
+                <li>holiday rental investment Canary Islands</li>
+                <li>family office real estate Tenerife</li>
+                <li>ocean view villas Adeje</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass rounded-3xl p-8 shadow-xl">
+          <h3 class="text-2xl font-bold text-slate-900">2. Mix de captación</h3>
+          <canvas id="channelChart" class="mt-6 h-80 w-full"></canvas>
+          <p class="mt-5 text-sm text-slate-600">Reparto recomendado del esfuerzo comercial en fase de lanzamiento: mayor peso en captación directa/partnerships y performance hipersegmentada; menor dependencia de portales generalistas.</p>
+        </article>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-3">
+        <article class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">SEO / Contenido</p>
+          <ul class="mt-4 space-y-3 text-sm text-slate-600">
+            <li>6-8 piezas evergreen sobre inversión vacacional premium en Adeje.</li>
+            <li>Landing específica para “holiday home investors”.</li>
+            <li>Schema markup para luxury residence + FAQ + video.</li>
+          </ul>
+        </article>
+        <article class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">SEM / Paid</p>
+          <ul class="mt-4 space-y-3 text-sm text-slate-600">
+            <li>Google Search en UK, DACH, Benelux, Francia y Península.</li>
+            <li>Meta Lead Ads con piezas lifestyle y segmentación HNWI proxy.</li>
+            <li>LinkedIn Ads para family offices, wealth managers y advisory firms.</li>
+          </ul>
+        </article>
+        <article class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Redes sociales</p>
+          <ul class="mt-4 space-y-3 text-sm text-slate-600">
+            <li><strong>Instagram:</strong> reels de vistas, arquitectura, sunset lifestyle, carouseles de inversión.</li>
+            <li><strong>TikTok luxury real estate:</strong> clips cortos “6 villas / 1 skyline / 20 plazas”.</li>
+            <li><strong>YouTube / Shorts:</strong> walkthrough, entrevistas con arquitecto y enfoque investor-ready.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+        <div class="border-b border-slate-200 px-6 py-5">
+          <h3 class="text-2xl font-bold text-slate-900">3. Portales y distribución premium</h3>
+        </div>
+        <div class="overflow-x-auto px-6 py-6">
+          <table class="min-w-full text-left text-sm">
+            <thead>
+              <tr class="text-slate-500">
+                <th class="px-4 py-3 font-semibold">Canal</th>
+                <th class="px-4 py-3 font-semibold">Objetivo</th>
+                <th class="px-4 py-3 font-semibold">Formato</th>
+                <th class="px-4 py-3 font-semibold">Prioridad</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              <tr><td class="px-4 py-4 font-medium">Idealista Luxury</td><td class="px-4 py-4">Cobertura premium nacional e internacional</td><td class="px-4 py-4">Ficha editorial + vídeo + dossier descargable</td><td class="px-4 py-4"><span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">Alta</span></td></tr>
+              <tr><td class="px-4 py-4 font-medium">JamesEdition</td><td class="px-4 py-4">HNWI global y brokers luxury</td><td class="px-4 py-4">Storytelling visual y precio visible/consultable</td><td class="px-4 py-4"><span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">Alta</span></td></tr>
+              <tr><td class="px-4 py-4 font-medium">Mansion Global</td><td class="px-4 py-4">Prestigio editorial y credibilidad</td><td class="px-4 py-4">Nota de prensa + pieza nativa si hay presupuesto</td><td class="px-4 py-4"><span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700">Media</span></td></tr>
+              <tr><td class="px-4 py-4 font-medium">Sotheby's / Christie's / E&amp;V</td><td class="px-4 py-4">Distribución selectiva vía agencia</td><td class="px-4 py-4">Mandato compartido con material premium</td><td class="px-4 py-4"><span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">Alta</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section id="dossier" class="reveal space-y-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="mb-3 inline-flex rounded-full bg-vendex-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.3em] text-vendex-700">Dossier comercial</p>
+          <h2 class="text-3xl font-bold text-slate-900 md:text-4xl">Ficha técnica, pricing orientativo y narrativa de inversión</h2>
+        </div>
+        <p class="max-w-2xl text-sm text-slate-600">Se recomienda dossier en dos capas: una versión teaser para captación y una versión privada con pricing, rentabilidad y data room técnico-comercial.</p>
+      </div>
+
+      <div class="grid gap-6 xl:grid-cols-[1.05fr_.95fr]">
+        <article class="rounded-3xl bg-white p-8 shadow-xl ring-1 ring-slate-200">
+          <h3 class="text-2xl font-bold text-slate-900">Ficha tipo por villa</h3>
+          <div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-slate-500">Superficie</p><p class="mt-2 text-lg font-bold text-slate-900">~190 m² construidos</p></div>
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-slate-500">Programa</p><p class="mt-2 text-lg font-bold text-slate-900">3 dorm. en suite + aseo</p></div>
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-slate-500">Exterior</p><p class="mt-2 text-lg font-bold text-slate-900">Terraza + piscina infinity</p></div>
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-slate-500">Tecnología</p><p class="mt-2 text-lg font-bold text-slate-900">KNX + datos + preinst. VE</p></div>
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-slate-500">Eficiencia</p><p class="mt-2 text-lg font-bold text-slate-900">Aerotermia + FV + Clase A</p></div>
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-slate-500">Localización</p><p class="mt-2 text-lg font-bold text-slate-900">10 min de Playa del Duque</p></div>
+          </div>
+          <div class="mt-6 rounded-3xl bg-gradient-to-r from-slate-900 to-slate-800 p-6 text-white">
+            <p class="text-xs uppercase tracking-[0.3em] text-rose-200">Storyline comercial recomendado</p>
+            <p class="mt-3 text-sm leading-7 text-slate-200">“Atlantic Crest Villas ofrece una colección extremadamente limitada de seis villas turísticas con vistas al Atlántico, arquitectura contemporánea bioclimática, piscinas infinity privadas y especificaciones smart-luxury preparadas para una explotación premium o una desinversión con valor añadido.”</p>
+          </div>
+        </article>
+
+        <article class="glass rounded-3xl p-8 shadow-xl">
+          <h3 class="text-2xl font-bold text-slate-900">Pricing y enfoque comercial</h3>
+          <div class="mt-5 space-y-4">
+            <div class="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+              <p class="font-semibold text-amber-900">Nota de coherencia inter-agentes</p>
+              <p class="mt-2 text-sm text-amber-800">Existe discrepancia entre el rango inicial aportado en el encargo (850k–1,2M €/villa) y la valoración detallada de Valorex. Para mantener coherencia documental, este plan adopta el rango de Valorex como base comercial.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-5">
+              <div class="flex items-center justify-between"><p class="font-semibold text-slate-900">Entrada de mercado / preventa táctica</p><span class="text-sm font-bold text-slate-900">1,65–1,85 M€</span></div>
+              <p class="mt-2 text-sm text-slate-600">Útil para 1-2 unidades ancla si se quiere acelerar absorción o asegurar debt/equity confidence.</p>
+            </div>
+            <div class="rounded-2xl border border-rose-200 bg-rose-50 p-5">
+              <div class="flex items-center justify-between"><p class="font-semibold text-slate-900">Posicionamiento recomendado</p><span class="text-sm font-bold text-vendex-700">2,20 M€ / villa</span></div>
+              <p class="mt-2 text-sm text-slate-600">Alineado con Valorex, reforzado por la escasez del complejo, la calidad técnica y la ventaja visual/topográfica.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-5">
+              <div class="flex items-center justify-between"><p class="font-semibold text-slate-900">Escenario ultra-premium</p><span class="text-sm font-bold text-slate-900">2,45–2,60 M€</span></div>
+              <p class="mt-2 text-sm text-slate-600">Solo viable con acabados finales, marketing editorial fuerte y canal broker internacional top-tier.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-2">
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+          <div class="border-b border-slate-200 px-6 py-5"><h3 class="text-2xl font-bold text-slate-900">Comparativa competitiva</h3></div>
+          <div class="overflow-x-auto px-6 py-6">
+            <table class="min-w-full text-left text-sm">
+              <thead>
+                <tr class="text-slate-500">
+                  <th class="px-4 py-3 font-semibold">Proyecto</th>
+                  <th class="px-4 py-3 font-semibold">Zona</th>
+                  <th class="px-4 py-3 font-semibold">Precio</th>
+                  <th class="px-4 py-3 font-semibold">Lectura comercial</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-700">
+                <tr><td class="px-4 py-4 font-medium">Siam Gardens</td><td class="px-4 py-4">San Eugenio Alto</td><td class="px-4 py-4">1,80 M€</td><td class="px-4 py-4">Benchmark de obra nueva; menor exclusividad por volumen de unidades.</td></tr>
+                <tr><td class="px-4 py-4 font-medium">Serenity Luxury Villas</td><td class="px-4 py-4">Siam / San Eugenio</td><td class="px-4 py-4">1,95 M€</td><td class="px-4 py-4">Competidor directo por aspiración; Atlantic Crest debe ganar en relato y privacidad.</td></tr>
+                <tr><td class="px-4 py-4 font-medium">Leonardo Omar</td><td class="px-4 py-4">Caldera del Rey</td><td class="px-4 py-4">2,60 M€</td><td class="px-4 py-4">Referencia de arquitectura de autor y elevación de pricing.</td></tr>
+                <tr><td class="px-4 py-4 font-medium">AureA Residencial</td><td class="px-4 py-4">Costa Adeje</td><td class="px-4 py-4">3,50 M€+</td><td class="px-4 py-4">Prueba de que el mercado absorbe ultra-lujo cuando el producto está finamente curado.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+          <div class="border-b border-slate-200 px-6 py-5"><h3 class="text-2xl font-bold text-slate-900">Rentabilidad para inversores</h3></div>
+          <div class="grid gap-4 px-6 py-6 md:grid-cols-2">
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-slate-500">ADR objetivo</p><p class="mt-2 text-2xl font-bold text-slate-900">~450 €/noche</p><p class="mt-2 text-sm text-slate-600">Rango Valorex: 350–550 €/noche por villa.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-slate-500">Ocupación anual</p><p class="mt-2 text-2xl font-bold text-slate-900">78%</p><p class="mt-2 text-sm text-slate-600">Potencial de posicionamiento luxury y estancia familiar premium.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-slate-500">NOI estimado</p><p class="mt-2 text-2xl font-bold text-slate-900">~920.000 €/año</p><p class="mt-2 text-sm text-slate-600">Tras costes operativos estimados por Valorex.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200"><p class="text-xs uppercase tracking-[0.3em] text-slate-500">Yield neto</p><p class="mt-2 text-2xl font-bold text-slate-900">14,2%</p><p class="mt-2 text-sm text-slate-600">Sobre inversión total aprox. 6,5 M€.</p></div>
+          </div>
+          <div class="px-6 pb-6 text-sm leading-7 text-slate-600">Mensaje sugerido para family offices: <strong>activo defendible por escasez, con upside de desinversión individual por unidad y explotación vacacional premium ya validada por comparables de la zona.</strong></div>
+        </article>
+      </div>
+    </section>
+    <section id="ventas" class="reveal space-y-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="mb-3 inline-flex rounded-full bg-vendex-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.3em] text-vendex-700">Estrategia de ventas</p>
+          <h2 class="text-3xl font-bold text-slate-900 md:text-4xl">Preventa, showroom virtual y partnerships de lujo</h2>
+        </div>
+        <p class="max-w-2xl text-sm text-slate-600">El cierre debe construirse por capas: captación → cualificación → inmersión visual → visita/meeting privado → reserva. El producto invita a un proceso tipo private sales, no a lead handling de volumen.</p>
+      </div>
+
+      <div class="grid gap-6 xl:grid-cols-4">
+        <div class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Fase 1</p>
+          <h3 class="mt-3 text-xl font-bold text-slate-900">Preventa sobre plano</h3>
+          <p class="mt-3 text-sm text-slate-600">Lanzamiento cerrado con 1-2 unidades a pricing fundacional para crear tracción, testimonios comerciales y prueba de mercado.</p>
+        </div>
+        <div class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Fase 2</p>
+          <h3 class="mt-3 text-xl font-bold text-slate-900">Showroom virtual</h3>
+          <p class="mt-3 text-sm text-slate-600">Microsite privado, video walkthrough, renders y reunión guiada por Zoom/Meet con deck financiero y documentación urbanística.</p>
+        </div>
+        <div class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Fase 3</p>
+          <h3 class="mt-3 text-xl font-bold text-slate-900">Eventos privados</h3>
+          <p class="mt-3 text-sm text-slate-600">Presentación en hotel 5* o rooftop con brokers clave, wealth advisors e inversores invitados.</p>
+        </div>
+        <div class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Fase 4</p>
+          <h3 class="mt-3 text-xl font-bold text-slate-900">Broker amplification</h3>
+          <p class="mt-3 text-sm text-slate-600">Mandato coordinado con agencias luxury y seguimiento semanal por pipeline, visitas y LOIs.</p>
+        </div>
+      </div>
+
+      <div class="grid gap-6 xl:grid-cols-[1fr_1fr]">
+        <article class="rounded-3xl bg-slate-950 p-8 text-white shadow-2xl">
+          <h3 class="text-2xl font-bold">Partnerships prioritarios</h3>
+          <div class="mt-6 grid gap-4 md:grid-cols-2">
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p class="font-semibold">Engel &amp; Völkers</p>
+              <p class="mt-2 text-sm text-slate-300">Cobertura DACH, Benelux y cliente europeo patrimonial. Ideal para preventa internacional.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p class="font-semibold">Sotheby's International Realty</p>
+              <p class="mt-2 text-sm text-slate-300">Refuerza percepción de lujo, distribución editorial y tráfico HNWI.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p class="font-semibold">Christie's Real Estate</p>
+              <p class="mt-2 text-sm text-slate-300">Útil para captar compradores con sensibilidad por activo escaso y arquitectura premium.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p class="font-semibold">Boutique local luxury brokers</p>
+              <p class="mt-2 text-sm text-slate-300">Clave para cierres en Costa Adeje y visitas cualificadas sobre el terreno.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass rounded-3xl p-8 shadow-xl">
+          <h3 class="text-2xl font-bold text-slate-900">Cadencia comercial recomendada</h3>
+          <ol class="mt-6 space-y-4 border-l-2 border-rose-200 pl-6 text-sm text-slate-600">
+            <li><strong>1.</strong> Lead entra por campaña, broker o referral y se etiqueta por perfil e intención.</li>
+            <li><strong>2.</strong> Envío de teaser deck y acceso controlado a landing premium.</li>
+            <li><strong>3.</strong> Reunión de 20-30 min con guion dual: lifestyle + investment case.</li>
+            <li><strong>4.</strong> Entrega de dossier privado, pricing strategy y memo de rentabilidad.</li>
+            <li><strong>5.</strong> Visita virtual o presencial con soporte de Arqon/PM si el lead es sofisticado.</li>
+            <li><strong>6.</strong> Reserva / LOI / cierre coordinado con equipo legal y financiero.</li>
+          </ol>
+          <div class="mt-6 rounded-2xl bg-white p-5 ring-1 ring-slate-200">
+            <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Assets de support sales</p>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              <li>One-pager de inversión para family offices.</li>
+              <li>Deck broker-friendly de 12-15 slides.</li>
+              <li>Ficha de FAQs urbanísticas y técnicas para reducir objeciones.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section id="activos" class="reveal space-y-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="mb-3 inline-flex rounded-full bg-vendex-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.3em] text-vendex-700">Material audiovisual</p>
+          <h2 class="text-3xl font-bold text-slate-900 md:text-4xl">Activos generados con fal-ai para precomercialización</h2>
+        </div>
+        <p class="max-w-2xl text-sm text-slate-600">Las imágenes se han generado tomando como guía la volumetría, el escalonamiento, la piedra basáltica, las vistas y el lenguaje arquitectónico reflejados en el PDF aprobado y en la memoria de Arqon.</p>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-2">
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+          <img src="assets/render-exterior-dia.jpg" alt="Render exterior día" class="h-80 w-full object-cover">
+          <div class="p-6">
+            <div class="flex items-center justify-between gap-4"><h3 class="text-xl font-bold text-slate-900">Render exterior día</h3><span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">fal-ai/flux/dev</span></div>
+            <p class="mt-3 text-sm text-slate-600">Hero principal de campaña: lectura instantánea del escalonamiento, privacidad visual y contacto con el horizonte atlántico.</p>
+          </div>
+        </article>
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+          <img src="assets/render-exterior-noche.jpg" alt="Render exterior noche" class="h-80 w-full object-cover">
+          <div class="p-6">
+            <div class="flex items-center justify-between gap-4"><h3 class="text-xl font-bold text-slate-900">Render exterior noche</h3><span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">fal-ai/flux/dev</span></div>
+            <p class="mt-3 text-sm text-slate-600">Pieza para social media y performance ads orientados a lifestyle premium y hospitalidad de alto nivel.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl"><img src="assets/render-interior-salon.jpg" alt="Render interior salón" class="h-64 w-full object-cover"><div class="p-5"><h3 class="font-bold text-slate-900">Interior salón-cocina</h3><p class="mt-2 text-sm text-slate-600">Conexión in/out y lenguaje de lujo calmado.</p></div></article>
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl"><img src="assets/render-dormitorio-master.jpg" alt="Render dormitorio master" class="h-64 w-full object-cover"><div class="p-5"><h3 class="font-bold text-slate-900">Dormitorio master</h3><p class="mt-2 text-sm text-slate-600">Pieza clave para comunicar descanso premium con terraza y vista al mar.</p></div></article>
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl"><img src="assets/render-piscina-oceano.jpg" alt="Render piscina infinity" class="h-64 w-full object-cover"><div class="p-5"><h3 class="font-bold text-slate-900">Piscina infinity con vistas</h3><p class="mt-2 text-sm text-slate-600">Activo clave para anuncios y portadas de dossier.</p></div></article>
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl"><img src="assets/render-terraza-atardecer.jpg" alt="Render terraza atardecer" class="h-64 w-full object-cover"><div class="p-5"><h3 class="font-bold text-slate-900">Terraza atardecer</h3><p class="mt-2 text-sm text-slate-600">Ideal para campañas de emoción aspiracional y remarketing.</p></div></article>
+      </div>
+
+      <div class="grid gap-6 xl:grid-cols-[1.05fr_.95fr]">
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+          <img src="assets/render-aereo-entorno.jpg" alt="Imagen aérea del entorno" class="h-[28rem] w-full object-cover">
+          <div class="p-6">
+            <div class="flex items-center justify-between gap-4"><h3 class="text-xl font-bold text-slate-900">Aérea del entorno Costa Adeje</h3><span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">fal-ai/flux/dev</span></div>
+            <p class="mt-3 text-sm text-slate-600">Refuerza el valor locacional: cota alta, mar, tejido premium y narrativa “above Costa Adeje”.</p>
+          </div>
+        </article>
+        <article class="rounded-3xl bg-slate-950 p-8 text-white shadow-2xl">
+          <h3 class="text-2xl font-bold">Video walkthrough virtual</h3>
+          <p class="mt-3 text-sm text-slate-300">Clip promocional generado con <strong>fal-ai/veo3.1/image-to-video</strong> a partir del render exterior día.</p>
+          <div class="mt-6 overflow-hidden rounded-3xl border border-white/10 bg-black">
+            <video controls preload="metadata" class="w-full" src="assets/video-walkthrough.mp4"></video>
+          </div>
+          <div class="mt-6 space-y-3 text-sm text-slate-300">
+            <p><strong>Uso recomendado:</strong> hero de landing, anuncios de remarketing, reels y soporte a reuniones comerciales.</p>
+            <p><strong>Siguiente iteración sugerida:</strong> generar una versión 9:16 para Instagram Reels / TikTok y una variante 16:9 con textos superpuestos para LinkedIn y YouTube.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section id="calendario" class="reveal space-y-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="mb-3 inline-flex rounded-full bg-vendex-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.3em] text-vendex-700">Plan de medios y calendario</p>
+          <h2 class="text-3xl font-bold text-slate-900 md:text-4xl">Presupuesto, fases de lanzamiento y KPIs de comercialización</h2>
+        </div>
+        <p class="max-w-2xl text-sm text-slate-600">El plan asume preventa sobre plano y un ciclo de comercialización de 12 meses, sincronizado con la obra de 18 meses estimada por Buildero.</p>
+      </div>
+
+      <div class="grid gap-6 xl:grid-cols-[1.05fr_.95fr]">
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+          <div class="border-b border-slate-200 px-6 py-5"><h3 class="text-2xl font-bold text-slate-900">Presupuesto de marketing recomendado</h3></div>
+          <div class="overflow-x-auto px-6 py-6">
+            <table class="min-w-full text-left text-sm">
+              <thead>
+                <tr class="text-slate-500">
+                  <th class="px-4 py-3 font-semibold">Partida</th>
+                  <th class="px-4 py-3 font-semibold">Importe estimado</th>
+                  <th class="px-4 py-3 font-semibold">Comentario</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-700">
+                <tr><td class="px-4 py-4 font-medium">Branding + naming + copy</td><td class="px-4 py-4">12.000 €</td><td class="px-4 py-4">Manual base, claims, identidad verbal y templates.</td></tr>
+                <tr><td class="px-4 py-4 font-medium">Web landing premium + CRM</td><td class="px-4 py-4">24.000 €</td><td class="px-4 py-4">Microsite multiidioma, lead scoring y data room privado.</td></tr>
+                <tr><td class="px-4 py-4 font-medium">CGIs, vídeo y postproducción</td><td class="px-4 py-4">28.000 €</td><td class="px-4 py-4">Incluye iteraciones finales y adaptación de piezas por formato.</td></tr>
+                <tr><td class="px-4 py-4 font-medium">Paid media internacional</td><td class="px-4 py-4">96.000 €</td><td class="px-4 py-4">Google, Meta, YouTube y LinkedIn en UK, Alemania, países nórdicos y Benelux.</td></tr>
+                <tr><td class="px-4 py-4 font-medium">Portales / brokers / listing fees</td><td class="px-4 py-4">42.000 €</td><td class="px-4 py-4">Premium placement y soporte comercial selectivo.</td></tr>
+                <tr><td class="px-4 py-4 font-medium">PR + eventos privados</td><td class="px-4 py-4">54.000 €</td><td class="px-4 py-4">Launch event, fam trips y presentaciones con brokers.</td></tr>
+                <tr><td class="px-4 py-4 font-medium">Email nurture / automatización / reporting</td><td class="px-4 py-4">14.000 €</td><td class="px-4 py-4">Secuencias, dashboards y optimización.</td></tr>
+                <tr><td class="px-4 py-4 font-medium">Contingencia</td><td class="px-4 py-4">20.000 €</td><td class="px-4 py-4">Refuerzo de canal ganador o mejoras creativas.</td></tr>
+              </tbody>
+              <tfoot>
+                <tr class="border-t border-slate-200 text-slate-900">
+                  <td class="px-4 py-4 font-bold">TOTAL</td>
+                  <td class="px-4 py-4 font-bold">290.000 €</td>
+                  <td class="px-4 py-4 font-medium">≈ 2,2% del valor bruto de venta (13,2 M€)</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </article>
+
+        <article class="rounded-3xl bg-slate-950 p-8 text-white shadow-2xl">
+          <h3 class="text-2xl font-bold">Pricing táctico de salida</h3>
+          <div class="mt-6 space-y-4 text-sm text-slate-300">
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p class="font-semibold text-white">Precio objetivo</p>
+              <p class="mt-2">2.200.000 € por villa · 13.200.000 € total.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p class="font-semibold text-white">Early bird recomendado</p>
+              <p class="mt-2">No comunicar “descuento” agresivo en abierto. Ofrecer a las 2 primeras reservas una ventaja controlada: <strong>3% máximo</strong>, upgrade de mobiliario, o paquete de explotación inicial.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p class="font-semibold text-white">Objetivo</p>
+              <p class="mt-2">Crear sensación de escasez y premio al decisor temprano sin erosionar el posicionamiento luxury.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="grid gap-6 xl:grid-cols-[1fr_1fr]">
+        <article class="rounded-3xl bg-white p-8 shadow-xl ring-1 ring-slate-200">
+          <h3 class="text-2xl font-bold text-slate-900">Calendario de comercialización</h3>
+          <div class="mt-6 space-y-5 border-l-2 border-rose-200 pl-6">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Fase 0 · Semanas 1-4</p>
+              <p class="mt-2 font-semibold text-slate-900">Preparación de marca y activos</p>
+              <p class="mt-2 text-sm text-slate-600">Naming final, microsite, renders definitivos, vídeo, dossier teaser y kit broker.</p>
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Fase 1 · Meses 2-3</p>
+              <p class="mt-2 font-semibold text-slate-900">Soft launch internacional</p>
+              <p class="mt-2 text-sm text-slate-600">Campañas seed en UK, Alemania, Países Bajos, Bélgica, Suecia, Noruega y Dinamarca; outreach a brokers luxury.</p>
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Fase 2 · Meses 4-6</p>
+              <p class="mt-2 font-semibold text-slate-900">Preventa y roadshow privado</p>
+              <p class="mt-2 text-sm text-slate-600">Eventos, visitas virtuales, PR selectiva, reuniones con family offices y captación de primeras reservas.</p>
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Fase 3 · Meses 7-9</p>
+              <p class="mt-2 font-semibold text-slate-900">Escalado de visibilidad</p>
+              <p class="mt-2 text-sm text-slate-600">Refuerzo paid, remarketing y presencia sostenida en portales/agencias top-tier con prueba social de absorción.</p>
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.3em] text-vendex-600">Fase 4 · Meses 10-12</p>
+              <p class="mt-2 font-semibold text-slate-900">Conversión final y gestión de espera</p>
+              <p class="mt-2 text-sm text-slate-600">Cierre de remanente, mantenimiento de lista de espera y preparación de narrativa post-sold out.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-3xl bg-white p-8 shadow-xl ring-1 ring-slate-200">
+          <h3 class="text-2xl font-bold text-slate-900">Plan de contenidos</h3>
+          <div class="mt-6 space-y-4 text-sm text-slate-600">
+            <div class="rounded-2xl bg-rose-50 p-5 ring-1 ring-rose-100">
+              <p class="font-semibold text-slate-900">Web / blog / email</p>
+              <p class="mt-2">2 piezas mensuales: inversión, lifestyle Costa Adeje, arquitectura bioclimática, rentabilidad vacacional y progreso de proyecto.</p>
+            </div>
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200">
+              <p class="font-semibold text-slate-900">Instagram / Facebook</p>
+              <p class="mt-2">3 publicaciones semanales + 2 reels; mezcla 60% lifestyle visual, 25% producto, 15% inversión.</p>
+            </div>
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200">
+              <p class="font-semibold text-slate-900">TikTok / Shorts</p>
+              <p class="mt-2">2 clips semanales: vistas, piscinas infinity, before/after de volumetría y teaser del walkthrough.</p>
+            </div>
+            <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200">
+              <p class="font-semibold text-slate-900">LinkedIn / brokers</p>
+              <p class="mt-2">1 publicación semanal enfocada a asset class, hospitality-investment y legitimidad del proyecto.</p>
+            </div>
+          </div>
+          <div class="mt-6 rounded-2xl bg-slate-950 p-5 text-sm text-slate-300">
+            <p class="font-semibold text-white">KPIs objetivo</p>
+            <ul class="mt-3 space-y-2">
+              <li>CTR paid &gt; 2,5% en search y &gt; 1,2% en social premium.</li>
+              <li>CPL cualificado &lt; 450 € en mercados principales.</li>
+              <li>15-20 leads cualificados/mes en fase activa.</li>
+              <li>6-8 reuniones comerciales/mes y 2-3 visitas profundas/mes.</li>
+              <li>2 reservas en primer semestre de campaña.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-slate-950 py-12 text-slate-400">
+    <div class="mx-auto max-w-7xl px-6 text-sm">
+      <p class="mb-2 text-white"><strong>Vendex</strong> — Sistema de Agentes Inmobiliarios IA</p>
+      <p class="mb-2">Documento comercial de trabajo. Los renders y el vídeo generados con fal-ai son conceptuales y no contractuales; deben coordinarse con la documentación técnica y comercial definitiva.</p>
+      <p>Fuentes internas utilizadas: Nexus (análisis urbanístico), Arqon (memoria arquitectónica), Buildero (presupuesto de obra), Valorex (tasación y viabilidad) y PDF aprobado definitivamente del refundido completo.</p>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    const channelCtx = document.getElementById('channelChart');
+    if (channelCtx) {
+      new Chart(channelCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Paid media', 'Agencias luxury', 'Portales premium', 'PR y eventos', 'Email/CRM'],
+          datasets: [{
+            data: [33, 24, 16, 17, 10],
+            backgroundColor: ['#e11d48', '#fb7185', '#fda4af', '#fdba74', '#1e293b'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { color: '#334155', usePointStyle: true, padding: 18 }
+            }
+          },
+          cutout: '68%'
+        }
+      });
+    }
+  </script>
+</body>
+</html>

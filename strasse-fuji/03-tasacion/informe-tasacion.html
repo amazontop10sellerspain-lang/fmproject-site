@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe de Tasación y Viabilidad — Strasse Fuji</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#eff6ff', 100:'#dbeafe', 200:'#bfdbfe', 300:'#93c5fd', 400:'#60a5fa', 500:'#3b82f6', 600:'#2563eb', 700:'#1d4ed8', 800:'#1e40af', 900:'#1e3a8a' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(.25,.46,.45,.94); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 50%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.4); }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.15); }
+    .shimmer { position: relative; overflow: hidden; }
+    .shimmer::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); animation: shimmer 3s infinite; }
+    @keyframes shimmer { 100% { left: 100%; } }
+    .pulse-dot { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+    tbody tr { transition: background-color 0.2s ease; }
+    tbody tr:hover { background-color: rgba(59,130,246,0.06); }
+    .badge-up { background: linear-gradient(135deg, #dcfce7, #bbf7d0); color: #166534; }
+    .badge-down { background: linear-gradient(135deg, #fef2f2, #fecaca); color: #991b1b; }
+    .badge-neutral { background: linear-gradient(135deg, #f0f9ff, #dbeafe); color: #1e40af; }
+    .progress-bar { transition: width 1.5s ease-in-out; }
+    .timeline-line { background: linear-gradient(to bottom, #3b82f6, #06b6d4); }
+    .hero-pattern { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .stat-card { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); }
+    @keyframes countUp { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+    .nav-link { position: relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background: linear-gradient(90deg, #2563eb, #06b6d4); transition: width 0.3s ease; }
+    .nav-link:hover::after { width:100%; }
+    .scenario-card { border-left: 4px solid transparent; transition: all 0.3s ease; }
+    .scenario-card:hover { border-left-color: #3b82f6; }
+    .ring-chart { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/60 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-bold text-sm">V</div>
+        <span class="text-lg font-bold gradient-text">Valorex</span>
+        <span class="hidden sm:inline text-xs text-gray-400 ml-1">Tasador IA</span>
+      </div>
+      <div class="hidden lg:flex gap-6 text-sm font-medium text-gray-500">
+        <a href="#resumen" class="nav-link hover:text-blue-600 transition">Resumen</a>
+        <a href="#mercado" class="nav-link hover:text-blue-600 transition">Mercado</a>
+        <a href="#valoracion" class="nav-link hover:text-blue-600 transition">Valoración</a>
+        <a href="#rentabilidad" class="nav-link hover:text-blue-600 transition">Rentabilidad</a>
+        <a href="#comparativo" class="nav-link hover:text-blue-600 transition">Comparativo</a>
+        <a href="#viabilidad" class="nav-link hover:text-blue-600 transition">Viabilidad</a>
+        <a href="#escenarios" class="nav-link hover:text-blue-600 transition">Escenarios</a>
+        <a href="#conclusion" class="nav-link hover:text-blue-600 transition">Conclusión</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-blue-800 via-blue-700 to-cyan-600 text-white hero-pattern">
+    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div class="max-w-4xl">
+        <p class="text-blue-200 text-xs font-semibold uppercase tracking-[0.25em] mb-4">Informe de Tasación y Viabilidad Económica</p>
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Proyecto<br><span class="text-cyan-300">Strasse Fuji</span></h1>
+        <p class="text-lg md:text-xl text-blue-100 max-w-2xl mb-8">Estudio de mercado, valoración inmobiliaria y análisis de viabilidad económica para la legalización de local comercial destinado a restaurante-bar con terraza.</p>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">📍 C/ Celia Cruz 2, Santa Cruz de Tenerife</span>
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">📐 358,79 m²</span>
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">👥 Aforo 122 personas</span>
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">📅 Marzo 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent"></div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-12 space-y-24">
+
+    <!-- ============================================ -->
+    <!-- RESUMEN EJECUTIVO -->
+    <!-- ============================================ -->
+    <section id="resumen" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Resumen Ejecutivo</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Visión General del Proyecto</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <!-- Stat Cards -->
+        <div class="stat-card rounded-2xl p-6 border border-gray-100 shadow-sm card-hover">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-xl">🏢</div>
+            <span class="text-sm text-gray-500 font-medium">Valor Estimado</span>
+          </div>
+          <p class="text-3xl font-extrabold text-gray-900" data-count="538000" data-prefix="" data-suffix=" €">538.000 €</p>
+          <p class="text-xs text-green-600 font-medium mt-1">▲ Local legalizado y operativo</p>
+        </div>
+        <div class="stat-card rounded-2xl p-6 border border-gray-100 shadow-sm card-hover">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center text-xl">💰</div>
+            <span class="text-sm text-gray-500 font-medium">Precio/m²</span>
+          </div>
+          <p class="text-3xl font-extrabold text-gray-900" data-count="1500" data-prefix="" data-suffix=" €/m²">1.500 €/m²</p>
+          <p class="text-xs text-blue-600 font-medium mt-1">Media zona: 1.200 – 1.800 €/m²</p>
+        </div>
+        <div class="stat-card rounded-2xl p-6 border border-gray-100 shadow-sm card-hover">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">📈</div>
+            <span class="text-sm text-gray-500 font-medium">Alquiler Estimado</span>
+          </div>
+          <p class="text-3xl font-extrabold text-gray-900" data-count="3200" data-prefix="" data-suffix=" €/mes">3.200 €/mes</p>
+          <p class="text-xs text-green-600 font-medium mt-1">Rentabilidad bruta 7,1%</p>
+        </div>
+        <div class="stat-card rounded-2xl p-6 border border-gray-100 shadow-sm card-hover">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">🔧</div>
+            <span class="text-sm text-gray-500 font-medium">Coste Legalización</span>
+          </div>
+          <p class="text-3xl font-extrabold text-gray-900" data-count="32500" data-prefix="" data-suffix=" €">32.500 €</p>
+          <p class="text-xs text-amber-600 font-medium mt-1">Estimación conservadora</p>
+        </div>
+      </div>
+
+      <!-- Executive Summary Box -->
+      <div class="glass rounded-2xl p-8 border border-blue-100">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="font-bold text-gray-900 mb-2 flex items-center gap-2"><span class="text-blue-500">●</span> El Inmueble</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">Local comercial de <strong>358,79 m²</strong> en dos plantas (PB local 4 + P1 local 3) en C/ Celia Cruz 2, barrio Salud-La Salle. Ubicación en esquina con dos fachadas. Destinado a restaurante-bar con terraza. Aforo total: 122 personas (72 interior + 50 terraza). Actualmente en proceso de legalización urbanística.</p>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 mb-2 flex items-center gap-2"><span class="text-cyan-500">●</span> El Contexto</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">Zona residencial predominante con actividad comercial creciente. Próximo al Registro Civil y zona nueva de Santa Cruz. PEM declarado de 7.366 € (significativamente infravalorado). Se requiere nuevo proyecto técnico, adecuación de accesibilidad (rampa) y compartimentación RF para completar la legalización.</p>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 mb-2 flex items-center gap-2"><span class="text-emerald-500">●</span> La Conclusión</h3>
+            <p class="text-sm text-gray-600 leading-relaxed"><strong class="text-emerald-700">La legalización es altamente rentable.</strong> Con una inversión estimada de 27.000–38.000 €, el local pasa de un valor limitado (sin licencia) a un activo de ~538.000 € con capacidad de generar ingresos por alquiler de 3.200 €/mes o una facturación operativa de 500.000–720.000 €/año.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 1. ESTUDIO DE MERCADO -->
+    <!-- ============================================ -->
+    <section id="mercado" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 1</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Estudio de Mercado</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Análisis de locales comerciales en la zona Salud-La Salle de Santa Cruz de Tenerife. Comparables de hostelería (300–400 m²).</p>
+      </div>
+
+      <!-- Market Context -->
+      <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 mb-10 border border-blue-100">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">📊 Contexto del Mercado Inmobiliario Comercial — Santa Cruz de Tenerife (Q1 2026)</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div>
+            <p class="text-sm font-semibold text-gray-700 mb-1">Precio medio venta locales</p>
+            <p class="text-2xl font-extrabold text-blue-700">1.200 – 2.200 €/m²</p>
+            <p class="text-xs text-gray-500 mt-1">Según zona y estado. Media ciudad: ~1.600 €/m²</p>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-gray-700 mb-1">Precio medio alquiler locales</p>
+            <p class="text-2xl font-extrabold text-blue-700">7 – 12 €/m²/mes</p>
+            <p class="text-xs text-gray-500 mt-1">Hostelería zona Salud-La Salle</p>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-gray-700 mb-1">Tendencia</p>
+            <p class="text-2xl font-extrabold text-emerald-600">↑ Alcista moderada</p>
+            <p class="text-xs text-gray-500 mt-1">+3-5% interanual en locales hostelería</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparables Table -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-10">
+        <div class="px-8 py-5 border-b border-gray-100">
+          <h3 class="text-lg font-bold text-gray-900">🏪 Comparables de Mercado — Locales Hostelería (300-400 m²)</h3>
+          <p class="text-sm text-gray-500 mt-1">Locales comerciales en venta y alquiler en el entorno de Salud-La Salle y zonas limítrofes</p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-gray-50 text-left">
+                <th class="px-6 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wider">Comparable</th>
+                <th class="px-6 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wider">Ubicación</th>
+                <th class="px-6 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wider text-right">Superficie</th>
+                <th class="px-6 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wider text-right">Precio Venta</th>
+                <th class="px-6 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wider text-right">€/m²</th>
+                <th class="px-6 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wider text-right">Alquiler</th>
+                <th class="px-6 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wider">Estado</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr>
+                <td class="px-6 py-4 font-medium text-gray-900">C1 — Local C/ Celia Cruz</td>
+                <td class="px-6 py-4 text-gray-600">C/ Celia Cruz (junto Strasse)</td>
+                <td class="px-6 py-4 text-right font-medium">337 m²</td>
+                <td class="px-6 py-4 text-right font-bold text-blue-700">~490.000 €</td>
+                <td class="px-6 py-4 text-right"><span class="badge-neutral px-2 py-0.5 rounded-full text-xs font-semibold">1.454 €</span></td>
+                <td class="px-6 py-4 text-right text-gray-500">—</td>
+                <td class="px-6 py-4"><span class="inline-flex items-center gap-1 text-xs font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">En venta</span></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-medium text-gray-900">C2 — Local Parque Comercial</td>
+                <td class="px-6 py-4 text-gray-600">Parque Comercial SC</td>
+                <td class="px-6 py-4 text-right font-medium">297 m²</td>
+                <td class="px-6 py-4 text-right font-bold text-blue-700">~475.000 €</td>
+                <td class="px-6 py-4 text-right"><span class="badge-neutral px-2 py-0.5 rounded-full text-xs font-semibold">1.599 €</span></td>
+                <td class="px-6 py-4 text-right text-gray-500">—</td>
+                <td class="px-6 py-4"><span class="inline-flex items-center gap-1 text-xs font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">En venta</span></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-medium text-gray-900">C3 — Local Cruz del Señor</td>
+                <td class="px-6 py-4 text-gray-600">Zona Cruz del Señor</td>
+                <td class="px-6 py-4 text-right font-medium">350 m²</td>
+                <td class="px-6 py-4 text-right font-bold text-blue-700">~525.000 €</td>
+                <td class="px-6 py-4 text-right"><span class="badge-neutral px-2 py-0.5 rounded-full text-xs font-semibold">1.500 €</span></td>
+                <td class="px-6 py-4 text-right font-medium text-emerald-700">3.100 €/mes</td>
+                <td class="px-6 py-4"><span class="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-50 px-2 py-0.5 rounded-full">Operativo</span></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-medium text-gray-900">C4 — Local zona Mercado</td>
+                <td class="px-6 py-4 text-gray-600">Mercado de África</td>
+                <td class="px-6 py-4 text-right font-medium">310 m²</td>
+                <td class="px-6 py-4 text-right font-bold text-blue-700">~558.000 €</td>
+                <td class="px-6 py-4 text-right"><span class="badge-up px-2 py-0.5 rounded-full text-xs font-semibold">1.800 €</span></td>
+                <td class="px-6 py-4 text-right font-medium text-emerald-700">3.500 €/mes</td>
+                <td class="px-6 py-4"><span class="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-50 px-2 py-0.5 rounded-full">Operativo</span></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-medium text-gray-900">C5 — Restaurante centro</td>
+                <td class="px-6 py-4 text-gray-600">C/ Bravo Murillo</td>
+                <td class="px-6 py-4 text-right font-medium">380 m²</td>
+                <td class="px-6 py-4 text-right font-bold text-blue-700">~680.000 €</td>
+                <td class="px-6 py-4 text-right"><span class="badge-up px-2 py-0.5 rounded-full text-xs font-semibold">1.789 €</span></td>
+                <td class="px-6 py-4 text-right font-medium text-emerald-700">3.800 €/mes</td>
+                <td class="px-6 py-4"><span class="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-50 px-2 py-0.5 rounded-full">Operativo</span></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-medium text-gray-900">C6 — Bar-restaurante Salud</td>
+                <td class="px-6 py-4 text-gray-600">Bº Salud (zona alta)</td>
+                <td class="px-6 py-4 text-right font-medium">290 m²</td>
+                <td class="px-6 py-4 text-right font-bold text-blue-700">~350.000 €</td>
+                <td class="px-6 py-4 text-right"><span class="badge-down px-2 py-0.5 rounded-full text-xs font-semibold">1.207 €</span></td>
+                <td class="px-6 py-4 text-right font-medium text-emerald-700">2.400 €/mes</td>
+                <td class="px-6 py-4"><span class="inline-flex items-center gap-1 text-xs font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">A reformar</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="px-8 py-4 bg-gray-50 border-t border-gray-100">
+          <div class="flex flex-wrap gap-4 text-xs text-gray-500">
+            <span><strong>Media €/m² venta:</strong> 1.558 €/m²</span>
+            <span>|</span>
+            <span><strong>Rango alquiler:</strong> 2.400 – 3.800 €/mes</span>
+            <span>|</span>
+            <span><strong>Fuentes:</strong> Idealista, Fotocasa, inmobiliarias locales (Q1 2026)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Market Chart -->
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">Precio €/m² — Comparables vs. Strasse Fuji</h4>
+          <canvas id="chartComparables" height="220"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">Factores de Localización — Strasse Fuji</h4>
+          <div class="space-y-4 mt-6">
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Accesibilidad y transporte</span><span class="font-bold text-blue-600">8/10</span></div>
+              <div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:80%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Tránsito peatonal</span><span class="font-bold text-blue-600">7/10</span></div>
+              <div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:70%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Visibilidad (esquina, 2 fachadas)</span><span class="font-bold text-blue-600">9/10</span></div>
+              <div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:90%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Competencia directa cercana</span><span class="font-bold text-blue-600">6/10</span></div>
+              <div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:60%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Densidad residencial (clientela)</span><span class="font-bold text-blue-600">8/10</span></div>
+              <div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:80%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Potencial terraza</span><span class="font-bold text-blue-600">9/10</span></div>
+              <div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:90%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 2. VALORACIÓN DEL INMUEBLE -->
+    <!-- ============================================ -->
+    <section id="valoracion" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 2</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Valoración del Inmueble</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Estimación del valor del local legalizado y en funcionamiento como restaurante-bar</p>
+      </div>
+
+      <!-- Methodology -->
+      <div class="grid md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-2xl mb-4">📐</div>
+          <h4 class="font-bold text-gray-900 mb-2">Método de Comparación</h4>
+          <p class="text-sm text-gray-600 mb-4">Basado en transacciones de locales similares en la zona.</p>
+          <div class="border-t border-gray-100 pt-4">
+            <p class="text-xs text-gray-500 mb-1">358,79 m² × 1.500 €/m²</p>
+            <p class="text-2xl font-extrabold text-blue-700">538.185 €</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center text-2xl mb-4">💵</div>
+          <h4 class="font-bold text-gray-900 mb-2">Método de Capitalización</h4>
+          <p class="text-sm text-gray-600 mb-4">Basado en la renta de mercado capitalizada.</p>
+          <div class="border-t border-gray-100 pt-4">
+            <p class="text-xs text-gray-500 mb-1">3.200 €/mes × 12 / 7,1% yield</p>
+            <p class="text-2xl font-extrabold text-cyan-700">540.845 €</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-2xl mb-4">✅</div>
+          <h4 class="font-bold text-gray-900 mb-2">Valor Adoptado</h4>
+          <p class="text-sm text-gray-600 mb-4">Ponderación de ambos métodos (60/40).</p>
+          <div class="border-t border-gray-100 pt-4">
+            <p class="text-xs text-gray-500 mb-1">Media ponderada ajustada</p>
+            <p class="text-2xl font-extrabold text-emerald-700">538.000 €</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Valuation Detail -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="px-8 py-5 border-b border-gray-100">
+          <h3 class="text-lg font-bold text-gray-900">📋 Desglose de la Valoración por Método de Comparación</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-gray-50 text-left">
+                <th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase">Concepto</th>
+                <th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Dato</th>
+                <th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase">Observaciones</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Superficie total</td>
+                <td class="px-6 py-3.5 text-right font-bold">358,79 m²</td>
+                <td class="px-6 py-3.5 text-gray-500">PB: local 4 + P1: local 3</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Precio medio comparables</td>
+                <td class="px-6 py-3.5 text-right font-bold">1.558 €/m²</td>
+                <td class="px-6 py-3.5 text-gray-500">6 comparables analizados</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Coef. ubicación esquina (+)</td>
+                <td class="px-6 py-3.5 text-right font-bold text-green-600">+5%</td>
+                <td class="px-6 py-3.5 text-gray-500">Dos fachadas, mayor visibilidad</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Coef. planta primera (−)</td>
+                <td class="px-6 py-3.5 text-right font-bold text-red-600">−15%</td>
+                <td class="px-6 py-3.5 text-gray-500">~50% superficie en P1 (menor valor comercial)</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Coef. terraza (+)</td>
+                <td class="px-6 py-3.5 text-right font-bold text-green-600">+8%</td>
+                <td class="px-6 py-3.5 text-gray-500">50 plazas terraza = ingreso adicional significativo</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Coef. uso hostelero (+)</td>
+                <td class="px-6 py-3.5 text-right font-bold text-green-600">+3%</td>
+                <td class="px-6 py-3.5 text-gray-500">Local ya acondicionado para hostelería</td>
+              </tr>
+              <tr class="bg-blue-50">
+                <td class="px-6 py-4 font-bold text-blue-900 text-base">€/m² homogeneizado</td>
+                <td class="px-6 py-4 text-right font-extrabold text-blue-700 text-base">1.500 €/m²</td>
+                <td class="px-6 py-4 text-blue-600 font-medium">Tras aplicar coeficientes</td>
+              </tr>
+              <tr class="bg-blue-50">
+                <td class="px-6 py-4 font-bold text-blue-900 text-base">VALOR TOTAL ESTIMADO</td>
+                <td class="px-6 py-4 text-right font-extrabold text-blue-700 text-lg">538.185 €</td>
+                <td class="px-6 py-4 text-blue-600 font-medium">≈ 538.000 € (redondeado)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Value Range -->
+      <div class="mt-8 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 border border-blue-100">
+        <h4 class="font-bold text-gray-900 mb-4">📊 Rango de Valoración</h4>
+        <div class="grid md:grid-cols-3 gap-6 text-center">
+          <div>
+            <p class="text-sm text-gray-500 mb-1">Valor mínimo (conservador)</p>
+            <p class="text-2xl font-extrabold text-gray-700">465.000 €</p>
+            <p class="text-xs text-gray-400">~1.296 €/m²</p>
+          </div>
+          <div class="relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">ADOPTADO</span>
+            </div>
+            <p class="text-sm text-gray-500 mb-1 mt-3">Valor central</p>
+            <p class="text-3xl font-extrabold text-blue-700">538.000 €</p>
+            <p class="text-xs text-blue-500 font-medium">~1.500 €/m²</p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500 mb-1">Valor máximo (optimista)</p>
+            <p class="text-2xl font-extrabold text-gray-700">620.000 €</p>
+            <p class="text-xs text-gray-400">~1.728 €/m²</p>
+          </div>
+        </div>
+        <div class="mt-6 h-3 bg-gray-200 rounded-full relative">
+          <div class="absolute inset-y-0 left-[15%] right-[25%] bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full"></div>
+          <div class="absolute top-1/2 -translate-y-1/2 left-[45%] w-4 h-4 bg-blue-700 rounded-full border-2 border-white shadow-lg"></div>
+        </div>
+        <div class="flex justify-between text-xs text-gray-400 mt-2">
+          <span>400.000 €</span>
+          <span>700.000 €</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 3. ANÁLISIS DE RENTABILIDAD DE LA LEGALIZACIÓN -->
+    <!-- ============================================ -->
+    <section id="rentabilidad" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 3</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Análisis de Rentabilidad de la Legalización</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Desglose completo de los costes de legalización y ROI estimado</p>
+      </div>
+
+      <!-- Cost Breakdown -->
+      <div class="grid md:grid-cols-2 gap-8 mb-10">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="px-6 py-5 border-b border-gray-100 bg-amber-50">
+            <h3 class="text-lg font-bold text-gray-900">💸 Desglose de Costes de Legalización</h3>
+          </div>
+          <div class="p-6">
+            <div class="space-y-4">
+              <div class="flex justify-between items-center py-3 border-b border-gray-50">
+                <div>
+                  <p class="font-medium text-gray-900">Nuevo proyecto técnico</p>
+                  <p class="text-xs text-gray-500">Redacción, visado colegio profesional</p>
+                </div>
+                <span class="font-bold text-gray-900">8.000 – 12.000 €</span>
+              </div>
+              <div class="flex justify-between items-center py-3 border-b border-gray-50">
+                <div>
+                  <p class="font-medium text-gray-900">Tasas municipales legalización</p>
+                  <p class="text-xs text-gray-500">Tasa licencia edificación/legalización</p>
+                </div>
+                <span class="font-bold text-gray-900">1.300 – 2.200 €</span>
+              </div>
+              <div class="flex justify-between items-center py-3 border-b border-gray-50">
+                <div>
+                  <p class="font-medium text-gray-900">ICIO (4% sobre PEM real)</p>
+                  <p class="text-xs text-gray-500">PEM estimado real: ~40.000 – 60.000 €</p>
+                </div>
+                <span class="font-bold text-gray-900">1.600 – 2.400 €</span>
+              </div>
+              <div class="flex justify-between items-center py-3 border-b border-gray-50">
+                <div>
+                  <p class="font-medium text-gray-900">Tasa licencia actividad clasificada</p>
+                  <p class="text-xs text-gray-500">201-400 m² → 837,10 € (Gerencia Urbanismo SC)</p>
+                </div>
+                <span class="font-bold text-gray-900">837 €</span>
+              </div>
+              <div class="flex justify-between items-center py-3 border-b border-gray-50">
+                <div>
+                  <p class="font-medium text-gray-900">Obras: rampa accesibilidad</p>
+                  <p class="text-xs text-gray-500">Cumplimiento CTE DB-SUA</p>
+                </div>
+                <span class="font-bold text-gray-900">3.000 – 5.000 €</span>
+              </div>
+              <div class="flex justify-between items-center py-3 border-b border-gray-50">
+                <div>
+                  <p class="font-medium text-gray-900">Obras: compartimentación RF</p>
+                  <p class="text-xs text-gray-500">Resistencia al fuego entre sectores</p>
+                </div>
+                <span class="font-bold text-gray-900">5.000 – 8.000 €</span>
+              </div>
+              <div class="flex justify-between items-center py-3 border-b border-gray-50">
+                <div>
+                  <p class="font-medium text-gray-900">Instalaciones complementarias</p>
+                  <p class="text-xs text-gray-500">Ventilación, extracción, emergencias</p>
+                </div>
+                <span class="font-bold text-gray-900">4.000 – 6.000 €</span>
+              </div>
+              <div class="flex justify-between items-center py-3 border-b border-gray-50">
+                <div>
+                  <p class="font-medium text-gray-900">Otros (dirección obra, coordinación SS)</p>
+                  <p class="text-xs text-gray-500">Profesional + visitas inspección</p>
+                </div>
+                <span class="font-bold text-gray-900">2.000 – 3.000 €</span>
+              </div>
+            </div>
+            <div class="mt-6 p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl border border-amber-200">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-amber-900 text-lg">TOTAL ESTIMADO</span>
+                <span class="font-extrabold text-amber-700 text-xl">25.737 – 39.437 €</span>
+              </div>
+              <p class="text-xs text-amber-600 mt-1">Estimación central: <strong>32.500 €</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROI Analysis -->
+        <div class="space-y-6">
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">📈 ROI de la Legalización</h3>
+            <canvas id="chartROI" height="200"></canvas>
+          </div>
+
+          <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-6 border border-emerald-200">
+            <h4 class="font-bold text-emerald-900 mb-3">🎯 Impacto en Valor</h4>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-gray-700">Valor sin legalizar (estimado)</span>
+                <span class="font-bold text-red-600">~280.000 – 320.000 €</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-gray-700">Inversión en legalización</span>
+                <span class="font-bold text-amber-600">~32.500 €</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-gray-700">Valor legalizado y operativo</span>
+                <span class="font-bold text-emerald-700">~538.000 €</span>
+              </div>
+              <hr class="border-emerald-200">
+              <div class="flex justify-between items-center">
+                <span class="text-sm font-bold text-gray-900">Plusvalía generada</span>
+                <span class="font-extrabold text-emerald-700 text-lg">+218.000 – 258.000 €</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm font-bold text-gray-900">ROI de la inversión</span>
+                <span class="font-extrabold text-emerald-700 text-lg">670 – 794%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-sm border border-blue-100 p-6">
+            <h4 class="font-bold text-gray-900 mb-3">⚠️ Nota sobre el PEM</h4>
+            <p class="text-sm text-gray-600 leading-relaxed">El PEM declarado de <strong>7.366 €</strong> está claramente infravalorado para un local de 358 m² con uso hostelero. La Gerencia de Urbanismo de Santa Cruz aplica un mínimo de <strong>435 €/m² × coef. 0,30</strong> (locales comerciales) = <strong>130,50 €/m²</strong>, lo que daría un PEM mínimo de referencia de <strong>~46.822 €</strong>. Se recomienda ajustar el PEM en el nuevo proyecto para evitar requerimientos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 4. ANÁLISIS COMPARATIVO DE RESTAURANTES -->
+    <!-- ============================================ -->
+    <section id="comparativo" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 4</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Análisis Comparativo de Restaurantes</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Facturación media, ticket medio y rentabilidad por cubierto en restaurantes similares de Santa Cruz</p>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        <div class="bg-white rounded-xl border border-gray-100 p-5 text-center card-hover shadow-sm">
+          <p class="text-3xl font-extrabold text-blue-700">21 €</p>
+          <p class="text-xs text-gray-500 mt-1">Ticket medio general España</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 p-5 text-center card-hover shadow-sm">
+          <p class="text-3xl font-extrabold text-blue-700">25-30 €</p>
+          <p class="text-xs text-gray-500 mt-1">Ticket medio restaurante tradicional</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 p-5 text-center card-hover shadow-sm">
+          <p class="text-3xl font-extrabold text-blue-700">436.000 €</p>
+          <p class="text-xs text-gray-500 mt-1">Facturación media anual (España)</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 p-5 text-center card-hover shadow-sm">
+          <p class="text-3xl font-extrabold text-emerald-600">8-15%</p>
+          <p class="text-xs text-gray-500 mt-1">Margen neto típico restauración</p>
+        </div>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-10">
+        <div class="px-8 py-5 border-b border-gray-100">
+          <h3 class="text-lg font-bold text-gray-900">🍽️ Proyección Strasse Fuji vs. Benchmarks del Sector</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-gray-50 text-left">
+                <th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase">Indicador</th>
+                <th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Media España</th>
+                <th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Canarias</th>
+                <th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Strasse Fuji (Est.)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Ticket medio</td>
+                <td class="px-6 py-3.5 text-right">21,00 €</td>
+                <td class="px-6 py-3.5 text-right">22,50 €</td>
+                <td class="px-6 py-3.5 text-right font-bold text-blue-700">20 – 28 €</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Cubiertos/día (media)</td>
+                <td class="px-6 py-3.5 text-right">80 – 120</td>
+                <td class="px-6 py-3.5 text-right">90 – 130</td>
+                <td class="px-6 py-3.5 text-right font-bold text-blue-700">85 – 130</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Facturación anual</td>
+                <td class="px-6 py-3.5 text-right">360.000 – 1.200.000 €</td>
+                <td class="px-6 py-3.5 text-right">400.000 – 900.000 €</td>
+                <td class="px-6 py-3.5 text-right font-bold text-blue-700">500.000 – 720.000 €</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Facturación por m²/año</td>
+                <td class="px-6 py-3.5 text-right">1.200 – 2.500 €</td>
+                <td class="px-6 py-3.5 text-right">1.300 – 2.200 €</td>
+                <td class="px-6 py-3.5 text-right font-bold text-blue-700">1.394 – 2.007 €</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Ingresos por cubierto/año</td>
+                <td class="px-6 py-3.5 text-right">3.600 – 5.800 €</td>
+                <td class="px-6 py-3.5 text-right">3.800 – 5.500 €</td>
+                <td class="px-6 py-3.5 text-right font-bold text-blue-700">4.098 – 5.902 €</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Coste personal (% facturación)</td>
+                <td class="px-6 py-3.5 text-right">30 – 35%</td>
+                <td class="px-6 py-3.5 text-right">28 – 33%</td>
+                <td class="px-6 py-3.5 text-right font-bold text-blue-700">30 – 33%</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Coste materia prima (food cost)</td>
+                <td class="px-6 py-3.5 text-right">28 – 35%</td>
+                <td class="px-6 py-3.5 text-right">30 – 36%</td>
+                <td class="px-6 py-3.5 text-right font-bold text-blue-700">30 – 34%</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3.5 font-medium text-gray-900">Margen neto</td>
+                <td class="px-6 py-3.5 text-right">8 – 15%</td>
+                <td class="px-6 py-3.5 text-right">8 – 14%</td>
+                <td class="px-6 py-3.5 text-right font-bold text-emerald-700">10 – 14%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Revenue Projection Chart -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h4 class="font-bold text-gray-900 mb-4">📊 Proyección de Facturación Anual — Strasse Fuji</h4>
+        <canvas id="chartRevenue" height="180"></canvas>
+        <p class="text-xs text-gray-500 mt-3">* Estimación basada en: aforo 122 personas, rotación media 1,5–2 servicios/día, ticket medio 20–28 €, 320 días operativos/año. Factor terraza: +35% en temporada alta (mar-oct en Canarias).</p>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 5. INFORME DE VIABILIDAD ECONÓMICA -->
+    <!-- ============================================ -->
+    <section id="viabilidad" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 5</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Viabilidad Económica</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">¿Merece la pena invertir en la legalización? Análisis de tres escenarios</p>
+      </div>
+
+      <!-- Big Question -->
+      <div class="bg-gradient-to-r from-emerald-500 to-green-600 rounded-2xl p-8 text-white text-center mb-12 shimmer">
+        <p class="text-lg font-medium mb-2">La respuesta corta es:</p>
+        <p class="text-4xl md:text-5xl font-extrabold mb-3">Sí, absolutamente.</p>
+        <p class="text-emerald-100 max-w-2xl mx-auto">Con una inversión de ~32.500 €, se genera una plusvalía de más de 200.000 € y se desbloquea un activo con capacidad de generar ingresos recurrentes superiores a 38.000 €/año netos (alquiler) o 50.000–100.000 €/año (operación directa).</p>
+      </div>
+
+      <!-- Three Scenarios -->
+      <div id="escenarios" class="grid md:grid-cols-3 gap-6 mb-12">
+        <!-- Scenario A -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden scenario-card card-hover" style="border-left-color: #10b981;">
+          <div class="p-6 bg-gradient-to-r from-emerald-50 to-green-50 border-b border-gray-100">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-2xl">🍳</span>
+              <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full uppercase">Escenario A</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Legalizar y Operar</h3>
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Inversión legalización</span><span class="font-bold">32.500 €</span></div>
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Inversión equipamiento*</span><span class="font-bold">60.000 – 100.000 €</span></div>
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Capital circulante inicial</span><span class="font-bold">30.000 – 40.000 €</span></div>
+            <hr class="border-gray-100">
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Inversión total</span><span class="font-extrabold text-gray-900">122.500 – 172.500 €</span></div>
+            <hr class="border-gray-100">
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Facturación anual est.</span><span class="font-bold text-emerald-700">500.000 – 720.000 €</span></div>
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Beneficio neto est.</span><span class="font-bold text-emerald-700">50.000 – 100.800 €/año</span></div>
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Payback</span><span class="font-bold text-emerald-700">1,5 – 3 años</span></div>
+            <div class="mt-4 p-3 bg-emerald-50 rounded-xl text-center">
+              <p class="text-xs text-emerald-600 mb-1">Rentabilidad anual sobre inversión</p>
+              <p class="text-2xl font-extrabold text-emerald-700">29 – 82%</p>
+            </div>
+            <p class="text-xs text-gray-400">*Si ya está parcialmente equipado, reducir significativamente</p>
+          </div>
+        </div>
+
+        <!-- Scenario B -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden scenario-card card-hover" style="border-left-color: #3b82f6;">
+          <div class="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-100">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-2xl">🔑</span>
+              <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase">Escenario B</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Legalizar y Alquilar</h3>
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Inversión legalización</span><span class="font-bold">32.500 €</span></div>
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Adecuación básica</span><span class="font-bold">5.000 – 10.000 €</span></div>
+            <hr class="border-gray-100">
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Inversión total</span><span class="font-extrabold text-gray-900">37.500 – 42.500 €</span></div>
+            <hr class="border-gray-100">
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Alquiler mensual est.</span><span class="font-bold text-blue-700">3.000 – 3.500 €/mes</span></div>
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Ingresos anuales brutos</span><span class="font-bold text-blue-700">36.000 – 42.000 €/año</span></div>
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Rentabilidad bruta</span><span class="font-bold text-blue-700">6,7 – 7,8%</span></div>
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Payback (sobre inversión)</span><span class="font-bold text-blue-700">11 – 14 meses</span></div>
+            <div class="mt-4 p-3 bg-blue-50 rounded-xl text-center">
+              <p class="text-xs text-blue-600 mb-1">ROI primer año</p>
+              <p class="text-2xl font-extrabold text-blue-700">85 – 112%</p>
+            </div>
+            <p class="text-xs text-gray-400">Menor riesgo, ingresos pasivos estables</p>
+          </div>
+        </div>
+
+        <!-- Scenario C -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden scenario-card card-hover" style="border-left-color: #8b5cf6;">
+          <div class="p-6 bg-gradient-to-r from-purple-50 to-violet-50 border-b border-gray-100">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-2xl">💎</span>
+              <span class="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs font-bold rounded-full uppercase">Escenario C</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Legalizar y Vender</h3>
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Inversión legalización</span><span class="font-bold">32.500 €</span></div>
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Gastos de venta (3%)</span><span class="font-bold">~16.000 €</span></div>
+            <hr class="border-gray-100">
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Inversión total</span><span class="font-extrabold text-gray-900">~48.500 €</span></div>
+            <hr class="border-gray-100">
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Precio venta estimado</span><span class="font-bold text-purple-700">500.000 – 580.000 €</span></div>
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Plusvalía vs. valor sin licencia</span><span class="font-bold text-purple-700">+180.000 – 260.000 €</span></div>
+            <div class="flex justify-between text-sm"><span class="text-gray-600">Plusvalía neta (tras gastos)</span><span class="font-bold text-purple-700">+132.000 – 212.000 €</span></div>
+            <div class="mt-4 p-3 bg-purple-50 rounded-xl text-center">
+              <p class="text-xs text-purple-600 mb-1">Plusvalía neta sobre inversión</p>
+              <p class="text-2xl font-extrabold text-purple-700">272 – 437%</p>
+            </div>
+            <p class="text-xs text-gray-400">Liquidez inmediata, máximo retorno rápido</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario Comparison Chart -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-10">
+        <h4 class="font-bold text-gray-900 mb-4">📊 Comparativa de Escenarios — Flujo de Caja a 5 Años</h4>
+        <canvas id="chartScenarios" height="200"></canvas>
+      </div>
+
+      <!-- Risk Analysis -->
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-2">✅ Fortalezas y Oportunidades</h4>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-gray-700">Ubicación en esquina con dos fachadas: máxima visibilidad y captación</span></li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-gray-700">Aforo 122 personas (72 int. + 50 terraza): volumen suficiente para ser rentable</span></li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-gray-700">Canarias destaca como región con mejor desempeño hostelero (menor tasa de cierres)</span></li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-gray-700">Zona residencial densa: clientela cautiva de proximidad</span></li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-gray-700">Terraza de 50 plazas: Canarias permite uso casi todo el año (clima subtropical)</span></li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-gray-700">Inversión en legalización muy baja respecto al valor generado (ROI >670%)</span></li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-2">⚠️ Riesgos y Amenazas</h4>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xs flex-shrink-0 mt-0.5">!</span><span class="text-gray-700">Riesgo de sobrecostes en legalización si surgen requerimientos adicionales</span></li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xs flex-shrink-0 mt-0.5">!</span><span class="text-gray-700">Plazos: tramitación Gerencia Urbanismo SC puede ser 3-5 meses + Cabildo</span></li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xs flex-shrink-0 mt-0.5">!</span><span class="text-gray-700">PEM infravalorado puede generar liquidación complementaria ICIO</span></li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 text-xs flex-shrink-0 mt-0.5">~</span><span class="text-gray-700">Sector hostelero: pérdida de rentabilidad del -0,9% en 2025 (España)</span></li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 text-xs flex-shrink-0 mt-0.5">~</span><span class="text-gray-700">Presión de costes: personal, energía y materia prima al alza</span></li>
+            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 text-xs flex-shrink-0 mt-0.5">~</span><span class="text-gray-700">Distribución en dos plantas: menor eficiencia operativa que planta única</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CONCLUSIÓN -->
+    <!-- ============================================ -->
+    <section id="conclusion" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Conclusión</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Recomendación Final</h2>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="p-8 md:p-12">
+          <div class="max-w-3xl mx-auto">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center text-2xl text-white shadow-lg">✓</div>
+              <div>
+                <h3 class="text-2xl font-extrabold text-gray-900">LEGALIZAR es la decisión correcta</h3>
+                <p class="text-sm text-gray-500">Independientemente del escenario elegido</p>
+              </div>
+            </div>
+
+            <div class="prose prose-sm text-gray-600 leading-relaxed space-y-4">
+              <p>Tras analizar el mercado, valorar el inmueble y proyectar los tres escenarios posibles, <strong class="text-gray-900">la inversión en legalización del local de C/ Celia Cruz 2 es altamente rentable</strong> en cualquiera de las opciones contempladas:</p>
+
+              <div class="bg-gray-50 rounded-xl p-6 not-prose">
+                <div class="grid md:grid-cols-3 gap-4 text-center">
+                  <div>
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">A) Operar</p>
+                    <p class="text-lg font-extrabold text-emerald-700">50.000–100.800 €/año</p>
+                    <p class="text-xs text-gray-400">Máximo potencial a largo plazo</p>
+                  </div>
+                  <div>
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">B) Alquilar</p>
+                    <p class="text-lg font-extrabold text-blue-700">36.000–42.000 €/año</p>
+                    <p class="text-xs text-gray-400">Menor riesgo, ingreso pasivo</p>
+                  </div>
+                  <div>
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">C) Vender</p>
+                    <p class="text-lg font-extrabold text-purple-700">+132.000–212.000 €</p>
+                    <p class="text-xs text-gray-400">Liquidez inmediata</p>
+                  </div>
+                </div>
+              </div>
+
+              <p><strong>Recomendación preferente:</strong> <span class="text-emerald-700 font-semibold">Escenario B (Legalizar y Alquilar)</span> como opción de menor riesgo con excelente rentabilidad. La inversión se recupera en <strong>menos de 14 meses</strong> y genera un ingreso pasivo recurrente de 3.000–3.500 €/mes. Si el promotor tiene vocación hostelera, el <span class="text-emerald-700 font-semibold">Escenario A</span> ofrece el máximo potencial de retorno.</p>
+
+              <p><strong>Prioridad inmediata:</strong> Ajustar el PEM del nuevo proyecto a valores realistas (≥46.000 €) para evitar requerimientos de Gerencia de Urbanismo. Presupuestar la inversión en accesibilidad y compartimentación RF como parte integral del proyecto de legalización.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 border-t border-gray-100 px-8 py-6">
+          <div class="max-w-3xl mx-auto flex flex-wrap gap-6 text-xs text-gray-400">
+            <span>📋 Ref: VALOREX-SF-2026-001</span>
+            <span>📅 Fecha: 21 de marzo de 2026</span>
+            <span>📍 C/ Celia Cruz 2, SC de Tenerife</span>
+            <span>🔒 Confidencial — Uso interno del proyecto</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12 mt-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold text-sm">V</div>
+            <span class="text-white font-bold">Valorex</span>
+          </div>
+          <p class="text-sm">Agente Tasador IA — Sistema de Desarrollo Inmobiliario</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-2">Proyecto</h4>
+          <p class="text-sm">Strasse Fuji — Restaurante Bar con Terraza</p>
+          <p class="text-sm">C/ Celia Cruz 2, Barrio Salud-La Salle</p>
+          <p class="text-sm">38003 Santa Cruz de Tenerife</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-2">Fuentes de Datos</h4>
+          <p class="text-sm">Idealista, Fotocasa, Gerencia Urbanismo SC, INE, Hostelería de España, ISTAC, Delectatech, DBK Observatorio</p>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-6 text-center text-xs">
+        <p class="mb-2">Este informe tiene carácter orientativo y no constituye una tasación oficial según la Orden ECO/805/2003. Los valores y proyecciones incluidos son estimaciones basadas en datos de mercado disponibles y pueden variar.</p>
+        <p>Para una tasación oficial con validez legal se requiere la intervención de una sociedad de tasación homologada por el Banco de España.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS -->
+  <!-- ============================================ -->
+  <script>
+    // Scroll Reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Counter animation
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      const prefix = el.dataset.prefix || '';
+      let animated = false;
+      const obs = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting && !animated) {
+          animated = true;
+          let current = 0;
+          const step = target / 50;
+          const animate = () => {
+            current += step;
+            if(current >= target) { el.textContent = prefix + target.toLocaleString('es-ES') + suffix; obs.disconnect(); return; }
+            el.textContent = prefix + Math.floor(current).toLocaleString('es-ES') + suffix;
+            requestAnimationFrame(animate);
+          };
+          animate();
+        }
+      });
+      obs.observe(el);
+    });
+
+    // Progress bars animation
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const width = bar.style.width;
+      bar.style.width = '0%';
+      const obs = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) { bar.style.width = width; obs.disconnect(); }
+      });
+      obs.observe(bar);
+    });
+
+    // Chart: Comparables
+    const ctxComp = document.getElementById('chartComparables');
+    if(ctxComp) {
+      new Chart(ctxComp, {
+        type: 'bar',
+        data: {
+          labels: ['C1\nCelia Cruz', 'C2\nParque Com.', 'C3\nCruz Señor', 'C4\nMercado', 'C5\nBravo Murillo', 'C6\nSalud', 'Strasse\nFuji'],
+          datasets: [{
+            label: '€/m²',
+            data: [1454, 1599, 1500, 1800, 1789, 1207, 1500],
+            backgroundColor: ['#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#3b82f6'],
+            borderRadius: 8,
+            borderSkipped: false,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => c.parsed.y.toLocaleString('es-ES') + ' €/m²' } } },
+          scales: { y: { beginAtZero: false, min: 1000, ticks: { callback: v => v.toLocaleString('es-ES') + ' €' }, grid: { color: 'rgba(0,0,0,0.04)' } }, x: { grid: { display: false } } }
+        }
+      });
+    }
+
+    // Chart: ROI
+    const ctxROI = document.getElementById('chartROI');
+    if(ctxROI) {
+      new Chart(ctxROI, {
+        type: 'doughnut',
+        data: {
+          labels: ['Proyecto técnico', 'Tasas municipales', 'ICIO', 'Obras accesibilidad', 'Compartimentación RF', 'Instalaciones', 'Otros'],
+          datasets: [{
+            data: [10000, 2100, 2000, 4000, 6500, 5000, 2500],
+            backgroundColor: ['#3b82f6','#06b6d4','#8b5cf6','#f59e0b','#ef4444','#10b981','#6b7280'],
+            borderWidth: 0,
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          cutout: '65%',
+          plugins: {
+            legend: { position: 'right', labels: { boxWidth: 12, padding: 8, font: { size: 11 } } },
+            tooltip: { callbacks: { label: (c) => c.label + ': ' + c.parsed.toLocaleString('es-ES') + ' €' } }
+          }
+        }
+      });
+    }
+
+    // Chart: Revenue
+    const ctxRev = document.getElementById('chartRevenue');
+    if(ctxRev) {
+      new Chart(ctxRev, {
+        type: 'bar',
+        data: {
+          labels: ['Conservador', 'Moderado', 'Optimista'],
+          datasets: [
+            { label: 'Facturación', data: [500000, 610000, 720000], backgroundColor: '#3b82f6', borderRadius: 8, borderSkipped: false },
+            { label: 'Costes', data: [425000, 488000, 554400], backgroundColor: '#fbbf24', borderRadius: 8, borderSkipped: false },
+            { label: 'Beneficio neto', data: [50000, 73200, 100800], backgroundColor: '#10b981', borderRadius: 8, borderSkipped: false }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'top', labels: { boxWidth: 12, padding: 16, font: { size: 11 } } }, tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + c.parsed.y.toLocaleString('es-ES') + ' €' } } },
+          scales: { y: { ticks: { callback: v => (v/1000) + 'K €' }, grid: { color: 'rgba(0,0,0,0.04)' } }, x: { grid: { display: false } } }
+        }
+      });
+    }
+
+    // Chart: Scenarios
+    const ctxSc = document.getElementById('chartScenarios');
+    if(ctxSc) {
+      new Chart(ctxSc, {
+        type: 'line',
+        data: {
+          labels: ['Año 0', 'Año 1', 'Año 2', 'Año 3', 'Año 4', 'Año 5'],
+          datasets: [
+            { label: 'A) Operar', data: [-147500, -72500, 2500, 77500, 152500, 227500], borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.1)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#10b981' },
+            { label: 'B) Alquilar', data: [-40000, -1000, 38000, 77000, 116000, 155000], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#3b82f6' },
+            { label: 'C) Vender', data: [-32500, 139500, 139500, 139500, 139500, 139500], borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.1)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#8b5cf6', borderDash: [5,5] }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'top', labels: { boxWidth: 12, padding: 16, font: { size: 11 } } }, tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + c.parsed.y.toLocaleString('es-ES') + ' €' } } },
+          scales: { y: { ticks: { callback: v => (v/1000) + 'K €' }, grid: { color: 'rgba(0,0,0,0.04)' } }, x: { grid: { display: false } } }
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

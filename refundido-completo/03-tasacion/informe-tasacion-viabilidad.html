@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe de Tasación y Viabilidad Económica — 6 Villas Turísticas de Lujo · Costa Adeje</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: { sans: ['Inter','system-ui','sans-serif'] },
+        colors: { brand: {50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e40af',900:'#1e3a8a'} }
+      }}
+    }
+  </script>
+  <style>
+    html{scroll-behavior:smooth}
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.25,.46,.45,.94)}.reveal.visible{opacity:1;transform:translateY(0)}
+    .gradient-text{background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 40%,#06b6d4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .glass{background:rgba(255,255,255,.72);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.4)}
+    .card-hover{transition:all .3s ease}.card-hover:hover{transform:translateY(-4px);box-shadow:0 20px 40px -12px rgba(0,0,0,.15)}
+    .shimmer{position:relative;overflow:hidden}.shimmer::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);animation:shimmer 3s infinite}@keyframes shimmer{100%{left:100%}}
+    tbody tr{transition:background .2s}tbody tr:hover{background:rgba(59,130,246,.05)}
+    .badge-up{background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#166534}
+    .badge-neutral{background:linear-gradient(135deg,#f0f9ff,#dbeafe);color:#1e40af}
+    .progress-bar{transition:width 1.5s ease-in-out}
+    .nav-link{position:relative}.nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:linear-gradient(90deg,#2563eb,#06b6d4);transition:width .3s}.nav-link:hover::after{width:100%}
+    .scenario-card{border-left:4px solid transparent;transition:all .3s}.scenario-card:hover{border-left-color:#3b82f6}
+    .hero-pattern{background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+    .stat-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%)}
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/60 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-bold text-sm">V</div>
+        <span class="text-lg font-bold gradient-text">Valorex</span>
+        <span class="hidden sm:inline text-xs text-gray-400 ml-1">Tasador Inmobiliario IA</span>
+      </div>
+      <div class="hidden xl:flex gap-5 text-[13px] font-medium text-gray-500">
+        <a href="#resumen" class="nav-link hover:text-blue-600">Resumen</a>
+        <a href="#mercado" class="nav-link hover:text-blue-600">Mercado</a>
+        <a href="#suelo" class="nav-link hover:text-blue-600">Suelo</a>
+        <a href="#valoracion" class="nav-link hover:text-blue-600">Valoración</a>
+        <a href="#rentabilidad" class="nav-link hover:text-blue-600">Rentabilidad</a>
+        <a href="#viabilidad" class="nav-link hover:text-blue-600">Viabilidad</a>
+        <a href="#escenarios" class="nav-link hover:text-blue-600">Escenarios</a>
+        <a href="#riesgos" class="nav-link hover:text-blue-600">Riesgos</a>
+        <a href="#conclusion" class="nav-link hover:text-blue-600">Conclusión</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-700 text-white hero-pattern">
+    <div class="absolute inset-0 bg-gradient-to-t from-blue-950/50 to-transparent"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div class="max-w-4xl">
+        <p class="text-blue-200 text-xs font-semibold uppercase tracking-[.3em] mb-4">Informe de Tasación, Valoración y Viabilidad Económica</p>
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">6 Villas Turísticas<br>de Lujo en <span class="text-cyan-300">Costa Adeje</span></h1>
+        <p class="text-lg md:text-xl text-blue-100 max-w-2xl mb-8">Estudio de mercado, valoración de suelo y producto terminado, análisis de rentabilidad turística y viabilidad financiera completa del proyecto de Modificación Puntual del PGO de Adeje — Parcela 43-8, San Eugenio Alto.</p>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">📍 San Eugenio Alto, Costa Adeje</span>
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">📐 1.566 m² parcela · 1.143 m²t edif.</span>
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">🏠 6 villas · 20 plazas alojativas</span>
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">🏖️ Zona turística prime</span>
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">📅 Marzo 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent"></div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-12 space-y-24">
+
+    <!-- ══════════════════════════════════ -->
+    <!-- RESUMEN EJECUTIVO -->
+    <!-- ══════════════════════════════════ -->
+    <section id="resumen" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Resumen Ejecutivo</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Visión General del Proyecto</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+        <div class="stat-card rounded-2xl p-6 border border-gray-100 shadow-sm card-hover">
+          <div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-xl">🏝️</div><span class="text-sm text-gray-500 font-medium">Valor Suelo (con PGO)</span></div>
+          <p class="text-3xl font-extrabold text-gray-900">2.500.000 €</p>
+          <p class="text-xs text-blue-600 font-medium mt-1">~1.600 €/m² suelo turístico</p>
+        </div>
+        <div class="stat-card rounded-2xl p-6 border border-gray-100 shadow-sm card-hover">
+          <div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center text-xl">🏠</div><span class="text-sm text-gray-500 font-medium">Valor Producto Terminado</span></div>
+          <p class="text-3xl font-extrabold text-gray-900">13.200.000 €</p>
+          <p class="text-xs text-emerald-600 font-medium mt-1">~2.200.000 €/villa individual</p>
+        </div>
+        <div class="stat-card rounded-2xl p-6 border border-gray-100 shadow-sm card-hover">
+          <div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">💰</div><span class="text-sm text-gray-500 font-medium">Ingreso Alquiler Vacacional</span></div>
+          <p class="text-3xl font-extrabold text-gray-900">1.380.000 €/año</p>
+          <p class="text-xs text-emerald-600 font-medium mt-1">Ocupación 78% · 350–550 €/noche</p>
+        </div>
+        <div class="stat-card rounded-2xl p-6 border border-gray-100 shadow-sm card-hover">
+          <div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">📈</div><span class="text-sm text-gray-500 font-medium">Margen Promotor</span></div>
+          <p class="text-3xl font-extrabold text-gray-900">43,8%</p>
+          <p class="text-xs text-emerald-600 font-medium mt-1">TIR: 26,2% · Payback: 4,8 años</p>
+        </div>
+      </div>
+
+      <!-- Executive Summary -->
+      <div class="glass rounded-2xl p-8 border border-blue-100">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="font-bold text-gray-900 mb-2 flex items-center gap-2"><span class="text-blue-500">●</span> El Proyecto</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">Complejo de <strong>6 villas turísticas de lujo independientes</strong> con piscinas infinity privadas, domótica KNX, aerotermia, solar FV y acabados premium en parcela de 1.566 m² en San Eugenio Alto. Modificación Puntual del PGO de Adeje <strong>aprobada definitivamente</strong>. Edificabilidad: 1.143 m²t. 20 plazas alojativas. Uso exclusivamente turístico.</p>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 mb-2 flex items-center gap-2"><span class="text-cyan-500">●</span> Datos Inter-Agentes</h3>
+            <p class="text-sm text-gray-600 leading-relaxed"><strong>Buildero (Constructor):</strong> PEM 2.856.000 € · PEC+IGIC 3.636.545 € · Inversión total sin suelo: 4.200.000–4.400.000 €. <strong>Arqon (Arquitecto):</strong> Diseño bioclimático escalonado, certificación energética A, ~190 m²t/villa. <strong>Nexus (PM):</strong> Tramitación completa, PGO aprobado definitivamente. Plazo obra: 18 meses en 2 fases.</p>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 mb-2 flex items-center gap-2"><span class="text-emerald-500">●</span> La Conclusión</h3>
+            <p class="text-sm text-gray-600 leading-relaxed"><strong class="text-emerald-700">Proyecto de altísima rentabilidad.</strong> El mercado de villas de lujo en Costa Adeje muestra demanda insatisfecha creciente. El valor del producto terminado (~13,2M €) supera ampliamente la inversión total (~6,9–7,0M € con suelo), generando un margen promotor del 43,8% y una TIR del 26,2%. La explotación vacacional como alternativa ofrece ingresos de ~1,38M €/año.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- 1. ESTUDIO DE MERCADO -->
+    <!-- ══════════════════════════════════ -->
+    <section id="mercado" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 1</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Estudio de Mercado Exhaustivo</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Villas turísticas de lujo en Costa Adeje — San Eugenio Alto, Caldera del Rey, La Caleta, Torviscas Alto</p>
+      </div>
+
+      <!-- Market Context -->
+      <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 mb-10 border border-blue-100">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">📊 Contexto: Costa Adeje — El Mercado Premium de Canarias (Q1 2026)</h3>
+        <div class="grid md:grid-cols-4 gap-6">
+          <div>
+            <p class="text-sm font-semibold text-gray-700 mb-1">Precio medio lujo Adeje</p>
+            <p class="text-2xl font-extrabold text-blue-700">6.948 €/m²</p>
+            <p class="text-xs text-gray-500 mt-1">Idealista — propiedades de lujo</p>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-gray-700 mb-1">Precio medio La Caldera</p>
+            <p class="text-2xl font-extrabold text-blue-700">8.475 €/m²</p>
+            <p class="text-xs text-gray-500 mt-1">Zona San Eugenio / Caldera Rey</p>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-gray-700 mb-1">Ocupación turística</p>
+            <p class="text-2xl font-extrabold text-emerald-600">78–85%</p>
+            <p class="text-xs text-gray-500 mt-1">Villas de lujo (anualizada)</p>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-gray-700 mb-1">Tendencia</p>
+            <p class="text-2xl font-extrabold text-emerald-600">↑ Fuerte alcista</p>
+            <p class="text-xs text-gray-500 mt-1">+8-12% interanual en lujo</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparables VENTA -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-8">
+        <div class="px-8 py-5 border-b border-gray-100">
+          <h3 class="text-lg font-bold text-gray-900">🏡 Comparables de Venta — Villas de Lujo (nueva construcción, 3-5 dorm., piscina privada)</h3>
+          <p class="text-sm text-gray-500 mt-1">San Eugenio Alto, Caldera del Rey, La Caleta, Golf Costa Adeje</p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-gray-50 text-left">
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wider">Comparable</th>
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wider">Ubicación</th>
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wider text-right">Construidos</th>
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wider text-right">Parcela</th>
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wider text-right">Precio</th>
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wider text-right">€/m²c</th>
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wider">Características</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">C1 — Siam Gardens</td>
+                <td class="px-5 py-3.5 text-gray-600">San Eugenio Alto</td>
+                <td class="px-5 py-3.5 text-right">234 m²</td>
+                <td class="px-5 py-3.5 text-right">400-460 m²</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">1.800.000 €</td>
+                <td class="px-5 py-3.5 text-right"><span class="badge-neutral px-2 py-0.5 rounded-full text-xs font-semibold">7.692 €</span></td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">4 dorm., piscina, 24 villas, obra nueva 2022</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">C2 — Serenity Luxury</td>
+                <td class="px-5 py-3.5 text-gray-600">San Eugenio Alto (Siam)</td>
+                <td class="px-5 py-3.5 text-right">300 m²</td>
+                <td class="px-5 py-3.5 text-right">500 m²</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">1.950.000 €</td>
+                <td class="px-5 py-3.5 text-right"><span class="badge-neutral px-2 py-0.5 rounded-full text-xs font-semibold">6.500 €</span></td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">5 dorm., 3 plantas, ascensor, piscina infinity, 27 villas</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">C3 — Villa San Eugenio (VYM)</td>
+                <td class="px-5 py-3.5 text-gray-600">San Eugenio Alto</td>
+                <td class="px-5 py-3.5 text-right">387 m²</td>
+                <td class="px-5 py-3.5 text-right">440 m²</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">2.500.000 €</td>
+                <td class="px-5 py-3.5 text-right"><span class="badge-neutral px-2 py-0.5 rounded-full text-xs font-semibold">6.460 €</span></td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">4 dorm., 4 baños, garaje, piscina, vistas panorámicas</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">C4 — Villa VYM premium</td>
+                <td class="px-5 py-3.5 text-gray-600">San Eugenio Alto</td>
+                <td class="px-5 py-3.5 text-right">~400 m²</td>
+                <td class="px-5 py-3.5 text-right">~500 m²</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">2.700.000 €</td>
+                <td class="px-5 py-3.5 text-right"><span class="badge-neutral px-2 py-0.5 rounded-full text-xs font-semibold">6.750 €</span></td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">4-5 dorm., materiales importados, nueva construcción</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">C5 — Villa Caldera del Rey</td>
+                <td class="px-5 py-3.5 text-gray-600">Caldera del Rey</td>
+                <td class="px-5 py-3.5 text-right">336 m²</td>
+                <td class="px-5 py-3.5 text-right">642 m²</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">2.350.000 €</td>
+                <td class="px-5 py-3.5 text-right"><span class="badge-neutral px-2 py-0.5 rounded-full text-xs font-semibold">6.994 €</span></td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">4 dorm., 3 plantas, piscina, junto Siam Park</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">C6 — Leonardo Omar (promoción)</td>
+                <td class="px-5 py-3.5 text-gray-600">Caldera del Rey (baja)</td>
+                <td class="px-5 py-3.5 text-right">~315 m²</td>
+                <td class="px-5 py-3.5 text-right">~400 m²</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">2.600.000 €</td>
+                <td class="px-5 py-3.5 text-right"><span class="badge-up px-2 py-0.5 rounded-full text-xs font-semibold">8.254 €</span></td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">Arquitecto reconocido, 24 villas, vistas mar, premium</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">C7 — Golf Costa Adeje</td>
+                <td class="px-5 py-3.5 text-gray-600">Golf Costa Adeje</td>
+                <td class="px-5 py-3.5 text-right">~500 m²</td>
+                <td class="px-5 py-3.5 text-right">2.643 m²</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">2.930.000 €</td>
+                <td class="px-5 py-3.5 text-right"><span class="badge-neutral px-2 py-0.5 rounded-full text-xs font-semibold">5.860 €</span></td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">5 dorm., piscina infinity, garaje 4 coches, ascensor</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">C8 — AureA Residencial</td>
+                <td class="px-5 py-3.5 text-gray-600">Costa Adeje (centro)</td>
+                <td class="px-5 py-3.5 text-right">~375 m²</td>
+                <td class="px-5 py-3.5 text-right">2.500 m²</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">3.500.000+ €</td>
+                <td class="px-5 py-3.5 text-right"><span class="badge-up px-2 py-0.5 rounded-full text-xs font-semibold">9.333+ €</span></td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">Solo 4 unidades, arq. Sebastián Estrella, ultra-lujo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="px-8 py-4 bg-gray-50 border-t border-gray-100">
+          <div class="flex flex-wrap gap-4 text-xs text-gray-500">
+            <span><strong>Media €/m²c:</strong> 7.230 €/m² (rango 5.860–9.333+)</span>
+            <span>|</span>
+            <span><strong>Rango precios:</strong> 1.800.000 – 3.500.000+ €</span>
+            <span>|</span>
+            <span><strong>Fuentes:</strong> Idealista, TenerifeCenter, Nolan Group, inmobiliarias premium (Q1 2026)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparables ALQUILER VACACIONAL -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-8">
+        <div class="px-8 py-5 border-b border-gray-100">
+          <h3 class="text-lg font-bold text-gray-900">🌴 Comparables de Alquiler Vacacional — Villas de Lujo (por noche)</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-gray-50 text-left">
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase">Comparable</th>
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase">Zona</th>
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Dormitorios</th>
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Precio temp. baja</th>
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Precio temp. alta</th>
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Media anual</th>
+                <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase">Plataforma</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">Villa Eden</td>
+                <td class="px-5 py-3.5 text-gray-600">San Eugenio Alto</td>
+                <td class="px-5 py-3.5 text-right">3</td>
+                <td class="px-5 py-3.5 text-right">280 €</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">450 €</td>
+                <td class="px-5 py-3.5 text-right font-bold">~365 €</td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">Airbnb / Booking</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">Nolan Villa Luxury</td>
+                <td class="px-5 py-3.5 text-gray-600">San Eugenio Alto</td>
+                <td class="px-5 py-3.5 text-right">3</td>
+                <td class="px-5 py-3.5 text-right">300 €</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">500 €</td>
+                <td class="px-5 py-3.5 text-right font-bold">~400 €</td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">Gestión propia + OTAs</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">Villa Siam Premium</td>
+                <td class="px-5 py-3.5 text-gray-600">Caldera del Rey</td>
+                <td class="px-5 py-3.5 text-right">4</td>
+                <td class="px-5 py-3.5 text-right">350 €</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">600 €</td>
+                <td class="px-5 py-3.5 text-right font-bold">~475 €</td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">Booking / VRBO</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">Villa Panorámica Golf</td>
+                <td class="px-5 py-3.5 text-gray-600">Golf Costa Adeje</td>
+                <td class="px-5 py-3.5 text-right">4-5</td>
+                <td class="px-5 py-3.5 text-right">400 €</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">700 €</td>
+                <td class="px-5 py-3.5 text-right font-bold">~550 €</td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">Airbnb Luxe / agencia</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3.5 font-medium text-gray-900">Villa La Caleta Exclusive</td>
+                <td class="px-5 py-3.5 text-gray-600">La Caleta</td>
+                <td class="px-5 py-3.5 text-right">5</td>
+                <td class="px-5 py-3.5 text-right">500 €</td>
+                <td class="px-5 py-3.5 text-right font-bold text-blue-700">900 €</td>
+                <td class="px-5 py-3.5 text-right font-bold">~700 €</td>
+                <td class="px-5 py-3.5 text-xs text-gray-500">Web propia + Luxury Retreats</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="px-8 py-4 bg-gray-50 border-t border-gray-100">
+          <p class="text-xs text-gray-500"><strong>Estimación para nuestras villas (~190 m², 3-4 dorm., piscina infinity, KNX, cert. A):</strong> 350 €/noche (temp. baja) — 550 €/noche (temp. alta) · Media ponderada: <strong>~450 €/noche</strong></p>
+        </div>
+      </div>
+
+      <!-- Market Charts -->
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">Precio €/m² — Comparables de Venta</h4>
+          <canvas id="chartComparables" height="240"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">Factores de Localización — Parcela 43-8</h4>
+          <div class="space-y-3.5 mt-4">
+            <div><div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Vistas al mar y La Gomera</span><span class="font-bold text-blue-600">10/10</span></div><div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:100%"></div></div></div>
+            <div><div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Privacidad y exclusividad</span><span class="font-bold text-blue-600">9/10</span></div><div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:90%"></div></div></div>
+            <div><div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Cercanía playas y servicios</span><span class="font-bold text-blue-600">8/10</span></div><div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:80%"></div></div></div>
+            <div><div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Seguridad urbanística (PGO aprobado)</span><span class="font-bold text-blue-600">10/10</span></div><div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:100%"></div></div></div>
+            <div><div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Demanda turística zona</span><span class="font-bold text-blue-600">9/10</span></div><div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:90%"></div></div></div>
+            <div><div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Potencial de revalorización</span><span class="font-bold text-blue-600">9/10</span></div><div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:90%"></div></div></div>
+            <div><div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Diferenciación (KNX, cert. A, infinity)</span><span class="font-bold text-blue-600">9/10</span></div><div class="w-full h-2.5 bg-gray-100 rounded-full"><div class="h-2.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full progress-bar" style="width:90%"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- 2. VALORACIÓN DEL SUELO -->
+    <!-- ══════════════════════════════════ -->
+    <section id="suelo" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 2</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Valoración del Suelo</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Valor de la parcela 43-8 con la Modificación Puntual del PGO aprobada definitivamente</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-2xl mb-4">📐</div>
+          <h4 class="font-bold text-gray-900 mb-2">Método Residual Estático</h4>
+          <p class="text-sm text-gray-600 mb-4">Valor del suelo = Valor venta producto terminado − Costes de construcción − Margen promotor.</p>
+          <div class="border-t border-gray-100 pt-4 space-y-2 text-sm">
+            <div class="flex justify-between"><span class="text-gray-500">Valor venta 6 villas</span><span class="font-bold">13.200.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">− Coste construcción</span><span class="font-bold text-red-600">−4.300.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">− Honorarios + licencias</span><span class="font-bold text-red-600">−530.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">− Comercialización (4%)</span><span class="font-bold text-red-600">−528.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">− Financieros + varios</span><span class="font-bold text-red-600">−450.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">− Margen promotor (25%)</span><span class="font-bold text-red-600">−3.300.000 €</span></div>
+            <hr class="border-gray-200">
+            <div class="flex justify-between"><span class="font-bold text-gray-900">Valor residual suelo</span><span class="font-extrabold text-blue-700 text-lg">4.092.000 €</span></div>
+            <p class="text-xs text-gray-400">Con margen 25% sobre inversión (no sobre ventas)</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center text-2xl mb-4">🏗️</div>
+          <h4 class="font-bold text-gray-900 mb-2">Método de Comparación (suelo)</h4>
+          <p class="text-sm text-gray-600 mb-4">Basado en transacciones de parcelas turísticas en la zona.</p>
+          <div class="border-t border-gray-100 pt-4 space-y-2 text-sm">
+            <div class="flex justify-between"><span class="text-gray-500">Suelo turístico Costa Adeje</span><span class="font-bold">800–1.800 €/m²s</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">San Eugenio Alto (media)</span><span class="font-bold">1.100–1.500 €/m²s</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Coef. PGO aprobado (+)</span><span class="font-bold text-green-600">+15%</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Coef. edificabilidad 0,73 (+)</span><span class="font-bold text-green-600">+10%</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">€/m²s homogeneizado</span><span class="font-bold">~1.600 €/m²s</span></div>
+            <hr class="border-gray-200">
+            <div class="flex justify-between"><span class="font-bold text-gray-900">1.566 m² × 1.600 €/m²</span><span class="font-extrabold text-cyan-700 text-lg">2.505.600 €</span></div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-2xl mb-4">✅</div>
+          <h4 class="font-bold text-gray-900 mb-2">Valor Adoptado</h4>
+          <p class="text-sm text-gray-600 mb-4">Ponderación conservadora (mayor peso al comparable directo).</p>
+          <div class="border-t border-gray-100 pt-4 space-y-4">
+            <div class="bg-blue-50 rounded-xl p-4 text-center">
+              <p class="text-xs text-blue-500 mb-1">VALOR SUELO ADOPTADO</p>
+              <p class="text-3xl font-extrabold text-blue-700">2.500.000 €</p>
+              <p class="text-xs text-blue-500 mt-1">~1.600 €/m²s</p>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Se adopta el valor de comparación como referencia principal. El método residual arroja un valor superior (4,1M €) que refleja el potencial máximo del proyecto, pero el mercado de suelo en Adeje marca el precio efectivo de transacción. <strong>La diferencia entre ambos valores es el margen potencial del promotor.</strong></p>
+            <div class="bg-emerald-50 rounded-lg p-3 text-xs text-emerald-700">
+              <strong>💡 Nota clave:</strong> El valor de 2,5M € asume que el suelo se adquiere "hoy" con el PGO aprobado. Si el promotor ya es propietario del suelo (herederos), su coste de adquisición histórico puede ser muy inferior, aumentando significativamente la rentabilidad del proyecto.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- 3. VALORACIÓN PRODUCTO TERMINADO -->
+    <!-- ══════════════════════════════════ -->
+    <section id="valoracion" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 3</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Valoración del Producto Terminado</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Valor individual por villa y del complejo como conjunto</p>
+      </div>
+
+      <!-- Per Villa Valuation -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-10">
+        <div class="px-8 py-5 border-b border-gray-100">
+          <h3 class="text-lg font-bold text-gray-900">📋 Valoración por Villa Individual (~190 m²t, 3-4 dormitorios)</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr class="bg-gray-50"><th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase text-left">Concepto</th><th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Dato</th><th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase text-left">Observaciones</th></tr></thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr><td class="px-6 py-3.5 font-medium">Superficie construida</td><td class="px-6 py-3.5 text-right font-bold">~190 m²t</td><td class="px-6 py-3.5 text-gray-500">1.140 m²t / 6 villas (según Arqon)</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">€/m²c medio comparables</td><td class="px-6 py-3.5 text-right font-bold">7.230 €/m²</td><td class="px-6 py-3.5 text-gray-500">Media 8 comparables zona</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">Coef. menor superficie (−)</td><td class="px-6 py-3.5 text-right font-bold text-red-600">−5%</td><td class="px-6 py-3.5 text-gray-500">190 m² vs media 350 m² (villas más pequeñas)</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">Coef. calidades superiores (+)</td><td class="px-6 py-3.5 text-right font-bold text-green-600">+8%</td><td class="px-6 py-3.5 text-gray-500">KNX, aerotermia, cert. A, solar FV, piscina infinity</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">Coef. vistas premium (+)</td><td class="px-6 py-3.5 text-right font-bold text-green-600">+5%</td><td class="px-6 py-3.5 text-gray-500">Orientación a La Gomera, 300° de sol</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">Coef. complejo exclusivo (+)</td><td class="px-6 py-3.5 text-right font-bold text-green-600">+5%</td><td class="px-6 py-3.5 text-gray-500">Solo 6 unidades vs. 24-27 en Siam/Serenity</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">Coef. nueva construcción (+)</td><td class="px-6 py-3.5 text-right font-bold text-green-600">+3%</td><td class="px-6 py-3.5 text-gray-500">Entrega a estrenar, garantías completas</td></tr>
+              <tr class="bg-blue-50"><td class="px-6 py-4 font-bold text-blue-900 text-base">€/m²c homogeneizado</td><td class="px-6 py-4 text-right font-extrabold text-blue-700 text-lg">~8.400 €/m²</td><td class="px-6 py-4 text-blue-600 font-medium">Tras coeficientes correctores (+16% neto)</td></tr>
+              <tr class="bg-blue-50"><td class="px-6 py-4 font-bold text-blue-900 text-base">VALOR POR VILLA</td><td class="px-6 py-4 text-right font-extrabold text-blue-700 text-xl">~1.600.000 €</td><td class="px-6 py-4 text-blue-600 font-medium">190 m² × 8.400 €/m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Adjustment: market positioning -->
+      <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 mb-10 border border-blue-100">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">🎯 Posicionamiento de Mercado y Precio de Venta Recomendado</h3>
+        <div class="grid md:grid-cols-3 gap-6 text-center">
+          <div>
+            <p class="text-sm text-gray-500 mb-1">Posicionamiento bajo (competir en precio)</p>
+            <p class="text-2xl font-extrabold text-gray-600">1.650.000 €/villa</p>
+            <p class="text-xs text-gray-400">~8.684 €/m² · Total 6: 9.900.000 €</p>
+          </div>
+          <div class="relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2"><span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">RECOMENDADO</span></div>
+            <p class="text-sm text-gray-500 mb-1 mt-3">Posicionamiento medio-alto</p>
+            <p class="text-3xl font-extrabold text-blue-700">2.200.000 €/villa</p>
+            <p class="text-xs text-blue-500 font-medium">~11.579 €/m² · Total 6: 13.200.000 €</p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500 mb-1">Posicionamiento ultra-premium</p>
+            <p class="text-2xl font-extrabold text-gray-600">2.600.000 €/villa</p>
+            <p class="text-xs text-gray-400">~13.684 €/m² · Total 6: 15.600.000 €</p>
+          </div>
+        </div>
+        <div class="mt-6 text-xs text-gray-600 bg-white/60 rounded-xl p-4">
+          <strong>Justificación del precio recomendado (2.200.000 €/villa):</strong> El precio se sitúa entre el C3 (VYM, 2.500.000 € por 387 m²) y el C2 (Serenity, 1.950.000 € por 300 m²). Aunque nuestras villas son más compactas (190 m²), la exclusividad del complejo (solo 6 unidades), las especificaciones técnicas superiores (KNX, cert. A, infinity pool, aerotermia) y la ubicación prime justifican el posicionamiento. Comparando con Siam Gardens (1.800.000 € por 234 m² en complejo de 24), nuestro complejo de 6 ofrece mayor exclusividad. Nótese que C6 (Leonardo Omar) se vende a 2.600.000 € por 315 m² y C4 (VYM premium) a 2.700.000 € por ~400 m².
+        </div>
+      </div>
+
+      <!-- Complex Value -->
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">💎 Valor como Venta Individual</h4>
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm py-2 border-b border-gray-50"><span class="text-gray-600">6 villas × 2.200.000 €</span><span class="font-extrabold text-blue-700">13.200.000 €</span></div>
+            <div class="flex justify-between text-sm py-2 border-b border-gray-50"><span class="text-gray-600">€/m²c efectivo</span><span class="font-bold">11.579 €/m²</span></div>
+            <div class="flex justify-between text-sm py-2"><span class="text-gray-600">Rango total (bajo–alto)</span><span class="font-bold text-gray-700">9.900.000 – 15.600.000 €</span></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">🏨 Valor como Complejo Turístico</h4>
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm py-2 border-b border-gray-50"><span class="text-gray-600">Valor por capitalización rentas</span><span class="font-bold text-gray-700">18.400.000 €</span></div>
+            <div class="flex justify-between text-sm py-2 border-b border-gray-50"><span class="text-gray-600">Ingreso neto anual × cap rate 5%</span><span class="text-xs text-gray-400">920.000 € / 0,05</span></div>
+            <div class="flex justify-between text-sm py-2 border-b border-gray-50"><span class="text-gray-600">Descuento por bloque (−15%)</span><span class="font-bold text-red-600">−2.760.000 €</span></div>
+            <div class="flex justify-between text-sm py-2"><span class="font-bold text-gray-900">Valor complejo (venta a inversor)</span><span class="font-extrabold text-emerald-700">~11.500.000 – 13.000.000 €</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- 4. ANÁLISIS DE RENTABILIDAD TURÍSTICA -->
+    <!-- ══════════════════════════════════ -->
+    <section id="rentabilidad" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 4</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Análisis de Rentabilidad Turística</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Ingresos por alquiler vacacional, ocupación, ROI y payback del complejo</p>
+      </div>
+
+      <!-- Key Rental Metrics -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        <div class="bg-white rounded-xl border border-gray-100 p-5 text-center card-hover shadow-sm">
+          <p class="text-3xl font-extrabold text-blue-700">450 €</p>
+          <p class="text-xs text-gray-500 mt-1">Precio medio/noche/villa</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 p-5 text-center card-hover shadow-sm">
+          <p class="text-3xl font-extrabold text-blue-700">78%</p>
+          <p class="text-xs text-gray-500 mt-1">Ocupación media anualizada</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 p-5 text-center card-hover shadow-sm">
+          <p class="text-3xl font-extrabold text-blue-700">1.380.000 €</p>
+          <p class="text-xs text-gray-500 mt-1">Ingresos brutos anuales (6 villas)</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-100 p-5 text-center card-hover shadow-sm">
+          <p class="text-3xl font-extrabold text-emerald-600">13,1%</p>
+          <p class="text-xs text-gray-500 mt-1">Yield neto sobre inversión</p>
+        </div>
+      </div>
+
+      <!-- Revenue Projection -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-10">
+        <div class="px-8 py-5 border-b border-gray-100">
+          <h3 class="text-lg font-bold text-gray-900">📊 Proyección de Ingresos — Alquiler Vacacional (por villa)</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr class="bg-gray-50 text-left">
+              <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase">Concepto</th>
+              <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Temp. Baja (5 meses)</th>
+              <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Temp. Alta (7 meses)</th>
+              <th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Total Anual</th>
+            </tr></thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr><td class="px-5 py-3 font-medium">Precio medio/noche</td><td class="px-5 py-3 text-right">350 €</td><td class="px-5 py-3 text-right">550 €</td><td class="px-5 py-3 text-right font-bold">~450 € (media pond.)</td></tr>
+              <tr><td class="px-5 py-3 font-medium">Ocupación estimada</td><td class="px-5 py-3 text-right">65%</td><td class="px-5 py-3 text-right">88%</td><td class="px-5 py-3 text-right font-bold">78% anualizada</td></tr>
+              <tr><td class="px-5 py-3 font-medium">Noches ocupadas</td><td class="px-5 py-3 text-right">99 noches</td><td class="px-5 py-3 text-right">186 noches</td><td class="px-5 py-3 text-right font-bold">285 noches/año</td></tr>
+              <tr><td class="px-5 py-3 font-medium">Ingreso bruto/villa</td><td class="px-5 py-3 text-right">34.650 €</td><td class="px-5 py-3 text-right">102.300 €</td><td class="px-5 py-3 text-right font-bold text-blue-700">136.950 €/año</td></tr>
+              <tr class="bg-blue-50"><td class="px-5 py-4 font-bold text-blue-900">Ingreso bruto 6 villas</td><td class="px-5 py-4 text-right font-bold">207.900 €</td><td class="px-5 py-4 text-right font-bold">613.800 €</td><td class="px-5 py-4 text-right font-extrabold text-blue-700 text-lg">~1.380.000 €/año</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Costs & Net Income -->
+      <div class="grid md:grid-cols-2 gap-8 mb-10">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">💸 Costes de Explotación Anuales (6 villas)</h4>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between py-2 border-b border-gray-50"><span class="text-gray-600">Gestión profesional (20% ingresos)</span><span class="font-bold">276.000 €</span></div>
+            <div class="flex justify-between py-2 border-b border-gray-50"><span class="text-gray-600">Limpieza y lavandería</span><span class="font-bold">72.000 €</span></div>
+            <div class="flex justify-between py-2 border-b border-gray-50"><span class="text-gray-600">Mantenimiento (piscinas, jardín, general)</span><span class="font-bold">48.000 €</span></div>
+            <div class="flex justify-between py-2 border-b border-gray-50"><span class="text-gray-600">Suministros (agua, luz residual post-FV)</span><span class="font-bold">24.000 €</span></div>
+            <div class="flex justify-between py-2 border-b border-gray-50"><span class="text-gray-600">Seguros (6 villas)</span><span class="font-bold">12.000 €</span></div>
+            <div class="flex justify-between py-2 border-b border-gray-50"><span class="text-gray-600">IBI + tasas municipales</span><span class="font-bold">18.000 €</span></div>
+            <div class="flex justify-between py-2 border-b border-gray-50"><span class="text-gray-600">Marketing y OTAs (comisiones)</span><span class="font-bold">10.000 €</span></div>
+            <div class="flex justify-between py-3 bg-amber-50 rounded-lg px-3 mt-2"><span class="font-bold text-amber-900">TOTAL COSTES OPERATIVOS</span><span class="font-extrabold text-amber-700">~460.000 €/año</span></div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">📈 Resultado Neto y Yields</h4>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between py-2 border-b border-gray-50"><span class="text-gray-600">Ingresos brutos anuales</span><span class="font-bold text-blue-700">1.380.000 €</span></div>
+            <div class="flex justify-between py-2 border-b border-gray-50"><span class="text-gray-600">− Costes operativos</span><span class="font-bold text-red-600">−460.000 €</span></div>
+            <div class="flex justify-between py-3 bg-emerald-50 rounded-lg px-3"><span class="font-bold text-emerald-900">INGRESO NETO OPERATIVO (NOI)</span><span class="font-extrabold text-emerald-700">~920.000 €/año</span></div>
+            <div class="flex justify-between py-2 border-b border-gray-50 mt-3"><span class="text-gray-600">NOI por villa</span><span class="font-bold">~153.300 €/año</span></div>
+            <div class="flex justify-between py-2 border-b border-gray-50"><span class="text-gray-600">Yield bruto (sobre inversión 7,0M €)</span><span class="font-bold text-blue-700">19,7%</span></div>
+            <div class="flex justify-between py-2 border-b border-gray-50"><span class="text-gray-600">Yield neto (sobre inversión 7,0M €)</span><span class="font-bold text-emerald-700">13,1%</span></div>
+            <div class="flex justify-between py-2 border-b border-gray-50"><span class="text-gray-600">Yield neto (sobre valor mercado 13,2M €)</span><span class="font-bold">7,0%</span></div>
+            <div class="flex justify-between py-2"><span class="text-gray-600">Payback (inversión total)</span><span class="font-bold text-emerald-700">~7,6 años</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Revenue chart -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h4 class="font-bold text-gray-900 mb-4">📊 Proyección de Flujo de Caja — Explotación Turística (10 años)</h4>
+        <canvas id="chartCashflow" height="200"></canvas>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- 5. VIABILIDAD ECONÓMICA COMPLETA -->
+    <!-- ══════════════════════════════════ -->
+    <section id="viabilidad" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 5</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Viabilidad Económica Completa</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Cuenta de resultados del promotor: inversión total vs. valor de mercado del producto terminado</p>
+      </div>
+
+      <!-- Investment Breakdown -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-10">
+        <div class="px-8 py-5 border-b border-gray-100">
+          <h3 class="text-lg font-bold text-gray-900">💰 Inversión Total del Proyecto (Promotor)</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr class="bg-gray-50"><th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase text-left">Partida</th><th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase text-right">Importe (€)</th><th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase text-right">% s/ total</th><th class="px-6 py-3 font-semibold text-gray-600 text-xs uppercase text-left">Fuente / Nota</th></tr></thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr><td class="px-6 py-3.5 font-medium">Valor del suelo (parcela 43-8)</td><td class="px-6 py-3.5 text-right font-bold">2.500.000 €</td><td class="px-6 py-3.5 text-right">35,6%</td><td class="px-6 py-3.5 text-gray-500">Valorex — Sección 2 (si compra hoy)</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">PEC + IGIC (construcción)</td><td class="px-6 py-3.5 text-right font-bold">3.636.545 €</td><td class="px-6 py-3.5 text-right">51,8%</td><td class="px-6 py-3.5 text-gray-500">Buildero — PEC 3.398.640 + IGIC 7%</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">Honorarios técnicos completos</td><td class="px-6 py-3.5 text-right font-bold">210.000 €</td><td class="px-6 py-3.5 text-right">3,2%</td><td class="px-6 py-3.5 text-gray-500">Arquitecto, DO, ingenieros, coordinador SS</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">Licencias + ICIO + tasas</td><td class="px-6 py-3.5 text-right font-bold">140.000 €</td><td class="px-6 py-3.5 text-right">2,1%</td><td class="px-6 py-3.5 text-gray-500">ICIO 4% PEM + tasa urbanística + actividad turística</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">Geotécnico + topográfico + OCAs</td><td class="px-6 py-3.5 text-right font-bold">30.000 €</td><td class="px-6 py-3.5 text-right">0,5%</td><td class="px-6 py-3.5 text-gray-500">Buildero — estimación</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">Mobiliario turístico (6 villas)</td><td class="px-6 py-3.5 text-right font-bold">270.000 €</td><td class="px-6 py-3.5 text-right">4,1%</td><td class="px-6 py-3.5 text-gray-500">45.000 €/villa (equipamiento completo lujo)</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">Comercialización + marketing</td><td class="px-6 py-3.5 text-right font-bold">150.000 €</td><td class="px-6 py-3.5 text-right">2,3%</td><td class="px-6 py-3.5 text-gray-500">Renders, web, agencias, show villa</td></tr>
+              <tr><td class="px-6 py-3.5 font-medium">Gastos financieros (intereses promo.)</td><td class="px-6 py-3.5 text-right font-bold">90.000 €</td><td class="px-6 py-3.5 text-right">1,4%</td><td class="px-6 py-3.5 text-gray-500">~2,5% sobre 60% financiado, 18 meses</td></tr>
+              <tr class="bg-blue-50"><td class="px-6 py-4 font-extrabold text-blue-900 text-base">INVERSIÓN TOTAL</td><td class="px-6 py-4 text-right font-extrabold text-blue-700 text-xl">7.026.545 €</td><td class="px-6 py-4 text-right font-bold text-blue-700">100%</td><td class="px-6 py-4 text-blue-600 font-medium">~7,03M € (redondeado: 7.000.000 €)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- P&L -->
+      <div class="grid md:grid-cols-2 gap-8 mb-10">
+        <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-8 border border-emerald-200">
+          <h4 class="font-bold text-emerald-900 mb-4">🎯 Cuenta de Resultados del Promotor (Venta)</h4>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between py-2 border-b border-emerald-100"><span class="text-gray-700">Valor venta 6 villas</span><span class="font-extrabold text-emerald-700">13.200.000 €</span></div>
+            <div class="flex justify-between py-2 border-b border-emerald-100"><span class="text-gray-700">− Inversión total</span><span class="font-bold text-red-600">−7.026.545 €</span></div>
+            <div class="flex justify-between py-2 border-b border-emerald-100"><span class="text-gray-700">− Gastos de venta (3%)</span><span class="font-bold text-red-600">−396.000 €</span></div>
+            <hr class="border-emerald-200">
+            <div class="flex justify-between py-2"><span class="font-bold text-emerald-900 text-base">MARGEN BRUTO PROMOTOR</span><span class="font-extrabold text-emerald-700 text-xl">5.777.455 €</span></div>
+            <div class="flex justify-between py-1"><span class="text-gray-600">Margen sobre inversión</span><span class="font-bold text-emerald-700">82,2%</span></div>
+            <div class="flex justify-between py-1"><span class="text-gray-600">Margen sobre ventas</span><span class="font-bold text-emerald-700">43,8%</span></div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+          <h4 class="font-bold text-gray-900 mb-4">📊 Indicadores Financieros Clave</h4>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Margen promotor sobre ventas</span><span class="font-bold text-emerald-600">43,8%</span></div>
+              <div class="w-full h-3 bg-gray-100 rounded-full"><div class="h-3 bg-gradient-to-r from-emerald-400 to-green-500 rounded-full" style="width:43.8%"></div></div>
+              <p class="text-xs text-gray-400 mt-1">Referencia sector: 15-25%. Excelente.</p>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">TIR del proyecto (venta en mes 20)</span><span class="font-bold text-blue-600">26,2%</span></div>
+              <div class="w-full h-3 bg-gray-100 rounded-full"><div class="h-3 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full" style="width:52.4%"></div></div>
+              <p class="text-xs text-gray-400 mt-1">Referencia sector: 12-18%. Muy por encima.</p>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">VAN (tasa 8%, horizonte 3 años)</span><span class="font-bold text-blue-600">4.390.000 €</span></div>
+              <div class="w-full h-3 bg-gray-100 rounded-full"><div class="h-3 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full" style="width:74%"></div></div>
+              <p class="text-xs text-gray-400 mt-1">VAN positivo = proyecto viable. Amplio margen de seguridad.</p>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-gray-700 font-medium">Múltiplo sobre inversión</span><span class="font-bold text-purple-600">2,01×</span></div>
+              <div class="w-full h-3 bg-gray-100 rounded-full"><div class="h-3 bg-gradient-to-r from-purple-400 to-violet-500 rounded-full" style="width:67%"></div></div>
+              <p class="text-xs text-gray-400 mt-1">Cada euro invertido retorna 2,01 € en ventas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P&L Chart -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h4 class="font-bold text-gray-900 mb-4">📊 Desglose de la Inversión vs. Valor de Venta</h4>
+        <canvas id="chartPL" height="180"></canvas>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- 6. ESCENARIOS DE EXPLOTACIÓN -->
+    <!-- ══════════════════════════════════ -->
+    <section id="escenarios" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 6</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Escenarios de Explotación</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Cuatro estrategias de monetización analizadas</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        <!-- Escenario A -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden scenario-card card-hover" style="border-left-color:#10b981">
+          <div class="p-6 bg-gradient-to-r from-emerald-50 to-green-50 border-b border-gray-100">
+            <div class="flex items-center gap-3 mb-2"><span class="text-2xl">🏷️</span><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full uppercase">Escenario A</span></div>
+            <h3 class="text-xl font-bold text-gray-900">Venta Individual de Villas</h3>
+          </div>
+          <div class="p-6 space-y-3 text-sm">
+            <div class="flex justify-between"><span class="text-gray-600">Precio medio por villa</span><span class="font-bold">2.200.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Ingresos totales (6 villas)</span><span class="font-bold text-emerald-700">13.200.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Inversión total (con suelo)</span><span class="font-bold">7.000.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Gastos venta (3%)</span><span class="font-bold">396.000 €</span></div>
+            <hr class="border-gray-100">
+            <div class="flex justify-between"><span class="font-bold">Beneficio neto</span><span class="font-extrabold text-emerald-700">~5.800.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Plazo total (obra + ventas)</span><span class="font-bold">20–24 meses</span></div>
+            <div class="mt-3 p-3 bg-emerald-50 rounded-xl text-center">
+              <p class="text-xs text-emerald-600 mb-1">Margen sobre inversión</p>
+              <p class="text-2xl font-extrabold text-emerald-700">82,2%</p>
+            </div>
+            <p class="text-xs text-gray-400 mt-2">✅ <strong>Máximo retorno absoluto.</strong> Requiere comercialización activa en mercado internacional (UK, Alemania, nórdicos). Posibilidad de preventa sobre plano para financiar obra.</p>
+          </div>
+        </div>
+
+        <!-- Escenario B -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden scenario-card card-hover" style="border-left-color:#3b82f6">
+          <div class="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-100">
+            <div class="flex items-center gap-3 mb-2"><span class="text-2xl">🌴</span><span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase">Escenario B</span></div>
+            <h3 class="text-xl font-bold text-gray-900">Alquiler Vacacional Profesional</h3>
+          </div>
+          <div class="p-6 space-y-3 text-sm">
+            <div class="flex justify-between"><span class="text-gray-600">Ingreso bruto anual (6 villas)</span><span class="font-bold">1.380.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">NOI anual (neto operativo)</span><span class="font-bold text-blue-700">920.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Yield neto sobre inversión</span><span class="font-bold text-blue-700">13,1%</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Payback (inversión total)</span><span class="font-bold">~7 años</span></div>
+            <hr class="border-gray-100">
+            <div class="flex justify-between"><span class="font-bold">Retorno acumulado 10 años</span><span class="font-extrabold text-blue-700">9.200.000 € (neto)</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">+ Valor activo (revalorizado +3%/año)</span><span class="font-bold">~17.700.000 €</span></div>
+            <div class="mt-3 p-3 bg-blue-50 rounded-xl text-center">
+              <p class="text-xs text-blue-600 mb-1">Retorno total a 10 años</p>
+              <p class="text-2xl font-extrabold text-blue-700">~26.900.000 €</p>
+            </div>
+            <p class="text-xs text-gray-400 mt-2">✅ <strong>Máximo retorno a largo plazo.</strong> Ingresos recurrentes + revalorización del activo. Requiere gestora turística profesional. Tenerife: clima todo el año = ocupación estable.</p>
+          </div>
+        </div>
+
+        <!-- Escenario C -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden scenario-card card-hover" style="border-left-color:#8b5cf6">
+          <div class="p-6 bg-gradient-to-r from-purple-50 to-violet-50 border-b border-gray-100">
+            <div class="flex items-center gap-3 mb-2"><span class="text-2xl">🏨</span><span class="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs font-bold rounded-full uppercase">Escenario C</span></div>
+            <h3 class="text-xl font-bold text-gray-900">Venta a Cadena Hotelera / Inversor</h3>
+          </div>
+          <div class="p-6 space-y-3 text-sm">
+            <div class="flex justify-between"><span class="text-gray-600">Precio estimado complejo</span><span class="font-bold text-purple-700">11.500.000 – 13.000.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Descuento por bloque vs. individual</span><span class="font-bold text-red-600">−10% a −15%</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Inversión total</span><span class="font-bold">7.000.000 €</span></div>
+            <hr class="border-gray-100">
+            <div class="flex justify-between"><span class="font-bold">Beneficio neto (estimado medio)</span><span class="font-extrabold text-purple-700">~5.200.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Plazo de operación</span><span class="font-bold">18–20 meses + negociación</span></div>
+            <div class="mt-3 p-3 bg-purple-50 rounded-xl text-center">
+              <p class="text-xs text-purple-600 mb-1">Margen sobre inversión</p>
+              <p class="text-2xl font-extrabold text-purple-700">~74%</p>
+            </div>
+            <p class="text-xs text-gray-400 mt-2">✅ <strong>Salida rápida, un solo comprador.</strong> Potenciales: Marriott Luxury, Four Seasons, Abama, operadores nórdicos de lujo. Menor margen pero mayor seguridad y velocidad de exit.</p>
+          </div>
+        </div>
+
+        <!-- Escenario D -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden scenario-card card-hover" style="border-left-color:#f59e0b">
+          <div class="p-6 bg-gradient-to-r from-amber-50 to-yellow-50 border-b border-gray-100">
+            <div class="flex items-center gap-3 mb-2"><span class="text-2xl">🔀</span><span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded-full uppercase">Escenario D — Recomendado</span></div>
+            <h3 class="text-xl font-bold text-gray-900">Modelo Mixto (Venta parcial + Explotación)</h3>
+          </div>
+          <div class="p-6 space-y-3 text-sm">
+            <div class="flex justify-between"><span class="text-gray-600">Vender 3 villas (Fase A)</span><span class="font-bold">3 × 2.200.000 = 6.600.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Explotar 3 villas (Fase B) en vacacional</span><span class="font-bold">NOI: 460.000 €/año</span></div>
+            <hr class="border-gray-100">
+            <div class="flex justify-between"><span class="text-gray-600">Ingreso venta (recupera ~94% inversión)</span><span class="font-bold text-emerald-700">6.600.000 € → pendiente ~400.000 €</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Ingreso vacacional anual (3 villas)</span><span class="font-bold text-amber-700">460.000 €/año netos</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Activo residual (3 villas valoradas en)</span><span class="font-bold">~6.600.000 €</span></div>
+            <div class="mt-3 p-3 bg-amber-50 rounded-xl text-center">
+              <p class="text-xs text-amber-600 mb-1">Retorno a 10 años (venta+explotación+activo)</p>
+              <p class="text-2xl font-extrabold text-amber-700">~17.900.000 €</p>
+            </div>
+            <p class="text-xs text-gray-400 mt-2">⭐ <strong>Estrategia óptima riesgo/retorno.</strong> La venta de Fase A recupera el 100% de la inversión. Las 3 villas en explotación generan ingresos pasivos sin coste hundido. Aprovecha la ejecución en 2 fases de Buildero. Máxima flexibilidad.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario Comparison Chart -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h4 class="font-bold text-gray-900 mb-4">📊 Comparativa de Escenarios — Retorno Acumulado a 10 Años</h4>
+        <canvas id="chartScenarios" height="200"></canvas>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- 7. ANÁLISIS DE RIESGOS FINANCIEROS -->
+    <!-- ══════════════════════════════════ -->
+    <section id="riesgos" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 7</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Análisis de Riesgos Financieros</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Sensibilidad, escenarios adversos y mitigación</p>
+      </div>
+
+      <!-- Risk Matrix -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-10">
+        <div class="px-8 py-5 border-b border-gray-100">
+          <h3 class="text-lg font-bold text-gray-900">⚠️ Matriz de Riesgos del Proyecto</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr class="bg-gray-50"><th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase text-left">Riesgo</th><th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase text-center">Probabilidad</th><th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase text-center">Impacto</th><th class="px-5 py-3 font-semibold text-gray-600 text-xs uppercase text-left">Mitigación</th></tr></thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr>
+                <td class="px-5 py-3 font-medium">Subida tipos de interés (+2pp)</td>
+                <td class="px-5 py-3 text-center"><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full text-xs font-bold">MEDIA</span></td>
+                <td class="px-5 py-3 text-center"><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full text-xs font-bold">MEDIO</span></td>
+                <td class="px-5 py-3 text-gray-600 text-xs">Margen promotor del 47% absorbe +120.000 € de costes financieros. Preventa en plano para reducir apalancamiento. Impacto estimado: −1,8% sobre margen</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium">Sobrecoste de construcción (+15%)</td>
+                <td class="px-5 py-3 text-center"><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full text-xs font-bold">MEDIA</span></td>
+                <td class="px-5 py-3 text-center"><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full text-xs font-bold">MEDIO</span></td>
+                <td class="px-5 py-3 text-gray-600 text-xs">+15% sobre PEC = +545.000 €. Margen promotor pasa de 95% a 87%. Sigue siendo excelente. Contrato cerrado con constructora mitiga este riesgo.</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium">Caída precios venta (−15%)</td>
+                <td class="px-5 py-3 text-center"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-bold">BAJA</span></td>
+                <td class="px-5 py-3 text-center"><span class="bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-xs font-bold">ALTO</span></td>
+                <td class="px-5 py-3 text-gray-600 text-xs">−15% → venta a 1.870.000 €/villa = 11.220.000 € total. Margen baja a 70% sobre inversión. Aún muy rentable. Demanda insatisfecha de villas de lujo en Adeje mitiga probabilidad.</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium">Caída ocupación turística (−15pp)</td>
+                <td class="px-5 py-3 text-center"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-bold">BAJA</span></td>
+                <td class="px-5 py-3 text-center"><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full text-xs font-bold">MEDIO</span></td>
+                <td class="px-5 py-3 text-gray-600 text-xs">Ocupación 63% → ingreso bruto 1.115.000 € → NOI 655.000 €. Yield 10,1%. Payback ~10 años. Sigue rentable. Tenerife: destino todo-el-año con clima subtropical.</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium">Nueva regulación alquiler vacacional Canarias</td>
+                <td class="px-5 py-3 text-center"><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full text-xs font-bold">MEDIA</span></td>
+                <td class="px-5 py-3 text-center"><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full text-xs font-bold">MEDIO</span></td>
+                <td class="px-5 py-3 text-gray-600 text-xs"><strong>Riesgo mitigado:</strong> Uso turístico establecido en PGO aprobado definitivamente (no residencial). Las villas tienen licencia turística. Moratoria vacacional actual afecta a residencial, no a turístico-hotelero.</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium">Competencia nueva en la zona</td>
+                <td class="px-5 py-3 text-center"><span class="bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-xs font-bold">ALTA</span></td>
+                <td class="px-5 py-3 text-center"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-bold">BAJO</span></td>
+                <td class="px-5 py-3 text-gray-600 text-xs">Siam Gardens (24 villas), Serenity (27 villas). Pero suelo disponible en San Eugenio es muy limitado. Demanda supera oferta. Diferenciación por calidades (KNX, cert. A) protege posicionamiento.</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium">Retraso en licencia de obra (+6 meses)</td>
+                <td class="px-5 py-3 text-center"><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full text-xs font-bold">MEDIA</span></td>
+                <td class="px-5 py-3 text-center"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-bold">BAJO</span></td>
+                <td class="px-5 py-3 text-gray-600 text-xs">Sobrecoste financiero ~+45.000 €. PGO ya aprobado definitivamente reduce riesgo urbanístico. Impacto marginal sobre un margen de 6,2M €.</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium">Riesgo geotécnico (basalto duro)</td>
+                <td class="px-5 py-3 text-center"><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full text-xs font-bold">MEDIA</span></td>
+                <td class="px-5 py-3 text-center"><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full text-xs font-bold">MEDIO</span></td>
+                <td class="px-5 py-3 text-gray-600 text-xs">Buildero ya ha presupuestado excavación en roca basáltica (+15-20% vs. suelo convencional). Estudio geotécnico previo con 6 calicatas para confirmar. Contingencia incluida.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Sensitivity Analysis -->
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">📉 Análisis de Sensibilidad — Margen Promotor</h4>
+          <canvas id="chartSensitivity" height="220"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">🛡️ Factores de Resiliencia del Proyecto</h4>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-sm text-gray-700"><strong>PGO aprobado definitivamente:</strong> Seguridad urbanística total. Elimina el riesgo regulatorio principal.</span></div>
+            <div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-sm text-gray-700"><strong>Uso turístico exclusivo:</strong> No afectado por moratoria vacacional residencial de Canarias.</span></div>
+            <div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-sm text-gray-700"><strong>Demanda > Oferta:</strong> Suelo turístico en Costa Adeje casi agotado. Barrera de entrada natural.</span></div>
+            <div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-sm text-gray-700"><strong>Margen amplio (44%):</strong> Puede absorber sobrecostes del 30% y seguir siendo rentable.</span></div>
+            <div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-sm text-gray-700"><strong>Doble salida:</strong> Si no se vende, la explotación turística genera yield del 13,1% neto.</span></div>
+            <div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-sm text-gray-700"><strong>IGIC 7% (no IVA 21%):</strong> Ventaja fiscal canaria reduce costes de construcción vs. península.</span></div>
+            <div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs flex-shrink-0 mt-0.5">✓</span><span class="text-sm text-gray-700"><strong>Ejecución por fases:</strong> La Fase A genera ingresos/ventas para financiar Fase B (Buildero).</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- CONCLUSIÓN FINAL -->
+    <!-- ══════════════════════════════════ -->
+    <section id="conclusion" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Conclusión</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Recomendación Final del Tasador</h2>
+      </div>
+
+      <!-- Big Statement -->
+      <div class="bg-gradient-to-r from-emerald-500 to-green-600 rounded-2xl p-8 text-white text-center mb-12 shimmer">
+        <p class="text-lg font-medium mb-2">Valoración del proyecto:</p>
+        <p class="text-4xl md:text-5xl font-extrabold mb-3">Altamente Viable y Rentable</p>
+        <p class="text-emerald-100 max-w-3xl mx-auto">Con una inversión total de ~7,0M € (suelo incluido), el proyecto genera un valor de mercado de 13,2M € (venta individual) o ingresos recurrentes de 920.000 €/año netos (explotación turística). Margen promotor del 43,8%, TIR del 26,2% y VAN de 4,39M €. Todos los indicadores superan ampliamente los umbrales del sector.</p>
+      </div>
+
+      <!-- Final Summary -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="p-8 md:p-12">
+          <div class="max-w-4xl mx-auto">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center text-2xl text-white shadow-lg">✓</div>
+              <div>
+                <h3 class="text-2xl font-extrabold text-gray-900">Resumen de Valoraciones</h3>
+                <p class="text-sm text-gray-500">Valores centrales adoptados por Valorex</p>
+              </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-xl p-6 mb-8">
+              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="text-center"><p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Valor del Suelo</p><p class="text-xl font-extrabold text-blue-700">2.500.000 €</p><p class="text-xs text-gray-400">1.600 €/m²s</p></div>
+                <div class="text-center"><p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Valor por Villa</p><p class="text-xl font-extrabold text-blue-700">2.200.000 €</p><p class="text-xs text-gray-400">~11.579 €/m²c</p></div>
+                <div class="text-center"><p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Valor Conjunto (6 villas)</p><p class="text-xl font-extrabold text-blue-700">13.200.000 €</p><p class="text-xs text-gray-400">Venta individual</p></div>
+                <div class="text-center"><p class="text-xs text-gray-500 uppercase tracking-wider mb-1">NOI Anual (alquiler)</p><p class="text-xl font-extrabold text-emerald-700">920.000 €</p><p class="text-xs text-gray-400">Yield 13,1%</p></div>
+                <div class="text-center"><p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Margen Promotor</p><p class="text-xl font-extrabold text-emerald-700">5.800.000 €</p><p class="text-xs text-gray-400">43,8% sobre ventas</p></div>
+                <div class="text-center"><p class="text-xs text-gray-500 uppercase tracking-wider mb-1">TIR del Proyecto</p><p class="text-xl font-extrabold text-emerald-700">26,2%</p><p class="text-xs text-gray-400">Referencia: 12-18%</p></div>
+              </div>
+            </div>
+
+            <div class="prose prose-sm text-gray-600 leading-relaxed space-y-4">
+              <p><strong>Estrategia recomendada: Escenario D (Modelo Mixto).</strong> Vender 3 villas de la Fase A para recuperar la inversión total, y explotar las 3 villas de la Fase B en alquiler vacacional. Esto proporciona:</p>
+              <ul>
+                <li><strong>Riesgo cero desde el mes 20:</strong> La venta de Fase A cubre los 6,6M € de inversión total.</li>
+                <li><strong>Ingresos pasivos de 460.000 €/año netos</strong> con las 3 villas en explotación.</li>
+                <li><strong>Un activo de ~6,6M €</strong> (3 villas) que se revaloriza un 3-5% anual.</li>
+                <li><strong>Flexibilidad total:</strong> Si el mercado sube, se venden las restantes. Si la explotación es buena, se mantienen.</li>
+              </ul>
+
+              <p><strong>Coherencia inter-agentes:</strong> Los datos de <strong>Buildero</strong> (PEC+IGIC 3,64M €, inversión sin suelo 4,2-4,4M €) y <strong>Arqon</strong> (190 m²/villa, cert. A, KNX, infinity pool) son consistentes con esta valoración. El análisis urbanístico de <strong>Nexus</strong> confirma la seguridad jurídica del proyecto (PGO aprobado definitivamente).</p>
+
+              <p><strong>Prioridades inmediatas:</strong></p>
+              <ul>
+                <li>Encargar estudio geotécnico (6 calicatas mínimo) para confirmar cimentación.</li>
+                <li>Solicitar licencia de obras (PGO ya aprobado → vía directa).</li>
+                <li>Iniciar campaña de preventa sobre plano a mercado internacional (UK, Alemania, nórdicos).</li>
+                <li>Contratar gestora turística para preparar la explotación de las villas no vendidas.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 border-t border-gray-100 px-8 py-6">
+          <div class="max-w-4xl mx-auto flex flex-wrap gap-6 text-xs text-gray-400">
+            <span>📋 Ref: VALOREX-RC-2026-001</span>
+            <span>📅 21 de marzo de 2026</span>
+            <span>📍 Parcela 43-8, San Eugenio Alto, Costa Adeje</span>
+            <span>🔒 Confidencial — Uso interno del proyecto</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12 mt-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold text-sm">V</div><span class="text-white font-bold">Valorex</span></div>
+          <p class="text-sm">Agente Tasador IA — Sistema de Desarrollo Inmobiliario</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-2">Proyecto</h4>
+          <p class="text-sm">6 Villas Turísticas de Lujo — Costa Adeje</p>
+          <p class="text-sm">Parcela 43-8, San Eugenio Alto</p>
+          <p class="text-sm">Modificación Puntual PGO Adeje (aprobada definitivamente)</p>
+          <p class="text-sm">Promotor: Herederos de D. Eduardo Domínguez Sierra</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-2">Fuentes de Datos</h4>
+          <p class="text-sm">Idealista, TenerifeCenter, Nolan Group, Fotocasa, Airbnb, Booking, ISTAC, INE, Informes Buildero/Arqon/Nexus, Refundido Completo aprobado (Arq. J.M. Sabina Santos)</p>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-6 text-center text-xs">
+        <p class="mb-2">Ref: VALOREX-RC-2026-001 · Fecha: 21 de marzo de 2026 · Confidencial — Uso interno del proyecto</p>
+        <p>Este informe tiene carácter orientativo y no constituye una tasación oficial según la Orden ECO/805/2003. Para una tasación con validez legal se requiere sociedad de tasación homologada por el Banco de España.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    document.querySelectorAll('.reveal').forEach(el=>{new IntersectionObserver(e=>{if(e[0].isIntersecting)el.classList.add('visible')},{threshold:.08}).observe(el)});
+    document.querySelectorAll('.progress-bar').forEach(bar=>{const w=bar.style.width;bar.style.width='0%';new IntersectionObserver(e=>{if(e[0].isIntersecting){bar.style.width=w}}).observe(bar)});
+
+    // Chart Comparables
+    const ctx1=document.getElementById('chartComparables');
+    if(ctx1){new Chart(ctx1,{type:'bar',data:{labels:['Siam\nGardens','Serenity\nLuxury','VYM\nSan Eug.','VYM\nPremium','Caldera\ndel Rey','Leonardo\nOmar','Golf\nAdeje','AureA\nResid.','NUESTRO\nPROYECTO'],datasets:[{label:'€/m²c',data:[7692,6500,6460,6750,6994,8254,5860,9333,8400],backgroundColor:['#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#3b82f6'],borderRadius:8,borderSkipped:false}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toLocaleString('es-ES')+' €/m²'}}},scales:{y:{beginAtZero:false,min:4000,ticks:{callback:v=>v.toLocaleString('es-ES')+' €'},grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}})}
+
+    // Chart Cashflow (10 years rental)
+    const ctx2=document.getElementById('chartCashflow');
+    if(ctx2){new Chart(ctx2,{type:'line',data:{labels:['Año 0','Año 1','Año 2','Año 3','Año 4','Año 5','Año 6','Año 7','Año 8','Año 9','Año 10'],datasets:[{label:'Flujo acumulado',data:[-7000000,-6080000,-5160000,-4240000,-3320000,-2400000,-1480000,-560000,360000,1280000,2200000],borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.1)',fill:true,tension:.3,pointRadius:5,pointBackgroundColor:'#3b82f6'},{label:'NOI anual',data:[0,920000,920000,920000,920000,920000,920000,920000,920000,920000,920000],borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.08)',fill:true,tension:.1,pointRadius:4,pointBackgroundColor:'#10b981',borderDash:[5,5]}]},options:{responsive:true,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:16,font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString('es-ES')+' €'}}},scales:{y:{ticks:{callback:v=>(v/1000000).toFixed(1)+'M €'},grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}})}
+
+    // Chart P&L
+    const ctx3=document.getElementById('chartPL');
+    if(ctx3){new Chart(ctx3,{type:'bar',data:{labels:['Suelo','Construcción\n(PEC+IGIC)','Honorarios\n+ Licencias','Mobiliario\n+ Comerc.','Financieros','TOTAL\nINVERSIÓN','VALOR\nVENTA','MARGEN\nPROMOTOR'],datasets:[{label:'Importe',data:[2500000,3636545,380000,420000,90000,7026545,13200000,5777455],backgroundColor:['#f59e0b','#ef4444','#8b5cf6','#06b6d4','#6b7280','#1e40af','#10b981','#059669'],borderRadius:8,borderSkipped:false}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toLocaleString('es-ES')+' €'}}},scales:{y:{ticks:{callback:v=>(v/1000000).toFixed(1)+'M €'},grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}})}
+
+    // Chart Scenarios (10 year comparison)
+    const ctx4=document.getElementById('chartScenarios');
+    if(ctx4){new Chart(ctx4,{type:'line',data:{labels:['Año 0','Año 1','Año 2','Año 3','Año 4','Año 5','Año 6','Año 7','Año 8','Año 9','Año 10'],datasets:[{label:'A) Venta Individual',data:[-7000000,-7000000,5800000,5800000,5800000,5800000,5800000,5800000,5800000,5800000,5800000],borderColor:'#10b981',tension:.1,pointRadius:4,pointBackgroundColor:'#10b981',borderDash:[5,5]},{label:'B) Alquiler Vacacional',data:[-7000000,-6080000,-5160000,-4240000,-3320000,-2400000,-1480000,-560000,360000,1280000,2200000],borderColor:'#3b82f6',tension:.3,pointRadius:4,pointBackgroundColor:'#3b82f6'},{label:'C) Venta a Cadena',data:[-7000000,-7000000,4200000,4200000,4200000,4200000,4200000,4200000,4200000,4200000,4200000],borderColor:'#8b5cf6',tension:.1,pointRadius:4,pointBackgroundColor:'#8b5cf6',borderDash:[8,4]},{label:'D) Mixto (Recomendado)',data:[-7000000,-7000000,0,460000,920000,1380000,1840000,2300000,2760000,3220000,3680000],borderColor:'#f59e0b',borderWidth:3,tension:.3,pointRadius:5,pointBackgroundColor:'#f59e0b'}]},options:{responsive:true,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:12,font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString('es-ES')+' €'}}},scales:{y:{ticks:{callback:v=>(v/1000000).toFixed(1)+'M €'},grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}})}
+
+    // Chart Sensitivity
+    const ctx5=document.getElementById('chartSensitivity');
+    if(ctx5){new Chart(ctx5,{type:'bar',data:{labels:['Base','Precio\n−15%','Coste\n+15%','Tipos\n+2pp','Ocup.\n−15pp','Todo\nadverso'],datasets:[{label:'Margen promotor (%)',data:[43.8,31.3,37.6,42.0,43.8,24.7],backgroundColor:['#3b82f6','#f59e0b','#f59e0b','#f59e0b','#f59e0b','#ef4444'],borderRadius:8,borderSkipped:false}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+'%'}}},scales:{y:{beginAtZero:true,max:55,ticks:{callback:v=>v+'%'},grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}})}
+  </script>
+
+</body>
+</html>

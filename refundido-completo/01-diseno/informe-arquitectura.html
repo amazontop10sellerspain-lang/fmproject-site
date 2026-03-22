@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diseño Arquitectónico — 6 Villas Turísticas San Eugenio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); }
+    .counter { display: inline-block; }
+    html { scroll-behavior: smooth; }
+    tbody tr:hover { background-color: rgba(168,85,247,0.05); }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR STICKY -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <span class="text-xl font-bold gradient-text">ARQON</span>
+      <div class="hidden md:flex gap-6 text-sm font-medium text-gray-600">
+        <a href="#parametros" class="hover:text-purple-600 transition">Parámetros</a>
+        <a href="#descripcion" class="hover:text-purple-600 transition">Descripción</a>
+        <a href="#diseno" class="hover:text-purple-600 transition">Diseño</a>
+        <a href="#normativa" class="hover:text-purple-600 transition">Normativa</a>
+        <a href="#imagenes" class="hover:text-purple-600 transition">Catálogo Visual</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-purple-600 via-fuchsia-600 to-pink-500 text-white">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml,...')] opacity-10"></div>
+    <div class="relative max-w-6xl mx-auto px-6 py-24 text-center">
+      <p class="text-purple-200 text-sm font-semibold uppercase tracking-widest mb-4">MEMORIA ARQUITECTÓNICA COMPLETA</p>
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-6">6 VILLAS TURÍSTICAS DE LUJO</h1>
+      <p class="text-xl text-purple-100 max-w-2xl mx-auto">San Eugenio Alto, Costa Adeje, Tenerife. Parcela 43-8.</p>
+      <div class="mt-8 flex justify-center gap-4 flex-wrap">
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📐 Parcela: <span data-count="1566">0</span> m²</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm">🏗️ Edificabilidad: <span data-count="1143">0</span> m²t</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm">☀️ 3.078h Sol/año</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main class="max-w-6xl mx-auto px-6 py-16 space-y-20">
+    
+    <!-- 1 & 2: PARÁMETROS Y DESCRIPCIÓN -->
+    <section id="parametros" class="reveal grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="glass p-8 rounded-2xl shadow-sm border-t-4 border-purple-500">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Parámetros Urbanísticos</h3>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex justify-between border-b pb-2"><span>Superficie Parcela</span> <span class="font-semibold">1.566 m²</span></li>
+          <li class="flex justify-between border-b pb-2"><span>Coef. Edificabilidad</span> <span class="font-semibold">0,73 m²c/m²s</span></li>
+          <li class="flex justify-between border-b pb-2"><span>Superficie Construible</span> <span class="font-semibold">1.143 m²t</span></li>
+          <li class="flex justify-between border-b pb-2"><span>Altura Máxima</span> <span class="font-semibold">2 Plantas</span></li>
+          <li class="flex justify-between border-b pb-2"><span>Uso Aprobado</span> <span class="font-semibold text-purple-600">Turístico Exclusivo</span></li>
+        </ul>
+      </div>
+
+      <div id="descripcion" class="glass p-8 rounded-2xl shadow-sm border-t-4 border-fuchsia-500">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Programa Funcional (Por Villa)</h3>
+        <p class="text-gray-600 mb-4">Complejo de 6 villas aisladas/pareadas de alto standing. Cada unidad incluye:</p>
+        <ul class="space-y-2 text-gray-700 list-disc list-inside">
+          <li><strong>Planta Baja:</strong> Zonas de día open-concept (Salón-Comedor-Cocina), 1 aseo de cortesía, terraza exterior, piscina infinity privada.</li>
+          <li><strong>Planta Alta:</strong> 3 Dormitorios en suite con baño propio, terrazas privadas con vistas al mar.</li>
+          <li><strong>Sótano:</strong> Garaje privado, cuarto de instalaciones, lavandería.</li>
+          <li><strong>Exteriores:</strong> Zonas ajardinadas con vegetación endémica.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3: DISEÑO CONCEPTUAL -->
+    <section id="diseno" class="reveal bg-white p-10 rounded-3xl shadow-lg border border-gray-100">
+      <h2 class="text-3xl font-bold mb-6 text-gray-900">Diseño Conceptual y Bioclimático</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <h4 class="font-bold text-purple-700 mb-2">Estilo Arquitectónico</h4>
+          <p class="text-gray-600 text-sm">Minimalismo contemporáneo con influencias canarias. Volúmenes puros, líneas rectas, cubiertas planas y grandes acristalamientos para desdibujar el límite interior-exterior.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-purple-700 mb-2">Materialidad</h4>
+          <p class="text-gray-600 text-sm">Uso extensivo de piedra basáltica local en muros de contención, revestimientos continuos en tonos arena, carpinterías de aluminio minimalista y lamas de madera para control solar.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-purple-700 mb-2">Estrategia Bioclimática</h4>
+          <p class="text-gray-600 text-sm">Aprovechamiento de los 21.2°C de media y 3.078h de sol. Orientación Sur-Suroeste garantizando vistas. Ventilación cruzada, voladizos calculados para sombra en verano y captación en invierno.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 & 5: PLANOS E INSTALACIONES -->
+    <section class="reveal">
+      <h2 class="text-3xl font-bold mb-6 text-gray-900">Planimetría e Instalaciones Previstas</h2>
+      <div class="overflow-hidden rounded-xl shadow-sm border border-gray-200 bg-white">
+        <table class="w-full text-left">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th class="px-6 py-4 font-semibold text-gray-700">Categoría</th>
+              <th class="px-6 py-4 font-semibold text-gray-700">Documentos Generados / Previstos</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr>
+              <td class="px-6 py-4 text-purple-600 font-medium">Planimetría</td>
+              <td class="px-6 py-4 text-gray-600 text-sm">Planos de Emplazamiento, Plantas Generales (Sótano, Baja, Alta, Cubiertas), Alzados (N, S, E, O) y Secciones constructivas.</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-purple-600 font-medium">Climatización</td>
+              <td class="px-6 py-4 text-gray-600 text-sm">Sistema de Aerotermia de alta eficiencia para ACS y climatización (suelo radiante/refrescante o fancoils integrados).</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-purple-600 font-medium">Saneamiento y Agua</td>
+              <td class="px-6 py-4 text-gray-600 text-sm">Red separativa, depuración para riego de jardines y sistema de filtrado avanzado para piscinas infinity.</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-purple-600 font-medium">Electricidad y Datos</td>
+              <td class="px-6 py-4 text-gray-600 text-sm">Cuadros independientes, domótica integral (KNX o similar) para control de iluminación, clima y estores.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 6: CUMPLIMIENTO NORMATIVO -->
+    <section id="normativa" class="reveal glass p-8 rounded-2xl shadow-sm">
+      <h2 class="text-3xl font-bold mb-6 text-gray-900">Cumplimiento Normativo (CTE)</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div class="p-4 border border-gray-200 rounded-lg bg-white">
+          <span class="block text-2xl mb-2">♿</span>
+          <h4 class="font-bold text-sm">DB-SUA</h4>
+          <p class="text-xs text-gray-500 mt-1">Accesibilidad garantizada en zonas comunes y planta baja.</p>
+        </div>
+        <div class="p-4 border border-gray-200 rounded-lg bg-white">
+          <span class="block text-2xl mb-2">🔥</span>
+          <h4 class="font-bold text-sm">DB-SI</h4>
+          <p class="text-xs text-gray-500 mt-1">Sectorización garajes y evacuación de alojamientos turísticos.</p>
+        </div>
+        <div class="p-4 border border-gray-200 rounded-lg bg-white">
+          <span class="block text-2xl mb-2">🌱</span>
+          <h4 class="font-bold text-sm">DB-HE</h4>
+          <p class="text-xs text-gray-500 mt-1">Alta eficiencia. Aislamiento SATE y placas fotovoltaicas en cubierta.</p>
+        </div>
+        <div class="p-4 border border-gray-200 rounded-lg bg-white">
+          <span class="block text-2xl mb-2">🏗️</span>
+          <h4 class="font-bold text-sm">DB-SE</h4>
+          <p class="text-xs text-gray-500 mt-1">Estructura de hormigón armado optimizada para sismo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7: CATÁLOGO DE IMÁGENES -->
+    <section id="imagenes" class="reveal">
+      <h2 class="text-3xl font-bold mb-4 text-gray-900 border-b-2 border-purple-100 pb-2">Catálogo de Referencias Visuales (Brief para Vendex)</h2>
+      <p class="text-gray-600 mb-6">Listado de imágenes extraídas del proyecto base para recreación en renders fotorrealistas:</p>
+      
+      <div class="space-y-4">
+        <div class="p-6 bg-white border border-gray-200 rounded-xl hover:shadow-md transition">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded">IMG-01</span>
+            <h4 class="font-bold text-gray-900">Vista Aérea del Emplazamiento</h4>
+          </div>
+          <p class="text-sm text-gray-600"><strong>Descripción PDF:</strong> Plano topográfico/render a vista de pájaro mostrando la parcela 43-8 aterrazada. Se aprecia el océano de fondo (sur).<br>
+          <strong>Instrucción Render:</strong> Crear un <em>drone shot</em> al atardecer mostrando las 6 villas escalonadas adaptándose a la topografía, destacando las piscinas iluminadas.</p>
+        </div>
+
+        <div class="p-6 bg-white border border-gray-200 rounded-xl hover:shadow-md transition">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded">IMG-02</span>
+            <h4 class="font-bold text-gray-900">Fachada Principal Sur</h4>
+          </div>
+          <p class="text-sm text-gray-600"><strong>Descripción PDF:</strong> Alzado sur con grandes paños de vidrio, terrazas voladas y piedra volcánica en planta baja.<br>
+          <strong>Instrucción Render:</strong> Render fotorrealista a pie de piscina mirando hacia la villa. Agua desbordante (infinity pool), mobiliario de exterior de lujo, reflejos del cielo en las cristaleras.</p>
+        </div>
+
+        <div class="p-6 bg-white border border-gray-200 rounded-xl hover:shadow-md transition">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded">IMG-03</span>
+            <h4 class="font-bold text-gray-900">Sección Transversal Escalona</h4>
+          </div>
+          <p class="text-sm text-gray-600"><strong>Descripción PDF:</strong> Esquema que muestra cómo cada villa no obstaculiza la vista de la villa posterior gracias a la pendiente.<br>
+          <strong>Instrucción Render:</strong> Diagrama 3D isométrico o render en sección (dollhouse view) para marketing, mostrando la privacidad visual de cada unidad.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8: RECOMENDACIONES -->
+    <section class="reveal bg-gray-900 text-white p-10 rounded-3xl shadow-xl">
+      <h2 class="text-3xl font-bold mb-6 text-purple-400">Recomendaciones de Diseño "Luxury" (Costa Adeje)</h2>
+      <ul class="space-y-4 text-gray-300">
+        <li class="flex gap-3"><span class="text-purple-500">✓</span> <strong>Conexión Interior-Exterior:</strong> Usar carpinterías de hojas ocultas (ej. Cortizo Cor Vision Plus) que se embutan en los muros para unificar salón y terraza.</li>
+        <li class="flex gap-3"><span class="text-purple-500">✓</span> <strong>Piscinas Infinity:</strong> El borde desbordante debe fundirse visualmente con el horizonte del océano hacia La Gomera.</li>
+        <li class="flex gap-3"><span class="text-purple-500">✓</span> <strong>Paisajismo Autóctono:</strong> Incorporar dragos, palmeras canarias y suculentas en jardineras integradas en la arquitectura, reduciendo demanda hídrica.</li>
+        <li class="flex gap-3"><span class="text-purple-500">✓</span> <strong>Materiales Nobles:</strong> Priorizar piedra natural (basalto), maderas termotratadas para lamas de fachada, y pavimentos porcelánicos de gran formato continuos (in/out).</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-gray-200 py-12">
+    <div class="max-w-6xl mx-auto px-6 text-center text-sm text-gray-500">
+      <p class="mb-2">Informe generado por <strong class="text-purple-600">ARQON</strong> — Arquitecto Principal</p>
+      <p>Sistema de Agentes Inmobiliarios IA • Proyecto 6 Villas Turísticas San Eugenio</p>
+    </div>
+  </footer>
+
+  <!-- SCROLL REVEAL SCRIPT -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); }});
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Counters
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      let current = 0;
+      const step = target / 60;
+      const animate = () => {
+        current += step;
+        if(current >= target) { el.textContent = target.toLocaleString('es-ES'); return; }
+        el.textContent = Math.floor(current).toLocaleString('es-ES');
+        requestAnimationFrame(animate);
+      };
+      const obs = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) { animate(); obs.disconnect(); }
+      });
+      obs.observe(el);
+    });
+  </script>
+</body>
+</html>

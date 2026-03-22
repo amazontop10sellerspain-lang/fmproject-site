@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe de Obra Completo — 6 Villas Turísticas San Eugenio Alto</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+<style>
+.reveal{opacity:0;transform:translateY(24px);transition:all .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+.gt{background:linear-gradient(135deg,#f59e0b,#b45309);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+html{scroll-behavior:smooth}tbody tr:hover{background:rgba(245,158,11,.06)}
+.bar{height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:600}
+.tl-dot{width:14px;height:14px;border-radius:50%;border:3px solid #f59e0b;background:#fff;position:absolute;left:-7px;top:4px}
+.tl-line{border-left:2px solid #fbbf24;padding-left:24px;margin-left:0;position:relative}
+.risk-h{background:#fecaca;color:#991b1b}.risk-m{background:#fef3c7;color:#92400e}.risk-l{background:#d1fae5;color:#065f46}
+</style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+<div class="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center">
+<span class="text-lg font-bold gt">BUILDERO — Jefe de Obra</span>
+<div class="hidden lg:flex gap-4 text-xs font-medium text-gray-500">
+<a href="#resumen" class="hover:text-amber-600">Resumen</a>
+<a href="#constructivo" class="hover:text-amber-600">Constructivo</a>
+<a href="#pem" class="hover:text-amber-600">PEM</a>
+<a href="#instalaciones" class="hover:text-amber-600">Instalaciones</a>
+<a href="#planning" class="hover:text-amber-600">Planning</a>
+<a href="#sys" class="hover:text-amber-600">SyS</a>
+<a href="#calidades" class="hover:text-amber-600">Calidades</a>
+<a href="#normativa" class="hover:text-amber-600">Normativa</a>
+<a href="#costes" class="hover:text-amber-600">Costes</a>
+</div>
+</div>
+</nav>
+
+<!-- HERO -->
+<header class="bg-gradient-to-br from-amber-500 via-orange-500 to-red-500 text-white py-16">
+<div class="max-w-6xl mx-auto px-6 text-center">
+<p class="text-amber-200 text-xs font-semibold uppercase tracking-widest mb-3">Informe de Obra Completo · Buildero · Marzo 2026</p>
+<h1 class="text-3xl md:text-5xl font-extrabold mb-3">6 Villas Turísticas de Lujo</h1>
+<p class="text-lg text-amber-100">Parcela 43-8 · San Eugenio Alto, Costa Adeje, Tenerife</p>
+<p class="text-sm text-amber-200 mt-2">Modificación Menor PGO Adeje — Aprobada Definitivamente (Enero 2024)</p>
+<div class="mt-6 flex flex-wrap justify-center gap-3 text-sm">
+<span class="px-3 py-1.5 bg-white/20 rounded-full">📐 1.566 m² parcela</span>
+<span class="px-3 py-1.5 bg-white/20 rounded-full">🏗️ 1.143 m²t edif.</span>
+<span class="px-3 py-1.5 bg-white/20 rounded-full">🏠 6 villas × ~190 m²</span>
+<span class="px-3 py-1.5 bg-white/20 rounded-full">🛏️ 20 plazas turísticas</span>
+<span class="px-3 py-1.5 bg-white/20 rounded-full">🌋 Basalto volcánico</span>
+<span class="px-3 py-1.5 bg-white/20 rounded-full">📏 Ocup. máx 40%</span>
+</div>
+</div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-14 space-y-16">
+
+<!-- ═══ KPIs ═══ -->
+<section id="resumen" class="reveal grid grid-cols-2 md:grid-cols-5 gap-4">
+<div class="bg-white rounded-xl p-4 shadow text-center"><p class="text-xl font-extrabold text-amber-600">2.856.000€</p><p class="text-[10px] text-gray-500 mt-1">PEM Total</p></div>
+<div class="bg-white rounded-xl p-4 shadow text-center"><p class="text-xl font-extrabold text-amber-600">476.000€</p><p class="text-[10px] text-gray-500 mt-1">PEM por villa</p></div>
+<div class="bg-white rounded-xl p-4 shadow text-center"><p class="text-xl font-extrabold text-amber-600">2.500€/m²</p><p class="text-[10px] text-gray-500 mt-1">Ratio €/m² construido</p></div>
+<div class="bg-white rounded-xl p-4 shadow text-center"><p class="text-xl font-extrabold text-amber-600">18 meses</p><p class="text-[10px] text-gray-500 mt-1">Plazo total (2 fases)</p></div>
+<div class="bg-white rounded-xl p-4 shadow text-center"><p class="text-xl font-extrabold text-amber-600">Clase A</p><p class="text-[10px] text-gray-500 mt-1">Certif. energética objetivo</p></div>
+</section>
+
+<!-- ═══ RESUMEN EJECUTIVO ═══ -->
+<section class="reveal glass bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+<h3 class="font-bold text-gray-900 mb-3">📋 Alcance de la Obra</h3>
+<p class="text-sm text-gray-600 leading-relaxed mb-4">Construcción de complejo turístico extrahotelero de 6 villas independientes de lujo (20 plazas alojativas) sobre parcela 43-8 de la zona AU-12, San Eugenio Alto. Parcela de 1.566 m²s en suelo urbano consolidado, con edificabilidad de 0,73 m²t/m²s (1.143 m²t) tras la Modificación Menor del PGO de Adeje aprobada definitivamente en enero 2024. Terreno volcánico basáltico con pendiente 15-20% hacia la costa (orientación Sur/Suroeste), vistas al océano y La Gomera. Tipología aislada escalonada, 2 plantas (7m máx.), retranqueos 3m a linderos.</p>
+<div class="grid md:grid-cols-3 gap-3 text-sm">
+<div class="bg-amber-50 rounded-xl p-3 border border-amber-100">
+<p class="font-semibold text-amber-800">🌋 Terreno</p>
+<p class="text-amber-700 text-xs mt-1">Coladas basálticas Pleistocenas. σadm ≥4-6 kg/cm². Pendiente 15-20%. Necesidad de plataformas escalonadas y muros de contención. Sin riesgo geológico identificado en el Documento Ambiental Estratégico.</p>
+</div>
+<div class="bg-amber-50 rounded-xl p-3 border border-amber-100">
+<p class="font-semibold text-amber-800">🏗️ Programa por Villa</p>
+<p class="text-amber-700 text-xs mt-1">PB: salón-comedor-cocina open-concept, aseo cortesía, terraza + piscina infinity. P1: 3 dormitorios en suite con baño y terraza. Sótano: garaje + instalaciones + lavadero. ~190 m²t/villa.</p>
+</div>
+<div class="bg-amber-50 rounded-xl p-3 border border-amber-100">
+<p class="font-semibold text-amber-800">📊 Parámetros Normativos</p>
+<p class="text-amber-700 text-xs mt-1">Edif.: 0,73 m²t/m²s (1.143 m²t). Ocup.: 40% (626 m²). Alt.: 2 plantas/7m escalonadas. Densidad: 20 plazas. Uso: turístico exclusivo. 1 parking/villa. Reserva agua 1m³/hab.</p>
+</div>
+</div>
+</section>
+
+<!-- ═══ 1. ANÁLISIS CONSTRUCTIVO ═══ -->
+<section id="constructivo" class="reveal">
+<div class="text-center mb-8">
+<p class="text-amber-600 text-xs font-semibold uppercase tracking-widest mb-1">Capítulo 1</p>
+<h2 class="text-2xl font-bold">Análisis Constructivo Completo</h2>
+<p class="text-gray-500 text-sm mt-1">Soluciones técnicas para terreno volcánico escalonado en pendiente 15-20%</p>
+</div>
+
+<!-- 1.1 Cimentación -->
+<div class="grid md:grid-cols-2 gap-5 mb-6">
+<div class="bg-white rounded-xl p-5 shadow border-l-4 border-amber-400">
+<h3 class="font-bold mb-2">🌋 1.1 Cimentación en Terreno Volcánico</h3>
+<ul class="text-xs text-gray-600 space-y-1.5">
+<li>• <strong>Sustrato:</strong> Coladas basálticas Pleistocenas de alta resistencia. El Documento Ambiental Estratégico (geólogo J.L. Roig, Col. 4.475) confirma ausencia de procesos geodinámicos externos y buena capacidad portante (σadm ≥ 4-6 kg/cm²).</li>
+<li>• <strong>Pendiente:</strong> 15-20% hacia la costa (orientación Sur). Requiere formación de 3-4 plataformas escalonadas adaptadas a la topografía, respetando la condición normativa de "2 plantas escalonadas".</li>
+<li>• <strong>Tipología:</strong> Zapatas aisladas HA sobre basalto + vigas riostras de atado perimetrales. Losa armada continua en zonas de sótano/garaje.</li>
+<li>• <strong>Excavación:</strong> Obligatorio martillo hidráulico o retroexcavadora con puntero para excavación en roca basáltica. Sobrecoste +15-20% respecto a suelo convencional. Volumen estimado: ~2.800 m³ incluyendo plataformas.</li>
+<li>• <strong>Muros contención:</strong> Muros de HA-30 de 30cm entre plataformas escalonadas (3-4 niveles). Altura variable 1,5-3,5m. Impermeabilización: lámina PVC + geotextil + tubo dren perimetral Ø160mm.</li>
+<li>• <strong>Geotécnico:</strong> Se requiere estudio geotécnico previo con calicatas mecánicas (mín. 6 puntos) + ensayo refracción sísmica + SPT en zonas de relleno antrópico si existiera.</li>
+</ul>
+</div>
+
+<div class="bg-white rounded-xl p-5 shadow border-l-4 border-orange-400">
+<h3 class="font-bold mb-2">🏗️ 1.2 Estructura de Hormigón Armado</h3>
+<ul class="text-xs text-gray-600 space-y-1.5">
+<li>• <strong>Hormigón:</strong> HA-30/B/20/IIa (ambiente costero Canarias, altitud 180-200m, distancia a costa 2-3km). Consistencia blanda para bombeo.</li>
+<li>• <strong>Acero:</strong> B500SD (soldable, ductilidad especial). Recubrimientos mín. 30mm interior, 40mm exterior, 50mm en contacto con terreno.</li>
+<li>• <strong>Forjados:</strong> Reticular de casetón perdido. PB: canto 25+5cm (peso propio ~4,2 kN/m²). P1: canto 30+5cm. Luces máx. 6-7m para espacios diáfanos open-concept (salón-comedor-cocina).</li>
+<li>• <strong>Pilares:</strong> Sección 30×30 a 40×40cm según posición y cargas. Modulación base 5-6m.</li>
+<li>• <strong>Escalera:</strong> Losa de HA inclinada de 18cm, 2 tramos con meseta intermedia. Huella 28cm, contrahuella 17,5cm (CTE DB-SUA).</li>
+<li>• <strong>Sismo:</strong> Zona de sismicidad baja (ac &lt; 0,04g según NCSE-02/NCSR-22). Se dimensiona con ductilidad limitada igualmente. La norma canaria no exige cálculo sísmico, pero se recomienda por proximidad a zona volcánica activa.</li>
+<li>• <strong>Cálculo:</strong> Según CTE DB-SE + EHE-08. Software CYPECAD o similar.</li>
+</ul>
+</div>
+
+<div class="bg-white rounded-xl p-5 shadow border-l-4 border-red-400">
+<h3 class="font-bold mb-2">🧱 1.3 Cerramientos y Envolvente Térmica</h3>
+<ul class="text-xs text-gray-600 space-y-1.5">
+<li>• <strong>Fachada principal (Sur/SW):</strong> SATE con 8cm EPS grafito (λ=0,031 W/mK) + acabado monocapa raspado color arena. Aplacado de piedra basáltica local en zócalos y muros singulares (según diseño de Arqon).</li>
+<li>• <strong>Fachada ventilada:</strong> Zonas de acento con subestructura de aluminio + panel composite. Cámara ventilada de 4cm.</li>
+<li>• <strong>Tabiquería interior:</strong> PYL trasdosada: montantes M70 + doble placa 15mm + lana mineral 60mm. Aislamiento acústico ≥45 dBA entre estancias.</li>
+<li>• <strong>Huecos:</strong> Carpintería aluminio hoja oculta RPT (Uf≤1,4 W/m²K). Vidrio doble bajo emisivo 6/16Ar/6 (Ug≤1,1 W/m²K). Factor solar g≤0,35 en orientación Sur para control de soleamiento (3.078h sol/año). Correderas elevables de ≤4m de ancho para conexión interior-exterior.</li>
+<li>• <strong>Lamas:</strong> Madera termotratada Thermowood clase D en fachada Sur: control solar pasivo + estética premium. Accionamiento motorizado integrado en KNX.</li>
+<li>• <strong>U fachada:</strong> ≤0,38 W/m²K (zona climática α3 Canarias según DB-HE).</li>
+</ul>
+</div>
+
+<div class="bg-white rounded-xl p-5 shadow border-l-4 border-cyan-400">
+<h3 class="font-bold mb-2">🏊 1.4 Cubiertas y Piscinas Infinity</h3>
+<ul class="text-xs text-gray-600 space-y-1.5">
+<li>• <strong>Cubierta plana transitable (invertida):</strong> Forjado reticular + formación pendientes con HA aligerado (1,5-2%) + lámina impermeabilizante bicapa (LBM-40-FP + LBM-40-FV) + aislamiento XPS 8cm (λ=0,034) + geotextil + plots regulables + pavimento porcelánico 60×60 antideslizante C2.</li>
+<li>• <strong>Zona ajardinada extensiva:</strong> En áreas decorativas de cubierta: sustrato volcánico (lapilli) 8cm + vegetación suculenta (Aeonium, Sempervivum). Drenaje con lámina nodular HDPE.</li>
+<li>• <strong>Piscinas infinity (×6):</strong> Vaso de hormigón gunitado ~8×3×1,5m (~24 m² lámina por unidad, ~36 m³ agua). Borde desbordante (infinity edge) orientado Sur/SW hacia La Gomera. Estructura: solera HA-30 de 20cm + muros HA de 25cm armados con doble malla B500T. Junta waterstop en encuentros muro-solera. Impermeabilización con membrana de PVC armado + revestimiento gres porcelánico antideslizante C3 color grafito oscuro (efecto espejo del cielo).</li>
+<li>• <strong>Equipamiento piscina:</strong> Filtración arena Ø600mm + bomba caudal variable (ahorro 60%) + cloración salina (sin productos químicos) + iluminación LED RGB empotrada subacuática + depósito compensación enterrado 2m³ + calefacción solar/aerotermia + rebosadero perimetral oculto (canal finlandés).</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ═══ 2. PRESUPUESTO DE EJECUCIÓN MATERIAL ═══ -->
+<section id="pem" class="reveal">
+<div class="text-center mb-8">
+<p class="text-amber-600 text-xs font-semibold uppercase tracking-widest mb-1">Capítulo 2</p>
+<h2 class="text-2xl font-bold">Presupuesto de Ejecución Material (PEM)</h2>
+<p class="text-gray-500 text-sm mt-1">Precios Q1 2026 · Zona insular turística Costa Adeje · IGIC no incluido · 6 villas + urbanización</p>
+</div>
+<div class="bg-white rounded-2xl shadow-lg overflow-hidden text-sm">
+<table class="w-full">
+<thead><tr class="bg-amber-50 border-b border-amber-200 text-amber-800">
+<th class="px-3 py-2.5 text-left w-8">Nº</th>
+<th class="px-3 py-2.5 text-left">Capítulo</th>
+<th class="px-3 py-2.5 text-left">Descripción técnica / Partidas principales</th>
+<th class="px-3 py-2.5 text-right">Importe (€)</th>
+<th class="px-3 py-2.5 text-right w-10">%</th>
+</tr></thead>
+<tbody class="divide-y divide-gray-100">
+<tr><td class="px-3 py-2 font-bold text-amber-600">01</td><td class="px-3 py-2 font-semibold">Actuaciones Previas y Mov. Tierras</td><td class="px-3 py-2 text-gray-500">Desbroce 1.566 m², demolición elementos existentes, excavación vaciado en basalto con martillo hidráulico (~2.800 m³), formación 3-4 plataformas escalonadas, rellenos compactados, transporte a vertedero autorizado (20-25 km)</td><td class="px-3 py-2 text-right font-semibold">185.600 €</td><td class="px-3 py-2 text-right text-gray-400">6,5</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">02</td><td class="px-3 py-2 font-semibold">Cimentación</td><td class="px-3 py-2 text-gray-500">Zapatas aisladas/corridas HA-30 sobre basalto, vigas riostras, losa armada sótano (e=30cm), muros contención HA entre plataformas (h=1,5-3,5m, e=30cm), impermeabilización lámina PVC, drenaje perimetral Ø160</td><td class="px-3 py-2 text-right font-semibold">228.500 €</td><td class="px-3 py-2 text-right text-gray-400">8,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">03</td><td class="px-3 py-2 font-semibold">Saneamiento Enterrado</td><td class="px-3 py-2 text-gray-500">Red separativa completa: colectores PVC SN8 Ø160-315mm (fecales) + PVC pluviales a aljibes riego. Arquetas registrables prefab. HA. Conexión a red municipal. Preinstalación reutilización aguas grises</td><td class="px-3 py-2 text-right font-semibold">57.100 €</td><td class="px-3 py-2 text-right text-gray-400">2,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">04</td><td class="px-3 py-2 font-semibold">Estructura</td><td class="px-3 py-2 text-gray-500">HA-30/B/20/IIa + B500SD. Pilares (30×30 a 40×40), forjados reticulares casetón perdido (25+5 PB, 30+5 P1), vigas planas, losa escalera 18cm, forjado cubierta plana, muros sótano. Encofrado metálico recuperable. ~185 m³ HA + ~22.000 kg acero por villa</td><td class="px-3 py-2 text-right font-semibold">342.700 €</td><td class="px-3 py-2 text-right text-gray-400">12,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">05</td><td class="px-3 py-2 font-semibold">Cerramientos Exteriores</td><td class="px-3 py-2 text-gray-500">Fachada SATE: EPS grafito 8cm + monocapa. Aplacado basáltico en zócalos. Fachada ventilada puntual con composite. Medianeras doble tabicón + cámara. Premarcos metálicos para hoja oculta</td><td class="px-3 py-2 text-right font-semibold">171.400 €</td><td class="px-3 py-2 text-right text-gray-400">6,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">06</td><td class="px-3 py-2 font-semibold">Tabiquería y Divisiones Int.</td><td class="px-3 py-2 text-gray-500">PYL trasdosada: montantes M70 + doble placa 15mm + lana mineral 60mm. Tabiques húmedos con placa hidrófuga. Trasdosados para instalaciones empotradas en baños y cocinas</td><td class="px-3 py-2 text-right font-semibold">71.400 €</td><td class="px-3 py-2 text-right text-gray-400">2,5</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">07</td><td class="px-3 py-2 font-semibold">Cubiertas</td><td class="px-3 py-2 text-gray-500">Plana invertida transitable: formación pendientes HA aligerado, impermeabilización bicapa, XPS 8cm, plots regulables + porcelánico 60×60 C2. Zona ajardinada extensiva con sustrato volcánico. Murete perimetral + albardilla zinc</td><td class="px-3 py-2 text-right font-semibold">114.200 €</td><td class="px-3 py-2 text-right text-gray-400">4,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">08</td><td class="px-3 py-2 font-semibold">Carpintería Exterior (Hoja Oculta)</td><td class="px-3 py-2 text-gray-500">Aluminio RPT hoja oculta (Cortizo Cor Vision Plus / equiv.), correderas elevables ≤4m, vidrio bajo emisivo 6/16Ar/6. Lamas madera termotratada motorizadas KNX. Puertas acceso blindadas con cerradura electrónica</td><td class="px-3 py-2 text-right font-semibold">185.600 €</td><td class="px-3 py-2 text-right text-gray-400">6,5</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">09</td><td class="px-3 py-2 font-semibold">Carpintería Interior</td><td class="px-3 py-2 text-gray-500">Puertas lisas lacadas mate hasta techo (h=2,40m) con herrajes ocultos. Armarios empotrados interiores melamina + frentes lacados/espejo. Barandillas vidrio templado 10mm + pasamanos inox. Mampara ducha fija vidrio 10mm</td><td class="px-3 py-2 text-right font-semibold">99.900 €</td><td class="px-3 py-2 text-right text-gray-400">3,5</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">10</td><td class="px-3 py-2 font-semibold">Instalación Eléctrica + Domótica KNX</td><td class="px-3 py-2 text-gray-500">CGMP + subcuadros villa, canalización empotrada. LED DALI con escenas programables. Bus KNX completo (iluminación, estores, clima, seguridad, riego). Videoportero IP. Preinstalación recarga VE. Red datos Cat6A + WiFi AP</td><td class="px-3 py-2 text-right font-semibold">171.400 €</td><td class="px-3 py-2 text-right text-gray-400">6,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">11</td><td class="px-3 py-2 font-semibold">Fontanería, ACS y Aparatos Sanitarios</td><td class="px-3 py-2 text-gray-500">Red multicapa PEX-Al-PEX con colector. Sanitarios suspendidos Roca Inspira/Duravit. Cisterna Geberit. Griferías empotradas termostáticas. Duchas a ras con plato extraplano. ACS desde aerotermia + recirculación</td><td class="px-3 py-2 text-right font-semibold">142.800 €</td><td class="px-3 py-2 text-right text-gray-400">5,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">12</td><td class="px-3 py-2 font-semibold">Climatización (Aerotermia + VMC)</td><td class="px-3 py-2 text-gray-500">Bomba calor aire-agua COP≥4,5 (8-10kW/villa). Suelo radiante/refrescante PB (PE-Xa Ø16, paso 15cm). Fancoils conducidos ocultos P1. VMC con recuperador entálpico η≥80%. Conductos rectangulares en falso techo. Control zonas KNX</td><td class="px-3 py-2 text-right font-semibold">185.600 €</td><td class="px-3 py-2 text-right text-gray-400">6,5</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">13</td><td class="px-3 py-2 font-semibold">Solar Fotovoltaica + Baterías</td><td class="px-3 py-2 text-gray-500">5 kWp/villa (30 kWp total): 12 paneles mono 450W en cubierta plana (soporte 10°). Inversor híbrido + batería Li 10kWh/villa. ~8.500 kWh/año/villa (irrad. Adeje 1.900 kWh/m²). Cumple DB-HE5. Bonificable ICIO 50%</td><td class="px-3 py-2 text-right font-semibold">114.200 €</td><td class="px-3 py-2 text-right text-gray-400">4,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">14</td><td class="px-3 py-2 font-semibold">Revestimientos y Acabados</td><td class="px-3 py-2 text-gray-500">Porcelánico rectificado 120×60 mate continuo in/out. Microcemento en baños. Falsos techos PYL con focos LED integrados. Peldaños escalera piedra natural. Cocina: muebles lacados + encimera Dekton 12mm + Siemens iQ700 integrados. Pintura mineral silicato mate</td><td class="px-3 py-2 text-right font-semibold">285.600 €</td><td class="px-3 py-2 text-right text-gray-400">10,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">15</td><td class="px-3 py-2 font-semibold">Piscinas Infinity (×6)</td><td class="px-3 py-2 text-gray-500">Vaso gunitado ~24 m²/ud, borde desbordante sur→La Gomera. Solera HA-30 20cm + muros HA 25cm + waterstop. Gres antideslizante C3 grafito. Filtración arena + bomba variable + cloración salina + LED RGB + depósito compensación 2m³ + calefacción aerotermia</td><td class="px-3 py-2 text-right font-semibold">199.900 €</td><td class="px-3 py-2 text-right text-gray-400">7,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">16</td><td class="px-3 py-2 font-semibold">Urbanización Interior</td><td class="px-3 py-2 text-gray-500">Viales acceso rodado con adoquín porcelánico drenante. Acometidas generales (agua CIATF, BT Endesa, saneamiento, telecom). Alumbrado exterior LED balizas + pilona. Muros contención vista piedra basáltica entre parcelas. Vallado perimetral + motorización acceso</td><td class="px-3 py-2 text-right font-semibold">157.100 €</td><td class="px-3 py-2 text-right text-gray-400">5,5</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">17</td><td class="px-3 py-2 font-semibold">Jardinería y Paisajismo</td><td class="px-3 py-2 text-gray-500">Xerojardinería canaria: dragos (Dracaena draco), palmera canaria (Phoenix canariensis), tabaibas (Euphorbia balsamifera), cardones (Euphorbia canariensis), suculentas — especies identificadas en el Doc. Ambiental del PDF. Riego goteo automatizado KNX. Deck termotratado zona piscina. Jardineras integradas HA</td><td class="px-3 py-2 text-right font-semibold">85.700 €</td><td class="px-3 py-2 text-right text-gray-400">3,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">18</td><td class="px-3 py-2 font-semibold">Seguridad contra Incendios + Intrusión</td><td class="px-3 py-2 text-gray-500">Detección incendios (ópticos en cada estancia), extintores 6kg/villa, señalización fotoluminiscente DB-SI. Alarma anti-intrusión volumétrica + perimetral. CCTV IP 4MP (6 cámaras/villa + perímetro). Cerraduras electrónicas check-in autónomo turístico</td><td class="px-3 py-2 text-right font-semibold">57.100 €</td><td class="px-3 py-2 text-right text-gray-400">2,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">19</td><td class="px-3 py-2 font-semibold">Seguridad y Salud + Gestión Residuos</td><td class="px-3 py-2 text-gray-500">Estudio SyS (terreno en pendiente + trabajos en roca + cubiertas transitables), coordinación, EPIs, protecciones colectivas (redes, barandillas, líneas de vida). Gestión RCD según normativa canaria, separación selectiva</td><td class="px-3 py-2 text-right font-semibold">42.800 €</td><td class="px-3 py-2 text-right text-gray-400">1,5</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">20</td><td class="px-3 py-2 font-semibold">Control Calidad + Ensayos</td><td class="px-3 py-2 text-gray-500">Probetas HA (mín. 1 serie/50m³), ensayos acero, prueba estanqueidad cubiertas y piscinas, termografía fachadas, prueba servicio instalaciones. OCAs: BT (REBT), ICT, ascensores si procede. Certificado final</td><td class="px-3 py-2 text-right font-semibold">28.600 €</td><td class="px-3 py-2 text-right text-gray-400">1,0</td></tr>
+<tr><td class="px-3 py-2 font-bold text-amber-600">21</td><td class="px-3 py-2 font-semibold">Imprevistos y Varios</td><td class="px-3 py-2 text-gray-500">Contingencia geotécnica (variabilidad roca basáltica, bolsas de lapilli), modificaciones de proyecto, limpieza final de obra, acta replanteo, licencia de ocupación</td><td class="px-3 py-2 text-right font-semibold">42.800 €</td><td class="px-3 py-2 text-right text-gray-400">1,5</td></tr>
+</tbody>
+<tfoot><tr class="bg-amber-100 border-t-2 border-amber-400">
+<td class="px-3 py-3" colspan="3"><span class="text-base font-extrabold text-amber-900">TOTAL PEM (6 VILLAS + URBANIZACIÓN + PISCINAS)</span></td>
+<td class="px-3 py-3 text-right text-base font-extrabold text-amber-900">2.856.000 €</td>
+<td class="px-3 py-3 text-right font-bold text-amber-700">100</td>
+</tr></tfoot>
+</table>
+</div>
+
+<!-- Nota sobre rango Nexus -->
+<div class="mt-4 bg-amber-50 rounded-xl p-4 border border-amber-200 text-xs text-amber-800">
+<strong>📊 Coherencia con estimación de Nexus (PM):</strong> El PM estimó un rango de 2,3-3,1M€. Nuestro PEM de 2.856.000€ se sitúa en la franja alta del rango, coherente con el nivel de calidades premium definido por Arqon (hoja oculta, aerotermia, KNX, piscinas infinity con cloración salina) y el sobrecoste de excavación en terreno volcánico (+15-20%). El ratio de 2.500 €/m²t es adecuado para villa turística de lujo en zona insular.
+</div>
+</section>
+
+<!-- ═══ 3. INSTALACIONES DETALLADAS ═══ -->
+<section id="instalaciones" class="reveal">
+<div class="text-center mb-8">
+<p class="text-amber-600 text-xs font-semibold uppercase tracking-widest mb-1">Capítulo 3</p>
+<h2 class="text-2xl font-bold">Instalaciones Detalladas</h2>
+</div>
+<div class="bg-white rounded-2xl shadow overflow-hidden text-sm">
+<table class="w-full">
+<thead><tr class="bg-gray-800 text-white"><th class="px-4 py-2.5 text-left w-44">Sistema</th><th class="px-4 py-2.5 text-left">Especificación Técnica Completa</th><th class="px-4 py-2.5 text-right w-24">€/villa</th></tr></thead>
+<tbody class="divide-y divide-gray-100">
+<tr><td class="px-4 py-3 font-semibold text-blue-700">❄️ Aerotermia<br><span class="font-normal text-gray-400 text-xs">Cap. 12</span></td><td class="px-4 py-3 text-gray-600 text-xs">Bomba de calor aire-agua monobloc exterior (COP≥4,5 a 7°C, SEER≥6,0). Potencia 8-10 kW térmicos. ACS: depósito inercia 200L inox. <strong>PB:</strong> suelo radiante/refrescante (tubo PE-Xa Ø16mm, paso 15cm sobre plancha aislante con tetones, colector inox con caudalímetros). <strong>P1:</strong> fancoils conducidos ocultos en falso techo (potencia 2,5-3,5 kW/ud, 3 unidades/villa). Regulación por zonas con termostatos KNX (6 zonas/villa). VMC con recuperador de calor entálpico (η≥80%, caudal 300 m³/h) para cumplimiento DB-HS3 y máxima eficiencia.</td><td class="px-4 py-3 text-right font-semibold">30.930 €</td></tr>
+<tr><td class="px-4 py-3 font-semibold text-yellow-700">☀️ Solar FV + Bat.<br><span class="font-normal text-gray-400 text-xs">Cap. 13</span></td><td class="px-4 py-3 text-gray-600 text-xs">Autoconsumo con excedentes: 5 kWp/villa (12 paneles monocristalinos 450Wp, η≥21%). Soporte coplanar aluminio a 10° en cubierta plana. Inversor híbrido trifásico 5kW con gestión de batería LiFePO4 10kWh (>6.000 ciclos). Producción estimada: ~8.500 kWh/año/villa (irradiación Adeje Sur: 1.900 kWh/m²/año, 3.078h sol). Total complejo: 30 kWp → ~51.000 kWh/año. Cumplimiento DB-HE5. Monitorización vía KNX + app. Bonificación ICIO Adeje hasta 50%.</td><td class="px-4 py-3 text-right font-semibold">19.030 €</td></tr>
+<tr><td class="px-4 py-3 font-semibold text-purple-700">🏠 Domótica KNX<br><span class="font-normal text-gray-400 text-xs">Cap. 10</span></td><td class="px-4 py-3 text-gray-600 text-xs">Bus KNX/TP cableado (topología árbol desde cuadro automatización). <strong>Control:</strong> iluminación DALI (escenas: día, noche, cine, bienvenida), estores/lamas motorizadas, clima por zonas (6), alarma anti-intrusión, videoportero IP 2 hilos, riego automatizado, monitorización FV + consumos eléctricos. Pasarela KNX/IP para control remoto vía app (gestión turística remota). Cerraduras electrónicas Bluetooth/NFC para check-in autónomo. 1 panel táctil 7" por villa + control smartphone. Sensor presencia para ahorro energético en desocupación.</td><td class="px-4 py-3 text-right font-semibold">incl.</td></tr>
+<tr><td class="px-4 py-3 font-semibold text-green-700">💧 Fontanería + ACS<br><span class="font-normal text-gray-400 text-xs">Cap. 11</span></td><td class="px-4 py-3 text-gray-600 text-xs">Acometida municipal (CIATF Adeje) Ø63 PE100 PN16 + grupo presión 2 bombas + calderín 50L. Distribución interior: multicapa PEX-Al-PEX Ø16-20mm desde colector inox por villa. ACS recirculada desde depósito aerotermia (ΔT≤3°C en grifo). Sanitarios: Roca Inspira Round (inodoro suspendido + bidé) + cisterna Geberit Sigma. Griferías empotradas termostáticas en duchas (Hansgrohe Axor / Gessi). Plato ducha extraplano empotrado a ras de suelo. Reserva almacenamiento agua: 1 m³/habitante (norma ficha U12-3) → aljibe 20 m³ comunitario.</td><td class="px-4 py-3 text-right font-semibold">23.800 €</td></tr>
+<tr><td class="px-4 py-3 font-semibold text-teal-700">🚰 Saneamiento<br><span class="font-normal text-gray-400 text-xs">Cap. 03</span></td><td class="px-4 py-3 text-gray-600 text-xs">Red separativa: fecales en PVC SN8 Ø160-315mm → red municipal Adeje. Pluviales → aljibes de riego enterrados (lapilli volcánico como filtro natural). Ventilación primaria + shunt en cada bajante. Arquetas registrables prefab. HA cada 15m y cambio dirección. Preinstalación para reutilización aguas grises (duchas/lavabos → filtro → riego jardines).</td><td class="px-4 py-3 text-right font-semibold">9.520 €</td></tr>
+<tr><td class="px-4 py-3 font-semibold text-indigo-700">⚡ Electricidad BT<br><span class="font-normal text-gray-400 text-xs">Cap. 10</span></td><td class="px-4 py-3 text-gray-600 text-xs">Acometida BT desde CT Endesa + CGP. CGMP + subcuadro por villa (ICP 40A). Canalización empotrada tubo corrugado libre de halógenos. Mecanismos gama alta (Simon 100 / Jung LS990). Luminarias LED empotradas + tiras LED indirectas perímetro falso techo. Preinstalación punto recarga VE tipo 2 (7,4 kW) por villa en sótano/garaje. Red datos Cat6A UTP + 3 puntos WiFi AP por villa.</td><td class="px-4 py-3 text-right font-semibold">28.570 €</td></tr>
+<tr><td class="px-4 py-3 font-semibold text-cyan-700">🏊 Depuración Piscinas<br><span class="font-normal text-gray-400 text-xs">Cap. 15</span></td><td class="px-4 py-3 text-gray-600 text-xs">Por villa: filtro arena sílex Ø600mm (caudal 14 m³/h) + bomba velocidad variable (IE4, ahorro 60%) + clorador salino (sal: 4g/L, sin productos químicos) + sonda ORP + pH con dosificación automática. Calefacción: circuito derivado de aerotermia (intercambiador Ti). Iluminación LED RGB 35W empotrada (2 focos/piscina). Canal desbordante finlandés oculto + depósito compensación enterrado PRFV 2 m³. Cuadro eléctrico piscina IP55 con diferencial 30mA.</td><td class="px-4 py-3 text-right font-semibold">33.320 €</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ═══ 4. PLANNING DE OBRA ═══ -->
+<section id="planning" class="reveal">
+<div class="text-center mb-8">
+<p class="text-amber-600 text-xs font-semibold uppercase tracking-widest mb-1">Capítulo 4</p>
+<h2 class="text-2xl font-bold">Planning de Obra — 18 Meses en 2 Fases</h2>
+<p class="text-gray-500 text-sm mt-1">Ejecución en 2 fases (3+3 villas) para optimizar recursos, equipos y tesorería</p>
+</div>
+
+<!-- Estrategia de fases -->
+<div class="grid md:grid-cols-2 gap-4 mb-6">
+<div class="bg-white rounded-xl p-5 shadow border-l-4 border-amber-400">
+<h4 class="font-bold text-sm mb-2">🔶 FASE A — Villas 1, 2 y 3 (Cota superior)</h4>
+<p class="text-xs text-gray-600 mb-2">Inicio inmediato tras licencia. Se ejecutan las 3 villas de la plataforma superior de la parcela. La excavación y muros de contención de la cota alta son independientes.</p>
+<ul class="text-xs text-gray-500 space-y-1">
+<li>• Meses 1–12: Ejecución completa villas 1-3</li>
+<li>• Mes 10: Inicio urbanización zona superior</li>
+<li>• Mes 12: Entrega parcial villas 1-3</li>
+</ul>
+</div>
+<div class="bg-white rounded-xl p-5 shadow border-l-4 border-orange-400">
+<h4 class="font-bold text-sm mb-2">🔷 FASE B — Villas 4, 5 y 6 (Cota inferior)</h4>
+<p class="text-xs text-gray-600 mb-2">Solape con Fase A a partir del mes 4. Se beneficia de la rampa de acceso y muros de la Fase A. Mano de obra y equipos se trasladan progresivamente.</p>
+<ul class="text-xs text-gray-500 space-y-1">
+<li>• Meses 4–16: Ejecución completa villas 4-6</li>
+<li>• Mes 14: Urbanización zona inferior + jardines</li>
+<li>• Mes 16-18: Acabados finales + limpieza + entrega</li>
+</ul>
+</div>
+</div>
+
+<!-- Gantt -->
+<div class="bg-white rounded-2xl shadow p-5 overflow-x-auto mb-6">
+<h4 class="font-bold text-sm text-gray-800 mb-3">📅 Diagrama de Gantt — Vista General</h4>
+<div class="min-w-[750px]">
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 mb-1 text-[9px] text-gray-400 font-semibold">
+<div></div><div class="text-center">1</div><div class="text-center">2</div><div class="text-center">3</div><div class="text-center">4</div><div class="text-center">5</div><div class="text-center">6</div><div class="text-center">7</div><div class="text-center">8</div><div class="text-center">9</div><div class="text-center">10</div><div class="text-center">11</div><div class="text-center">12</div><div class="text-center">13</div><div class="text-center">14</div><div class="text-center">15</div><div class="text-center">16</div><div class="text-center">17</div><div class="text-center">18</div>
+</div>
+<!-- Fase A label -->
+<div class="text-[9px] font-bold text-amber-700 mb-0.5 mt-2">FASE A — Villas 1-3 (cota superior)</div>
+<div class="space-y-0.5">
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Mov. tierras + plataf.</div><div class="col-span-2 bar bg-amber-400">1-2</div><div class="col-span-16"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Cimentación + muros</div><div class="col-span-1"></div><div class="col-span-2 bar bg-orange-400">2-3</div><div class="col-span-15"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Estructura HA</div><div class="col-span-3"></div><div class="col-span-3 bar bg-red-500">4-6</div><div class="col-span-12"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Cerram. + cubiertas</div><div class="col-span-5"></div><div class="col-span-2 bar bg-rose-400">6-7</div><div class="col-span-11"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Instalaciones A</div><div class="col-span-6"></div><div class="col-span-4 bar bg-blue-500">7-10</div><div class="col-span-8"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Piscinas A (×3)</div><div class="col-span-7"></div><div class="col-span-3 bar bg-cyan-400">8-10</div><div class="col-span-8"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Acabados A</div><div class="col-span-8"></div><div class="col-span-3 bar bg-indigo-400">9-11</div><div class="col-span-7"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Entrega Fase A ✅</div><div class="col-span-11"></div><div class="col-span-1 bar bg-green-500">12</div><div class="col-span-6"></div></div>
+</div>
+<!-- Fase B label -->
+<div class="text-[9px] font-bold text-orange-700 mb-0.5 mt-3">FASE B — Villas 4-6 (cota inferior) — solape desde mes 4</div>
+<div class="space-y-0.5">
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Mov. tierras B</div><div class="col-span-3"></div><div class="col-span-2 bar bg-amber-400">4-5</div><div class="col-span-13"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Cimentación B</div><div class="col-span-4"></div><div class="col-span-2 bar bg-orange-400">5-6</div><div class="col-span-12"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Estructura B</div><div class="col-span-6"></div><div class="col-span-3 bar bg-red-500">7-9</div><div class="col-span-9"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Cerram. + cub. B</div><div class="col-span-8"></div><div class="col-span-2 bar bg-rose-400">9-10</div><div class="col-span-8"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Instalaciones B</div><div class="col-span-9"></div><div class="col-span-4 bar bg-blue-500">10-13</div><div class="col-span-5"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Piscinas B (×3)</div><div class="col-span-10"></div><div class="col-span-3 bar bg-cyan-400">11-13</div><div class="col-span-5"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Acabados B</div><div class="col-span-12"></div><div class="col-span-3 bar bg-indigo-400">13-15</div><div class="col-span-3"></div></div>
+</div>
+<!-- Comunes -->
+<div class="text-[9px] font-bold text-gray-600 mb-0.5 mt-3">COMUNES</div>
+<div class="space-y-0.5">
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Urbanización int.</div><div class="col-span-9"></div><div class="col-span-5 bar bg-teal-400">10-14</div><div class="col-span-4"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Jardinería + paisaj.</div><div class="col-span-13"></div><div class="col-span-3 bar bg-green-400">14-16</div><div class="col-span-2"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">Limpieza + certific.</div><div class="col-span-15"></div><div class="col-span-2 bar bg-gray-400">16-17</div><div class="col-span-1"></div></div>
+<div class="grid grid-cols-[170px_repeat(18,1fr)] gap-0.5 items-center"><div class="text-[10px] font-medium truncate">🔑 Entrega final</div><div class="col-span-17"></div><div class="col-span-1 bar bg-emerald-500">18</div></div>
+</div>
+</div>
+</div>
+
+<!-- Hitos -->
+<div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+<div class="bg-white rounded-lg p-3 shadow-sm border-l-3 border-amber-500 text-center"><p class="text-lg">🏗️</p><p class="font-bold text-xs">Mes 3</p><p class="text-[10px] text-gray-500">Cimentación A OK</p></div>
+<div class="bg-white rounded-lg p-3 shadow-sm border-l-3 border-red-500 text-center"><p class="text-lg">🧱</p><p class="font-bold text-xs">Mes 6</p><p class="text-[10px] text-gray-500">Estructura A OK</p></div>
+<div class="bg-white rounded-lg p-3 shadow-sm border-l-3 border-blue-500 text-center"><p class="text-lg">⚡</p><p class="font-bold text-xs">Mes 10</p><p class="text-[10px] text-gray-500">Instal. A completas</p></div>
+<div class="bg-white rounded-lg p-3 shadow-sm border-l-3 border-green-500 text-center"><p class="text-lg">🔑</p><p class="font-bold text-xs">Mes 12</p><p class="text-[10px] text-gray-500">Entrega Fase A</p></div>
+<div class="bg-white rounded-lg p-3 shadow-sm border-l-3 border-indigo-500 text-center"><p class="text-lg">🏊</p><p class="font-bold text-xs">Mes 15</p><p class="text-[10px] text-gray-500">Acabados B OK</p></div>
+<div class="bg-white rounded-lg p-3 shadow-sm border-l-3 border-emerald-500 text-center"><p class="text-lg">✅</p><p class="font-bold text-xs">Mes 18</p><p class="text-[10px] text-gray-500">Entrega total</p></div>
+</div>
+
+<!-- Ventajas de fases -->
+<div class="mt-5 bg-amber-50 rounded-xl p-4 border border-amber-200 text-xs text-amber-800">
+<strong>💡 Ventajas de la ejecución en 2 fases:</strong>
+<ul class="mt-1 space-y-0.5">
+<li>• <strong>Tesorería:</strong> El promotor puede iniciar la explotación turística de las villas 1-3 mientras se construyen las 4-6, generando ingresos durante la obra.</li>
+<li>• <strong>Optimización:</strong> Equipos de encofrado, grúa y maquinaria se reutilizan de Fase A a Fase B sin coste de movilización adicional.</li>
+<li>• <strong>Aprendizaje:</strong> Los ajustes de calidad y acabados detectados en Fase A se implementan directamente en Fase B.</li>
+<li>• <strong>Riesgo geotécnico:</strong> La excavación en basalto de la cota superior (Fase A) revela las condiciones reales del terreno antes de comprometer la cota inferior.</li>
+</ul>
+</div>
+</section>
+
+<!-- ═══ 5. ESTUDIO DE SEGURIDAD Y SALUD ═══ -->
+<section id="sys" class="reveal">
+<div class="text-center mb-8">
+<p class="text-amber-600 text-xs font-semibold uppercase tracking-widest mb-1">Capítulo 5</p>
+<h2 class="text-2xl font-bold">Estudio de Seguridad y Salud</h2>
+<p class="text-gray-500 text-sm mt-1">Riesgos específicos del terreno volcánico en pendiente 15-20% y trabajos en cubiertas transitables</p>
+</div>
+
+<div class="bg-white rounded-2xl shadow overflow-hidden text-sm mb-5">
+<table class="w-full">
+<thead><tr class="bg-gray-800 text-white"><th class="px-4 py-2.5 text-left">Actividad / Riesgo</th><th class="px-4 py-2.5 text-left">Riesgos Específicos</th><th class="px-4 py-2.5 text-left">Medidas Preventivas</th><th class="px-4 py-2.5 text-center w-20">Nivel</th></tr></thead>
+<tbody class="divide-y divide-gray-100 text-xs">
+<tr>
+<td class="px-4 py-2.5 font-semibold">Excavación en roca basáltica</td>
+<td class="px-4 py-2.5 text-gray-600">Proyección de fragmentos por martillo hidráulico. Vibraciones. Polvo de sílice. Inestabilidad de taludes en pendiente 15-20%. Caída a distinto nivel entre plataformas escalonadas</td>
+<td class="px-4 py-2.5 text-gray-600">Cabina cerrada ROPS/FOPS en maquinaria. Pantallas anti-proyección. Riego continuo para polvo. Taludes provisionales 1:1 o entibación. Barandillas perimetrales en desniveles >2m. Medición vibraciones diaria</td>
+<td class="px-4 py-2.5 text-center"><span class="risk-h px-2 py-0.5 rounded-full text-[10px] font-bold">ALTO</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-semibold">Muros de contención en pendiente</td>
+<td class="px-4 py-2.5 text-gray-600">Caída al vacío desde encofrados (h=1,5-3,5m). Vuelco de encofrado por empuje de tierras. Aplastamiento durante vertido de hormigón</td>
+<td class="px-4 py-2.5 text-gray-600">Plataformas de trabajo con barandilla a ambos lados. Apuntalamiento calculado del encofrado. Arnés + línea de vida en h>2m. Orden de vertido desde bomba (evitar caída manual)</td>
+<td class="px-4 py-2.5 text-center"><span class="risk-h px-2 py-0.5 rounded-full text-[10px] font-bold">ALTO</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-semibold">Estructura HA 2 plantas</td>
+<td class="px-4 py-2.5 text-gray-600">Caída a distinto nivel en encofrado P1 y cubierta (h≤7m). Desplome de puntales. Atrapamiento en ferrallado. Golpes por movimiento de carga con grúa</td>
+<td class="px-4 py-2.5 text-gray-600">Redes horizontales bajo forjado en PB y P1. Barandillas de borde en todo perímetro. Puntales certificados con arriostramiento. Señalista para grúa. Casco, arnés, guantes anticorte</td>
+<td class="px-4 py-2.5 text-center"><span class="risk-h px-2 py-0.5 rounded-full text-[10px] font-bold">ALTO</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-semibold">Cubiertas planas transitables</td>
+<td class="px-4 py-2.5 text-gray-600">Caída al vacío desde borde cubierta (h≤7m). Resbalón en superficie húmeda (impermeabilización). Golpe de calor (Adeje, 3.078h sol/año)</td>
+<td class="px-4 py-2.5 text-gray-600">Línea de vida perimetral permanente en cubierta. Barandilla provisional hasta remate de murete. Calzado antideslizante S3. Horario de trabajo adaptado (evitar 13:00-16:00 en verano). Hidratación obligatoria</td>
+<td class="px-4 py-2.5 text-center"><span class="risk-m px-2 py-0.5 rounded-full text-[10px] font-bold">MEDIO</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-semibold">Piscinas — vaso gunitado</td>
+<td class="px-4 py-2.5 text-gray-600">Caída al interior del vaso vacío (h=1,5m). Proyección de gunita (cemite + arena a presión). Espacio confinado durante revestimiento interior. Contacto con productos químicos (resinas)</td>
+<td class="px-4 py-2.5 text-gray-600">Pasarelas y accesos seguros al interior del vaso. EPI específico gunitado (máscara FFP3, gafas, traje Tyvek). Ventilación forzada durante aplicación de impermeabilización. Ducha de emergencia</td>
+<td class="px-4 py-2.5 text-center"><span class="risk-m px-2 py-0.5 rounded-full text-[10px] font-bold">MEDIO</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-semibold">Instalaciones eléctricas</td>
+<td class="px-4 py-2.5 text-gray-600">Contacto eléctrico directo/indirecto. Caída desde escalera en instalación en techo. Riesgo de incendio por cortocircuito</td>
+<td class="px-4 py-2.5 text-gray-600">Corte efectivo y enclavamiento antes de trabajar. Diferencial 30mA en cuadro provisional de obra. Plataforma elevadora en lugar de escalera manual. Extintores CO2 en cuadros</td>
+<td class="px-4 py-2.5 text-center"><span class="risk-m px-2 py-0.5 rounded-full text-[10px] font-bold">MEDIO</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-semibold">Trabajos en pendiente general</td>
+<td class="px-4 py-2.5 text-gray-600">Vuelco de maquinaria en pendiente 15-20%. Deslizamiento de materiales acopiados. Arrastre por escorrentía en lluvias (116mm/año pero concentradas)</td>
+<td class="px-4 py-2.5 text-gray-600">Maquinaria con estabilizadores. Acopios en plataformas niveladas con topes. Cuneta perimetral de recogida de aguas. Suspensión de trabajos con viento >50 km/h (alisio puntual)</td>
+<td class="px-4 py-2.5 text-center"><span class="risk-m px-2 py-0.5 rounded-full text-[10px] font-bold">MEDIO</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="grid md:grid-cols-3 gap-4 text-xs">
+<div class="bg-white rounded-xl p-4 shadow">
+<h4 class="font-bold text-sm mb-2">🏥 Recursos Sanitarios</h4>
+<ul class="text-gray-600 space-y-1">
+<li>• Botiquín de obra en caseta principal</li>
+<li>• Centro de salud más cercano: CS San Eugenio (1,2 km)</li>
+<li>• Hospital referencia: Quirón Costa Adeje (3 km)</li>
+<li>• Teléfono emergencias: 112</li>
+<li>• Coordinador SyS en obra (visita semanal mín.)</li>
+</ul>
+</div>
+<div class="bg-white rounded-xl p-4 shadow">
+<h4 class="font-bold text-sm mb-2">🦺 Protecciones Colectivas</h4>
+<ul class="text-gray-600 space-y-1">
+<li>• Redes horizontales bajo forjados (tipo S)</li>
+<li>• Barandillas perimetrales 1,10m en todo borde</li>
+<li>• Líneas de vida cubierta (cable inox Ø8)</li>
+<li>• Vallas delimitación de excavaciones</li>
+<li>• Señalización vial interna + semáforo acceso</li>
+<li>• Pantallas anti-proyección en excavación</li>
+</ul>
+</div>
+<div class="bg-white rounded-xl p-4 shadow">
+<h4 class="font-bold text-sm mb-2">👷 EPIs Obligatorios</h4>
+<ul class="text-gray-600 space-y-1">
+<li>• Casco de seguridad (EN 397) — siempre</li>
+<li>• Calzado S3 antideslizante (EN 20345)</li>
+<li>• Arnés anticaída (EN 361) en h>2m</li>
+<li>• Chaleco alta visibilidad (EN 471)</li>
+<li>• Protección auditiva (martillo hidráulico >85dB)</li>
+<li>• Mascarilla FFP3 (gunita + corte piedra)</li>
+<li>• Gafas anti-impacto (EN 166)</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ═══ 6. CALIDADES Y ESPECIFICACIONES ═══ -->
+<section id="calidades" class="reveal">
+<div class="text-center mb-8">
+<p class="text-amber-600 text-xs font-semibold uppercase tracking-widest mb-1">Capítulo 6</p>
+<h2 class="text-2xl font-bold">Memoria de Calidades Premium</h2>
+<p class="text-gray-500 text-sm mt-1">Nivel alto-lujo turístico · Coherente con diseño de Arqon (Arquitecto)</p>
+</div>
+<div class="bg-white rounded-2xl shadow overflow-hidden text-sm">
+<table class="w-full">
+<thead><tr class="bg-amber-50 border-b border-amber-200 text-amber-800"><th class="px-4 py-2.5 text-left w-40">Elemento</th><th class="px-4 py-2.5 text-left">Especificación Premium</th><th class="px-4 py-2.5 text-left w-44">Referencia / Marca</th></tr></thead>
+<tbody class="divide-y divide-gray-100 text-xs">
+<tr><td class="px-4 py-2 font-medium">Estructura</td><td class="px-4 py-2 text-gray-600">HA-30/B/20/IIa (ambiente costero) + B500SD. Recubrimientos mayorados por cercanía a costa. Forjados reticulares para grandes luces (6-7m open-concept)</td><td class="px-4 py-2 text-gray-500">EHE-08 / Hormigón planta Adeje</td></tr>
+<tr><td class="px-4 py-2 font-medium">Fachada</td><td class="px-4 py-2 text-gray-600">SATE EPS grafito 8cm (λ=0,031) + monocapa arena. Aplacado piedra basáltica local en zócalos y muros singulares. Fachada ventilada puntual con composite</td><td class="px-4 py-2 text-gray-500">Canteras de Tenerife / STO</td></tr>
+<tr><td class="px-4 py-2 font-medium">Carpint. exterior</td><td class="px-4 py-2 text-gray-600">Aluminio RPT hoja oculta, correderas elevables ≤4m para conexión interior-exterior total. Vidrio bajo emisivo 6/16Ar/6. Lamas madera termotratada motorizadas</td><td class="px-4 py-2 text-gray-500">Cortizo Cor Vision Plus / Schüco</td></tr>
+<tr><td class="px-4 py-2 font-medium">Pavimento int/ext</td><td class="px-4 py-2 text-gray-600">Porcelánico rectificado gran formato 120×60cm mate, espesor 10mm, continuo interior-exterior (mismo material, clase C2 en exterior)</td><td class="px-4 py-2 text-gray-500">Inalco Strato / Coverlam</td></tr>
+<tr><td class="px-4 py-2 font-medium">Zonas húmedas</td><td class="px-4 py-2 text-gray-600">Microcemento aplicado en paredes y suelo de baños, color cemento natural. Impermeabilización previa con tela + resina</td><td class="px-4 py-2 text-gray-500">Topciment / Microcemento.com</td></tr>
+<tr><td class="px-4 py-2 font-medium">Cocina</td><td class="px-4 py-2 text-gray-600">Muebles lacados mate, tirador integrado tipo gola. Encimera Dekton 12mm ultracompacta. Electrodomésticos integrados gama alta. Fregadero bajo encimera inox</td><td class="px-4 py-2 text-gray-500">Dekton Kelya / Siemens iQ700</td></tr>
+<tr><td class="px-4 py-2 font-medium">Sanitarios</td><td class="px-4 py-2 text-gray-600">Suspendidos: inodoro + bidé, cisterna empotrada, lavabo sobre encimera. Ducha a ras de suelo con plato extraplano encastrado. Mampara fija vidrio 10mm</td><td class="px-4 py-2 text-gray-500">Roca Inspira Round / Geberit Sigma</td></tr>
+<tr><td class="px-4 py-2 font-medium">Griferías</td><td class="px-4 py-2 text-gray-600">Empotradas termostáticas en duchas, monomando en lavabos. Acabado negro mate o cromado cepillado. Rociador ducha Ø300mm tipo lluvia</td><td class="px-4 py-2 text-gray-500">Hansgrohe Axor / Gessi</td></tr>
+<tr><td class="px-4 py-2 font-medium">Puertas interior</td><td class="px-4 py-2 text-gray-600">Lisas lacadas mate blanco, hasta techo (h=2,40m). Herrajes ocultos, cierre magnético silencioso. Puertas correderas en baños</td><td class="px-4 py-2 text-gray-500">Lualdi / Garofoli</td></tr>
+<tr><td class="px-4 py-2 font-medium">Iluminación</td><td class="px-4 py-2 text-gray-600">LED empotrada DALI regulable + tiras LED indirectas en perímetro falso techo. Escenas programables KNX (día, noche, cine, bienvenida). Balizas LED exterior</td><td class="px-4 py-2 text-gray-500">Flos / Arkoslight / iGuzzini</td></tr>
+<tr><td class="px-4 py-2 font-medium">Piscina</td><td class="px-4 py-2 text-gray-600">Gres porcelánico antideslizante C3 color grafito oscuro (efecto espejo). Borde infinity desbordante orientado a La Gomera. Cloración salina sin químicos</td><td class="px-4 py-2 text-gray-500">Rosa Gres / Exagres</td></tr>
+<tr><td class="px-4 py-2 font-medium">Deck piscina</td><td class="px-4 py-2 text-gray-600">Madera termotratada Thermowood clase D (190°C, estabilidad dimensional) o composite WPC premium. No astillas, baja absorción, sin mantenimiento</td><td class="px-4 py-2 text-gray-500">Lunawood / Fiberon Paramount</td></tr>
+<tr><td class="px-4 py-2 font-medium">Piedra natural</td><td class="px-4 py-2 text-gray-600">Basalto volcánico local para muros contención vistos, aplacados fachada y escalera interior. Peldaños de piedra maciza 3cm</td><td class="px-4 py-2 text-gray-500">Canteras locales Tenerife</td></tr>
+<tr><td class="px-4 py-2 font-medium">Pintura</td><td class="px-4 py-2 text-gray-600">Mineral de silicato mate en interior, tonos neutros cálidos (blanco roto, arena). Pintura exterior al silicato transpirable (resistencia alcalina)</td><td class="px-4 py-2 text-gray-500">Keim Optil / Jotun Lady</td></tr>
+<tr><td class="px-4 py-2 font-medium">Domótica</td><td class="px-4 py-2 text-gray-600">Sistema KNX cableado con pasarela IP. Panel táctil 7" por villa. Control vía smartphone. Cerraduras electrónicas BLE/NFC para gestión turística remota</td><td class="px-4 py-2 text-gray-500">ABB / Schneider / Jung</td></tr>
+<tr><td class="px-4 py-2 font-medium">Climatización</td><td class="px-4 py-2 text-gray-600">Aerotermia aire-agua COP≥4,5. Suelo radiante PB, fancoils ocultos P1. VMC con recuperador η≥80%. Casi-nZEB con FV + batería</td><td class="px-4 py-2 text-gray-500">Daikin Altherma 3 / Vaillant</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ═══ 7. CUMPLIMIENTO NORMATIVO CONSTRUCTIVO ═══ -->
+<section id="normativa" class="reveal">
+<div class="text-center mb-8">
+<p class="text-amber-600 text-xs font-semibold uppercase tracking-widest mb-1">Capítulo 7</p>
+<h2 class="text-2xl font-bold">Cumplimiento Normativo Constructivo</h2>
+<p class="text-gray-500 text-sm mt-1">CTE + normativa canaria + ficha U12-3 modificada</p>
+</div>
+
+<div class="bg-white rounded-2xl shadow overflow-hidden text-sm mb-5">
+<table class="w-full">
+<thead><tr class="bg-gray-800 text-white"><th class="px-4 py-2.5 text-left w-28">Normativa</th><th class="px-4 py-2.5 text-left">Exigencia</th><th class="px-4 py-2.5 text-left">Solución Adoptada</th><th class="px-4 py-2.5 text-center w-16">Estado</th></tr></thead>
+<tbody class="divide-y divide-gray-100 text-xs">
+<tr>
+<td class="px-4 py-2.5 font-bold text-amber-700">DB-SE<br><span class="font-normal text-gray-400">Seguridad Estructural</span></td>
+<td class="px-4 py-2.5 text-gray-600">Resistencia y estabilidad. Terreno volcánico basáltico con pendiente 15-20%. NCSE-02/NCSR-22: sismicidad baja (ac&lt;0,04g)</td>
+<td class="px-4 py-2.5 text-gray-600">HA-30/IIa + B500SD. Zapatas sobre basalto (σadm≥4 kg/cm²). Muros contención para plataformas escalonadas. Estudio geotécnico previo con 6 calicatas mínimo. Forjados reticulares para luces 6-7m</td>
+<td class="px-4 py-2.5 text-center"><span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-[10px] font-bold">✅</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-bold text-amber-700">DB-HE<br><span class="font-normal text-gray-400">Eficiencia Energética</span></td>
+<td class="px-4 py-2.5 text-gray-600">Limitación demanda energética. Contribución FV (HE5). Zona climática α3 (Canarias sur). Objetivo: Certificación A</td>
+<td class="px-4 py-2.5 text-gray-600">SATE 8cm (U fachada ≤0,38 W/m²K). Cubierta XPS 8cm. Vidrio bajo emisivo (Ug≤1,1). Aerotermia COP≥4,5 (casi-nZEB). FV 5kWp/villa (30 kWp total) + batería 10kWh. VMC η≥80%. Lamas Sur para g≤0,35. Suelo radiante (baja Tª impulsión = alto COP)</td>
+<td class="px-4 py-2.5 text-center"><span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-[10px] font-bold">✅ A</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-bold text-amber-700">DB-HS<br><span class="font-normal text-gray-400">Salubridad</span></td>
+<td class="px-4 py-2.5 text-gray-600">HS1: Impermeabilización. HS2: Residuos. HS3: Calidad aire interior. HS4: Suministro agua. HS5: Evacuación aguas</td>
+<td class="px-4 py-2.5 text-gray-600">HS1: Lámina PVC muros enterrados + cubierta bicapa. HS2: Almacén residuos integrado. HS3: VMC con recuperador (caudales según ocupación). HS4: Grupo presión + aljibe 20m³ (1m³/hab según ficha U12-3). HS5: Red separativa PVC + arquetas registrables</td>
+<td class="px-4 py-2.5 text-center"><span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-[10px] font-bold">✅</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-bold text-amber-700">DB-SI<br><span class="font-normal text-gray-400">Seguridad Incendios</span></td>
+<td class="px-4 py-2.5 text-gray-600">Sectorización (vivienda unifamiliar = 1 sector/villa). Evacuación. Instalaciones PCI. Intervención bomberos. Resistencia al fuego estructura</td>
+<td class="px-4 py-2.5 text-gray-600">Cada villa = 1 sector independiente (&lt;2.500 m²). R60 en estructura (HA cumple). Recorridos evacuación &lt;35m. Detección óptica + extintores 6kg polvo. Accesibilidad de bomberos por vial principal ≥3,5m. Hidrante en radio 100m (urbanización)</td>
+<td class="px-4 py-2.5 text-center"><span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-[10px] font-bold">✅</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-bold text-amber-700">DB-SUA<br><span class="font-normal text-gray-400">Accesibilidad</span></td>
+<td class="px-4 py-2.5 text-gray-600">Uso turístico: planta baja accesible. Itinerario accesible hasta entrada + zonas comunes PB. Baño accesible en PB. Piscina: acceso con silla o grúa</td>
+<td class="px-4 py-2.5 text-gray-600">PB completamente accesible (cota ±0 desde terraza). Puertas ≥80cm paso libre. Baño cortesía PB adaptable (barras abatibles, espacio giro Ø1,5m). Rampa acceso desde parking &lt;8% con pasamanos doble. Acceso piscina: grúa portátil tipo elevador hidráulico</td>
+<td class="px-4 py-2.5 text-center"><span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-[10px] font-bold">✅</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-bold text-amber-700">DB-HR<br><span class="font-normal text-gray-400">Ruido</span></td>
+<td class="px-4 py-2.5 text-gray-600">Aislamiento acústico entre recintos y a exterior. DnT,A ≥50 dBA entre villas pareadas. Ld ≤30 dBA en dormitorios</td>
+<td class="px-4 py-2.5 text-gray-600">Medianeras: doble tabicón + cámara 5cm + lana mineral 50mm (DnT,A ~55 dBA). Fachada: SATE + vidrio bajo emisivo (Rw ≥42 dBA). Suelo radiante: aislamiento acústico a impacto bajo solera (PE 5mm). Instalaciones: soportes antivibratorios en aerotermia</td>
+<td class="px-4 py-2.5 text-center"><span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-[10px] font-bold">✅</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-bold text-amber-700">Ficha U12-3<br><span class="font-normal text-gray-400">PGO Adeje modif.</span></td>
+<td class="px-4 py-2.5 text-gray-600">Edif.: 0,73 m²t/m²s (1.143 m²t). Ocup.: 45%. Alt.: 7m/2pl escalonadas. Retranqueos: 3m (H/2). Densidad: 20 plazas. Uso: turístico exclusivo. Parking: 1 pl/villa &gt;60m². Agua: 1m³/hab</td>
+<td class="px-4 py-2.5 text-gray-600">6 villas × ~190 m²t = 1.140 m²t ≤ 1.143 ✅. Ocupación ~40% ≤ 45% ✅. 2 plantas escalonadas siguiendo pendiente ✅. Retranqueo 3m a linderos ✅. 20 plazas (3-4/villa) ✅. 6 plazas garaje ✅. Aljibe 20 m³ ✅</td>
+<td class="px-4 py-2.5 text-center"><span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-[10px] font-bold">✅</span></td>
+</tr>
+<tr>
+<td class="px-4 py-2.5 font-bold text-amber-700">Normativa canaria<br><span class="font-normal text-gray-400">Turismo + IGIC</span></td>
+<td class="px-4 py-2.5 text-gray-600">Ley 2/2013 Renovación Turística. PTEOTT (Plan Territorial Turístico Tenerife). Régimen fiscal canario (IGIC 7%, no IVA). Decreto 113/2015 alojamientos turísticos</td>
+<td class="px-4 py-2.5 text-gray-600">Uso exclusivamente turístico (prohibido residencial en parcela 43-8). Cumplimiento estándar 55 m²t/plaza (calidad alta). Autorización turística insular previa a explotación. Presupuesto calculado con IGIC 7%</td>
+<td class="px-4 py-2.5 text-center"><span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-[10px] font-bold">✅</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ═══ 8. RESUMEN DE COSTES TOTALES ═══ -->
+<section id="costes" class="reveal">
+<div class="text-center mb-8">
+<p class="text-amber-600 text-xs font-semibold uppercase tracking-widest mb-1">Capítulo 8</p>
+<h2 class="text-2xl font-bold">Resumen de Costes Totales</h2>
+</div>
+
+<!-- Coste por villa -->
+<div class="grid md:grid-cols-3 gap-4 mb-6">
+<div class="bg-amber-50 rounded-xl p-5 text-center border border-amber-200"><p class="text-xl font-extrabold text-amber-700">395.500 €</p><p class="text-xs text-gray-600 mt-1">Edificación pura/villa</p><p class="text-[10px] text-gray-400">(cap. 02-14) · ~2.082 €/m²</p></div>
+<div class="bg-orange-50 rounded-xl p-5 text-center border border-orange-200"><p class="text-xl font-extrabold text-orange-700">33.320 €</p><p class="text-xs text-gray-600 mt-1">Piscina infinity/villa</p><p class="text-[10px] text-gray-400">Vaso + equipo + cloración salina</p></div>
+<div class="bg-red-50 rounded-xl p-5 text-center border border-red-200"><p class="text-xl font-extrabold text-red-700">47.180 €</p><p class="text-xs text-gray-600 mt-1">Proporc. urbaniz./villa</p><p class="text-[10px] text-gray-400">Viales + jardín + SyS + QC + imprev.</p></div>
+</div>
+<div class="text-center mb-6">
+<p class="text-3xl font-extrabold text-gray-900">476.000 € <span class="text-lg font-normal text-gray-500">por villa (PEM)</span></p>
+</div>
+
+<!-- Tabla final -->
+<div class="bg-white rounded-2xl shadow-lg overflow-hidden text-sm mb-5">
+<table class="w-full">
+<thead><tr class="bg-gray-800 text-white"><th class="px-4 py-2.5 text-left">Concepto</th><th class="px-4 py-2.5 text-right">Importe (€)</th><th class="px-4 py-2.5 text-left">Observaciones</th></tr></thead>
+<tbody class="divide-y divide-gray-100">
+<tr><td class="px-4 py-2.5 font-semibold">PEM (Presupuesto Ejecución Material)</td><td class="px-4 py-2.5 text-right font-bold">2.856.000 €</td><td class="px-4 py-2.5 text-gray-500 text-xs">21 capítulos desglosados (sección 2)</td></tr>
+<tr><td class="px-4 py-2.5">Gastos Generales (13%)</td><td class="px-4 py-2.5 text-right font-semibold">371.280 €</td><td class="px-4 py-2.5 text-gray-500 text-xs">Oficina obra, seguros RC, avales bancarios</td></tr>
+<tr><td class="px-4 py-2.5">Beneficio Industrial (6%)</td><td class="px-4 py-2.5 text-right font-semibold">171.360 €</td><td class="px-4 py-2.5 text-gray-500 text-xs">Margen contratista principal</td></tr>
+<tr class="bg-amber-50 font-bold"><td class="px-4 py-2.5 text-amber-800">PEC sin impuestos</td><td class="px-4 py-2.5 text-right text-amber-800">3.398.640 €</td><td class="px-4 py-2.5 text-amber-600 text-xs">PEM + GG + BI</td></tr>
+<tr><td class="px-4 py-2.5">IGIC 7% (Canarias — no IVA)</td><td class="px-4 py-2.5 text-right font-semibold">237.905 €</td><td class="px-4 py-2.5 text-gray-500 text-xs">Impuesto General Indirecto Canario</td></tr>
+<tr class="bg-gray-900 text-white"><td class="px-4 py-3 font-extrabold text-base">TOTAL CONTRATA (PEC + IGIC)</td><td class="px-4 py-3 text-right font-extrabold text-base">3.636.545 €</td><td class="px-4 py-3 text-gray-300 text-xs">Coste total de construcción llave en mano</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- Otros costes -->
+<div class="bg-gray-50 rounded-xl p-5 border border-gray-200 text-sm mb-5">
+<h4 class="font-bold text-gray-800 mb-3">📋 Otros Costes del Proyecto (estimación)</h4>
+<div class="grid md:grid-cols-2 gap-2 text-xs">
+<div class="flex justify-between p-2 bg-white rounded-lg"><span class="text-gray-600">Honorarios técnicos (arquitecto + DO + ingenieros)</span><span class="font-semibold">185.000–225.000 €</span></div>
+<div class="flex justify-between p-2 bg-white rounded-lg"><span class="text-gray-600">Licencia obras (ICIO 4% PEM + tasa urbanística)</span><span class="font-semibold">130.000–145.000 €</span></div>
+<div class="flex justify-between p-2 bg-white rounded-lg"><span class="text-gray-600">Estudio geotécnico + topográfico</span><span class="font-semibold">8.000–12.000 €</span></div>
+<div class="flex justify-between p-2 bg-white rounded-lg"><span class="text-gray-600">ICT + OCAs (BT, ascensores si procede)</span><span class="font-semibold">15.000–20.000 €</span></div>
+<div class="flex justify-between p-2 bg-white rounded-lg"><span class="text-gray-600">Licencia actividad turística + 1ª ocupación</span><span class="font-semibold">10.000–15.000 €</span></div>
+<div class="flex justify-between p-2 bg-white rounded-lg"><span class="text-gray-600">Mobiliario turístico completo (×6 villas)</span><span class="font-semibold">210.000–330.000 €</span></div>
+</div>
+<div class="mt-4 p-3 bg-amber-100 rounded-lg border border-amber-300 text-center">
+<p class="font-extrabold text-amber-900 text-base">Inversión Total Proyecto: 4.200.000 – 4.400.000 € <span class="font-normal text-sm">(sin valor del suelo)</span></p>
+</div>
+</div>
+
+<!-- Notas finales -->
+<div class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl p-6 text-white text-sm">
+<h3 class="text-lg font-bold mb-3">📌 Condicionantes y Notas del Presupuesto</h3>
+<div class="grid md:grid-cols-2 gap-4 text-amber-50 text-xs">
+<ul class="space-y-1">
+<li>• Precios de mercado Q1 2026, zona insular turística (sobrecoste transporte marítimo incluido en precios unitarios)</li>
+<li>• Excavación en roca basáltica supone +15-20% respecto a suelo convencional peninsular</li>
+<li>• IGIC 7% (Régimen Económico Fiscal de Canarias), NO se aplica IVA 21%</li>
+<li>• Bonificación ICIO por instalación FV posible hasta 50% (Ayto. Adeje)</li>
+<li>• Ratio global: ~2.500 €/m²t (acorde con nivel lujo turístico zona insular)</li>
+<li>• PEM dentro del rango estimado por Nexus (PM): 2,3-3,1M€ ✅</li>
+</ul>
+<ul class="space-y-1">
+<li>• Pendiente de estudio geotécnico para confirmar tipología cimentación definitiva</li>
+<li>• Presupuesto NO incluye valor del suelo ni honorarios técnicos completos</li>
+<li>• Mobiliario y equipamiento turístico presupuestado aparte (35.000-55.000 €/villa)</li>
+<li>• Climatización diseñada para certificación energética A (casi-nZEB)</li>
+<li>• Ejecución en 2 fases (3+3) permite generar ingresos con Fase A mientras se construye Fase B</li>
+<li>• Plazo total: 18 meses (12 meses Fase A completa + 6 meses solape Fase B)</li>
+<li>• Se recomienda consultar promotor (Herederos de D. Eduardo Domínguez Sierra) sobre priorización de fases según estrategia de comercialización turística</li>
+</ul>
+</div>
+</div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-gray-400 py-8">
+<div class="max-w-6xl mx-auto px-6 text-center text-sm">
+<p class="mb-1">Informe generado por <strong class="text-amber-400">BUILDERO</strong> — Jefe de Obra · Sistema Agentes Inmobiliarios IA</p>
+<p class="text-gray-500 text-xs">Parcela 43-8, San Eugenio Alto, Costa Adeje, Tenerife · Promotor: Herederos de D. Eduardo Domínguez Sierra</p>
+<p class="text-gray-600 text-[10px] mt-2 max-w-2xl mx-auto">Estimación profesional orientativa basada en datos del Refundido Completo aprobado (Arq. José Manuel Sabina Santos, Col. 2.524) y valores de mercado Q1 2026 zona insular turística. No sustituye al presupuesto sobre proyecto ejecutivo visado. Precios sin IGIC salvo indicación expresa.</p>
+</div>
+</footer>
+
+<script>
+document.querySelectorAll('.reveal').forEach(el=>{new IntersectionObserver(e=>{if(e[0].isIntersecting)el.classList.add('visible')},{threshold:.1}).observe(el)});
+</script>
+</body>
+</html>
