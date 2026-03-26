@@ -1,0 +1,14 @@
+{
+  "sourceImageLocal": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\render-exterior-dia.jpg",
+  "sourceImagePublicUrl": "https://v3b.fal.media/files/b/0a93a75d/k29khw-PhYavjQMkUI9eL_render-exterior-dia.jpg",
+  "generatedAt": "2026-03-26T01:21:35.323Z",
+  "output": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\video-promocional.mp4",
+  "model": "kling-v3",
+  "duration": "5",
+  "aspectRatio": "16:9",
+  "prompt": "Premium",
+  "result": {
+    "url": "https://v3b.fal.media/files/b/0a93a769/kG1-MtHvC2EfiYO_a4DSi_output.mp4",
+    "path": "proyectos/guargacho/05-marketing/assets/video-promocional.mp4"
+  }
+}
