@@ -101,15 +101,31 @@
               <i data-lucide="download" class="w-5 h-5"></i>
               Descargar Plan (PDF)
           </button>
-          <button class="bg-white hover:bg-gray-50 text-gray-800 font-semibold py-3 px-6 rounded-xl border border-gray-200 shadow-3d hover:shadow-3d-hover btn-3d flex items-center gap-2">
+          <a href="#video-showcase" class="bg-white hover:bg-gray-50 text-gray-800 font-semibold py-3 px-6 rounded-xl border border-gray-200 shadow-3d hover:shadow-3d-hover btn-3d flex items-center gap-2">
               <i data-lucide="play" class="w-5 h-5"></i>
-              Ver Previsualización
-          </button>
+              Ver Video Showcase
+          </a>
       </div>
     </div>
   </header>
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
+
+    <!-- Video Showcase -->
+    <section id="video-showcase" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-brand-600">
+          <i data-lucide="film" class="w-6 h-6"></i>
+        </div>
+        <h2 class="text-3xl font-bold text-gray-900">Video Showcase</h2>
+      </div>
+      <div class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 mb-12">
+        <video controls class="w-full rounded-2xl shadow-sm" poster="assets/render-exterior-dia.jpg">
+          <source src="assets/video-remotion.mp4" type="video/mp4">
+          Tu navegador no soporta el tag de video.
+        </video>
+      </div>
+    </section>
 
     <!-- Moodboard Conceptual -->
     <section id="moodboard" class="reveal">
