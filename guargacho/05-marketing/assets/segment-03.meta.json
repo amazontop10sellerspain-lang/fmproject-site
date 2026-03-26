@@ -1,0 +1,16 @@
+{
+  "tool": "kie-video-fl",
+  "api": "kie.ai",
+  "endpoint": "veo3.1/FIRST_AND_LAST_FRAMES_2_VIDEO",
+  "model": "veo3",
+  "prompt": "Camera descending from aerial view of residential building, smoothly transitioning through a window into a luxurious modern living room interior, seamless exterior to interior cinematic flow, warm ambient lighting, architectural visualization",
+  "firstFrameLocal": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\render-aereo-entorno.jpg",
+  "lastFrameLocal": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\render-interior-salon.jpg",
+  "firstFrameUrl": "https://v3b.fal.media/files/b/0a93aa75/bqP99JrhbYc9FEefSi1QY_render-aereo-entorno.jpg",
+  "lastFrameUrl": "https://v3b.fal.media/files/b/0a93aa75/STDxzQoHIDjccCgpf-0i0_render-interior-salon.jpg",
+  "taskId": "8a31d110665e128139fc2ca344197f3d",
+  "videoUrl": "https://tempfile.aiquickdraw.com/v/8a31d110665e128139fc2ca344197f3d_1774495988.mp4",
+  "output": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\segment-03.mp4",
+  "fileSize": 7322807,
+  "generatedAt": "2026-03-26T03:33:13.802Z"
+}

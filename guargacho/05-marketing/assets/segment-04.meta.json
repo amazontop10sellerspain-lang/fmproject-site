@@ -1,0 +1,16 @@
+{
+  "tool": "kie-video-fl",
+  "api": "kie.ai",
+  "endpoint": "veo3.1/FIRST_AND_LAST_FRAMES_2_VIDEO",
+  "model": "veo3",
+  "prompt": "Smooth walkthrough from modern living room through open-plan apartment, camera gliding into a fully equipped contemporary kitchen, warm interior lighting, seamless room-to-room transition, luxury real estate promotional video",
+  "firstFrameLocal": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\render-interior-salon.jpg",
+  "lastFrameLocal": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\render-cocina.jpg",
+  "firstFrameUrl": "https://v3b.fal.media/files/b/0a93aa7f/_qdFaNFXoZ6SYA88X-09a_render-interior-salon.jpg",
+  "lastFrameUrl": "https://v3b.fal.media/files/b/0a93aa80/qLXdIyOM902nQeMByvPtz_render-cocina.jpg",
+  "taskId": "a6a4a071603633bb4b053f597dd2b19f",
+  "videoUrl": "https://tempfile.aiquickdraw.com/v/a6a4a071603633bb4b053f597dd2b19f_1774496076.mp4",
+  "output": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\segment-04.mp4",
+  "fileSize": 5916190,
+  "generatedAt": "2026-03-26T03:34:40.654Z"
+}

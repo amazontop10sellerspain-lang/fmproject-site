@@ -1,0 +1,16 @@
+{
+  "tool": "kie-video-fl",
+  "api": "kie.ai",
+  "endpoint": "veo3.1/FIRST_AND_LAST_FRAMES_2_VIDEO",
+  "model": "veo3",
+  "prompt": "Cinematic smooth time-lapse transition on a modern 3-story residential building in Guargacho Tenerife, golden hour daylight gradually changing to dramatic night illumination, apartment lights turning on one by one, sky transitioning from warm sunset to dark blue, architectural photography, Canary Islands",
+  "firstFrameLocal": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\render-exterior-dia.jpg",
+  "lastFrameLocal": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\render-exterior-noche.jpg",
+  "firstFrameUrl": "https://v3b.fal.media/files/b/0a93aa5b/02U1ubh5PUhNN-9Yjsrxg_render-exterior-dia.jpg",
+  "lastFrameUrl": "https://v3b.fal.media/files/b/0a93aa5b/SrHcxSXKp9a_DXba2x3HO_render-exterior-noche.jpg",
+  "taskId": "c555461b04eed4f9b70455dee5d58e32",
+  "videoUrl": "https://tempfile.aiquickdraw.com/v/c555461b04eed4f9b70455dee5d58e32_1774495727.mp4",
+  "output": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\segment-01.mp4",
+  "fileSize": 3812516,
+  "generatedAt": "2026-03-26T03:28:53.703Z"
+}

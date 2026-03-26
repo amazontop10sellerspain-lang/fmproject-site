@@ -1,0 +1,16 @@
+{
+  "tool": "kie-video-fl",
+  "api": "kie.ai",
+  "endpoint": "veo3.1/FIRST_AND_LAST_FRAMES_2_VIDEO",
+  "model": "veo3",
+  "prompt": "Smooth drone camera ascending from street-level night view of illuminated 3-story residential building, pulling back and rising to reveal the full Guargacho neighborhood from above in aerial perspective, cinematic vertical transition, Tenerife coast visible in background",
+  "firstFrameLocal": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\render-exterior-noche.jpg",
+  "lastFrameLocal": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\render-aereo-entorno.jpg",
+  "firstFrameUrl": "https://v3b.fal.media/files/b/0a93aa66/QmhBU-MDw6mtC0N-5c319_render-exterior-noche.jpg",
+  "lastFrameUrl": "https://v3b.fal.media/files/b/0a93aa66/7H2YVJZbHHsfMuMC4DGNX_render-aereo-entorno.jpg",
+  "taskId": "5360e9c404279724a69a724545923ab6",
+  "videoUrl": "https://tempfile.aiquickdraw.com/v/5360e9c404279724a69a724545923ab6_1774495874.mp4",
+  "output": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\segment-02.mp4",
+  "fileSize": 6337814,
+  "generatedAt": "2026-03-26T03:31:28.443Z"
+}

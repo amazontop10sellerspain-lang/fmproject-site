@@ -1,0 +1,16 @@
+{
+  "tool": "kie-video-fl",
+  "api": "kie.ai",
+  "endpoint": "veo3.1/FIRST_AND_LAST_FRAMES_2_VIDEO",
+  "model": "veo3",
+  "prompt": "Camera moving from modern equipped kitchen through sliding glass doors opening onto a sunlit terrace, revealing panoramic views of the Tenerife coastline and Guargacho surroundings, interior to exterior transition, golden hour lighting, gentle breeze on subtropical plants",
+  "firstFrameLocal": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\render-cocina.jpg",
+  "lastFrameLocal": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\render-terraza.jpg",
+  "firstFrameUrl": "https://v3b.fal.media/files/b/0a93aa88/Fh7iRmWx1QPON9wsTmXSC_render-cocina.jpg",
+  "lastFrameUrl": "https://v3b.fal.media/files/b/0a93aa88/iBoRT6By2FD0r6I-t0AGo_render-terraza.jpg",
+  "taskId": "60f5ddd7dba1c6ab2896326b8e6182d8",
+  "videoUrl": "https://tempfile.aiquickdraw.com/v/60f5ddd7dba1c6ab2896326b8e6182d8_1774496163.mp4",
+  "output": "C:\\Users\\User\\.openclaw\\workspace-realestate\\proyectos\\guargacho\\05-marketing\\assets\\segment-05.mp4",
+  "fileSize": 5898140,
+  "generatedAt": "2026-03-26T03:36:21.890Z"
+}
