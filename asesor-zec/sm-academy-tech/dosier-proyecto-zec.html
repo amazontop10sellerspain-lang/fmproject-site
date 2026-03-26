@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dosier de Proyecto — SM Academy Tech S.L. | Solicitud ZEC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']},colors:{zec:{50:'#FFFBEB',100:'#FEF3C7',200:'#FDE68A',300:'#FCD34D',400:'#FBBF24',500:'#D4A017',600:'#B8860B',700:'#92400E',800:'#78350F',900:'#451A03'}}}}}
+  </script>
+  <style>
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+    .gradient-text{background:linear-gradient(135deg,#D4A017 0%,#B8860B 50%,#78350F 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .glass{background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(212,160,23,.2)}
+    html{scroll-behavior:smooth}tbody tr:hover{background-color:rgba(212,160,23,.05)}
+    .card-hover{transition:all .3s ease}.card-hover:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.1)}
+    .check-item{cursor:pointer;user-select:none}.check-item:hover{background:rgba(212,160,23,.05)}
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+<!-- NAVBAR -->
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zec-200 shadow-sm">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <span class="text-xl font-bold gradient-text">DOSIEREX 📁 Dosier de Proyecto</span>
+    <div class="hidden md:flex gap-5 text-sm font-medium text-gray-600">
+      <a href="#resumen" class="hover:text-zec-600 transition">Resumen</a>
+      <a href="#informes" class="hover:text-zec-600 transition">Informes</a>
+      <a href="#checklist" class="hover:text-zec-600 transition">Checklist</a>
+      <a href="#documentacion" class="hover:text-zec-600 transition">Documentación</a>
+      <a href="#procedimiento" class="hover:text-zec-600 transition">Procedimiento</a>
+      <a href="#contacto" class="hover:text-zec-600 transition">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="relative overflow-hidden min-h-[55vh] flex items-center text-white">
+  <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&q=80')"></div>
+  <div class="absolute inset-0 bg-gradient-to-br from-zec-900/90 via-zec-800/80 to-zec-600/60"></div>
+  <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+    <p class="text-zec-200 text-sm font-semibold uppercase tracking-widest mb-4">Informe 4/5 — DOSIEREX 📁 | Compilador de Dosieres</p>
+    <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Dosier Integrado<br>Solicitud de Inscripción ZEC</h1>
+    <p class="text-xl text-zec-100 max-w-3xl mx-auto">Compilación de todos los análisis, documentación requerida y hoja de ruta para la solicitud ante el Consorcio</p>
+    <div class="mt-8 flex justify-center gap-3 flex-wrap">
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📅 26 de marzo de 2026</span>
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">🏢 SM Academy Tech S.L.</span>
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📍 Santa Cruz de Tenerife</span>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-16 space-y-20">
+
+<!-- ═══ RESUMEN EJECUTIVO ═══ -->
+<section id="resumen" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Resumen Ejecutivo del Proyecto</h2>
+  <p class="text-gray-500 mb-8">Síntesis para la Comisión de Evaluación del Consorcio ZEC</p>
+
+  <div class="grid md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-zec-500">
+      <p class="text-4xl font-extrabold gradient-text">4%</p>
+      <p class="text-sm font-bold text-gray-700">Tipo IS solicitado</p>
+      <p class="text-xs text-gray-400">vs. 25% régimen general</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-blue-500">
+      <p class="text-4xl font-extrabold text-blue-600">5</p>
+      <p class="text-sm font-bold text-gray-700">Empleos directos</p>
+      <p class="text-xs text-gray-400">Jornada completa, año 1</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-green-500">
+      <p class="text-4xl font-extrabold text-green-600">100K€</p>
+      <p class="text-sm font-bold text-gray-700">Inversión prevista</p>
+      <p class="text-xs text-gray-400">Activos fijos en Canarias</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-purple-500">
+      <p class="text-4xl font-extrabold text-purple-600">9</p>
+      <p class="text-sm font-bold text-gray-700">CNAEs propuestos</p>
+      <p class="text-xs text-gray-400">7 autorizados + 2 consulta</p>
+    </div>
+  </div>
+
+  <div class="glass rounded-2xl p-8 shadow-xl border-2 border-yellow-400 mb-8">
+    <div class="flex items-center gap-4 mb-4">
+      <div class="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center border-4 border-yellow-400"><span class="text-3xl">🟡</span></div>
+      <div><p class="text-sm text-yellow-700 font-bold uppercase">Veredicto global del equipo ZECEX</p><h3 class="text-2xl font-extrabold text-gray-900">VIABLE CON CONDICIONES</h3></div>
+    </div>
+    <p class="text-sm text-gray-600">SM Academy Tech S.L. cumple los requisitos principales para la inscripción en la ZEC (Art. 31 Ley 19/1994). Quedan 2 CNAEs (6831, 4511) y la cuestión de inversión por resolver mediante consulta previa al Consorcio.</p>
+  </div>
+
+  <div class="bg-white rounded-xl p-6 shadow-md">
+    <h3 class="font-bold text-zec-700 mb-4">Ficha resumen del proyecto</h3>
+    <div class="grid md:grid-cols-2 gap-x-12 gap-y-2 text-sm">
+      <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Denominación social</span><span class="font-bold">SM Academy Tech S.L.</span></div>
+      <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Solicitante</span><span class="font-bold">Adrián Morales Santana</span></div>
+      <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">DNI</span><span class="font-mono">43.876.521-K</span></div>
+      <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Isla</span><span class="font-bold">Tenerife (capitalina)</span></div>
+      <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Domicilio social</span><span>C/ Villalba Hervás 12, 2ª, SCT</span></div>
+      <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Constitución prevista</span><span>2º semestre 2026</span></div>
+      <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Capital social</span><span class="font-bold">50.000 €</span></div>
+      <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Empleos / Inversión</span><span class="font-bold">5 puestos / 100.000 €</span></div>
+      <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Ingresos año 1</span><span class="font-bold text-green-600">186.000 €</span></div>
+      <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Ahorro fiscal 5 años (est.)</span><span class="font-bold text-zec-600">313.824 €</span></div>
+      <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Verticales</span><span>SM Academy · OpenClaw · SM Motors</span></div>
+      <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Administrador residente</span><span class="text-green-600 font-bold">✅ Sí</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ÍNDICE DE INFORMES ═══ -->
+<section id="informes" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Índice de Informes del Equipo ZECEX</h2>
+  <p class="text-gray-500 mb-8">5 informes profesionales generados por el equipo de asesores IA</p>
+
+  <div class="grid md:grid-cols-5 gap-4">
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-yellow-500">
+      <p class="text-3xl mb-2">🔍</p>
+      <h4 class="font-bold text-sm">1. VIABLEX</h4>
+      <p class="text-xs text-gray-500 mt-1">Análisis de Viabilidad</p>
+      <p class="text-xs text-green-600 font-bold mt-2">✅ Completado</p>
+      <p class="text-xs text-gray-400 mt-1">analisis-viabilidad-zec.html</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-blue-500">
+      <p class="text-3xl mb-2">📝</p>
+      <h4 class="font-bold text-sm">2. MEMOREX</h4>
+      <p class="text-xs text-gray-500 mt-1">Memoria Descriptiva</p>
+      <p class="text-xs text-green-600 font-bold mt-2">✅ Completado</p>
+      <p class="text-xs text-gray-400 mt-1">memoria-descriptiva-zec.html</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-purple-500">
+      <p class="text-3xl mb-2">📊</p>
+      <h4 class="font-bold text-sm">3. STRATEX</h4>
+      <p class="text-xs text-gray-500 mt-1">Dictamen Estratégico</p>
+      <p class="text-xs text-green-600 font-bold mt-2">✅ Completado</p>
+      <p class="text-xs text-gray-400 mt-1">dictamen-estrategico-zec.html</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-zec-500 ring-2 ring-zec-300">
+      <p class="text-3xl mb-2">📁</p>
+      <h4 class="font-bold text-sm">4. DOSIEREX</h4>
+      <p class="text-xs text-gray-500 mt-1">Dosier Integrado</p>
+      <p class="text-xs text-zec-600 font-bold mt-2">📌 Este informe</p>
+      <p class="text-xs text-gray-400 mt-1">dosier-proyecto-zec.html</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-green-500">
+      <p class="text-3xl mb-2">🛡️</p>
+      <h4 class="font-bold text-sm">5. VIGILEX</h4>
+      <p class="text-xs text-gray-500 mt-1">Seguimiento Cumplimiento</p>
+      <p class="text-xs text-green-600 font-bold mt-2">✅ Completado</p>
+      <p class="text-xs text-gray-400 mt-1">seguimiento-cumplimiento-zec.html</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHECKLIST MAESTRO ═══ -->
+<section id="checklist" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Checklist Maestro de Requisitos — Art. 31</h2>
+  <p class="text-gray-500 mb-4">Estado de cumplimiento de cada requisito legal</p>
+
+  <!-- Progress bar -->
+  <div class="bg-white rounded-xl p-5 shadow-md mb-6">
+    <div class="flex justify-between items-center mb-2">
+      <span class="text-sm font-bold text-gray-700">Progreso general del dosier</span>
+      <span class="text-sm font-bold text-zec-700" id="progressText">67%</span>
+    </div>
+    <div class="w-full bg-gray-200 rounded-full h-4"><div class="bg-gradient-to-r from-zec-500 to-green-500 h-4 rounded-full transition-all" style="width:67%" id="progressBar"></div></div>
+    <div class="flex justify-between text-xs text-gray-400 mt-1">
+      <span>6 de 9 requisitos cumplidos o en vía</span>
+      <span>3 pendientes de acción</span>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-md overflow-hidden">
+    <table class="w-full text-sm">
+      <thead><tr class="bg-zec-800 text-white"><th class="px-4 py-3 text-center w-10">#</th><th class="px-4 py-3 text-left">Requisito (Art. 31)</th><th class="px-4 py-3 text-center w-20">Estado</th><th class="px-4 py-3 text-left">Observaciones</th><th class="px-4 py-3 text-left w-40">Acción requerida</th></tr></thead>
+      <tbody class="divide-y divide-gray-100">
+        <tr><td class="px-4 py-3 text-center font-bold">1</td><td class="px-4 py-3">Entidad de nueva creación con domicilio en ZEC (Art. 31.1.a)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">🟢</span></td><td class="px-4 py-3 text-gray-600">Domicilio previsto: C/ Villalba Hervás 12, SCT</td><td class="px-4 py-3 text-gray-400 text-xs">Constituir sociedad</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">2</td><td class="px-4 py-3">Administrador residente en Canarias (Art. 31.1.b)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">🟢</span></td><td class="px-4 py-3 text-gray-600">Adrián Morales Santana, SCT</td><td class="px-4 py-3 text-gray-400 text-xs">Certificar residencia</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">3</td><td class="px-4 py-3">Inversión mínima 100.000 € (capitalina) (Art. 31.1.c)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">🟡</span></td><td class="px-4 py-3 text-yellow-700">Plan de 100K€ presentado. Depósitos 2K€ podrían no computar. Solicitar exención Circular 1/2022.</td><td class="px-4 py-3 text-yellow-700 text-xs font-bold">Consultar Consorcio</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">4</td><td class="px-4 py-3">Mínimo 5 empleos jornada completa (capitalina) (Art. 31.1.d)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">🟢</span></td><td class="px-4 py-3 text-gray-600">5 puestos detallados. 116K€ bruto/año.</td><td class="px-4 py-3 text-gray-400 text-xs">Formalizar contratos</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">5</td><td class="px-4 py-3">Crear empleo en 6 meses (Art. 31.1.e)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">🟢</span></td><td class="px-4 py-3 text-gray-600">Plan de contratación contempla 5 empleados en 6 meses</td><td class="px-4 py-3 text-gray-400 text-xs">Ejecutar plan RRHH</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">6</td><td class="px-4 py-3">Memoria descriptiva (Art. 31.2.f)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">🟢</span></td><td class="px-4 py-3 text-gray-600">Borrador completo. Informe MEMOREX generado.</td><td class="px-4 py-3 text-yellow-700 text-xs font-bold">Formalizar en modelo normalizado</td></tr>
+        <tr class="bg-yellow-50/50"><td class="px-4 py-3 text-center font-bold">7</td><td class="px-4 py-3 font-medium text-yellow-800">Actividades del Anexo RD 2/2000 (Art. 31.1.g)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">🟡</span></td><td class="px-4 py-3 text-yellow-700">7/9 CNAEs autorizados. CNAE 6831 y 4511 pendientes.</td><td class="px-4 py-3 text-yellow-700 text-xs font-bold">Consultar Consorcio (5 consultas)</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">8</td><td class="px-4 py-3">Certificados AEAT y TGSS</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded-full text-xs font-bold">🔴</span></td><td class="px-4 py-3 text-red-700">No aportados aún</td><td class="px-4 py-3 text-red-700 text-xs font-bold">Solicitar certificados</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">9</td><td class="px-4 py-3">Certificación negativa denominación social</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded-full text-xs font-bold">🔴</span></td><td class="px-4 py-3 text-red-700">No obtenida aún</td><td class="px-4 py-3 text-red-700 text-xs font-bold">Solicitar al RMC</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ DOCUMENTACIÓN ═══ -->
+<section id="documentacion" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Documentación Requerida</h2>
+  <p class="text-gray-500 mb-8">Documentos necesarios para la solicitud de autorización previa ante el Consorcio</p>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="bg-white rounded-xl p-6 shadow-md">
+      <h3 class="font-bold text-zec-700 mb-4">📄 Documentación societaria</h3>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-red-500">🔴</span><span class="text-sm">Escritura de constitución</span><span class="ml-auto text-xs text-gray-400">Post-autorización</span></div>
+        <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-red-500">🔴</span><span class="text-sm">Certificación negativa de denominación (RMC)</span><span class="ml-auto text-xs text-red-600 font-bold">Pendiente</span></div>
+        <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-yellow-500">🟡</span><span class="text-sm">DNI del administrador (Adrián Morales Santana)</span><span class="ml-auto text-xs text-gray-400">Disponible</span></div>
+        <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-red-500">🔴</span><span class="text-sm">Certificado de residencia fiscal en Canarias</span><span class="ml-auto text-xs text-red-600 font-bold">Pendiente</span></div>
+        <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-red-500">🔴</span><span class="text-sm">Certificado AEAT (al corriente)</span><span class="ml-auto text-xs text-red-600 font-bold">Pendiente</span></div>
+        <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-red-500">🔴</span><span class="text-sm">Certificado TGSS (al corriente)</span><span class="ml-auto text-xs text-red-600 font-bold">Pendiente</span></div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md">
+      <h3 class="font-bold text-zec-700 mb-4">📊 Documentación económica</h3>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-green-500">🟢</span><span class="text-sm">Memoria descriptiva (MEMOREX)</span><span class="ml-auto text-xs text-green-600 font-bold">Generado</span></div>
+        <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-green-500">🟢</span><span class="text-sm">Proyecciones financieras a 3 años</span><span class="ml-auto text-xs text-green-600 font-bold">En MEMOREX</span></div>
+        <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-green-500">🟢</span><span class="text-sm">Plan de empleo detallado</span><span class="ml-auto text-xs text-green-600 font-bold">En MEMOREX</span></div>
+        <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-green-500">🟢</span><span class="text-sm">Plan de inversión detallado</span><span class="ml-auto text-xs text-green-600 font-bold">En MEMOREX</span></div>
+        <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-red-500">🔴</span><span class="text-sm">Extractos bancarios / solvencia financiera</span><span class="ml-auto text-xs text-red-600 font-bold">Pendiente</span></div>
+        <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-red-500">🔴</span><span class="text-sm">Compromiso de préstamo bancario (75K€)</span><span class="ml-auto text-xs text-red-600 font-bold">Pendiente</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 bg-white rounded-xl p-6 shadow-md">
+    <h3 class="font-bold text-zec-700 mb-4">📋 Formularios oficiales del Consorcio</h3>
+    <div class="space-y-3">
+      <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-red-500">🔴</span><span class="text-sm font-medium">Solicitud de autorización previa (modelo normalizado)</span><span class="ml-auto text-xs text-blue-600"><a href="https://canariaszec.com/wp-content/uploads/2025/03/SOLICITUD-DE-AUTORIZACION-Y-MEMORIA.docx" class="underline" target="_blank">Descargar →</a></span></div>
+      <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-yellow-500">🟡</span><span class="text-sm font-medium">Memoria descriptiva en formato oficial</span><span class="ml-auto text-xs text-yellow-600">Adaptar MEMOREX al modelo</span></div>
+      <div class="flex items-center gap-3 p-2 rounded-lg check-item"><span class="text-yellow-500">🟡</span><span class="text-sm font-medium">Tasa de solicitud: 1.200 €</span><span class="ml-auto text-xs text-yellow-600">Pendiente de pago</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROCEDIMIENTO ═══ -->
+<section id="procedimiento" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Procedimiento de Solicitud — Hoja de Ruta</h2>
+  <p class="text-gray-500 mb-8">Art. 32 Ley 19/1994 — Pasos desde hoy hasta la inscripción en ROEZEC</p>
+
+  <div class="bg-white rounded-xl p-6 shadow-md">
+    <div class="space-y-6">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">1</div>
+        <div class="flex-1">
+          <h4 class="font-bold">Consultas previas al Consorcio</h4>
+          <p class="text-sm text-gray-600">Resolver las 5 consultas pendientes: CNAEs 6831, 4511, exención inversión, flota como activo fijo, IGIC importaciones.</p>
+          <p class="text-xs text-gray-400 mt-1">📍 Tel: 922 298 010 | Email: zec@canariaszec.gob.es | Plazo: 2-4 semanas</p>
+        </div>
+        <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold flex-shrink-0">INMEDIATO</span>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">2</div>
+        <div class="flex-1">
+          <h4 class="font-bold">Obtener documentación pendiente</h4>
+          <p class="text-sm text-gray-600">Certificación negativa RMC + certificados AEAT y TGSS + certificado residencia fiscal + extractos bancarios + compromiso préstamo.</p>
+          <p class="text-xs text-gray-400 mt-1">📍 Registro Mercantil Central (online) + AEAT (sede electrónica) + TGSS (sistema RED)</p>
+        </div>
+        <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold flex-shrink-0">PARALELO</span>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">3</div>
+        <div class="flex-1">
+          <h4 class="font-bold">Contratar asesor fiscal colegiado</h4>
+          <p class="text-sm text-gray-600">Revisar memoria descriptiva + plan fiscal STRATEX. Formalizar en modelo normalizado del Consorcio.</p>
+          <p class="text-xs text-gray-400 mt-1">📍 Colegio de Economistas de Santa Cruz de Tenerife | REAF-CGE</p>
+        </div>
+        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold flex-shrink-0">SEMANA 2-3</span>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 bg-zec-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">4</div>
+        <div class="flex-1">
+          <h4 class="font-bold">Presentar solicitud de autorización previa</h4>
+          <p class="text-sm text-gray-600">Presentar solicitud + memoria + documentación + tasa 1.200 € ante el Consorcio ZEC (sede SCT).</p>
+          <p class="text-xs text-gray-400 mt-1">📍 Consorcio ZEC, C/ Villalba Hervás 4, 5ª, 38002 SCT | Art. 32</p>
+        </div>
+        <span class="px-3 py-1 bg-zec-100 text-zec-700 rounded-full text-xs font-bold flex-shrink-0">SEMANA 4-6</span>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">5</div>
+        <div class="flex-1">
+          <h4 class="font-bold">Resolución del Consorcio</h4>
+          <p class="text-sm text-gray-600">Plazo máximo: 2 meses. Silencio administrativo positivo (Art. 32).</p>
+        </div>
+        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold flex-shrink-0">2 MESES MÁX.</span>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">6</div>
+        <div class="flex-1">
+          <h4 class="font-bold">Constitución e inscripción ROEZEC</h4>
+          <p class="text-sm text-gray-600">Constituir sociedad ante notario. Inscripción Registro Mercantil. Inscripción ROEZEC (máx. 18 meses desde autorización).</p>
+        </div>
+        <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold flex-shrink-0">POST-AUTORIZACIÓN</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACTO CONSORCIO ═══ -->
+<section id="contacto" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Contacto del Consorcio ZEC</h2>
+  <div class="grid md:grid-cols-2 gap-8 mt-8">
+    <div class="bg-white rounded-xl p-6 shadow-md border-t-4 border-zec-500">
+      <h3 class="font-bold text-zec-700 mb-3">📍 Sede Santa Cruz de Tenerife</h3>
+      <table class="w-full text-sm"><tbody class="divide-y divide-gray-100">
+        <tr><td class="py-2 text-gray-500">Dirección</td><td class="py-2">C/ Villalba Hervás 4, 5ª, 38002 SCT</td></tr>
+        <tr><td class="py-2 text-gray-500">Teléfono</td><td class="py-2 font-mono font-bold">+34 922 298 010</td></tr>
+        <tr><td class="py-2 text-gray-500">Fax</td><td class="py-2 font-mono">+34 922 278 063</td></tr>
+        <tr><td class="py-2 text-gray-500">Email</td><td class="py-2 font-mono text-blue-600">zec@canariaszec.gob.es</td></tr>
+      </tbody></table>
+      <p class="mt-2 text-xs text-zec-600 bg-zec-50 rounded p-2 text-center font-medium">◀ SEDE CORRESPONDIENTE (Tenerife)</p>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md border-t-4 border-gray-300">
+      <h3 class="font-bold text-gray-500 mb-3">📍 Sede Las Palmas de Gran Canaria</h3>
+      <table class="w-full text-sm"><tbody class="divide-y divide-gray-100">
+        <tr><td class="py-2 text-gray-400">Dirección</td><td class="py-2 text-gray-500">C/ León y Castillo 431, Edificio Urbis, 4ª, 35007 LP</td></tr>
+        <tr><td class="py-2 text-gray-400">Teléfono</td><td class="py-2 font-mono text-gray-500">+34 928 490 505</td></tr>
+        <tr><td class="py-2 text-gray-400">Fax</td><td class="py-2 font-mono text-gray-500">+34 928 273 274</td></tr>
+        <tr><td class="py-2 text-gray-400">Email</td><td class="py-2 font-mono text-gray-500">zec@canariaszec.gob.es</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+  <div class="mt-4 text-center">
+    <a href="https://canariaszec.com" target="_blank" class="inline-block px-6 py-3 bg-zec-600 text-white rounded-lg font-bold hover:bg-zec-700 transition shadow-lg">🌐 canariaszec.com — Web oficial del Consorcio</a>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="reveal">
+  <div class="bg-red-50 border-2 border-red-300 rounded-xl p-5 text-sm text-red-800">
+    <div class="flex items-start gap-3"><span class="text-2xl">⚠️</span>
+    <div><h4 class="font-bold mb-1">AVISO — Dosier de trabajo</h4>
+    <p>Este dosier integra los análisis de los agentes VIABLEX, MEMOREX, STRATEX y DOSIEREX. Los datos del solicitante son ficticios a efectos de primera prueba. Los datos de actividad y estructura se basan en el proyecto real. Requiere <strong>validación por profesional colegiado</strong> y formalización en modelos normalizados del Consorcio antes de la presentación oficial.</p></div></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-gray-900 text-gray-400 py-12">
+  <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+    <p class="mb-2">Informe generado por <strong class="text-zec-400">DOSIEREX 📁</strong> — Compilador de Dosieres | Equipo <strong class="text-zec-400">ZECEX ⚖️📊</strong></p>
+    <p class="mb-2">Fecha: 26 de marzo de 2026 | Base legal: Arts. 31-32 Ley 19/1994</p>
+    <p>Consorcio ZEC — SCT: 922 298 010 | LP: 928 490 505 | zec@canariaszec.gob.es</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.reveal').forEach(el=>{new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.1}).observe(el)});
+</script>
+</body>
+</html>

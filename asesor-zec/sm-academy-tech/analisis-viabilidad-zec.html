@@ -1,0 +1,802 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análisis de Viabilidad ZEC — SM Academy Tech S.L.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            zec: { 50:'#FFFBEB',100:'#FEF3C7',200:'#FDE68A',300:'#FCD34D',400:'#FBBF24',500:'#D4A017',600:'#B8860B',700:'#92400E',800:'#78350F',900:'#451A03' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #D4A017 0%, #B8860B 50%, #78350F 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border: 1px solid rgba(212,160,23,0.2); }
+    html { scroll-behavior: smooth; }
+    tbody tr:hover { background-color: rgba(212,160,23,0.05); }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.4} }
+    .pulse-dot { animation: pulse-dot 2s infinite; }
+    .tl-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; flex-shrink: 0; position: absolute; left: -14px; border: 4px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- ═══════════════ NAVBAR ═══════════════ -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zec-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <span class="text-xl font-bold gradient-text">VIABLEX 🔍 Análisis de Viabilidad</span>
+      <div class="hidden md:flex gap-5 text-sm font-medium text-gray-600">
+        <a href="#veredicto" class="hover:text-zec-600 transition">Veredicto</a>
+        <a href="#datos" class="hover:text-zec-600 transition">Datos</a>
+        <a href="#cnae" class="hover:text-zec-600 transition">CNAEs</a>
+        <a href="#requisitos" class="hover:text-zec-600 transition">Requisitos</a>
+        <a href="#inversion" class="hover:text-zec-600 transition">Inversión</a>
+        <a href="#empleo" class="hover:text-zec-600 transition">Empleo</a>
+        <a href="#plazos" class="hover:text-zec-600 transition">Plazos</a>
+        <a href="#consultas" class="hover:text-zec-600 transition">Consultas</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <header class="relative overflow-hidden min-h-[60vh] flex items-center text-white">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80');"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-zec-900/90 via-zec-800/80 to-zec-600/60"></div>
+    <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><path d=%22M0 0h80v80H0z%22 fill=%22none%22/><path d=%22M0 80L80 0%22 stroke=%22white%22 stroke-width=%220.5%22/></svg>'); background-size: 40px 40px;"></div>
+    <div class="relative max-w-6xl mx-auto px-6 py-24 text-center">
+      <p class="text-zec-200 text-sm font-semibold uppercase tracking-widest mb-4">Informe 1/5 — VIABLEX 🔍 | Analista de Viabilidad ZEC</p>
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Análisis de Viabilidad<br>Zona Especial Canaria</h1>
+      <p class="text-xl text-zec-100 max-w-3xl mx-auto">Evaluación exhaustiva de requisitos de inscripción en el ROEZEC para SM Academy Tech S.L. conforme a la Ley 19/1994 y su normativa de desarrollo</p>
+      <div class="mt-8 flex justify-center gap-3 flex-wrap">
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📅 26 de marzo de 2026</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm">🏢 SM Academy Tech S.L.</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📍 Tenerife (isla capitalina)</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm">⚖️ Ley 19/1994 · Arts. 28-50</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-16 space-y-20">
+
+    <!-- ═══════════════ VEREDICTO ═══════════════ -->
+    <section id="veredicto" class="reveal">
+      <div class="glass rounded-2xl p-8 md:p-12 shadow-xl border-2 border-yellow-400">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+          <div class="flex-shrink-0 w-36 h-36 rounded-full bg-yellow-100 flex items-center justify-center border-4 border-yellow-400 shadow-lg">
+            <span class="text-6xl">🟡</span>
+          </div>
+          <div class="flex-1 text-center md:text-left">
+            <p class="text-sm font-bold text-yellow-700 uppercase tracking-wider mb-1">Veredicto VIABLEX</p>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">VIABLE CON CONDICIONES</h2>
+            <p class="text-gray-600 leading-relaxed mb-4">SM Academy Tech S.L. cumple la mayoría de requisitos para la inscripción en la ZEC. Sin embargo, <strong>2 de los 9 códigos CNAE propuestos</strong> (6831 — intermediación inmobiliaria y 4511 — venta de vehículos) requieren <strong>consulta previa obligatoria</strong> al Consorcio ZEC antes de la solicitud formal, y la División 68 presenta <strong>limitaciones expresas</strong> que podrían excluir la actividad de agente inmobiliario.</p>
+            <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+              <span class="px-3 py-1.5 bg-green-100 text-green-800 rounded-full text-xs font-bold">✅ 7 CNAEs claramente autorizados</span>
+              <span class="px-3 py-1.5 bg-yellow-100 text-yellow-800 rounded-full text-xs font-bold">🟡 2 CNAEs requieren consulta</span>
+              <span class="px-3 py-1.5 bg-green-100 text-green-800 rounded-full text-xs font-bold">✅ Empleo: 5 puestos (cumple)</span>
+              <span class="px-3 py-1.5 bg-green-100 text-green-800 rounded-full text-xs font-bold">✅ Inversión: 100.000 € (cumple)</span>
+              <span class="px-3 py-1.5 bg-green-100 text-green-800 rounded-full text-xs font-bold">✅ Administrador residente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ DATOS DEL PROYECTO ═══════════════ -->
+    <section id="datos" class="reveal">
+      <h2 class="text-3xl font-extrabold gradient-text mb-2">Datos del Proyecto</h2>
+      <p class="text-gray-500 mb-8">Información extraída del borrador de memoria descriptiva presentado por el solicitante</p>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Datos del solicitante -->
+        <div class="bg-white rounded-xl p-6 shadow-md">
+          <h3 class="font-bold text-zec-700 mb-4 flex items-center gap-2">👤 Datos del Solicitante</h3>
+          <table class="w-full text-sm">
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="py-2.5 text-gray-500 w-40">Razón social</td><td class="py-2.5 font-semibold">SM Academy Tech S.L.</td></tr>
+              <tr><td class="py-2.5 text-gray-500">Solicitante</td><td class="py-2.5">Adrián Morales Santana</td></tr>
+              <tr><td class="py-2.5 text-gray-500">DNI</td><td class="py-2.5 font-mono">43.876.521-K</td></tr>
+              <tr><td class="py-2.5 text-gray-500">Nacionalidad</td><td class="py-2.5">Española</td></tr>
+              <tr><td class="py-2.5 text-gray-500">Domicilio personal</td><td class="py-2.5">C/ El Pilar 28, 3ºA, 38002 SCT</td></tr>
+              <tr><td class="py-2.5 text-gray-500">Teléfono</td><td class="py-2.5 font-mono">+34 622 445 891</td></tr>
+              <tr><td class="py-2.5 text-gray-500">Email</td><td class="py-2.5 font-mono text-blue-600">adrian.morales@smacademytech.es</td></tr>
+              <tr><td class="py-2.5 text-gray-500">Administrador residente</td><td class="py-2.5 text-green-700 font-bold">✅ Sí — Santa Cruz de Tenerife</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Datos societarios -->
+        <div class="bg-white rounded-xl p-6 shadow-md">
+          <h3 class="font-bold text-zec-700 mb-4 flex items-center gap-2">🏢 Datos Societarios Previstos</h3>
+          <table class="w-full text-sm">
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="py-2.5 text-gray-500 w-40">Forma jurídica</td><td class="py-2.5 font-semibold">Sociedad Limitada (S.L.)</td></tr>
+              <tr><td class="py-2.5 text-gray-500">Domicilio social</td><td class="py-2.5">C/ Villalba Hervás 12, planta 2ª, 38002 SCT</td></tr>
+              <tr><td class="py-2.5 text-gray-500">Isla</td><td class="py-2.5">Tenerife <span class="ml-1 px-2 py-0.5 bg-zec-100 text-zec-700 rounded text-xs font-bold">Capitalina</span></td></tr>
+              <tr><td class="py-2.5 text-gray-500">Constitución prevista</td><td class="py-2.5">2º semestre 2026</td></tr>
+              <tr><td class="py-2.5 text-gray-500">Empleos previstos</td><td class="py-2.5 font-bold">5 (jornada completa) → 10 en año 3</td></tr>
+              <tr><td class="py-2.5 text-gray-500">Inversión prevista</td><td class="py-2.5 font-bold">100.000 €</td></tr>
+              <tr><td class="py-2.5 text-gray-500">Financiación total</td><td class="py-2.5">125.000 € (capital 50K + préstamo 75K)</td></tr>
+              <tr><td class="py-2.5 text-gray-500">Ingresos previstos año 1</td><td class="py-2.5 font-bold">186.000 €</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Verticales -->
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-md card-hover border-t-4 border-blue-500">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-lg">📚</span>
+            <div><h4 class="font-bold">SM Academy</h4><p class="text-xs text-blue-600">EdTech / FinTech</p></div>
+          </div>
+          <p class="text-sm text-gray-600 mb-3">Plataforma de formación en trading + Copy Trading automatizado. +160 lecciones, 5 planes de suscripción, bot de señales propietario, motor MT5 y Bitget.</p>
+          <table class="w-full text-xs">
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="py-1 text-gray-400">Ingresos año 1</td><td class="py-1 text-right font-bold">96.000 €</td></tr>
+              <tr><td class="py-1 text-gray-400">CNAEs</td><td class="py-1 text-right font-mono">6209 · 6311 · 6312 · 8559</td></tr>
+              <tr><td class="py-1 text-gray-400">Estado MVP</td><td class="py-1 text-right text-green-600 font-bold">✅ Operativo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-md card-hover border-t-4 border-emerald-500">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-lg">🏠</span>
+            <div><h4 class="font-bold">SM PropTech</h4><p class="text-xs text-emerald-600">PropTech</p></div>
+          </div>
+          <p class="text-sm text-gray-600 mb-3">Plataforma digital de intermediación inmobiliaria: captación de listings, CRM especializado, portal con mapas y valoraciones, comisiones por operación.</p>
+          <table class="w-full text-xs">
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="py-1 text-gray-400">Ingresos año 1</td><td class="py-1 text-right font-bold">30.000 €</td></tr>
+              <tr><td class="py-1 text-gray-400">CNAEs</td><td class="py-1 text-right font-mono">6201 · 6831 ⚠️</td></tr>
+              <tr><td class="py-1 text-gray-400">Estado MVP</td><td class="py-1 text-right text-yellow-600 font-bold">🟡 En desarrollo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-md card-hover border-t-4 border-orange-500">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-lg">🚗</span>
+            <div><h4 class="font-bold">SM Motors</h4><p class="text-xs text-orange-600">Mobility</p></div>
+          </div>
+          <p class="text-sm text-gray-600 mb-3">Importación de vehículos premium desde EAU (Dubái), renting con opción a compra en Tenerife. Flota objetivo: 5-10 unidades premium.</p>
+          <table class="w-full text-xs">
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="py-1 text-gray-400">Ingresos año 1</td><td class="py-1 text-right font-bold">60.000 €</td></tr>
+              <tr><td class="py-1 text-gray-400">CNAEs</td><td class="py-1 text-right font-mono">7711 · 4511 ⚠️ · 5229</td></tr>
+              <tr><td class="py-1 text-gray-400">Inversión flota</td><td class="py-1 text-right font-bold">75.000 €</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ VERIFICACIÓN CNAE ═══════════════ -->
+    <section id="cnae" class="reveal">
+      <h2 class="text-3xl font-extrabold gradient-text mb-2">Verificación de Actividades CNAE — Anexo RD 2/2000</h2>
+      <p class="text-gray-500 mb-8">Art. 31.1.g) Ley 19/1994 — Solo las actividades incluidas en el Anexo pueden acogerse al régimen ZEC. Lista cerrada.</p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full bg-white rounded-xl overflow-hidden shadow-md text-sm">
+          <thead>
+            <tr class="bg-zec-800 text-white">
+              <th class="px-4 py-3 text-center w-16">CNAE</th>
+              <th class="px-4 py-3 text-left">Actividad</th>
+              <th class="px-4 py-3 text-left">Vertical</th>
+              <th class="px-4 py-3 text-center">División Anexo</th>
+              <th class="px-4 py-3 text-center w-24">Estado</th>
+              <th class="px-4 py-3 text-left">Observaciones</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="bg-green-50/50">
+              <td class="px-4 py-3 text-center font-mono font-bold">6209</td>
+              <td class="px-4 py-3">Otros servicios de tecnologías de la información</td>
+              <td class="px-4 py-3"><span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">SM Academy</span></td>
+              <td class="px-4 py-3 text-center">Div. 62 — Sección J</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">🟢 Autorizado</span></td>
+              <td class="px-4 py-3 text-gray-500 text-xs">Programación, consultoría y actividades informáticas. Actividad más demandada en ZEC (⭐⭐⭐⭐⭐).</td>
+            </tr>
+            <tr class="bg-green-50/50">
+              <td class="px-4 py-3 text-center font-mono font-bold">6311</td>
+              <td class="px-4 py-3">Proceso de datos, hosting y actividades relacionadas</td>
+              <td class="px-4 py-3"><span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">SM Academy</span></td>
+              <td class="px-4 py-3 text-center">Div. 63 — Sección J</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">🟢 Autorizado</span></td>
+              <td class="px-4 py-3 text-gray-500 text-xs">Servicios de información. Procesamiento de señales de mercado y hosting VPS.</td>
+            </tr>
+            <tr class="bg-green-50/50">
+              <td class="px-4 py-3 text-center font-mono font-bold">6312</td>
+              <td class="px-4 py-3">Portales web</td>
+              <td class="px-4 py-3"><span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">SM Academy</span></td>
+              <td class="px-4 py-3 text-center">Div. 63 — Sección J</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">🟢 Autorizado</span></td>
+              <td class="px-4 py-3 text-gray-500 text-xs">Operación del portal sm.academy como plataforma educativa de suscripción.</td>
+            </tr>
+            <tr class="bg-green-50/50">
+              <td class="px-4 py-3 text-center font-mono font-bold">8559</td>
+              <td class="px-4 py-3">Otra educación n.c.o.p.</td>
+              <td class="px-4 py-3"><span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">SM Academy</span></td>
+              <td class="px-4 py-3 text-center">Div. 85 — Sección P</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">🟢 Autorizado</span></td>
+              <td class="px-4 py-3 text-gray-500 text-xs">Educación "determinadas actividades" incluida en el Anexo. Formación online en mercados financieros.</td>
+            </tr>
+            <tr class="bg-green-50/50">
+              <td class="px-4 py-3 text-center font-mono font-bold">6201</td>
+              <td class="px-4 py-3">Programación informática</td>
+              <td class="px-4 py-3"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded text-xs">SM PropTech</span></td>
+              <td class="px-4 py-3 text-center">Div. 62 — Sección J</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">🟢 Autorizado</span></td>
+              <td class="px-4 py-3 text-gray-500 text-xs">Desarrollo del software de gestión inmobiliaria. Base para solicitar exención de inversión (Circular 1/2022).</td>
+            </tr>
+            <tr class="bg-yellow-50/50">
+              <td class="px-4 py-3 text-center font-mono font-bold text-yellow-700">6831</td>
+              <td class="px-4 py-3 font-medium text-yellow-800">Agentes de la propiedad inmobiliaria</td>
+              <td class="px-4 py-3"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded text-xs">SM PropTech</span></td>
+              <td class="px-4 py-3 text-center">Div. 68 — Sección L <span class="text-yellow-600 font-bold">"con limitaciones"</span></td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">🟡 Consultar</span></td>
+              <td class="px-4 py-3 text-yellow-800 text-xs font-medium">La División 68 aparece "con limitaciones" en el Anexo. La intermediación inmobiliaria digital (PropTech) podría estar limitada. Consulta previa obligatoria al Consorcio. Alternativa segura: operar bajo CNAE 6201 (desarrollo software).</td>
+            </tr>
+            <tr class="bg-green-50/50">
+              <td class="px-4 py-3 text-center font-mono font-bold">7711</td>
+              <td class="px-4 py-3">Alquiler de automóviles y vehículos ligeros</td>
+              <td class="px-4 py-3"><span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded text-xs">SM Motors</span></td>
+              <td class="px-4 py-3 text-center">Div. 77 — Sección N</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">🟢 Autorizado</span></td>
+              <td class="px-4 py-3 text-gray-500 text-xs">Actividades de alquiler plenamente incluidas. Renting con opción a compra es el modelo recomendado.</td>
+            </tr>
+            <tr class="bg-yellow-50/50">
+              <td class="px-4 py-3 text-center font-mono font-bold text-yellow-700">4511</td>
+              <td class="px-4 py-3 font-medium text-yellow-800">Venta de automóviles y vehículos ligeros</td>
+              <td class="px-4 py-3"><span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded text-xs">SM Motors</span></td>
+              <td class="px-4 py-3 text-center">Div. 45 — Sección G</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">🟡 Consultar</span></td>
+              <td class="px-4 py-3 text-yellow-800 text-xs font-medium">La División 45 aparece en el Anexo ("Venta y reparación de vehículos"). Sin embargo, el propio cliente señala dudas. El Consorcio puede interpretar restricciones para venta de vehículos importados. Recomendación: priorizar CNAE 7711 (renting con opción a compra) y confirmar 4511 como actividad secundaria.</td>
+            </tr>
+            <tr class="bg-green-50/50">
+              <td class="px-4 py-3 text-center font-mono font-bold">5229</td>
+              <td class="px-4 py-3">Otras actividades anexas al transporte</td>
+              <td class="px-4 py-3"><span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded text-xs">SM Motors</span></td>
+              <td class="px-4 py-3 text-center">Div. 52 — Sección H</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">🟢 Autorizado</span></td>
+              <td class="px-4 py-3 text-gray-500 text-xs">Almacenamiento y actividades anexas al transporte. Gestión logística de importación de vehículos.</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-gray-50 font-bold">
+              <td class="px-4 py-3" colspan="4">TOTAL: 9 actividades CNAE propuestas</td>
+              <td class="px-4 py-3 text-center" colspan="2">
+                <span class="text-green-700">7 autorizados</span> · <span class="text-yellow-700">2 pendientes de consulta</span>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- Gráfico resumen CNAE -->
+      <div class="mt-8 grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-xl p-6 shadow-md">
+          <h3 class="font-bold text-gray-700 mb-4">Distribución de CNAEs por estado</h3>
+          <canvas id="cnaeChart" height="220"></canvas>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-md">
+          <h3 class="font-bold text-gray-700 mb-4">Análisis por vertical</h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="font-medium text-blue-700">SM Academy</span><span class="font-bold text-green-600">4/4 autorizados (100%)</span></div>
+              <div class="w-full bg-gray-200 rounded-full h-3"><div class="bg-green-500 h-3 rounded-full" style="width:100%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="font-medium text-emerald-700">SM PropTech</span><span class="font-bold text-yellow-600">1/2 autorizados (50%)</span></div>
+              <div class="w-full bg-gray-200 rounded-full h-3"><div class="bg-yellow-400 h-3 rounded-full" style="width:50%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="font-medium text-orange-700">SM Motors</span><span class="font-bold text-yellow-600">2/3 autorizados (67%)</span></div>
+              <div class="w-full bg-gray-200 rounded-full h-3"><div class="bg-yellow-400 h-3 rounded-full" style="width:67%"></div></div>
+            </div>
+          </div>
+          <div class="mt-4 bg-blue-50 rounded-lg p-3 text-xs text-blue-800">
+            <strong>Art. 33 Ley 19/1994:</strong> Las entidades ZEC pueden tener varios objetos sociales siempre que TODOS estén incluidos en el Anexo. Una sola entidad es viable si se confirman los CNAEs pendientes.
+          </div>
+        </div>
+      </div>
+
+      <!-- Estrategia para CNAEs problemáticos -->
+      <div class="mt-6 space-y-4">
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-5">
+          <h4 class="font-bold text-yellow-800 mb-2">⚠️ Estrategia para CNAE 6831 (Intermediación inmobiliaria)</h4>
+          <div class="text-sm text-yellow-700 space-y-2">
+            <p><strong>Riesgo:</strong> La División 68 aparece "con limitaciones" en el Anexo. La actividad de agente inmobiliario tradicional podría no estar contemplada. No se puede interpretar extensivamente una lista cerrada (NACE Rev.2 es exhaustiva).</p>
+            <p><strong>Argumento a favor:</strong> SM PropTech es un servicio tecnológico (PropTech) de intermediación digital, no una agencia inmobiliaria física tradicional. El componente principal es el desarrollo de software (CNAE 6201).</p>
+            <p><strong>Plan A:</strong> Consultar al Consorcio argumentando carácter tecnológico de la intermediación digital.</p>
+            <p><strong>Plan B (seguro):</strong> Operar SM PropTech exclusivamente bajo CNAE 6201 (programación informática) como desarrollo y licencia de software de gestión inmobiliaria, sin actividad directa de intermediación.</p>
+          </div>
+        </div>
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-5">
+          <h4 class="font-bold text-yellow-800 mb-2">⚠️ Estrategia para CNAE 4511 (Venta de vehículos)</h4>
+          <div class="text-sm text-yellow-700 space-y-2">
+            <p><strong>Situación:</strong> La División 45 sí aparece en el Anexo ("Venta y reparación de vehículos"). Sin embargo, el propio cliente ha señalado dudas sobre si la venta de vehículos importados desde EAU encaja en la interpretación del Consorcio.</p>
+            <p><strong>Recomendación fuerte:</strong> Priorizar el modelo de renting con opción a compra (CNAE 7711 — claramente autorizado). El renting genera ingresos recurrentes (más valorados por el Consorcio) y la exención IGIC en importaciones aplica igualmente a los activos fijos afectos (la flota).</p>
+            <p><strong>Consulta:</strong> Confirmar con el Consorcio si la venta directa de vehículos importados de fuera de la UE es actividad aceptada como secundaria bajo la División 45.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ REQUISITOS ART. 31 ═══════════════ -->
+    <section id="requisitos" class="reveal">
+      <h2 class="text-3xl font-extrabold gradient-text mb-2">Checklist de Requisitos — Art. 31 Ley 19/1994</h2>
+      <p class="text-gray-500 mb-8">Verificación individual de cada requisito legal para la inscripción en el ROEZEC</p>
+
+      <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="divide-y divide-gray-100">
+          <!-- Req 1 -->
+          <div class="p-5 flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"><span class="text-green-600 font-bold text-lg">✅</span></div>
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-1">
+                <h4 class="font-bold text-gray-900">a) Entidad de nueva creación con domicilio en ZEC</h4>
+                <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">CUMPLE</span>
+              </div>
+              <p class="text-sm text-gray-600">SM Academy Tech S.L. será una entidad de nueva creación, con domicilio social y sede de dirección efectiva previsto en <strong>C/ Villalba Hervás 12, planta 2ª, 38002 Santa Cruz de Tenerife</strong>, dentro del ámbito geográfico de la ZEC (todo el Archipiélago canario, Art. 30).</p>
+            </div>
+          </div>
+          <!-- Req 2 -->
+          <div class="p-5 flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"><span class="text-green-600 font-bold text-lg">✅</span></div>
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-1">
+                <h4 class="font-bold text-gray-900">b) Al menos un administrador residente en Canarias</h4>
+                <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">CUMPLE</span>
+              </div>
+              <p class="text-sm text-gray-600"><strong>Adrián Morales Santana</strong> (DNI 43.876.521-K) reside en Santa Cruz de Tenerife (C/ El Pilar 28, 3ºA) y será el administrador de la sociedad. Deberá mantener su residencia fiscal en Canarias durante toda la vida de la entidad ZEC.</p>
+            </div>
+          </div>
+          <!-- Req 3 -->
+          <div class="p-5 flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"><span class="text-green-600 font-bold text-lg">✅</span></div>
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-1">
+                <h4 class="font-bold text-gray-900">c) Inversión mínima en activos fijos — 100.000 € (isla capitalina)</h4>
+                <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">CUMPLE</span>
+              </div>
+              <p class="text-sm text-gray-600">Plan de inversión detallado: flota de vehículos 75.000 € + equipos informáticos 8.000 € + mobiliario 5.000 € + software propio 10.000 € + garantías 2.000 € = <strong>100.000 €</strong>. Cumple exactamente el mínimo. Materialización en 2 años desde autorización (Art. 31.2). <em>Nota: el solicitante podría solicitar la exención del requisito de inversión al amparo de la Circular 1/2022, por tratarse de empresa de programación (CNAE 6201/6209) intensiva en capital humano.</em></p>
+            </div>
+          </div>
+          <!-- Req 4 -->
+          <div class="p-5 flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"><span class="text-green-600 font-bold text-lg">✅</span></div>
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-1">
+                <h4 class="font-bold text-gray-900">d) Creación mínima de 5 puestos de trabajo a jornada completa (isla capitalina)</h4>
+                <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">CUMPLE</span>
+              </div>
+              <p class="text-sm text-gray-600">El plan prevé <strong>5 puestos</strong> a jornada completa: CEO (28K), CTO (26K), Dir. Comercial (24K), Community Manager (20K), Gestor Administrativo (18K). Total nómina bruta anual: 116.000 €. Plazo: 6 meses desde autorización (Art. 31.1.e).</p>
+            </div>
+          </div>
+          <!-- Req 5 -->
+          <div class="p-5 flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"><span class="text-green-600 font-bold text-lg">✅</span></div>
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-1">
+                <h4 class="font-bold text-gray-900">f) Memoria descriptiva</h4>
+                <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-bold">CUMPLE (borrador)</span>
+              </div>
+              <p class="text-sm text-gray-600">Borrador de memoria descriptiva detallado (14 secciones). Incluye: actividades, descripción técnica, solvencia, plan de empleo, plan de inversión, contribución económico-social y cronograma. <strong>Requiere revisión por asesor colegiado</strong> y formalización en modelo normalizado del Consorcio antes de la presentación.</p>
+            </div>
+          </div>
+          <!-- Req 6 -->
+          <div class="p-5 flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center"><span class="text-yellow-600 font-bold text-lg pulse-dot">⚠️</span></div>
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-1">
+                <h4 class="font-bold text-gray-900">g) Actividades incluidas en el Anexo del RD 2/2000</h4>
+                <span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">PARCIAL — 7/9</span>
+              </div>
+              <p class="text-sm text-gray-600"><strong>7 de 9 CNAEs</strong> están claramente autorizados en el Anexo. Los CNAEs 6831 (intermediación inmobiliaria, Div. 68 "con limitaciones") y 4511 (venta de vehículos, dudas del propio solicitante) requieren consulta previa. Ver sección anterior para estrategia detallada.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ INVERSIÓN ═══════════════ -->
+    <section id="inversion" class="reveal">
+      <h2 class="text-3xl font-extrabold gradient-text mb-2">Verificación del Plan de Inversión</h2>
+      <p class="text-gray-500 mb-8">Art. 31.1.c) — Inversión mínima 100.000 € en activos fijos para isla capitalina</p>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-xl p-6 shadow-md">
+          <h3 class="font-bold text-gray-700 mb-4">Desglose de inversión propuesta</h3>
+          <canvas id="inversionChart" height="240"></canvas>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-md">
+          <h3 class="font-bold text-gray-700 mb-4">Detalle y verificación</h3>
+          <table class="w-full text-sm">
+            <thead><tr class="bg-gray-50"><th class="px-3 py-2 text-left">Concepto</th><th class="px-3 py-2 text-right">Importe</th><th class="px-3 py-2 text-center">¿Activo fijo?</th></tr></thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="px-3 py-2">Flota vehículos premium (5 uds.)</td><td class="px-3 py-2 text-right font-bold">75.000 €</td><td class="px-3 py-2 text-center text-green-600">✅ Material</td></tr>
+              <tr><td class="px-3 py-2">Equipamiento informático</td><td class="px-3 py-2 text-right font-bold">8.000 €</td><td class="px-3 py-2 text-center text-green-600">✅ Material</td></tr>
+              <tr><td class="px-3 py-2">Mobiliario y oficina</td><td class="px-3 py-2 text-right font-bold">5.000 €</td><td class="px-3 py-2 text-center text-green-600">✅ Material</td></tr>
+              <tr><td class="px-3 py-2">Software propio (plataformas)</td><td class="px-3 py-2 text-right font-bold">10.000 €</td><td class="px-3 py-2 text-center text-green-600">✅ Intangible</td></tr>
+              <tr><td class="px-3 py-2">Depósitos y garantías</td><td class="px-3 py-2 text-right font-bold">2.000 €</td><td class="px-3 py-2 text-center text-yellow-600">⚠️ Verificar</td></tr>
+              <tr class="bg-green-50 font-bold"><td class="px-3 py-2">TOTAL</td><td class="px-3 py-2 text-right text-lg">100.000 €</td><td class="px-3 py-2 text-center text-green-700">≥ 100.000 €</td></tr>
+            </tbody>
+          </table>
+          <div class="mt-4 bg-yellow-50 rounded-lg p-3 text-xs text-yellow-800">
+            <strong>⚠️ Observación:</strong> Los "depósitos y garantías" (2.000 €) podrían no computar como activo fijo afecto a la actividad según la interpretación estricta del Art. 31.1.c). Sin los depósitos, la inversión en activos fijos afectos sería de <strong>98.000 €</strong>, por debajo del mínimo. Recomendación: incrementar alguna partida o solicitar la exención de inversión (Circular 1/2022).
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparativa capitalina vs no capitalina -->
+      <div class="mt-8">
+        <h3 class="font-bold text-gray-800 mb-4">Comparativa requisitos: isla capitalina vs. no capitalina</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-xl p-6 shadow-md border-t-4 border-zec-500">
+            <h4 class="font-bold text-zec-700 mb-3 flex items-center gap-2">🏝️ Isla Capitalina <span class="text-xs font-normal text-gray-500">(Gran Canaria, Tenerife)</span></h4>
+            <table class="w-full text-sm">
+              <tbody class="divide-y divide-gray-100">
+                <tr><td class="py-2 text-gray-500">Inversión mínima</td><td class="py-2 text-right font-bold text-zec-700">100.000 €</td></tr>
+                <tr><td class="py-2 text-gray-500">Empleo mínimo</td><td class="py-2 text-right font-bold text-zec-700">5 puestos</td></tr>
+                <tr><td class="py-2 text-gray-500">SM Academy Tech</td><td class="py-2 text-right font-bold text-green-600">✅ Cumple ambos</td></tr>
+              </tbody>
+            </table>
+            <p class="mt-2 text-xs text-zec-600 bg-zec-50 rounded p-2 text-center font-medium">◀ APLICA A SM ACADEMY TECH (Tenerife)</p>
+          </div>
+          <div class="bg-white rounded-xl p-6 shadow-md border-t-4 border-gray-300">
+            <h4 class="font-bold text-gray-500 mb-3 flex items-center gap-2">🏝️ Isla No Capitalina <span class="text-xs font-normal">(LZ, FV, LP, LG, EH)</span></h4>
+            <table class="w-full text-sm">
+              <tbody class="divide-y divide-gray-100">
+                <tr><td class="py-2 text-gray-400">Inversión mínima</td><td class="py-2 text-right font-bold text-gray-500">50.000 €</td></tr>
+                <tr><td class="py-2 text-gray-400">Empleo mínimo</td><td class="py-2 text-right font-bold text-gray-500">3 puestos</td></tr>
+                <tr><td class="py-2 text-gray-400">SM Academy Tech</td><td class="py-2 text-right text-gray-400">No aplica</td></tr>
+              </tbody>
+            </table>
+            <p class="mt-2 text-xs text-gray-400 bg-gray-50 rounded p-2 text-center">Solo referencia comparativa</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ EMPLEO ═══════════════ -->
+    <section id="empleo" class="reveal">
+      <h2 class="text-3xl font-extrabold gradient-text mb-2">Verificación del Plan de Empleo</h2>
+      <p class="text-gray-500 mb-8">Art. 31.1.d) — Mínimo 5 puestos a jornada completa. Plazo: 6 meses desde autorización (Art. 31.1.e)</p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full bg-white rounded-xl overflow-hidden shadow-md text-sm">
+          <thead>
+            <tr class="bg-zec-800 text-white">
+              <th class="px-4 py-3 text-center w-10">Nº</th>
+              <th class="px-4 py-3 text-left">Puesto</th>
+              <th class="px-4 py-3 text-center">Dedicación</th>
+              <th class="px-4 py-3 text-right">Salario bruto/año</th>
+              <th class="px-4 py-3 text-left">Vertical principal</th>
+              <th class="px-4 py-3 text-center">Computa ZEC</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr><td class="px-4 py-3 text-center font-bold">1</td><td class="px-4 py-3 font-medium">Director General / CEO</td><td class="px-4 py-3 text-center">Jornada completa</td><td class="px-4 py-3 text-right">28.000 €</td><td class="px-4 py-3">Todas</td><td class="px-4 py-3 text-center text-green-600 font-bold">✅</td></tr>
+            <tr><td class="px-4 py-3 text-center font-bold">2</td><td class="px-4 py-3 font-medium">Desarrollador Full-Stack / CTO</td><td class="px-4 py-3 text-center">Jornada completa</td><td class="px-4 py-3 text-right">26.000 €</td><td class="px-4 py-3">SM Academy + SM PropTech</td><td class="px-4 py-3 text-center text-green-600 font-bold">✅</td></tr>
+            <tr><td class="px-4 py-3 text-center font-bold">3</td><td class="px-4 py-3 font-medium">Director Comercial / Ventas</td><td class="px-4 py-3 text-center">Jornada completa</td><td class="px-4 py-3 text-right">24.000 €</td><td class="px-4 py-3">SM Motors + SM PropTech</td><td class="px-4 py-3 text-center text-green-600 font-bold">✅</td></tr>
+            <tr><td class="px-4 py-3 text-center font-bold">4</td><td class="px-4 py-3 font-medium">Community Manager / Soporte</td><td class="px-4 py-3 text-center">Jornada completa</td><td class="px-4 py-3 text-right">20.000 €</td><td class="px-4 py-3">SM Academy</td><td class="px-4 py-3 text-center text-green-600 font-bold">✅</td></tr>
+            <tr><td class="px-4 py-3 text-center font-bold">5</td><td class="px-4 py-3 font-medium">Gestor Administrativo / Operaciones</td><td class="px-4 py-3 text-center">Jornada completa</td><td class="px-4 py-3 text-right">18.000 €</td><td class="px-4 py-3">Todas</td><td class="px-4 py-3 text-center text-green-600 font-bold">✅</td></tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-green-50 font-bold">
+              <td class="px-4 py-3 text-center">5</td>
+              <td class="px-4 py-3" colspan="2">TOTAL — Requisito cumplido (5/5 jornada completa)</td>
+              <td class="px-4 py-3 text-right text-lg text-green-700">116.000 €</td>
+              <td class="px-4 py-3" colspan="2"><span class="text-green-700">Coste SS empresa est.: +29.000 € → Total: ~145.000 €/año</span></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="mt-6 bg-white rounded-xl p-6 shadow-md">
+        <h3 class="font-bold text-gray-700 mb-4">Plan de crecimiento</h3>
+        <div class="grid grid-cols-3 gap-6 text-center">
+          <div class="bg-blue-50 rounded-xl p-4">
+            <p class="text-4xl font-extrabold text-blue-600 mb-1">5</p>
+            <p class="text-sm text-blue-700 font-medium">Año 1</p>
+            <p class="text-xs text-blue-500">Equipo fundacional</p>
+          </div>
+          <div class="bg-zec-50 rounded-xl p-4">
+            <p class="text-4xl font-extrabold text-zec-600 mb-1">7</p>
+            <p class="text-sm text-zec-700 font-medium">Año 2</p>
+            <p class="text-xs text-zec-500">+ Trader/analista + Técnico logístico</p>
+          </div>
+          <div class="bg-green-50 rounded-xl p-4">
+            <p class="text-4xl font-extrabold text-green-600 mb-1">10</p>
+            <p class="text-sm text-green-700 font-medium">Año 3</p>
+            <p class="text-xs text-green-500">+ 2º desarrollador + Agente inmob. + Marketing</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-3 text-center">Art. 44: Con 5 empleos → límite BI al 4% de 1.800.000 €/año. Con 8 empleos → 2.400.000 €/año. Con 12 empleos → 3.600.000 €/año.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════ PLAZOS ═══════════════ -->
+    <section id="plazos" class="reveal">
+      <h2 class="text-3xl font-extrabold gradient-text mb-2">Timeline de Plazos Críticos</h2>
+      <p class="text-gray-500 mb-8">Cronograma de hitos legales desde la solicitud hasta la operación</p>
+
+      <div class="relative pl-10 border-l-4 border-zec-400 space-y-8">
+        <div class="relative">
+          <div class="tl-dot bg-yellow-500">1</div>
+          <div class="bg-white rounded-xl p-5 shadow-md ml-4">
+            <div class="flex items-center gap-3 mb-2">
+              <h4 class="font-bold text-gray-900">Consultas previas al Consorcio</h4>
+              <span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded text-xs font-bold">PRE-SOLICITUD</span>
+            </div>
+            <p class="text-sm text-gray-600">Resolver: CNAEs 6831 y 4511 + exención inversión (Circular 1/2022). Tel: 922 298 010 | zec@canariaszec.gob.es</p>
+            <p class="text-xs text-gray-400 mt-1">📍 Antes de presentar la solicitud formal. Plazo estimado: 2-4 semanas.</p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="tl-dot bg-zec-500">2</div>
+          <div class="bg-white rounded-xl p-5 shadow-md ml-4">
+            <div class="flex items-center gap-3 mb-2">
+              <h4 class="font-bold text-gray-900">Solicitud de autorización previa</h4>
+              <span class="px-2 py-0.5 bg-zec-100 text-zec-700 rounded text-xs font-bold">Art. 32</span>
+            </div>
+            <p class="text-sm text-gray-600">Presentar solicitud en modelo normalizado + memoria descriptiva + documentación + tasa 1.200 € ante el Consorcio ZEC (sede SCT).</p>
+            <p class="text-xs text-gray-400 mt-1">📍 Resolución del Consorcio: máximo 2 meses (Art. 32). Silencio administrativo positivo.</p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="tl-dot bg-blue-500">3</div>
+          <div class="bg-white rounded-xl p-5 shadow-md ml-4">
+            <div class="flex items-center gap-3 mb-2">
+              <h4 class="font-bold text-gray-900">Constitución de la sociedad</h4>
+              <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-bold">Post-autorización</span>
+            </div>
+            <p class="text-sm text-gray-600">Constitución ante notario con objeto social compatible con los CNAEs autorizados. Inscripción en Registro Mercantil. Obtención CIF.</p>
+            <p class="text-xs text-gray-400 mt-1">📍 Constitución prevista: 2º semestre 2026 según el solicitante.</p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="tl-dot bg-purple-500">4</div>
+          <div class="bg-white rounded-xl p-5 shadow-md ml-4">
+            <div class="flex items-center gap-3 mb-2">
+              <h4 class="font-bold text-gray-900">Inscripción en el ROEZEC</h4>
+              <span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded text-xs font-bold">Máx. 18 meses</span>
+            </div>
+            <p class="text-sm text-gray-600">Inscripción en el Registro Oficial de Entidades ZEC. La entidad NO puede operar bajo régimen ZEC hasta esta inscripción efectiva (Art. 32.4).</p>
+            <p class="text-xs text-gray-400 mt-1">⚠️ Plazo máximo: 18 meses desde autorización previa. Superado → autorización caduca.</p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="tl-dot bg-orange-500">5</div>
+          <div class="bg-white rounded-xl p-5 shadow-md ml-4">
+            <div class="flex items-center gap-3 mb-2">
+              <h4 class="font-bold text-gray-900">Creación de empleo (5 puestos)</h4>
+              <span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded text-xs font-bold">6 meses</span>
+            </div>
+            <p class="text-sm text-gray-600">Formalizar los 5 contratos a jornada completa. Art. 31.1.e: dentro de los 6 meses siguientes a la autorización.</p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="tl-dot bg-red-500">6</div>
+          <div class="bg-white rounded-xl p-5 shadow-md ml-4">
+            <div class="flex items-center gap-3 mb-2">
+              <h4 class="font-bold text-gray-900">Materialización inversión (100.000 €)</h4>
+              <span class="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-bold">2 años</span>
+            </div>
+            <p class="text-sm text-gray-600">Materializar los 100.000 € en activos fijos nuevos situados en Canarias y afectos a la actividad (Art. 31.2). Si la exención Circular 1/2022 es concedida, este requisito no aplica.</p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="tl-dot bg-gray-500">⏰</div>
+          <div class="bg-white rounded-xl p-5 shadow-md ml-4 border border-red-200">
+            <div class="flex items-center gap-3 mb-2">
+              <h4 class="font-bold text-red-800">Fin vigencia régimen ZEC</h4>
+              <span class="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-bold">31/12/2027</span>
+            </div>
+            <p class="text-sm text-red-700">Art. 29 Ley 19/1994 (confirmado por Ley 31/2022). Posible prórroga previa autorización CE (históricamente se ha prorrogado en 2008, 2014, 2019, 2024). Riesgo regulatorio a monitorizar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ CONSULTAS PENDIENTES ═══════════════ -->
+    <section id="consultas" class="reveal">
+      <h2 class="text-3xl font-extrabold gradient-text mb-2">Consultas Pendientes para el Consorcio</h2>
+      <p class="text-gray-500 mb-8">Puntos que deben resolverse ANTES de la presentación formal de la solicitud</p>
+
+      <div class="space-y-4">
+        <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-yellow-500">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold flex-shrink-0">CONSULTA 1</span>
+            <div>
+              <h4 class="font-bold text-gray-900">¿La intermediación inmobiliaria digital (CNAE 6831) está contemplada en el Anexo ZEC?</h4>
+              <p class="text-sm text-gray-600 mt-1">La División 68 aparece "con limitaciones". SM PropTech es un servicio tecnológico (PropTech) de intermediación digital, no una agencia inmobiliaria tradicional. La actividad de desarrollo de software ya está cubierta por CNAE 6201, pero la intermediación directa con cobro de comisiones requiere confirmación.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-yellow-500">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold flex-shrink-0">CONSULTA 2</span>
+            <div>
+              <h4 class="font-bold text-gray-900">¿La venta directa de vehículos importados (CNAE 4511) es viable como actividad ZEC?</h4>
+              <p class="text-sm text-gray-600 mt-1">La División 45 sí aparece en el Anexo. Sin embargo, el modelo de negocio (importación desde EAU para venta directa) podría generar dudas. ¿Es compatible como actividad secundaria junto al renting (7711)?</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-yellow-500">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold flex-shrink-0">CONSULTA 3</span>
+            <div>
+              <h4 class="font-bold text-gray-900">¿La empresa puede acogerse a la exención del requisito de inversión (Circular 1/2022)?</h4>
+              <p class="text-sm text-gray-600 mt-1">SM Academy Tech opera como empresa de programación (CNAE 6201/6209) intensiva en capital humano. La Circular 1/2022 permite la exención del requisito de inversión para este tipo de empresas. Si se concede, los 100.000 € dejan de ser obligatorios.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-blue-500">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold flex-shrink-0">CONSULTA 4</span>
+            <div>
+              <h4 class="font-bold text-gray-900">¿La flota de vehículos importados computa como activo fijo a efectos del Art. 31.1.c)?</h4>
+              <p class="text-sm text-gray-600 mt-1">Los vehículos premium importados desde EAU constituyen la partida principal (75.000 €) del plan de inversión. Si el Consorcio no los acepta como activos fijos afectos, la inversión quedaría por debajo del mínimo.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-blue-500">
+          <div class="flex items-start gap-3">
+            <span class="px-2.5 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold flex-shrink-0">CONSULTA 5</span>
+            <div>
+              <h4 class="font-bold text-gray-900">¿La exención IGIC de importaciones (Art. 43) aplica a vehículos desde EAU?</h4>
+              <p class="text-sm text-gray-600 mt-1">Confirmar que la exención aplica a importaciones de países no-UE y verificar requisitos adicionales: homologación europea, ITV, arancel aduanero (10% para vehículos desde países sin acuerdo preferencial).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ CONCLUSIÓN FINAL ═══════════════ -->
+    <section class="reveal">
+      <div class="glass rounded-2xl p-8 md:p-12 shadow-xl border-2 border-yellow-400">
+        <h2 class="text-2xl font-extrabold text-center gradient-text mb-6">Conclusión del Análisis de Viabilidad</h2>
+        <div class="grid md:grid-cols-3 gap-6 text-center mb-8">
+          <div class="bg-green-50 rounded-xl p-5 border border-green-200">
+            <p class="text-4xl mb-2">✅</p>
+            <p class="font-bold text-green-800 text-lg">A FAVOR</p>
+            <ul class="text-sm text-green-700 mt-3 text-left space-y-1.5">
+              <li>• Actividad principal (tecnología/educación) en las divisiones más demandadas del Anexo ZEC</li>
+              <li>• MVP operativo (sm.academy) demuestra viabilidad técnica</li>
+              <li>• Administrador residente en Canarias</li>
+              <li>• Plan de empleo supera el mínimo exacto</li>
+              <li>• Contribución a diversificación económica canaria</li>
+              <li>• Posible exención de inversión (Circular 1/2022)</li>
+              <li>• 3 verticales complementarias generan resiliencia</li>
+            </ul>
+          </div>
+          <div class="bg-yellow-50 rounded-xl p-5 border border-yellow-200">
+            <p class="text-4xl mb-2">⚠️</p>
+            <p class="font-bold text-yellow-800 text-lg">CONDICIONES</p>
+            <ul class="text-sm text-yellow-700 mt-3 text-left space-y-1.5">
+              <li>• CNAE 6831: la Div. 68 tiene "limitaciones" — consulta previa obligatoria</li>
+              <li>• CNAE 4511: confirmar aceptación de venta de vehículos importados</li>
+              <li>• Inversión ajustada al mínimo exacto (100K) — sin margen si los depósitos no computan</li>
+              <li>• CTO y Dir. Comercial "por designar" — contratación pendiente</li>
+              <li>• Memoria es borrador de trabajo, requiere asesor colegiado</li>
+              <li>• Vigencia ZEC hasta 31/12/2027 — riesgo regulatorio</li>
+            </ul>
+          </div>
+          <div class="bg-blue-50 rounded-xl p-5 border border-blue-200">
+            <p class="text-4xl mb-2">📋</p>
+            <p class="font-bold text-blue-800 text-lg">PRÓXIMOS PASOS</p>
+            <ol class="text-sm text-blue-700 mt-3 text-left space-y-1.5">
+              <li>1. Contactar Consorcio ZEC (922 298 010) para resolver 5 consultas pendientes</li>
+              <li>2. Obtener certificación negativa de denominación social (RMC)</li>
+              <li>3. Obtener certificados AEAT y TGSS del solicitante</li>
+              <li>4. Contratar asesor fiscal colegiado para revisión de memoria</li>
+              <li>5. Preparar acreditación de solvencia financiera</li>
+              <li>6. Formalizar en modelo normalizado del Consorcio</li>
+            </ol>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center">
+          <p class="text-sm text-gray-500 mb-2">Veredicto VIABLEX</p>
+          <p class="text-3xl font-extrabold text-yellow-700">🟡 VIABLE CON CONDICIONES</p>
+          <p class="text-sm text-gray-600 mt-2 max-w-2xl mx-auto">El proyecto de SM Academy Tech S.L. es viable para su inscripción en la ZEC, condicionado a la resolución favorable de las consultas pendientes sobre las actividades CNAE 6831 y 4511, y la confirmación de la inversión en activos fijos afectos. Se recomienda proceder con las consultas previas al Consorcio ZEC de forma inmediata.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AVISO BORRADOR -->
+    <section class="reveal">
+      <div class="bg-red-50 border-2 border-red-300 rounded-xl p-5 text-sm text-red-800">
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">⚠️</span>
+          <div>
+            <h4 class="font-bold mb-1">AVISO IMPORTANTE — Documento de trabajo</h4>
+            <p>Este informe se basa en el <strong>borrador de memoria descriptiva</strong> proporcionado por el solicitante, cuyos datos de solicitante son ficticios a efectos de primera prueba. Los datos de actividad y estructura se basan en el proyecto real. Este análisis es <strong>orientativo y no constituye asesoramiento legal ni fiscal vinculante</strong>. Debe ser revisado y validado por un asesor fiscal y legal colegiado antes de cualquier actuación ante el Consorcio ZEC.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+      <p class="mb-2">Informe generado por <strong class="text-zec-400">VIABLEX 🔍</strong> — Analista de Viabilidad ZEC | Equipo <strong class="text-zec-400">ZECEX ⚖️📊</strong></p>
+      <p class="mb-2">Fecha: 26 de marzo de 2026 | Normativa base: Ley 19/1994 (texto consolidado marzo 2026), Anexo RD 2/2000</p>
+      <p class="mb-2">Este informe es orientativo y no constituye asesoramiento legal vinculante. Requiere validación por profesional colegiado.</p>
+      <p>Consorcio ZEC — Las Palmas: 928 490 505 | Santa Cruz de Tenerife: 922 298 010 | zec@canariaszec.gob.es</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // CNAE Chart
+    new Chart(document.getElementById('cnaeChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Autorizados (7)', 'Pendientes consulta (2)'],
+        datasets: [{
+          data: [7, 2],
+          backgroundColor: ['#16a34a', '#d97706'],
+          borderWidth: 0,
+          borderRadius: 4
+        }]
+      },
+      options: {
+        cutout: '65%',
+        plugins: {
+          legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true } }
+        }
+      }
+    });
+
+    // Inversión Chart
+    new Chart(document.getElementById('inversionChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Flota vehículos', 'Software propio', 'Equipos IT', 'Mobiliario', 'Depósitos'],
+        datasets: [{
+          label: 'Inversión (€)',
+          data: [75000, 10000, 8000, 5000, 2000],
+          backgroundColor: ['#D4A017', '#B8860B', '#92400E', '#78350F', '#d97706'],
+          borderRadius: 6
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ctx.parsed.x.toLocaleString('es-ES') + ' €' } }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            ticks: { callback: v => (v/1000) + 'K €' }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

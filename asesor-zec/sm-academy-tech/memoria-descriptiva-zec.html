@@ -1,0 +1,514 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memoria Descriptiva — SM Academy Tech S.L. | Solicitud ZEC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+      colors: { zec: { 50:'#FFFBEB',100:'#FEF3C7',200:'#FDE68A',300:'#FCD34D',400:'#FBBF24',500:'#D4A017',600:'#B8860B',700:'#92400E',800:'#78350F',900:'#451A03' }}
+    }}}
+  </script>
+  <style>
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+    .gradient-text{background:linear-gradient(135deg,#D4A017 0%,#B8860B 50%,#78350F 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .glass{background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(212,160,23,.2)}
+    html{scroll-behavior:smooth}tbody tr:hover{background-color:rgba(212,160,23,.05)}
+    .card-hover{transition:all .3s ease}.card-hover:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.1)}
+    .tl-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0;position:absolute;left:-14px;border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+<!-- NAVBAR -->
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zec-200 shadow-sm">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <span class="text-xl font-bold gradient-text">MEMOREX 📝 Memoria Descriptiva</span>
+    <div class="hidden md:flex gap-5 text-sm font-medium text-gray-600">
+      <a href="#datos" class="hover:text-zec-600 transition">Datos</a>
+      <a href="#actividades" class="hover:text-zec-600 transition">Actividades</a>
+      <a href="#tecnica" class="hover:text-zec-600 transition">Solvencia Técnica</a>
+      <a href="#financiera" class="hover:text-zec-600 transition">Solvencia Financiera</a>
+      <a href="#contribucion" class="hover:text-zec-600 transition">Contribución</a>
+      <a href="#implantacion" class="hover:text-zec-600 transition">Implantación</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="relative overflow-hidden min-h-[55vh] flex items-center text-white">
+  <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80')"></div>
+  <div class="absolute inset-0 bg-gradient-to-br from-zec-900/90 via-zec-800/80 to-zec-600/60"></div>
+  <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+    <p class="text-zec-200 text-sm font-semibold uppercase tracking-widest mb-4">Informe 2/5 — MEMOREX 📝 | Art. 31.2.f Ley 19/1994</p>
+    <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Memoria Descriptiva<br>del Proyecto Empresarial</h1>
+    <p class="text-xl text-zec-100 max-w-3xl mx-auto">Solicitud de Autorización Previa — Zona Especial Canaria</p>
+    <div class="mt-8 flex justify-center gap-3 flex-wrap">
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📅 26 de marzo de 2026</span>
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">🏢 SM Academy Tech S.L.</span>
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📍 Santa Cruz de Tenerife</span>
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">⚖️ Art. 31.2.f Ley 19/1994</span>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-16 space-y-20">
+
+<!-- ═══ A. DATOS DE LA ENTIDAD SOLICITANTE ═══ -->
+<section id="datos" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">A. Datos de la Entidad Solicitante</h2>
+  <p class="text-gray-500 mb-8">Conforme al modelo normalizado del Consorcio de la Zona Especial Canaria</p>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="bg-white rounded-xl p-6 shadow-md">
+      <h3 class="font-bold text-zec-700 mb-4">🏢 Datos de la Sociedad</h3>
+      <table class="w-full text-sm"><tbody class="divide-y divide-gray-100">
+        <tr><td class="py-2.5 text-gray-500 w-44">Denominación social</td><td class="py-2.5 font-bold text-lg">SM ACADEMY TECH S.L.</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Forma jurídica</td><td class="py-2.5">Sociedad de Responsabilidad Limitada</td></tr>
+        <tr><td class="py-2.5 text-gray-500">CIF</td><td class="py-2.5 font-mono text-gray-400">Pendiente de constitución</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Domicilio social previsto</td><td class="py-2.5">C/ Villalba Hervás, 12, planta 2ª<br>38002 Santa Cruz de Tenerife</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Isla de establecimiento</td><td class="py-2.5">Tenerife <span class="ml-1 px-2 py-0.5 bg-zec-100 text-zec-700 rounded text-xs font-bold">Capitalina</span></td></tr>
+        <tr><td class="py-2.5 text-gray-500">Capital social previsto</td><td class="py-2.5 font-bold">50.000 €</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Constitución prevista</td><td class="py-2.5">2º semestre 2026</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Tipo de entidad</td><td class="py-2.5 text-green-700 font-bold">Nueva creación (Art. 31.1.a)</td></tr>
+      </tbody></table>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md">
+      <h3 class="font-bold text-zec-700 mb-4">👤 Representante Legal y Administrador</h3>
+      <table class="w-full text-sm"><tbody class="divide-y divide-gray-100">
+        <tr><td class="py-2.5 text-gray-500 w-44">Nombre completo</td><td class="py-2.5 font-bold">Adrián Morales Santana</td></tr>
+        <tr><td class="py-2.5 text-gray-500">DNI</td><td class="py-2.5 font-mono">43.876.521-K</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Nacionalidad</td><td class="py-2.5">Española</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Domicilio</td><td class="py-2.5">C/ El Pilar 28, 3ºA<br>38002 Santa Cruz de Tenerife</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Cargo</td><td class="py-2.5">Administrador Único / CEO</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Residente en Canarias</td><td class="py-2.5 text-green-700 font-bold">✅ Sí (Art. 31.1.b)</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Teléfono</td><td class="py-2.5 font-mono">+34 622 445 891</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Email</td><td class="py-2.5 font-mono text-blue-600">adrian.morales@smacademytech.es</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <div class="mt-6 bg-white rounded-xl p-6 shadow-md">
+    <h3 class="font-bold text-zec-700 mb-4">🎯 Visión y Misión</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-blue-50 rounded-lg p-5 border border-blue-200">
+        <h4 class="font-bold text-blue-800 mb-2">Visión</h4>
+        <p class="text-sm text-blue-700">Empresa tecnológica multidisciplinar con sede de dirección efectiva en Tenerife, enfocada en tres verticales complementarias: formación en trading (EdTech/FinTech), intermediación inmobiliaria digital (PropTech) y movilidad premium (Mobility), compartiendo una base tecnológica común de desarrollo de software propio, automatización e infraestructura cloud.</p>
+      </div>
+      <div class="bg-emerald-50 rounded-lg p-5 border border-emerald-200">
+        <h4 class="font-bold text-emerald-800 mb-2">Misión</h4>
+        <p class="text-sm text-emerald-700">Desarrollar y operar desde Canarias plataformas tecnológicas innovadoras que democraticen el acceso a la educación financiera, la inversión inmobiliaria y la movilidad premium, contribuyendo a la diversificación económica del archipiélago canario más allá del sector turístico tradicional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ B. ACTIVIDADES A DESARROLLAR ═══ -->
+<section id="actividades" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">B. Actividades Económicas a Desarrollar</h2>
+  <p class="text-gray-500 mb-8">Códigos NACE Rev.2 conforme al Anexo del RD 2/2000 — Verificados por VIABLEX</p>
+
+  <!-- Vertical 1 -->
+  <div class="mb-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white text-lg">📚</span>
+      <div><h3 class="font-bold text-xl text-blue-800">Vertical 1: SM Academy — EdTech / FinTech</h3><p class="text-sm text-blue-600">Plataforma de formación en trading + Copy Trading automatizado</p></div>
+    </div>
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+      <table class="w-full text-sm">
+        <thead><tr class="bg-blue-50"><th class="px-4 py-3 text-center w-20">CNAE</th><th class="px-4 py-3 text-left">Actividad</th><th class="px-4 py-3 text-left">Descripción concreta</th><th class="px-4 py-3 text-center w-24">Anexo</th></tr></thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr><td class="px-4 py-3 text-center font-mono font-bold">6209</td><td class="px-4 py-3 font-medium">Otros servicios TI</td><td class="px-4 py-3 text-gray-600">Desarrollo y mantenimiento de la plataforma web educativa sm.academy, sistema de señales automatizadas, infraestructura Copy Trading, motor de ejecución MT5/Bitget</td><td class="px-4 py-3 text-center text-green-600 font-bold">🟢</td></tr>
+          <tr><td class="px-4 py-3 text-center font-mono font-bold">6311</td><td class="px-4 py-3 font-medium">Proceso de datos y hosting</td><td class="px-4 py-3 text-gray-600">Procesamiento de señales de mercado en tiempo real, hosting de servidores VPS para ejecución de operaciones automatizadas, almacenamiento de datos educativos</td><td class="px-4 py-3 text-center text-green-600 font-bold">🟢</td></tr>
+          <tr><td class="px-4 py-3 text-center font-mono font-bold">6312</td><td class="px-4 py-3 font-medium">Portales web</td><td class="px-4 py-3 text-gray-600">Operación del portal sm.academy como plataforma educativa de suscripción con +160 lecciones HD, quizzes, certificados y comunidad de trading</td><td class="px-4 py-3 text-center text-green-600 font-bold">🟢</td></tr>
+          <tr><td class="px-4 py-3 text-center font-mono font-bold">8559</td><td class="px-4 py-3 font-medium">Otra educación n.c.o.p.</td><td class="px-4 py-3 text-gray-600">Formación online en Forex, criptomonedas, análisis técnico y psicología del trading. Cursos de Principiante a Avanzado. Mentoría personalizada.</td><td class="px-4 py-3 text-center text-green-600 font-bold">🟢</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-4 bg-blue-50 rounded-xl p-5 border border-blue-200">
+      <h4 class="font-bold text-blue-800 mb-3">Catálogo formativo (MVP operativo)</h4>
+      <div class="grid md:grid-cols-4 gap-3">
+        <div class="bg-white rounded-lg p-3 text-center"><p class="text-2xl mb-1">📊</p><p class="font-bold text-sm">Forex desde Cero</p><p class="text-xs text-gray-500">42 lecciones · 12h</p></div>
+        <div class="bg-white rounded-lg p-3 text-center"><p class="text-2xl mb-1">₿</p><p class="font-bold text-sm">Crypto Avanzado</p><p class="text-xs text-gray-500">38 lecciones · 15h</p></div>
+        <div class="bg-white rounded-lg p-3 text-center"><p class="text-2xl mb-1">📈</p><p class="font-bold text-sm">Análisis Técnico Pro</p><p class="text-xs text-gray-500">56 lecciones · 20h</p></div>
+        <div class="bg-white rounded-lg p-3 text-center"><p class="text-2xl mb-1">🧠</p><p class="font-bold text-sm">Psicología Trader</p><p class="text-xs text-gray-500">24 lecciones · 8h</p></div>
+      </div>
+      <p class="text-xs text-blue-600 mt-3 text-center font-medium">Total: +160 lecciones con vídeos HD, quizzes interactivos y certificados de finalización</p>
+    </div>
+    <div class="mt-4 bg-white rounded-xl p-5 shadow-md">
+      <h4 class="font-bold text-gray-800 mb-3">Modelo de suscripción</h4>
+      <div class="grid grid-cols-5 gap-3 text-center text-sm">
+        <div class="bg-gray-50 rounded-lg p-3"><p class="font-bold">Gratuito</p><p class="text-lg font-extrabold text-gray-400">0 €</p><p class="text-xs text-gray-400">Cursos básicos</p></div>
+        <div class="bg-blue-50 rounded-lg p-3"><p class="font-bold">Mensual</p><p class="text-lg font-extrabold text-blue-600">49 €</p><p class="text-xs text-blue-500">Premium + Copy Trading</p></div>
+        <div class="bg-blue-50 rounded-lg p-3"><p class="font-bold">Trimestral</p><p class="text-lg font-extrabold text-blue-600">129 €</p><p class="text-xs text-blue-500">+ Mentoría grupal</p></div>
+        <div class="bg-blue-100 rounded-lg p-3"><p class="font-bold">Semestral</p><p class="text-lg font-extrabold text-blue-700">239 €</p><p class="text-xs text-blue-600">+ Mentoría individual</p></div>
+        <div class="bg-zec-100 rounded-lg p-3 ring-2 ring-zec-400"><p class="font-bold">Anual</p><p class="text-lg font-extrabold text-zec-700">399 €</p><p class="text-xs text-zec-600">Todo incluido + VIP</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vertical 2 -->
+  <div class="mb-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white text-lg">🏠</span>
+      <div><h3 class="font-bold text-xl text-emerald-800">Vertical 2: SM PropTech — PropTech</h3><p class="text-sm text-emerald-600">Plataforma de intermediación inmobiliaria digital</p></div>
+    </div>
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+      <table class="w-full text-sm">
+        <thead><tr class="bg-emerald-50"><th class="px-4 py-3 text-center w-20">CNAE</th><th class="px-4 py-3 text-left">Actividad</th><th class="px-4 py-3 text-left">Descripción concreta</th><th class="px-4 py-3 text-center w-24">Anexo</th></tr></thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr><td class="px-4 py-3 text-center font-mono font-bold">6201</td><td class="px-4 py-3 font-medium">Programación informática</td><td class="px-4 py-3 text-gray-600">Desarrollo integral del software de gestión inmobiliaria SM PropTech: CRM, portal público, motor de búsqueda, valoraciones, mapas interactivos</td><td class="px-4 py-3 text-center text-green-600 font-bold">🟢</td></tr>
+          <tr class="bg-yellow-50/50"><td class="px-4 py-3 text-center font-mono font-bold text-yellow-700">6831</td><td class="px-4 py-3 font-medium text-yellow-800">Agentes inmobiliarios</td><td class="px-4 py-3 text-yellow-700">Intermediación digital en compra-venta y alquiler. Captación automatizada de listings, CRM inmobiliario, comisiones por operación. <strong>Pendiente consulta Consorcio (Div. 68 "con limitaciones")</strong></td><td class="px-4 py-3 text-center text-yellow-600 font-bold">🟡</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-4 bg-white rounded-xl p-5 shadow-md">
+      <h4 class="font-bold text-gray-800 mb-3">Funcionalidades de la plataforma SM PropTech</h4>
+      <div class="grid md:grid-cols-4 gap-4">
+        <div class="bg-emerald-50 rounded-lg p-4"><p class="text-2xl mb-2">🔍</p><h5 class="font-bold text-sm">Captación digital</h5><p class="text-xs text-gray-500">Sistema automatizado de recogida de listings inmobiliarios</p></div>
+        <div class="bg-emerald-50 rounded-lg p-4"><p class="text-2xl mb-2">👥</p><h5 class="font-bold text-sm">CRM Inmobiliario</h5><p class="text-xs text-gray-500">Gestión integral de clientes compradores y vendedores</p></div>
+        <div class="bg-emerald-50 rounded-lg p-4"><p class="text-2xl mb-2">🗺️</p><h5 class="font-bold text-sm">Portal público</h5><p class="text-xs text-gray-500">Búsqueda avanzada con mapas, filtros y valoraciones</p></div>
+        <div class="bg-emerald-50 rounded-lg p-4"><p class="text-2xl mb-2">💰</p><h5 class="font-bold text-sm">Intermediación</h5><p class="text-xs text-gray-500">Comisiones por compra-venta y gestión de alquileres</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vertical 3 -->
+  <div>
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white text-lg">🚗</span>
+      <div><h3 class="font-bold text-xl text-orange-800">Vertical 3: SM Motors — Mobility</h3><p class="text-sm text-orange-600">Importación, alquiler y renting de vehículos premium</p></div>
+    </div>
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+      <table class="w-full text-sm">
+        <thead><tr class="bg-orange-50"><th class="px-4 py-3 text-center w-20">CNAE</th><th class="px-4 py-3 text-left">Actividad</th><th class="px-4 py-3 text-left">Descripción concreta</th><th class="px-4 py-3 text-center w-24">Anexo</th></tr></thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr><td class="px-4 py-3 text-center font-mono font-bold">7711</td><td class="px-4 py-3 font-medium">Alquiler de automóviles</td><td class="px-4 py-3 text-gray-600">Alquiler de vehículos premium importados (EAU). Renting corta duración (turismo), larga duración (12-36 meses) con opción a compra por valor residual</td><td class="px-4 py-3 text-center text-green-600 font-bold">🟢</td></tr>
+          <tr class="bg-yellow-50/50"><td class="px-4 py-3 text-center font-mono font-bold text-yellow-700">4511</td><td class="px-4 py-3 font-medium text-yellow-800">Venta de automóviles</td><td class="px-4 py-3 text-yellow-700">Venta directa de vehículos importados (segunda fase). <strong>Pendiente consulta Consorcio</strong>. Actividad secundaria al renting.</td><td class="px-4 py-3 text-center text-yellow-600 font-bold">🟡</td></tr>
+          <tr><td class="px-4 py-3 text-center font-mono font-bold">5229</td><td class="px-4 py-3 font-medium">Actividades anexas al transporte</td><td class="px-4 py-3 text-gray-600">Gestión logística de importación de vehículos desde Dubái: transitarios, despacho aduanero, homologación, ITV</td><td class="px-4 py-3 text-center text-green-600 font-bold">🟢</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-4 bg-white rounded-xl p-5 shadow-md">
+      <h4 class="font-bold text-gray-800 mb-3">Modelo de negocio SM Motors</h4>
+      <div class="flex items-center gap-2 text-sm">
+        <div class="bg-orange-100 rounded-lg p-3 text-center flex-1"><p class="font-bold text-orange-800">1. Importación</p><p class="text-xs text-orange-600">Vehículos premium desde EAU (Dubái)</p></div>
+        <span class="text-orange-400 text-xl">→</span>
+        <div class="bg-orange-100 rounded-lg p-3 text-center flex-1"><p class="font-bold text-orange-800">2. Homologación</p><p class="text-xs text-orange-600">ITV + conformidad europea</p></div>
+        <span class="text-orange-400 text-xl">→</span>
+        <div class="bg-orange-200 rounded-lg p-3 text-center flex-1 ring-2 ring-orange-400"><p class="font-bold text-orange-900">3. Renting</p><p class="text-xs text-orange-700">12-36 meses + opción a compra</p></div>
+        <span class="text-orange-400 text-xl">→</span>
+        <div class="bg-orange-50 rounded-lg p-3 text-center flex-1"><p class="font-bold text-orange-700">4. Venta</p><p class="text-xs text-orange-500">Valor residual (a confirmar)</p></div>
+      </div>
+      <p class="text-xs text-orange-600 mt-3">Flota objetivo inicial: 5-10 vehículos premium (Mercedes, BMW, Porsche, Land Rover)</p>
+    </div>
+  </div>
+
+  <!-- Mercados -->
+  <div class="mt-8 bg-white rounded-xl p-6 shadow-md">
+    <h3 class="font-bold text-gray-800 mb-4">Mercados objetivo</h3>
+    <div class="grid md:grid-cols-3 gap-4 text-sm">
+      <div class="bg-blue-50 rounded-lg p-4"><h4 class="font-bold text-blue-800">SM Academy</h4><p class="text-blue-600 mt-1">🌍 Internacional: España + 20 países hispanohablantes (Latinoamérica). Ingresos 100% digitales desde Canarias.</p></div>
+      <div class="bg-emerald-50 rounded-lg p-4"><h4 class="font-bold text-emerald-800">SM PropTech</h4><p class="text-emerald-600 mt-1">📍 Local + Nacional: Mercado inmobiliario canario + inversores peninsulares e internacionales interesados en Canarias.</p></div>
+      <div class="bg-orange-50 rounded-lg p-4"><h4 class="font-bold text-orange-800">SM Motors</h4><p class="text-orange-600 mt-1">📍 Local: Residentes en Tenerife + turismo premium de alto poder adquisitivo. Importación desde EAU.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ C. SOLVENCIA TÉCNICA ═══ -->
+<section id="tecnica" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">C. Solvencia Técnica</h2>
+  <p class="text-gray-500 mb-8">Equipo, capacidades tecnológicas e infraestructura</p>
+
+  <div class="bg-white rounded-xl p-6 shadow-md mb-6">
+    <h3 class="font-bold text-zec-700 mb-4">Equipo promotor</h3>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-zec-50 rounded-lg p-5 border border-zec-200 text-center">
+        <div class="w-14 h-14 bg-zec-500 rounded-full mx-auto flex items-center justify-center text-white text-2xl mb-3">👤</div>
+        <h4 class="font-bold">Adrián Morales Santana</h4>
+        <p class="text-sm text-zec-600 font-medium">CEO / Administrador Único</p>
+        <p class="text-xs text-gray-500 mt-2">Emprendedor tecnológico. Experiencia en desarrollo de plataformas digitales, marketing digital y operativa en mercados financieros. Residente en Tenerife.</p>
+      </div>
+      <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 text-center">
+        <div class="w-14 h-14 bg-gray-400 rounded-full mx-auto flex items-center justify-center text-white text-2xl mb-3">💻</div>
+        <h4 class="font-bold">CTO / Director Técnico</h4>
+        <p class="text-sm text-gray-500 font-medium">Por designar</p>
+        <p class="text-xs text-gray-400 mt-2">Perfil requerido: Ingeniero de software full-stack, experiencia en trading automatizado, arquitectura cloud, infraestructura de servidores.</p>
+      </div>
+      <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 text-center">
+        <div class="w-14 h-14 bg-gray-400 rounded-full mx-auto flex items-center justify-center text-white text-2xl mb-3">📈</div>
+        <h4 class="font-bold">Director Comercial</h4>
+        <p class="text-sm text-gray-500 font-medium">Por designar</p>
+        <p class="text-xs text-gray-400 mt-2">Perfil requerido: Captación de suscriptores, relaciones con brokers, gestión de flota de vehículos, operaciones inmobiliarias.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl p-6 shadow-md mb-6">
+    <h3 class="font-bold text-zec-700 mb-4">MVP operativo — Capacidades tecnológicas demostradas</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <p class="text-sm text-gray-600 mb-4">La empresa cuenta con un <strong>producto mínimo viable ya operativo</strong>, lo que demuestra viabilidad técnica y capacidad del equipo:</p>
+        <ul class="space-y-2 text-sm">
+          <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✅</span> Plataforma web sm.academy en producción (+160 lecciones)</li>
+          <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✅</span> Sistema de Copy Trading operativo en tiempo real (2 estrategias)</li>
+          <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✅</span> Infraestructura VPS 24/7 con monitorización automatizada (Watchdog)</li>
+          <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✅</span> Bot Telegram con reportes diarios automatizados</li>
+          <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✅</span> Comunidad activa de traders en Discord</li>
+          <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✅</span> Motor de ejecución MT5 + Bitget propietario</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-gray-700 mb-3">Stack tecnológico</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Python 3.12</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Next.js / React</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">MetaTrader 5 API</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Bitget REST API</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">TradingView</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">VPS Windows</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Cloudflare</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Telegram Bot API</span>
+        </div>
+        <h4 class="font-bold text-gray-700 mt-4 mb-2">Propiedad intelectual (activo intangible)</h4>
+        <ul class="text-xs text-gray-600 space-y-1">
+          <li>• Algoritmos de SL/TP basados en estructura de velas</li>
+          <li>• Sistema de ejecución GUI automatizada</li>
+          <li>• Motor de gestión de riesgo dinámico</li>
+          <li>• Sistema multi-instancia para estrategias paralelas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ D. SOLVENCIA FINANCIERA ═══ -->
+<section id="financiera" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">D. Solvencia Financiera</h2>
+  <p class="text-gray-500 mb-8">Plan de financiación, proyecciones y capacidad de inversión</p>
+
+  <div class="grid md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-white rounded-xl p-6 shadow-md text-center card-hover">
+      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Financiación total año 1</p>
+      <p class="text-4xl font-extrabold gradient-text">125.000 €</p>
+      <p class="text-sm text-gray-500 mt-2">Capital 50K + Préstamo 75K</p>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md text-center card-hover">
+      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Ingresos previstos año 1</p>
+      <p class="text-4xl font-extrabold text-green-600">186.000 €</p>
+      <p class="text-sm text-gray-500 mt-2">3 verticales combinadas</p>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md text-center card-hover">
+      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Resultado neto año 1 (ZEC 4%)</p>
+      <p class="text-4xl font-extrabold text-zec-600">10.944 €</p>
+      <p class="text-sm text-gray-500 mt-2">IS al 4% = 456 €</p>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="bg-white rounded-xl p-6 shadow-md">
+      <h3 class="font-bold text-zec-700 mb-4">Ingresos por vertical — Año 1</h3>
+      <canvas id="ingresosChart" height="200"></canvas>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md">
+      <h3 class="font-bold text-zec-700 mb-4">Estructura de gastos — Año 1</h3>
+      <canvas id="gastosChart" height="200"></canvas>
+    </div>
+  </div>
+
+  <div class="mt-8 bg-white rounded-xl p-6 shadow-md">
+    <h3 class="font-bold text-zec-700 mb-4">Cuenta de resultados previsional</h3>
+    <table class="w-full text-sm">
+      <thead><tr class="bg-zec-50"><th class="px-4 py-3 text-left">Concepto</th><th class="px-4 py-3 text-right">Año 1</th><th class="px-4 py-3 text-right">Año 2 (est.)</th><th class="px-4 py-3 text-right">Año 3 (est.)</th></tr></thead>
+      <tbody class="divide-y divide-gray-100">
+        <tr class="font-medium"><td class="px-4 py-2.5">Ingresos SM Academy</td><td class="px-4 py-2.5 text-right">96.000 €</td><td class="px-4 py-2.5 text-right">180.000 €</td><td class="px-4 py-2.5 text-right">300.000 €</td></tr>
+        <tr class="font-medium"><td class="px-4 py-2.5">Ingresos SM PropTech</td><td class="px-4 py-2.5 text-right">30.000 €</td><td class="px-4 py-2.5 text-right">75.000 €</td><td class="px-4 py-2.5 text-right">150.000 €</td></tr>
+        <tr class="font-medium"><td class="px-4 py-2.5">Ingresos SM Motors</td><td class="px-4 py-2.5 text-right">60.000 €</td><td class="px-4 py-2.5 text-right">120.000 €</td><td class="px-4 py-2.5 text-right">200.000 €</td></tr>
+        <tr class="bg-green-50 font-bold"><td class="px-4 py-2.5">TOTAL INGRESOS</td><td class="px-4 py-2.5 text-right text-green-700">186.000 €</td><td class="px-4 py-2.5 text-right text-green-700">375.000 €</td><td class="px-4 py-2.5 text-right text-green-700">650.000 €</td></tr>
+        <tr><td class="px-4 py-2.5 text-gray-500">Salarios + SS (5→7→10 empleados)</td><td class="px-4 py-2.5 text-right">-145.000 €</td><td class="px-4 py-2.5 text-right">-200.000 €</td><td class="px-4 py-2.5 text-right">-290.000 €</td></tr>
+        <tr><td class="px-4 py-2.5 text-gray-500">Alquiler oficina</td><td class="px-4 py-2.5 text-right">-9.600 €</td><td class="px-4 py-2.5 text-right">-12.000 €</td><td class="px-4 py-2.5 text-right">-15.000 €</td></tr>
+        <tr><td class="px-4 py-2.5 text-gray-500">Infraestructura + marketing + otros</td><td class="px-4 py-2.5 text-right">-20.000 €</td><td class="px-4 py-2.5 text-right">-30.000 €</td><td class="px-4 py-2.5 text-right">-45.000 €</td></tr>
+        <tr class="bg-red-50"><td class="px-4 py-2.5 font-medium text-gray-600">TOTAL GASTOS</td><td class="px-4 py-2.5 text-right text-red-600">-174.600 €</td><td class="px-4 py-2.5 text-right text-red-600">-242.000 €</td><td class="px-4 py-2.5 text-right text-red-600">-350.000 €</td></tr>
+        <tr class="bg-zec-50 font-bold text-lg"><td class="px-4 py-3">RESULTADO ANTES IS</td><td class="px-4 py-3 text-right">11.400 €</td><td class="px-4 py-3 text-right">133.000 €</td><td class="px-4 py-3 text-right">300.000 €</td></tr>
+        <tr><td class="px-4 py-2.5 text-gray-500">IS al 4% (ZEC)</td><td class="px-4 py-2.5 text-right">-456 €</td><td class="px-4 py-2.5 text-right">-5.320 €</td><td class="px-4 py-2.5 text-right">-12.000 €</td></tr>
+        <tr class="bg-green-100 font-extrabold text-lg"><td class="px-4 py-3">RESULTADO NETO</td><td class="px-4 py-3 text-right text-green-700">10.944 €</td><td class="px-4 py-3 text-right text-green-700">127.680 €</td><td class="px-4 py-3 text-right text-green-700">288.000 €</td></tr>
+      </tbody>
+    </table>
+    <p class="text-xs text-gray-400 mt-3">Proyecciones años 2-3 basadas en crecimientos conservadores: SM Academy (x2, x1.7), SM PropTech (x2.5, x2), SM Motors (x2, x1.7). Base imponible dentro del límite art. 44 (1.800.000 € con 5 empleos).</p>
+  </div>
+</section>
+
+<!-- ═══ E. CONTRIBUCIÓN ECONÓMICA Y SOCIAL ═══ -->
+<section id="contribucion" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">E. Contribución al Desarrollo Económico y Social de Canarias</h2>
+  <p class="text-gray-500 mb-8">Art. 31.2.f Ley 19/1994 — Impacto socioeconómico del proyecto</p>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-blue-500">
+      <p class="text-4xl font-extrabold text-blue-600">5→10</p>
+      <p class="text-sm font-bold text-gray-700 mt-1">Empleos directos</p>
+      <p class="text-xs text-gray-400">Cualificados, jornada completa</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-green-500">
+      <p class="text-4xl font-extrabold text-green-600">100K€</p>
+      <p class="text-sm font-bold text-gray-700 mt-1">Inversión inicial</p>
+      <p class="text-xs text-gray-400">Activos fijos en Canarias</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-purple-500">
+      <p class="text-4xl font-extrabold text-purple-600">3</p>
+      <p class="text-sm font-bold text-gray-700 mt-1">Sectores innovadores</p>
+      <p class="text-xs text-gray-400">EdTech, PropTech, Mobility</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover border-t-4 border-zec-500">
+      <p class="text-4xl font-extrabold text-zec-600">20+</p>
+      <p class="text-sm font-bold text-gray-700 mt-1">Países alcanzados</p>
+      <p class="text-xs text-gray-400">Internacionalización desde TFE</p>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl p-6 shadow-md">
+    <h3 class="font-bold text-zec-700 mb-4">Alineación con los objetivos de la ZEC (Art. 28 Ley 19/1994)</h3>
+    <table class="w-full text-sm">
+      <thead><tr class="bg-zec-50"><th class="px-4 py-3 text-left">Objetivo ZEC</th><th class="px-4 py-3 text-left">Contribución de SM Academy Tech</th><th class="px-4 py-3 text-center w-20">Estado</th></tr></thead>
+      <tbody class="divide-y divide-gray-100">
+        <tr><td class="px-4 py-3 font-medium">Promover el desarrollo económico y social</td><td class="px-4 py-3 text-gray-600">5 empleos cualificados directos (año 1), 10 en año 3. Nómina bruta >116K€/año. Reducción de fuga de talento joven canario.</td><td class="px-4 py-3 text-center text-green-600 font-bold">🟢</td></tr>
+        <tr><td class="px-4 py-3 font-medium">Diversificar estructura productiva</td><td class="px-4 py-3 text-gray-600">3 verticales NO turísticas: tecnología educativa, PropTech inmobiliario, movilidad premium. Sectores de alto valor añadido.</td><td class="px-4 py-3 text-center text-green-600 font-bold">🟢</td></tr>
+        <tr><td class="px-4 py-3 font-medium">Atraer inversión</td><td class="px-4 py-3 text-gray-600">100.000 € de inversión inicial en activos fijos. Financiación mixta (capital propio 50K + deuda 75K).</td><td class="px-4 py-3 text-center text-green-600 font-bold">🟢</td></tr>
+        <tr><td class="px-4 py-3 font-medium">Impulsar internacionalización</td><td class="px-4 py-3 text-gray-600">SM Academy genera ingresos de suscriptores de 20+ países hispanohablantes desde Canarias. SM PropTech capta inversores inmobiliarios internacionales. SM Motors importa activos desde EAU.</td><td class="px-4 py-3 text-center text-green-600 font-bold">🟢</td></tr>
+        <tr><td class="px-4 py-3 font-medium">Innovación tecnológica</td><td class="px-4 py-3 text-gray-600">Software propio: algoritmos de trading automatizado, plataformas web React/Next.js, infraestructura cloud, procesamiento de datos en tiempo real.</td><td class="px-4 py-3 text-center text-green-600 font-bold">🟢</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ F. PLAN DE IMPLANTACIÓN ═══ -->
+<section id="implantacion" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">F. Plan de Implantación</h2>
+  <p class="text-gray-500 mb-8">Cronograma detallado de implantación con hitos verificables</p>
+
+  <div class="relative pl-10 border-l-4 border-zec-400 space-y-6">
+    <div class="relative">
+      <div class="tl-dot bg-zec-500">F1</div>
+      <div class="bg-white rounded-xl p-5 shadow-md ml-4">
+        <div class="flex items-center gap-3 mb-2"><h4 class="font-bold">Fase 1 — Autorización</h4><span class="px-2 py-0.5 bg-zec-100 text-zec-700 rounded text-xs font-bold">Meses 1-3</span></div>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li>• Presentación de solicitud al Consorcio ZEC + memoria descriptiva</li>
+          <li>• Constitución de SM Academy Tech S.L. ante notario</li>
+          <li>• Designación formal de administrador residente</li>
+          <li>• Inscripción en Registro Mercantil + obtención CIF</li>
+        </ul>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="tl-dot bg-blue-500">F2</div>
+      <div class="bg-white rounded-xl p-5 shadow-md ml-4">
+        <div class="flex items-center gap-3 mb-2"><h4 class="font-bold">Fase 2 — Inscripción ROEZEC</h4><span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-bold">Meses 3-6</span></div>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li>• Inscripción en el Registro Oficial de Entidades ZEC</li>
+          <li>• Alta en actividades económicas (CNAEs autorizados)</li>
+          <li>• Contratación de primeros 3 empleados (CEO, CTO, Dir. Comercial)</li>
+          <li>• Apertura de oficina en C/ Villalba Hervás 12, planta 2ª</li>
+        </ul>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="tl-dot bg-purple-500">F3</div>
+      <div class="bg-white rounded-xl p-5 shadow-md ml-4">
+        <div class="flex items-center gap-3 mb-2"><h4 class="font-bold">Fase 3 — Operativa SM Academy</h4><span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded text-xs font-bold">Meses 6-9</span></div>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li>• Lanzamiento comercial de SM Academy desde la entidad ZEC</li>
+          <li>• Migración de suscriptores actuales</li>
+          <li>• Contratación empleados 4 y 5 (Community Manager, Gestor Adm.)</li>
+          <li>• <strong>Hito: 5 empleos a jornada completa (Art. 31.1.e)</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="tl-dot bg-emerald-500">F4</div>
+      <div class="bg-white rounded-xl p-5 shadow-md ml-4">
+        <div class="flex items-center gap-3 mb-2"><h4 class="font-bold">Fase 4 — SM PropTech & SM Motors</h4><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded text-xs font-bold">Meses 9-12</span></div>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li>• Lanzamiento de SM PropTech en Canarias</li>
+          <li>• Primera importación de vehículos desde Dubái</li>
+          <li>• Inicio de operaciones de alquiler/renting</li>
+          <li>• Primeras operaciones inmobiliarias</li>
+        </ul>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="tl-dot bg-orange-500">F5</div>
+      <div class="bg-white rounded-xl p-5 shadow-md ml-4">
+        <div class="flex items-center gap-3 mb-2"><h4 class="font-bold">Fase 5 — Consolidación</h4><span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded text-xs font-bold">Año 2</span></div>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li>• Ampliación de flota de vehículos</li>
+          <li>• Crecimiento base de suscriptores SM Academy</li>
+          <li>• <strong>Materialización inversión 100.000 € (Art. 31.2 — plazo 2 años)</strong></li>
+          <li>• Contratación empleados 6 y 7</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-8 bg-white rounded-xl p-6 shadow-md">
+    <h3 class="font-bold text-zec-700 mb-4">Evolución prevista de empleo e inversión</h3>
+    <canvas id="evolucionChart" height="200"></canvas>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="reveal">
+  <div class="bg-red-50 border-2 border-red-300 rounded-xl p-5 text-sm text-red-800">
+    <div class="flex items-start gap-3">
+      <span class="text-2xl">⚠️</span>
+      <div>
+        <h4 class="font-bold mb-1">AVISO — Documento de trabajo (Art. 31.2.f Ley 19/1994)</h4>
+        <p>Esta memoria descriptiva es un <strong>borrador profesional</strong> basado en los datos proporcionados por el solicitante. Los datos personales del solicitante son ficticios a efectos de primera prueba. Los datos de actividad, estructura y proyecciones se basan en el proyecto real. Debe ser revisada por un <strong>asesor fiscal y legal colegiado</strong> y formalizada en el <strong>modelo normalizado del Consorcio</strong> antes de su presentación oficial.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-gray-900 text-gray-400 py-12">
+  <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+    <p class="mb-2">Informe generado por <strong class="text-zec-400">MEMOREX 📝</strong> — Redactor de Memorias Descriptivas ZEC | Equipo <strong class="text-zec-400">ZECEX ⚖️📊</strong></p>
+    <p class="mb-2">Fecha: 26 de marzo de 2026 | Base legal: Art. 31.2.f Ley 19/1994 | Coherente con análisis VIABLEX</p>
+    <p class="mb-2">Este documento es orientativo y no constituye asesoramiento legal vinculante.</p>
+    <p>Consorcio ZEC — Las Palmas: 928 490 505 | Santa Cruz de Tenerife: 922 298 010 | zec@canariaszec.gob.es</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.reveal').forEach(el => {
+    new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, {threshold:.1}).observe(el);
+  });
+
+  new Chart(document.getElementById('ingresosChart'), {
+    type:'doughnut', data:{ labels:['SM Academy (96K)','SM PropTech (30K)','SM Motors (60K)'],
+    datasets:[{data:[96000,30000,60000],backgroundColor:['#3b82f6','#10b981','#f97316'],borderWidth:0}]},
+    options:{cutout:'60%',plugins:{legend:{position:'bottom',labels:{padding:12,usePointStyle:true}}}}
+  });
+
+  new Chart(document.getElementById('gastosChart'), {
+    type:'doughnut', data:{ labels:['Salarios+SS (145K)','Alquiler (9.6K)','Infra+Marketing (18K)','Seguros (8K)','Amortización (15K)'],
+    datasets:[{data:[145000,9600,18000,8000,15000],backgroundColor:['#ef4444','#8b5cf6','#06b6d4','#f59e0b','#6b7280'],borderWidth:0}]},
+    options:{cutout:'60%',plugins:{legend:{position:'bottom',labels:{padding:12,usePointStyle:true,font:{size:10}}}}}
+  });
+
+  new Chart(document.getElementById('evolucionChart'), {
+    type:'bar', data:{ labels:['Año 1','Año 2','Año 3'],
+    datasets:[
+      {label:'Empleos',data:[5,7,10],backgroundColor:'#3b82f6',yAxisID:'y',borderRadius:6},
+      {label:'Ingresos (K€)',data:[186,375,650],backgroundColor:'#D4A017',yAxisID:'y1',borderRadius:6}
+    ]},
+    options:{responsive:true,plugins:{legend:{position:'top'}},
+      scales:{y:{beginAtZero:true,position:'left',title:{display:true,text:'Empleos'}},y1:{beginAtZero:true,position:'right',title:{display:true,text:'Ingresos (K€)'},grid:{drawOnChartArea:false}}}}
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dictamen Estratégico Fiscal — SM Academy Tech S.L. | ZEC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']},colors:{zec:{50:'#FFFBEB',100:'#FEF3C7',200:'#FDE68A',300:'#FCD34D',400:'#FBBF24',500:'#D4A017',600:'#B8860B',700:'#92400E',800:'#78350F',900:'#451A03'}}}}}
+  </script>
+  <style>
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+    .gradient-text{background:linear-gradient(135deg,#D4A017 0%,#B8860B 50%,#78350F 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .glass{background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(212,160,23,.2)}
+    html{scroll-behavior:smooth}tbody tr:hover{background-color:rgba(212,160,23,.05)}
+    .card-hover{transition:all .3s ease}.card-hover:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.1)}
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+<!-- NAVBAR -->
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zec-200 shadow-sm">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <span class="text-xl font-bold gradient-text">STRATEX 📊 Dictamen Estratégico</span>
+    <div class="hidden md:flex gap-5 text-sm font-medium text-gray-600">
+      <a href="#comparativa" class="hover:text-zec-600 transition">Comparativa</a>
+      <a href="#ahorro" class="hover:text-zec-600 transition">Ahorro Fiscal</a>
+      <a href="#limites" class="hover:text-zec-600 transition">Límites BI</a>
+      <a href="#compatibilidades" class="hover:text-zec-600 transition">Compatibilidades</a>
+      <a href="#escenarios" class="hover:text-zec-600 transition">Escenarios</a>
+      <a href="#recomendaciones" class="hover:text-zec-600 transition">Recomendaciones</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="relative overflow-hidden min-h-[55vh] flex items-center text-white">
+  <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80')"></div>
+  <div class="absolute inset-0 bg-gradient-to-br from-zec-900/90 via-zec-800/80 to-zec-600/60"></div>
+  <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+    <p class="text-zec-200 text-sm font-semibold uppercase tracking-widest mb-4">Informe 3/5 — STRATEX 📊 | Consultor Estratégico Fiscal</p>
+    <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Dictamen Estratégico<br>Optimización Fiscal ZEC</h1>
+    <p class="text-xl text-zec-100 max-w-3xl mx-auto">Comparativa régimen general vs. ZEC · Compatibilidades · Proyección de ahorro fiscal a 5 años</p>
+    <div class="mt-8 flex justify-center gap-3 flex-wrap">
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📅 26 de marzo de 2026</span>
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">🏢 SM Academy Tech S.L.</span>
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📍 Tenerife (capitalina)</span>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-16 space-y-20">
+
+<!-- ═══ COMPARATIVA IS ═══ -->
+<section id="comparativa" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Comparativa Fiscal: Régimen General vs. ZEC</h2>
+  <p class="text-gray-500 mb-8">Art. 40 Ley 19/1994 — Tipo reducido del 4% vs. tipo general del 25%</p>
+
+  <div class="grid md:grid-cols-2 gap-8 mb-8">
+    <div class="bg-white rounded-xl p-6 shadow-md border-t-4 border-red-400">
+      <h3 class="font-bold text-red-700 mb-4 text-center">❌ Régimen General (sin ZEC)</h3>
+      <table class="w-full text-sm"><tbody class="divide-y divide-gray-100">
+        <tr><td class="py-2.5 text-gray-500">Impuesto sobre Sociedades</td><td class="py-2.5 text-right font-bold text-red-600">25%</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Dividendos a no residentes</td><td class="py-2.5 text-right font-bold text-red-600">19% retención</td></tr>
+        <tr><td class="py-2.5 text-gray-500">IGIC importaciones</td><td class="py-2.5 text-right font-bold text-red-600">7% (general)</td></tr>
+        <tr><td class="py-2.5 text-gray-500">ITP-AJD</td><td class="py-2.5 text-right font-bold text-red-600">Tipo ordinario</td></tr>
+        <tr><td class="py-2.5 text-gray-500">IGIC entre entidades</td><td class="py-2.5 text-right font-bold text-red-600">7% (general)</td></tr>
+        <tr class="bg-red-50"><td class="py-2.5 font-bold">IS sobre 300.000 € BAI (año 3)</td><td class="py-2.5 text-right font-extrabold text-red-700 text-lg">75.000 €</td></tr>
+      </tbody></table>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md border-t-4 border-green-500">
+      <h3 class="font-bold text-green-700 mb-4 text-center">✅ Régimen ZEC</h3>
+      <table class="w-full text-sm"><tbody class="divide-y divide-gray-100">
+        <tr><td class="py-2.5 text-gray-500">Impuesto sobre Sociedades</td><td class="py-2.5 text-right font-bold text-green-600">4% (Art. 40)</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Dividendos a no residentes</td><td class="py-2.5 text-right font-bold text-green-600">Exento (Art. 42)</td></tr>
+        <tr><td class="py-2.5 text-gray-500">IGIC importaciones</td><td class="py-2.5 text-right font-bold text-green-600">Exento (Art. 43)</td></tr>
+        <tr><td class="py-2.5 text-gray-500">ITP-AJD</td><td class="py-2.5 text-right font-bold text-green-600">Exento (Art. 43)</td></tr>
+        <tr><td class="py-2.5 text-gray-500">IGIC entre entidades ZEC</td><td class="py-2.5 text-right font-bold text-green-600">Exento (Art. 43)</td></tr>
+        <tr class="bg-green-50"><td class="py-2.5 font-bold">IS sobre 300.000 € BAI (año 3)</td><td class="py-2.5 text-right font-extrabold text-green-700 text-lg">12.000 €</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl p-6 shadow-md">
+    <h3 class="font-bold text-zec-700 mb-4">Comparativa IS por año — Régimen General vs. ZEC</h3>
+    <canvas id="comparativaChart" height="200"></canvas>
+  </div>
+</section>
+
+<!-- ═══ AHORRO FISCAL ═══ -->
+<section id="ahorro" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Ahorro Fiscal Acumulado — Proyección a 5 Años</h2>
+  <p class="text-gray-500 mb-8">Cálculos basados en las proyecciones de MEMOREX y los tipos vigentes</p>
+
+  <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+    <table class="w-full text-sm">
+      <thead><tr class="bg-zec-800 text-white">
+        <th class="px-4 py-3 text-left">Concepto</th><th class="px-4 py-3 text-right">Año 1</th><th class="px-4 py-3 text-right">Año 2</th><th class="px-4 py-3 text-right">Año 3</th><th class="px-4 py-3 text-right">Año 4</th><th class="px-4 py-3 text-right">Año 5</th><th class="px-4 py-3 text-right font-bold">TOTAL</th>
+      </tr></thead>
+      <tbody class="divide-y divide-gray-100">
+        <tr><td class="px-4 py-2.5 text-gray-600">Base imponible estimada</td><td class="px-4 py-2.5 text-right">11.400 €</td><td class="px-4 py-2.5 text-right">133.000 €</td><td class="px-4 py-2.5 text-right">300.000 €</td><td class="px-4 py-2.5 text-right">450.000 €</td><td class="px-4 py-2.5 text-right">600.000 €</td><td class="px-4 py-2.5 text-right font-bold">1.494.400 €</td></tr>
+        <tr class="bg-red-50"><td class="px-4 py-2.5 text-red-700 font-medium">IS al 25% (reg. general)</td><td class="px-4 py-2.5 text-right text-red-600">2.850 €</td><td class="px-4 py-2.5 text-right text-red-600">33.250 €</td><td class="px-4 py-2.5 text-right text-red-600">75.000 €</td><td class="px-4 py-2.5 text-right text-red-600">112.500 €</td><td class="px-4 py-2.5 text-right text-red-600">150.000 €</td><td class="px-4 py-2.5 text-right text-red-700 font-bold">373.600 €</td></tr>
+        <tr class="bg-green-50"><td class="px-4 py-2.5 text-green-700 font-medium">IS al 4% (ZEC)</td><td class="px-4 py-2.5 text-right text-green-600">456 €</td><td class="px-4 py-2.5 text-right text-green-600">5.320 €</td><td class="px-4 py-2.5 text-right text-green-600">12.000 €</td><td class="px-4 py-2.5 text-right text-green-600">18.000 €</td><td class="px-4 py-2.5 text-right text-green-600">24.000 €</td><td class="px-4 py-2.5 text-right text-green-700 font-bold">59.776 €</td></tr>
+        <tr class="bg-zec-100 font-extrabold text-lg"><td class="px-4 py-3 text-zec-800">💰 AHORRO FISCAL</td><td class="px-4 py-3 text-right text-zec-700">2.394 €</td><td class="px-4 py-3 text-right text-zec-700">27.930 €</td><td class="px-4 py-3 text-right text-zec-700">63.000 €</td><td class="px-4 py-3 text-right text-zec-700">94.500 €</td><td class="px-4 py-3 text-right text-zec-700">126.000 €</td><td class="px-4 py-3 text-right text-zec-900 text-xl">313.824 €</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="bg-white rounded-xl p-6 shadow-md">
+      <h3 class="font-bold text-zec-700 mb-4">Ahorro fiscal acumulado (waterfall)</h3>
+      <canvas id="ahorroChart" height="220"></canvas>
+    </div>
+    <div class="glass rounded-xl p-6 shadow-md border-2 border-zec-400 text-center flex flex-col justify-center">
+      <p class="text-sm text-gray-500 mb-2">Ahorro fiscal acumulado en 5 años</p>
+      <p class="text-6xl font-black gradient-text">313.824 €</p>
+      <p class="text-lg text-zec-700 font-bold mt-2">Un 84% menos de impuestos</p>
+      <p class="text-sm text-gray-500 mt-4">Equivalente a reinvertir >2.5 años de salarios del equipo fundacional</p>
+      <div class="mt-4 w-full bg-gray-200 rounded-full h-4"><div class="bg-gradient-to-r from-zec-500 to-green-500 h-4 rounded-full" style="width:84%"></div></div>
+      <p class="text-xs text-gray-400 mt-1">Ahorro: 84% del IS total</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LÍMITES BASE IMPONIBLE ═══ -->
+<section id="limites" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Límites de Base Imponible — Art. 44</h2>
+  <p class="text-gray-500 mb-8">El tipo del 4% se aplica hasta el límite. Lo que exceda tributa al 25%.</p>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="bg-white rounded-xl p-6 shadow-md">
+      <h3 class="font-bold text-zec-700 mb-4">Límite por empleo (Art. 44.1)</h3>
+      <table class="w-full text-sm">
+        <thead><tr class="bg-zec-50"><th class="px-3 py-2 text-center">Empleos</th><th class="px-3 py-2 text-right">Límite BI/año</th><th class="px-3 py-2 text-center">SM Academy Tech</th></tr></thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr class="bg-green-50"><td class="px-3 py-2 text-center font-bold">5</td><td class="px-3 py-2 text-right font-bold">1.800.000 €</td><td class="px-3 py-2 text-center text-green-700 font-bold">✅ Año 1</td></tr>
+          <tr><td class="px-3 py-2 text-center font-bold">8</td><td class="px-3 py-2 text-right">2.400.000 €</td><td class="px-3 py-2 text-center text-blue-600">→ Año 2-3</td></tr>
+          <tr><td class="px-3 py-2 text-center">12</td><td class="px-3 py-2 text-right">3.600.000 €</td><td class="px-3 py-2 text-center text-gray-400">Futuro</td></tr>
+          <tr><td class="px-3 py-2 text-center">20</td><td class="px-3 py-2 text-right">5.400.000 €</td><td class="px-3 py-2 text-center text-gray-400">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md">
+      <h3 class="font-bold text-zec-700 mb-4">Límite por inversión (Art. 44.2)</h3>
+      <table class="w-full text-sm">
+        <thead><tr class="bg-zec-50"><th class="px-3 py-2 text-left">Inversión neta</th><th class="px-3 py-2 text-right">Límite BI/año</th><th class="px-3 py-2 text-center">SM Academy Tech</th></tr></thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr class="bg-green-50"><td class="px-3 py-2 font-bold">100.000 €</td><td class="px-3 py-2 text-right font-bold">1.800.000 €</td><td class="px-3 py-2 text-center text-green-700 font-bold">✅ Año 1-2</td></tr>
+          <tr><td class="px-3 py-2">500.000 €</td><td class="px-3 py-2 text-right">3.600.000 €</td><td class="px-3 py-2 text-center text-gray-400">—</td></tr>
+          <tr><td class="px-3 py-2">1.000.000 €</td><td class="px-3 py-2 text-right">5.400.000 €</td><td class="px-3 py-2 text-center text-gray-400">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="mt-6 bg-blue-50 rounded-xl p-5 border border-blue-200 text-sm text-blue-800">
+    <strong>💡 Análisis para SM Academy Tech:</strong> Con 5 empleos y 100.000 € de inversión, ambos límites son iguales: <strong>1.800.000 €/año</strong>. Las proyecciones de beneficio (máximo 600.000 € en año 5) están <strong>muy por debajo del límite</strong>. Toda la base imponible tributará al 4%. Si el empleo crece a 8 (año 2-3), el límite sube a 2.400.000 €/año. No hay riesgo de tributar al 25% en el horizonte proyectado.
+  </div>
+</section>
+
+<!-- ═══ COMPATIBILIDADES ═══ -->
+<section id="compatibilidades" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Compatibilidad con Otros Incentivos del REF</h2>
+  <p class="text-gray-500 mb-8">Art. 45-47 Ley 19/1994 — Maximización del beneficio fiscal</p>
+
+  <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+    <table class="w-full text-sm">
+      <thead><tr class="bg-zec-800 text-white">
+        <th class="px-4 py-3 text-left">Incentivo</th><th class="px-4 py-3 text-center w-28">Compatible</th><th class="px-4 py-3 text-left">Base legal</th><th class="px-4 py-3 text-left">Aplicación para SM Academy Tech</th><th class="px-4 py-3 text-right">Ahorro adicional est.</th>
+      </tr></thead>
+      <tbody class="divide-y divide-gray-100">
+        <tr class="bg-green-50/50"><td class="px-4 py-3 font-bold">RIC (Reserva para Inversiones en Canarias)</td><td class="px-4 py-3 text-center text-green-600 font-bold text-lg">✅</td><td class="px-4 py-3 text-xs">Art. 27 Ley 19/1994 + Art. 45</td><td class="px-4 py-3 text-gray-600">Dotación con cargo a beneficios no distribuidos. Reducción de BI hasta 90% del beneficio. Materialización en activos fijos en Canarias en 3 años.</td><td class="px-4 py-3 text-right font-bold text-green-700">Alto</td></tr>
+        <tr class="bg-green-50/50"><td class="px-4 py-3 font-bold">Deducción I+D+i</td><td class="px-4 py-3 text-center text-green-600 font-bold text-lg">✅</td><td class="px-4 py-3 text-xs">Art. 35 Ley 27/2014 + Art. 46</td><td class="px-4 py-3 text-gray-600">Desarrollo de software propio (algoritmos de trading, plataformas). Deducción incrementada en Canarias: hasta 45% de gastos I+D.</td><td class="px-4 py-3 text-right font-bold text-green-700">Medio-Alto</td></tr>
+        <tr class="bg-green-50/50"><td class="px-4 py-3 font-bold">DIC (Deducción Inversiones en Canarias)</td><td class="px-4 py-3 text-center text-green-600 font-bold text-lg">✅</td><td class="px-4 py-3 text-xs">Art. 94 Ley 20/1991</td><td class="px-4 py-3 text-gray-600">Deducción del 25% sobre inversión en activos fijos nuevos en Canarias. Aplicable a la flota de vehículos, equipos IT, software.</td><td class="px-4 py-3 text-right font-bold text-green-700">25.000 €</td></tr>
+        <tr class="bg-green-50/50"><td class="px-4 py-3 font-bold">Bonificación producción bienes corporales</td><td class="px-4 py-3 text-center text-green-600 font-bold text-lg">✅</td><td class="px-4 py-3 text-xs">Art. 26 Ley 19/1994</td><td class="px-4 py-3 text-gray-600">Bonificación del 50% de la cuota IS por producción de bienes corporales en Canarias. Podría no aplicar directamente (servicios digitales).</td><td class="px-4 py-3 text-right font-bold text-gray-400">N/A</td></tr>
+        <tr class="bg-green-50/50"><td class="px-4 py-3 font-bold">Producciones audiovisuales</td><td class="px-4 py-3 text-center text-green-600 font-bold text-lg">✅</td><td class="px-4 py-3 text-xs">Art. 36.2 Ley 27/2014</td><td class="px-4 py-3 text-gray-600">Deducción hasta 54% por producción audiovisual en Canarias. Aplicable a los vídeos educativos HD de SM Academy si se estructura correctamente.</td><td class="px-4 py-3 text-right font-bold text-yellow-600">A explorar</td></tr>
+        <tr class="bg-red-50/50"><td class="px-4 py-3 font-bold">ZFC (Zona Franca de Canarias)</td><td class="px-4 py-3 text-center text-red-600 font-bold text-lg">❌</td><td class="px-4 py-3 text-xs">Art. 47 Ley 19/1994</td><td class="px-4 py-3 text-red-600">Regímenes incompatibles. No se puede estar en ZEC y ZFC simultáneamente.</td><td class="px-4 py-3 text-right text-red-600">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bg-white rounded-xl p-6 shadow-md">
+    <h3 class="font-bold text-zec-700 mb-4">Estrategia combinada: ZEC + RIC + DIC + I+D</h3>
+    <div class="grid md:grid-cols-4 gap-4">
+      <div class="bg-zec-50 rounded-lg p-4 text-center border border-zec-200">
+        <p class="text-3xl mb-2">📉</p>
+        <h4 class="font-bold text-sm">Paso 1: IS al 4%</h4>
+        <p class="text-xs text-gray-500 mt-1">BI completa tributa al 4% (dentro del límite 1,8M€)</p>
+      </div>
+      <div class="bg-blue-50 rounded-lg p-4 text-center border border-blue-200">
+        <p class="text-3xl mb-2">💰</p>
+        <h4 class="font-bold text-sm">Paso 2: Dotar RIC</h4>
+        <p class="text-xs text-gray-500 mt-1">Hasta 90% del beneficio reduce BI. Materializar en 3 años en activos en Canarias.</p>
+      </div>
+      <div class="bg-green-50 rounded-lg p-4 text-center border border-green-200">
+        <p class="text-3xl mb-2">🔧</p>
+        <h4 class="font-bold text-sm">Paso 3: Aplicar DIC</h4>
+        <p class="text-xs text-gray-500 mt-1">25% sobre inversión en activos fijos nuevos. Flota + IT = 25.000 €.</p>
+      </div>
+      <div class="bg-purple-50 rounded-lg p-4 text-center border border-purple-200">
+        <p class="text-3xl mb-2">🧬</p>
+        <h4 class="font-bold text-sm">Paso 4: Deducción I+D</h4>
+        <p class="text-xs text-gray-500 mt-1">Gastos de desarrollo de software propio. Incrementada en Canarias.</p>
+      </div>
+    </div>
+    <div class="mt-4 bg-yellow-50 rounded-lg p-3 text-xs text-yellow-800 border border-yellow-200">
+      <strong>⚠️ Importante:</strong> La combinación de RIC + DIC + I+D es técnicamente posible pero requiere planificación cuidadosa para no duplicar base de deducción. La RIC reduce la BI (paso previo al cálculo del IS), mientras que DIC e I+D son deducciones en cuota. Un asesor fiscal colegiado debe validar la aplicación concreta.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ESCENARIOS ═══ -->
+<section id="escenarios" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Escenarios de Proyección Fiscal</h2>
+  <p class="text-gray-500 mb-8">Tres escenarios: conservador, base y optimista — Ahorro fiscal acumulado a 5 años</p>
+
+  <div class="grid md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-white rounded-xl p-6 shadow-md border-t-4 border-gray-400 card-hover">
+      <h3 class="font-bold text-gray-600 text-center mb-4">🐢 Conservador</h3>
+      <p class="text-xs text-gray-400 text-center mb-3">Crecimiento 50% del escenario base</p>
+      <table class="w-full text-xs"><tbody class="divide-y divide-gray-100">
+        <tr><td class="py-1.5">BAI acumulada 5 años</td><td class="py-1.5 text-right font-bold">748.000 €</td></tr>
+        <tr><td class="py-1.5">IS al 25%</td><td class="py-1.5 text-right text-red-600">187.000 €</td></tr>
+        <tr><td class="py-1.5">IS al 4%</td><td class="py-1.5 text-right text-green-600">29.920 €</td></tr>
+        <tr class="bg-gray-50 font-bold"><td class="py-1.5">Ahorro fiscal</td><td class="py-1.5 text-right text-gray-700 text-base">157.080 €</td></tr>
+      </tbody></table>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md border-t-4 border-zec-500 card-hover ring-2 ring-zec-300">
+      <h3 class="font-bold text-zec-700 text-center mb-4">📊 Base (proyectado)</h3>
+      <p class="text-xs text-zec-500 text-center mb-3">Basado en proyecciones MEMOREX</p>
+      <table class="w-full text-xs"><tbody class="divide-y divide-gray-100">
+        <tr><td class="py-1.5">BAI acumulada 5 años</td><td class="py-1.5 text-right font-bold">1.494.400 €</td></tr>
+        <tr><td class="py-1.5">IS al 25%</td><td class="py-1.5 text-right text-red-600">373.600 €</td></tr>
+        <tr><td class="py-1.5">IS al 4%</td><td class="py-1.5 text-right text-green-600">59.776 €</td></tr>
+        <tr class="bg-zec-50 font-bold"><td class="py-1.5">Ahorro fiscal</td><td class="py-1.5 text-right text-zec-700 text-base">313.824 €</td></tr>
+      </tbody></table>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md border-t-4 border-green-500 card-hover">
+      <h3 class="font-bold text-green-700 text-center mb-4">🚀 Optimista</h3>
+      <p class="text-xs text-green-500 text-center mb-3">Crecimiento 150% del escenario base</p>
+      <table class="w-full text-xs"><tbody class="divide-y divide-gray-100">
+        <tr><td class="py-1.5">BAI acumulada 5 años</td><td class="py-1.5 text-right font-bold">2.241.600 €</td></tr>
+        <tr><td class="py-1.5">IS al 25%</td><td class="py-1.5 text-right text-red-600">560.400 €</td></tr>
+        <tr><td class="py-1.5">IS al 4%</td><td class="py-1.5 text-right text-green-600">89.664 €</td></tr>
+        <tr class="bg-green-50 font-bold"><td class="py-1.5">Ahorro fiscal</td><td class="py-1.5 text-right text-green-700 text-base">470.736 €</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl p-6 shadow-md">
+    <h3 class="font-bold text-zec-700 mb-4">Comparativa de escenarios — Ahorro fiscal acumulado</h3>
+    <canvas id="escenariosChart" height="200"></canvas>
+  </div>
+</section>
+
+<!-- ═══ IGIC E IMPORTACIONES ═══ -->
+<section class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Análisis Específico: IGIC e Importaciones</h2>
+  <p class="text-gray-500 mb-8">Art. 43 Ley 19/1994 — Ventaja clave para SM Motors</p>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="bg-white rounded-xl p-6 shadow-md">
+      <h3 class="font-bold text-orange-700 mb-4">🚗 Impacto IGIC en SM Motors</h3>
+      <table class="w-full text-sm"><tbody class="divide-y divide-gray-100">
+        <tr><td class="py-2.5 text-gray-500">Valor importación flota (5 vehículos)</td><td class="py-2.5 text-right font-bold">75.000 €</td></tr>
+        <tr><td class="py-2.5 text-gray-500">IGIC sin ZEC (7%)</td><td class="py-2.5 text-right text-red-600 font-bold">5.250 €</td></tr>
+        <tr><td class="py-2.5 text-gray-500">IGIC con ZEC (exento, Art. 43)</td><td class="py-2.5 text-right text-green-600 font-bold">0 €</td></tr>
+        <tr class="bg-orange-50 font-bold"><td class="py-2.5">Ahorro IGIC importación</td><td class="py-2.5 text-right text-orange-700 text-lg">5.250 €</td></tr>
+      </tbody></table>
+      <p class="text-xs text-orange-600 mt-3">⚠️ Pendiente confirmar con Consorcio si la exención IGIC Art. 43 aplica a importaciones de vehículos desde EAU (país no-UE). Arancel aduanero (10%) se mantiene en cualquier caso.</p>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md">
+      <h3 class="font-bold text-purple-700 mb-4">📋 ITP-AJD (Art. 43)</h3>
+      <table class="w-full text-sm"><tbody class="divide-y divide-gray-100">
+        <tr><td class="py-2.5 text-gray-500">Constitución S.L. (1% sobre capital)</td><td class="py-2.5 text-right text-red-600">500 € (sin ZEC)</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Constitución S.L. con ZEC</td><td class="py-2.5 text-right text-green-600 font-bold">0 € (exento)</td></tr>
+        <tr><td class="py-2.5 text-gray-500">Adquisición activos afectos</td><td class="py-2.5 text-right text-green-600 font-bold">Exento</td></tr>
+        <tr class="bg-purple-50 font-bold"><td class="py-2.5">Ahorro ITP-AJD</td><td class="py-2.5 text-right text-purple-700">~500 € + variable</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RECOMENDACIONES ═══ -->
+<section id="recomendaciones" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Recomendaciones Estratégicas STRATEX</h2>
+  <p class="text-gray-500 mb-8">Ordenadas por prioridad de impacto fiscal</p>
+
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-red-500 card-hover">
+      <div class="flex items-start gap-3">
+        <span class="px-2.5 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold flex-shrink-0">ALTA</span>
+        <div>
+          <h4 class="font-bold text-gray-900">1. Priorizar solicitud ZEC inmediatamente</h4>
+          <p class="text-sm text-gray-600 mt-1">La vigencia del régimen es hasta 31/12/2027. Cada mes de retraso es un mes menos de tributación al 4%. Si se constituye en 2S 2026 y se inscribe en ROEZEC a principios de 2027, solo quedaría 1 año de régimen garantizado (pendiente de prórroga CE).</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-red-500 card-hover">
+      <div class="flex items-start gap-3">
+        <span class="px-2.5 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold flex-shrink-0">ALTA</span>
+        <div>
+          <h4 class="font-bold text-gray-900">2. Solicitar exención de inversión (Circular 1/2022)</h4>
+          <p class="text-sm text-gray-600 mt-1">Si se concede la exención por empresa de programación intensiva en capital humano, los 100.000 € dejan de ser obligatorios. Esto elimina el riesgo de incumplimiento si los depósitos no computan como activo fijo y libera capital para crecimiento.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-yellow-500 card-hover">
+      <div class="flex items-start gap-3">
+        <span class="px-2.5 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold flex-shrink-0">MEDIA</span>
+        <div>
+          <h4 class="font-bold text-gray-900">3. Planificar dotación de RIC desde el primer ejercicio con beneficios</h4>
+          <p class="text-sm text-gray-600 mt-1">Desde año 2 (BAI estimada 133.000 €), dotar RIC reduce la BI hasta un 90%. La materialización se puede hacer en la propia flota de vehículos o equipos IT. Efecto: tipo efectivo cercano a 0,4% sobre el beneficio.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-yellow-500 card-hover">
+      <div class="flex items-start gap-3">
+        <span class="px-2.5 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold flex-shrink-0">MEDIA</span>
+        <div>
+          <h4 class="font-bold text-gray-900">4. Documentar desarrollo de software como I+D+i</h4>
+          <p class="text-sm text-gray-600 mt-1">Los algoritmos propietarios de trading (SL/TP, gestión de riesgo dinámico, Copy Trading) pueden calificarse como I+D. Solicitar informe motivado vinculante al CDTI para asegurar la deducción incrementada canaria.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-blue-500 card-hover">
+      <div class="flex items-start gap-3">
+        <span class="px-2.5 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold flex-shrink-0">BAJA</span>
+        <div>
+          <h4 class="font-bold text-gray-900">5. Explorar deducción audiovisual para contenido educativo</h4>
+          <p class="text-sm text-gray-600 mt-1">Si los vídeos educativos HD de SM Academy (+160 lecciones) se producen en Canarias y se estructuran correctamente, podrían beneficiarse de la deducción por producciones audiovisuales (hasta 54% en Canarias). Requiere validación con ICAA.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-blue-500 card-hover">
+      <div class="flex items-start gap-3">
+        <span class="px-2.5 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold flex-shrink-0">BAJA</span>
+        <div>
+          <h4 class="font-bold text-gray-900">6. Estructura societaria: una sola entidad ZEC</h4>
+          <p class="text-sm text-gray-600 mt-1">Art. 33 permite múltiples objetos sociales si todos están en el Anexo. Una sola entidad simplifica la gestión, la contabilidad y la relación con el Consorcio. No crear entidades separadas por vertical salvo que el Consorcio lo exija.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="reveal">
+  <div class="bg-red-50 border-2 border-red-300 rounded-xl p-5 text-sm text-red-800">
+    <div class="flex items-start gap-3"><span class="text-2xl">⚠️</span>
+    <div><h4 class="font-bold mb-1">AVISO — Dictamen orientativo</h4>
+    <p>Este dictamen fiscal es <strong>orientativo</strong> y se basa en las proyecciones del borrador de memoria descriptiva. Las cifras son estimaciones. Los cálculos de ahorro fiscal, compatibilidades de incentivos y estrategias de optimización deben ser <strong>validados por un asesor fiscal colegiado</strong> antes de su aplicación. La normativa fiscal puede cambiar.</p></div></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-gray-900 text-gray-400 py-12">
+  <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+    <p class="mb-2">Informe generado por <strong class="text-zec-400">STRATEX 📊</strong> — Consultor Estratégico Fiscal | Equipo <strong class="text-zec-400">ZECEX ⚖️📊</strong></p>
+    <p class="mb-2">Fecha: 26 de marzo de 2026 | Base legal: Arts. 37-47 Ley 19/1994, Ley 27/2014, Art. 27 Ley 19/1994 (RIC)</p>
+    <p>Consorcio ZEC — Las Palmas: 928 490 505 | Santa Cruz de Tenerife: 922 298 010</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.reveal').forEach(el=>{new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.1}).observe(el)});
+
+  // Comparativa IS
+  new Chart(document.getElementById('comparativaChart'),{type:'bar',data:{labels:['Año 1','Año 2','Año 3','Año 4','Año 5'],datasets:[
+    {label:'IS al 25% (sin ZEC)',data:[2850,33250,75000,112500,150000],backgroundColor:'#ef4444',borderRadius:6},
+    {label:'IS al 4% (ZEC)',data:[456,5320,12000,18000,24000],backgroundColor:'#22c55e',borderRadius:6}
+  ]},options:{plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000)+'K €'}}}}});
+
+  // Ahorro acumulado
+  new Chart(document.getElementById('ahorroChart'),{type:'line',data:{labels:['Año 1','Año 2','Año 3','Año 4','Año 5'],datasets:[
+    {label:'Ahorro acumulado',data:[2394,30324,93324,187824,313824],borderColor:'#D4A017',backgroundColor:'rgba(212,160,23,.15)',fill:true,tension:.3,pointRadius:6,pointBackgroundColor:'#D4A017'}
+  ]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/1000).toFixed(0)+'K €'}}}}});
+
+  // Escenarios
+  new Chart(document.getElementById('escenariosChart'),{type:'bar',data:{labels:['Conservador','Base','Optimista'],datasets:[
+    {label:'Ahorro fiscal 5 años',data:[157080,313824,470736],backgroundColor:['#9ca3af','#D4A017','#22c55e'],borderRadius:8}
+  ]},options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.x.toLocaleString('es-ES')+' €'}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>(v/1000)+'K €'}}}}});
+</script>
+</body>
+</html>

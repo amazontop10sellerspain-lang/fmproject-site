@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Seguimiento — SM Academy Tech S.L. | Cumplimiento ZEC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']},colors:{zec:{50:'#FFFBEB',100:'#FEF3C7',200:'#FDE68A',300:'#FCD34D',400:'#FBBF24',500:'#D4A017',600:'#B8860B',700:'#92400E',800:'#78350F',900:'#451A03'}}}}}
+  </script>
+  <style>
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+    .gradient-text{background:linear-gradient(135deg,#D4A017 0%,#B8860B 50%,#78350F 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .glass{background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(212,160,23,.2)}
+    html{scroll-behavior:smooth}tbody tr:hover{background-color:rgba(212,160,23,.05)}
+    .card-hover{transition:all .3s ease}.card-hover:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.1)}
+    @keyframes pulse-glow{0%,100%{box-shadow:0 0 5px rgba(34,197,94,.3)}50%{box-shadow:0 0 20px rgba(34,197,94,.6)}}
+    .pulse-green{animation:pulse-glow 2s infinite}
+    .cal-cell{min-height:80px;border:1px solid #e5e7eb;border-radius:8px;padding:6px;font-size:11px}
+    .cal-header{font-weight:700;text-align:center;padding:4px;font-size:12px}
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+<!-- NAVBAR -->
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zec-200 shadow-sm">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <span class="text-xl font-bold gradient-text">VIGILEX 🛡️ Seguimiento</span>
+    <div class="hidden md:flex gap-5 text-sm font-medium text-gray-600">
+      <a href="#dashboard" class="hover:text-zec-600 transition">Dashboard</a>
+      <a href="#obligaciones" class="hover:text-zec-600 transition">Obligaciones</a>
+      <a href="#calendario" class="hover:text-zec-600 transition">Calendario</a>
+      <a href="#revocacion" class="hover:text-zec-600 transition">Revocación</a>
+      <a href="#blindaje" class="hover:text-zec-600 transition">Blindaje</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="relative overflow-hidden min-h-[55vh] flex items-center text-white">
+  <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80')"></div>
+  <div class="absolute inset-0 bg-gradient-to-br from-zec-900/90 via-zec-800/80 to-zec-600/60"></div>
+  <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+    <p class="text-zec-200 text-sm font-semibold uppercase tracking-widest mb-4">Informe 5/5 — VIGILEX 🛡️ | Supervisor de Cumplimiento</p>
+    <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Sistema de Seguimiento<br>Cumplimiento ZEC</h1>
+    <p class="text-xl text-zec-100 max-w-3xl mx-auto">Plan de vigilancia post-inscripción para garantizar el mantenimiento del régimen ZEC</p>
+    <div class="mt-8 flex justify-center gap-3 flex-wrap">
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📅 26 de marzo de 2026</span>
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">🏢 SM Academy Tech S.L.</span>
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">📍 Tenerife (capitalina)</span>
+      <span class="px-4 py-2 bg-white/20 rounded-full text-sm">⏰ Vigencia hasta 31/12/2027</span>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-16 space-y-20">
+
+<!-- ═══ DASHBOARD ═══ -->
+<section id="dashboard" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Dashboard de Estado de Cumplimiento</h2>
+  <p class="text-gray-500 mb-8">Vista general del estado de todas las obligaciones post-inscripción</p>
+
+  <!-- Semáforo general -->
+  <div class="glass rounded-2xl p-8 shadow-xl border-2 border-yellow-400 mb-8">
+    <div class="flex flex-col md:flex-row items-center gap-6">
+      <div class="w-24 h-24 rounded-full bg-yellow-100 flex items-center justify-center border-4 border-yellow-400 shadow-lg pulse-green" style="animation-name:none">
+        <span class="text-5xl">🟡</span>
+      </div>
+      <div class="flex-1 text-center md:text-left">
+        <p class="text-sm text-yellow-700 font-bold uppercase">Estado general de cumplimiento</p>
+        <h3 class="text-3xl font-extrabold text-gray-900">PRE-INSCRIPCIÓN — En preparación</h3>
+        <p class="text-sm text-gray-600 mt-2">La entidad SM Academy Tech S.L. se encuentra en fase de preparación de la solicitud. Las obligaciones post-inscripción se activarán tras la inscripción efectiva en el ROEZEC.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover">
+      <p class="text-4xl font-extrabold text-green-600">0</p>
+      <p class="text-sm font-bold text-gray-700">Alertas activas</p>
+      <p class="text-xs text-gray-400">Sin obligaciones vencidas</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover">
+      <p class="text-4xl font-extrabold text-yellow-600">10</p>
+      <p class="text-sm font-bold text-gray-700">Obligaciones a monitorizar</p>
+      <p class="text-xs text-gray-400">Se activarán post-ROEZEC</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover">
+      <p class="text-4xl font-extrabold text-red-600">6</p>
+      <p class="text-sm font-bold text-gray-700">Causas de revocación</p>
+      <p class="text-xs text-gray-400">A prevenir permanentemente</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md text-center card-hover">
+      <p class="text-4xl font-extrabold text-purple-600">668</p>
+      <p class="text-sm font-bold text-gray-700">Días hasta fin vigencia</p>
+      <p class="text-xs text-gray-400">31/12/2027 (pendiente prórroga)</p>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl p-6 shadow-md">
+    <h3 class="font-bold text-zec-700 mb-4">Resumen de datos del caso (de informes previos)</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-center">
+      <div class="bg-zec-50 rounded-lg p-3"><p class="font-bold text-zec-700">5 empleos</p><p class="text-xs text-gray-500">Mínimo comprometido</p></div>
+      <div class="bg-zec-50 rounded-lg p-3"><p class="font-bold text-zec-700">100.000 €</p><p class="text-xs text-gray-500">Inversión comprometida</p></div>
+      <div class="bg-zec-50 rounded-lg p-3"><p class="font-bold text-zec-700">9 CNAEs</p><p class="text-xs text-gray-500">Actividades declaradas</p></div>
+      <div class="bg-zec-50 rounded-lg p-3"><p class="font-bold text-zec-700">Adrián Morales</p><p class="text-xs text-gray-500">Administrador residente</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OBLIGACIONES PERIÓDICAS ═══ -->
+<section id="obligaciones" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Obligaciones Periódicas del Titular ZEC</h2>
+  <p class="text-gray-500 mb-8">Arts. 31, 33-36, 44 Ley 19/1994 — Se activan tras inscripción en ROEZEC</p>
+
+  <div class="bg-white rounded-xl shadow-md overflow-hidden">
+    <table class="w-full text-sm">
+      <thead><tr class="bg-zec-800 text-white"><th class="px-4 py-3 text-center w-10">#</th><th class="px-4 py-3 text-left">Obligación</th><th class="px-4 py-3 text-center">Periodicidad</th><th class="px-4 py-3 text-center">Plazo</th><th class="px-4 py-3 text-center">Base legal</th><th class="px-4 py-3 text-center w-16">Estado</th></tr></thead>
+      <tbody class="divide-y divide-gray-100">
+        <tr><td class="px-4 py-3 text-center font-bold">1</td><td class="px-4 py-3 font-medium">Mantener 5 empleos a jornada completa</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-bold">PERMANENTE</span></td><td class="px-4 py-3 text-center">Continuo</td><td class="px-4 py-3 text-center text-xs">Art. 31.1.d</td><td class="px-4 py-3 text-center">🟡</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">2</td><td class="px-4 py-3 font-medium">Crear 5 empleos en 6 meses desde autorización</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded text-xs font-bold">ÚNICA VEZ</span></td><td class="px-4 py-3 text-center">6 meses</td><td class="px-4 py-3 text-center text-xs">Art. 31.1.e</td><td class="px-4 py-3 text-center">🟡</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">3</td><td class="px-4 py-3 font-medium">Materializar inversión 100.000 € en activos fijos</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded text-xs font-bold">ÚNICA VEZ</span></td><td class="px-4 py-3 text-center">2 años</td><td class="px-4 py-3 text-center text-xs">Art. 31.2</td><td class="px-4 py-3 text-center">🟡</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">4</td><td class="px-4 py-3 font-medium">Domicilio social y sede dirección en Canarias</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-bold">PERMANENTE</span></td><td class="px-4 py-3 text-center">Continuo</td><td class="px-4 py-3 text-center text-xs">Art. 31.1.a</td><td class="px-4 py-3 text-center">🟡</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">5</td><td class="px-4 py-3 font-medium">Administrador residente en Canarias</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-bold">PERMANENTE</span></td><td class="px-4 py-3 text-center">Continuo</td><td class="px-4 py-3 text-center text-xs">Art. 31.1.b</td><td class="px-4 py-3 text-center">🟡</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">6</td><td class="px-4 py-3 font-medium">Declaración IS al 4% (modelo 200)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-bold">ANUAL</span></td><td class="px-4 py-3 text-center">25 julio</td><td class="px-4 py-3 text-center text-xs">Art. 37-40</td><td class="px-4 py-3 text-center">🟡</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">7</td><td class="px-4 py-3 font-medium">Verificar límites base imponible art. 44</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-bold">ANUAL</span></td><td class="px-4 py-3 text-center">Con IS</td><td class="px-4 py-3 text-center text-xs">Art. 44</td><td class="px-4 py-3 text-center">🟡</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">8</td><td class="px-4 py-3 font-medium">Informe anual al Consorcio ZEC</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-bold">ANUAL</span></td><td class="px-4 py-3 text-center">Según Consorcio</td><td class="px-4 py-3 text-center text-xs">Art. 33</td><td class="px-4 py-3 text-center">🟡</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">9</td><td class="px-4 py-3 font-medium">Contabilidad separada (ZEC vs no-ZEC)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-bold">PERMANENTE</span></td><td class="px-4 py-3 text-center">Continuo</td><td class="px-4 py-3 text-center text-xs">Art. 35</td><td class="px-4 py-3 text-center">🟡</td></tr>
+        <tr><td class="px-4 py-3 text-center font-bold">10</td><td class="px-4 py-3 font-medium">Comunicar cambios societarios al Consorcio</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded text-xs font-bold">ANTE CAMBIO</span></td><td class="px-4 py-3 text-center">30 días</td><td class="px-4 py-3 text-center text-xs">Art. 34</td><td class="px-4 py-3 text-center">🟡</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ CALENDARIO ═══ -->
+<section id="calendario" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Calendario de Obligaciones — Primer Año ZEC</h2>
+  <p class="text-gray-500 mb-8">Asumiendo inscripción ROEZEC en enero 2027 (escenario optimista)</p>
+
+  <div class="bg-white rounded-xl p-6 shadow-md">
+    <div class="grid grid-cols-4 gap-3">
+      <!-- Q1 -->
+      <div class="cal-cell bg-blue-50">
+        <div class="cal-header text-blue-700">ENE 2027</div>
+        <p class="text-blue-600 font-bold">📌 Inscripción ROEZEC</p>
+        <p class="text-gray-500">Inicio régimen ZEC</p>
+      </div>
+      <div class="cal-cell bg-yellow-50">
+        <div class="cal-header text-yellow-700">FEB 2027</div>
+        <p class="text-yellow-600">Contratación emp. 1-3</p>
+      </div>
+      <div class="cal-cell bg-yellow-50">
+        <div class="cal-header text-yellow-700">MAR 2027</div>
+        <p class="text-yellow-600">Contratación emp. 4-5</p>
+      </div>
+      <div class="cal-cell bg-green-50">
+        <div class="cal-header text-green-700">ABR 2027</div>
+        <p class="text-green-600 font-bold">✅ Inicio operativa</p>
+        <p class="text-gray-500">SM Academy lanzamiento</p>
+      </div>
+      <!-- Q2 -->
+      <div class="cal-cell">
+        <div class="cal-header text-gray-600">MAY 2027</div>
+        <p class="text-gray-500">Operativa normal</p>
+      </div>
+      <div class="cal-cell bg-orange-50">
+        <div class="cal-header text-orange-700">JUN 2027</div>
+        <p class="text-orange-600 font-bold">⏰ Deadline empleo</p>
+        <p class="text-gray-500">5 puestos (6 meses)</p>
+      </div>
+      <div class="cal-cell bg-red-50">
+        <div class="cal-header text-red-700">JUL 2027</div>
+        <p class="text-red-600 font-bold">📋 Declaración IS</p>
+        <p class="text-gray-500">Modelo 200 al 4%</p>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-header text-gray-600">AGO 2027</div>
+        <p class="text-gray-500">Operativa normal</p>
+      </div>
+      <!-- Q3 -->
+      <div class="cal-cell bg-emerald-50">
+        <div class="cal-header text-emerald-700">SEP 2027</div>
+        <p class="text-emerald-600">Lanzamiento OpenClaw</p>
+        <p class="text-gray-500">+ SM Motors importación</p>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-header text-gray-600">OCT 2027</div>
+        <p class="text-gray-500">Informe anual Consorcio</p>
+      </div>
+      <div class="cal-cell">
+        <div class="cal-header text-gray-600">NOV 2027</div>
+        <p class="text-gray-500">Operativa normal</p>
+      </div>
+      <div class="cal-cell bg-red-100 border-red-300">
+        <div class="cal-header text-red-800">DIC 2027</div>
+        <p class="text-red-700 font-bold">⚠️ FIN VIGENCIA ZEC</p>
+        <p class="text-red-600">Art. 29 Ley 19/1994</p>
+        <p class="text-gray-500 text-xs">Pendiente prórroga CE</p>
+      </div>
+    </div>
+    <div class="mt-4 flex flex-wrap gap-3 text-xs">
+      <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded">📌 Hito inscripción</span>
+      <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded">⏰ Deadline legal</span>
+      <span class="px-2 py-1 bg-red-100 text-red-700 rounded">📋 Obligación fiscal</span>
+      <span class="px-2 py-1 bg-green-100 text-green-700 rounded">✅ Hito operativo</span>
+      <span class="px-2 py-1 bg-red-200 text-red-800 rounded">⚠️ Riesgo regulatorio</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CAUSAS DE REVOCACIÓN ═══ -->
+<section id="revocacion" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Causas de Revocación — Art. 36</h2>
+  <p class="text-gray-500 mb-8">Supuestos que conllevan pérdida del régimen fiscal ZEC</p>
+
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-red-500">
+      <div class="flex items-start gap-3">
+        <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-bold flex-shrink-0">CRÍTICA</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-gray-900">Incumplimiento de requisitos del Art. 31</h4>
+          <p class="text-sm text-gray-600 mt-1">Caer por debajo de 5 empleos, no materializar la inversión, perder domicilio en Canarias o que el administrador deje de residir en el archipiélago.</p>
+          <div class="mt-2 bg-green-50 rounded-lg p-2 text-xs text-green-700"><strong>Prevención:</strong> Revisión trimestral de nóminas, verificación anual de activos fijos, certificado de residencia fiscal del administrador.</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-red-500">
+      <div class="flex items-start gap-3">
+        <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-bold flex-shrink-0">CRÍTICA</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-gray-900">No inicio de actividad en plazo</h4>
+          <p class="text-sm text-gray-600 mt-1">No iniciar la actividad económica efectiva dentro de los plazos establecidos.</p>
+          <div class="mt-2 bg-green-50 rounded-lg p-2 text-xs text-green-700"><strong>Prevención:</strong> Calendario de hitos con alertas anticipadas (30, 15, 7 días). SM Academy tiene MVP operativo — bajo riesgo.</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-red-500">
+      <div class="flex items-start gap-3">
+        <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-bold flex-shrink-0">CRÍTICA</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-gray-900">Fraude o falsedad documental</h4>
+          <p class="text-sm text-gray-600 mt-1">Obtención de la autorización mediante datos falsos o fraudulentos (Art. 36.1.c).</p>
+          <div class="mt-2 bg-green-50 rounded-lg p-2 text-xs text-green-700"><strong>Prevención:</strong> Auditoría interna anual. Todos los datos presentados deben ser verificables.</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-yellow-500">
+      <div class="flex items-start gap-3">
+        <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-bold flex-shrink-0">ALTA</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-gray-900">Infracción grave reiterada</h4>
+          <p class="text-sm text-gray-600 mt-1">Incumplimiento reiterado de obligaciones de comunicación, contabilidad separada o informes al Consorcio.</p>
+          <div class="mt-2 bg-green-50 rounded-lg p-2 text-xs text-green-700"><strong>Prevención:</strong> Programa de compliance con checklist mensual. Designar responsable interno.</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-yellow-500">
+      <div class="flex items-start gap-3">
+        <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-bold flex-shrink-0">ALTA</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-gray-900">Cambio de actividad a CNAE no autorizado</h4>
+          <p class="text-sm text-gray-600 mt-1">Realizar actividades no incluidas en el Anexo sin autorización previa del Consorcio.</p>
+          <div class="mt-2 bg-green-50 rounded-lg p-2 text-xs text-green-700"><strong>Prevención:</strong> Verificar SIEMPRE contra el Anexo antes de ampliar objeto social. Consultar al Consorcio antes de cualquier nueva actividad.</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-yellow-500">
+      <div class="flex items-start gap-3">
+        <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-bold flex-shrink-0">ALTA</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-gray-900">Cese de actividad sin comunicación</h4>
+          <p class="text-sm text-gray-600 mt-1">Dejar de operar sin notificar formalmente al Consorcio.</p>
+          <div class="mt-2 bg-green-50 rounded-lg p-2 text-xs text-green-700"><strong>Prevención:</strong> Protocolo de comunicación inmediata al Consorcio ante cualquier cese temporal o definitivo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 bg-red-50 rounded-xl p-5 border border-red-200 text-sm text-red-800">
+    <strong>⚠️ Consecuencia de la revocación (Art. 36.2):</strong> Pérdida del derecho a la aplicación del régimen fiscal especial y <strong>obligación de regularizar la tributación</strong> al tipo general del 25% desde la fecha del incumplimiento. Esto puede suponer la devolución de cientos de miles de euros en impuestos no pagados + intereses + sanciones.
+  </div>
+</section>
+
+<!-- ═══ RECOMENDACIONES DE BLINDAJE ═══ -->
+<section id="blindaje" class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Recomendaciones de Blindaje</h2>
+  <p class="text-gray-500 mb-8">Medidas preventivas para garantizar el cumplimiento permanente</p>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-white rounded-xl p-6 shadow-md card-hover border-t-4 border-green-500">
+      <h3 class="font-bold text-green-700 mb-3 flex items-center gap-2"><span class="text-xl">🛡️</span> Protocolo interno de compliance ZEC</h3>
+      <ul class="text-sm text-gray-600 space-y-2">
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> Designar un <strong>responsable de cumplimiento ZEC</strong> (puede ser el CEO inicialmente)</li>
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> Checklist mensual de verificación: empleos activos, domicilio, administrador residente</li>
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> Archivo documental organizado: contratos laborales, nóminas, facturas de activos fijos</li>
+        <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> Acta de verificación trimestral firmada por el administrador</li>
+      </ul>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md card-hover border-t-4 border-blue-500">
+      <h3 class="font-bold text-blue-700 mb-3 flex items-center gap-2"><span class="text-xl">📅</span> Sistema de alertas anticipadas</h3>
+      <ul class="text-sm text-gray-600 space-y-2">
+        <li class="flex items-start gap-2"><span class="text-blue-500 mt-0.5">✓</span> <strong>30 días antes</strong> de cada deadline: alerta al administrador y asesor fiscal</li>
+        <li class="flex items-start gap-2"><span class="text-blue-500 mt-0.5">✓</span> <strong>15 días antes:</strong> verificación de que la documentación está lista</li>
+        <li class="flex items-start gap-2"><span class="text-blue-500 mt-0.5">✓</span> <strong>7 días antes:</strong> confirmación final y presentación</li>
+        <li class="flex items-start gap-2"><span class="text-blue-500 mt-0.5">✓</span> Calendario compartido con asesor fiscal y gestoría</li>
+      </ul>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md card-hover border-t-4 border-purple-500">
+      <h3 class="font-bold text-purple-700 mb-3 flex items-center gap-2"><span class="text-xl">📊</span> Auditoría anual preventiva</h3>
+      <ul class="text-sm text-gray-600 space-y-2">
+        <li class="flex items-start gap-2"><span class="text-purple-500 mt-0.5">✓</span> Auditoría fiscal anual por asesor colegiado (antes de la declaración IS)</li>
+        <li class="flex items-start gap-2"><span class="text-purple-500 mt-0.5">✓</span> Verificar contabilidad separada ZEC / no-ZEC</li>
+        <li class="flex items-start gap-2"><span class="text-purple-500 mt-0.5">✓</span> Verificar que toda la BI está dentro del límite art. 44</li>
+        <li class="flex items-start gap-2"><span class="text-purple-500 mt-0.5">✓</span> Simular inspección del Consorcio: ¿pasaría todos los controles?</li>
+      </ul>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-md card-hover border-t-4 border-zec-500">
+      <h3 class="font-bold text-zec-700 mb-3 flex items-center gap-2"><span class="text-xl">👥</span> Red de profesionales de referencia</h3>
+      <ul class="text-sm text-gray-600 space-y-2">
+        <li class="flex items-start gap-2"><span class="text-zec-500 mt-0.5">✓</span> <strong>Asesor fiscal colegiado</strong> especializado en REF / ZEC (contratación prioritaria)</li>
+        <li class="flex items-start gap-2"><span class="text-zec-500 mt-0.5">✓</span> <strong>Abogado mercantilista</strong> para cambios societarios y consultas al Consorcio</li>
+        <li class="flex items-start gap-2"><span class="text-zec-500 mt-0.5">✓</span> <strong>Gestoría laboral</strong> para gestión de nóminas y altas/bajas SS</li>
+        <li class="flex items-start gap-2"><span class="text-zec-500 mt-0.5">✓</span> <strong>Auditor de cuentas</strong> si se supera el umbral de auditoría obligatoria</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VIGENCIA Y RIESGO REGULATORIO ═══ -->
+<section class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Riesgo Regulatorio: Vigencia del Régimen ZEC</h2>
+  <div class="glass rounded-2xl p-8 shadow-xl border-2 border-red-300 mt-6">
+    <div class="flex items-start gap-4">
+      <span class="text-4xl flex-shrink-0">⏰</span>
+      <div>
+        <h3 class="text-xl font-extrabold text-red-800 mb-2">Vigencia actual: hasta 31 de diciembre de 2027</h3>
+        <p class="text-sm text-gray-600 mb-3">Art. 29 Ley 19/1994, confirmado por Ley 31/2022 (PGE 2023)</p>
+        <div class="bg-white rounded-lg p-4 mb-3">
+          <h4 class="font-bold text-gray-700 mb-2 text-sm">Historial de prórrogas</h4>
+          <div class="flex gap-3 text-xs">
+            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full">2008 ✅</span>
+            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full">2014 ✅</span>
+            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full">2019 ✅</span>
+            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full">2024 ✅</span>
+            <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full font-bold">2027 → ¿?</span>
+          </div>
+          <p class="text-xs text-gray-500 mt-2">El régimen ZEC se ha prorrogado en <strong>todas las ocasiones</strong> desde su creación. La CE ha autorizado cada prórroga. Es altamente probable (pero no garantizado) que se prorrogue más allá de 2027.</p>
+        </div>
+        <div class="bg-yellow-50 rounded-lg p-3 text-sm text-yellow-800">
+          <strong>Recomendación VIGILEX:</strong> Monitorizar activamente las negociaciones España-CE sobre la prórroga del régimen ZEC. Suscribirse a las noticias del Consorcio. Si no se aprueba la prórroga antes de mediados de 2027, evaluar estrategia alternativa con el asesor fiscal.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HISTORIAL DE VERIFICACIONES ═══ -->
+<section class="reveal">
+  <h2 class="text-3xl font-extrabold gradient-text mb-2">Historial de Verificaciones</h2>
+  <p class="text-gray-500 mb-8">Registro cronológico de cada verificación de cumplimiento realizada</p>
+
+  <div class="bg-white rounded-xl shadow-md overflow-hidden">
+    <table class="w-full text-sm">
+      <thead><tr class="bg-zec-800 text-white"><th class="px-4 py-3 text-left">Fecha</th><th class="px-4 py-3 text-left">Obligación verificada</th><th class="px-4 py-3 text-center">Resultado</th><th class="px-4 py-3 text-left">Observaciones</th></tr></thead>
+      <tbody class="divide-y divide-gray-100">
+        <tr><td class="px-4 py-3 font-mono">26/03/2026</td><td class="px-4 py-3">Análisis de viabilidad inicial (VIABLEX)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded text-xs font-bold">🟡 VIABLE CON CONDICIONES</span></td><td class="px-4 py-3 text-gray-500">7/9 CNAEs autorizados. 2 pendientes consulta.</td></tr>
+        <tr><td class="px-4 py-3 font-mono">26/03/2026</td><td class="px-4 py-3">Generación de memoria descriptiva (MEMOREX)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-bold">🟢 COMPLETADO</span></td><td class="px-4 py-3 text-gray-500">Borrador completo. Pendiente formalización.</td></tr>
+        <tr><td class="px-4 py-3 font-mono">26/03/2026</td><td class="px-4 py-3">Dictamen estratégico fiscal (STRATEX)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-bold">🟢 COMPLETADO</span></td><td class="px-4 py-3 text-gray-500">Ahorro estimado 5 años: 313.824 €.</td></tr>
+        <tr><td class="px-4 py-3 font-mono">26/03/2026</td><td class="px-4 py-3">Compilación de dosier (DOSIEREX)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-bold">🟢 COMPLETADO</span></td><td class="px-4 py-3 text-gray-500">67% de documentación lista. Pendientes certificados.</td></tr>
+        <tr><td class="px-4 py-3 font-mono">26/03/2026</td><td class="px-4 py-3">Sistema de seguimiento (VIGILEX)</td><td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-bold">🟢 ACTIVO</span></td><td class="px-4 py-3 text-gray-500">Plan de vigilancia establecido.</td></tr>
+        <tr class="bg-gray-50"><td class="px-4 py-3 font-mono text-gray-400">—</td><td class="px-4 py-3 text-gray-400 italic">Próxima verificación: tras consulta al Consorcio</td><td class="px-4 py-3 text-center text-gray-400">—</td><td class="px-4 py-3 text-gray-400">Actualizar CNAEs y estado inversión</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="reveal">
+  <div class="bg-red-50 border-2 border-red-300 rounded-xl p-5 text-sm text-red-800">
+    <div class="flex items-start gap-3"><span class="text-2xl">⚠️</span>
+    <div><h4 class="font-bold mb-1">AVISO — Sistema de seguimiento orientativo</h4>
+    <p>Este sistema de seguimiento es un <strong>plan de vigilancia orientativo</strong>. Las obligaciones, plazos y consecuencias deben ser verificados con la <strong>normativa vigente en cada momento</strong> y con un <strong>asesor fiscal colegiado</strong>. Los plazos del calendario asumen una inscripción ROEZEC en enero 2027 y pueden variar.</p></div></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-gray-900 text-gray-400 py-12">
+  <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+    <p class="mb-2">Informe generado por <strong class="text-zec-400">VIGILEX 🛡️</strong> — Supervisor de Cumplimiento | Equipo <strong class="text-zec-400">ZECEX ⚖️📊</strong></p>
+    <p class="mb-2">Fecha: 26 de marzo de 2026 | Base legal: Arts. 31-36, 44 Ley 19/1994</p>
+    <p>Consorcio ZEC — SCT: 922 298 010 | LP: 928 490 505 | zec@canariaszec.gob.es</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.reveal').forEach(el=>{new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.1}).observe(el)});
+</script>
+</body>
+</html>
