@@ -117,13 +117,79 @@
         <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-brand-600">
           <i data-lucide="film" class="w-6 h-6"></i>
         </div>
-        <h2 class="text-3xl font-bold text-gray-900">Video Showcase</h2>
+        <h2 class="text-3xl font-bold text-gray-900">Video Cinematográfico</h2>
       </div>
-      <div class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 mb-12">
+      
+      <div class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 mb-8">
+        <h3 class="text-xl font-bold mb-4 px-4 pt-2">Master Showcase (Remotion)</h3>
         <video controls class="w-full rounded-2xl shadow-sm" poster="assets/render-exterior-dia.jpg">
           <source src="assets/video-remotion.mp4" type="video/mp4">
           Tu navegador no soporta el tag de video.
         </video>
+      </div>
+
+      <h3 class="text-2xl font-bold text-gray-900 mb-6">Segmentos Generados (First-Last Frame AI)</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Segmento 1 -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 card-hover transition-all">
+          <div class="flex justify-between items-start mb-3">
+            <span class="px-2 py-1 bg-purple-50 text-purple-600 text-xs font-bold rounded">SEG 01</span>
+            <span class="text-xs text-gray-500">Exterior Día → Noche</span>
+          </div>
+          <video controls preload="metadata" class="w-full h-48 object-cover rounded-lg mb-3">
+            <source src="assets/segment-01.mp4" type="video/mp4">
+          </video>
+          <p class="text-xs text-gray-600">Transición temporal con iluminación arquitectónica.</p>
+        </div>
+
+        <!-- Segmento 2 -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 card-hover transition-all">
+          <div class="flex justify-between items-start mb-3">
+            <span class="px-2 py-1 bg-purple-50 text-purple-600 text-xs font-bold rounded">SEG 02</span>
+            <span class="text-xs text-gray-500">Exterior Noche → Aéreo</span>
+          </div>
+          <video controls preload="metadata" class="w-full h-48 object-cover rounded-lg mb-3">
+            <source src="assets/segment-02.mp4" type="video/mp4">
+          </video>
+          <p class="text-xs text-gray-600">Ascenso de dron revelando el entorno de Guargacho.</p>
+        </div>
+
+        <!-- Segmento 3 -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 card-hover transition-all">
+          <div class="flex justify-between items-start mb-3">
+            <span class="px-2 py-1 bg-purple-50 text-purple-600 text-xs font-bold rounded">SEG 03</span>
+            <span class="text-xs text-gray-500">Aéreo → Salón</span>
+          </div>
+          <video controls preload="metadata" class="w-full h-48 object-cover rounded-lg mb-3">
+            <source src="assets/segment-03.mp4" type="video/mp4">
+          </video>
+          <p class="text-xs text-gray-600">Entrada fluida desde exterior al interior del piso.</p>
+        </div>
+
+        <!-- Segmento 4 -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 card-hover transition-all">
+          <div class="flex justify-between items-start mb-3">
+            <span class="px-2 py-1 bg-purple-50 text-purple-600 text-xs font-bold rounded">SEG 04</span>
+            <span class="text-xs text-gray-500">Salón → Cocina</span>
+          </div>
+          <video controls preload="metadata" class="w-full h-48 object-cover rounded-lg mb-3">
+            <source src="assets/segment-04.mp4" type="video/mp4">
+          </video>
+          <p class="text-xs text-gray-600">Dolly suave recorriendo la zona de día.</p>
+        </div>
+
+        <!-- Segmento 5 -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 card-hover transition-all">
+          <div class="flex justify-between items-start mb-3">
+            <span class="px-2 py-1 bg-purple-50 text-purple-600 text-xs font-bold rounded">SEG 05</span>
+            <span class="text-xs text-gray-500">Cocina → Terraza</span>
+          </div>
+          <video controls preload="metadata" class="w-full h-48 object-cover rounded-lg mb-3">
+            <source src="assets/segment-05.mp4" type="video/mp4">
+          </video>
+          <p class="text-xs text-gray-600">Apertura hacia el exterior con vistas a la costa.</p>
+        </div>
       </div>
     </section>
 
