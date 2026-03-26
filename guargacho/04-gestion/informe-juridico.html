@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe Jurídico-Urbanístico — Edificio Plurifamiliar en Guargacho</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            navy: { 50:'#f0f4f8',100:'#d9e2ec',200:'#bcccdc',300:'#9fb3c8',400:'#829ab1',500:'#627d98',600:'#486581',700:'#334e68',800:'#1D3557',900:'#102a43' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s ease}
+    .reveal.active{opacity:1;transform:translateY(0)}
+    .gradient-text{background:linear-gradient(135deg,#1D3557,#457b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .glass{background:rgba(255,255,255,.7);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.3)}
+    .card-hover{transition:all .3s ease}.card-hover:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(29,53,87,.15)}
+    .sem{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:9999px;font-size:.75rem;font-weight:600}
+    .sem-g{background:#c6f6d5;color:#22543d}.sem-y{background:#fefcbf;color:#744210}.sem-r{background:#fed7d7;color:#822727}
+    .tl-item{position:relative;padding-left:2.5rem;padding-bottom:2rem;border-left:2px solid #bcccdc}
+    .tl-item:last-child{border-left-color:transparent}
+    .tl-dot{position:absolute;left:-9px;top:0;width:16px;height:16px;border-radius:50%;border:3px solid #1D3557;background:#fff}
+    table.lt{width:100%;border-collapse:separate;border-spacing:0}
+    table.lt th{background:#1D3557;color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
+    table.lt th:first-child{border-radius:8px 0 0 0}table.lt th:last-child{border-radius:0 8px 0 0}
+    table.lt td{padding:12px 16px;border-bottom:1px solid #e2e8f0;font-size:.875rem}
+    table.lt tr:hover td{background:#f7fafc}
+    table.lt tr:last-child td:first-child{border-radius:0 0 0 8px}table.lt tr:last-child td:last-child{border-radius:0 0 8px 0}
+    html{scroll-behavior:smooth}
+    .nav-link{transition:all .2s}.nav-link:hover{color:#1D3557;background:rgba(29,53,87,.05)}
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 glass shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-14">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-navy-800 flex items-center justify-center"><span class="text-white text-sm font-bold">⚖️</span></div>
+          <span class="text-navy-800 font-bold text-sm">LEGEX</span>
+          <span class="text-gray-400 text-xs">| Informe Jurídico-Urbanístico</span>
+        </div>
+        <div class="hidden md:flex items-center gap-1 text-xs">
+          <a href="#resumen" class="nav-link px-3 py-1 rounded">Resumen</a>
+          <a href="#marco" class="nav-link px-3 py-1 rounded">Marco Legal</a>
+          <a href="#clasificacion" class="nav-link px-3 py-1 rounded">Clasificación</a>
+          <a href="#cumplimiento" class="nav-link px-3 py-1 rounded">Cumplimiento</a>
+          <a href="#tramitacion" class="nav-link px-3 py-1 rounded">Tramitación</a>
+          <a href="#riesgos" class="nav-link px-3 py-1 rounded">Riesgos</a>
+          <a href="#conclusiones" class="nav-link px-3 py-1 rounded">Conclusiones</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="relative min-h-[70vh] flex items-center overflow-hidden pt-14" style="background:linear-gradient(135deg,#102a43 0%,#1D3557 40%,#334e68 70%,#486581 100%)">
+    <div class="absolute inset-0 opacity-10">
+      <svg width="100%" height="100%"><defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0L0 0 0 40" fill="none" stroke="#fff" stroke-width=".5"/></pattern></defs><rect width="100%" height="100%" fill="url(#g)"/></svg>
+    </div>
+    <div class="absolute top-20 right-10 w-64 h-64 rounded-full bg-white/5 blur-3xl"></div>
+    <div class="absolute bottom-10 left-10 w-48 h-48 rounded-full bg-white/5 blur-3xl"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 mb-6 backdrop-blur-sm border border-white/20">
+          <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+          <span class="text-white/80 text-xs font-medium">Suelo Urbano Consolidado · San Miguel de Abona</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+          Informe<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300">Jurídico-Urbanístico</span>
+        </h1>
+        <p class="text-lg text-blue-100/80 mb-8 max-w-xl leading-relaxed">
+          Análisis de viabilidad legal, cumplimiento normativo y estrategia de tramitación para el edificio plurifamiliar de 12 viviendas con local comercial y garaje en Guargacho, Tenerife.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+            <div class="text-2xl font-bold text-white">12</div>
+            <div class="text-xs text-blue-200/70 mt-1">Viviendas</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+            <div class="text-2xl font-bold text-white">460 m²</div>
+            <div class="text-xs text-blue-200/70 mt-1">Solar</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+            <div class="text-2xl font-bold text-white">PB+3</div>
+            <div class="text-xs text-blue-200/70 mt-1">Alturas</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+            <div class="text-2xl font-bold text-green-300">VIABLE</div>
+            <div class="text-xs text-blue-200/70 mt-1">Dictamen Jurídico</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+    <!-- S1: RESUMEN EJECUTIVO -->
+    <section id="resumen" class="mb-20 reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-navy-800 flex items-center justify-center text-white text-lg">1</div>
+        <h2 class="text-3xl font-bold gradient-text">Resumen Ejecutivo</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="md:col-span-2 bg-white rounded-2xl shadow-sm p-8 card-hover">
+          <h3 class="font-bold text-navy-800 mb-4 text-lg">Dictamen General</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            Tras el análisis exhaustivo de la documentación urbanística y la normativa aplicable, este despacho concluye que el proyecto de <strong>edificio plurifamiliar de 12 viviendas, local comercial en planta baja y garaje subterráneo</strong>, sobre solar de <strong>460 m²</strong> clasificado como <strong>Suelo Urbano Consolidado</strong> en Guargacho, municipio de San Miguel de Abona (Tenerife), resulta <strong>jurídicamente viable y plenamente conforme</strong> con el planeamiento vigente.
+          </p>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            El solar se encuentra regulado por las <strong>Normas Subsidiarias de Planeamiento (NNSS) de San Miguel de Abona</strong>, que permiten el uso residencial plurifamiliar con los parámetros urbanísticos propuestos (edificabilidad 3,0 m²/m², PB+3, ocupación 100% PB). La clasificación como suelo urbano consolidado supone que el solar tiene la condición de <strong>solar apto para edificar</strong>, lo que simplifica notablemente la tramitación.
+          </p>
+          <p class="text-gray-600 leading-relaxed">
+            A diferencia de actuaciones en suelo rústico o no consolidado, este proyecto <strong>no requiere instrumentos de gestión urbanística previos</strong> (plan parcial, reparcelación, etc.), pudiendo solicitar directamente licencia de obra mayor tras la redacción del proyecto técnico. El informe de Valorex (tasación) estima un valor de la promoción terminada de ~3.168.000 €, sobre un solar valorado en 368.000 €.
+          </p>
+        </div>
+        <div class="space-y-4">
+          <div class="bg-white rounded-2xl shadow-sm p-6 card-hover border-l-4 border-green-500">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-green-500 text-xl">🟢</span>
+              <span class="font-bold text-sm text-navy-800">Clasificación Urbanística</span>
+            </div>
+            <p class="text-xs text-gray-500">Suelo Urbano Consolidado — máxima seguridad jurídica</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm p-6 card-hover border-l-4 border-green-500">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-green-500 text-xl">🟢</span>
+              <span class="font-bold text-sm text-navy-800">Uso Residencial Plurifamiliar</span>
+            </div>
+            <p class="text-xs text-gray-500">Permitido por las NNSS sin necesidad de autorización especial</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm p-6 card-hover border-l-4 border-green-500">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-green-500 text-xl">🟢</span>
+              <span class="font-bold text-sm text-navy-800">Parámetros Urbanísticos</span>
+            </div>
+            <p class="text-xs text-gray-500">Edif. 3,0 m²/m², PB+3, ocupación 100% PB — todo conforme</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm p-6 card-hover border-l-4 border-yellow-500">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-yellow-500 text-xl">🟡</span>
+              <span class="font-bold text-sm text-navy-800">Tramitación</span>
+            </div>
+            <p class="text-xs text-gray-500">Plazo estimado 4-8 meses para obtención de licencia de obra</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S2: MARCO NORMATIVO -->
+    <section id="marco" class="mb-20 reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-navy-800 flex items-center justify-center text-white text-lg">2</div>
+        <h2 class="text-3xl font-bold gradient-text">Marco Normativo Aplicable</h2>
+      </div>
+      <p class="text-gray-600 mb-8 max-w-3xl">El proyecto se somete a un marco normativo multinivel: legislación estatal básica, autonómica canaria, insular y municipal. En suelo urbano consolidado, la tramitación es más directa que en otras categorías de suelo.</p>
+
+      <div class="bg-white rounded-2xl shadow-sm overflow-hidden mb-8">
+        <table class="lt">
+          <thead><tr><th>Norma</th><th>Ámbito</th><th>Incidencia en el Proyecto</th><th>Estado</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="font-semibold text-navy-800">NNSS de San Miguel de Abona (Texto Refundido)</td>
+              <td>Municipal</td>
+              <td>Clasificación, usos, parámetros urbanísticos, condiciones edificatorias</td>
+              <td><span class="sem sem-g">✓ Vigente</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">Ley 4/2017, de 13 de julio (LSENPC)</td>
+              <td>Autonómico</td>
+              <td>Régimen del suelo urbano, licencias, plazos, silencio administrativo, deberes</td>
+              <td><span class="sem sem-g">✓ Vigente</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">Decreto 182/2018 (Reglamento Intervención)</td>
+              <td>Autonómico</td>
+              <td>Procedimiento de licencias, documentación, comunicaciones previas</td>
+              <td><span class="sem sem-g">✓ Vigente</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">Decreto-ley 3/2025, de 21 de abril</td>
+              <td>Autonómico</td>
+              <td>Agilización tramitación licencias, entidades urbanísticas de colaboración</td>
+              <td><span class="sem sem-g">✓ Vigente</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">Decreto-ley 1/2024, de 19 de febrero</td>
+              <td>Autonómico</td>
+              <td>Medidas urgentes vivienda, viviendas asequibles incentivadas</td>
+              <td><span class="sem sem-g">✓ Vigente</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">RD 7/2015 (TRLS)</td>
+              <td>Estatal</td>
+              <td>Legislación básica: situaciones de suelo, deberes del propietario, valoraciones</td>
+              <td><span class="sem sem-g">✓ Vigente</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">Ley 38/1999 (LOE)</td>
+              <td>Estatal</td>
+              <td>Agentes de la edificación, requisitos básicos, responsabilidades</td>
+              <td><span class="sem sem-g">✓ Vigente</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">CTE (RD 314/2006 y actualizaciones)</td>
+              <td>Estatal</td>
+              <td>DB-SE, DB-HS, DB-HE, DB-HR, DB-SI, DB-SUA: exigencias técnicas edificación</td>
+              <td><span class="sem sem-g">✓ Vigente</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">EHE-08 / NCSE-02</td>
+              <td>Estatal</td>
+              <td>Hormigón estructural, sismicidad (baja en Canarias)</td>
+              <td><span class="sem sem-g">✓ Vigente</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">REBT / RITE / ICT</td>
+              <td>Estatal</td>
+              <td>Instalaciones electrotécnicas, térmicas y telecomunicaciones</td>
+              <td><span class="sem sem-g">✓ Vigente</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">Ley 12/2023 (Derecho a la vivienda)</td>
+              <td>Estatal</td>
+              <td>Reserva VPO en suelo urbanizable, zonas tensionadas</td>
+              <td><span class="sem sem-y">⚠ Verificar reserva</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">PIOT — Plan Insular de Tenerife</td>
+              <td>Insular</td>
+              <td>Directrices territoriales, compatibilidad de usos</td>
+              <td><span class="sem sem-g">✓ Vigente</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">Ley 7/2011 Patrimonio Cultural Canarias</td>
+              <td>Autonómico</td>
+              <td>Protección de bienes catalogados (no afección prevista)</td>
+              <td><span class="sem sem-g">✓ No aplica</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-navy-50 rounded-2xl p-6 border border-navy-200">
+        <h4 class="font-bold text-navy-800 mb-3 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          Nota sobre las NNSS de San Miguel de Abona
+        </h4>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          San Miguel de Abona se rige por las <strong>Normas Subsidiarias de Planeamiento</strong> (Texto Refundido, aprobación definitiva BOC 63/87), no por un Plan General de Ordenación (PGO). Estas NNSS han sido objeto de diversas modificaciones puntuales y revisiones parciales, siendo la más relevante la <strong>Revisión 1ª Fase Franja Litoral-Autopista</strong>. La zona de Guargacho está clasificada como suelo urbano en las NNSS, con condiciones edificatorias específicas para edificación residencial colectiva en manzana cerrada/abierta.
+        </p>
+      </div>
+    </section>
+
+    <!-- S3: CLASIFICACIÓN URBANÍSTICA -->
+    <section id="clasificacion" class="mb-20 reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-navy-800 flex items-center justify-center text-white text-lg">3</div>
+        <h2 class="text-3xl font-bold gradient-text">Clasificación Urbanística del Suelo</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm p-8 card-hover">
+          <h3 class="font-bold text-navy-800 mb-4 text-lg flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-navy-800"></span>
+            Ficha Urbanística del Solar
+          </h3>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Clasificación</span>
+              <span class="font-semibold text-sm text-navy-800">Suelo Urbano Consolidado</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Situación TRLS</span>
+              <span class="font-semibold text-sm text-navy-800">Suelo Urbanizado</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Ubicación</span>
+              <span class="font-semibold text-sm text-navy-800">Guargacho, San Miguel de Abona</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Superficie del Solar</span>
+              <span class="font-semibold text-sm text-navy-800">460 m²</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Edificabilidad Máxima</span>
+              <span class="font-semibold text-sm text-navy-800">3,0 m²/m² → 1.380 m²c</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Edificabilidad Proyecto</span>
+              <span class="font-semibold text-sm text-navy-800">~1.320 m²c (~2,87 m²/m²)</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Alturas Permitidas</span>
+              <span class="font-semibold text-sm text-navy-800">PB+3 (máx. 12 m)</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Ocupación PB</span>
+              <span class="font-semibold text-sm text-navy-800">100%</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Ocupación Plantas Piso</span>
+              <span class="font-semibold text-sm text-navy-800">80%</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="text-sm text-gray-500">Retranqueos</span>
+              <span class="font-semibold text-sm text-navy-800">0 m frontal / 3 m a linderos</span>
+            </div>
+            <div class="flex justify-between items-center py-2">
+              <span class="text-sm text-gray-500">Condición de Solar</span>
+              <span class="font-semibold text-sm text-green-600">✓ Apto para edificar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-white rounded-2xl shadow-sm p-8 card-hover">
+            <h3 class="font-bold text-navy-800 mb-4 text-lg flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-green-500"></span>
+              Usos Permitidos
+            </h3>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> Residencial plurifamiliar (uso principal)</li>
+              <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> Comercial en planta baja (uso compatible)</li>
+              <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> Garaje-aparcamiento (uso complementario)</li>
+              <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> Trasteros vinculados a viviendas</li>
+              <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">✓</span> Oficinas y servicios profesionales (PB)</li>
+            </ul>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm p-8 card-hover">
+            <h3 class="font-bold text-navy-800 mb-4 text-lg flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-red-500"></span>
+              Usos Prohibidos / Condicionados
+            </h3>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li class="flex items-start gap-2"><span class="text-red-500 mt-0.5">✗</span> Industrial</li>
+              <li class="flex items-start gap-2"><span class="text-red-500 mt-0.5">✗</span> Agropecuario</li>
+              <li class="flex items-start gap-2"><span class="text-red-500 mt-0.5">✗</span> Edificación > PB+3 (superación de altura)</li>
+              <li class="flex items-start gap-2"><span class="text-yellow-500 mt-0.5">⚠</span> Alojamiento turístico: requiere autorización sectorial</li>
+              <li class="flex items-start gap-2"><span class="text-yellow-500 mt-0.5">⚠</span> Vivienda vacacional: sujeto a regulación insular</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-navy-50 to-blue-50 rounded-2xl p-8 border border-navy-100">
+        <h4 class="font-bold text-navy-800 mb-4">Análisis de Compatibilidad: Proyecto vs. Planeamiento</h4>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <p class="text-sm text-gray-600 leading-relaxed mb-3">
+              El art. <strong>28 de la LSENPC</strong> define el suelo urbano consolidado como aquel que cuenta con urbanización completa (acceso rodado, abastecimiento de agua, evacuación de aguas, suministro eléctrico). El solar de Guargacho cumple todos estos requisitos al estar ubicado en una zona consolidada del núcleo urbano.
+            </p>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Conforme al art. <strong>29 LSENPC</strong>, los propietarios de suelo urbano consolidado tienen el derecho a edificar directamente sin necesidad de equidistribución previa, lo que permite la solicitud de licencia de obra mayor de forma inmediata.
+            </p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-600 leading-relaxed mb-3">
+              El proyecto propone una edificabilidad de <strong>~2,87 m²/m²</strong> frente a los <strong>3,0 m²/m²</strong> permitidos, lo que supone un margen de seguridad del 4,3%. Las alturas (PB+3) y la ocupación son conformes con la ficha urbanística de la zona.
+            </p>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              <strong>Conclusión:</strong> El proyecto es plenamente compatible con la clasificación urbanística y los parámetros de las NNSS. No requiere modificación puntual del planeamiento, ni instrumento de gestión previo. Puede acceder directamente a licencia de obra mayor.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S4: CUMPLIMIENTO NORMATIVO -->
+    <section id="cumplimiento" class="mb-20 reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-navy-800 flex items-center justify-center text-white text-lg">4</div>
+        <h2 class="text-3xl font-bold gradient-text">Semáforo de Cumplimiento Normativo</h2>
+      </div>
+      <p class="text-gray-600 mb-8 max-w-3xl">Evaluación del grado de cumplimiento del proyecto con cada bloque normativo. Los datos se basan en los informes de Valorex (tasación) y la documentación de proyecto disponible.</p>
+
+      <div class="bg-white rounded-2xl shadow-sm overflow-hidden mb-8">
+        <table class="lt">
+          <thead><tr><th>Normativa</th><th>Requisito Clave</th><th>Estado del Proyecto</th><th>Semáforo</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="font-semibold text-navy-800">NNSS — Uso</td>
+              <td>Residencial plurifamiliar + comercial PB</td>
+              <td>12 viv. + local PB + garaje — compatible</td>
+              <td><span class="sem sem-g">✓ Cumple</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">NNSS — Edificabilidad</td>
+              <td>Máx. 3,0 m²/m² (1.380 m²c)</td>
+              <td>~1.320 m²c (~2,87 m²/m²) — dentro de límite</td>
+              <td><span class="sem sem-g">✓ Cumple</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">NNSS — Altura</td>
+              <td>PB+3 (máx. 12 m)</td>
+              <td>PB+3 propuesto</td>
+              <td><span class="sem sem-g">✓ Cumple</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">NNSS — Ocupación</td>
+              <td>100% PB / 80% plantas piso</td>
+              <td>Proyecto ajustado a parámetros</td>
+              <td><span class="sem sem-g">✓ Cumple</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">NNSS — Aparcamiento</td>
+              <td>Mín. 1 plaza/vivienda + dotación comercial</td>
+              <td>12 plazas garaje subterráneo + plazas comercial</td>
+              <td><span class="sem sem-g">✓ Cumple</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">CTE DB-HE (Ahorro energético)</td>
+              <td>Zona climática α3, exigencias HE0-HE5</td>
+              <td>Diseño con aerotermia, aislamiento térmico, energías renovables</td>
+              <td><span class="sem sem-g">✓ Cumple</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">CTE DB-SE (Seg. estructural)</td>
+              <td>Acciones, cimentación, verificaciones ELU/ELS</td>
+              <td>Estructura porticada de hormigón armado — a detallar</td>
+              <td><span class="sem sem-y">⚠ Pendiente cálculo</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">CTE DB-HS (Salubridad)</td>
+              <td>Protección humedad, evacuación aguas, calidad aire</td>
+              <td>Conexión a red municipal de saneamiento</td>
+              <td><span class="sem sem-g">✓ Cumple</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">CTE DB-SI (Seg. incendio)</td>
+              <td>Propagación, evacuación, intervención bomberos</td>
+              <td>Exigencias de bloque plurifamiliar: sectorizaciones, BIE, detección</td>
+              <td><span class="sem sem-y">⚠ Pendiente proyecto</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">CTE DB-SUA (Accesibilidad)</td>
+              <td>Itinerarios accesibles, ascensor obligatorio</td>
+              <td>Ascensor previsto, accesibilidad en PB y zonas comunes</td>
+              <td><span class="sem sem-g">✓ Cumple</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">CTE DB-HR (Ruido)</td>
+              <td>Aislamiento acústico entre viviendas y exterior</td>
+              <td>Soluciones constructivas a definir en proyecto de ejecución</td>
+              <td><span class="sem sem-y">⚠ Pendiente proyecto</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">EHE-08</td>
+              <td>Hormigón estructural, durabilidad</td>
+              <td>Ambiente IIa (costero canario), recubrimientos especiales</td>
+              <td><span class="sem sem-y">⚠ Pendiente ejecución</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">REBT + RITE + ICT</td>
+              <td>Instalaciones eléctricas, térmicas y telecomunicaciones</td>
+              <td>Proyectos sectoriales necesarios para licencia</td>
+              <td><span class="sem sem-y">⚠ Pendiente proyecto</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">LOE (Agentes edificación)</td>
+              <td>Promotor, proyectista, director obra, constructor</td>
+              <td>Equipo completo a designar</td>
+              <td><span class="sem sem-y">⚠ Pendiente</span></td>
+            </tr>
+            <tr>
+              <td class="font-semibold text-navy-800">Ley 12/2023 — Reserva VPO</td>
+              <td>30% vivienda protegida en suelo urbanizable residencial</td>
+              <td>Solar urbano consolidado — no aplica reserva directa</td>
+              <td><span class="sem sem-g">✓ No aplica</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-2xl shadow-sm p-8">
+          <h4 class="font-bold text-navy-800 mb-4">Resumen del Semáforo</h4>
+          <canvas id="semaforoChart" height="200"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-8">
+          <h4 class="font-bold text-navy-800 mb-6">Acciones para Cumplimiento Total</h4>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 py-2 border-b border-gray-100">
+              <span class="text-yellow-500 text-lg">⚠</span>
+              <div>
+                <div class="font-semibold text-sm text-navy-800">Proyecto de Ejecución completo</div>
+                <div class="text-xs text-gray-500">Redacción por arquitecto colegiado con todos los anejos técnicos (estructura, instalaciones, acústica, incendios)</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 py-2 border-b border-gray-100">
+              <span class="text-yellow-500 text-lg">⚠</span>
+              <div>
+                <div class="font-semibold text-sm text-navy-800">Estudio Geotécnico</div>
+                <div class="text-xs text-gray-500">Obligatorio CTE DB-SE-C para edificación con sótano (garaje subterráneo)</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 py-2 border-b border-gray-100">
+              <span class="text-yellow-500 text-lg">⚠</span>
+              <div>
+                <div class="font-semibold text-sm text-navy-800">Designación de Agentes LOE</div>
+                <div class="text-xs text-gray-500">Proyectista, director de obra, director de ejecución, coordinador SyS</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 py-2">
+              <span class="text-yellow-500 text-lg">⚠</span>
+              <div>
+                <div class="font-semibold text-sm text-navy-800">Proyectos sectoriales de instalaciones</div>
+                <div class="text-xs text-gray-500">Electricidad (REBT), climatización (RITE), telecomunicaciones (ICT), ascensor</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S5: TRAMITACIÓN -->
+    <section id="tramitacion" class="mb-20 reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-navy-800 flex items-center justify-center text-white text-lg">5</div>
+        <h2 class="text-3xl font-bold gradient-text">Hoja de Ruta de Tramitación</h2>
+      </div>
+      <p class="text-gray-600 mb-8 max-w-3xl">Al tratarse de suelo urbano consolidado con condición de solar, la tramitación es la más directa posible: proyecto técnico → licencia de obra mayor → ejecución → primera ocupación.</p>
+
+      <div class="bg-white rounded-2xl shadow-sm p-8 mb-8">
+        <div class="space-y-0">
+          <div class="tl-item">
+            <div class="tl-dot" style="background:#1D3557;border-color:#1D3557"></div>
+            <div class="ml-2">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-white bg-navy-800 px-2 py-0.5 rounded">FASE 1</span>
+                <span class="text-xs text-gray-400">Mes 1-2</span>
+              </div>
+              <h4 class="font-bold text-navy-800 mb-1">Verificaciones Previas y Due Diligence</h4>
+              <p class="text-sm text-gray-600 mb-3">Solicitar cédula urbanística al Ayuntamiento de San Miguel de Abona. Obtener nota simple registral actualizada. Verificar la condición de solar (servicios urbanísticos completos). Comprobar inexistencia de cargas, afecciones o servidumbres.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Cédula urbanística</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Nota simple registral</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Certificado catastral</span>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="ml-2">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-white bg-navy-700 px-2 py-0.5 rounded">FASE 2</span>
+                <span class="text-xs text-gray-400">Mes 1-2 (paralelo)</span>
+              </div>
+              <h4 class="font-bold text-navy-800 mb-1">Estudio Geotécnico</h4>
+              <p class="text-sm text-gray-600 mb-3">Contratar estudio geotécnico (obligatorio para edificación con planta sótano conforme CTE DB-SE-C). Especialmente relevante en terreno volcánico canario y para dimensionar la cimentación del garaje subterráneo.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Sondeos y ensayos</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Informe geotécnico</span>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="ml-2">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-white bg-navy-600 px-2 py-0.5 rounded">FASE 3</span>
+                <span class="text-xs text-gray-400">Mes 2-4</span>
+              </div>
+              <h4 class="font-bold text-navy-800 mb-1">Redacción del Proyecto Básico y de Ejecución</h4>
+              <p class="text-sm text-gray-600 mb-3">Desarrollo completo del proyecto por arquitecto colegiado. Incluye: memoria constructiva, planos de arquitectura y estructura, mediciones, presupuesto, estudios CTE (HE, HS, SI, SUA, HR, SE), proyectos de instalaciones (REBT, RITE, ICT), estudio de seguridad y salud.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Proyecto básico</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Proyecto ejecución</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Visado colegial</span>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="ml-2">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-white bg-navy-500 px-2 py-0.5 rounded">FASE 4</span>
+                <span class="text-xs text-gray-400">Mes 4-8</span>
+              </div>
+              <h4 class="font-bold text-navy-800 mb-1">Solicitud de Licencia de Obra Mayor</h4>
+              <p class="text-sm text-gray-600 mb-3">Presentación ante el Ayuntamiento de San Miguel de Abona. Plazo legal: <strong>3 meses</strong> (art. 343 LSENPC). Silencio positivo salvo que adquiera facultades contrarias al planeamiento. Posibilidad de utilizar entidades urbanísticas de colaboración (DL 3/2025) para agilizar informe técnico.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Solicitud + proyecto</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Pago tasas + ICIO</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Informe técnico</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Resolución</span>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="ml-2">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-white bg-navy-400 px-2 py-0.5 rounded">FASE 5</span>
+                <span class="text-xs text-gray-400">Mes 4-6 (paralelo)</span>
+              </div>
+              <h4 class="font-bold text-navy-800 mb-1">Autorizaciones Sectoriales</h4>
+              <p class="text-sm text-gray-600 mb-3">Tramitación paralela: acometida eléctrica (Endesa), acometida de agua y saneamiento (red municipal), proyecto ICT (telecomunicaciones), autorización de vado y ocupación de vía pública si procede para grúa.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Acometida eléctrica</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Agua/saneamiento</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">ICT</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Vado/grúa</span>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="ml-2">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-white bg-navy-300 text-navy-800 px-2 py-0.5 rounded">FASE 6</span>
+                <span class="text-xs text-gray-400">Tras licencia</span>
+              </div>
+              <h4 class="font-bold text-navy-800 mb-1">Inicio de Obras</h4>
+              <p class="text-sm text-gray-600 mb-3">Acta de replanteo, comunicación de inicio al Ayuntamiento (plazo 6 meses desde licencia). Apertura del Libro de Órdenes. Designación del coordinador de seguridad y salud en fase de ejecución (RD 1627/1997).</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Acta replanteo</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Comunicación inicio</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Libro de Órdenes</span>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="ml-2">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-bold text-white bg-green-600 px-2 py-0.5 rounded">FASE 7</span>
+                <span class="text-xs text-gray-400">Al finalizar obra</span>
+              </div>
+              <h4 class="font-bold text-navy-800 mb-1">Licencia de Primera Ocupación y Registros</h4>
+              <p class="text-sm text-gray-600 mb-3">Certificado final de obra, solicitud de licencia de primera ocupación/utilización, escritura de obra nueva y división horizontal, inscripción registral de las 12 viviendas + local + garaje como fincas independientes.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Certificado final</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">1ª ocupación</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">División horizontal</span>
+                <span class="text-xs bg-navy-50 text-navy-800 px-2 py-1 rounded-full">Inscripción registral</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Costes tramitación -->
+      <div class="bg-white rounded-2xl shadow-sm p-8">
+        <h4 class="font-bold text-navy-800 mb-6">Costes Estimados de Tramitación Administrativa</h4>
+        <table class="lt">
+          <thead><tr><th>Concepto</th><th>Importe Estimado</th><th>Observaciones</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Tasas municipales licencia de obra</td>
+              <td class="font-semibold">~8.000 – 15.000 €</td>
+              <td>Variable según ordenanza fiscal de San Miguel de Abona</td>
+            </tr>
+            <tr>
+              <td>ICIO (Impuesto Construcciones)</td>
+              <td class="font-semibold">~40.000 – 55.000 €</td>
+              <td>~4% sobre coste real de construcción</td>
+            </tr>
+            <tr>
+              <td>Visados colegiales</td>
+              <td class="font-semibold">~5.000 – 8.000 €</td>
+              <td>Colegio de Arquitectos + Colegio de Ingenieros</td>
+            </tr>
+            <tr>
+              <td>Estudio geotécnico</td>
+              <td class="font-semibold">~3.000 – 5.000 €</td>
+              <td>Con sondeos para sótano en terreno volcánico</td>
+            </tr>
+            <tr>
+              <td>Acometidas y conexiones</td>
+              <td class="font-semibold">~8.000 – 12.000 €</td>
+              <td>Eléctrica, agua, saneamiento, telecomunicaciones</td>
+            </tr>
+            <tr>
+              <td>Notaría y Registro</td>
+              <td class="font-semibold">~12.000 – 20.000 €</td>
+              <td>Obra nueva + división horizontal (14 fincas)</td>
+            </tr>
+            <tr>
+              <td>AJD (Actos Jurídicos Documentados)</td>
+              <td class="font-semibold">~15.000 – 25.000 €</td>
+              <td>Tipo Canarias: 0,75% sobre valor de obra nueva</td>
+            </tr>
+            <tr class="bg-navy-50">
+              <td class="font-bold text-navy-800">TOTAL TRAMITACIÓN ESTIMADO</td>
+              <td class="font-bold text-navy-800">91.000 – 140.000 €</td>
+              <td class="font-medium text-navy-600">~7-10% sobre coste construcción</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-xs text-gray-400 mt-4">* Cifras orientativas basadas en los datos del informe de Valorex (valor de la promoción terminada: 3.168.000 €, coste construcción estimado: ~1.200.000 €). Sujetas a variación según ordenanzas fiscales vigentes.</p>
+      </div>
+    </section>
+
+    <!-- S6: RIESGOS JURÍDICOS -->
+    <section id="riesgos" class="mb-20 reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-navy-800 flex items-center justify-center text-white text-lg">6</div>
+        <h2 class="text-3xl font-bold gradient-text">Análisis de Riesgos Jurídicos</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm p-6 card-hover border-l-4 border-yellow-400">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-yellow-700 bg-yellow-50 px-2 py-1 rounded">RIESGO MEDIO</span>
+            <span class="text-xs text-gray-400">Impacto: Retrasos</span>
+          </div>
+          <h4 class="font-bold text-navy-800 mb-2">R1 — Demora en otorgamiento de licencia</h4>
+          <p class="text-sm text-gray-600 mb-3">Los municipios canarios acumulan retrasos significativos. El plazo real puede superar 6-12 meses pese al plazo legal de 3 meses. San Miguel de Abona no es de los municipios más lentos, pero la demora es posible.</p>
+          <div class="bg-gray-50 rounded-lg p-3">
+            <div class="text-xs font-semibold text-navy-800 mb-1">Mitigación:</div>
+            <p class="text-xs text-gray-600">Utilizar entidades urbanísticas de colaboración (DL 3/2025) para aportar informe técnico con la solicitud. Proyecto impecable para evitar requerimientos de subsanación.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 card-hover border-l-4 border-yellow-400">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-yellow-700 bg-yellow-50 px-2 py-1 rounded">RIESGO MEDIO</span>
+            <span class="text-xs text-gray-400">Impacto: Presupuesto</span>
+          </div>
+          <h4 class="font-bold text-navy-800 mb-2">R2 — Condiciones geotécnicas para sótano</h4>
+          <p class="text-sm text-gray-600 mb-3">La excavación del garaje subterráneo en terreno volcánico puede revelar roca basáltica dura que encarezca significativamente los movimientos de tierra y la cimentación.</p>
+          <div class="bg-gray-50 rounded-lg p-3">
+            <div class="text-xs font-semibold text-navy-800 mb-1">Mitigación:</div>
+            <p class="text-xs text-gray-600">Estudio geotécnico previo imprescindible. Incluir partida de imprevistos en presupuesto. Valorar alternativas: garaje en PB en vez de sótano si la geotecnia es adversa.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 card-hover border-l-4 border-green-400">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-green-700 bg-green-50 px-2 py-1 rounded">RIESGO BAJO</span>
+            <span class="text-xs text-gray-400">Impacto: Menor</span>
+          </div>
+          <h4 class="font-bold text-navy-800 mb-2">R3 — Incumplimiento de parámetros urbanísticos</h4>
+          <p class="text-sm text-gray-600 mb-3">Riesgo de que el proyecto técnico no se ajuste exactamente a los parámetros de las NNSS (edificabilidad, alturas, ocupación). Riesgo bajo por el margen de seguridad disponible (4,3% en edificabilidad).</p>
+          <div class="bg-gray-50 rounded-lg p-3">
+            <div class="text-xs font-semibold text-navy-800 mb-1">Mitigación:</div>
+            <p class="text-xs text-gray-600">Verificación exhaustiva del proyecto contra la ficha urbanística antes de presentar solicitud. Solicitar consulta previa al técnico municipal.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 card-hover border-l-4 border-green-400">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-green-700 bg-green-50 px-2 py-1 rounded">RIESGO BAJO</span>
+            <span class="text-xs text-gray-400">Impacto: Menor</span>
+          </div>
+          <h4 class="font-bold text-navy-800 mb-2">R4 — Oposición vecinal</h4>
+          <p class="text-sm text-gray-600 mb-3">Posibles quejas de vecinos colindantes por molestias de obra o impacto visual. Riesgo bajo en zona urbana donde la edificación en PB+3 es la norma.</p>
+          <div class="bg-gray-50 rounded-lg p-3">
+            <div class="text-xs font-semibold text-navy-800 mb-1">Mitigación:</div>
+            <p class="text-xs text-gray-600">Cumplimiento estricto de NNSS y CTE. Plan de gestión de obra con horarios y control de polvo/ruido.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 card-hover border-l-4 border-yellow-400">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-yellow-700 bg-yellow-50 px-2 py-1 rounded">RIESGO MEDIO</span>
+            <span class="text-xs text-gray-400">Impacto: Comercial</span>
+          </div>
+          <h4 class="font-bold text-navy-800 mb-2">R5 — Velocidad de venta en mercado local</h4>
+          <p class="text-sm text-gray-600 mb-3">Guargacho es una zona de mercado residencial accesible (valores medios-bajos). La absorción de 12 viviendas puede requerir un período prolongado si el mercado se enfría.</p>
+          <div class="bg-gray-50 rounded-lg p-3">
+            <div class="text-xs font-semibold text-navy-800 mb-1">Mitigación:</div>
+            <p class="text-xs text-gray-600">Iniciar comercialización en fase de proyecto (preventas). Valorar vivienda asequible incentivada (DL 3/2025) como estrategia para obtener beneficios urbanísticos y asegurar demanda.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 card-hover border-l-4 border-green-400">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-green-700 bg-green-50 px-2 py-1 rounded">RIESGO BAJO</span>
+            <span class="text-xs text-gray-400">Impacto: Regulatorio</span>
+          </div>
+          <h4 class="font-bold text-navy-800 mb-2">R6 — Cambios normativos sobrevenidos</h4>
+          <p class="text-sm text-gray-600 mb-3">Posible modificación de las NNSS o nueva normativa que afecte a los parámetros. Riesgo bajo: las licencias otorgadas tienen eficacia independiente del planeamiento posterior.</p>
+          <div class="bg-gray-50 rounded-lg p-3">
+            <div class="text-xs font-semibold text-navy-800 mb-1">Mitigación:</div>
+            <p class="text-xs text-gray-600">Agilizar la tramitación al máximo. Una vez otorgada la licencia, los derechos adquiridos están protegidos (art. 347 LSENPC).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm p-8">
+        <h4 class="font-bold text-navy-800 mb-6">Matriz de Riesgos</h4>
+        <table class="w-full text-center text-sm">
+          <thead>
+            <tr>
+              <th class="p-3 text-left text-xs text-gray-500 uppercase">Probabilidad ↓ / Impacto →</th>
+              <th class="p-3 bg-green-50 text-green-700 rounded-tl-lg text-xs">Bajo</th>
+              <th class="p-3 bg-yellow-50 text-yellow-700 text-xs">Medio</th>
+              <th class="p-3 bg-red-50 text-red-700 rounded-tr-lg text-xs">Alto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-3 text-left font-medium text-gray-600">Alta</td>
+              <td class="p-3 bg-yellow-50"></td>
+              <td class="p-3 bg-orange-50 font-semibold text-orange-700">R1</td>
+              <td class="p-3 bg-red-50"></td>
+            </tr>
+            <tr>
+              <td class="p-3 text-left font-medium text-gray-600">Media</td>
+              <td class="p-3 bg-green-50 font-semibold text-green-700">R4</td>
+              <td class="p-3 bg-yellow-50 font-semibold text-yellow-700">R2, R5</td>
+              <td class="p-3 bg-orange-50"></td>
+            </tr>
+            <tr>
+              <td class="p-3 text-left font-medium text-gray-600">Baja</td>
+              <td class="p-3 bg-green-50 font-semibold text-green-700">R3, R6</td>
+              <td class="p-3 bg-green-50"></td>
+              <td class="p-3 bg-yellow-50"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- S7: CONCLUSIONES -->
+    <section id="conclusiones" class="mb-20 reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-navy-800 flex items-center justify-center text-white text-lg">7</div>
+        <h2 class="text-3xl font-bold gradient-text">Conclusiones y Recomendaciones</h2>
+      </div>
+
+      <div class="bg-gradient-to-br from-navy-800 to-navy-900 rounded-2xl p-8 mb-8 text-white">
+        <h3 class="text-2xl font-bold mb-6">Dictamen Final</h3>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                <span class="text-green-400 text-xl">✓</span>
+              </div>
+              <span class="font-bold text-lg">PROYECTO PLENAMENTE VIABLE</span>
+            </div>
+            <p class="text-blue-100/70 text-sm leading-relaxed mb-4">
+              El proyecto de edificio plurifamiliar de 12 viviendas con local comercial y garaje subterráneo en Guargacho, sobre solar de 460 m² clasificado como <strong class="text-white">Suelo Urbano Consolidado</strong>, presenta el <strong class="text-white">máximo nivel de seguridad jurídico-urbanística</strong>.
+            </p>
+            <p class="text-blue-100/70 text-sm leading-relaxed mb-4">
+              A diferencia de actuaciones en suelo rústico o no consolidado, el solar tiene condición de solar apto para edificar, lo que permite la <strong class="text-white">tramitación directa de licencia de obra mayor</strong> sin instrumentos de gestión previos. Los parámetros urbanísticos del proyecto (edificabilidad 2,87 m²/m², PB+3, ocupación 100%/80%) son conformes con las NNSS.
+            </p>
+            <p class="text-blue-100/70 text-sm leading-relaxed">
+              El riesgo jurídico global del proyecto es <strong class="text-white">BAJO</strong>, siendo la principal contingencia la demora administrativa en la obtención de licencia, mitigable mediante los mecanismos del Decreto-ley 3/2025.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4 text-blue-200">Ventajas Jurídicas del Proyecto</h4>
+            <div class="space-y-3">
+              <div class="flex items-start gap-3">
+                <span class="text-green-400 mt-1">✓</span>
+                <p class="text-sm text-blue-100/70"><strong class="text-white">Suelo Urbano Consolidado</strong> — sin gestión urbanística previa (plan parcial, reparcelación, etc.)</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-green-400 mt-1">✓</span>
+                <p class="text-sm text-blue-100/70"><strong class="text-white">Condición de solar</strong> — servicios urbanísticos completos (acceso, agua, electricidad, saneamiento)</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-green-400 mt-1">✓</span>
+                <p class="text-sm text-blue-100/70"><strong class="text-white">Uso plurifamiliar permitido</strong> — sin necesidad de autorización especial ni informe sectorial</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-green-400 mt-1">✓</span>
+                <p class="text-sm text-blue-100/70"><strong class="text-white">Sin reserva VPO obligatoria</strong> — suelo urbano consolidado exento de reserva de vivienda protegida</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-green-400 mt-1">✓</span>
+                <p class="text-sm text-blue-100/70"><strong class="text-white">Sin afección ambiental</strong> — no colinda con ENP ni zonas protegidas</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-green-400 mt-1">✓</span>
+                <p class="text-sm text-blue-100/70"><strong class="text-white">Silencio positivo</strong> — el otorgamiento tácito es posible si no contraviene el planeamiento (art. 345 LSENPC)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recomendaciones -->
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm p-6 card-hover">
+          <h4 class="font-bold text-navy-800 mb-4 flex items-center gap-2">
+            <span class="text-green-500">🎯</span> Recomendaciones Inmediatas
+          </h4>
+          <ol class="space-y-3 text-sm text-gray-600">
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-navy-800 min-w-[20px]">1.</span>
+              <span><strong>Solicitar cédula urbanística</strong> al Ayuntamiento de San Miguel de Abona para confirmar parámetros exactos.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-navy-800 min-w-[20px]">2.</span>
+              <span><strong>Obtener nota simple registral</strong> actualizada: verificar titularidad, cargas, servidumbres, superficie real.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-navy-800 min-w-[20px]">3.</span>
+              <span><strong>Contratar estudio geotécnico</strong> inmediatamente: condicionará el diseño del sótano y la cimentación.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-navy-800 min-w-[20px]">4.</span>
+              <span><strong>Designar arquitecto proyectista</strong> para iniciar la redacción del proyecto básico y de ejecución.</span>
+            </li>
+          </ol>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 card-hover">
+          <h4 class="font-bold text-navy-800 mb-4 flex items-center gap-2">
+            <span class="text-blue-500">📋</span> Recomendaciones Estratégicas
+          </h4>
+          <ol class="space-y-3 text-sm text-gray-600">
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-navy-800 min-w-[20px]">1.</span>
+              <span><strong>Valorar viviendas asequibles incentivadas</strong> (DL 3/2025): beneficios urbanísticos y demanda asegurada a cambio de limitaciones de renta y plazo (10 años).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-navy-800 min-w-[20px]">2.</span>
+              <span><strong>Utilizar entidades de colaboración</strong> para aportar informe técnico privado con la solicitud de licencia y acelerar la resolución.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-navy-800 min-w-[20px]">3.</span>
+              <span><strong>Planificar la división horizontal</strong> desde el inicio del proyecto: 12 viviendas + 1 local + 12 garajes + zonas comunes como fincas registrales independientes.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-bold text-navy-800 min-w-[20px]">4.</span>
+              <span><strong>Iniciar comercialización preventiva</strong> con contrato de reserva/arras para asegurar la venta y facilitar la obtención de financiación promotor.</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Coherencia con otros agentes -->
+      <div class="bg-navy-50 rounded-2xl p-6 border border-navy-200">
+        <h4 class="font-bold text-navy-800 mb-4">Coherencia con Informes de Otros Agentes</h4>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="bg-white rounded-xl p-4">
+            <div class="font-semibold text-navy-800 mb-1">📊 Valorex (Tasación)</div>
+            <p class="text-gray-600 text-xs">Valor promoción terminada: 3.168.000 €. Solar: 368.000 €. 12 viv. × 264.000 €/ud. <span class="text-green-600 font-medium">Referenciado ✓</span></p>
+          </div>
+          <div class="bg-white rounded-xl p-4">
+            <div class="font-semibold text-navy-800 mb-1">📐 Arqon (Arquitectura)</div>
+            <p class="text-gray-600 text-xs">Pendiente de informe. Parámetros base: PB+3, 460 m², edif. 3,0 m²/m². <span class="text-yellow-600 font-medium">En proceso ⏳</span></p>
+          </div>
+          <div class="bg-white rounded-xl p-4">
+            <div class="font-semibold text-navy-800 mb-1">📋 Nexus (PM)</div>
+            <p class="text-gray-600 text-xs">Pendiente de informe. Tramitación: 4-8 meses pre-obra. <span class="text-yellow-600 font-medium">En proceso ⏳</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const ctx=document.getElementById('semaforoChart')?.getContext('2d');
+      if(ctx){new Chart(ctx,{type:'doughnut',data:{labels:['Cumple (Verde)','Pendiente (Amarillo)','No Cumple (Rojo)'],datasets:[{data:[9,6,0],backgroundColor:['#48bb78','#ed8936','#f56565'],borderWidth:0,hoverOffset:8}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{padding:16,font:{size:12}}}},cutout:'60%'}});}
+    </script>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-navy-800 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center gap-2 mb-4"><span class="text-2xl">⚖️</span><span class="font-bold text-lg">LEGEX</span></div>
+          <p class="text-sm text-blue-200/60">Agente de Asesoría Jurídico-Urbanística<br>Sistema de Agentes de Desarrollo Inmobiliario</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3 text-sm">Proyecto</h4>
+          <p class="text-sm text-blue-200/60">Edificio Plurifamiliar — Guargacho<br>San Miguel de Abona, Tenerife<br>Solar 460 m² · 12 viviendas + local + garaje</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3 text-sm">Disclaimer</h4>
+          <p class="text-xs text-blue-200/40 leading-relaxed">Este informe tiene carácter orientativo y no sustituye al asesoramiento jurídico profesional presencial. Las conclusiones se basan en la documentación disponible y la normativa vigente a marzo de 2026. Se recomienda verificación por letrado colegiado antes de cualquier actuación.</p>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-white/10 text-center text-xs text-blue-200/30">
+        Generado el 25 de marzo de 2026 · LEGEX v1.0 · Proyecto Guargacho — San Miguel de Abona
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add('active')})},{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth',block:'start'})})});
+  </script>
+</body>
+</html>

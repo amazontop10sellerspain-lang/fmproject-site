@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan de Marketing · Residencial Brisa Guargacho</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter','sans-serif'] },
+          colors: {
+            vendex: {
+              50:'#fff5f7', 100:'#ffe4ea', 200:'#fecbd6', 300:'#fda4b8', 400:'#fb718f',
+              500:'#f43f6b', 600:'#e11d48', 700:'#be123c', 800:'#9f1239', 900:'#881337'
+            },
+            ocean:'#0f766e',
+            sand:'#f7efe4',
+            ink:'#172033'
+          },
+          boxShadow: {
+            soft:'0 20px 45px rgba(15,23,42,.10)',
+            card:'0 12px 30px rgba(15,23,42,.08)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, sans-serif; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .glass { background: rgba(255,255,255,.70); backdrop-filter: blur(14px); }
+    .btn-3d {
+      position: relative; display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 1rem; font-weight: 700; transition: .18s ease; transform: translateY(0);
+      box-shadow: 0 10px 0 rgba(136,19,55,.95), 0 18px 30px rgba(136,19,55,.18);
+    }
+    .btn-3d:hover { transform: translateY(2px); box-shadow: 0 8px 0 rgba(136,19,55,.95), 0 14px 24px rgba(136,19,55,.20); }
+    .btn-3d:active { transform: translateY(6px); box-shadow: 0 4px 0 rgba(136,19,55,.95), 0 10px 16px rgba(136,19,55,.20); }
+    .btn-alt { box-shadow: 0 10px 0 rgba(15,118,110,.95), 0 18px 30px rgba(15,118,110,.16); }
+    .btn-alt:hover { box-shadow: 0 8px 0 rgba(15,118,110,.95), 0 14px 24px rgba(15,118,110,.18); }
+    .btn-alt:active { box-shadow: 0 4px 0 rgba(15,118,110,.95), 0 10px 16px rgba(15,118,110,.18); }
+    .section-anchor { scroll-margin-top: 90px; }
+    .mesh {
+      background:
+        radial-gradient(circle at 15% 20%, rgba(251,113,143,.28), transparent 25%),
+        radial-gradient(circle at 85% 15%, rgba(15,118,110,.22), transparent 22%),
+        radial-gradient(circle at 70% 85%, rgba(255,255,255,.14), transparent 30%),
+        linear-gradient(135deg, #881337 0%, #be123c 45%, #172033 100%);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <header class="mesh relative overflow-hidden text-white">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,.18),transparent_30%)]"></div>
+    <nav class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/25 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <div>
+          <p class="text-xs uppercase tracking-[.35em] text-rose-200">Vendex · Director de marketing</p>
+          <p class="font-semibold">Residencial Brisa Guargacho</p>
+        </div>
+        <div class="hidden gap-5 text-sm lg:flex">
+          <a href="#publico">Público</a>
+          <a href="#marca">Marca</a>
+          <a href="#precios">Precios</a>
+          <a href="#canales">Canales</a>
+          <a href="#kpis">KPIs</a>
+          <a href="#timeline">Timeline</a>
+        </div>
+      </div>
+    </nav>
+    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <div class="grid gap-8 lg:grid-cols-[1.15fr_.85fr] lg:items-center">
+        <div class="reveal">
+          <div class="mb-5 flex flex-wrap gap-3 text-sm">
+            <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">Guargacho · San Miguel de Abona</span>
+            <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">18 viviendas + 1 local</span>
+            <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">TF-1 a 3 min</span>
+            <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">Tenerife Sur a 10 min</span>
+          </div>
+          <p class="text-sm font-semibold uppercase tracking-[.35em] text-rose-200">Plan de marketing 2026</p>
+          <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight sm:text-5xl xl:text-6xl">Lanzamiento comercial de un edificio residencial urbano con alma del sur de Tenerife.</h1>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-white/84">Plan integral para comercializar <strong>Residencial Brisa Guargacho</strong>, con base en los informes de Arqon, Decox, Buildero, Valorex, Nexus, Finex, Gestex, Notarex y el barrido de tendencias inmobiliarias Canarias 2025-2026 consultado con Perplexity. La estrategia combina <strong>precio por tipología</strong>, captación multicanal, material comercial imprimible y secuencia de lanzamiento ligada a la tramitación real del proyecto.</p>
+          <div class="mt-8 flex flex-wrap gap-5">
+            <a href="#marca" class="btn-3d bg-white px-6 py-3 text-vendex-700">Ver posicionamiento</a>
+            <a href="#timeline" class="btn-3d btn-alt bg-emerald-200 px-6 py-3 text-ocean">Ver calendario comercial</a>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="glass rounded-[28px] p-6 text-slate-900 shadow-soft">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="rounded-2xl bg-white p-5 shadow-card"><p class="text-xs font-semibold uppercase tracking-[.24em] text-slate-400">Valoración de referencia</p><p class="mt-2 text-3xl font-black text-vendex-700">3,85 M€</p><p class="mt-1 text-sm text-slate-500">Base consistente en tasación / finanzas / notarial</p></div>
+              <div class="rounded-2xl bg-white p-5 shadow-card"><p class="text-xs font-semibold uppercase tracking-[.24em] text-slate-400">Tipologías</p><p class="mt-2 text-3xl font-black text-vendex-700">6 · 6 · 6</p><p class="mt-1 text-sm text-slate-500">1D · 2D · 3D + local y anejos</p></div>
+              <div class="rounded-2xl bg-white p-5 shadow-card"><p class="text-xs font-semibold uppercase tracking-[.24em] text-slate-400">Presupuesto comercial</p><p class="mt-2 text-3xl font-black text-vendex-700">115 k€</p><p class="mt-1 text-sm text-slate-500">Marco compatible con 3% ventas de Finex</p></div>
+              <div class="rounded-2xl bg-white p-5 shadow-card"><p class="text-xs font-semibold uppercase tracking-[.24em] text-slate-400">Ventana de venta</p><p class="mt-2 text-3xl font-black text-vendex-700">9-14 m</p><p class="mt-1 text-sm text-slate-500">Desde lanzamiento fuerte a cierre stock</p></div>
+            </div>
+            <div class="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-7 text-slate-700">
+              <strong>Incidencia detectada:</strong> el task log cita una tasación de 2.847.000 €, pero los informes comercial, financiero y notarial convergen en una base mucho más consistente de <strong>3.847.225 €</strong>. Este plan adopta la cifra documentada por tipologías y deja constancia de la discrepancia para no contaminar pricing ni marketing.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <section class="reveal">
+      <div class="grid gap-6 lg:grid-cols-[.95fr_1.05fr]">
+        <div class="rounded-[28px] bg-white p-7 shadow-soft">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Lectura estratégica</p>
+          <h2 class="mt-3 text-3xl font-black text-ink">Qué estamos vendiendo realmente</h2>
+          <p class="mt-4 leading-8 text-slate-600">No se comercializa solo un bloque de viviendas, sino una <strong>solución residencial conectada, nueva y escasa</strong> en un entorno donde la oferta de obra nueva es limitada, con accesos potentes al sur de Tenerife y un posicionamiento por debajo de mercados más tensos como Los Cristianos o Costa Adeje.</p>
+          <ul class="mt-5 space-y-3 text-sm text-slate-600">
+            <li>• Producto mixto: primera residencia, mejora local, segunda residencia funcional e inversión patrimonial.</li>
+            <li>• Ventaja competitiva: edificio nuevo con ascensor, garaje, trastero y tipologías completas de 1D, 2D y 3D.</li>
+            <li>• Narrativa de mercado: “obra nueva bien conectada y todavía comprable en el sur”.</li>
+            <li>• Palanca emocional: luz, comodidad, cercanía a costa y servicios cotidianos.</li>
+          </ul>
+        </div>
+        <div class="rounded-[28px] bg-gradient-to-br from-slate-900 to-slate-800 p-7 text-white shadow-soft">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-rose-200">Tendencias Canarias 2025-2026</p>
+          <h2 class="mt-3 text-3xl font-black">Señales de mercado usadas</h2>
+          <ul class="mt-5 space-y-4 text-sm leading-7 text-white/80">
+            <li>• Demanda internacional con peso muy relevante en Canarias y Santa Cruz de Tenerife, especialmente alemana, italiana y británica.</li>
+            <li>• Subida de precios y escasez de obra nueva: el comprador valora seguridad documental, materiales y entrega previsible.</li>
+            <li>• Mejor rendimiento comercial en piezas <strong>multilingües, mobile-first y muy visuales</strong>.</li>
+            <li>• Reels, short video, visitas virtuales y remarketing superan a la ficha estática aislada.</li>
+            <li>• En promociones pequeñas, la velocidad de respuesta del comercial pesa casi tanto como la creatividad de campaña.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="publico" class="section-anchor mt-12 reveal">
+      <div class="mb-8 flex items-end justify-between gap-4">
+        <div><p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Público objetivo</p><h2 class="mt-3 text-3xl font-black text-ink">Tres audiencias principales</h2></div>
+        <div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600">Mix recomendado de leads: local 45% · peninsular 25% · europeo 30%</div>
+      </div>
+      <div class="grid gap-6 lg:grid-cols-3">
+        <article class="rounded-[28px] bg-white p-7 shadow-soft"><span class="rounded-full bg-vendex-50 px-4 py-2 text-xs font-bold uppercase tracking-[.22em] text-vendex-700">Local</span><h3 class="mt-4 text-2xl font-black text-ink">Familia o pareja del sur</h3><p class="mt-3 text-sm leading-7 text-slate-600">Comprador residente en San Miguel, Arona o entorno industrial/comercial de Las Chafiras que busca salto de calidad a obra nueva con garaje y trastero.</p><ul class="mt-4 space-y-2 text-sm text-slate-600"><li>• Valora cuota asumible, anejos y ascensor.</li><li>• Convierte bien con visita física y dossier claro.</li><li>• Sensible a colegios, salud, accesos y plazos reales.</li></ul></article>
+        <article class="rounded-[28px] bg-white p-7 shadow-soft"><span class="rounded-full bg-emerald-50 px-4 py-2 text-xs font-bold uppercase tracking-[.22em] text-ocean">Peninsular</span><h3 class="mt-4 text-2xl font-black text-ink">Segunda residencia funcional</h3><p class="mt-3 text-sm leading-7 text-slate-600">Cliente de Madrid, Barcelona o País Vasco que quiere una base en Tenerife sur sin pagar precios de costa prime y con mejor conectividad cotidiana.</p><ul class="mt-4 space-y-2 text-sm text-slate-600"><li>• Responde a vídeo, fichas limpias y comparativa de precio.</li><li>• Valora cercanía al aeropuerto y vida diaria práctica.</li><li>• Interés alto en 2D y 3D con balcón/terraza.</li></ul></article>
+        <article class="rounded-[28px] bg-white p-7 shadow-soft"><span class="rounded-full bg-amber-50 px-4 py-2 text-xs font-bold uppercase tracking-[.22em] text-amber-800">Europeo</span><h3 class="mt-4 text-2xl font-black text-ink">Comprador internacional</h3><p class="mt-3 text-sm leading-7 text-slate-600">Perfil alemán, italiano, belga u holandés que busca activo seguro, clima estable y vivienda nueva en zona conectada del sur de la isla.</p><ul class="mt-4 space-y-2 text-sm text-slate-600"><li>• Necesita materiales en ES/EN; idealmente refuerzo DE/IT en campañas.</li><li>• Mejor encaje en 2D, 3D y local como inversión.</li><li>• Muy sensible a reputación, legalidad y claridad fiscal.</li></ul></article>
+      </div>
+      <div class="mt-8 rounded-[28px] bg-white p-7 shadow-soft"><div class="h-80"><canvas id="audienciasChart"></canvas></div></div>
+    </section>
+
+    <section id="marca" class="section-anchor mt-12 reveal">
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="rounded-[28px] bg-gradient-to-br from-vendex-900 to-slate-900 p-7 text-white shadow-soft">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-rose-200">Nombre comercial</p>
+          <h2 class="mt-3 text-3xl font-black">Residencial Brisa Guargacho</h2>
+          <p class="mt-4 text-sm leading-7 text-white/80">Nombre directo, local, recordable y comercializable en español e inglés. Traslada atmósfera canaria sin sobreactuar lujo, y funciona bien en ficha portal, valla de obra, dominio y dossier.</p>
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4"><p class="text-xs uppercase tracking-[.2em] text-rose-200">Alternativa 01</p><p class="mt-2 text-xl font-bold">Terrazas de Guargacho</p></div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4"><p class="text-xs uppercase tracking-[.2em] text-rose-200">Alternativa 02</p><p class="mt-2 text-xl font-bold">Guargacho Central Homes</p></div>
+          </div>
+        </div>
+        <div class="rounded-[28px] bg-white p-7 shadow-soft">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Claim y relato</p>
+          <div class="mt-4 rounded-2xl bg-vendex-50 p-5"><p class="text-xs font-semibold uppercase tracking-[.2em] text-vendex-700">Claim principal</p><p class="mt-2 text-2xl font-black text-ink">“Luz, conexión y vida al sur de Tenerife.”</p></div>
+          <div class="mt-4 space-y-4 text-sm leading-7 text-slate-600">
+            <p><strong>Tagline portal:</strong> Obra nueva con 18 viviendas, garaje y trastero en Guargacho, a 3 minutos de la TF-1 y 10 del aeropuerto.</p>
+            <p><strong>Promesa comercial:</strong> una promoción práctica, nueva y muy bien conectada para vivir, invertir o tener una base en el sur de la isla.</p>
+            <p><strong>Tono de marca:</strong> contemporáneo canario, claro, cercano, limpio y confiable. Debe transmitir solvencia, no exceso.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="precios" class="section-anchor mt-12 reveal">
+      <div class="mb-8 flex items-end justify-between gap-4">
+        <div><p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Pricing</p><h2 class="mt-3 text-3xl font-black text-ink">Estrategia de precios por tipología</h2></div>
+        <div class="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Precio comercial recomendado = tasación + prima moderada por stock nuevo y anejos</div>
+      </div>
+      <div class="overflow-hidden rounded-[28px] border border-slate-100 bg-white shadow-soft">
+        <table class="min-w-full text-sm">
+          <thead class="bg-slate-900 text-left text-white"><tr><th class="px-5 py-4">Tipología</th><th class="px-5 py-4">Tasación base</th><th class="px-5 py-4">Salida Vendex</th><th class="px-5 py-4">Rango objetivo</th><th class="px-5 py-4">Lectura comercial</th></tr></thead>
+          <tbody class="divide-y divide-slate-100 bg-white">
+            <tr><td class="px-5 py-4 font-semibold">1 dormitorio + garaje + trastero</td><td class="px-5 py-4">154.350 €</td><td class="px-5 py-4 font-black text-vendex-700">Desde 159.900 €</td><td class="px-5 py-4">159.900–175.000 €</td><td class="px-5 py-4 text-slate-600">Entrada de producto, ideal para captar volumen y crear prueba social.</td></tr>
+            <tr><td class="px-5 py-4 font-semibold">2 dormitorios + garaje + trastero</td><td class="px-5 py-4">193.700 €</td><td class="px-5 py-4 font-black text-vendex-700">Desde 199.900 €</td><td class="px-5 py-4">199.900–219.900 €</td><td class="px-5 py-4 text-slate-600">Tipología más líquida; debe liderar ritmo de reservas.</td></tr>
+            <tr><td class="px-5 py-4 font-semibold">3 dormitorios + garaje + trastero</td><td class="px-5 py-4">270.750 €</td><td class="px-5 py-4 font-black text-vendex-700">Desde 279.900 €</td><td class="px-5 py-4">279.900–305.000 €</td><td class="px-5 py-4 text-slate-600">Producto familiar y patrimonial; mayor margen defensable.</td></tr>
+            <tr><td class="px-5 py-4 font-semibold">Local comercial (~95 m²)</td><td class="px-5 py-4">≈134.425 €</td><td class="px-5 py-4 font-black text-vendex-700">Desde 142.500 €</td><td class="px-5 py-4">142.500–155.000 €</td><td class="px-5 py-4 text-slate-600">Venta a usuario final o inversor de proximidad.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-6 grid gap-6 lg:grid-cols-2">
+        <div class="rounded-[28px] bg-white p-7 shadow-soft"><p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Reglas de pricing</p><ul class="mt-4 space-y-3 text-sm leading-7 text-slate-600"><li>• Salida comercial prudente para capturar preventa sin regalar stock.</li><li>• Subida de 2%–3% tras primeras 5 reservas o hito de estructura ejecutada.</li><li>• Diferenciar unidades con terraza especial, orientación y planta.</li><li>• Evitar descuentos públicos; usar incentivos cerrados y temporales.</li></ul></div>
+        <div class="rounded-[28px] bg-white p-7 shadow-soft"><p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Nota comercial clave</p><p class="mt-4 text-sm leading-7 text-slate-600">La tipología de <strong>2 dormitorios</strong> debe ser la locomotora del embudo. La de <strong>1 dormitorio</strong> ayudará a activar la promoción con un precio de acceso atractivo. La de <strong>3 dormitorios</strong> soporta el relato de edificio familiar y eleva el ticket medio. La vivienda ático de 1 dormitorio con gran terraza debe venderse como unidad singular, fuera del precio estándar.</p></div>
+      </div>
+    </section>
+
+    <section id="canales" class="section-anchor mt-12 reveal">
+      <div class="mb-8 flex items-end justify-between gap-4">
+        <div><p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Canales</p><h2 class="mt-3 text-3xl font-black text-ink">Embudo comercial híbrido</h2></div>
+        <a href="dossier-comercial-ventas.html" class="btn-3d bg-vendex-500 px-5 py-3 text-white">Abrir dossier comercial</a>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div class="rounded-[28px] bg-white p-6 shadow-soft"><h3 class="text-xl font-black text-ink">Portales</h3><p class="mt-3 text-sm leading-7 text-slate-600">Idealista, Fotocasa, Kyero y pisos.com con fichas premium, etiquetas de obra nueva, plano por tipología y CTA a WhatsApp / llamada.</p></div>
+        <div class="rounded-[28px] bg-white p-6 shadow-soft"><h3 class="text-xl font-black text-ink">Paid media</h3><p class="mt-3 text-sm leading-7 text-slate-600">Meta Ads para demanda fría y remarketing; Google Ads para intención alta con búsquedas geográficas y de tipología.</p></div>
+        <div class="rounded-[28px] bg-white p-6 shadow-soft"><h3 class="text-xl font-black text-ink">Red comercial</h3><p class="mt-3 text-sm leading-7 text-slate-600">Agencias colaboradoras del sur de Tenerife, base local, inversor y prescriptores extranjeros con dossier homogéneo.</p></div>
+        <div class="rounded-[28px] bg-white p-6 shadow-soft"><h3 class="text-xl font-black text-ink">Social content</h3><p class="mt-3 text-sm leading-7 text-slate-600">Instagram, Facebook, YouTube Shorts y LinkedIn promotor para confianza, progreso y notoriedad.</p></div>
+        <div class="rounded-[28px] bg-white p-6 shadow-soft"><h3 class="text-xl font-black text-ink">Ferias y eventos</h3><p class="mt-3 text-sm leading-7 text-slate-600">Acciones selectivas, no masivas: open days, presentaciones privadas y networking con brokers locales.</p></div>
+        <div class="rounded-[28px] bg-white p-6 shadow-soft"><h3 class="text-xl font-black text-ink">Landing + CRM</h3><p class="mt-3 text-sm leading-7 text-slate-600">Base central del embudo con formularios breves, tracking de UTMs, alertas y secuencia automática de seguimiento.</p></div>
+      </div>
+    </section>
+
+    <section class="mt-12 reveal">
+      <div class="grid gap-6 lg:grid-cols-[1fr_1fr]">
+        <div class="rounded-[28px] bg-white p-7 shadow-soft">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Calendario editorial</p>
+          <h2 class="mt-3 text-3xl font-black text-ink">Plan mensual de contenidos</h2>
+          <div class="mt-5 overflow-hidden rounded-3xl border border-slate-100">
+            <table class="min-w-full text-sm">
+              <thead class="bg-slate-50"><tr><th class="px-4 py-4 text-left">Semana</th><th class="px-4 py-4 text-left">Tema</th><th class="px-4 py-4 text-left">Formato</th><th class="px-4 py-4 text-left">Objetivo</th></tr></thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-4 font-semibold">1</td><td class="px-4 py-4">Presentación de promoción + ubicación</td><td class="px-4 py-4">Reel + carrusel</td><td class="px-4 py-4">Awareness</td></tr>
+                <tr><td class="px-4 py-4 font-semibold">2</td><td class="px-4 py-4">Tipologías y planos</td><td class="px-4 py-4">Carrusel + stories</td><td class="px-4 py-4">Consideración</td></tr>
+                <tr><td class="px-4 py-4 font-semibold">3</td><td class="px-4 py-4">Calidades y vida cotidiana</td><td class="px-4 py-4">Vídeo corto + email</td><td class="px-4 py-4">Confianza</td></tr>
+                <tr><td class="px-4 py-4 font-semibold">4</td><td class="px-4 py-4">Precios, disponibilidad y FAQ</td><td class="px-4 py-4">Newsletter + ads</td><td class="px-4 py-4">Conversión</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="rounded-[28px] bg-white p-7 shadow-soft">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Material comercial</p>
+          <h2 class="mt-3 text-3xl font-black text-ink">Piezas obligatorias</h2>
+          <div class="mt-5 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="font-semibold">Dossier comercial</p><p class="mt-2 text-sm text-slate-600">Versión ventas ES/EN lista para imprimir y enviar.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="font-semibold">Fichas por unidad</p><p class="mt-2 text-sm text-slate-600">Superficie, planta, orientación, precio y estado.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="font-semibold">Vídeo hero</p><p class="mt-2 text-sm text-slate-600">Pieza de 45-60s + cortes verticales de 10-15s.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="font-semibold">Valla y cartel de obra</p><p class="mt-2 text-sm text-slate-600">Branding visible sobre la TF-652.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="font-semibold">Landing</p><p class="mt-2 text-sm text-slate-600">Formulario, WhatsApp, descarga de dossier.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="font-semibold">Argumentario comercial</p><p class="mt-2 text-sm text-slate-600">Respuesta a objeciones sobre licencias, plazos e impuestos.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12 reveal">
+      <div class="grid gap-6 lg:grid-cols-[1fr_1fr]">
+        <div class="rounded-[28px] bg-white p-7 shadow-soft">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Estrategia digital</p>
+          <h2 class="mt-3 text-3xl font-black text-ink">SEO · SEM · Meta · Google</h2>
+          <ul class="mt-5 space-y-4 text-sm leading-7 text-slate-600">
+            <li><strong>SEO:</strong> landing indexable con queries “obra nueva Guargacho”, “viviendas nuevas San Miguel de Abona”, “new build south Tenerife apartments”.</li>
+            <li><strong>SEM:</strong> campañas por intención alta, separando búsquedas local/península/internacional.</li>
+            <li><strong>Meta Ads:</strong> secuencia 60/30/10: notoriedad, consideración, remarketing.</li>
+            <li><strong>Google Ads:</strong> Search + Performance Max solo si hay creatividades sólidas y eventos bien medidos.</li>
+            <li><strong>Medición:</strong> GA4, Meta pixel, conversiones mejoradas, UTMs y CRM con scoring de lead.</li>
+          </ul>
+        </div>
+        <div class="rounded-[28px] bg-white p-7 shadow-soft">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Presupuesto</p>
+          <h2 class="mt-3 text-3xl font-black text-ink">115.000 € estimados</h2>
+          <div class="mt-5 h-72"><canvas id="budgetChart"></canvas></div>
+          <p class="mt-4 text-sm leading-7 text-slate-600">Asignación compatible con la partida de comercialización (~3% sobre ventas) manejada por Finex. Se recomienda concentrar más del 65% del gasto en los primeros 120 días de lanzamiento fuerte.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="kpis" class="section-anchor mt-12 reveal">
+      <div class="mb-8 flex items-end justify-between gap-4">
+        <div><p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">KPIs</p><h2 class="mt-3 text-3xl font-black text-ink">Cómo se gobierna la captación</h2></div>
+        <div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600">Reporte semanal táctico + comité mensual de precio y stock</div>
+      </div>
+      <div class="grid gap-6 lg:grid-cols-[1fr_1fr]">
+        <div class="rounded-[28px] bg-white p-7 shadow-soft">
+          <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="text-xs uppercase tracking-[.2em] text-slate-400">Leads/mes</p><p class="mt-2 text-3xl font-black text-ink">55-70</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="text-xs uppercase tracking-[.2em] text-slate-400">Visitas/mes</p><p class="mt-2 text-3xl font-black text-ink">12-18</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="text-xs uppercase tracking-[.2em] text-slate-400">Reservas</p><p class="mt-2 text-3xl font-black text-ink">1 cada 4-6 sem</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="text-xs uppercase tracking-[.2em] text-slate-400">Lead→reserva</p><p class="mt-2 text-3xl font-black text-ink">2,5%-3,5%</p></div>
+          </div>
+          <div class="mt-6 h-72"><canvas id="funnelChart"></canvas></div>
+        </div>
+        <div class="rounded-[28px] bg-white p-7 shadow-soft">
+          <div class="overflow-hidden rounded-3xl border border-slate-100">
+            <table class="min-w-full text-sm">
+              <thead class="bg-slate-50"><tr><th class="px-4 py-4 text-left">Indicador</th><th class="px-4 py-4 text-left">Objetivo</th><th class="px-4 py-4 text-left">Alerta</th></tr></thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-4 font-medium">CPL cualificado</td><td class="px-4 py-4">&lt; 110 €</td><td class="px-4 py-4">&gt; 150 €</td></tr>
+                <tr><td class="px-4 py-4 font-medium">Tiempo de respuesta</td><td class="px-4 py-4">&lt; 10 min</td><td class="px-4 py-4">&gt; 30 min</td></tr>
+                <tr><td class="px-4 py-4 font-medium">Lead → visita</td><td class="px-4 py-4">20%-25%</td><td class="px-4 py-4">&lt; 15%</td></tr>
+                <tr><td class="px-4 py-4 font-medium">Visita → reserva</td><td class="px-4 py-4">12%-15%</td><td class="px-4 py-4">&lt; 8%</td></tr>
+                <tr><td class="px-4 py-4 font-medium">Reservas a mes 6</td><td class="px-4 py-4">35%-45% stock</td><td class="px-4 py-4">&lt; 20%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-5 rounded-2xl border border-rose-100 bg-rose-50 p-4 text-sm text-slate-700"><strong>Regla operativa:</strong> si no convierten los 2D durante 45 días, revisar mensaje, visuales y segmentación antes de tocar precio.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline" class="section-anchor mt-12 reveal">
+      <div class="mb-8 flex items-end justify-between gap-4">
+        <div><p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Timeline</p><h2 class="mt-3 text-3xl font-black text-ink">Secuencia de lanzamiento comercial</h2></div>
+        <div class="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Alineado con licencias, obra y legalizaciones; no desacoplado del proyecto real</div>
+      </div>
+      <div class="space-y-5">
+        <div class="rounded-[28px] bg-white p-6 shadow-soft"><p class="text-xs font-bold uppercase tracking-[.22em] text-vendex-600">Fase 0 · Prelanzamiento</p><h3 class="mt-2 text-xl font-black text-ink">M-3 a M0</h3><p class="mt-2 text-sm leading-7 text-slate-600">Naming, identidad, landing, dossier, setup CRM, portales en borrador y base de datos de interesados. Comunicación prudente mientras se unifica la ficha administrativa del proyecto.</p></div>
+        <div class="rounded-[28px] bg-white p-6 shadow-soft"><p class="text-xs font-bold uppercase tracking-[.22em] text-vendex-600">Fase 1 · Lanzamiento</p><h3 class="mt-2 text-xl font-black text-ink">M0 a M2</h3><p class="mt-2 text-sm leading-7 text-slate-600">Alta en portales, campañas Meta/Google, envío a colaboradores, primera oleada de visitas y reservas sobre unidades más líquidas.</p></div>
+        <div class="rounded-[28px] bg-white p-6 shadow-soft"><p class="text-xs font-bold uppercase tracking-[.22em] text-vendex-600">Fase 2 · Preventa activa</p><h3 class="mt-2 text-xl font-black text-ink">M2 a M8</h3><p class="mt-2 text-sm leading-7 text-slate-600">Optimización de campañas, ajuste de pricing por respuesta, actualización de disponibilidad y comunicación de hitos de obra/administración.</p></div>
+        <div class="rounded-[28px] bg-white p-6 shadow-soft"><p class="text-xs font-bold uppercase tracking-[.22em] text-vendex-600">Fase 3 · Cierre de stock</p><h3 class="mt-2 text-xl font-black text-ink">M8 a M14</h3><p class="mt-2 text-sm leading-7 text-slate-600">Enfoque en últimas unidades, empuje sobre 3D y ático, visitas privadas, storytelling de acabados y cierre de escrituras.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white py-10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-[1.1fr_.9fr]">
+        <div><h3 class="text-2xl font-black text-ink">Plan redactado por Vendex</h3><p class="mt-3 text-sm leading-7 text-slate-600">Base documental leída: proyecto Guargacho, informes de arquitectura, topografía, geotecnia, estructura, instalaciones, presupuesto, tasación, gestión, finanzas, jurídico, trámites, moodboard y modelo contractual. Palancas usadas: localización TF-652, 18 viviendas, local comercial, garaje/trastero, interiores de gama media-alta y demanda de obra nueva en el sur de Tenerife.</p></div>
+        <div class="rounded-[28px] border border-slate-100 bg-slate-50 p-6"><p class="text-xs font-semibold uppercase tracking-[.22em] text-slate-400">Disclaimer</p><ul class="mt-4 space-y-3 text-sm text-slate-600"><li>• Existe discrepancia documental 12/18 viviendas en el informe jurídico previo; este plan adopta la ficha 18 viviendas por ser la dominante en proyecto y resto de informes.</li><li>• Los precios finales deberán asignarse por unidad concreta cuando se cierre cuadro definitivo.</li><li>• Toda activación comercial intensa debe acompasarse con la seguridad administrativa real.</li></ul></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries)=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    const grid = { color:'rgba(148,163,184,.18)', drawBorder:false };
+    new Chart(document.getElementById('audienciasChart'), {
+      type:'doughnut',
+      data:{ labels:['Local', 'Peninsular', 'Europeo'], datasets:[{ data:[45,25,30], backgroundColor:['#f43f6b','#0f766e','#f59e0b'], borderWidth:0 }] },
+      options:{ maintainAspectRatio:false, cutout:'65%', plugins:{ legend:{ position:'bottom' } } }
+    });
+    new Chart(document.getElementById('budgetChart'), {
+      type:'bar',
+      data:{ labels:['Portales','Meta Ads','Google Ads','Creatividad','Vídeo','CRM','Eventos','Colaboradores'], datasets:[{ data:[14000,24000,21000,11000,12000,5000,8000,20000], backgroundColor:['#fecdd6','#fda4b8','#fb718f','#f43f6b','#e11d48','#0f766e','#f59e0b','#334155'], borderRadius:10 }] },
+      options:{ maintainAspectRatio:false, plugins:{ legend:{display:false} }, scales:{ x:{ grid:{display:false} }, y:{ grid } } }
+    });
+    new Chart(document.getElementById('funnelChart'), {
+      type:'bar',
+      data:{ labels:['Leads','Cualificados','Visitas','Ofertas','Reservas'], datasets:[{ data:[100,58,22,8,3], backgroundColor:['#fecdd6','#fda4b8','#fb718f','#f43f6b','#be123c'], borderRadius:10 }] },
+      options:{ indexAxis:'y', maintainAspectRatio:false, plugins:{ legend:{display:false} }, scales:{ x:{ grid }, y:{ grid:{display:false} } } }
+    });
+  </script>
+</body>
+</html>

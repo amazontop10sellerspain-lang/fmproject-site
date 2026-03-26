@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditoría Transversal — Edificio Guargacho 1 · AUDITEX</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            audit: { 50:'#f0f0ff', 100:'#e0e0ff', 200:'#c4c4ff', 300:'#a3a3ff', 400:'#8282ff', 500:'#6C63FF', 600:'#5a52e0', 700:'#4840b8', 800:'#362f90', 900:'#252068' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all .8s cubic-bezier(.23,1,.32,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gt { background: linear-gradient(135deg, #6C63FF 0%, #a78bfa 50%, #818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass { background: rgba(255,255,255,.78); backdrop-filter: blur(16px); border: 1px solid rgba(108,99,255,.1); }
+    .glass-dark { background: rgba(108,99,255,.04); backdrop-filter: blur(8px); border: 1px solid rgba(108,99,255,.1); }
+    tbody tr { transition: background .2s; }
+    tbody tr:hover { background: rgba(108,99,255,.05); }
+    .nav-l { position: relative; }
+    .nav-l::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:linear-gradient(90deg,#6C63FF,#a78bfa); transition:width .3s; }
+    .nav-l:hover::after { width:100%; }
+    .badge { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:9999px; font-size:.7rem; font-weight:700; }
+    .b-ok { background:#dcfce7; color:#166534; border:1px solid #bbf7d0; }
+    .b-warn { background:#fef3c7; color:#92400e; border:1px solid #fde68a; }
+    .b-err { background:#fef2f2; color:#991b1b; border:1px solid #fecaca; }
+    .b-info { background:#e0e0ff; color:#362f90; border:1px solid #c4c4ff; }
+    .b-gray { background:#f3f4f6; color:#4b5563; border:1px solid #e5e7eb; }
+    .sem { display:inline-block; width:14px; height:14px; border-radius:50%; }
+    .sem-g { background:#22c55e; box-shadow:0 0 6px rgba(34,197,94,.4); }
+    .sem-y { background:#eab308; box-shadow:0 0 6px rgba(234,179,8,.4); }
+    .sem-r { background:#ef4444; box-shadow:0 0 6px rgba(239,68,68,.4); }
+    .btn-3d { position:relative; display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1.5rem; border-radius:.75rem; font-weight:800; font-size:.85rem; color:white; cursor:pointer; border:none; transition:all .15s ease; }
+    .btn-3d-main { background:linear-gradient(180deg,#8282ff 0%,#6C63FF 50%,#5a52e0 100%); box-shadow:0 5px 0 #362f90,0 8px 16px rgba(108,99,255,.3); }
+    .btn-3d-main:hover { transform:translateY(-1px); box-shadow:0 6px 0 #362f90,0 10px 20px rgba(108,99,255,.35); }
+    .btn-3d-main:active { transform:translateY(3px); box-shadow:0 2px 0 #362f90,0 4px 8px rgba(108,99,255,.25); }
+    .btn-3d-emerald { background:linear-gradient(180deg,#34d399 0%,#10b981 50%,#059669 100%); box-shadow:0 5px 0 #047857,0 8px 16px rgba(16,185,129,.3); }
+    .btn-3d-emerald:hover { transform:translateY(-1px); box-shadow:0 6px 0 #047857,0 10px 20px rgba(16,185,129,.35); }
+    .btn-3d-emerald:active { transform:translateY(3px); box-shadow:0 2px 0 #047857,0 4px 8px rgba(16,185,129,.25); }
+    .btn-3d-amber { background:linear-gradient(180deg,#fbbf24 0%,#f59e0b 50%,#d97706 100%); box-shadow:0 5px 0 #92400e,0 8px 16px rgba(245,158,11,.3); color:#78350f; }
+    .btn-3d-amber:hover { transform:translateY(-1px); box-shadow:0 6px 0 #92400e,0 10px 20px rgba(245,158,11,.35); }
+    .btn-3d-amber:active { transform:translateY(3px); box-shadow:0 2px 0 #92400e,0 4px 8px rgba(245,158,11,.25); }
+    .hero-pattern { background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .score-ring { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1rem; color:#fff; }
+    .score-a { background:linear-gradient(135deg,#22c55e,#16a34a); }
+    .score-b { background:linear-gradient(135deg,#84cc16,#65a30d); }
+    .score-c { background:linear-gradient(135deg,#eab308,#ca8a04); }
+    .score-d { background:linear-gradient(135deg,#f97316,#ea580c); }
+    .score-e { background:linear-gradient(135deg,#ef4444,#dc2626); }
+    .tab-btn { padding:.6rem 1.2rem; border-radius:.5rem; font-weight:600; font-size:.82rem; cursor:pointer; transition:all .2s; border:1px solid transparent; }
+    .tab-btn.active { background:#6C63FF; color:white; border-color:#5a52e0; box-shadow:0 4px 12px rgba(108,99,255,.3); }
+    .tab-btn:not(.active) { background:#f3f4f6; color:#6b7280; }
+    .tab-btn:not(.active):hover { background:#e5e7eb; }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+    .progress-bar { height:8px; border-radius:9999px; background:#e5e7eb; overflow:hidden; }
+    .progress-fill { height:100%; border-radius:9999px; transition:width 1s ease; }
+    @keyframes pulse-glow { 0%,100%{box-shadow:0 0 0 0 rgba(108,99,255,.25)} 50%{box-shadow:0 0 20px 4px rgba(108,99,255,.15)} }
+    .pulse-glow { animation:pulse-glow 3s infinite; }
+    @media print { nav,.no-print{display:none!important} .reveal{opacity:1!important;transform:none!important} }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-lg border-b border-gray-200/60 shadow-sm no-print">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-audit-500 to-violet-500 flex items-center justify-center text-white font-bold text-sm" style="box-shadow:0 3px 0 #362f90,0 4px 8px rgba(108,99,255,.25)">🔍</div>
+        <span class="text-lg font-bold gt">Auditex</span>
+        <span class="hidden sm:inline text-xs text-gray-400 ml-1">Auditor Transversal de Proyecto</span>
+      </div>
+      <div class="hidden xl:flex gap-3 text-[12px] font-medium text-gray-500">
+        <a href="#resumen" class="nav-l hover:text-audit-600">Resumen</a>
+        <a href="#cobertura" class="nav-l hover:text-audit-600">Cobertura</a>
+        <a href="#coherencia" class="nav-l hover:text-audit-600">Coherencia</a>
+        <a href="#discrepancias" class="nav-l hover:text-audit-600">Discrepancias</a>
+        <a href="#scoring" class="nav-l hover:text-audit-600">Scoring</a>
+        <a href="#riesgos" class="nav-l hover:text-audit-600">Riesgos</a>
+        <a href="#gaps" class="nav-l hover:text-audit-600">Gaps</a>
+        <a href="#recomendaciones" class="nav-l hover:text-audit-600">Recomendaciones</a>
+        <a href="#profesionales" class="nav-l hover:text-audit-600">Profesionales</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-[#252068] via-audit-700 to-violet-700 text-white hero-pattern">
+    <div class="absolute inset-0 bg-gradient-to-t from-[#252068]/60 to-transparent"></div>
+    <div class="absolute top-16 right-16 w-72 h-72 bg-audit-400/15 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-8 left-8 w-56 h-56 bg-violet-400/15 rounded-full blur-3xl"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-24">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
+        <div class="max-w-3xl">
+          <p class="text-audit-200 text-xs font-semibold uppercase tracking-[.3em] mb-4">Auditoría Transversal de Proyecto · 21 Agentes · Cobertura 360°</p>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-5 leading-tight">Auditoría Transversal<br><span class="text-audit-200">Edificio Guargacho 1</span></h1>
+          <p class="text-lg text-audit-100 leading-relaxed max-w-2xl">Revisión cruzada de los 21 informes del sistema de agentes IA. Análisis de coherencia, detección de discrepancias, evaluación de riesgos y recomendaciones de mejora para el proyecto de 18 viviendas + local comercial.</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">📅 25 marzo 2026</span>
+            <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">📍 Guargacho, San Miguel de Abona</span>
+            <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">📐 ~1.789 m² construidos</span>
+            <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">🏗️ PB + 2 + Sótano</span>
+            <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">📊 21 informes auditados</span>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 text-center min-w-[260px]">
+          <p class="text-audit-800 text-xs font-bold uppercase tracking-wider mb-2">Puntuación Global</p>
+          <div class="mx-auto w-24 h-24 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center mb-3 pulse-glow">
+            <span class="text-4xl font-black text-white">B+</span>
+          </div>
+          <p class="text-audit-700 text-sm font-semibold">7,6 / 10</p>
+          <p class="text-gray-500 text-xs mt-1">Coherencia inter-agentes</p>
+          <div class="mt-3 pt-3 border-t border-audit-200/30 grid grid-cols-3 gap-2 text-center">
+            <div><p class="text-emerald-600 text-lg font-bold">14</p><p class="text-gray-400 text-[10px]">Coherentes</p></div>
+            <div><p class="text-amber-500 text-lg font-bold">5</p><p class="text-gray-400 text-[10px]">Con alertas</p></div>
+            <div><p class="text-red-500 text-lg font-bold">2</p><p class="text-gray-400 text-[10px]">Críticos</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="max-w-7xl mx-auto px-6 py-16 space-y-24">
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- RESUMEN EJECUTIVO -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="resumen" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-audit-100 flex items-center justify-center text-xl">📋</div>
+        <h2 class="text-3xl font-extrabold gt">Resumen Ejecutivo</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
+          <h3 class="font-bold text-lg mb-4 text-audit-700">Alcance de la Auditoría</h3>
+          <p class="text-sm text-gray-600 leading-7 mb-4">Se han revisado <strong>21 informes HTML</strong> generados por 20 agentes especializados del sistema IA, cubriendo las 5 fases del desarrollo inmobiliario: Diseño, Obra, Comercialización, Gestión y Marketing. El proyecto consiste en un <strong>edificio plurifamiliar de 18 viviendas + 1 local comercial</strong> en Guargacho, San Miguel de Abona, Tenerife.</p>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3"><span class="sem sem-g"></span><span class="text-sm">14 informes sin discrepancias significativas</span></div>
+            <div class="flex items-center gap-3"><span class="sem sem-y"></span><span class="text-sm">5 informes con alertas menores de coherencia</span></div>
+            <div class="flex items-center gap-3"><span class="sem sem-r"></span><span class="text-sm">2 discrepancias críticas detectadas</span></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
+          <h3 class="font-bold text-lg mb-4 text-audit-700">Datos Maestros del Proyecto</h3>
+          <table class="w-full text-sm">
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="py-2 font-semibold text-gray-500 w-40">Promotor</td><td class="py-2">Eric Gavalda Fernandez</td></tr>
+              <tr><td class="py-2 font-semibold text-gray-500">Arquitectura</td><td class="py-2">DOS 07 Arquitectura y Diseño, S.L.</td></tr>
+              <tr><td class="py-2 font-semibold text-gray-500">Colegiados</td><td class="py-2">I. Galván (1967) · D. Montesino (1726 COAC)</td></tr>
+              <tr><td class="py-2 font-semibold text-gray-500">Ubicación</td><td class="py-2">Ctra. General TF-652, Guargacho, CP 38639</td></tr>
+              <tr><td class="py-2 font-semibold text-gray-500">Configuración</td><td class="py-2">PB + 2 plantas + sótano garaje</td></tr>
+              <tr><td class="py-2 font-semibold text-gray-500">Unidades</td><td class="py-2">18 viviendas + 1 local (~95 m²)</td></tr>
+              <tr><td class="py-2 font-semibold text-gray-500">Parcela</td><td class="py-2">399,18 m²</td></tr>
+              <tr><td class="py-2 font-semibold text-gray-500">Sup. construida total</td><td class="py-2">~1.789 m² (sótano incluido)</td></tr>
+              <tr><td class="py-2 font-semibold text-gray-500">Sobre rasante</td><td class="py-2">~1.349 m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- KPIs rápidos -->
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-8">
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+          <p class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">Valoración</p>
+          <p class="text-xl font-black text-audit-600 mt-1" data-count="3847" data-suffix=" k€">3.847 k€</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+          <p class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">PEM Obra</p>
+          <p class="text-xl font-black text-amber-600 mt-1">1.539 k€</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+          <p class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">€/m² medio</p>
+          <p class="text-xl font-black text-emerald-600 mt-1">2.965</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+          <p class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">Mercado YoY</p>
+          <p class="text-xl font-black text-green-600 mt-1">+12,3%</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+          <p class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">IGIC</p>
+          <p class="text-xl font-black text-blue-600 mt-1">7%</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+          <p class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">Plazo obra</p>
+          <p class="text-xl font-black text-violet-600 mt-1">18-20 m</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- MAPA DE COBERTURA -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="cobertura" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-audit-100 flex items-center justify-center text-xl">🗺️</div>
+        <h2 class="text-3xl font-extrabold gt">Mapa de Cobertura por Agente</h2>
+      </div>
+      <p class="text-sm text-gray-500 mb-6">Cobertura estimada de cada agente IA respecto a lo que haría un profesional humano equivalente. Las barras muestran el porcentaje de trabajo profesional que el agente puede cubrir de forma autónoma.</p>
+
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b-2 border-gray-200 text-left">
+              <th class="py-3 px-3 font-bold text-gray-600 w-36">Agente</th>
+              <th class="py-3 px-3 font-bold text-gray-600 w-44">Rol</th>
+              <th class="py-3 px-3 font-bold text-gray-600">Informe</th>
+              <th class="py-3 px-3 font-bold text-gray-600 w-20 text-center">Cob.</th>
+              <th class="py-3 px-3 font-bold text-gray-600 w-52">Barra</th>
+              <th class="py-3 px-3 font-bold text-gray-600 w-24 text-center">Estado</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr><td class="py-2.5 px-3 font-bold text-purple-700">Arqon</td><td class="py-2.5 px-3 text-gray-500">Arquitecto</td><td class="py-2.5 px-3">informe-arquitectura.html</td><td class="py-2.5 px-3 text-center font-bold">85%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-purple-500" style="width:85%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-cyan-700">Trazex</td><td class="py-2.5 px-3 text-gray-500">Delineante CAD</td><td class="py-2.5 px-3">esquemas-planta.html</td><td class="py-2.5 px-3 text-center font-bold">85%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-cyan-500" style="width:85%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-warn">⚠ Alerta</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-violet-700">Decox</td><td class="py-2.5 px-3 text-gray-500">Interiorista</td><td class="py-2.5 px-3">propuesta-interiorismo.html</td><td class="py-2.5 px-3 text-center font-bold">75%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-violet-500" style="width:75%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-green-700">Verdex</td><td class="py-2.5 px-3 text-gray-500">Paisajista</td><td class="py-2.5 px-3">diseno-paisajistico.html</td><td class="py-2.5 px-3 text-center font-bold">75%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-green-500" style="width:75%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-emerald-700">Topex</td><td class="py-2.5 px-3 text-gray-500">Topógrafo</td><td class="py-2.5 px-3">analisis-topografico.html</td><td class="py-2.5 px-3 text-center font-bold">75%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-emerald-500" style="width:75%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-gray-600">Civex</td><td class="py-2.5 px-3 text-gray-500">Ing. Estructuras</td><td class="py-2.5 px-3">informe-estructural.html</td><td class="py-2.5 px-3 text-center font-bold">70%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-gray-500" style="width:70%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-orange-700">Indux</td><td class="py-2.5 px-3 text-gray-500">Ing. Industrial</td><td class="py-2.5 px-3">informe-instalaciones.html</td><td class="py-2.5 px-3 text-center font-bold">70%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-orange-500" style="width:70%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-amber-800">Geoex</td><td class="py-2.5 px-3 text-gray-500">Geotécnico</td><td class="py-2.5 px-3">estudio-geotecnico.html</td><td class="py-2.5 px-3 text-center font-bold">45%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-amber-700" style="width:45%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-warn">⚠ Parcial</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-amber-600">Buildero</td><td class="py-2.5 px-3 text-gray-500">Jefe de Obra</td><td class="py-2.5 px-3">presupuesto-obra.html</td><td class="py-2.5 px-3 text-center font-bold">80%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-amber-500" style="width:80%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-red-600">Segurex</td><td class="py-2.5 px-3 text-gray-500">Seguridad y Salud</td><td class="py-2.5 px-3">plan-seguridad-salud.html</td><td class="py-2.5 px-3 text-center font-bold">40%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-red-500" style="width:40%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-warn">⚠ Parcial</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-indigo-700">Valorex</td><td class="py-2.5 px-3 text-gray-500">Tasador</td><td class="py-2.5 px-3">informe-tasacion.html</td><td class="py-2.5 px-3 text-center font-bold">90%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-indigo-500" style="width:90%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-emerald-600">Nexus</td><td class="py-2.5 px-3 text-gray-500">Director Proyecto</td><td class="py-2.5 px-3">analisis-proyecto.html</td><td class="py-2.5 px-3 text-center font-bold">75%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-emerald-500" style="width:75%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-blue-900">Finex</td><td class="py-2.5 px-3 text-gray-500">Analista Financiero</td><td class="py-2.5 px-3">estudio-financiero.html</td><td class="py-2.5 px-3 text-center font-bold">85%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-blue-700" style="width:85%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-blue-800">Legex</td><td class="py-2.5 px-3 text-gray-500">Abogado Urbanista</td><td class="py-2.5 px-3">informe-juridico.html</td><td class="py-2.5 px-3 text-center font-bold">70%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-blue-600" style="width:70%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-yellow-800">Gestex</td><td class="py-2.5 px-3 text-gray-500">Gestor Administrativo</td><td class="py-2.5 px-3">tramites-administrativos.html</td><td class="py-2.5 px-3 text-center font-bold">30%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-yellow-600" style="width:30%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-warn">⚠ Bajo</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-gray-700">Notarex</td><td class="py-2.5 px-3 text-gray-500">Asesor Notarial</td><td class="py-2.5 px-3">modelo-contrato.html</td><td class="py-2.5 px-3 text-center font-bold">35%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-gray-600" style="width:35%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-warn">⚠ Bajo</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-pink-600">Vendex</td><td class="py-2.5 px-3 text-gray-500">Marketing</td><td class="py-2.5 px-3">plan-marketing.html + dossier</td><td class="py-2.5 px-3 text-center font-bold">85%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-pink-500" style="width:85%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-fuchsia-600">Renderex</td><td class="py-2.5 px-3 text-gray-500">Renderista 3D</td><td class="py-2.5 px-3">moodboard-referencias.html</td><td class="py-2.5 px-3 text-center font-bold">90%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-fuchsia-500" style="width:90%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-orange-600">Fotex</td><td class="py-2.5 px-3 text-gray-500">Fotógrafo</td><td class="py-2.5 px-3">plan-fotografico.html</td><td class="py-2.5 px-3 text-center font-bold">85%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-orange-400" style="width:85%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-emerald-600">Dealex</td><td class="py-2.5 px-3 text-gray-500">Agente Comercial</td><td class="py-2.5 px-3">informe-comisiones.html</td><td class="py-2.5 px-3 text-center font-bold">70%</td><td class="py-2.5 px-3"><div class="progress-bar"><div class="progress-fill bg-emerald-500" style="width:70%"></div></div></td><td class="py-2.5 px-3 text-center"><span class="badge b-ok">✓ OK</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Chart cobertura -->
+      <div class="mt-8 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <h3 class="font-bold text-lg mb-4 text-audit-700">Cobertura por Agente (% sobre profesional humano)</h3>
+        <div style="max-height:400px"><canvas id="chartCobertura"></canvas></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- MATRIZ DE COHERENCIA -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="coherencia" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-audit-100 flex items-center justify-center text-xl">🔗</div>
+        <h2 class="text-3xl font-extrabold gt">Matriz de Coherencia Inter-Agentes</h2>
+      </div>
+      <p class="text-sm text-gray-500 mb-6">Verificación cruzada de datos clave que comparten múltiples agentes. Se evalúa si cada dato es <strong>consistente</strong> (🟢), presenta <strong>desviación menor</strong> (🟡) o tiene una <strong>discrepancia crítica</strong> (🔴) entre informes.</p>
+
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 overflow-x-auto">
+        <table class="w-full text-[13px]">
+          <thead>
+            <tr class="border-b-2 border-gray-200">
+              <th class="py-3 px-3 text-left font-bold text-gray-600 w-52">Dato verificado</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-500">Arqon</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-500">Trazex</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-500">Buildero</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-500">Valorex</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-500">Finex</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-500">Vendex</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-500">Dealex</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-500">Nexus</th>
+              <th class="py-3 px-3 text-center font-bold text-gray-600 w-28">Veredicto</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr>
+              <td class="py-3 px-3 font-semibold">N.º viviendas</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-r" title="Trazex indica 9 viviendas"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-3 text-center"><span class="badge b-err">🔴 Discrepancia</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold">Sup. total construida</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-y" title="797,51 m² computable"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-3 text-center"><span class="badge b-warn">🟡 Menor</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold">Valoración total (€)</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-y"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-3 text-center"><span class="badge b-err">🔴 Discrepancia</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold">Tipologías (6+6+6)</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-r"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-3 text-center"><span class="badge b-err">🔴 Discrepancia</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold">PEM presupuesto</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-3 text-center"><span class="badge b-ok">🟢 Consistente</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold">Parcela (399,18 m²)</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-3 text-center"><span class="badge b-ok">🟢 Consistente</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold">Configuración PB+2+S</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-3 text-center"><span class="badge b-ok">🟢 Consistente</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold">IGIC 7%</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-3 text-center"><span class="badge b-ok">🟢 Consistente</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold">€/m² medio (2.965)</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-3 text-center"><span class="badge b-ok">🟢 Consistente</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold">Nombre comercial</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-3 text-center"><span class="badge b-ok">🟢 Consistente</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold">Plazo obra (meses)</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center">—</td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-2 text-center"><span class="sem sem-g"></span></td>
+              <td class="py-3 px-3 text-center"><span class="badge b-ok">🟢 Consistente</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- DISCREPANCIAS DETECTADAS -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="discrepancias" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center text-xl">🚨</div>
+        <h2 class="text-3xl font-extrabold gt">Discrepancias Detectadas</h2>
+      </div>
+
+      <!-- Discrepancia 1 -->
+      <div class="bg-white rounded-2xl border-l-4 border-red-500 p-6 shadow-sm mb-6">
+        <div class="flex items-start gap-4">
+          <div class="score-ring score-e text-sm flex-shrink-0">D1</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-2">
+              <h3 class="font-bold text-lg text-red-700">N.º de viviendas: 9 vs 18</h3>
+              <span class="badge b-err">CRÍTICA</span>
+            </div>
+            <p class="text-sm text-gray-600 leading-7 mb-4"><strong>Trazex</strong> (esquemas-planta.html) indica <strong>«9 Viviendas»</strong> en el hero y <strong>797,51 m² computables</strong>. Sin embargo, <strong>todos los demás agentes</strong> (Arqon, Valorex, Finex, Vendex, Dealex, Nexus, Buildero, Segurex, Indux…) coinciden en <strong>18 viviendas</strong> y ~1.789 m² construidos totales.</p>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-red-50 rounded-xl p-4">
+                <p class="text-xs font-bold text-red-700 uppercase mb-2">Trazex dice:</p>
+                <ul class="text-sm text-red-800 space-y-1">
+                  <li>• 9 Viviendas</li>
+                  <li>• 797,51 m² computables</li>
+                  <li>• Sótano: 395,52 m²</li>
+                </ul>
+              </div>
+              <div class="bg-green-50 rounded-xl p-4">
+                <p class="text-xs font-bold text-green-700 uppercase mb-2">Resto del equipo dice:</p>
+                <ul class="text-sm text-green-800 space-y-1">
+                  <li>• 18 viviendas (6×1D + 6×2D + 6×3D)</li>
+                  <li>• ~1.789 m² construidos totales</li>
+                  <li>• ~1.349 m² sobre rasante</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-4">
+              <p class="text-sm text-amber-800"><strong>📋 Diagnóstico:</strong> Trazex parece haber tomado datos de una versión anterior del proyecto o de una sola planta tipo (9 viviendas = 3 por planta × 3 plantas de PB+2, que no cuadra). Es posible que se refiera a 9 tipologías únicas (3 en PB + 3 en P1 + 3 en P2) y haya confundido «tipologías» con «unidades».</p>
+              <p class="text-sm text-amber-800 mt-2"><strong>✅ Acción requerida:</strong> Regenerar el informe de Trazex con el dato correcto de 18 viviendas. Verificar que los planos SVG representen las 18 unidades.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Discrepancia 2 -->
+      <div class="bg-white rounded-2xl border-l-4 border-red-500 p-6 shadow-sm mb-6">
+        <div class="flex items-start gap-4">
+          <div class="score-ring score-e text-sm flex-shrink-0">D2</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-2">
+              <h3 class="font-bold text-lg text-red-700">Valoración: €2.847.000 vs €3.847.225</h3>
+              <span class="badge b-err">CRÍTICA</span>
+            </div>
+            <p class="text-sm text-gray-600 leading-7 mb-4">El fichero de tarea (task_T20_AUDITEX.txt) menciona una tasación de <strong>€2.847.000</strong>. Sin embargo, los informes de <strong>Valorex, Finex, Notarex y Vendex</strong> convergen en un valor base de <strong>~€3.847.225</strong> sumando todas las tipologías con garaje y trastero.</p>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-red-50 rounded-xl p-4">
+                <p class="text-xs font-bold text-red-700 uppercase mb-2">Task log dice:</p>
+                <p class="text-sm text-red-800">Tasación: €2.847.000</p>
+              </div>
+              <div class="bg-green-50 rounded-xl p-4">
+                <p class="text-xs font-bold text-green-700 uppercase mb-2">Informes documentados:</p>
+                <ul class="text-sm text-green-800 space-y-1">
+                  <li>• Valorex: ~€3.847.225 (por tipologías)</li>
+                  <li>• Dealex: €3.792.000 objetivo</li>
+                  <li>• Vendex: €3,85 M referencia</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-4">
+              <p class="text-sm text-amber-800"><strong>📋 Diagnóstico:</strong> La cifra de €2.847.000 puede corresponder a un dato parcial (solo viviendas sin anejos), un error de transcripción, o una valoración por otro método. Los agentes comerciales y financieros trabajan con la cifra más alta, que incluye garajes, trasteros y local.</p>
+              <p class="text-sm text-amber-800 mt-2"><strong>✅ Acción requerida:</strong> Confirmar con Valorex cuál es la valoración oficial. Adoptar una cifra única para todo el proyecto. Esta auditoría adopta €3.847.225 como referencia documentada.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Discrepancia 3 - menor -->
+      <div class="bg-white rounded-2xl border-l-4 border-amber-400 p-6 shadow-sm mb-6">
+        <div class="flex items-start gap-4">
+          <div class="score-ring score-c text-sm flex-shrink-0">D3</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-2">
+              <h3 class="font-bold text-lg text-amber-700">Superficie computable: 797 m² vs ~1.349 m²</h3>
+              <span class="badge b-warn">MENOR</span>
+            </div>
+            <p class="text-sm text-gray-600 leading-7">Trazex indica 797,51 m² computables. Arqon y el resto mencionan ~1.349 m² sobre rasante. La diferencia puede deberse a que Trazex reporta superficie computable urbanística (excluye zonas comunes, escaleras, ascensor) mientras que el resto reporta superficie construida total. <strong>No es necesariamente un error</strong>, pero la terminología debe unificarse para evitar confusión.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Discrepancia 4 - menor -->
+      <div class="bg-white rounded-2xl border-l-4 border-amber-400 p-6 shadow-sm mb-6">
+        <div class="flex items-start gap-4">
+          <div class="score-ring score-c text-sm flex-shrink-0">D4</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-2">
+              <h3 class="font-bold text-lg text-amber-700">Precio desde: discrepancia en precio mínimo</h3>
+              <span class="badge b-warn">MENOR</span>
+            </div>
+            <p class="text-sm text-gray-600 leading-7">Vendex (dossier comercial) indica <strong>«Desde 159.900 €»</strong> como precio de lanzamiento. Dealex trabaja con una tabla de precios por unidad donde el mínimo para 1D ronda los €159.900. Finex utiliza una base media de €2.965/m². Las cifras son compatibles entre sí pero <strong>el «desde» debe verificarse</strong> con la tabla final de precios para que el material comercial no prometa un precio que luego no se sostenga.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- SCORING POR AGENTE -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="scoring" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-audit-100 flex items-center justify-center text-xl">🏆</div>
+        <h2 class="text-3xl font-extrabold gt">Scoring por Agente</h2>
+      </div>
+      <p class="text-sm text-gray-500 mb-6">Cada informe se evalúa en 4 dimensiones: <strong>Completitud</strong> (¿cubre todo lo esperado?), <strong>Coherencia</strong> (¿coincide con otros agentes?), <strong>Calidad técnica</strong> (¿terminología y cálculos correctos?) y <strong>Presentación</strong> (¿formato profesional y legible?). Escala 1-10.</p>
+
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 overflow-x-auto">
+        <table class="w-full text-[13px]">
+          <thead>
+            <tr class="border-b-2 border-gray-200">
+              <th class="py-3 px-3 text-left font-bold text-gray-600">Agente</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-500">Complet.</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-500">Coher.</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-500">Técnica</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-500">Present.</th>
+              <th class="py-3 px-2 text-center font-bold text-gray-600">Media</th>
+              <th class="py-3 px-3 text-center font-bold text-gray-600">Nota</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr><td class="py-2.5 px-3 font-bold text-purple-700">Arqon</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center font-bold">8,8</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-a mx-auto text-xs">A</div></td></tr>
+            <tr class="bg-red-50/40"><td class="py-2.5 px-3 font-bold text-cyan-700">Trazex</td><td class="py-2.5 px-2 text-center">7</td><td class="py-2.5 px-2 text-center">4</td><td class="py-2.5 px-2 text-center">7</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center font-bold">6,8</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-c mx-auto text-xs">C</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-violet-700">Decox</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">7</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center font-bold">8,0</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-b mx-auto text-xs">B</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-green-700">Verdex</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">7</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center font-bold">8,0</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-b mx-auto text-xs">B</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-emerald-700">Topex</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center font-bold">8,0</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-b mx-auto text-xs">B</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-gray-600">Civex</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">7</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center font-bold">7,8</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-b mx-auto text-xs">B</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-orange-700">Indux</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center font-bold">8,5</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-a mx-auto text-xs">A</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-amber-800">Geoex</td><td class="py-2.5 px-2 text-center">6</td><td class="py-2.5 px-2 text-center">7</td><td class="py-2.5 px-2 text-center">6</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center font-bold">6,8</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-c mx-auto text-xs">C</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-amber-600">Buildero</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center font-bold">8,8</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-a mx-auto text-xs">A</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-red-600">Segurex</td><td class="py-2.5 px-2 text-center">6</td><td class="py-2.5 px-2 text-center">7</td><td class="py-2.5 px-2 text-center">6</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center font-bold">6,8</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-c mx-auto text-xs">C</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-indigo-700">Valorex</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center font-bold">9,0</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-a mx-auto text-xs">A+</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-emerald-600">Nexus</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center font-bold">8,3</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-a mx-auto text-xs">A</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-blue-900">Finex</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center font-bold">9,0</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-a mx-auto text-xs">A+</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-blue-800">Legex</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center font-bold">8,0</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-b mx-auto text-xs">B</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-yellow-800">Gestex</td><td class="py-2.5 px-2 text-center">5</td><td class="py-2.5 px-2 text-center">7</td><td class="py-2.5 px-2 text-center">5</td><td class="py-2.5 px-2 text-center">7</td><td class="py-2.5 px-2 text-center font-bold">6,0</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-d mx-auto text-xs">D</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-gray-700">Notarex</td><td class="py-2.5 px-2 text-center">6</td><td class="py-2.5 px-2 text-center">7</td><td class="py-2.5 px-2 text-center">6</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center font-bold">6,8</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-c mx-auto text-xs">C</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-pink-600">Vendex</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">10</td><td class="py-2.5 px-2 text-center font-bold">8,8</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-a mx-auto text-xs">A</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-fuchsia-600">Renderex</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">7</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center font-bold">8,0</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-b mx-auto text-xs">B</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-orange-600">Fotex</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">7</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center font-bold">8,0</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-b mx-auto text-xs">B</div></td></tr>
+            <tr><td class="py-2.5 px-3 font-bold text-emerald-600">Dealex</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">8</td><td class="py-2.5 px-2 text-center">9</td><td class="py-2.5 px-2 text-center font-bold">8,3</td><td class="py-2.5 px-3 text-center"><div class="score-ring score-a mx-auto text-xs">A</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Chart scoring -->
+      <div class="mt-8 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <h3 class="font-bold text-lg mb-4 text-audit-700">Distribución de Puntuaciones</h3>
+        <div style="max-height:350px"><canvas id="chartScoring"></canvas></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- MAPA DE RIESGOS -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="riesgos" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center text-xl">⚠️</div>
+        <h2 class="text-3xl font-extrabold gt">Mapa de Riesgos Cruzados</h2>
+      </div>
+      <p class="text-sm text-gray-500 mb-6">Riesgos identificados cruzando información de múltiples agentes. Se valoran por <strong>impacto</strong> (económico/temporal) y <strong>probabilidad</strong>.</p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Riesgo 1 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-red-500">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="badge b-err">ALTO</span>
+            <h3 class="font-bold text-red-700">R1 · Geotécnico sin validar</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-7 mb-3">Geoex advierte explícitamente que su informe es un <strong>pre-estudio (45% cobertura)</strong> basado en datos IGME y que requiere un estudio geotécnico de campo con sondeos SPT/DPSH. Sin este estudio, la cimentación propuesta por Civex carece de soporte real.</p>
+          <div class="flex gap-2 mt-3">
+            <span class="badge b-gray">Impacto: Muy Alto</span>
+            <span class="badge b-gray">Prob: Alta</span>
+            <span class="badge b-gray">Afecta: Civex, Buildero, Finex</span>
+          </div>
+        </div>
+        <!-- Riesgo 2 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-red-500">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="badge b-err">ALTO</span>
+            <h3 class="font-bold text-red-700">R2 · Licencia urbanística pendiente</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-7 mb-3">Legex y Gestex confirman que la <strong>licencia de obra mayor no ha sido concedida</strong> y que depende de la aprobación del PGOU de San Miguel de Abona. El retraso en la licencia arrastra todo el cronograma: obra, financiación, comercialización.</p>
+          <div class="flex gap-2 mt-3">
+            <span class="badge b-gray">Impacto: Muy Alto</span>
+            <span class="badge b-gray">Prob: Media-Alta</span>
+            <span class="badge b-gray">Afecta: Nexus, Finex, Vendex</span>
+          </div>
+        </div>
+        <!-- Riesgo 3 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-amber-400">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="badge b-warn">MEDIO</span>
+            <h3 class="font-bold text-amber-700">R3 · Sótano en terreno volcánico</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-7 mb-3">Topex confirma sustrato basáltico y Geoex advierte de posible <strong>manto freático somero y coladas basálticas</strong> que dificultan la excavación. El sótano de ~440 m² podría requerir martillo hidráulico pesado, encareciendo el PEM un 10-15%.</p>
+          <div class="flex gap-2 mt-3">
+            <span class="badge b-gray">Impacto: Alto</span>
+            <span class="badge b-gray">Prob: Media</span>
+            <span class="badge b-gray">Afecta: Buildero, Finex, Civex</span>
+          </div>
+        </div>
+        <!-- Riesgo 4 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-amber-400">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="badge b-warn">MEDIO</span>
+            <h3 class="font-bold text-amber-700">R4 · Comercialización prematura</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-7 mb-3">Vendex y Dealex diseñan un plan de lanzamiento agresivo (9-14 meses), pero <strong>sin licencia de obra ni estudio geotécnico</strong>, la preventas con señal podría generar compromisos difíciles de cumplir o retrasos con los compradores.</p>
+          <div class="flex gap-2 mt-3">
+            <span class="badge b-gray">Impacto: Alto</span>
+            <span class="badge b-gray">Prob: Media</span>
+            <span class="badge b-gray">Afecta: Vendex, Dealex, Legex</span>
+          </div>
+        </div>
+        <!-- Riesgo 5 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-amber-400">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="badge b-warn">MEDIO</span>
+            <h3 class="font-bold text-amber-700">R5 · Seguro decenal y OCT</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-7 mb-3">Segurex y Legex mencionan la obligatoriedad del <strong>seguro decenal</strong> y la contratación de un <strong>OCT (Organismo de Control Técnico)</strong>. Finex no incluye este coste (~1,2-1,5% PEM) en el presupuesto de forma explícita.</p>
+          <div class="flex gap-2 mt-3">
+            <span class="badge b-gray">Impacto: Medio</span>
+            <span class="badge b-gray">Prob: Alta</span>
+            <span class="badge b-gray">Afecta: Finex, Buildero, Legex</span>
+          </div>
+        </div>
+        <!-- Riesgo 6 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-green-400">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="badge b-ok">BAJO</span>
+            <h3 class="font-bold text-green-700">R6 · Variación coste materiales</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-7 mb-3">Buildero utiliza precios de mercado marzo 2026. Finex incluye un <strong>colchón de contingencias del 5%</strong> sobre PEM. El riesgo es bajo si la obra arranca en 2026-2027, pero crece si se retrasa &gt;12 meses.</p>
+          <div class="flex gap-2 mt-3">
+            <span class="badge b-gray">Impacto: Medio</span>
+            <span class="badge b-gray">Prob: Baja</span>
+            <span class="badge b-gray">Afecta: Buildero, Finex</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart riesgos -->
+      <div class="mt-8 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <h3 class="font-bold text-lg mb-4 text-audit-700">Matriz Impacto × Probabilidad</h3>
+        <div style="max-height:350px"><canvas id="chartRiesgos"></canvas></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- GAPS DETECTADOS -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="gaps" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">🕳️</div>
+        <h2 class="text-3xl font-extrabold gt">Gaps Detectados</h2>
+      </div>
+      <p class="text-sm text-gray-500 mb-6">Áreas no cubiertas por ningún agente o con cobertura insuficiente que requieren acción del promotor o profesionales externos.</p>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+          <div class="flex items-center gap-2 mb-3"><span class="text-xl">🔬</span><span class="badge b-err">CRÍTICO</span></div>
+          <h3 class="font-bold text-sm mb-2">Estudio geotécnico de campo</h3>
+          <p class="text-xs text-gray-500 leading-6">Ningún agente puede sustituir sondeos SPT/DPSH en campo. Coste estimado: 3.000-6.000 €. Sin él, la cimentación es especulativa.</p>
+          <p class="text-xs text-audit-600 font-semibold mt-2">→ Contratar laboratorio acreditado</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+          <div class="flex items-center gap-2 mb-3"><span class="text-xl">📐</span><span class="badge b-err">CRÍTICO</span></div>
+          <h3 class="font-bold text-sm mb-2">Proyecto de ejecución visado</h3>
+          <p class="text-xs text-gray-500 leading-6">Arqon genera memoria y diseño pero el proyecto de ejecución visado por COAC requiere firma de arquitecto colegiado. DOS 07 Arquitectura ya asignada.</p>
+          <p class="text-xs text-audit-600 font-semibold mt-2">→ DOS 07 debe visar el proyecto</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+          <div class="flex items-center gap-2 mb-3"><span class="text-xl">📜</span><span class="badge b-err">CRÍTICO</span></div>
+          <h3 class="font-bold text-sm mb-2">Licencia de obra mayor</h3>
+          <p class="text-xs text-gray-500 leading-6">Legex y Gestex documentan los trámites pero no pueden tramitarlos. El promotor debe presentar la solicitud en el Ayuntamiento de San Miguel de Abona.</p>
+          <p class="text-xs text-audit-600 font-semibold mt-2">→ Gestionar con arquitecto y Ayuntamiento</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+          <div class="flex items-center gap-2 mb-3"><span class="text-xl">🏗️</span><span class="badge b-warn">IMPORTANTE</span></div>
+          <h3 class="font-bold text-sm mb-2">Dirección de obra y ejecución</h3>
+          <p class="text-xs text-gray-500 leading-6">Se necesitan Director de Obra (arquitecto) y Director de Ejecución de Obra (arquitecto técnico). Segurex necesita un CSS real en obra.</p>
+          <p class="text-xs text-audit-600 font-semibold mt-2">→ Contratar equipo facultativo</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+          <div class="flex items-center gap-2 mb-3"><span class="text-xl">🏦</span><span class="badge b-warn">IMPORTANTE</span></div>
+          <h3 class="font-bold text-sm mb-2">Financiación promotor (hipoteca)</h3>
+          <p class="text-xs text-gray-500 leading-6">Finex modela escenarios pero la negociación bancaria real (préstamo promotor al 60-70% LTC) debe realizarse por el promotor con entidades financieras.</p>
+          <p class="text-xs text-audit-600 font-semibold mt-2">→ Solicitar ofertas a 3-4 bancos</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+          <div class="flex items-center gap-2 mb-3"><span class="text-xl">📸</span><span class="badge b-info">MENOR</span></div>
+          <h3 class="font-bold text-sm mb-2">Renders y fotografía reales</h3>
+          <p class="text-xs text-gray-500 leading-6">Renderex y Fotex planifican pero los renders fotorrealistas finales dependen del proyecto de ejecución definitivo. Fotex necesita el edificio construido para las fotos finales.</p>
+          <p class="text-xs text-audit-600 font-semibold mt-2">→ Producir renders tras visado</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+          <div class="flex items-center gap-2 mb-3"><span class="text-xl">⚖️</span><span class="badge b-warn">IMPORTANTE</span></div>
+          <h3 class="font-bold text-sm mb-2">Escritura de obra nueva y DH</h3>
+          <p class="text-xs text-gray-500 leading-6">Notarex redacta minutas modelo (35% cobertura) pero la escritura notarial requiere notario real, registro de la propiedad y pago de aranceles.</p>
+          <p class="text-xs text-audit-600 font-semibold mt-2">→ Reservar notario al finalizar obra</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+          <div class="flex items-center gap-2 mb-3"><span class="text-xl">🔌</span><span class="badge b-info">MENOR</span></div>
+          <h3 class="font-bold text-sm mb-2">Acometidas y boletines</h3>
+          <p class="text-xs text-gray-500 leading-6">Indux diseña instalaciones pero las acometidas eléctricas, de agua y telecomunicaciones deben tramitarse con las compañías suministradoras.</p>
+          <p class="text-xs text-audit-600 font-semibold mt-2">→ Solicitar puntos de conexión</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+          <div class="flex items-center gap-2 mb-3"><span class="text-xl">🛡️</span><span class="badge b-warn">IMPORTANTE</span></div>
+          <h3 class="font-bold text-sm mb-2">Seguro decenal + OCT</h3>
+          <p class="text-xs text-gray-500 leading-6">Obligatorio para edificación residencial (LOE art. 19). Requiere contratar un OCT desde inicio de obra. Coste: ~1,2% PEM ≈ 18.500 €.</p>
+          <p class="text-xs text-audit-600 font-semibold mt-2">→ Contratar antes de inicio de obra</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- RECOMENDACIONES -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="recomendaciones" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">💡</div>
+        <h2 class="text-3xl font-extrabold gt">Recomendaciones de Mejora</h2>
+      </div>
+
+      <div class="space-y-5">
+        <div class="bg-gradient-to-r from-red-50 to-white rounded-2xl p-6 border border-red-200">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-red-500 text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
+            <div>
+              <h3 class="font-bold text-red-700 mb-1">Corregir informe Trazex — Prioridad URGENTE</h3>
+              <p class="text-sm text-gray-600 leading-7">Regenerar esquemas-planta.html con el dato correcto de <strong>18 viviendas</strong> (no 9). Verificar que los SVG de planta representan 6 viviendas por planta tipo (PB, P1, P2). Actualizar superficie computable si procede.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gradient-to-r from-red-50 to-white rounded-2xl p-6 border border-red-200">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-red-500 text-white flex items-center justify-center font-bold flex-shrink-0">2</div>
+            <div>
+              <h3 class="font-bold text-red-700 mb-1">Unificar cifra de valoración — Prioridad URGENTE</h3>
+              <p class="text-sm text-gray-600 leading-7">Adoptar <strong>€3.847.225</strong> (suma de tipologías documentada por Valorex, Finex, Vendex) como valoración oficial del proyecto. Eliminar referencias a €2.847.000 en task logs. Comunicar a todos los agentes.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gradient-to-r from-amber-50 to-white rounded-2xl p-6 border border-amber-200">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold flex-shrink-0">3</div>
+            <div>
+              <h3 class="font-bold text-amber-700 mb-1">Contratar estudio geotécnico real — Prioridad ALTA</h3>
+              <p class="text-sm text-gray-600 leading-7">Geoex solo proporciona un pre-informe (45%). Antes de iniciar proyecto de ejecución, contratar laboratorio acreditado para <strong>2-3 sondeos mecánicos + ensayos SPT</strong>. Coste: 3.000-6.000 €. Plazos: 3-4 semanas.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gradient-to-r from-amber-50 to-white rounded-2xl p-6 border border-amber-200">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold flex-shrink-0">4</div>
+            <div>
+              <h3 class="font-bold text-amber-700 mb-1">Añadir coste OCT/decenal al modelo financiero</h3>
+              <p class="text-sm text-gray-600 leading-7">Finex debe incluir ~€18.500 (1,2% PEM) para seguro decenal + OCT, y ~€8.000-12.000 para certificación energética y licencia de primera ocupación. Ajustar el cash-flow y la TIR.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gradient-to-r from-blue-50 to-white rounded-2xl p-6 border border-blue-200">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-blue-500 text-white flex items-center justify-center font-bold flex-shrink-0">5</div>
+            <div>
+              <h3 class="font-bold text-blue-700 mb-1">Estandarizar terminología de superficies</h3>
+              <p class="text-sm text-gray-600 leading-7">Crear un <strong>cuadro de superficies maestro</strong> que distinga: superficie construida total, superficie sobre rasante, superficie computable urbanística y superficie útil. Todos los agentes deben referenciar el mismo documento.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gradient-to-r from-blue-50 to-white rounded-2xl p-6 border border-blue-200">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-blue-500 text-white flex items-center justify-center font-bold flex-shrink-0">6</div>
+            <div>
+              <h3 class="font-bold text-blue-700 mb-1">Validar precios «desde» antes de lanzamiento</h3>
+              <p class="text-sm text-gray-600 leading-7">Vendex publica «Desde 159.900 €». Antes de publicar material comercial, verificar con Dealex y Finex que ese precio mínimo es sostenible tras incluir todos los costes adicionales (OCT, acometidas, paisajismo).</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gradient-to-r from-green-50 to-white rounded-2xl p-6 border border-green-200">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-green-500 text-white flex items-center justify-center font-bold flex-shrink-0">7</div>
+            <div>
+              <h3 class="font-bold text-green-700 mb-1">Secuenciar comercialización con licencia</h3>
+              <p class="text-sm text-gray-600 leading-7">No iniciar preventas con cobro de señal hasta tener al menos la <strong>licencia de obra concedida</strong>. Se puede hacer «pre-registro de interés» sin compromiso económico para calentar mercado sin riesgo legal.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- PROFESIONALES NECESARIOS -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="profesionales" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-audit-100 flex items-center justify-center text-xl">👷</div>
+        <h2 class="text-3xl font-extrabold gt">Profesionales Humanos Necesarios</h2>
+      </div>
+      <p class="text-sm text-gray-500 mb-6">Listado de profesionales reales que el promotor debe contratar para complementar lo que el sistema de agentes IA <strong>no puede cubrir</strong> (el 36% restante de cobertura media).</p>
+
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b-2 border-gray-200 text-left">
+              <th class="py-3 px-3 font-bold text-gray-600">Profesional</th>
+              <th class="py-3 px-3 font-bold text-gray-600">Función</th>
+              <th class="py-3 px-3 font-bold text-gray-600">Fase</th>
+              <th class="py-3 px-3 font-bold text-gray-600 text-right">Coste est. (€)</th>
+              <th class="py-3 px-3 font-bold text-gray-600 text-center">Urgencia</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr><td class="py-3 px-3 font-semibold">Arquitecto (visado)</td><td class="py-3 px-3 text-gray-500">Proyecto ejecución + DO</td><td class="py-3 px-3"><span class="badge b-info">Diseño</span></td><td class="py-3 px-3 text-right font-semibold">55.000 - 75.000</td><td class="py-3 px-3 text-center"><span class="sem sem-r"></span></td></tr>
+            <tr><td class="py-3 px-3 font-semibold">Arquitecto técnico</td><td class="py-3 px-3 text-gray-500">Dirección ejecución obra</td><td class="py-3 px-3"><span class="badge b-info">Obra</span></td><td class="py-3 px-3 text-right font-semibold">25.000 - 35.000</td><td class="py-3 px-3 text-center"><span class="sem sem-r"></span></td></tr>
+            <tr><td class="py-3 px-3 font-semibold">Lab. geotécnico</td><td class="py-3 px-3 text-gray-500">Sondeos SPT/DPSH + informe</td><td class="py-3 px-3"><span class="badge b-info">Pre-obra</span></td><td class="py-3 px-3 text-right font-semibold">3.000 - 6.000</td><td class="py-3 px-3 text-center"><span class="sem sem-r"></span></td></tr>
+            <tr><td class="py-3 px-3 font-semibold">Coord. S+S</td><td class="py-3 px-3 text-gray-500">Seguridad en fase ejecución</td><td class="py-3 px-3"><span class="badge b-info">Obra</span></td><td class="py-3 px-3 text-right font-semibold">8.000 - 12.000</td><td class="py-3 px-3 text-center"><span class="sem sem-y"></span></td></tr>
+            <tr><td class="py-3 px-3 font-semibold">OCT (Organismo Control)</td><td class="py-3 px-3 text-gray-500">Control técnico seguro decenal</td><td class="py-3 px-3"><span class="badge b-info">Obra</span></td><td class="py-3 px-3 text-right font-semibold">12.000 - 18.000</td><td class="py-3 px-3 text-center"><span class="sem sem-y"></span></td></tr>
+            <tr><td class="py-3 px-3 font-semibold">Seguro decenal</td><td class="py-3 px-3 text-gray-500">Póliza LOE art. 19</td><td class="py-3 px-3"><span class="badge b-info">Obra</span></td><td class="py-3 px-3 text-right font-semibold">15.000 - 22.000</td><td class="py-3 px-3 text-center"><span class="sem sem-y"></span></td></tr>
+            <tr><td class="py-3 px-3 font-semibold">Notario</td><td class="py-3 px-3 text-gray-500">Escrituras obra nueva + DH</td><td class="py-3 px-3"><span class="badge b-info">Post-obra</span></td><td class="py-3 px-3 text-right font-semibold">4.000 - 8.000</td><td class="py-3 px-3 text-center"><span class="sem sem-g"></span></td></tr>
+            <tr><td class="py-3 px-3 font-semibold">Registrador propiedad</td><td class="py-3 px-3 text-gray-500">Inscripción DH + venta</td><td class="py-3 px-3"><span class="badge b-info">Post-obra</span></td><td class="py-3 px-3 text-right font-semibold">3.000 - 5.000</td><td class="py-3 px-3 text-center"><span class="sem sem-g"></span></td></tr>
+            <tr><td class="py-3 px-3 font-semibold">Constructora</td><td class="py-3 px-3 text-gray-500">Ejecución material de la obra</td><td class="py-3 px-3"><span class="badge b-info">Obra</span></td><td class="py-3 px-3 text-right font-semibold">1.400.000 - 1.600.000</td><td class="py-3 px-3 text-center"><span class="sem sem-y"></span></td></tr>
+            <tr><td class="py-3 px-3 font-semibold">Agente inmobiliario</td><td class="py-3 px-3 text-gray-500">Venta de unidades (3-5% comisión)</td><td class="py-3 px-3"><span class="badge b-info">Comercial</span></td><td class="py-3 px-3 text-right font-semibold">115.000 - 192.000</td><td class="py-3 px-3 text-center"><span class="sem sem-g"></span></td></tr>
+            <tr class="bg-audit-50/50 font-bold"><td class="py-3 px-3" colspan="3">TOTAL ESTIMADO (sin constructora)</td><td class="py-3 px-3 text-right text-audit-700">240.000 - 371.000 €</td><td class="py-3 px-3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Chart coste profesionales -->
+      <div class="mt-8 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <h3 class="font-bold text-lg mb-4 text-audit-700">Distribución de Costes Profesionales (sin constructora)</h3>
+        <div class="max-w-lg mx-auto" style="max-height:350px"><canvas id="chartProfesionales"></canvas></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+      <p class="mb-2">Informe generado por <strong class="text-white">AUDITEX</strong> — Auditor Transversal del Sistema de Agentes Inmobiliarios IA</p>
+      <p class="mb-2">Proyecto: Edificio Guargacho 1 · San Miguel de Abona, Tenerife · 25 marzo 2026</p>
+      <p class="text-gray-500 text-xs mt-4">⚠️ Este informe es una herramienta de apoyo a la decisión. No sustituye la revisión de profesionales colegiados. Los datos proceden de informes generados por IA con cobertura parcial. Consulte siempre con los técnicos competentes antes de tomar decisiones vinculantes.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => obs.observe(el));
+
+    // Counter animation
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      const prefix = el.dataset.prefix || '';
+      let current = 0;
+      const step = target / 60;
+      const animate = () => {
+        current += step;
+        if(current >= target) { el.textContent = prefix + target.toLocaleString('es-ES') + suffix; return; }
+        el.textContent = prefix + Math.floor(current).toLocaleString('es-ES') + suffix;
+        requestAnimationFrame(animate);
+      };
+      const cObs = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) { animate(); cObs.disconnect(); }
+      });
+      cObs.observe(el);
+    });
+
+    // Chart: Cobertura
+    new Chart(document.getElementById('chartCobertura'), {
+      type: 'bar',
+      data: {
+        labels: ['Arqon','Trazex','Decox','Verdex','Topex','Civex','Indux','Geoex','Buildero','Segurex','Valorex','Nexus','Finex','Legex','Gestex','Notarex','Vendex','Renderex','Fotex','Dealex'],
+        datasets: [{
+          label: 'Cobertura %',
+          data: [85,85,75,75,75,70,70,45,80,40,90,75,85,70,30,35,85,90,85,70],
+          backgroundColor: [
+            '#9333ea','#06b6d4','#8b5cf6','#22c55e','#16a34a','#6b7280','#f97316','#92400e','#f59e0b','#ef4444',
+            '#6366f1','#10b981','#1e3a8a','#1e40af','#d97706','#4b5563','#ec4899','#d946ef','#f97316','#10b981'
+          ],
+          borderRadius: 6,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ctx.raw + '% cobertura' } }
+        },
+        scales: {
+          y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' }, grid: { color: 'rgba(0,0,0,.05)' } },
+          x: { ticks: { font: { size: 10, weight: '600' } }, grid: { display: false } }
+        }
+      }
+    });
+
+    // Chart: Scoring radar
+    new Chart(document.getElementById('chartScoring'), {
+      type: 'bar',
+      data: {
+        labels: ['Arqon','Trazex','Decox','Verdex','Topex','Civex','Indux','Geoex','Buildero','Segurex','Valorex','Nexus','Finex','Legex','Gestex','Notarex','Vendex','Renderex','Fotex','Dealex'],
+        datasets: [
+          { label:'Completitud', data:[9,7,8,8,8,8,9,6,9,6,9,8,9,8,5,6,9,8,8,8], backgroundColor:'rgba(99,102,241,.7)', borderRadius:4 },
+          { label:'Coherencia', data:[9,4,8,8,8,8,8,7,9,7,9,8,9,8,7,7,8,8,8,8], backgroundColor:'rgba(16,185,129,.7)', borderRadius:4 },
+          { label:'Técnica', data:[8,7,7,7,8,7,8,6,8,6,9,8,9,8,5,6,8,7,7,8], backgroundColor:'rgba(245,158,11,.7)', borderRadius:4 },
+          { label:'Presentación', data:[9,9,9,9,8,8,9,8,9,8,9,9,9,8,7,8,10,9,9,9], backgroundColor:'rgba(168,85,247,.7)', borderRadius:4 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position:'top', labels:{ font:{size:11} } } },
+        scales: {
+          y: { beginAtZero:true, max:10, grid:{color:'rgba(0,0,0,.05)'} },
+          x: { ticks:{font:{size:9,weight:'600'}}, grid:{display:false} }
+        }
+      }
+    });
+
+    // Chart: Riesgos scatter
+    new Chart(document.getElementById('chartRiesgos'), {
+      type: 'bubble',
+      data: {
+        datasets: [
+          { label:'R1 Geotécnico', data:[{x:8,y:9,r:16}], backgroundColor:'rgba(239,68,68,.6)' },
+          { label:'R2 Licencia', data:[{x:7,y:9,r:16}], backgroundColor:'rgba(239,68,68,.5)' },
+          { label:'R3 Sótano basalto', data:[{x:6,y:7,r:12}], backgroundColor:'rgba(245,158,11,.5)' },
+          { label:'R4 Comercialización', data:[{x:5,y:7,r:11}], backgroundColor:'rgba(245,158,11,.4)' },
+          { label:'R5 OCT/Decenal', data:[{x:7,y:5,r:10}], backgroundColor:'rgba(245,158,11,.4)' },
+          { label:'R6 Materiales', data:[{x:3,y:5,r:8}], backgroundColor:'rgba(34,197,94,.4)' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position:'right', labels:{font:{size:10}} } },
+        scales: {
+          x: { title:{display:true,text:'Probabilidad',font:{weight:'bold'}}, min:0, max:10, grid:{color:'rgba(0,0,0,.05)'} },
+          y: { title:{display:true,text:'Impacto',font:{weight:'bold'}}, min:0, max:10, grid:{color:'rgba(0,0,0,.05)'} }
+        }
+      }
+    });
+
+    // Chart: Profesionales donut
+    new Chart(document.getElementById('chartProfesionales'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Arquitecto (DO)','Arq. técnico (DEO)','Lab. geotécnico','Coord. S+S','OCT','Seguro decenal','Notario','Registrador','Agente inmobiliario'],
+        datasets: [{
+          data: [65000,30000,4500,10000,15000,18500,6000,4000,153500],
+          backgroundColor: ['#6366f1','#8b5cf6','#92400e','#ef4444','#f97316','#eab308','#4b5563','#6b7280','#10b981'],
+          borderWidth: 2, borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position:'bottom', labels:{font:{size:10}, padding:12} },
+          tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.raw.toLocaleString('es-ES') + ' €' } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

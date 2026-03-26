@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dossier Comercial de Ventas · Residencial Brisa Guargacho</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter','sans-serif'] },
+          colors: {
+            vendex: {50:'#fff5f7',100:'#ffe4ea',200:'#fecbd6',300:'#fda4b8',400:'#fb718f',500:'#f43f6b',600:'#e11d48',700:'#be123c',800:'#9f1239',900:'#881337'},
+            ocean:'#0f766e',
+            sand:'#f7efe4',
+            ink:'#172033'
+          },
+          boxShadow: { soft:'0 18px 40px rgba(15,23,42,.10)' }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, sans-serif; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .btn-3d {
+      position: relative; display:inline-flex; align-items:center; justify-content:center; border-radius:1rem;
+      font-weight:700; transition:.18s ease; transform:translateY(0);
+      box-shadow: 0 10px 0 rgba(136,19,55,.95), 0 18px 30px rgba(136,19,55,.18);
+    }
+    .btn-3d:hover { transform:translateY(2px); box-shadow:0 8px 0 rgba(136,19,55,.95), 0 14px 24px rgba(136,19,55,.20); }
+    .btn-3d:active { transform:translateY(6px); box-shadow:0 4px 0 rgba(136,19,55,.95), 0 10px 16px rgba(136,19,55,.20); }
+    .mesh {
+      background:
+        radial-gradient(circle at 18% 18%, rgba(251,113,143,.30), transparent 24%),
+        radial-gradient(circle at 82% 22%, rgba(15,118,110,.22), transparent 20%),
+        radial-gradient(circle at 60% 88%, rgba(255,255,255,.12), transparent 26%),
+        linear-gradient(135deg, #881337 0%, #be123c 46%, #172033 100%);
+    }
+    .page-break { break-inside: avoid; }
+    @media print {
+      .no-print { display:none !important; }
+      .reveal { opacity:1 !important; transform:none !important; }
+      body { background:white !important; }
+      .print-card { box-shadow:none !important; border:1px solid #e5e7eb !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <header class="mesh relative overflow-hidden text-white">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,.18),transparent_28%)]"></div>
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-4 no-print">
+        <a href="plan-marketing.html" class="btn-3d bg-white px-5 py-3 text-vendex-700">Volver al plan</a>
+        <button onclick="window.print()" class="btn-3d bg-vendex-500 px-5 py-3 text-white">Imprimir dossier</button>
+      </div>
+      <div class="grid gap-8 lg:grid-cols-[1.15fr_.85fr] lg:items-center">
+        <div class="reveal">
+          <p class="text-sm font-semibold uppercase tracking-[.36em] text-rose-200">Dossier comercial de ventas</p>
+          <h1 class="mt-3 text-4xl font-black leading-tight sm:text-5xl xl:text-6xl">Residencial Brisa Guargacho</h1>
+          <p class="mt-5 max-w-3xl text-lg leading-8 text-white/84">Nueva promoción de <strong>18 viviendas</strong> y <strong>1 local comercial</strong> en la Ctra. General TF-652, Guargacho, con garaje, trastero, ascensor y tipologías de 1, 2 y 3 dormitorios pensadas para vivir el sur de Tenerife con comodidad y conexión.</p>
+          <div class="mt-7 flex flex-wrap gap-3 text-sm">
+            <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">Guargacho · San Miguel de Abona</span>
+            <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">PB + 2 plantas + sótano</span>
+            <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">18 plazas de garaje</span>
+            <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">18 trasteros</span>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="rounded-[28px] bg-white/80 p-6 text-slate-900 shadow-soft backdrop-blur print-card">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="rounded-2xl bg-white p-5"><p class="text-xs uppercase tracking-[.2em] text-slate-400">Ubicación</p><p class="mt-2 text-2xl font-black text-vendex-700">TF-652</p><p class="mt-1 text-sm text-slate-500">Conexión directa con la TF-1</p></div>
+              <div class="rounded-2xl bg-white p-5"><p class="text-xs uppercase tracking-[.2em] text-slate-400">Tipologías</p><p class="mt-2 text-2xl font-black text-vendex-700">1D · 2D · 3D</p><p class="mt-1 text-sm text-slate-500">Con garaje y trastero vinculados</p></div>
+              <div class="rounded-2xl bg-white p-5"><p class="text-xs uppercase tracking-[.2em] text-slate-400">Rango de precios</p><p class="mt-2 text-2xl font-black text-vendex-700">Desde 159.900 €</p><p class="mt-1 text-sm text-slate-500">Precios orientativos de lanzamiento</p></div>
+              <div class="rounded-2xl bg-white p-5"><p class="text-xs uppercase tracking-[.2em] text-slate-400">Entorno</p><p class="mt-2 text-2xl font-black text-vendex-700">Sur de Tenerife</p><p class="mt-1 text-sm text-slate-500">A 10 min del aeropuerto</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <section class="reveal page-break">
+      <div class="grid gap-6 lg:grid-cols-[1fr_1fr]">
+        <div class="rounded-[28px] bg-white p-7 shadow-soft print-card">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">El proyecto</p>
+          <h2 class="mt-3 text-3xl font-black text-ink">Descripción de la promoción</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-600">Residencial Brisa Guargacho es un edificio plurifamiliar de obra nueva situado en <strong>Ctra. General TF-652</strong>, en el núcleo de Guargacho, municipio de San Miguel de Abona. La promoción se plantea como un producto de <strong>gama media-alta</strong>, con imagen contemporánea, buena conectividad y distribución eficiente para vivienda habitual, segunda residencia o inversión patrimonial.</p>
+          <ul class="mt-5 space-y-3 text-sm text-slate-600">
+            <li>• 18 viviendas en tipologías de 1, 2 y 3 dormitorios.</li>
+            <li>• 1 local comercial en planta baja de aproximadamente 95 m².</li>
+            <li>• 18 plazas de garaje y 18 trasteros vinculados.</li>
+            <li>• Superficie construida sobre rasante aproximada: 1.349 m².</li>
+            <li>• Superficie total construida con sótano: 1.789 m².</li>
+          </ul>
+        </div>
+        <div class="rounded-[28px] bg-white p-7 shadow-soft print-card">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Resumen técnico</p>
+          <div class="overflow-hidden rounded-3xl border border-slate-100">
+            <table class="min-w-full text-sm">
+              <tbody class="divide-y divide-slate-100 bg-white">
+                <tr><td class="px-5 py-4 font-semibold text-slate-500">Arquitectura</td><td class="px-5 py-4">DOS 07 Arquitectura y Diseño, S.L.</td></tr>
+                <tr><td class="px-5 py-4 font-semibold text-slate-500">Entorno</td><td class="px-5 py-4">Núcleo residencial consolidado, 2-4 plantas, densidad media-baja</td></tr>
+                <tr><td class="px-5 py-4 font-semibold text-slate-500">Accesos</td><td class="px-5 py-4">TF-1 a 3 min · Las Galletas a 5 min · Aeropuerto Sur a 10 min</td></tr>
+                <tr><td class="px-5 py-4 font-semibold text-slate-500">Fiscalidad</td><td class="px-5 py-4">IGIC 7% en primera entrega + AJD orientativo 0,75%</td></tr>
+                <tr><td class="px-5 py-4 font-semibold text-slate-500">Configuración</td><td class="px-5 py-4">PB + 2 plantas + sótano garaje</td></tr>
+                <tr><td class="px-5 py-4 font-semibold text-slate-500">Perfil comprador</td><td class="px-5 py-4">Local, peninsular e internacional europeo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12 reveal page-break">
+      <div class="mb-8 flex items-end justify-between gap-4"><div><p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Tipologías</p><h2 class="mt-3 text-3xl font-black text-ink">Ficha técnica de vivienda</h2></div><div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600">Superficies basadas en informes de arquitectura y tasación</div></div>
+      <div class="grid gap-6 xl:grid-cols-4">
+        <article class="rounded-[28px] bg-white p-6 shadow-soft print-card"><span class="rounded-full bg-vendex-50 px-4 py-2 text-xs font-bold uppercase tracking-[.22em] text-vendex-700">1 dormitorio</span><h3 class="mt-4 text-2xl font-black text-ink">Compacta y luminosa</h3><ul class="mt-4 space-y-2 text-sm text-slate-600"><li>• 6 viviendas</li><li>• 45-52 m² construidos</li><li>• 38-44 m² útiles aprox.</li><li>• Salón-comedor-cocina integrada</li><li>• Garaje + trastero vinculados</li></ul><p class="mt-4 text-sm leading-7 text-slate-600">Pensada para primera vivienda, segunda residencia funcional o inversión de entrada. La unidad ático se considera singular por su terraza privada amplia.</p></article>
+        <article class="rounded-[28px] bg-white p-6 shadow-soft print-card"><span class="rounded-full bg-emerald-50 px-4 py-2 text-xs font-bold uppercase tracking-[.22em] text-ocean">2 dormitorios</span><h3 class="mt-4 text-2xl font-black text-ink">La más líquida</h3><ul class="mt-4 space-y-2 text-sm text-slate-600"><li>• 6 viviendas</li><li>• 60-70 m² construidos</li><li>• 52-60 m² útiles aprox.</li><li>• Zona de día abierta y flexible</li><li>• Garaje + trastero vinculados</li></ul><p class="mt-4 text-sm leading-7 text-slate-600">Tipología con mejor equilibrio entre ticket, uso familiar y atractivo para mercado peninsular o extranjero.</p></article>
+        <article class="rounded-[28px] bg-white p-6 shadow-soft print-card"><span class="rounded-full bg-amber-50 px-4 py-2 text-xs font-bold uppercase tracking-[.22em] text-amber-800">3 dormitorios</span><h3 class="mt-4 text-2xl font-black text-ink">Familiar y patrimonial</h3><ul class="mt-4 space-y-2 text-sm text-slate-600"><li>• 6 viviendas</li><li>• 88-102 m² construidos</li><li>• 75-90 m² útiles aprox.</li><li>• Mejor lectura para familia consolidada</li><li>• Garaje + trastero vinculados</li></ul><p class="mt-4 text-sm leading-7 text-slate-600">Producto principal para comprador local estable y cliente que quiere más superficie sin ir a vivienda unifamiliar.</p></article>
+        <article class="rounded-[28px] bg-white p-6 shadow-soft print-card"><span class="rounded-full bg-slate-100 px-4 py-2 text-xs font-bold uppercase tracking-[.22em] text-slate-700">Local comercial</span><h3 class="mt-4 text-2xl font-black text-ink">Planta baja activa</h3><ul class="mt-4 space-y-2 text-sm text-slate-600"><li>• 1 local</li><li>• ~95 m² construidos</li><li>• Frente a vía principal</li><li>• Excelente visibilidad</li><li>• Interés para comercio o servicio</li></ul><p class="mt-4 text-sm leading-7 text-slate-600">Oportunidad para operador local o inversor que busque rentabilidad en un eje con paso cotidiano.</p></article>
+      </div>
+    </section>
+
+    <section class="mt-12 reveal page-break">
+      <div class="grid gap-6 lg:grid-cols-[1.05fr_.95fr]">
+        <div class="rounded-[28px] bg-white p-7 shadow-soft print-card">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Precios orientativos</p>
+          <h2 class="mt-3 text-3xl font-black text-ink">Tasación y propuesta comercial</h2>
+          <div class="overflow-hidden rounded-3xl border border-slate-100 mt-5">
+            <table class="min-w-full text-sm">
+              <thead class="bg-slate-900 text-left text-white"><tr><th class="px-5 py-4">Producto</th><th class="px-5 py-4">Tasación</th><th class="px-5 py-4">Precio Vendex</th><th class="px-5 py-4">Con IGIC 7%</th></tr></thead>
+              <tbody class="divide-y divide-slate-100 bg-white">
+                <tr><td class="px-5 py-4 font-semibold">1 dormitorio</td><td class="px-5 py-4">154.350 €</td><td class="px-5 py-4 font-black text-vendex-700">Desde 159.900 €</td><td class="px-5 py-4">171.093 €</td></tr>
+                <tr><td class="px-5 py-4 font-semibold">2 dormitorios</td><td class="px-5 py-4">193.700 €</td><td class="px-5 py-4 font-black text-vendex-700">Desde 199.900 €</td><td class="px-5 py-4">213.893 €</td></tr>
+                <tr><td class="px-5 py-4 font-semibold">3 dormitorios</td><td class="px-5 py-4">270.750 €</td><td class="px-5 py-4 font-black text-vendex-700">Desde 279.900 €</td><td class="px-5 py-4">299.493 €</td></tr>
+                <tr><td class="px-5 py-4 font-semibold">Local comercial</td><td class="px-5 py-4">≈134.425 €</td><td class="px-5 py-4 font-black text-vendex-700">Desde 142.500 €</td><td class="px-5 py-4">152.475 €</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mt-4 text-sm leading-7 text-slate-600">Los precios son <strong>orientativos</strong> y deberán asignarse por unidad concreta según planta, orientación, balcón o terraza, privacidad y ritmo comercial. La vivienda ático de 1 dormitorio debe comercializarse como unidad singular fuera del precio medio estándar.</p>
+        </div>
+        <div class="rounded-[28px] bg-white p-7 shadow-soft print-card">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Distribución de oferta</p>
+          <h2 class="mt-3 text-3xl font-black text-ink">Peso de tipologías</h2>
+          <div class="mt-5 h-80"><canvas id="tipologiasChart"></canvas></div>
+          <div class="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-slate-700"><strong>Nota documental:</strong> el log de tarea cita 2.847.000 €, pero la descomposición por unidades en tasación, finanzas y notaría suma aproximadamente <strong>3.847.225 €</strong>. Este dossier usa la base desglosada por tipologías por ser la más consistente.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12 reveal page-break">
+      <div class="grid gap-6 lg:grid-cols-[1fr_1fr]">
+        <div class="rounded-[28px] bg-white p-7 shadow-soft print-card">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Calidades y acabados</p>
+          <h2 class="mt-3 text-3xl font-black text-ink">Memoria comercial</h2>
+          <div class="mt-5 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="font-semibold">Estilo interior</p><p class="mt-2 text-sm text-slate-600">Contemporáneo canario, cálido y luminoso, basado en texturas minerales, maderas y tonos neutros.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="font-semibold">Pavimentos</p><p class="mt-2 text-sm text-slate-600">Porcelánico gran formato, durable y fácil de mantener.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="font-semibold">Cocinas</p><p class="mt-2 text-sm text-slate-600">Abiertas e integradas, imagen limpia, almacenaje eficiente y electrodoméstico panelado parcial según replanteo.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="font-semibold">Baños</p><p class="mt-2 text-sm text-slate-600">Diseño actual, plato de ducha, mampara y materiales preparados para humedad y uso intensivo.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="font-semibold">Carpintería exterior</p><p class="mt-2 text-sm text-slate-600">Aluminio con rotura de puente térmico y control solar según orientación.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-4"><p class="font-semibold">Instalaciones</p><p class="mt-2 text-sm text-slate-600">Aerotermia para ACS, ventilación, ascensor y previsión de climatización acorde a tipología.</p></div>
+          </div>
+        </div>
+        <div class="rounded-[28px] bg-gradient-to-br from-slate-900 to-slate-800 p-7 text-white shadow-soft print-card">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-rose-200">Valor percibido</p>
+          <h2 class="mt-3 text-3xl font-black">Qué hace atractiva la promoción</h2>
+          <ul class="mt-5 space-y-4 text-sm leading-7 text-white/80">
+            <li>• Obra nueva en un entorno con poca oferta comparable.</li>
+            <li>• Garaje y trastero vinculados, muy valorados por comprador local.</li>
+            <li>• Tipologías variadas para distintos presupuestos.</li>
+            <li>• Buena conectividad con TF-1, costa, aeropuerto y zonas de empleo.</li>
+            <li>• Imagen contemporánea sin caer en sobreprecio de mercados prime.</li>
+          </ul>
+          <div class="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm leading-7 text-white/78">La promoción se sitúa en el punto de equilibrio entre <strong>precio accesible dentro del sur de Tenerife</strong> y <strong>valor de obra nueva</strong>. Esa es la idea fuerza que debe sostener toda la comunicación comercial.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12 reveal page-break">
+      <div class="mb-8 flex items-end justify-between gap-4"><div><p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Entorno y servicios</p><h2 class="mt-3 text-3xl font-black text-ink">Vida cotidiana y proximidad</h2></div><div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600">Datos cruzados con informes del proyecto y referencias públicas consultadas con Perplexity</div></div>
+      <div class="grid gap-6 lg:grid-cols-2 xl:grid-cols-4">
+        <div class="rounded-[28px] bg-white p-6 shadow-soft print-card"><h3 class="text-xl font-black text-ink">Playas y ocio</h3><ul class="mt-4 space-y-2 text-sm text-slate-600"><li>• Las Galletas a ~5 min</li><li>• Los Cristianos / Playa de las Américas a ~15 min</li><li>• Puerto y paseo marítimo de Las Galletas</li></ul></div>
+        <div class="rounded-[28px] bg-white p-6 shadow-soft print-card"><h3 class="text-xl font-black text-ink">Restauración</h3><ul class="mt-4 space-y-2 text-sm text-slate-600"><li>• Varadero Viejo Las Galletas</li><li>• Casa Mary</li><li>• Le Grand Bleu</li><li>• Oferta local en Guargacho y costa cercana</li></ul></div>
+        <div class="rounded-[28px] bg-white p-6 shadow-soft print-card"><h3 class="text-xl font-black text-ink">Salud y educación</h3><ul class="mt-4 space-y-2 text-sm text-slate-600"><li>• Centro de Salud Guargacho</li><li>• Hospital del Sur a ~15 min</li><li>• Entorno escolar de Guargacho / Las Galletas</li><li>• IES Las Galletas y CEIP cercanos</li></ul></div>
+        <div class="rounded-[28px] bg-white p-6 shadow-soft print-card"><h3 class="text-xl font-black text-ink">Conectividad</h3><ul class="mt-4 space-y-2 text-sm text-slate-600"><li>• TF-1 a 3 min</li><li>• Aeropuerto Tenerife Sur a 10 min</li><li>• Las Chafiras y zonas de empleo próximas</li><li>• Paradas TITSA y servicios cotidianos</li></ul></div>
+      </div>
+    </section>
+
+    <section class="mt-12 reveal page-break">
+      <div class="grid gap-6 lg:grid-cols-[1fr_1fr]">
+        <div class="rounded-[28px] bg-white p-7 shadow-soft print-card">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Condiciones de compra</p>
+          <h2 class="mt-3 text-3xl font-black text-ink">Proceso orientativo</h2>
+          <ol class="mt-5 space-y-4 text-sm leading-7 text-slate-600">
+            <li><strong>1. Reserva.</strong> Señal orientativa de 3.000 € a 6.000 € para bloquear unidad.</li>
+            <li><strong>2. Contrato de arras.</strong> Completar hasta aproximadamente el 10% del precio, con aval o garantía para cantidades anticipadas.</li>
+            <li><strong>3. Pagos a cuenta.</strong> Calendario pactado según evolución de obra y contrato.</li>
+            <li><strong>4. Escritura pública.</strong> Tras certificado final de obra y licencia de primera ocupación, con notario elegido por la parte compradora.</li>
+            <li><strong>5. Impuestos y gastos.</strong> IGIC 7% y AJD orientativo 0,75%, además de gastos registrales y gestoría.</li>
+          </ol>
+        </div>
+        <div class="rounded-[28px] bg-white p-7 shadow-soft print-card">
+          <p class="text-sm font-semibold uppercase tracking-[.28em] text-vendex-500">Seguridad jurídica y comercial</p>
+          <ul class="mt-5 space-y-4 text-sm leading-7 text-slate-600">
+            <li>• Venta sobre plano sujeta a documentación comercial, contrato y garantías legales aplicables.</li>
+            <li>• Cantidades anticipadas con cobertura según normativa vigente.</li>
+            <li>• Precios orientativos, susceptibles de ajuste por unidad concreta y evolución de stock.</li>
+            <li>• El presente dossier no sustituye el asesoramiento jurídico individual, pero se apoya en el modelo contractual y notarial del proyecto.</li>
+          </ul>
+          <div class="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-slate-700"><strong>Importante:</strong> en la documentación interna existe una discrepancia antigua entre una ficha de 12 viviendas y la ficha consolidada de 18 viviendas. Este dossier adopta la ficha consolidada por ser la utilizada en arquitectura, tasación, finanzas, trámites y notaría.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12 reveal page-break">
+      <div class="rounded-[32px] bg-gradient-to-r from-vendex-900 via-vendex-800 to-slate-900 p-8 text-white shadow-soft lg:p-10 print-card">
+        <div class="grid gap-8 lg:grid-cols-[1fr_.9fr] lg:items-center">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[.28em] text-rose-200">Resumen comercial</p>
+            <h2 class="mt-3 text-3xl font-black">Una promoción nueva, conectada y bien segmentada para venderse rápido y con discurso claro.</h2>
+            <p class="mt-4 text-sm leading-7 text-white/80">Residencial Brisa Guargacho condensa varios atributos que hoy funcionan en el sur de Tenerife: obra nueva escasa, ticket escalonado por tipología, fiscalidad canaria conocida, cercanía a costa y aeropuerto, y un producto pensado para comprador real, no solo para especulación. La clave comercial es lanzar con material limpio, pricing bien calibrado y respuesta rápida.</p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5"><p class="text-xs uppercase tracking-[.2em] text-rose-200">Desde</p><p class="mt-2 text-2xl font-black">159.900 €</p></div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5"><p class="text-xs uppercase tracking-[.2em] text-rose-200">Tipologías</p><p class="mt-2 text-2xl font-black">1D · 2D · 3D</p></div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5"><p class="text-xs uppercase tracking-[.2em] text-rose-200">Acceso</p><p class="mt-2 text-2xl font-black">TF-1 · 3 min</p></div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5"><p class="text-xs uppercase tracking-[.2em] text-rose-200">Aeropuerto</p><p class="mt-2 text-2xl font-black">10 min</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white py-10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-[1fr_.9fr]">
+        <div>
+          <h3 class="text-2xl font-black text-ink">Dossier comercial listo para ventas</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">Documento de presentación comercial generado por Vendex a partir de la documentación de proyecto y los informes del equipo de agentes. Preparado para uso comercial, preventa, reuniones con clientes y envío digital.</p>
+        </div>
+        <div class="rounded-[28px] border border-slate-100 bg-slate-50 p-6 print-card">
+          <p class="text-xs font-semibold uppercase tracking-[.22em] text-slate-400">Realized for</p>
+          <p class="mt-2 text-xl font-black text-ink">Eric Gavalda Fernandez</p>
+          <p class="mt-3 text-sm text-slate-600">Residencial Brisa Guargacho · Guargacho · San Miguel de Abona · Tenerife · Marzo 2026</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries)=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    new Chart(document.getElementById('tipologiasChart'), {
+      type:'doughnut',
+      data:{ labels:['1 dormitorio','2 dormitorios','3 dormitorios','Local comercial'], datasets:[{ data:[6,6,6,1], backgroundColor:['#fda4b8','#0f766e','#f59e0b','#334155'], borderWidth:0 }] },
+      options:{ maintainAspectRatio:false, cutout:'63%', plugins:{ legend:{ position:'bottom' } } }
+    });
+  </script>
+</body>
+</html>

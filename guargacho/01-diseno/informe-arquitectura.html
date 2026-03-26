@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe de Arquitectura — Guargacho 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              300: '#d8b4fe',
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+              800: '#6b21a8',
+              900: '#581c87',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Scroll reveal animation */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* Gradient text */
+    .gradient-text { background: linear-gradient(135deg, #a855f7 0%, #6b21a8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    /* Glass card */
+    .glass { background: rgba(255,255,255,0.8); backdrop-filter: blur(12px); border: 1px solid rgba(168, 85, 247, 0.2); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+    /* Counter animation */
+    .counter { display: inline-block; }
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+    /* Table hover */
+    tbody tr:hover { background-color: rgba(168, 85, 247, 0.05); }
+    /* 3D Button */
+    .btn-3d {
+      transition: all 0.1s;
+      box-shadow: 0px 4px 0px 0px #581c87, 0px 4px 10px rgba(0,0,0,0.2);
+    }
+    .btn-3d:active {
+      transform: translateY(4px);
+      box-shadow: 0px 0px 0px 0px #581c87, 0px 0px 2px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR STICKY -->
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-brand-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <svg class="w-8 h-8 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+        <span class="text-xl font-bold gradient-text">ARQON</span>
+      </div>
+      <div class="hidden md:flex gap-6 text-sm font-medium text-gray-600">
+        <a href="#memoria" class="hover:text-brand-600 transition">Memoria</a>
+        <a href="#programa" class="hover:text-brand-600 transition">Programa</a>
+        <a href="#normativa" class="hover:text-brand-600 transition">Normativa CTE</a>
+        <a href="#plazos" class="hover:text-brand-600 transition">Plazos</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-700 to-brand-500 text-white shadow-lg">
+    <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxwYXRoIGQ9Ik0wIDBoNDB2NDBIMHoiIGZpbGw9Im5vbmUiLz4KPHBhdGggZD0iTTAgMTBoNDBNMCAyMGg0ME0wIDMwaDQwTTEwIDB2NDBNMjAgMHY0ME0zMCAwdjQwIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=')]"></div>
+    <div class="relative max-w-6xl mx-auto px-6 py-24 text-center">
+      <p class="text-brand-200 text-sm font-semibold uppercase tracking-widest mb-4">Memoria Técnica Arquitectónica</p>
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-md">Edificio Guargacho 1</h1>
+      <p class="text-xl text-brand-100 max-w-2xl mx-auto font-light">Proyecto Básico y de Ejecución: 18 Viviendas, Local Comercial y Garaje.</p>
+      <div class="mt-8 flex justify-center gap-4 flex-wrap">
+        <span class="px-4 py-2 bg-black/20 rounded-full text-sm backdrop-blur-sm border border-white/10">📍 San Miguel de Abona, Tenerife</span>
+        <span class="px-4 py-2 bg-black/20 rounded-full text-sm backdrop-blur-sm border border-white/10">📐 1.789 m² Totales</span>
+        <span class="px-4 py-2 bg-black/20 rounded-full text-sm backdrop-blur-sm border border-white/10">🏗️ PB + 2 + Sótano</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="max-w-6xl mx-auto px-6 py-16 space-y-24">
+
+    <!-- SECCIÓN 1: MEMORIA DESCRIPTIVA -->
+    <section id="memoria" class="reveal scroll-mt-24">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="p-3 bg-brand-100 rounded-lg text-brand-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+        </div>
+        <h2 class="text-3xl font-bold text-gray-900">Memoria Descriptiva</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="glass p-8 rounded-2xl">
+          <h3 class="text-xl font-semibold mb-4 text-brand-800">Descripción General</h3>
+          <p class="text-gray-600 mb-4 leading-relaxed">
+            El proyecto consiste en la construcción de un edificio plurifamiliar de obra nueva situado en la Ctra. General TF-652, núcleo poblacional de Guargacho, término municipal de San Miguel de Abona, Tenerife.
+          </p>
+          <p class="text-gray-600 leading-relaxed">
+            La volumetría se resuelve en <strong>Sótano, Planta Baja y 2 Plantas de Piso</strong>. La planta sótano se destina a uso de garaje y trasteros. La planta baja alberga un local comercial, el zaguán de acceso al edificio, la rampa de vehículos y parte del programa residencial. Las plantas primera y segunda se destinan íntegramente a uso residencial.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <div class="glass p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+            <span class="text-4xl font-extrabold text-brand-600 mb-2" data-count="18">0</span>
+            <span class="text-sm font-medium text-gray-500 uppercase">Viviendas</span>
+          </div>
+          <div class="glass p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+            <span class="text-4xl font-extrabold text-brand-600 mb-2" data-count="1">0</span>
+            <span class="text-sm font-medium text-gray-500 uppercase">Local Comercial</span>
+          </div>
+          <div class="glass p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+            <span class="text-4xl font-extrabold text-brand-600 mb-2" data-count="18">0</span>
+            <span class="text-sm font-medium text-gray-500 uppercase">Plazas Garaje</span>
+          </div>
+          <div class="glass p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+            <div class="flex items-baseline">
+              <span class="text-4xl font-extrabold text-brand-600 mb-2" data-count="1349">0</span>
+              <span class="text-xl font-bold text-brand-600 ml-1">m²</span>
+            </div>
+            <span class="text-sm font-medium text-gray-500 uppercase">Sobre Rasante</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: PROGRAMA Y SUPERFICIES -->
+    <section id="programa" class="reveal scroll-mt-24">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="p-3 bg-brand-100 rounded-lg text-brand-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+        </div>
+        <h2 class="text-3xl font-bold text-gray-900">Programa Funcional y Distribución</h2>
+      </div>
+
+      <div class="glass rounded-2xl overflow-hidden mb-8">
+        <div class="p-6 bg-white/50 border-b border-brand-100 flex justify-between items-center flex-wrap gap-4">
+          <h3 class="font-bold text-lg text-gray-800">Tipologías de Vivienda</h3>
+          <div class="flex gap-2">
+            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">1 Dorm. (x6)</span>
+            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">2 Dorm. (x6)</span>
+            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold">3 Dorm. (x6)</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <canvas id="tipologiasChart" height="100"></canvas>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse glass rounded-xl overflow-hidden shadow-sm">
+          <thead>
+            <tr class="bg-brand-50 text-brand-900 border-b border-brand-200">
+              <th class="p-4 font-semibold">Nivel</th>
+              <th class="p-4 font-semibold">Uso</th>
+              <th class="p-4 font-semibold">Unidades</th>
+              <th class="p-4 font-semibold">Sup. Construida Aprox.</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 text-gray-700">
+            <tr>
+              <td class="p-4 font-medium text-gray-900">Sótano</td>
+              <td class="p-4">Aparcamiento y Trasteros</td>
+              <td class="p-4">18 plazas + 18 trasteros</td>
+              <td class="p-4">~440 m²</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-gray-900">Planta Baja</td>
+              <td class="p-4">Comercial, Acceso y Residencial</td>
+              <td class="p-4">1 Local (~95m²) + Viviendas</td>
+              <td class="p-4">~449 m²</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-gray-900">Planta Primera</td>
+              <td class="p-4">Residencial</td>
+              <td class="p-4">Viviendas tipo</td>
+              <td class="p-4">~450 m²</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-gray-900">Planta Segunda</td>
+              <td class="p-4">Residencial</td>
+              <td class="p-4">Viviendas tipo</td>
+              <td class="p-4">~450 m²</td>
+            </tr>
+            <tr class="bg-brand-50/50 font-bold text-brand-900 border-t-2 border-brand-200">
+              <td class="p-4" colspan="3">TOTAL SUPERFICIE CONSTRUIDA (INCL. SÓTANO)</td>
+              <td class="p-4">~1.789 m²</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: SOLUCIÓN CONSTRUCTIVA Y CTE -->
+    <section id="normativa" class="reveal scroll-mt-24">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="p-3 bg-brand-100 rounded-lg text-brand-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+        </div>
+        <h2 class="text-3xl font-bold text-gray-900">Sistemas Constructivos y Cumplimiento CTE</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Tarjeta Estructura -->
+        <div class="glass p-6 rounded-2xl hover:-translate-y-1 transition-transform duration-300">
+          <h4 class="font-bold text-brand-800 flex items-center gap-2 mb-3">
+            <span class="text-xl">🏗️</span> Estructura
+          </h4>
+          <ul class="space-y-2 text-sm text-gray-600 list-disc list-inside ml-2">
+            <li>Cimentación mediante zapatas aisladas y corridas de hormigón armado (a confirmar por estudio geotécnico).</li>
+            <li>Estructura portante de pilares de hormigón armado.</li>
+            <li>Forjados reticulares con casetones recuperables/perdidos.</li>
+            <li>Muros de contención de sótano en hormigón armado.</li>
+          </ul>
+        </div>
+
+        <!-- Tarjeta Envolvente HE -->
+        <div class="glass p-6 rounded-2xl hover:-translate-y-1 transition-transform duration-300 border-l-4 border-l-green-400">
+          <h4 class="font-bold text-brand-800 flex items-center gap-2 mb-3">
+            <span class="text-xl">🍃</span> Envolvente y DB-HE
+          </h4>
+          <p class="text-xs text-green-700 bg-green-100 px-2 py-1 rounded inline-block mb-3">Actualización 2025/2026: PCG e infraestructura recarga</p>
+          <ul class="space-y-2 text-sm text-gray-600 list-disc list-inside ml-2">
+            <li>Fachada de doble hoja con aislamiento térmico intermedio continuo. Acabado exterior en mortero monocapa/acrílico.</li>
+            <li>Cubierta plana transitable y no transitable, invertida, con aislamiento térmico (XPS) e impermeabilización bicapa.</li>
+            <li>Carpintería de aluminio con rotura de puente térmico y doble acristalamiento bajo emisivo.</li>
+            <li>Cumplimiento de las nuevas exigencias de infraestructura de recarga de V.E. (DB-HE6 / HSA2).</li>
+          </ul>
+        </div>
+
+        <!-- Tarjeta SUA y SI -->
+        <div class="glass p-6 rounded-2xl hover:-translate-y-1 transition-transform duration-300">
+          <h4 class="font-bold text-brand-800 flex items-center gap-2 mb-3">
+            <span class="text-xl">🛡️</span> Accesibilidad y Fuego
+          </h4>
+          <ul class="space-y-2 text-sm text-gray-600 list-disc list-inside ml-2">
+            <li><strong>DB-SUA:</strong> Itinerario accesible desde la vía pública hasta todas las viviendas. Ascensor accesible. Pasillos de ancho min. 1,20m.</li>
+            <li><strong>DB-SI:</strong> Sectorización de la escalera (protegida) y del garaje. Puertas EI2-60-C5 en vestíbulos de independencia de sótano.</li>
+            <li>Cumplimiento de nuevas exigencias DB-SI frente a propagación exterior en fachadas.</li>
+            <li>Ventilación natural/forzada en aparcamiento según DB-HS3.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: NORMATIVA URBANÍSTICA Y PLAZOS -->
+    <section id="plazos" class="reveal scroll-mt-24">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Normativa Local -->
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-3 bg-brand-100 rounded-lg text-brand-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900">Normativa Urbanística Local</h2>
+          </div>
+          <div class="glass p-6 rounded-2xl h-full">
+            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+              El proyecto se redacta en cumplimiento de la normativa urbanística vigente en el municipio de <strong>San Miguel de Abona</strong>. 
+            </p>
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded mb-4">
+              <p class="text-sm text-blue-800">
+                <strong>Actualización PGO (2025/2026):</strong> Se ha aprobado definitivamente el Plan General de Ordenación Supletorio de San Miguel de Abona (BOC Nº 007 de 13 de enero de 2026 y BOC Nº 051 de 16 de marzo de 2026). El proyecto debe ajustarse a las determinaciones de la nueva normativa de ordenación estructural y pormenorizada publicada en marzo de 2026.
+              </p>
+            </div>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> Uso Residencial Plurifamiliar permitido.</li>
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> Ocupación y Edificabilidad dentro de los parámetros de la zona de Guargacho.</li>
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> Altura máxima: PB + 2 cumplida.</li>
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> Dotación de aparcamiento: Cumple mínimo 1 plaza/vivienda vinculada.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Plazos -->
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-3 bg-brand-100 rounded-lg text-brand-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900">Plazos Estimados</h2>
+          </div>
+          <div class="glass p-6 rounded-2xl h-full">
+            <div class="relative border-l-2 border-brand-200 ml-3 space-y-6 pb-4">
+              
+              <div class="relative">
+                <div class="absolute -left-[29px] bg-brand-500 h-4 w-4 rounded-full border-4 border-white"></div>
+                <div class="pl-4">
+                  <h5 class="font-bold text-gray-800 text-sm">Fase 1: Redacción de Proyectos</h5>
+                  <p class="text-xs text-gray-500 mb-1">Proyecto Básico y de Ejecución</p>
+                  <span class="inline-block px-2 py-1 bg-gray-100 rounded text-xs font-semibold text-gray-600">2 - 3 meses</span>
+                </div>
+              </div>
+
+              <div class="relative">
+                <div class="absolute -left-[29px] bg-yellow-400 h-4 w-4 rounded-full border-4 border-white"></div>
+                <div class="pl-4">
+                  <h5 class="font-bold text-gray-800 text-sm">Fase 2: Licencia Municipal</h5>
+                  <p class="text-xs text-gray-500 mb-1">Tramitación en Ayto. San Miguel de Abona</p>
+                  <span class="inline-block px-2 py-1 bg-gray-100 rounded text-xs font-semibold text-gray-600">6 - 9 meses (aprox.)</span>
+                </div>
+              </div>
+
+              <div class="relative">
+                <div class="absolute -left-[29px] bg-blue-500 h-4 w-4 rounded-full border-4 border-white"></div>
+                <div class="pl-4">
+                  <h5 class="font-bold text-gray-800 text-sm">Fase 3: Ejecución de Obra</h5>
+                  <p class="text-xs text-gray-500 mb-1">Construcción del edificio</p>
+                  <span class="inline-block px-2 py-1 bg-gray-100 rounded text-xs font-semibold text-gray-600">14 - 16 meses</span>
+                </div>
+              </div>
+
+              <div class="relative">
+                <div class="absolute -left-[29px] bg-green-500 h-4 w-4 rounded-full border-4 border-white"></div>
+                <div class="pl-4">
+                  <h5 class="font-bold text-gray-800 text-sm">Fase 4: Final de Obra y LPO</h5>
+                  <p class="text-xs text-gray-500 mb-1">Licencia de Primera Ocupación</p>
+                  <span class="inline-block px-2 py-1 bg-gray-100 rounded text-xs font-semibold text-gray-600">2 - 3 meses</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCIÓN -->
+    <div class="text-center py-8">
+      <button class="btn-3d bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 px-8 rounded-lg inline-flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+        Descargar Memoria Completa (PDF)
+      </button>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12 mt-12 border-t-4 border-brand-600">
+    <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+      <div class="flex justify-center items-center gap-2 mb-4">
+        <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+        <span class="font-bold text-white tracking-wider">ARQON</span>
+      </div>
+      <p class="mb-2">Informe generado por <strong class="text-white">ARQON (Arquitecto Director)</strong> — Sistema de Agentes Inmobiliarios IA</p>
+      <p class="text-xs">Proyecto: Guargacho 1. Arquitectos Originales: DOS 07 Arquitectura y Diseño, S.L. (Ignacio Galván Cañada, Daniel Montesino Rodríguez). Este documento es un resumen ejecutivo de la memoria técnica del proyecto.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); }});
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Counter animation
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      let current = 0;
+      const duration = 1500; // ms
+      const stepTime = Math.abs(Math.floor(duration / target));
+      
+      const obs = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) { 
+          const timer = setInterval(() => {
+            current += 1;
+            el.textContent = current.toLocaleString('es-ES');
+            if(current >= target) {
+              clearInterval(timer);
+              el.textContent = target.toLocaleString('es-ES');
+            }
+          }, stepTime);
+          obs.disconnect(); 
+        }
+      });
+      obs.observe(el);
+    });
+
+    // Chart.js
+    document.addEventListener('DOMContentLoaded', function() {
+      const ctx = document.getElementById('tipologiasChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['1 Dormitorio (45-52m²)', '2 Dormitorios (60-70m²)', '3 Dormitorios (88-102m²)'],
+          datasets: [{
+            label: 'Número de Viviendas',
+            data: [6, 6, 6],
+            backgroundColor: [
+              'rgba(59, 130, 246, 0.7)', // blue
+              'rgba(16, 185, 129, 0.7)', // green
+              'rgba(168, 85, 247, 0.7)'  // purple
+            ],
+            borderColor: [
+              'rgb(59, 130, 246)',
+              'rgb(16, 185, 129)',
+              'rgb(168, 85, 247)'
+            ],
+            borderWidth: 1,
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 2 }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe Estructural — Edificio Guargacho 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            steel: { 50:'#f0f4f8',100:'#d9e2ec',200:'#bcccdc',300:'#9fb3c8',400:'#829ab1',500:'#627d98',600:'#486581',700:'#334e68',800:'#243b53',900:'#102a43' },
+            accent: { 50:'#e6f6ff',100:'#bae3ff',200:'#7cc4fa',300:'#47a3f3',400:'#2186eb',500:'#0967d2',600:'#0552b5',700:'#03449e',800:'#01337d',900:'#002159' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(.23,1,.32,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #4A6FA5 0%, #334e68 50%, #627d98 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(16px); border: 1px solid rgba(74,111,165,0.15); }
+    .glass-dark { background: rgba(16,42,67,0.06); backdrop-filter: blur(8px); border: 1px solid rgba(74,111,165,0.12); }
+    tbody tr { transition: background 0.2s; }
+    tbody tr:hover { background-color: rgba(74,111,165,0.06); }
+    .stat-card { transition: all 0.3s cubic-bezier(.23,1,.32,1); }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(74,111,165,0.18); }
+    .nav-link { position: relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:linear-gradient(90deg,#4A6FA5,#627d98); transition:width 0.3s; }
+    .nav-link:hover::after { width:100%; }
+    .hero-grid { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M0 0h60v60H0V0zm1 1h58v58H1V1z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .float { animation: float 6s ease-in-out infinite; }
+    .sem-green { display:inline-block; width:14px; height:14px; border-radius:50%; background:#10b981; box-shadow:0 0 8px rgba(16,185,129,0.5); }
+    .sem-yellow { display:inline-block; width:14px; height:14px; border-radius:50%; background:#f59e0b; box-shadow:0 0 8px rgba(245,158,11,0.5); }
+    .sem-red { display:inline-block; width:14px; height:14px; border-radius:50%; background:#ef4444; box-shadow:0 0 8px rgba(239,68,68,0.5); }
+    .btn3d { display:inline-block; padding:10px 24px; border-radius:10px; font-weight:700; font-size:.875rem; color:#fff; cursor:pointer; border:none; text-decoration:none; transition:all .15s; }
+    .btn3d-steel { background:linear-gradient(180deg,#4A6FA5 0%,#334e68 100%); box-shadow:0 4px 0 #243b53,0 6px 12px rgba(36,59,83,0.3); }
+    .btn3d-steel:hover { transform:translateY(-1px); box-shadow:0 5px 0 #243b53,0 8px 16px rgba(36,59,83,0.35); }
+    .btn3d-steel:active { transform:translateY(2px); box-shadow:0 1px 0 #243b53,0 2px 4px rgba(36,59,83,0.2); }
+    .btn3d-green { background:linear-gradient(180deg,#059669 0%,#065f46 100%); box-shadow:0 4px 0 #064e3b,0 6px 12px rgba(6,95,70,0.3); }
+    .btn3d-green:hover { transform:translateY(-1px); }
+    .btn3d-green:active { transform:translateY(2px); box-shadow:0 1px 0 #064e3b; }
+    .portico-svg text { font-family: 'Inter', sans-serif; }
+    @media print { .no-print{display:none} .reveal{opacity:1;transform:none} }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-lg border-b border-gray-200/60 no-print">
+    <div class="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-steel-700 to-steel-500 flex items-center justify-center text-white font-bold text-sm shadow-md btn3d-steel" style="padding:0;box-shadow:0 3px 0 #243b53">CX</div>
+        <span class="text-lg font-bold gradient-text">Civex</span>
+        <span class="hidden sm:inline text-xs text-gray-400 ml-1">Ing. Civil / Estructural</span>
+      </div>
+      <div class="hidden xl:flex gap-4 text-[13px] font-medium text-gray-500">
+        <a href="#resumen" class="nav-link hover:text-steel-700 transition">Resumen</a>
+        <a href="#tipologia" class="nav-link hover:text-steel-700 transition">Tipología</a>
+        <a href="#predimensionado" class="nav-link hover:text-steel-700 transition">Predimensionado</a>
+        <a href="#cimentacion" class="nav-link hover:text-steel-700 transition">Cimentación</a>
+        <a href="#sotano" class="nav-link hover:text-steel-700 transition">Sótano</a>
+        <a href="#acciones" class="nav-link hover:text-steel-700 transition">Acciones</a>
+        <a href="#sismo" class="nav-link hover:text-steel-700 transition">Sismo</a>
+        <a href="#durabilidad" class="nav-link hover:text-steel-700 transition">Durabilidad</a>
+        <a href="#cuantias" class="nav-link hover:text-steel-700 transition">Cuantías</a>
+        <a href="#verificaciones" class="nav-link hover:text-steel-700 transition">Verificaciones</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-steel-900 via-steel-800 to-steel-600 text-white">
+    <div class="absolute inset-0 hero-grid"></div>
+    <div class="absolute top-16 right-16 w-80 h-80 bg-accent-400/10 rounded-full blur-3xl float"></div>
+    <div class="absolute bottom-8 left-8 w-64 h-64 bg-steel-400/10 rounded-full blur-3xl float" style="animation-delay:-3s"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+        <div class="max-w-2xl">
+          <p class="text-steel-300 text-xs font-semibold uppercase tracking-[0.2em] mb-4">🏗️ Informe de Predimensionado Estructural</p>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight">Edificio Guargacho 1</h1>
+          <p class="text-lg text-steel-200 leading-relaxed">18 Viviendas + Local Comercial + Garaje Subterráneo — Pórticos de HA con forjado reticular, muro de sótano perimetral. Conforme a CTE DB-SE, EHE-08 y NCSE-02.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-white/12 rounded-full text-sm backdrop-blur-sm">📍 Guargacho, San Miguel de Abona</span>
+            <span class="px-4 py-2 bg-white/12 rounded-full text-sm backdrop-blur-sm">📐 1.789 m² totales</span>
+            <span class="px-4 py-2 bg-white/12 rounded-full text-sm backdrop-blur-sm">🏢 Sótano + PB + 2</span>
+            <span class="px-4 py-2 bg-white/12 rounded-full text-sm backdrop-blur-sm">📅 Marzo 2026</span>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 text-center min-w-[200px]">
+          <p class="text-steel-800 text-xs font-semibold uppercase tracking-wider mb-2">Niveles estructurales</p>
+          <p class="text-5xl font-black text-steel-700">4</p>
+          <p class="text-steel-500 text-sm mt-1 font-medium">Sótano + PB + P1 + P2</p>
+          <div class="mt-3 pt-3 border-t border-steel-200/50">
+            <p class="text-steel-700 text-lg font-bold">~1.789 m²</p>
+            <p class="text-steel-400 text-xs">superficie total construida</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-7xl mx-auto px-6 py-16 space-y-24">
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 1: RESUMEN EJECUTIVO -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="resumen" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">📊</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Resumen Ejecutivo</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+        <div class="stat-card glass-dark rounded-2xl p-6 text-center">
+          <div class="text-3xl mb-2">🏗️</div>
+          <p class="text-sm text-gray-500 font-medium mb-1">Tipología Estructural</p>
+          <p class="text-lg font-bold text-gray-800">HA Pórticos + Reticular</p>
+          <p class="text-xs text-gray-400 mt-1">Hormigón armado HA-30</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-6 text-center">
+          <div class="text-3xl mb-2">🪨</div>
+          <p class="text-sm text-gray-500 font-medium mb-1">Cimentación</p>
+          <p class="text-lg font-bold text-gray-800">Losa + Muro sótano</p>
+          <p class="text-xs text-gray-400 mt-1">Pendiente estudio geotécnico</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-6 text-center">
+          <div class="text-3xl mb-2">⚡</div>
+          <p class="text-sm text-gray-500 font-medium mb-1">Sismicidad (NCSE-02)</p>
+          <p class="text-lg font-bold text-gray-800">a<sub>b</sub> = 0,04g</p>
+          <p class="text-xs text-gray-400 mt-1">No obligatorio pero recomendado</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-6 text-center">
+          <div class="text-3xl mb-2">🌊</div>
+          <p class="text-sm text-gray-500 font-medium mb-1">Clase Exposición</p>
+          <p class="text-lg font-bold text-gray-800">IIIa + Qb</p>
+          <p class="text-xs text-gray-400 mt-1">Aérea marina + cimentación</p>
+        </div>
+      </div>
+
+      <div class="glass-dark rounded-2xl p-6">
+        <h3 class="font-bold text-gray-800 mb-3">🔍 Alcance del informe</h3>
+        <p class="text-gray-600 leading-relaxed mb-3">El presente documento constituye el <strong>informe de predimensionado estructural</strong> del Edificio Guargacho 1, un edificio plurifamiliar de obra nueva compuesto por <strong>sótano de garaje, planta baja con local comercial y viviendas, y dos plantas de pisos</strong>, situado en la Ctra. General TF-652, Guargacho, término municipal de San Miguel de Abona (Tenerife).</p>
+        <p class="text-gray-600 leading-relaxed mb-3">Se propone una estructura de <strong>pórticos de hormigón armado con forjado reticular aligerado</strong> (casetones recuperables), con <strong>muro de sótano perimetral de hormigón armado</strong> para contención de tierras. La cimentación se predimensiona como <strong>losa de cimentación</strong> bajo el sótano, sujeta a confirmación mediante estudio geotécnico.</p>
+        <p class="text-gray-600 leading-relaxed text-sm"><strong>Datos de referencia:</strong> Informe de Arquitectura (Arqon), Informe de Tasación (Valorex — valor total promoción 2.847.000 €), Estudio Financiero (Finex) y Análisis de Proyecto (Nexus). Proyecto del estudio DOS·07 Arquitectura y Diseño, S.L.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 2: TIPOLOGÍA ESTRUCTURAL -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="tipologia" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">🧱</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Tipología Estructural</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- Solución adoptada -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-steel-800 text-lg mb-4">✅ Solución adoptada</h3>
+          <div class="space-y-4">
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">1</div>
+              <div>
+                <p class="font-semibold text-gray-800">Pórticos de Hormigón Armado</p>
+                <p class="text-sm text-gray-500">Pilares y vigas de canto / planas formando pórticos bidireccionales. Máxima versatilidad en planta para distribución de viviendas. HA-30/B/20/IIIa.</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">2</div>
+              <div>
+                <p class="font-semibold text-gray-800">Forjado Reticular Aligerado (30+5 cm)</p>
+                <p class="text-sm text-gray-500">Losa nervada con casetones recuperables de 80×80 cm, nervios de 15 cm, capa de compresión de 5 cm. Óptimo para luces de 5,5–7,5 m y distribución flexible.</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">3</div>
+              <div>
+                <p class="font-semibold text-gray-800">Muro de Sótano Perimetral (30 cm)</p>
+                <p class="text-sm text-gray-500">Muro de HA para contención de tierras del garaje subterráneo. HA-30/B/20/IIa+Qb con impermeabilización exterior.</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">4</div>
+              <div>
+                <p class="font-semibold text-gray-800">Losa de Cimentación (50–60 cm)</p>
+                <p class="text-sm text-gray-500">Losa maciza de HA bajo toda la planta sótano. Garantiza reparto uniforme de cargas y función de solera del garaje. Pendiente de geotécnico.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alternativas descartadas -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-700 text-lg mb-4">❌ Alternativas descartadas</h3>
+          <div class="space-y-3">
+            <div class="p-3 rounded-xl bg-red-50/50 border border-red-100">
+              <p class="font-semibold text-sm text-red-800">Forjado Unidireccional (viguetas)</p>
+              <p class="text-xs text-red-600">Adecuado para luces ≤5,5 m. Limitaría la distribución de un edificio plurifamiliar con luces previstas de 6–7,5 m. Mayor rigidez en una dirección.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-red-50/50 border border-red-100">
+              <p class="font-semibold text-sm text-red-800">Estructura metálica</p>
+              <p class="text-xs text-red-600">Corrosión en ambiente marino costero (Las Galletas a 5 km). Mayor coste de mantenimiento y protección contra fuego. Escasa tradición constructiva en Canarias para residencial.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-red-50/50 border border-red-100">
+              <p class="font-semibold text-sm text-red-800">Losa maciza (forjado)</p>
+              <p class="text-xs text-red-600">Excesivo peso propio para luces de 6–7,5 m. Requeriría espesores ≥25 cm → incremento de carga y coste de hormigón (~30% más).</p>
+            </div>
+            <div class="p-3 rounded-xl bg-red-50/50 border border-red-100">
+              <p class="font-semibold text-sm text-red-800">Muros de carga</p>
+              <p class="text-xs text-red-600">Incompatible con la distribución flexible requerida para 3 tipologías de vivienda (1, 2 y 3 dormitorios) y local comercial diáfano en PB.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esquema pórtico SVG -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">📐 Esquema Estructural — Sección Transversal Tipo</h3>
+        <div class="flex justify-center overflow-x-auto">
+          <svg class="portico-svg" viewBox="0 0 700 420" width="700" height="420" xmlns="http://www.w3.org/2000/svg">
+            <!-- Terreno -->
+            <rect x="0" y="340" width="700" height="80" fill="#e8d5b7" opacity="0.5"/>
+            <line x1="0" y1="340" x2="700" y2="340" stroke="#8B7355" stroke-width="2" stroke-dasharray="8,4"/>
+            <text x="650" y="375" fill="#8B7355" font-size="11" text-anchor="end">Terreno natural</text>
+            <!-- Losa cimentación -->
+            <rect x="60" y="330" width="580" height="20" fill="#4A6FA5" opacity="0.3" rx="2"/>
+            <text x="350" y="345" fill="#334e68" font-size="10" text-anchor="middle" font-weight="600">LOSA CIMENTACIÓN e=50-60cm</text>
+            <!-- Muro sótano izq -->
+            <rect x="70" y="240" width="20" height="90" fill="#627d98" opacity="0.6" rx="1"/>
+            <text x="55" y="285" fill="#334e68" font-size="9" text-anchor="end" transform="rotate(-90,55,285)">MURO 30cm</text>
+            <!-- Muro sótano der -->
+            <rect x="610" y="240" width="20" height="90" fill="#627d98" opacity="0.6" rx="1"/>
+            <!-- Pilares sótano -->
+            <rect x="195" y="240" width="20" height="90" fill="#4A6FA5" rx="1"/>
+            <rect x="340" y="240" width="20" height="90" fill="#4A6FA5" rx="1"/>
+            <rect x="485" y="240" width="20" height="90" fill="#4A6FA5" rx="1"/>
+            <!-- Forjado Sótano/PB (reticular) -->
+            <rect x="60" y="225" width="580" height="18" fill="#4A6FA5" opacity="0.7" rx="2"/>
+            <text x="350" y="220" fill="#102a43" font-size="10" text-anchor="middle" font-weight="600">FORJADO RETICULAR 30+5 — Techo Sótano / Suelo PB</text>
+            <!-- Pilares PB -->
+            <rect x="75" y="145" width="18" height="80" fill="#4A6FA5" rx="1"/>
+            <rect x="197" y="145" width="18" height="80" fill="#4A6FA5" rx="1"/>
+            <rect x="342" y="145" width="18" height="80" fill="#4A6FA5" rx="1"/>
+            <rect x="487" y="145" width="18" height="80" fill="#4A6FA5" rx="1"/>
+            <rect x="612" y="145" width="18" height="80" fill="#4A6FA5" rx="1"/>
+            <!-- Forjado PB/P1 -->
+            <rect x="60" y="130" width="580" height="18" fill="#4A6FA5" opacity="0.7" rx="2"/>
+            <text x="350" y="125" fill="#102a43" font-size="10" text-anchor="middle" font-weight="600">FORJADO RETICULAR 30+5 — Techo PB / Suelo P1</text>
+            <!-- Pilares P1 -->
+            <rect x="75" y="55" width="16" height="75" fill="#4A6FA5" rx="1"/>
+            <rect x="198" y="55" width="16" height="75" fill="#4A6FA5" rx="1"/>
+            <rect x="343" y="55" width="16" height="75" fill="#4A6FA5" rx="1"/>
+            <rect x="488" y="55" width="16" height="75" fill="#4A6FA5" rx="1"/>
+            <rect x="613" y="55" width="16" height="75" fill="#4A6FA5" rx="1"/>
+            <!-- Forjado P1/P2 -->
+            <rect x="60" y="40" width="580" height="18" fill="#4A6FA5" opacity="0.7" rx="2"/>
+            <text x="350" y="35" fill="#102a43" font-size="10" text-anchor="middle" font-weight="600">FORJADO RETICULAR 30+5 — Techo P1 / Suelo P2 + Cubierta</text>
+            <!-- Labels niveles -->
+            <text x="15" y="290" fill="#627d98" font-size="11" font-weight="700">SÓTANO</text>
+            <text x="15" y="195" fill="#627d98" font-size="11" font-weight="700">PB</text>
+            <text x="15" y="100" fill="#627d98" font-size="11" font-weight="700">P1-P2</text>
+            <!-- Cotas -->
+            <text x="140" y="400" fill="#8B7355" font-size="9" text-anchor="middle">↔ ~6,5 m</text>
+            <text x="275" y="400" fill="#8B7355" font-size="9" text-anchor="middle">↔ ~7,5 m</text>
+            <text x="420" y="400" fill="#8B7355" font-size="9" text-anchor="middle">↔ ~7,5 m</text>
+            <text x="555" y="400" fill="#8B7355" font-size="9" text-anchor="middle">↔ ~6,5 m</text>
+          </svg>
+        </div>
+        <p class="text-xs text-gray-400 mt-3 italic text-center">Esquema orientativo de sección transversal. Luces y alturas aproximadas según análisis de planos del proyecto arquitectónico (DOS·07 Arquitectura y Diseño).</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 3: PREDIMENSIONADO DE ELEMENTOS -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="predimensionado" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">📏</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Predimensionado de Elementos</h2>
+      </div>
+
+      <!-- PILARES -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <h3 class="font-bold text-steel-800 text-lg mb-4">🔲 Pilares</h3>
+        <p class="text-sm text-gray-600 mb-4">Predimensionado por compresión centrada según EHE-08. Áreas tributarias estimadas entre 20-45 m² según posición. Tensión de trabajo del hormigón HA-30 limitada a 0,85·f<sub>cd</sub> = 17 N/mm².</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-steel-50 text-steel-900 border-b-2 border-steel-200">
+                <th class="p-3 text-left font-semibold">Planta</th>
+                <th class="p-3 text-center font-semibold">Posición</th>
+                <th class="p-3 text-center font-semibold">Á. tributaria</th>
+                <th class="p-3 text-center font-semibold">N<sub>d</sub> estimado</th>
+                <th class="p-3 text-center font-semibold">Sección mín.</th>
+                <th class="p-3 text-center font-semibold">Sección adoptada</th>
+                <th class="p-3 text-center font-semibold">Aprovechamiento</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr>
+                <td class="p-3 font-medium">Sótano</td>
+                <td class="p-3 text-center">Central</td>
+                <td class="p-3 text-center">~45 m²</td>
+                <td class="p-3 text-center font-semibold">~1.850 kN</td>
+                <td class="p-3 text-center">29×29 cm</td>
+                <td class="p-3 text-center font-bold text-steel-700">40×40 cm</td>
+                <td class="p-3 text-center"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">68%</span></td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Sótano</td>
+                <td class="p-3 text-center">Borde</td>
+                <td class="p-3 text-center">~25 m²</td>
+                <td class="p-3 text-center font-semibold">~1.050 kN</td>
+                <td class="p-3 text-center">22×22 cm</td>
+                <td class="p-3 text-center font-bold text-steel-700">35×35 cm</td>
+                <td class="p-3 text-center"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">50%</span></td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">PB</td>
+                <td class="p-3 text-center">Central</td>
+                <td class="p-3 text-center">~45 m²</td>
+                <td class="p-3 text-center font-semibold">~1.350 kN</td>
+                <td class="p-3 text-center">26×26 cm</td>
+                <td class="p-3 text-center font-bold text-steel-700">40×40 cm</td>
+                <td class="p-3 text-center"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">50%</span></td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">PB</td>
+                <td class="p-3 text-center">Esquina</td>
+                <td class="p-3 text-center">~12 m²</td>
+                <td class="p-3 text-center font-semibold">~520 kN</td>
+                <td class="p-3 text-center">18×18 cm</td>
+                <td class="p-3 text-center font-bold text-steel-700">30×30 cm</td>
+                <td class="p-3 text-center"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">34%</span></td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">P1–P2</td>
+                <td class="p-3 text-center">Central</td>
+                <td class="p-3 text-center">~45 m²</td>
+                <td class="p-3 text-center font-semibold">~500 kN</td>
+                <td class="p-3 text-center">17×17 cm</td>
+                <td class="p-3 text-center font-bold text-steel-700">30×30 cm</td>
+                <td class="p-3 text-center"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">33%</span></td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">P1–P2</td>
+                <td class="p-3 text-center">Borde</td>
+                <td class="p-3 text-center">~25 m²</td>
+                <td class="p-3 text-center font-semibold">~280 kN</td>
+                <td class="p-3 text-center">13×13 cm</td>
+                <td class="p-3 text-center font-bold text-steel-700">30×30 cm</td>
+                <td class="p-3 text-center"><span class="px-2 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold">19%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-gray-400 mt-3 italic">* Sección mínima por normativa EHE-08: 25×25 cm para pilares de edificación. Adoptamos 30×30 cm mínimo para garantizar recubrimientos en clase IIIa y facilitar el armado.</p>
+      </div>
+
+      <!-- FORJADO RETICULAR -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <h3 class="font-bold text-steel-800 text-lg mb-4">🔳 Forjado Reticular</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <table class="w-full text-sm">
+              <tbody>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500 w-48">Tipo</td><td class="py-2.5 font-medium">Reticular aligerado con casetones recuperables</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Canto total</td><td class="py-2.5 font-bold text-steel-700">30 + 5 = 35 cm</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Nervios</td><td class="py-2.5">15 cm de ancho, intereje 85 cm</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Casetón</td><td class="py-2.5">80×80×30 cm (recuperable)</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Capa compresión</td><td class="py-2.5">5 cm (malla electrosoldada Ø5 c/20)</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Luz máxima</td><td class="py-2.5">~7,5 m (entre ejes de pilares)</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Relación L/h</td><td class="py-2.5">7,5/0,35 = 21,4 <span class="text-emerald-600 font-bold">✓</span> (≤24)</td></tr>
+                <tr><td class="py-2.5 font-semibold text-gray-500">Peso propio</td><td class="py-2.5">~4,5 kN/m² (incluida capa compresión)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-5">
+            <h4 class="font-bold text-steel-800 text-sm mb-3">¿Por qué reticular y no unidireccional?</h4>
+            <ul class="text-sm text-gray-600 space-y-2">
+              <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Luces de 6,5–7,5 m: reticular óptimo para L &gt; 5,5 m</li>
+              <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Distribución bidireccional: mejor reparto con planta irregular</li>
+              <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Menor canto que losa maciza: 35 cm vs ≥25 cm (losa) pero con 40% menos peso</li>
+              <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Flexibilidad: permite paso de instalaciones entre nervios</li>
+              <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Ábacos macizos: zonas de punzonamiento reforzadas en cabeza de pilares</li>
+              <li class="flex gap-2"><span class="text-amber-500 font-bold">⚠</span> Coste mayor que unidireccional (~8-12%) pero compensado por versatilidad</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIGAS -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <h3 class="font-bold text-steel-800 text-lg mb-4">📏 Vigas</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-steel-50 text-steel-900 border-b-2 border-steel-200">
+                <th class="p-3 text-left font-semibold">Tipo</th>
+                <th class="p-3 text-center font-semibold">Ubicación</th>
+                <th class="p-3 text-center font-semibold">Luz</th>
+                <th class="p-3 text-center font-semibold">Sección</th>
+                <th class="p-3 text-center font-semibold">Criterio</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr>
+                <td class="p-3 font-medium">Viga de canto (pórtico principal)</td>
+                <td class="p-3 text-center">Borde fachada</td>
+                <td class="p-3 text-center">6,5–7,5 m</td>
+                <td class="p-3 text-center font-bold text-steel-700">30×60 cm</td>
+                <td class="p-3 text-center text-xs text-gray-500">h ≥ L/12 = 625 mm</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Viga plana (interior)</td>
+                <td class="p-3 text-center">Interiores entre pilares</td>
+                <td class="p-3 text-center">5,5–7,5 m</td>
+                <td class="p-3 text-center font-bold text-steel-700">60×35 cm</td>
+                <td class="p-3 text-center text-xs text-gray-500">Canto = forjado reticular</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Zuncho perimetral</td>
+                <td class="p-3 text-center">Borde forjado</td>
+                <td class="p-3 text-center">—</td>
+                <td class="p-3 text-center font-bold text-steel-700">30×35 cm</td>
+                <td class="p-3 text-center text-xs text-gray-500">Confinamiento borde</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Viga de cuelgue (sótano)</td>
+                <td class="p-3 text-center">Sobre muro sótano</td>
+                <td class="p-3 text-center">—</td>
+                <td class="p-3 text-center font-bold text-steel-700">30×50 cm</td>
+                <td class="p-3 text-center text-xs text-gray-500">Coronación muro</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- FORJADO SÓTANO -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-steel-800 text-lg mb-4">🅿️ Forjado Sótano (techo garaje)</h3>
+        <p class="text-sm text-gray-600 mb-3">El forjado del techo del sótano (suelo de PB) es el más solicitado: recibe la carga del local comercial (~5 kN/m² sobrecarga) y las viviendas de PB. Se adopta el mismo sistema reticular 30+5 para mantener uniformidad constructiva, con <strong>ábacos macizos ampliados</strong> en cabeza de pilares.</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-2xl font-black text-steel-700">35 cm</p>
+            <p class="text-xs text-gray-500">Canto total</p>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-2xl font-black text-steel-700">~4,5</p>
+            <p class="text-xs text-gray-500">kN/m² peso propio</p>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-2xl font-black text-steel-700">~10,7</p>
+            <p class="text-xs text-gray-500">kN/m² carga total</p>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-2xl font-black text-steel-700">150×150</p>
+            <p class="text-xs text-gray-500">cm ábaco mínimo</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 4: CIMENTACIÓN -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="cimentacion" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">🪨</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Cimentación</h2>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-6 flex gap-3">
+        <span class="text-2xl">⚠️</span>
+        <div>
+          <p class="font-bold text-amber-800 mb-1">Estudio geotécnico pendiente</p>
+          <p class="text-sm text-amber-700">El predimensionado de la cimentación se realiza con hipótesis conservadoras. La tensión admisible del terreno se estima en <strong>σ<sub>adm</sub> = 1,50 kg/cm² (150 kN/m²)</strong> como valor prudente para terrenos volcánicos del sur de Tenerife (basaltos alterados / tobas). <strong>El estudio geotécnico es obligatorio</strong> según CTE DB-SE-C y deberá confirmar o modificar estos parámetros.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- Losa de cimentación -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-steel-800 text-lg mb-4">Losa de cimentación</h3>
+          <p class="text-sm text-gray-600 mb-4">Se propone losa de cimentación bajo toda la planta del sótano. Ventajas: reparto uniforme de cargas sobre terreno potencialmente heterogéneo (volcánico), función simultánea como solera del garaje, y contribución a la impermeabilización del sótano.</p>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2 font-semibold text-gray-500 w-44">Tipo</td><td class="py-2 font-medium">Losa maciza HA-30/B/20/IIa+Qb</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 font-semibold text-gray-500">Espesor</td><td class="py-2 font-bold text-steel-700">50–60 cm</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 font-semibold text-gray-500">Superficie</td><td class="py-2">~440 m² (planta sótano)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 font-semibold text-gray-500">Armadura base</td><td class="py-2">Ø16 c/15 cm (ambas caras, ambas direcciones)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 font-semibold text-gray-500">Refuerzo en pilares</td><td class="py-2">Ø20 c/12 cm zona de punzonamiento</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 font-semibold text-gray-500">Hormigón limpieza</td><td class="py-2">HM-20, e = 10 cm</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 font-semibold text-gray-500">Recubrimiento</td><td class="py-2">50 mm (contacto con terreno, Qb)</td></tr>
+              <tr><td class="py-2 font-semibold text-gray-500">σ<sub>adm</sub> adoptada</td><td class="py-2">150 kN/m² (conservadora)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Verificación -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-steel-800 text-lg mb-4">Verificación de presiones</h3>
+          <div class="bg-steel-50 rounded-xl p-4 mb-4">
+            <p class="text-sm text-gray-700 mb-2"><strong>Carga total sobre cimentación:</strong></p>
+            <ul class="text-sm text-gray-600 space-y-1 ml-4">
+              <li>• Peso estructura: ~4.500 kN (estimado)</li>
+              <li>• Sobrecarga uso (mayorada): ~3.200 kN</li>
+              <li>• Peso muros + fachadas: ~1.500 kN</li>
+              <li>• Peso propio losa: ~440 × 0,55 × 25 = ~6.050 kN</li>
+              <li>• <strong>Total Nd ≈ 15.250 kN</strong></li>
+            </ul>
+          </div>
+          <div class="bg-emerald-50 rounded-xl p-4 mb-4">
+            <p class="text-sm text-gray-700 mb-1"><strong>Presión sobre terreno:</strong></p>
+            <p class="text-sm text-gray-600">σ = N / A = 15.250 / 440 = <strong>34,7 kN/m² = 0,35 kg/cm²</strong></p>
+            <p class="text-sm text-emerald-700 font-bold mt-2">✅ σ = 0,35 &lt; σ<sub>adm</sub> = 1,50 kg/cm² → Amplio margen (23%)</p>
+          </div>
+          <div class="bg-blue-50 rounded-xl p-4">
+            <p class="text-sm text-gray-700 mb-2"><strong>Alternativa si geotécnico confirma buena capacidad portante:</strong></p>
+            <p class="text-sm text-gray-600">Si σ<sub>adm</sub> ≥ 2,0 kg/cm² → posible cambiar a <strong>zapatas aisladas arriostradas + solera independiente</strong> con ahorro del ~15-20% en hormigón de cimentación.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Excavación -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-steel-800 text-lg mb-4">⛏️ Excavación estimada</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-2xl font-black text-steel-700" data-count="440" data-suffix=" m²">0 m²</p>
+            <p class="text-xs text-gray-500 mt-1">Superficie sótano</p>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-2xl font-black text-steel-700">~3,5 m</p>
+            <p class="text-xs text-gray-500 mt-1">Profundidad excavación</p>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-2xl font-black text-steel-700" data-count="1680" data-suffix=" m³">0 m³</p>
+            <p class="text-xs text-gray-500 mt-1">Volumen excavación</p>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-2xl font-black text-steel-700">Volcánico</p>
+            <p class="text-xs text-gray-500 mt-1">Terreno esperado</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-3 italic">* Excavación estimada: planta sótano ~480 m² (incluido sobreancho) × 3,5 m profundidad media = ~1.680 m³. Posible presencia de roca basáltica → prever martillo hidráulico. Esponjamiento estimado 30%.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 5: MURO DE SÓTANO -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="sotano" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">🧱</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Muro de Sótano — Contención de Tierras</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-steel-800 text-lg mb-4">Parámetros de cálculo</h3>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500 w-48">Tipo</td><td class="py-2.5 font-medium">Muro de sótano HA in situ</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Espesor</td><td class="py-2.5 font-bold text-steel-700">30 cm</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Altura libre</td><td class="py-2.5">~3,00 m (hasta forjado techo sótano)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Hormigón</td><td class="py-2.5">HA-30/B/20/IIa+Qb</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Acero</td><td class="py-2.5">B 500 SD (alta ductilidad)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Recubrimiento</td><td class="py-2.5">40 mm (cara terreno) / 30 mm (cara interior)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Empuje terreno (K₀)</td><td class="py-2.5">K₀ ≈ 0,50 (reposo, arcillas volcánicas)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">γ terreno</td><td class="py-2.5">18 kN/m³ (estimado)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Sobrecarga trasdós</td><td class="py-2.5">10 kN/m² (vial/peatonal)</td></tr>
+              <tr><td class="py-2.5 font-semibold text-gray-500">Empuje en base</td><td class="py-2.5 font-bold text-steel-700">e = K₀·γ·h + K₀·q = 0,5×18×3 + 0,5×10 = 32 kN/m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-steel-800 text-lg mb-4">Armado predimensionado</h3>
+          <div class="space-y-3 mb-4">
+            <div class="p-3 rounded-xl bg-steel-50">
+              <p class="font-semibold text-sm text-steel-800">Armadura vertical (cara terreno)</p>
+              <p class="text-sm text-gray-600">Ø12 c/15 cm (As = 7,54 cm²/m) → M<sub>d,base</sub> ≈ 48 kN·m/m</p>
+            </div>
+            <div class="p-3 rounded-xl bg-steel-50">
+              <p class="font-semibold text-sm text-steel-800">Armadura vertical (cara interior)</p>
+              <p class="text-sm text-gray-600">Ø10 c/20 cm (As = 3,93 cm²/m) — mínimo EHE-08</p>
+            </div>
+            <div class="p-3 rounded-xl bg-steel-50">
+              <p class="font-semibold text-sm text-steel-800">Armadura horizontal (reparto)</p>
+              <p class="text-sm text-gray-600">Ø10 c/20 cm (ambas caras) — retracción y temperatura</p>
+            </div>
+          </div>
+          <h4 class="font-bold text-sm text-gray-700 mb-2">Impermeabilización</h4>
+          <ul class="text-sm text-gray-600 space-y-1.5">
+            <li>• <strong>Cara exterior:</strong> Lámina EPDM/PVC + geotextil protección</li>
+            <li>• <strong>Base:</strong> Lámina impermeabilizante bajo losa + drenaje perimetral</li>
+            <li>• <strong>Drenaje:</strong> Tubo dren Ø150 perimetral + lámina nodular + grava filtrante</li>
+            <li>• <strong>Juntas:</strong> Banda hidroexpansiva en junta muro-losa</li>
+            <li>• <strong>Clasificación:</strong> CTE DB-HS §2.1 — Grado de impermeabilidad ≥ 2</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-steel-50 to-accent-50 rounded-2xl p-5 border border-steel-200">
+        <h3 class="font-bold text-steel-800 mb-2">📌 Nota sobre rampa de vehículos</h3>
+        <p class="text-sm text-gray-600">La rampa de acceso al sótano requiere muros laterales de contención de espesor similar (30 cm) con altura variable. La pendiente máxima recomendada es del 18% (rampas cubiertas) con tramos de transición del 12% en los extremos. Anchura mínima: 3,00 m (unidireccional) conforme a DB-SUA y normativa de accesibilidad vigente en Canarias.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 6: ACCIONES Y COMBINACIONES -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="acciones" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">⚖️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Acciones y Combinaciones de Cargas</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- Acciones permanentes -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-steel-800 text-lg mb-4">📦 Acciones permanentes (G)</h3>
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-steel-50 border-b-2 border-steel-200">
+                <th class="p-3 text-left font-semibold text-steel-900">Concepto</th>
+                <th class="p-3 text-right font-semibold text-steel-900">Valor (kN/m²)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="p-3">Peso propio forjado reticular 30+5</td><td class="p-3 text-right font-bold">4,50</td></tr>
+              <tr><td class="p-3">Pavimento + mortero agarre (e ≈ 5 cm)</td><td class="p-3 text-right font-bold">1,00</td></tr>
+              <tr><td class="p-3">Tabiquería interior (CTE DB-SE-AE §2.1)</td><td class="p-3 text-right font-bold">1,00</td></tr>
+              <tr><td class="p-3">Instalaciones (falso techo + conductos)</td><td class="p-3 text-right font-bold">0,30</td></tr>
+              <tr class="bg-steel-50/50 font-bold text-steel-900">
+                <td class="p-3">TOTAL PERMANENTES (vivienda)</td>
+                <td class="p-3 text-right text-lg">6,80</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Acciones variables -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-steel-800 text-lg mb-4">🏋️ Acciones variables (Q)</h3>
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-steel-50 border-b-2 border-steel-200">
+                <th class="p-3 text-left font-semibold text-steel-900">Concepto</th>
+                <th class="p-3 text-center font-semibold text-steel-900">Norma</th>
+                <th class="p-3 text-right font-semibold text-steel-900">Valor (kN/m²)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="p-3">Sobrecarga uso — viviendas (A1)</td><td class="p-3 text-center text-xs">CTE DB-SE-AE T.3.1</td><td class="p-3 text-right font-bold">2,00</td></tr>
+              <tr><td class="p-3">Sobrecarga uso — zonas comunes (A2)</td><td class="p-3 text-center text-xs">CTE DB-SE-AE T.3.1</td><td class="p-3 text-right font-bold">3,00</td></tr>
+              <tr><td class="p-3">Sobrecarga uso — local comercial (D1)</td><td class="p-3 text-center text-xs">CTE DB-SE-AE T.3.1</td><td class="p-3 text-right font-bold">5,00</td></tr>
+              <tr><td class="p-3">Sobrecarga uso — garaje (F)</td><td class="p-3 text-center text-xs">CTE DB-SE-AE T.3.1</td><td class="p-3 text-right font-bold">4,00</td></tr>
+              <tr><td class="p-3">Sobrecarga uso — cubierta no transitable (G1)</td><td class="p-3 text-center text-xs">CTE DB-SE-AE T.3.1</td><td class="p-3 text-right font-bold">1,00</td></tr>
+              <tr><td class="p-3">Nieve — Tenerife, altitud &lt;500 m</td><td class="p-3 text-center text-xs">CTE DB-SE-AE §3.5</td><td class="p-3 text-right font-bold">0,00</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Viento -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <h3 class="font-bold text-steel-800 text-lg mb-4">💨 Acción del viento (CTE DB-SE-AE §3.3)</h3>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-xl font-black text-steel-700">C</p>
+            <p class="text-xs text-gray-500 mt-1">Zona eólica</p>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-xl font-black text-steel-700">29 m/s</p>
+            <p class="text-xs text-gray-500 mt-1">v<sub>b</sub> (velocidad básica)</p>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-xl font-black text-steel-700">0,52</p>
+            <p class="text-xs text-gray-500 mt-1">q<sub>b</sub> (kN/m²)</p>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-xl font-black text-steel-700">IV</p>
+            <p class="text-xs text-gray-500 mt-1">Grado rugosidad</p>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-xl font-black text-steel-700">~0,78</p>
+            <p class="text-xs text-gray-500 mt-1">q<sub>e</sub> (kN/m²) a h=12m</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-3 italic">Grado de aspereza IV (zona urbana, edificación dispersa). c<sub>e</sub>(12m) ≈ 1,50. Presión estática equivalente: q<sub>e</sub> = q<sub>b</sub> × c<sub>e</sub> × c<sub>p</sub> ≈ 0,52 × 1,50 × 1,0 ≈ 0,78 kN/m².</p>
+      </div>
+
+      <!-- Combinaciones -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-steel-800 text-lg mb-4">🔄 Combinaciones de acciones (EHE-08 / CTE DB-SE §4.2)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl bg-steel-50 border border-steel-200">
+            <p class="font-bold text-sm text-steel-800 mb-2">ELU — Estado Límite Último</p>
+            <p class="text-xs text-gray-600 font-mono bg-white p-2 rounded">γ<sub>G</sub>·G + γ<sub>Q,1</sub>·Q<sub>1</sub> + Σ(γ<sub>Q,i</sub>·ψ<sub>0,i</sub>·Q<sub>i</sub>)</p>
+            <p class="text-xs text-gray-500 mt-2">γ<sub>G</sub> = 1,35 (desfavorable) / 1,00 (favorable)<br>γ<sub>Q</sub> = 1,50 (variable principal)<br>ψ<sub>0</sub> = 0,7 (viviendas) / 0,6 (viento)</p>
+          </div>
+          <div class="p-4 rounded-xl bg-steel-50 border border-steel-200">
+            <p class="font-bold text-sm text-steel-800 mb-2">ELS — Estado Límite de Servicio</p>
+            <p class="text-xs text-gray-600 font-mono bg-white p-2 rounded">G + Q<sub>1</sub> + Σ(ψ<sub>0,i</sub>·Q<sub>i</sub>) — Combinación característica<br>G + ψ<sub>1</sub>·Q<sub>1</sub> + Σ(ψ<sub>2,i</sub>·Q<sub>i</sub>) — Combinación frecuente</p>
+            <p class="text-xs text-gray-500 mt-2">ψ<sub>1</sub> = 0,5 (vivienda) / 0,5 (viento)<br>ψ<sub>2</sub> = 0,3 (vivienda) / 0,0 (viento)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 7: SISMO NCSE-02 -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="sismo" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">⚡</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Análisis Sísmico (NCSE-02)</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-steel-800 text-lg mb-4">Parámetros sísmicos</h3>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500 w-52">Municipio</td><td class="py-2.5 font-medium">San Miguel de Abona (Tenerife)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Aceleración básica (a<sub>b</sub>)</td><td class="py-2.5 font-bold text-steel-700">0,04g</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Coeficiente contribución (K)</td><td class="py-2.5 font-bold">1,0</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Importancia (ρ)</td><td class="py-2.5">1,0 (importancia normal)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Terreno (C)</td><td class="py-2.5">1,6 (tipo III — suelo granular)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">S = C/1,25</td><td class="py-2.5">1,28</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">a<sub>c</sub> = S·ρ·a<sub>b</sub></td><td class="py-2.5 font-bold text-steel-700">0,051g</td></tr>
+              <tr><td class="py-2.5 font-semibold text-gray-500">¿Obligatorio?</td><td class="py-2.5"><span class="px-2.5 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-bold">Exento (a<sub>c</sub> &lt; 0,08g) pero recomendado</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-steel-800 text-lg mb-4">Recomendaciones sismorresistentes</h3>
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4">
+            <p class="text-sm text-amber-800"><strong>⚠️ Volcán activo:</strong> Tenerife es una isla volcánica con el Teide activo. Aunque la NCSE-02 no exige cálculo sísmico para a<sub>c</sub> &lt; 0,08g, la sismicidad volcánica puede generar eventos localizados de mayor intensidad que los recogidos en la norma (como demostró La Palma 2021).</p>
+          </div>
+          <p class="text-sm text-gray-600 mb-3"><strong>Buenas prácticas adoptadas:</strong></p>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> <strong>Acero B 500 SD</strong> (alta ductilidad) en toda la estructura</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Cercos Ø8 c/10 cm en zonas críticas de pilares (h/6 extremos)</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Longitud de solapo incrementada en un 20% sobre mínimo EHE</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Nudos con cercos de confinamiento (zona L/4 → pilares)</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Regularidad en planta: sin torsión relevante</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Losa de cimentación: rigidez global del conjunto</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Juntas de dilatación -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-steel-800 text-lg mb-4">📏 Juntas de Dilatación</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl bg-steel-50">
+            <p class="font-semibold text-sm text-steel-800 mb-1">Longitud máxima del edificio</p>
+            <p class="text-sm text-gray-600">~40 m (estimada según planta tipo)</p>
+          </div>
+          <div class="p-4 rounded-xl bg-emerald-50">
+            <p class="font-semibold text-sm text-emerald-800 mb-1">Junta necesaria</p>
+            <p class="text-sm text-gray-600"><strong>No.</strong> EHE-08 §49.2.4: junta de dilatación cada ≤40 m (para clima suave). Al estar en el límite, se recomienda <strong>refuerzo de retracción adicional</strong> (Ø8 c/25 → Ø8 c/20 en forjados) pero no se requiere junta estructural.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 8: DURABILIDAD Y CLASE DE EXPOSICIÓN -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="durabilidad" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">🌊</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Durabilidad y Clase de Exposición</h2>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <h3 class="font-bold text-steel-800 text-lg mb-4">Clasificación según EHE-08 / Código Estructural</h3>
+        <p class="text-sm text-gray-600 mb-4">El edificio se sitúa en <strong>Guargacho (San Miguel de Abona)</strong>, a ~5 km de la costa de Las Galletas. El ambiente marino aerotransportado afecta a los elementos expuestos al exterior. El sótano está en contacto con terreno volcánico con posible presencia de sulfatos.</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-steel-50 text-steel-900 border-b-2 border-steel-200">
+                <th class="p-3 text-left font-semibold">Elemento</th>
+                <th class="p-3 text-center font-semibold">Clase general</th>
+                <th class="p-3 text-center font-semibold">Clase específica</th>
+                <th class="p-3 text-center font-semibold">Hormigón mín.</th>
+                <th class="p-3 text-center font-semibold">a/c máx.</th>
+                <th class="p-3 text-center font-semibold">Cemento mín.</th>
+                <th class="p-3 text-center font-semibold">Recubrimiento</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr>
+                <td class="p-3 font-medium">Estructura interior (pilares, vigas, forjados)</td>
+                <td class="p-3 text-center">Normal</td>
+                <td class="p-3 text-center font-bold text-steel-700">IIb</td>
+                <td class="p-3 text-center">HA-30</td>
+                <td class="p-3 text-center">0,55</td>
+                <td class="p-3 text-center">300 kg/m³</td>
+                <td class="p-3 text-center font-bold">30 mm</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Estructura exterior (fachada, balcones)</td>
+                <td class="p-3 text-center">Marina</td>
+                <td class="p-3 text-center font-bold text-steel-700">IIIa</td>
+                <td class="p-3 text-center">HA-30</td>
+                <td class="p-3 text-center">0,50</td>
+                <td class="p-3 text-center">325 kg/m³</td>
+                <td class="p-3 text-center font-bold">35 mm</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Muro sótano (cara terreno)</td>
+                <td class="p-3 text-center">Agresiva</td>
+                <td class="p-3 text-center font-bold text-steel-700">IIa + Qb</td>
+                <td class="p-3 text-center">HA-30 / SR</td>
+                <td class="p-3 text-center">0,50</td>
+                <td class="p-3 text-center">325 kg/m³</td>
+                <td class="p-3 text-center font-bold">40 mm</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Losa de cimentación</td>
+                <td class="p-3 text-center">Agresiva</td>
+                <td class="p-3 text-center font-bold text-steel-700">IIa + Qb</td>
+                <td class="p-3 text-center">HA-30 / SR</td>
+                <td class="p-3 text-center">0,50</td>
+                <td class="p-3 text-center">325 kg/m³</td>
+                <td class="p-3 text-center font-bold">50 mm</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Cubierta (si HA visto)</td>
+                <td class="p-3 text-center">Marina</td>
+                <td class="p-3 text-center font-bold text-steel-700">IIIa</td>
+                <td class="p-3 text-center">HA-30</td>
+                <td class="p-3 text-center">0,50</td>
+                <td class="p-3 text-center">325 kg/m³</td>
+                <td class="p-3 text-center font-bold">35 mm</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-gray-400 mt-3 italic">* Clase Qb (ataque químico débil por sulfatos): se adopta preventivamente para cimentación y muro de sótano en terreno volcánico. Pendiente de confirmación mediante ensayo de agresividad del terreno según estudio geotécnico. Si se confirma presencia de sulfatos, emplear cemento sulforresistente (SR).</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-gradient-to-br from-steel-50 to-accent-50 rounded-2xl p-5 border border-steel-200">
+          <h4 class="font-bold text-steel-800 text-sm mb-2">🧪 Hormigón prescrito</h4>
+          <p class="text-2xl font-black text-steel-700 mb-1">HA-30/B/20/IIIa</p>
+          <p class="text-xs text-gray-500">Resistencia 30 MPa, consistencia blanda, TMA 20 mm. Para elementos en ambiente marino aerotransportado.</p>
+          <p class="text-xs text-gray-500 mt-2"><strong>Cimentación:</strong> HA-30/B/20/IIa+Qb (con cemento SR si procede)</p>
+        </div>
+        <div class="bg-gradient-to-br from-steel-50 to-accent-50 rounded-2xl p-5 border border-steel-200">
+          <h4 class="font-bold text-steel-800 text-sm mb-2">🔩 Acero prescrito</h4>
+          <p class="text-2xl font-black text-steel-700 mb-1">B 500 SD</p>
+          <p class="text-xs text-gray-500">Acero corrugado soldable de alta ductilidad. f<sub>yk</sub> = 500 MPa, ε<sub>máx</sub> ≥ 8%. Sobrecoste mínimo (~3-5%) respecto a B 500 S.</p>
+          <p class="text-xs text-gray-500 mt-2">Justificación: buenas prácticas sismorresistentes + ambiente Canarias.</p>
+        </div>
+        <div class="bg-gradient-to-br from-steel-50 to-accent-50 rounded-2xl p-5 border border-steel-200">
+          <h4 class="font-bold text-steel-800 text-sm mb-2">🛡️ Vida útil</h4>
+          <p class="text-2xl font-black text-steel-700 mb-1">50 años</p>
+          <p class="text-xs text-gray-500">Vida útil nominal para edificios de viviendas (CTE DB-SE §2.1). Los recubrimientos y la calidad del hormigón se dimensionan para garantizar esta vida útil en ambiente IIIa.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 9: CUANTÍAS ESTIMADAS -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="cuantias" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">📊</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Cuantías Estimadas y Mediciones</h2>
+      </div>
+
+      <!-- Medición por capítulos -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <h3 class="font-bold text-steel-800 text-lg mb-4">Medición por capítulos estructurales</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-steel-50 text-steel-900 border-b-2 border-steel-200">
+                <th class="p-3 text-left font-semibold">Capítulo</th>
+                <th class="p-3 text-center font-semibold">Hormigón (m³)</th>
+                <th class="p-3 text-center font-semibold">Acero (kg)</th>
+                <th class="p-3 text-center font-semibold">Encofrado (m²)</th>
+                <th class="p-3 text-center font-semibold">Ratio kg/m³</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr>
+                <td class="p-3 font-medium">Losa de cimentación (e=55cm)</td>
+                <td class="p-3 text-center font-bold">242</td>
+                <td class="p-3 text-center">19.360</td>
+                <td class="p-3 text-center">440</td>
+                <td class="p-3 text-center text-xs text-gray-500">80</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Muro de sótano (e=30cm)</td>
+                <td class="p-3 text-center font-bold">54</td>
+                <td class="p-3 text-center">5.400</td>
+                <td class="p-3 text-center">360</td>
+                <td class="p-3 text-center text-xs text-gray-500">100</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Pilares (Sótano + PB + P1 + P2)</td>
+                <td class="p-3 text-center font-bold">28</td>
+                <td class="p-3 text-center">3.360</td>
+                <td class="p-3 text-center">280</td>
+                <td class="p-3 text-center text-xs text-gray-500">120</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Forjados reticulares (×3 plantas + cubierta)</td>
+                <td class="p-3 text-center font-bold">210</td>
+                <td class="p-3 text-center">14.700</td>
+                <td class="p-3 text-center">1.760</td>
+                <td class="p-3 text-center text-xs text-gray-500">70</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Vigas (canto + planas + zunchos)</td>
+                <td class="p-3 text-center font-bold">32</td>
+                <td class="p-3 text-center">3.840</td>
+                <td class="p-3 text-center">320</td>
+                <td class="p-3 text-center text-xs text-gray-500">120</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Escaleras (2 tramos × 3 niveles)</td>
+                <td class="p-3 text-center font-bold">9</td>
+                <td class="p-3 text-center">810</td>
+                <td class="p-3 text-center">60</td>
+                <td class="p-3 text-center text-xs text-gray-500">90</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium">Rampa garaje</td>
+                <td class="p-3 text-center font-bold">12</td>
+                <td class="p-3 text-center">1.200</td>
+                <td class="p-3 text-center">80</td>
+                <td class="p-3 text-center text-xs text-gray-500">100</td>
+              </tr>
+              <tr class="bg-steel-50/60 font-bold text-steel-900 border-t-2 border-steel-300">
+                <td class="p-3">TOTAL ESTRUCTURA</td>
+                <td class="p-3 text-center text-lg">587 m³</td>
+                <td class="p-3 text-center text-lg">48.670 kg</td>
+                <td class="p-3 text-center text-lg">3.300 m²</td>
+                <td class="p-3 text-center">83 kg/m³</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- KPIs cuantías -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center">
+          <p class="text-3xl font-black text-steel-700" data-count="587" data-suffix=" m³">0 m³</p>
+          <p class="text-xs text-gray-500 mt-1">Hormigón total</p>
+          <p class="text-xs text-steel-500 font-semibold">0,33 m³/m² construido</p>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center">
+          <p class="text-3xl font-black text-steel-700">48,7 t</p>
+          <p class="text-xs text-gray-500 mt-1">Acero B 500 SD</p>
+          <p class="text-xs text-steel-500 font-semibold">27,2 kg/m² construido</p>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center">
+          <p class="text-3xl font-black text-steel-700" data-count="1680" data-suffix=" m³">0 m³</p>
+          <p class="text-xs text-gray-500 mt-1">Excavación sótano</p>
+          <p class="text-xs text-steel-500 font-semibold">incl. sobreancho</p>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center">
+          <p class="text-3xl font-black text-steel-700">83</p>
+          <p class="text-xs text-gray-500 mt-1">kg acero / m³ hormigón</p>
+          <p class="text-xs text-steel-500 font-semibold">ratio medio global</p>
+        </div>
+      </div>
+
+      <!-- Gráfico distribución -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-steel-800 text-lg mb-4">Distribución de hormigón por capítulos</h3>
+        <div class="max-w-lg mx-auto">
+          <canvas id="hormiChart" height="280"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 10: CONTROL DE CALIDAD -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="calidad" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">🧪</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Plan de Control de Calidad</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-steel-800 text-lg mb-4">Control del hormigón (EHE-08 §86)</h3>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500 w-48">Nivel de control</td><td class="py-2.5 font-bold text-steel-700">Estadístico (normal)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Modalidad</td><td class="py-2.5">Lotes de control</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Tamaño lote máx.</td><td class="py-2.5">100 m³ ó 2 semanas ó 500 m² forjado</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Nº amasadas/lote</td><td class="py-2.5">≥ 3 (mínimo normativo)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Probetas/amasada</td><td class="py-2.5">6 probetas (2×7d + 2×28d + 2 reserva)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Lotes estimados</td><td class="py-2.5">~6 lotes (587 m³ / 100 m³)</td></tr>
+              <tr><td class="py-2.5 font-semibold text-gray-500">Probetas totales</td><td class="py-2.5 font-bold">~108 probetas (6×3×6)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-steel-800 text-lg mb-4">Control del acero (EHE-08 §87)</h3>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500 w-48">Nivel de control</td><td class="py-2.5 font-bold text-steel-700">Normal</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Suministro</td><td class="py-2.5">Certificación de marca AENOR o sello equiv.</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Ensayos por lote</td><td class="py-2.5">2 probetas tracción + 2 doblado-desdoblado</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Tamaño lote</td><td class="py-2.5">≤ 40 t por diámetro y proveedor</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Lotes estimados</td><td class="py-2.5">~2-3 lotes (48,7 t / 40 t)</td></tr>
+              <tr><td class="py-2.5 font-semibold text-gray-500">Comprobaciones</td><td class="py-2.5">Sección equivalente, corruga, límite elástico, alargamiento rotura ≥8% (SD)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-steel-800 text-lg mb-4">Control de ejecución (EHE-08 §92)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-xl bg-steel-50">
+            <p class="font-bold text-sm text-steel-800 mb-1">Nivel: Normal</p>
+            <p class="text-xs text-gray-600">Inspección por lotes de ejecución. Un lote por cada 500 m² de forjado, 50 m³ de hormigón o 3.000 kg de acero.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-steel-50">
+            <p class="font-bold text-sm text-steel-800 mb-1">Comprobaciones</p>
+            <p class="text-xs text-gray-600">Replanteo, cimbrado, encofrado, armaduras (posición, atado, recubrimiento), vertido hormigón, vibrado, curado, desencofrado y descimbrado.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-steel-50">
+            <p class="font-bold text-sm text-steel-800 mb-1">Control de flechas</p>
+            <p class="text-xs text-gray-600">Flecha activa ≤ L/400 (forjado reticular). Para L=7,5 m → f<sub>máx</sub> = 18,75 mm. Contraflechas de ejecución recomendadas: L/500.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 11: SEMÁFORO DE VERIFICACIONES -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="verificaciones" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">✅</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Semáforo de Verificaciones</h2>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-steel-50 text-steel-900 border-b-2 border-steel-200">
+                <th class="p-3 text-center font-semibold w-16">Estado</th>
+                <th class="p-3 text-left font-semibold">Verificación</th>
+                <th class="p-3 text-left font-semibold">Norma</th>
+                <th class="p-3 text-left font-semibold">Resultado</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr>
+                <td class="p-3 text-center"><span class="sem-green"></span></td>
+                <td class="p-3 font-medium">Dimensiones mínimas pilares</td>
+                <td class="p-3 text-xs text-gray-500">EHE-08 §54.1</td>
+                <td class="p-3 text-sm">30×30 cm ≥ 25×25 cm mínimo ✅</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-center"><span class="sem-green"></span></td>
+                <td class="p-3 font-medium">Canto forjado reticular</td>
+                <td class="p-3 text-xs text-gray-500">EHE-08 §50.2.2</td>
+                <td class="p-3 text-sm">L/h = 7,5/0,35 = 21,4 ≤ 24 ✅</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-center"><span class="sem-green"></span></td>
+                <td class="p-3 font-medium">Espesor muro sótano</td>
+                <td class="p-3 text-xs text-gray-500">EHE-08 §54.2</td>
+                <td class="p-3 text-sm">30 cm ≥ max(15cm, h/20=15cm) ✅</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-center"><span class="sem-green"></span></td>
+                <td class="p-3 font-medium">Recubrimientos mínimos (IIIa)</td>
+                <td class="p-3 text-xs text-gray-500">EHE-08 §37.2.4</td>
+                <td class="p-3 text-sm">35 mm adoptado ≥ 35 mm (IIIa, HA-30) ✅</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-center"><span class="sem-green"></span></td>
+                <td class="p-3 font-medium">Presión terreno (cimentación)</td>
+                <td class="p-3 text-xs text-gray-500">CTE DB-SE-C</td>
+                <td class="p-3 text-sm">σ = 0,35 kg/cm² &lt; σ<sub>adm</sub> = 1,50 kg/cm² ✅</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-center"><span class="sem-green"></span></td>
+                <td class="p-3 font-medium">Flecha activa forjados</td>
+                <td class="p-3 text-xs text-gray-500">EHE-08 §50.1</td>
+                <td class="p-3 text-sm">f<sub>act</sub> ≤ L/400 = 18,75 mm (para L=7,5m) ✅</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-center"><span class="sem-green"></span></td>
+                <td class="p-3 font-medium">Acción del viento</td>
+                <td class="p-3 text-xs text-gray-500">CTE DB-SE-AE §3.3</td>
+                <td class="p-3 text-sm">Zona C, q<sub>e</sub>=0,78 kN/m² — estructura compatible ✅</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-center"><span class="sem-green"></span></td>
+                <td class="p-3 font-medium">Análisis sísmico</td>
+                <td class="p-3 text-xs text-gray-500">NCSE-02 §1.2.3</td>
+                <td class="p-3 text-sm">a<sub>c</sub>=0,051g &lt; 0,08g → Exento. Buenas prácticas adoptadas ✅</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-center"><span class="sem-green"></span></td>
+                <td class="p-3 font-medium">Junta de dilatación</td>
+                <td class="p-3 text-xs text-gray-500">EHE-08 §49.2.4</td>
+                <td class="p-3 text-sm">L≈40m ≤ 40m (clima suave). Refuerzo retracción adicional ✅</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-center"><span class="sem-green"></span></td>
+                <td class="p-3 font-medium">Cuantías mínimas hormigón</td>
+                <td class="p-3 text-xs text-gray-500">Ratios habituales</td>
+                <td class="p-3 text-sm">0,33 m³/m² — rango normal para PB+2+sótano (0,28–0,38) ✅</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-center"><span class="sem-green"></span></td>
+                <td class="p-3 font-medium">Cuantías mínimas acero</td>
+                <td class="p-3 text-xs text-gray-500">Ratios habituales</td>
+                <td class="p-3 text-sm">27,2 kg/m² — rango normal para edificación (22–32 kg/m²) ✅</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-center"><span class="sem-yellow"></span></td>
+                <td class="p-3 font-medium">Estudio geotécnico</td>
+                <td class="p-3 text-xs text-gray-500">CTE DB-SE-C §3</td>
+                <td class="p-3 text-sm"><strong>⚠️ PENDIENTE</strong> — Obligatorio antes de ejecución. Puede modificar tipo de cimentación.</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-center"><span class="sem-yellow"></span></td>
+                <td class="p-3 font-medium">Cálculo completo con software</td>
+                <td class="p-3 text-xs text-gray-500">EHE-08 / CTE DB-SE</td>
+                <td class="p-3 text-sm"><strong>⚠️ PENDIENTE</strong> — Modelo CYPECAD/Tricalc necesario para proyecto de ejecución.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Resumen semáforo -->
+      <div class="grid grid-cols-3 gap-4">
+        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 text-center">
+          <p class="text-4xl font-black text-emerald-600">11</p>
+          <p class="text-sm font-semibold text-emerald-800">Verificaciones OK</p>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 text-center">
+          <p class="text-4xl font-black text-amber-600">2</p>
+          <p class="text-sm font-semibold text-amber-800">Pendientes</p>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-2xl p-5 text-center">
+          <p class="text-4xl font-black text-red-600">0</p>
+          <p class="text-sm font-semibold text-red-800">No cumple</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 12: PLAN DE EJECUCIÓN ESTRUCTURA -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="ejecucion" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">📅</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Cronograma de Ejecución Estructural</h2>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <p class="text-sm text-gray-600 mb-4">Duración estimada de la fase de estructura: <strong>~7 meses</strong> dentro del plazo total de obra de 18 meses (referencia Nexus/Finex). Incluye excavación, cimentación, estructura y cubierta.</p>
+        <div class="space-y-4">
+          <!-- Timeline items -->
+          <div class="flex gap-4 items-start">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-steel-600 text-white flex items-center justify-center font-bold text-sm">1</div>
+              <div class="w-0.5 h-12 bg-steel-200"></div>
+            </div>
+            <div class="flex-1 pb-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="font-bold text-steel-800">Movimiento de tierras y excavación sótano</p>
+                <span class="px-3 py-1 bg-steel-100 text-steel-700 rounded-full text-xs font-bold">4-5 semanas</span>
+              </div>
+              <p class="text-sm text-gray-500">Excavación ~1.680 m³. Posible martillo hidráulico en roca basáltica. Taludes 1:1 o entibación según geotécnico.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-steel-600 text-white flex items-center justify-center font-bold text-sm">2</div>
+              <div class="w-0.5 h-12 bg-steel-200"></div>
+            </div>
+            <div class="flex-1 pb-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="font-bold text-steel-800">Cimentación (losa + drenaje + impermeabilización)</p>
+                <span class="px-3 py-1 bg-steel-100 text-steel-700 rounded-full text-xs font-bold">3-4 semanas</span>
+              </div>
+              <p class="text-sm text-gray-500">Hormigón de limpieza, impermeabilización base, armado losa 55 cm, vertido hormigón HA-30 (~242 m³).</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-steel-600 text-white flex items-center justify-center font-bold text-sm">3</div>
+              <div class="w-0.5 h-12 bg-steel-200"></div>
+            </div>
+            <div class="flex-1 pb-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="font-bold text-steel-800">Muro de sótano + impermeabilización</p>
+                <span class="px-3 py-1 bg-steel-100 text-steel-700 rounded-full text-xs font-bold">3-4 semanas</span>
+              </div>
+              <p class="text-sm text-gray-500">Encofrado a dos caras, armado, vertido ~54 m³. Impermeabilización exterior + drenaje perimetral. Relleno trasdós.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-steel-600 text-white flex items-center justify-center font-bold text-sm">4</div>
+              <div class="w-0.5 h-12 bg-steel-200"></div>
+            </div>
+            <div class="flex-1 pb-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="font-bold text-steel-800">Estructura PB (pilares + forjado reticular)</p>
+                <span class="px-3 py-1 bg-steel-100 text-steel-700 rounded-full text-xs font-bold">3-4 semanas</span>
+              </div>
+              <p class="text-sm text-gray-500">Pilares sótano→PB, encofrado reticular con casetones recuperables, armado, vertido y curado. Ciclo por planta.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-steel-600 text-white flex items-center justify-center font-bold text-sm">5</div>
+              <div class="w-0.5 h-12 bg-steel-200"></div>
+            </div>
+            <div class="flex-1 pb-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="font-bold text-steel-800">Estructura P1 + P2 (ciclo repetitivo)</p>
+                <span class="px-3 py-1 bg-steel-100 text-steel-700 rounded-full text-xs font-bold">6-8 semanas</span>
+              </div>
+              <p class="text-sm text-gray-500">2 plantas × 3-4 semanas/planta. Reutilización de casetones recuperables. Escaleras y núcleo simultáneos.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">6</div>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between items-center mb-1">
+                <p class="font-bold text-steel-800">Cubierta plana + impermeabilización</p>
+                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold">2-3 semanas</span>
+              </div>
+              <p class="text-sm text-gray-500">Forjado cubierta + formación de pendientes + impermeabilización + aislamiento + protección.</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 bg-steel-50 rounded-xl p-4 flex items-center justify-between">
+          <p class="font-bold text-steel-800">DURACIÓN TOTAL FASE ESTRUCTURA</p>
+          <span class="btn3d btn3d-steel">~28 semanas (7 meses)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECCIÓN 13: PRESUPUESTO ESTRUCTURA -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="presupuesto" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-steel-100 flex items-center justify-center text-xl">💰</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Estimación Presupuestaria — Estructura</h2>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-steel-50 text-steel-900 border-b-2 border-steel-200">
+                <th class="p-3 text-left font-semibold">Partida</th>
+                <th class="p-3 text-center font-semibold">Medición</th>
+                <th class="p-3 text-center font-semibold">Precio unit.</th>
+                <th class="p-3 text-right font-semibold">Importe (€)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="p-3 font-medium">Excavación sótano (terreno volcánico)</td><td class="p-3 text-center">1.680 m³</td><td class="p-3 text-center">18 €/m³</td><td class="p-3 text-right font-bold">30.240</td></tr>
+              <tr><td class="p-3 font-medium">Transporte a vertedero</td><td class="p-3 text-center">2.180 m³</td><td class="p-3 text-center">8 €/m³</td><td class="p-3 text-right font-bold">17.440</td></tr>
+              <tr><td class="p-3 font-medium">Horm. limpieza HM-20 (e=10cm)</td><td class="p-3 text-center">44 m³</td><td class="p-3 text-center">85 €/m³</td><td class="p-3 text-right font-bold">3.740</td></tr>
+              <tr><td class="p-3 font-medium">Losa cimentación HA-30 (e=55cm)</td><td class="p-3 text-center">242 m³</td><td class="p-3 text-center">145 €/m³</td><td class="p-3 text-right font-bold">35.090</td></tr>
+              <tr><td class="p-3 font-medium">Muro sótano HA-30 (e=30cm)</td><td class="p-3 text-center">54 m³</td><td class="p-3 text-center">165 €/m³</td><td class="p-3 text-right font-bold">8.910</td></tr>
+              <tr><td class="p-3 font-medium">Pilares HA-30</td><td class="p-3 text-center">28 m³</td><td class="p-3 text-center">180 €/m³</td><td class="p-3 text-right font-bold">5.040</td></tr>
+              <tr><td class="p-3 font-medium">Forjado reticular 30+5 (incl. encofrado)</td><td class="p-3 text-center">1.760 m²</td><td class="p-3 text-center">72 €/m²</td><td class="p-3 text-right font-bold">126.720</td></tr>
+              <tr><td class="p-3 font-medium">Vigas HA-30</td><td class="p-3 text-center">32 m³</td><td class="p-3 text-center">175 €/m³</td><td class="p-3 text-right font-bold">5.600</td></tr>
+              <tr><td class="p-3 font-medium">Escaleras HA + rampa</td><td class="p-3 text-center">21 m³</td><td class="p-3 text-center">190 €/m³</td><td class="p-3 text-right font-bold">3.990</td></tr>
+              <tr><td class="p-3 font-medium">Acero B 500 SD (suministro + colocación)</td><td class="p-3 text-center">48.670 kg</td><td class="p-3 text-center">1,35 €/kg</td><td class="p-3 text-right font-bold">65.705</td></tr>
+              <tr><td class="p-3 font-medium">Impermeabilización sótano</td><td class="p-3 text-center">360 m²</td><td class="p-3 text-center">32 €/m²</td><td class="p-3 text-right font-bold">11.520</td></tr>
+              <tr><td class="p-3 font-medium">Drenaje perimetral</td><td class="p-3 text-center">60 ml</td><td class="p-3 text-center">45 €/ml</td><td class="p-3 text-right font-bold">2.700</td></tr>
+              <tr class="bg-steel-50/60 font-bold text-steel-900 border-t-2 border-steel-300">
+                <td class="p-3" colspan="3">TOTAL CAPÍTULO ESTRUCTURA + CIMENTACIÓN</td>
+                <td class="p-3 text-right text-lg">316.695 €</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-xl font-black text-steel-700">~177 €/m²</p>
+            <p class="text-xs text-gray-500">Coste estructura / m² construido</p>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-xl font-black text-steel-700">~11,1%</p>
+            <p class="text-xs text-gray-500">% sobre valor tasación (2.847.000 €)</p>
+          </div>
+          <div class="bg-steel-50 rounded-xl p-4 text-center">
+            <p class="text-xl font-black text-steel-700">~22-25%</p>
+            <p class="text-xs text-gray-500">% estimado sobre PEM total</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER placeholder -->
+  <footer class="bg-steel-900 text-steel-400 py-12">
+    <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+      <p class="mb-2">Informe generado por <strong class="text-white">Civex</strong> — Ingeniero Civil / Estructural · Sistema de Agentes Inmobiliarios IA</p>
+      <p class="mb-2">Edificio Guargacho 1 · Ctra. General TF-652, Guargacho, San Miguel de Abona, Tenerife · Marzo 2026</p>
+      <p class="text-steel-500 text-xs max-w-3xl mx-auto">⚠️ DISCLAIMER: Este informe constituye un predimensionado orientativo y NO sustituye al proyecto de estructuras redactado por técnico competente. Las dimensiones y armados son estimaciones previas que deberán ser verificadas mediante cálculo completo con software homologado (CYPECAD, CYPE 3D, Tricalc o similar) y con los datos del estudio geotécnico real del terreno. No se asumen responsabilidades derivadas del uso directo de estos datos sin la supervisión profesional correspondiente.</p>
+    </div>
+  </footer>
+
+  <!-- SCROLL REVEAL + COUNTER SCRIPTS -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); }});
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Chart.js — Distribución hormigón
+    const hCtx = document.getElementById('hormiChart');
+    if(hCtx) {
+      new Chart(hCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Losa cimentación','Muro sótano','Pilares','Forjados reticulares','Vigas','Escaleras + Rampa'],
+          datasets: [{
+            data: [242, 54, 28, 210, 32, 21],
+            backgroundColor: ['#102a43','#243b53','#334e68','#4A6FA5','#627d98','#9fb3c8'],
+            borderWidth: 2,
+            borderColor: '#fff'
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position:'bottom', labels:{ padding:16, usePointStyle:true, font:{size:12, family:'Inter'} } },
+            tooltip: { callbacks:{ label: ctx => ctx.label + ': ' + ctx.parsed + ' m³ (' + Math.round(ctx.parsed/587*100) + '%)' } }
+          }
+        }
+      });
+    }
+
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      const prefix = el.dataset.prefix || '';
+      let current = 0;
+      const step = target / 60;
+      const animate = () => {
+        current += step;
+        if(current >= target) { el.textContent = prefix + target.toLocaleString('es-ES') + suffix; return; }
+        el.textContent = prefix + Math.floor(current).toLocaleString('es-ES') + suffix;
+        requestAnimationFrame(animate);
+      };
+      const obs = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) { animate(); obs.disconnect(); }
+      });
+      obs.observe(el);
+    });
+  </script>
+</body>
+</html>

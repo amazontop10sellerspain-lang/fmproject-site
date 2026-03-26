@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propuesta de Interiorismo — Guargacho 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            decox: {
+              50: '#f9f5ff',
+              100: '#f2ebff',
+              200: '#e6d8ff',
+              300: '#d0b3ff',
+              400: '#bb8cff',
+              500: '#c77dff',
+              600: '#a95cf5',
+              700: '#8d3fe1',
+              800: '#6e30b5',
+              900: '#4f2384'
+            },
+            sand: '#e8dcc9',
+            clay: '#c98963',
+            basalt: '#55525c',
+            sea: '#8db4ba',
+            olive: '#7d8b67'
+          },
+          boxShadow: {
+            soft: '0 20px 50px -25px rgba(79,35,132,.35)',
+            lift: '0 18px 40px -24px rgba(35,27,63,.35)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(199,125,255,.12), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(141,180,186,.14), transparent 28%),
+        linear-gradient(180deg, #f8f6fb 0%, #f4f1f7 100%);
+    }
+    .glass {
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.6);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #6e30b5 0%, #c77dff 45%, #7d8b67 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+    .reveal { opacity: 0; transform: translateY(28px); transition: all .8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .btn3d {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      border-radius: 999px;
+      padding: .85rem 1.25rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      transform: translateY(0);
+      box-shadow: 0 10px 0 rgba(79,35,132,.26), 0 22px 30px -18px rgba(79,35,132,.45);
+    }
+    .btn3d:hover { transform: translateY(-2px); filter: brightness(1.02); }
+    .btn3d:active { transform: translateY(4px); box-shadow: 0 5px 0 rgba(79,35,132,.22), 0 12px 20px -16px rgba(79,35,132,.35); }
+    .btn-primary { background: linear-gradient(135deg, #c77dff 0%, #8d3fe1 100%); color: white; }
+    .btn-secondary { background: linear-gradient(135deg, #ffffff 0%, #efe7fb 100%); color: #4f2384; }
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+    .table-modern tbody tr:hover { background: rgba(199,125,255,.06); }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .45rem .8rem;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .swatch { min-height: 110px; }
+    .section-anchor { scroll-margin-top: 92px; }
+  </style>
+</head>
+<body class="text-gray-800 antialiased">
+  <nav class="sticky top-0 z-50 border-b border-white/50 bg-white/75 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-decox-700 to-decox-500 text-white flex items-center justify-center font-black shadow-soft">D</div>
+        <div>
+          <p class="text-xs uppercase tracking-[.28em] font-bold text-decox-700">Decox · Interiorismo</p>
+          <p class="text-sm font-semibold text-gray-600">Guargacho 1 · San Miguel de Abona</p>
+        </div>
+      </div>
+      <div class="hidden xl:flex items-center gap-3 text-sm">
+        <a href="#concepto" class="btn3d btn-secondary text-xs">Concepto</a>
+        <a href="#tipologias" class="btn3d btn-secondary text-xs">Tipologías</a>
+        <a href="#materiales" class="btn3d btn-secondary text-xs">Materiales</a>
+        <a href="#iluminacion" class="btn3d btn-secondary text-xs">Iluminación</a>
+        <a href="#cocinas-banos" class="btn3d btn-secondary text-xs">Cocinas + baños</a>
+        <a href="#presupuesto" class="btn3d btn-secondary text-xs">Presupuesto</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="relative overflow-hidden bg-gradient-to-br from-decox-900 via-decox-700 to-basalt text-white hero-grid">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(255,255,255,.18),transparent_30%),radial-gradient(circle_at_80%_30%,rgba(141,180,186,.18),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(201,137,99,.18),transparent_26%)]"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-24">
+      <div class="grid lg:grid-cols-[1.15fr_.85fr] gap-10 items-start">
+        <div>
+          <p class="text-decox-100 text-sm font-semibold uppercase tracking-[.35em] mb-4">Propuesta de interiorismo residencial</p>
+          <h1 class="text-4xl md:text-6xl font-black leading-tight mb-5">Estilo contemporáneo canario,<br>luminoso y funcional para<br><span class="text-decox-200">18 viviendas en Guargacho</span></h1>
+          <p class="text-lg md:text-xl text-white/85 max-w-3xl leading-relaxed">Propuesta de Decox para el edificio plurifamiliar de obra nueva con 18 viviendas, local comercial, garaje y trasteros, alineada con la distribución de Arqon, las calidades medias-altas indicadas por Nexus/Finex y el posicionamiento comercial fijado por Valorex para el sur de Tenerife.</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <span class="pill bg-white/14 text-white">🏢 PB + 2 plantas + sótano</span>
+            <span class="pill bg-white/14 text-white">🏠 6 x 1D · 6 x 2D · 6 x 3D</span>
+            <span class="pill bg-white/14 text-white">📍 TF-652 · Guargacho</span>
+            <span class="pill bg-white/14 text-white">☀️ Sur de Tenerife · clima subtropical</span>
+            <span class="pill bg-white/14 text-white">📈 Mercado +12,3% interanual</span>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="#presupuesto" class="btn3d btn-primary">Ver presupuesto por tipología</a>
+            <a href="#resumen-tabla" class="btn3d btn-secondary">Tabla resumen técnica</a>
+          </div>
+        </div>
+        <div class="glass rounded-[2rem] p-7 shadow-soft">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-2xl bg-white/80 p-5 text-gray-900 shadow-sm">
+              <p class="text-xs uppercase tracking-[.2em] text-gray-400 font-bold">Producto</p>
+              <p class="text-3xl font-black mt-2 text-decox-800">18</p>
+              <p class="text-sm text-gray-500 mt-1">viviendas + 1 local</p>
+            </div>
+            <div class="rounded-2xl bg-white/80 p-5 text-gray-900 shadow-sm">
+              <p class="text-xs uppercase tracking-[.2em] text-gray-400 font-bold">Sup. total</p>
+              <p class="text-3xl font-black mt-2 text-decox-800">1.789 m²</p>
+              <p class="text-sm text-gray-500 mt-1">incluye sótano</p>
+            </div>
+            <div class="rounded-2xl bg-white/80 p-5 text-gray-900 shadow-sm">
+              <p class="text-xs uppercase tracking-[.2em] text-gray-400 font-bold">Sup. sobre rasante</p>
+              <p class="text-3xl font-black mt-2 text-decox-800">1.349 m²</p>
+              <p class="text-sm text-gray-500 mt-1">viviendas + local</p>
+            </div>
+            <div class="rounded-2xl bg-white/80 p-5 text-gray-900 shadow-sm">
+              <p class="text-xs uppercase tracking-[.2em] text-gray-400 font-bold">Valor comercial</p>
+              <p class="text-3xl font-black mt-2 text-decox-800">3,847 M€</p>
+              <p class="text-sm text-gray-500 mt-1">Valorex · 2.965 €/m²</p>
+            </div>
+          </div>
+          <div class="mt-5 rounded-2xl bg-gradient-to-r from-white/90 to-decox-50 p-5 border border-white/70">
+            <p class="text-sm font-bold text-decox-800 mb-2">Criterio de Decox</p>
+            <p class="text-sm text-gray-600 leading-relaxed">Interiores serenos, muy luminosos, con materiales honestos y mantenimiento racional. La propuesta evita un lujo estridente y traduce el imaginario del sur de Tenerife en tonos arena, piedra, madera y acentos minerales suaves.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-14 space-y-24">
+
+    <section id="concepto" class="section-anchor reveal">
+      <div class="text-center mb-10">
+        <p class="text-decox-700 text-xs font-bold uppercase tracking-[.35em] mb-2">Concepto de diseño</p>
+        <h2 class="text-3xl md:text-5xl font-black gradient-text">Contemporáneo canario · cálido · claro · vendible</h2>
+      </div>
+      <div class="grid lg:grid-cols-[1.1fr_.9fr] gap-8 items-start">
+        <div class="glass rounded-[2rem] p-8 shadow-lift">
+          <h3 class="text-2xl font-black text-gray-900 mb-4">Idea rectora</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">El edificio se interpreta como un producto residencial urbano de gama media-alta, orientado a comprador local, nacional e internacional que valora <strong>luz natural, distribución eficiente, cocina integrada, calidades durables y una estética limpia pero cálida</strong>. El lenguaje no es tropical ni excesivamente minimalista: es <strong>contemporáneo canario</strong>, con un fondo neutro luminoso, textura mineral, notas de madera, detalles mate y conexión visual con terrazas y huecos exteriores.</p>
+          <p class="text-gray-600 leading-relaxed mb-4">La información de Arqon confirma tres familias de vivienda: <strong>1 dormitorio compacta</strong> (45–52 m² construidos), <strong>2 dormitorios equilibrada</strong> (60–70 m²) y <strong>3 dormitorios familiar</strong> (88–102 m²), además del ático singular con terraza privada. Por eso, la propuesta plantea una base común de materiales para todo el edificio y un ajuste fino por tipología.</p>
+          <p class="text-gray-600 leading-relaxed">Se incorporan además las tendencias observadas con Perplexity para Tenerife/Canarias 2025–2026: <strong>minimalismo cálido y texturizado</strong>, <strong>cocina invisible e integrada</strong>, <strong>tonos tierra y terracota</strong>, <strong>formas orgánicas</strong> y prioridad por <strong>materiales preparados para humedad, radiación UV y salinidad</strong>.</p>
+          <div class="grid md:grid-cols-3 gap-4 mt-6">
+            <div class="rounded-2xl bg-white p-5 shadow-sm border border-white/80">
+              <p class="text-2xl mb-2">☀️</p>
+              <p class="font-bold text-gray-900 mb-1">Luz</p>
+              <p class="text-sm text-gray-600">Paleta clara y superficies mate para multiplicar la luz del sur sin deslumbrar.</p>
+            </div>
+            <div class="rounded-2xl bg-white p-5 shadow-sm border border-white/80">
+              <p class="text-2xl mb-2">🪨</p>
+              <p class="font-bold text-gray-900 mb-1">Materia</p>
+              <p class="text-sm text-gray-600">Porcelánico gran formato, madera tecnológica, aluminio RPT y texturas pétreas honestas.</p>
+            </div>
+            <div class="rounded-2xl bg-white p-5 shadow-sm border border-white/80">
+              <p class="text-2xl mb-2">🛋️</p>
+              <p class="font-bold text-gray-900 mb-1">Función</p>
+              <p class="text-sm text-gray-600">Distribuciones abiertas, almacenaje útil y cocinas que ordenan el espacio.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-[2rem] p-8 shadow-lift border border-white/70">
+          <h3 class="text-2xl font-black text-gray-900 mb-5">Moodboard verbal</h3>
+          <div class="grid grid-cols-2 gap-4 mb-5">
+            <div class="swatch rounded-2xl p-4" style="background:#f0e6d8;color:#6a4b2f">
+              <p class="text-xs uppercase tracking-[.2em] font-bold opacity-70">Base</p>
+              <p class="text-lg font-black mt-5">Arena caliza</p>
+              <p class="text-xs mt-1">paredes y textiles</p>
+            </div>
+            <div class="swatch rounded-2xl p-4 text-white" style="background:#8d3fe1">
+              <p class="text-xs uppercase tracking-[.2em] font-bold opacity-80">Corporativo</p>
+              <p class="text-lg font-black mt-5">Lavanda mineral</p>
+              <p class="text-xs mt-1">acentos de identidad Decox</p>
+            </div>
+            <div class="swatch rounded-2xl p-4 text-white" style="background:#7d8b67">
+              <p class="text-xs uppercase tracking-[.2em] font-bold opacity-80">Natural</p>
+              <p class="text-lg font-black mt-5">Oliva seco</p>
+              <p class="text-xs mt-1">tapizados y detalles</p>
+            </div>
+            <div class="swatch rounded-2xl p-4 text-white" style="background:#c98963">
+              <p class="text-xs uppercase tracking-[.2em] font-bold opacity-80">Tendencia</p>
+              <p class="text-lg font-black mt-5">Terracota suave</p>
+              <p class="text-xs mt-1">cerámica y objetos</p>
+            </div>
+          </div>
+          <div class="space-y-3 text-sm text-gray-600">
+            <div class="rounded-2xl bg-gray-50 p-4"><strong class="text-gray-900">Sensación:</strong> vivienda clara, fresca, muy limpia y preparada para uso intensivo sin perder tacto doméstico.</div>
+            <div class="rounded-2xl bg-gray-50 p-4"><strong class="text-gray-900">Expresión:</strong> líneas sencillas, cantos suavizados, materiales mates y algún gesto curvo en luminarias o espejos.</div>
+            <div class="rounded-2xl bg-gray-50 p-4"><strong class="text-gray-900">Mercado:</strong> producto fácilmente comercializable, atemporal y comprensible para un público amplio.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tipologias" class="section-anchor reveal">
+      <div class="text-center mb-10">
+        <p class="text-decox-700 text-xs font-bold uppercase tracking-[.35em] mb-2">Memoria de calidades por tipología</p>
+        <h2 class="text-3xl md:text-5xl font-black gradient-text">Tres familias residenciales, un solo lenguaje material</h2>
+      </div>
+      <div class="grid xl:grid-cols-3 gap-6">
+        <article class="bg-white rounded-[2rem] p-7 shadow-lift border border-white/70">
+          <div class="flex items-center justify-between gap-4 mb-4">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[.3em] text-decox-600">Tipología 1D</p>
+              <h3 class="text-2xl font-black text-gray-900 mt-2">Vivienda compacta · 45–52 m²</h3>
+            </div>
+            <span class="pill bg-decox-100 text-decox-800">6 unidades</span>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed mb-4">Dirigida a primera residencia compacta, inversión y comprador joven. Debe sentirse más amplia de lo que indican sus metros, por lo que se maximiza la continuidad entre salón, cocina y luz exterior.</p>
+          <ul class="space-y-2 text-sm text-gray-600 mb-5">
+            <li>• Cocina lineal integrada con frente limpio y electrodoméstico panelado parcial.</li>
+            <li>• Continuidad de pavimento porcelánico en toda la vivienda salvo baño.</li>
+            <li>• Armarios de suelo a techo para concentrar almacenaje.</li>
+            <li>• Iluminación perimetral suave + puntos de tarea muy controlados.</li>
+            <li>• Mobiliario sugerido: sofá compacto, mesa extensible y dormitorio con cabecero corrido.</li>
+          </ul>
+          <div class="rounded-2xl bg-decox-50 p-4 text-sm text-decox-900">
+            <strong>Clave Decox:</strong> cocina casi invisible, espejos estratégicos y tonos muy claros para ensanchar la percepción espacial.
+          </div>
+        </article>
+
+        <article class="bg-white rounded-[2rem] p-7 shadow-lift border border-white/70">
+          <div class="flex items-center justify-between gap-4 mb-4">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[.3em] text-decox-600">Tipología 2D</p>
+              <h3 class="text-2xl font-black text-gray-900 mt-2">Vivienda equilibrada · 60–70 m²</h3>
+            </div>
+            <span class="pill bg-sky-100 text-sky-800">6 unidades</span>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed mb-4">Tipología más líquida comercialmente. Debe servir tanto a familia pequeña como a segunda residencia. La propuesta enfatiza una zona de día abierta, cocina bien equipada y dormitorios con capacidad real de armario y escritorio.</p>
+          <ul class="space-y-2 text-sm text-gray-600 mb-5">
+            <li>• Frente de cocina con posible península según replanteo final.</li>
+            <li>• Pavimento gran formato 90×90 o 120×60 efecto piedra clara.</li>
+            <li>• Dormitorio principal con pared de cabecero texturizada en tono lino/oliva grisáceo.</li>
+            <li>• Segundo dormitorio apto para cama doble compacta o dos camas + escritorio.</li>
+            <li>• Baño con mueble suspendido, espejo retroiluminado y ducha extraplana.</li>
+          </ul>
+          <div class="rounded-2xl bg-sky-50 p-4 text-sm text-sky-900">
+            <strong>Clave Decox:</strong> equilibrio entre coste, versatilidad y percepción premium sin sobre-equipar la vivienda.
+          </div>
+        </article>
+
+        <article class="bg-white rounded-[2rem] p-7 shadow-lift border border-white/70">
+          <div class="flex items-center justify-between gap-4 mb-4">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[.3em] text-decox-600">Tipología 3D</p>
+              <h3 class="text-2xl font-black text-gray-900 mt-2">Vivienda familiar · 88–102 m²</h3>
+            </div>
+            <span class="pill bg-emerald-100 text-emerald-800">6 unidades</span>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed mb-4">Producto orientado a familia consolidada o comprador que prioriza comodidad. Necesita una lectura interior más robusta y con algo más de presencia material, especialmente en salón, cocina y dormitorio principal.</p>
+          <ul class="space-y-2 text-sm text-gray-600 mb-5">
+            <li>• Cocina abierta de mayor desarrollo, con más almacenamiento y opción de isla corta o barra.</li>
+            <li>• Pared protagonista en salón con panelado liso, pintura mineral o porcelánico de gran formato.</li>
+            <li>• Carpinterías interiores de mayor altura visual y armarios mejor equipados.</li>
+            <li>• Baño principal con ducha amplia, nicho iluminado y grifería termostática.</li>
+            <li>• En el ático singular, tratamiento premium para terraza privada y continuidad interior-exterior reforzada.</li>
+          </ul>
+          <div class="rounded-2xl bg-emerald-50 p-4 text-sm text-emerald-900">
+            <strong>Clave Decox:</strong> sensación de vivienda principal, más doméstica, más estable y con mejor jerarquía espacial.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="materiales" class="section-anchor reveal">
+      <div class="text-center mb-10">
+        <p class="text-decox-700 text-xs font-bold uppercase tracking-[.35em] mb-2">Paleta material</p>
+        <h2 class="text-3xl md:text-5xl font-black gradient-text">Materiales por estancia</h2>
+      </div>
+      <div class="overflow-hidden rounded-[2rem] border border-white/70 bg-white shadow-lift">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm table-modern">
+            <thead class="bg-gradient-to-r from-decox-800 via-decox-700 to-decox-500 text-white text-left">
+              <tr>
+                <th class="px-5 py-4 font-semibold">Estancia</th>
+                <th class="px-5 py-4 font-semibold">Suelo</th>
+                <th class="px-5 py-4 font-semibold">Paredes</th>
+                <th class="px-5 py-4 font-semibold">Techo</th>
+                <th class="px-5 py-4 font-semibold">Equipamiento / observación</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Vestíbulo / pasillo</td>
+                <td class="px-5 py-4 text-gray-600">Gres porcelánico gran formato 90×90 tono arena/piedra</td>
+                <td class="px-5 py-4 text-gray-600">Pintura plástica lavable mate color lino claro</td>
+                <td class="px-5 py-4 text-gray-600">Yeso liso blanco roto, foseado puntual donde proceda</td>
+                <td class="px-5 py-4 text-gray-600">Espejo vertical, iluminación indirecta y sensación limpia de llegada</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Salón-comedor</td>
+                <td class="px-5 py-4 text-gray-600">Gres porcelánico gran formato rectificado efecto piedra cálida</td>
+                <td class="px-5 py-4 text-gray-600">Base marfil mate + paño acento en microtextura mineral o panel liso decorativo</td>
+                <td class="px-5 py-4 text-gray-600">Falso techo liso con carril o downlight antideslumbrante</td>
+                <td class="px-5 py-4 text-gray-600">Prioridad a continuidad visual y amplitud en zona de día</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Cocina</td>
+                <td class="px-5 py-4 text-gray-600">Mismo pavimento del salón para continuidad espacial</td>
+                <td class="px-5 py-4 text-gray-600">Frente técnico porcelánico / piedra sinterizada + muebles en laminado mate</td>
+                <td class="px-5 py-4 text-gray-600">Techo liso con iluminación lineal de tarea</td>
+                <td class="px-5 py-4 text-gray-600">Encimera compacta, grifería monomando y electrodoméstico básico integrado</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Dormitorio principal</td>
+                <td class="px-5 py-4 text-gray-600">Porcelánico imitación madera o SPC hidrófugo de alta resistencia</td>
+                <td class="px-5 py-4 text-gray-600">Pintura mate tono arena + pared cabecero en textil vinílico o pintura mineral</td>
+                <td class="px-5 py-4 text-gray-600">Yeso liso con cortinero oculto opcional</td>
+                <td class="px-5 py-4 text-gray-600">Lectura cálida, apacible y no recargada</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Dormitorios secundarios</td>
+                <td class="px-5 py-4 text-gray-600">Porcelánico madera o SPC mate tono roble claro</td>
+                <td class="px-5 py-4 text-gray-600">Pintura lavable color hueso, lino o azul humo muy suave</td>
+                <td class="px-5 py-4 text-gray-600">Yeso liso blanco roto</td>
+                <td class="px-5 py-4 text-gray-600">Preparado para cama, escritorio y armario sin saturación visual</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Baños</td>
+                <td class="px-5 py-4 text-gray-600">Porcelánico antideslizante clase 2/3 en zona húmeda · 60×60 o 60×120</td>
+                <td class="px-5 py-4 text-gray-600">Alicatado porcelánico pétreo hasta altura completa en ducha + resto pintado técnico o alicatado parcial</td>
+                <td class="px-5 py-4 text-gray-600">Placa hidrófuga + pintura anti-moho</td>
+                <td class="px-5 py-4 text-gray-600">Mueble suspendido, plato extraplano, mampara templada y nicho integrado</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Terrazas</td>
+                <td class="px-5 py-4 text-gray-600">Porcelánico exterior antideslizante tono piedra / arena</td>
+                <td class="px-5 py-4 text-gray-600">Revestimiento exterior según proyecto + carpintería RPT</td>
+                <td class="px-5 py-4 text-gray-600">Sin tratamiento interior · continuidad visual mediante carpintería</td>
+                <td class="px-5 py-4 text-gray-600">Especialmente importante en viv. 05 y ático 09</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="bg-white rounded-[2rem] p-8 shadow-lift border border-white/70">
+          <h3 class="text-2xl font-black text-gray-900 mb-5">Pintura y acabados de paredes y techos</h3>
+          <div class="space-y-4 text-sm text-gray-600">
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900 mb-1">Paredes secas</p>
+              <p>Pintura plástica mate lavable de alta cubrición, tonos base marfil, lino, arena clara y greige suave. Acabado sin brillo para evitar reflejos duros.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900 mb-1">Paredes de acento</p>
+              <p>Uso medido de texturas minerales, porcelánico de gran formato o pintura al silicato en cabeceros, paños de salón y zonas nobles.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900 mb-1">Techos</p>
+              <p>Yeso liso blanco roto RAL cálido, registros discretos, encuentros limpios y posibilidad de foseado de luz indirecta en zonas singulares.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900 mb-1">Humedad</p>
+              <p>En baños y cocinas se recomienda pintura técnica anti-moho y sellados de juntas de máxima resistencia, especialmente por cercanía a costa.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-[2rem] p-8 shadow-lift border border-white/70">
+          <h3 class="text-2xl font-black text-gray-900 mb-5">Carpinterías interiores y exteriores</h3>
+          <div class="space-y-4 text-sm text-gray-600">
+            <div class="rounded-2xl bg-decox-50 p-4">
+              <p class="font-bold text-decox-900 mb-1">Puertas interiores</p>
+              <p>Hoja lisa lacada o chapada en tono roble claro / fresno humo, herraje mate, tapajuntas rectos y altura visual generosa para sensación contemporánea.</p>
+            </div>
+            <div class="rounded-2xl bg-sky-50 p-4">
+              <p class="font-bold text-sky-900 mb-1">Armarios</p>
+              <p>Frentes lisos de suelo a techo, interiores melamínicos color textil y módulos combinados de balda, barra y cajón según tipología.</p>
+            </div>
+            <div class="rounded-2xl bg-emerald-50 p-4">
+              <p class="font-bold text-emerald-900 mb-1">Ventanas y balconeras</p>
+              <p>Carpintería exterior de aluminio con rotura de puente térmico según proyecto, acabado oscuro o grafito, acristalamiento con control solar donde proceda y corredera de terraza en viviendas con salida exterior.</p>
+            </div>
+            <div class="rounded-2xl bg-amber-50 p-4">
+              <p class="font-bold text-amber-900 mb-1">Clima costero</p>
+              <p>Se recomienda especificar tratamiento apto para ambiente marino en aluminio y herrajes, juntas de EPDM de calidad y revisión de perfiles expuestos a salinidad.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="iluminacion" class="section-anchor reveal">
+      <div class="text-center mb-10">
+        <p class="text-decox-700 text-xs font-bold uppercase tracking-[.35em] mb-2">Luz natural y artificial</p>
+        <h2 class="text-3xl md:text-5xl font-black gradient-text">Iluminar para vender amplitud y confort</h2>
+      </div>
+      <div class="grid lg:grid-cols-[1fr_1fr] gap-8 items-start">
+        <div class="bg-white rounded-[2rem] p-8 shadow-lift border border-white/70">
+          <h3 class="text-2xl font-black text-gray-900 mb-5">Estrategia por estancia</h3>
+          <div class="space-y-4 text-sm text-gray-600">
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900">Zona de día</p>
+              <p>Maximizar el reflejo de la luz natural con pavimento claro, paramentos mates y muebles de altura contenida. Iluminación artificial de 3000K con escenas ambiente, reunión y limpieza.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900">Cocina</p>
+              <p>Luz de tarea precisa mediante lineal LED bajo mueble y downlights empotrados antideslumbrantes. Temperatura 3000K; CRI alto para lectura correcta de materiales.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900">Dormitorios</p>
+              <p>Luz general suave + puntos de lectura laterales + posible tira indirecta en cabecero. En 1D, una única escena bien resuelta es clave para evitar fragmentación visual.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900">Baños</p>
+              <p>Espejo retroiluminado, apoyo vertical sin sombras fuertes y downlight IP adecuado. Temperatura 3000K, tono neutro-cálido.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900">Terrazas</p>
+              <p>Balizas y apliques de luz cálida 2700K. En ático y terrazas relevantes, iluminación tenue y elegante para extender el uso nocturno.</p>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-6">
+          <div class="bg-white rounded-[2rem] p-6 shadow-lift border border-white/70">
+            <h3 class="text-xl font-black text-gray-900 mb-4">Peso de criterios lumínicos</h3>
+            <canvas id="chartLighting" height="260"></canvas>
+          </div>
+          <div class="bg-white rounded-[2rem] p-6 shadow-lift border border-white/70">
+            <h3 class="text-xl font-black text-gray-900 mb-4">Climatización y confort técnico</h3>
+            <div class="space-y-3 text-sm text-gray-600">
+              <p>El proyecto ya prevé <strong>aerotermia para ACS</strong> y <strong>preinstalación de aire acondicionado</strong> según documentación previa. Decox recomienda ocultar la mayor parte del impacto visual de esa preinstalación y coordinarla con falsos techos y ubicaciones de mobiliario.</p>
+              <ul class="space-y-2">
+                <li>• Preinstalación de A/A tipo split o multisplit con previsión de unidades en salón y dormitorio principal.</li>
+                <li>• Rejillas y salidas resueltas con criterio compositivo, no improvisadas.</li>
+                <li>• Integración de termostatos en paramentos discretos.</li>
+                <li>• Cortinaje screen o visillo técnico para reducir carga térmica en huecos de mayor soleamiento.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cocinas-banos" class="section-anchor reveal">
+      <div class="text-center mb-10">
+        <p class="text-decox-700 text-xs font-bold uppercase tracking-[.35em] mb-2">Equipamiento técnico</p>
+        <h2 class="text-3xl md:text-5xl font-black gradient-text">Cocinas y baños: núcleo de valor percibido</h2>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="bg-white rounded-[2rem] p-8 shadow-lift border border-white/70">
+          <h3 class="text-2xl font-black text-gray-900 mb-5">Cocinas</h3>
+          <div class="space-y-4 text-sm text-gray-600">
+            <div class="rounded-2xl bg-decox-50 p-4">
+              <p class="font-bold text-decox-900 mb-1">Distribución tipo</p>
+              <p>1D: frente lineal muy limpio. 2D: lineal con retorno corto o península según replanteo. 3D: lineal generoso con posible barra, isla corta o frente complementario.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900 mb-1">Frentes y encimeras</p>
+              <p>Mobiliario laminado o PET antihuellas en greige, arena o topo claro. Encimera de cuarzo compacto o porcelánico técnico en acabado mate, preferiblemente de dibujo pétreo contenido.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900 mb-1">Electrodomésticos básicos incluidos</p>
+              <p>Placa de inducción, horno, campana integrada, fregadero bajo encimera, grifería monomando, frigorífico combi, lavavajillas integrable y hueco previsto para microondas o torre compacta según tipología.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900 mb-1">Tendencia 2025–2026 incorporada</p>
+              <p>Cocina invisible e integrada: campana lo más oculta posible, electrodoméstico panelado cuando el presupuesto lo admita y menor ruido visual del frente de trabajo.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-[2rem] p-8 shadow-lift border border-white/70">
+          <h3 class="text-2xl font-black text-gray-900 mb-5">Baños</h3>
+          <div class="space-y-4 text-sm text-gray-600">
+            <div class="rounded-2xl bg-sky-50 p-4">
+              <p class="font-bold text-sky-900 mb-1">Sanitarios</p>
+              <p>Inodoro de líneas rectas o suavemente redondeadas, cisterna oculta cuando proceda y lavabo integrado o sobreencimera compacta de diseño sencillo.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900 mb-1">Grifería</p>
+              <p>Grifería monomando cromada, acero cepillado o PVD según presupuesto. En viviendas próximas a costa, priorizar acabados con mejor comportamiento frente a corrosión salina.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900 mb-1">Alicatados</p>
+              <p>Porcelánico 60×120 o 120×120 en ducha y zonas nobles; el resto puede resolverse con medio aplacado y pintura técnica para optimizar coste manteniendo calidad percibida.</p>
+            </div>
+            <div class="rounded-2xl bg-gray-50 p-4">
+              <p class="font-bold text-gray-900 mb-1">Mamparas</p>
+              <p>Mampara fija o corredera según tamaño, vidrio templado transparente con perfilería mínima. Plato extraplanos antideslizante y nicho de ducha siempre que encaje con instalaciones.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="bg-white rounded-[2rem] p-8 shadow-lift border border-white/70">
+          <h3 class="text-2xl font-black text-gray-900 mb-5">Materiales recomendados para clima subtropical y costa</h3>
+          <div class="space-y-4 text-sm text-gray-600">
+            <div class="rounded-2xl bg-amber-50 p-4">
+              <p class="font-bold text-amber-900 mb-1">Suelos y revestimientos</p>
+              <p>Gres porcelánico masa coloreada y/o técnico: muy estable frente a humedad, manchas, radiación solar y uso intensivo. Preferible a madera natural en zonas de día.</p>
+            </div>
+            <div class="rounded-2xl bg-emerald-50 p-4">
+              <p class="font-bold text-emerald-900 mb-1">Metales y herrajes</p>
+              <p>Acero inoxidable de calidad, aluminio con tratamiento apto para ambiente marino, grifería PVD o cromado técnico y mantenimiento preventivo básico.</p>
+            </div>
+            <div class="rounded-2xl bg-sky-50 p-4">
+              <p class="font-bold text-sky-900 mb-1">Tableros y carpintería</p>
+              <p>Tableros hidrófugos en cocina/baño, laminados antihuellas, madera tecnológica en exterior y sellados bien ejecutados en encuentros de terrazas y carpinterías.</p>
+            </div>
+            <div class="rounded-2xl bg-decox-50 p-4">
+              <p class="font-bold text-decox-900 mb-1">Textiles</p>
+              <p>Visillos técnicos, tapicerías desenfundables o con tratamiento antimanchas y alfombras de fibras aptas para alta radiación y ventilación frecuente.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-[2rem] p-8 shadow-lift border border-white/70">
+          <h3 class="text-2xl font-black text-gray-900 mb-5">Tendencias 2025–2026 detectadas con Perplexity</h3>
+          <div class="space-y-4 text-sm text-gray-600">
+            <div class="rounded-2xl bg-gray-50 p-4"><strong class="text-gray-900">Minimalismo cálido y texturizado:</strong> maderas con veta, piedra sinterizada, acabados mate y atmósferas refugio.</div>
+            <div class="rounded-2xl bg-gray-50 p-4"><strong class="text-gray-900">Cocina invisible:</strong> panelados, campanas integradas y menor ruido visual del frente técnico.</div>
+            <div class="rounded-2xl bg-gray-50 p-4"><strong class="text-gray-900">Tonos tierra y volcánicos:</strong> arena, terracota, oliva y beige, muy coherentes con el paisaje canario.</div>
+            <div class="rounded-2xl bg-gray-50 p-4"><strong class="text-gray-900">Materiales resistentes al clima isleño:</strong> superficies sinterizadas, griferías más durables y soluciones pensadas para sol, salinidad y humedad.</div>
+            <div class="rounded-2xl bg-gray-50 p-4"><strong class="text-gray-900">Continuidad interior-exterior:</strong> abrir la vivienda a terraza y balcón como activo espacial y comercial.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="presupuesto" class="section-anchor reveal">
+      <div class="text-center mb-10">
+        <p class="text-decox-700 text-xs font-bold uppercase tracking-[.35em] mb-2">Estimación económica</p>
+        <h2 class="text-3xl md:text-5xl font-black gradient-text">Presupuesto estimado de acabados por vivienda tipo</h2>
+      </div>
+      <div class="grid lg:grid-cols-[1.05fr_.95fr] gap-8 items-start">
+        <div class="bg-white rounded-[2rem] p-6 shadow-lift border border-white/70 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm table-modern">
+              <thead class="bg-gray-900 text-white text-left">
+                <tr>
+                  <th class="px-4 py-4 font-semibold">Tipología</th>
+                  <th class="px-4 py-4 font-semibold text-right">Superficie ref.</th>
+                  <th class="px-4 py-4 font-semibold text-right">Acabados integrados</th>
+                  <th class="px-4 py-4 font-semibold text-right">Cocina + baño base</th>
+                  <th class="px-4 py-4 font-semibold text-right">Total estimado</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100">
+                <tr>
+                  <td class="px-4 py-4 font-semibold text-gray-900">1 dormitorio</td>
+                  <td class="px-4 py-4 text-right text-gray-600">49 m² media</td>
+                  <td class="px-4 py-4 text-right text-gray-600">9.850 €</td>
+                  <td class="px-4 py-4 text-right text-gray-600">7.650 €</td>
+                  <td class="px-4 py-4 text-right font-black text-decox-700">17.500 €</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-4 font-semibold text-gray-900">2 dormitorios</td>
+                  <td class="px-4 py-4 text-right text-gray-600">65 m² media</td>
+                  <td class="px-4 py-4 text-right text-gray-600">12.900 €</td>
+                  <td class="px-4 py-4 text-right text-gray-600">9.600 €</td>
+                  <td class="px-4 py-4 text-right font-black text-decox-700">22.500 €</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-4 font-semibold text-gray-900">3 dormitorios</td>
+                  <td class="px-4 py-4 text-right text-gray-600">95 m² media</td>
+                  <td class="px-4 py-4 text-right text-gray-600">17.400 €</td>
+                  <td class="px-4 py-4 text-right text-gray-600">13.600 €</td>
+                  <td class="px-4 py-4 text-right font-black text-decox-700">31.000 €</td>
+                </tr>
+                <tr class="bg-decox-50/60">
+                  <td class="px-4 py-4 font-bold text-decox-900">Ático 09 (referencia singular)</td>
+                  <td class="px-4 py-4 text-right text-decox-900">55 m² + terraza</td>
+                  <td class="px-4 py-4 text-right text-decox-900">12.500 €</td>
+                  <td class="px-4 py-4 text-right text-decox-900">10.500 €</td>
+                  <td class="px-4 py-4 text-right font-black text-decox-900">23.000 €</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-gray-500 mt-4">Estimación orientativa de acabados interiores y equipamiento base visible de cocina/baño. No incluye mobiliario suelto completo, decoración, local comercial ni urbanización. Debe ajustarse con mediciones y oferta de proveedores.</p>
+        </div>
+        <div class="space-y-6">
+          <div class="bg-white rounded-[2rem] p-6 shadow-lift border border-white/70">
+            <h3 class="text-xl font-black text-gray-900 mb-4">Comparativa por tipología</h3>
+            <canvas id="chartBudget" height="265"></canvas>
+          </div>
+          <div class="bg-white rounded-[2rem] p-6 shadow-lift border border-white/70">
+            <h3 class="text-xl font-black text-gray-900 mb-4">Lectura comercial</h3>
+            <div class="space-y-3 text-sm text-gray-600">
+              <p>La inversión en acabados propuesta es coherente con las <strong>calidades medias-altas</strong> descritas por Nexus y con los precios de venta manejados por Valorex/Finex.</p>
+              <p>La tipología 2D es la más sensible a percepción de valor: una cocina bien resuelta y un baño solvente mejoran mucho la comercialización sin disparar el coste.</p>
+              <p>En 3D y ático conviene reforzar el paquete visible de cocina, iluminación y paños especiales para sostener mejor el ticket de venta.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resumen-tabla" class="section-anchor reveal">
+      <div class="text-center mb-10">
+        <p class="text-decox-700 text-xs font-bold uppercase tracking-[.35em] mb-2">Resumen ejecutivo</p>
+        <h2 class="text-3xl md:text-5xl font-black gradient-text">Tabla resumen técnica</h2>
+      </div>
+      <div class="overflow-hidden rounded-[2rem] border border-white/70 bg-white shadow-lift">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm table-modern">
+            <thead class="bg-gradient-to-r from-basalt to-gray-700 text-white text-left">
+              <tr>
+                <th class="px-5 py-4 font-semibold">Estancia</th>
+                <th class="px-5 py-4 font-semibold">Suelo</th>
+                <th class="px-5 py-4 font-semibold">Paredes</th>
+                <th class="px-5 py-4 font-semibold">Techo</th>
+                <th class="px-5 py-4 font-semibold">Equipamiento</th>
+                <th class="px-5 py-4 font-semibold text-right">Presupuesto ref.</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Salón-comedor</td>
+                <td class="px-5 py-4 text-gray-600">Porcelánico gran formato claro</td>
+                <td class="px-5 py-4 text-gray-600">Pintura mate + paño acento</td>
+                <td class="px-5 py-4 text-gray-600">Yeso liso</td>
+                <td class="px-5 py-4 text-gray-600">Iluminación general + ambiente + punto TV</td>
+                <td class="px-5 py-4 text-right text-gray-700">4.200–7.200 €</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Cocina</td>
+                <td class="px-5 py-4 text-gray-600">Continuidad con salón</td>
+                <td class="px-5 py-4 text-gray-600">Frente técnico porcelánico</td>
+                <td class="px-5 py-4 text-gray-600">Techo técnico liso</td>
+                <td class="px-5 py-4 text-gray-600">Mobiliario, encimera, placa, horno, campana, fregadero</td>
+                <td class="px-5 py-4 text-right text-gray-700">5.800–10.200 €</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Dormitorio principal</td>
+                <td class="px-5 py-4 text-gray-600">Porcelánico madera / SPC</td>
+                <td class="px-5 py-4 text-gray-600">Pintura mate + cabecero de acento</td>
+                <td class="px-5 py-4 text-gray-600">Yeso liso</td>
+                <td class="px-5 py-4 text-gray-600">Armario, lectura lateral, preinst. A/A cercana</td>
+                <td class="px-5 py-4 text-right text-gray-700">2.400–4.600 €</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Dormitorios secundarios</td>
+                <td class="px-5 py-4 text-gray-600">Porcelánico madera / SPC</td>
+                <td class="px-5 py-4 text-gray-600">Pintura lavable clara</td>
+                <td class="px-5 py-4 text-gray-600">Yeso liso</td>
+                <td class="px-5 py-4 text-gray-600">Punto escritorio, armario y luz regulada</td>
+                <td class="px-5 py-4 text-right text-gray-700">1.600–3.800 €</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Baño</td>
+                <td class="px-5 py-4 text-gray-600">Porcelánico antideslizante</td>
+                <td class="px-5 py-4 text-gray-600">Alicatado pétreo + pintura técnica</td>
+                <td class="px-5 py-4 text-gray-600">Hidrófugo</td>
+                <td class="px-5 py-4 text-gray-600">Mueble suspendido, espejo, mampara, grifería</td>
+                <td class="px-5 py-4 text-right text-gray-700">2.500–4.700 €</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-semibold text-gray-900">Vestíbulo / pasillo</td>
+                <td class="px-5 py-4 text-gray-600">Porcelánico 90×90</td>
+                <td class="px-5 py-4 text-gray-600">Pintura mate</td>
+                <td class="px-5 py-4 text-gray-600">Yeso liso</td>
+                <td class="px-5 py-4 text-gray-600">Espejo, apliques, continuidad de diseño</td>
+                <td class="px-5 py-4 text-right text-gray-700">900–1.800 €</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="bg-gradient-to-br from-decox-900 via-decox-800 to-basalt rounded-[2rem] p-8 md:p-10 text-white shadow-soft">
+        <div class="grid lg:grid-cols-[1.1fr_.9fr] gap-8 items-start">
+          <div>
+            <p class="text-decox-200 text-xs uppercase tracking-[.35em] font-bold mb-3">Conclusión Decox</p>
+            <h2 class="text-3xl md:text-4xl font-black mb-4">El interiorismo debe sostener el valor del producto sin disparar el coste</h2>
+            <p class="text-white/85 leading-relaxed mb-4">Guargacho 1 no necesita un interiorismo ostentoso; necesita <strong>claridad espacial, buenas cocinas, baños solventes, materiales resistentes y una atmósfera contemporánea canaria</strong> que conecte con el mercado del sur de Tenerife. Con esa base, la promoción refuerza su posicionamiento de obra nueva escasa, funcional y atractiva.</p>
+            <p class="text-white/85 leading-relaxed">La recomendación de Decox es ejecutar una <strong>memoria de acabados cerrada por tipología</strong> y, si el plan comercial lo permite, preparar al menos una unidad piloto 2D o 3D y el ático 09 como referencias de venta.</p>
+          </div>
+          <div class="glass rounded-[1.75rem] p-6 bg-white/10">
+            <h3 class="text-xl font-black mb-4">Checklist previo a compras</h3>
+            <ul class="space-y-2 text-sm text-white/85">
+              <li>✅ Coordinar replanteo de cocina con instalaciones y estructura</li>
+              <li>✅ Validar catálogo único de pavimentos y alicatados para todo el edificio</li>
+              <li>✅ Confirmar tratamiento marino de carpinterías y herrajes expuestos</li>
+              <li>✅ Unificar criterios de iluminación y temperatura de color</li>
+              <li>✅ Preparar dossier comercial con renders/material board realista</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-gray-950 text-gray-400 py-12 mt-12">
+    <div class="max-w-7xl mx-auto px-6 text-sm grid md:grid-cols-2 gap-8">
+      <div>
+        <p class="text-white font-semibold mb-2">Decox · Sistema de Agentes Inmobiliarios IA</p>
+        <p>Proyecto: Guargacho 1 · Edificio de Viviendas y Local Comercial · Ctra. General TF-652 · San Miguel de Abona · Tenerife.</p>
+        <p class="mt-2">Base documental leída: proyecto arquitectónico (páginas convertidas del PDF), informe de arquitectura de Arqon, esquemas de planta, análisis de Nexus, estudio financiero de Finex, informe jurídico, trámites y tasación de Valorex.</p>
+      </div>
+      <div>
+        <p class="text-white font-semibold mb-2">Notas y referencias</p>
+        <p>Tendencias consultadas con Perplexity/Web: Grupo Globarq (cocinas en Tenerife 2026), Glassydur (Canarias 2025) y reportaje de Manera Magazine sobre reforma en Tenerife con foco en luz, materiales honestos y continuidad interior-exterior.</p>
+        <p class="mt-2 text-gray-500">Nota: el log de tarea menciona 2.847.000 €, pero el informe de tasación HTML ya generado por Valorex fija el valor de referencia en 3.847.225 €; esta propuesta toma como base el informe existente del proyecto para mantener coherencia interagente.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    new Chart(document.getElementById('chartBudget'), {
+      type: 'bar',
+      data: {
+        labels: ['1 dormitorio', '2 dormitorios', '3 dormitorios', 'Ático 09'],
+        datasets: [
+          {
+            label: 'Total acabados estimado (€)',
+            data: [17500, 22500, 31000, 23000],
+            backgroundColor: ['#c77dff', '#8db4ba', '#7d8b67', '#c98963'],
+            borderRadius: 12,
+            borderSkipped: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ctx.parsed.y.toLocaleString('es-ES') + ' €' } }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { callback: v => v.toLocaleString('es-ES') + ' €' },
+            grid: { color: 'rgba(0,0,0,.06)' }
+          },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    new Chart(document.getElementById('chartLighting'), {
+      type: 'radar',
+      data: {
+        labels: ['Luz natural', 'Confort visual', 'Mantenimiento', 'Ahorro energético', 'Escena comercial', 'Adaptación climática'],
+        datasets: [{
+          label: 'Peso del criterio',
+          data: [9.5, 9.2, 8.5, 8.4, 8.8, 9.1],
+          fill: true,
+          backgroundColor: 'rgba(199,125,255,.16)',
+          borderColor: '#8d3fe1',
+          pointBackgroundColor: '#7d8b67',
+          pointBorderColor: '#fff',
+          pointRadius: 4
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: {
+          r: {
+            min: 0,
+            max: 10,
+            ticks: { stepSize: 2, backdropColor: 'transparent', color: '#6b7280' },
+            grid: { color: 'rgba(0,0,0,.08)' },
+            angleLines: { color: 'rgba(0,0,0,.08)' },
+            pointLabels: { color: '#374151', font: { size: 12, weight: 600 } }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trámites Administrativos — Guargacho 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            gestex: {
+              50:'#faf7f2',100:'#f4ebe0',200:'#ead6bf',300:'#ddb997',400:'#d4a373',500:'#c38753',600:'#a96a3f',700:'#875032',800:'#6f432d',900:'#5c3928'
+            }
+          },
+          boxShadow: {
+            soft:'0 20px 60px rgba(36,31,26,.10)',
+            glow:'0 20px 60px rgba(169,106,63,.16)',
+            btn:'0 10px 0 #7b4e31, 0 18px 30px rgba(92,57,40,.18)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html{scroll-behavior:smooth} body{background:radial-gradient(circle at top left,rgba(212,163,115,.18),transparent 26%),linear-gradient(180deg,#fffdfb,#f7f1e9)}
+    .glass{background:rgba(255,255,255,.76);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.6)}
+    .reveal{opacity:0;transform:translateY(26px);transition:all .75s ease}.reveal.visible{opacity:1;transform:none}
+    .gradient-text{background:linear-gradient(135deg,#6f432d,#d4a373,#875032);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .8rem;border-radius:9999px;font-size:.72rem;font-weight:800}
+    .ok{background:#e9f9ef;color:#166534;border:1px solid #bbf7d0}.warn{background:#fff7e6;color:#9a6700;border:1px solid #f6d38d}.risk{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}.info{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+    .btn3d{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 1.25rem;border-radius:1rem;font-weight:800;transition:.18s ease;transform:translateY(0);box-shadow:0 8px 0 #7b4e31,0 18px 30px rgba(92,57,40,.18);background:linear-gradient(180deg,#d4a373,#b97b48);color:#fff}
+    .btn3d:hover{transform:translateY(2px);box-shadow:0 6px 0 #7b4e31,0 14px 24px rgba(92,57,40,.16)}
+    .btn3d-lite{display:inline-flex;align-items:center;gap:.45rem;padding:.75rem 1rem;border-radius:.9rem;font-weight:700;background:#fff;color:#6f432d;border:1px solid rgba(111,67,45,.12);box-shadow:0 6px 0 #ead6bf,0 12px 22px rgba(111,67,45,.08);transition:.18s ease}.btn3d-lite:hover{transform:translateY(2px);box-shadow:0 4px 0 #ead6bf,0 10px 18px rgba(111,67,45,.08)}
+    .timeline:before{content:'';position:absolute;left:1rem;top:.2rem;bottom:.2rem;width:2px;background:linear-gradient(180deg,#d4a373,rgba(212,163,115,.1))}
+    .table-modern tbody tr:hover{background:rgba(212,163,115,.08)}
+  </style>
+</head>
+<body class="font-sans text-gray-800 antialiased">
+  <nav class="sticky top-0 z-50 bg-white/75 backdrop-blur-xl border-b border-white/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
+      <div>
+        <p class="text-xs uppercase tracking-[.22em] font-bold text-gestex-700">Gestex · San Miguel de Abona</p>
+        <p class="text-sm text-gray-600">Ruta administrativa del proyecto Guargacho 1</p>
+      </div>
+      <div class="hidden xl:flex items-center gap-3 text-sm font-semibold text-gray-600">
+        <a href="#resumen" class="btn3d-lite">Resumen</a>
+        <a href="#checklist" class="btn3d-lite">Checklist</a>
+        <a href="#tasas" class="btn3d-lite">Tasas</a>
+        <a href="#organigrama" class="btn3d-lite">Organigrama</a>
+        <a href="#calendario" class="btn3d-lite">Calendario</a>
+        <a href="#tabla" class="btn3d-lite">Tabla</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="relative overflow-hidden bg-gradient-to-br from-gestex-900 via-gestex-800 to-gestex-600 text-white">
+    <div class="absolute inset-0 opacity-15" style="background-image:linear-gradient(rgba(255,255,255,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.15) 1px,transparent 1px);background-size:28px 28px"></div>
+    <div class="absolute -top-12 right-0 w-72 h-72 rounded-full bg-white/10 blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-amber-200/10 blur-3xl"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="max-w-4xl">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[.22em]">Informe de trámites administrativos</span>
+        <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-black leading-tight">Secuencia administrativa para el <span class="text-amber-200">edificio residencial de Guargacho</span></h1>
+        <p class="mt-6 max-w-3xl text-lg text-amber-50/90 leading-relaxed">Hoja de ruta de licencias, autorizaciones, libros, fiscalidad y cierre registral para la promoción situada en <strong>Ctra. General TF-652, Guargacho, San Miguel de Abona</strong>. Se toma como base operativa el programa de <strong>18 viviendas + 1 local + 18 garajes + 18 trasteros</strong> descrito en el proyecto arquitectónico, tasación y encargo T04.</p>
+        <div class="mt-8 flex flex-wrap gap-3 text-sm">
+          <span class="px-4 py-2 rounded-full bg-white/12 border border-white/20">🏢 PB + 2 + sótano</span>
+          <span class="px-4 py-2 rounded-full bg-white/12 border border-white/20">📐 1.349 m² s/r + 1.789 m² total</span>
+          <span class="px-4 py-2 rounded-full bg-white/12 border border-white/20">🏘️ 18 viviendas</span>
+          <span class="px-4 py-2 rounded-full bg-white/12 border border-white/20">🛍️ Local ~95 m²</span>
+          <span class="px-4 py-2 rounded-full bg-white/12 border border-white/20">⏱️ Obra base: 18–24 meses</span>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="#tabla" class="btn3d">Ver tabla operativa</a>
+          <a href="#calendario" class="btn3d-lite">Ir al calendario</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20">
+    <section id="resumen" class="reveal">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
+        <div>
+          <p class="text-sm uppercase tracking-[.22em] text-gestex-700 font-bold">Resumen ejecutivo</p>
+          <h2 class="mt-2 text-3xl lg:text-4xl font-black gradient-text">Qué hay, qué falta y cuál es la ruta correcta</h2>
+        </div>
+        <div class="glass rounded-2xl p-5 shadow-soft max-w-xl text-sm text-gray-700">
+          <strong>Incidencia documental detectada:</strong> el informe jurídico previo de Legex habla de <strong>12 viviendas / PB+3 / solar 460 m²</strong>, mientras que el proyecto arquitectónico, la tasación, el PSS y la tarea T04 trabajan con <strong>18 viviendas / PB+2 + sótano / 1.789 m²</strong>. Para no generar un expediente incoherente, antes de licencia debe unificarse la ficha base del proyecto.
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <article class="glass rounded-3xl p-6 shadow-glow"><p class="text-sm font-semibold text-gray-500">Estado urbanístico</p><h3 class="mt-3 text-2xl font-black text-gestex-900">Viable</h3><p class="mt-3 text-sm text-gray-600">Legex concluye viabilidad urbanística en suelo urbano consolidado y acceso directo a licencia, pero con datos internos a corregir.</p><span class="mt-4 badge warn">Unificar ficha previa</span></article>
+        <article class="glass rounded-3xl p-6 shadow-soft"><p class="text-sm font-semibold text-gray-500">Primer hito crítico</p><h3 class="mt-3 text-2xl font-black text-gestex-900">Licencia de obra</h3><p class="mt-3 text-sm text-gray-600">Proyecto de ejecución consistente, geotécnico válido, designaciones y autoliquidaciones municipales correctamente planteadas.</p><span class="mt-4 badge risk">Bloqueante</span></article>
+        <article class="glass rounded-3xl p-6 shadow-soft"><p class="text-sm font-semibold text-gray-500">Paquete admin. orientativo</p><h3 class="mt-3 text-2xl font-black text-gestex-900">125k–175k €</h3><p class="mt-3 text-sm text-gray-600">Orden de magnitud conjunta de ICIO, tasa urbanística, vía pública, libros, control documental, primera ocupación, notaría/registro y AJD.</p><span class="mt-4 badge info">Estimación 2026</span></article>
+        <article class="glass rounded-3xl p-6 shadow-soft"><p class="text-sm font-semibold text-gray-500">Ruta total</p><h3 class="mt-3 text-2xl font-black text-gestex-900">24–32 meses</h3><p class="mt-3 text-sm text-gray-600">Desde cierre del expediente de licencia hasta primera ocupación, obra nueva terminada, división horizontal y alta catastral.</p><span class="mt-4 badge ok">Con solapes posibles</span></article>
+      </div>
+      <div class="mt-8 grid lg:grid-cols-[1.1fr_.9fr] gap-6">
+        <div class="bg-white rounded-3xl p-7 shadow-soft border border-white/70">
+          <h3 class="text-xl font-black text-gray-900">Criterio Gestex</h3>
+          <div class="mt-5 space-y-4 text-gray-700 leading-relaxed">
+            <p>Al tratarse de un edificio con sótano, uso residencial colectivo y varias fincas futuras, la tramitación debe plantearse en tres capas: <strong>pre-obra</strong> (licencia, proyecto coherente, geotécnico, designaciones y fiscalidad), <strong>ejecución</strong> (replanteo, PSS, apertura de centro de trabajo, libros, residuos, calidad, ocupación de vía pública) y <strong>post-obra</strong> (CFO, primera ocupación/habitabilidad, escrituras, división horizontal, Catastro y Registro).</p>
+            <p>El expediente es administrativamente <strong>más claro que una promoción en suelo rústico</strong>, pero presenta un riesgo de coherencia documental: si no se corrige ya la contradicción 12/18 viviendas, el Ayuntamiento, la notaría y el Registro pueden obligar a rehacer piezas clave.</p>
+            <p>La mejor estrategia es cerrar una <strong>ficha matriz única</strong> antes de presentar licencia: número de viviendas, superficies, altura, referencia catastral, PEM/PEC, geotécnico, agentes intervinientes y cronograma.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-3xl p-7 shadow-soft border border-white/70">
+          <h3 class="text-xl font-black text-gray-900">Base documental usada</h3>
+          <ul class="mt-5 space-y-3 text-sm text-gray-700">
+            <li>• Proyecto PDF: edificio de viviendas y local en TF-652, PB+2 + sótano.</li>
+            <li>• Informe de arquitectura: 18 viviendas, 18 garajes, 18 trasteros, 1.789 m² totales.</li>
+            <li>• Plan de Seguridad y Salud: obra 18–24 meses, mismas magnitudes y fases de obra.</li>
+            <li>• Tasación Valorex: valor total 3.847.225 €, absorción comercial y mix tipológico.</li>
+            <li>• Informe jurídico Legex: viabilidad urbanística, pero con discrepancia de 12 viviendas / PB+3.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="checklist" class="reveal">
+      <div class="mb-8"><p class="text-sm uppercase tracking-[.22em] text-gestex-700 font-bold">Checklist cronológico</p><h2 class="mt-2 text-3xl lg:text-4xl font-black gradient-text">Trámites necesarios de principio a fin</h2></div>
+      <div class="grid xl:grid-cols-3 gap-6">
+        <article class="bg-white rounded-3xl p-7 shadow-soft border border-white/70">
+          <div class="flex items-center justify-between"><h3 class="text-xl font-black">1. Pre-obra</h3><span class="badge risk">Fase crítica</span></div>
+          <div class="mt-5 space-y-4 text-sm text-gray-700">
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>1. Ficha única del proyecto.</strong><p class="mt-1 text-gray-600">Unificar 18 viviendas / PB+2+sótano / superficies / promotor / técnicos / referencia catastral.</p></div>
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>2. Informe geotécnico.</strong><p class="mt-1 text-gray-600">Imprescindible al existir sótano y cimentación enterrada. Si hay informe antiguo, verificar vigencia y adecuación.</p></div>
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>3. Proyecto de ejecución cerrado.</strong><p class="mt-1 text-gray-600">Con memoria, pliego, presupuesto, planos, DB-SI/SUA/HE/HR, estructura, instalaciones y residuos.</p></div>
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>4. Licencia urbanística de obra mayor.</strong><p class="mt-1 text-gray-600">Presentación en Ayuntamiento de San Miguel de Abona con autoliquidación de tasa urbanística e ICIO.</p></div>
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>5. Designaciones.</strong><p class="mt-1 text-gray-600">Dirección de obra, dirección de ejecución, coordinador de seguridad, OCT/decenal si aplica y contratista.</p></div>
+          </div>
+        </article>
+        <article class="bg-white rounded-3xl p-7 shadow-soft border border-white/70">
+          <div class="flex items-center justify-between"><h3 class="text-xl font-black">2. Inicio y ejecución</h3><span class="badge warn">Antes de arrancar</span></div>
+          <div class="mt-5 space-y-4 text-sm text-gray-700">
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>6. Acta de replanteo e inicio.</strong><p class="mt-1 text-gray-600">Debe dejar constancia del arranque efectivo y del estado del solar.</p></div>
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>7. Plan de Seguridad y Salud aprobado.</strong><p class="mt-1 text-gray-600">Adaptado al contratista adjudicatario y aprobado por la coordinación antes del acceso a obra.</p></div>
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>8. Apertura de centro de trabajo.</strong><p class="mt-1 text-gray-600">Comunicación a la autoridad laboral canaria por parte del contratista.</p></div>
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>9. Ocupación de vía pública.</strong><p class="mt-1 text-gray-600">Si hay vallado, contenedor, acopio, andamio, grúa o afección al dominio público.</p></div>
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>10. Libros y control documental.</strong><p class="mt-1 text-gray-600">Libro de órdenes, incidencias, subcontratación, calidad, residuos y certificaciones.</p></div>
+          </div>
+        </article>
+        <article class="bg-white rounded-3xl p-7 shadow-soft border border-white/70">
+          <div class="flex items-center justify-between"><h3 class="text-xl font-black">3. Cierre y comercialización</h3><span class="badge ok">Salida registral</span></div>
+          <div class="mt-5 space-y-4 text-sm text-gray-700">
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>11. Certificado final de obra.</strong><p class="mt-1 text-gray-600">Suscrito por DO y DEO, con anexos y documentación final de instalaciones.</p></div>
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>12. Primera ocupación / habitabilidad.</strong><p class="mt-1 text-gray-600">Vía municipal de licencia o declaración responsable según ordenanza/procedimiento vigente.</p></div>
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>13. Obra nueva terminada y división horizontal.</strong><p class="mt-1 text-gray-600">Escritura notarial con libro del edificio, seguro decenal si procede y cuadro de superficies definitivo.</p></div>
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>14. Alta en Catastro.</strong><p class="mt-1 text-gray-600">Declaración catastral de la obra nueva y de cada entidad independiente.</p></div>
+            <div class="rounded-2xl border border-gray-100 p-4"><strong>15. Registro + ventas.</strong><p class="mt-1 text-gray-600">Inscripción de obra nueva/división horizontal, preparación de escrituras y repercusión fiscal a compradores.</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="mb-8"><p class="text-sm uppercase tracking-[.22em] text-gestex-700 font-bold">Documentación por trámite</p><h2 class="mt-2 text-3xl lg:text-4xl font-black gradient-text">Qué pedir y qué entregar en cada paso</h2></div>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <article class="bg-white rounded-3xl p-7 shadow-soft border border-white/70">
+          <h3 class="text-xl font-black">Paquete de licencia</h3>
+          <ul class="mt-5 space-y-3 text-sm text-gray-700">
+            <li>• Instancia municipal y acreditación del promotor.</li>
+            <li>• Proyecto básico/de ejecución coherente con la ficha final del edificio.</li>
+            <li>• Estudio o Estudio Básico de Seguridad y Salud.</li>
+            <li>• Estudio de gestión de residuos.</li>
+            <li>• Informe geotécnico.</li>
+            <li>• Hojas de dirección facultativa y coordinación.</li>
+            <li>• Presupuesto / PEM / mediciones y autoliquidaciones.</li>
+            <li>• Justificación urbanística actualizada conforme a ordenación vigente.</li>
+          </ul>
+        </article>
+        <article class="bg-white rounded-3xl p-7 shadow-soft border border-white/70">
+          <h3 class="text-xl font-black">Paquete de cierre</h3>
+          <ul class="mt-5 space-y-3 text-sm text-gray-700">
+            <li>• Certificado final de obra y acta final.</li>
+            <li>• Boletines y legalizaciones de instalaciones.</li>
+            <li>• Libro del edificio, manuales y garantías.</li>
+            <li>• Certificados de eficiencia energética finales.</li>
+            <li>• Justificación de residuos y control de calidad.</li>
+            <li>• Documento municipal de primera ocupación/habitabilidad.</li>
+            <li>• Escritura de obra nueva terminada y división horizontal.</li>
+            <li>• Declaración catastral y liquidación AJD correspondiente.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="tasas" class="reveal">
+      <div class="mb-8"><p class="text-sm uppercase tracking-[.22em] text-gestex-700 font-bold">Tasas e impuestos</p><h2 class="mt-2 text-3xl lg:text-4xl font-black gradient-text">Hipótesis económica administrativa para San Miguel de Abona</h2></div>
+      <div class="grid xl:grid-cols-[1.08fr_.92fr] gap-6">
+        <div class="bg-white rounded-3xl p-7 shadow-soft border border-white/70 overflow-x-auto">
+          <table class="w-full text-sm table-modern min-w-[760px]">
+            <thead class="bg-gestex-50 text-gestex-800"><tr><th class="text-left py-3 px-4 rounded-tl-2xl">Concepto</th><th class="text-left py-3 px-4">Criterio</th><th class="text-left py-3 px-4 rounded-tr-2xl">Estimación operativa</th></tr></thead>
+            <tbody class="divide-y divide-gray-100 text-gray-700">
+              <tr><td class="py-3 px-4 font-semibold">Base técnica adoptada</td><td class="py-3 px-4">Se toma el coste de construcción usado por Valorex: 1.250 €/m² × 1.789 m²</td><td class="py-3 px-4"><strong>2.236.250 €</strong></td></tr>
+              <tr><td class="py-3 px-4 font-semibold">ICIO</td><td class="py-3 px-4">Ordenanza OF14 vigente desde 30/06/2025. Para caja preventiva se aplica hipótesis conservadora del 4%</td><td class="py-3 px-4"><strong>89.450 €</strong></td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Tasa licencia urbanística</td><td class="py-3 px-4">Ordenanza OF4 vigente desde 30/06/2025. Sin acceso automático al articulado completo, reservar 0,8–1,0% sobre base</td><td class="py-3 px-4"><strong>17.890–22.363 €</strong></td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Ocupación vía pública</td><td class="py-3 px-4">Depende de tiempo real de valla, contenedor, andamio, acopio y/o grúa</td><td class="py-3 px-4"><strong>2.000–8.000 €</strong></td></tr>
+              <tr><td class="py-3 px-4 font-semibold">AJD obra nueva / división horizontal</td><td class="py-3 px-4">Estimación prudente 0,75–1,00% según configuración y base escriturable</td><td class="py-3 px-4"><strong>15.000–30.000 €</strong></td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Notaría + Registro</td><td class="py-3 px-4">Obra nueva terminada + división horizontal + inscripciones</td><td class="py-3 px-4"><strong>8.000–18.000 €</strong></td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Catastro</td><td class="py-3 px-4">Trámite administrativo; el coste principal es de gestión/documentación</td><td class="py-3 px-4"><strong>500–2.000 €</strong></td></tr>
+            </tbody>
+          </table>
+          <div class="mt-5 rounded-2xl bg-amber-50 border border-amber-200 p-4 text-sm text-amber-900"><strong>Nota metodológica:</strong> la tarea pedía buscar tasas municipales y se ha confirmado la existencia de las ordenanzas <strong>OF4 (licencias urbanísticas)</strong> y <strong>OF14 (ICIO)</strong> vigentes en la sede de San Miguel de Abona desde el 30/06/2025. Al no poder extraer automáticamente el articulado completo del BOP 78/2025 desde la sede, se formula una <strong>estimación prudente de tesorería</strong> que debe validarse con autoliquidación real antes de presentar expediente.</div>
+        </div>
+        <div class="bg-white rounded-3xl p-7 shadow-soft border border-white/70 flex flex-col">
+          <h3 class="text-xl font-black">Distribución del paquete administrativo</h3>
+          <div class="mt-6 min-h-[320px] flex-1"><canvas id="taxChart"></canvas></div>
+          <div class="mt-5 grid sm:grid-cols-2 gap-4 text-sm">
+            <div class="rounded-2xl bg-gestex-50 border border-gestex-100 p-4"><strong>Rango bajo</strong><p class="mt-1 text-gray-600">~132.840 €</p></div>
+            <div class="rounded-2xl bg-gestex-50 border border-gestex-100 p-4"><strong>Rango alto</strong><p class="mt-1 text-gray-600">~169.813 €</p></div>
+            <div class="rounded-2xl bg-gestex-50 border border-gestex-100 p-4"><strong>No incluido</strong><p class="mt-1 text-gray-600">Coste total de obra, honorarios completos de proyecto, financiación, comercialización e IGIC de compraventas.</p></div>
+            <div class="rounded-2xl bg-gestex-50 border border-gestex-100 p-4"><strong>IGIC ventas</strong><p class="mt-1 text-gray-600">Se repercute al comprador en la primera entrega; afecta a comercialización, no a la tasa de licencia.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="organigrama" class="reveal">
+      <div class="mb-8"><p class="text-sm uppercase tracking-[.22em] text-gestex-700 font-bold">Organigrama administrativo</p><h2 class="mt-2 text-3xl lg:text-4xl font-black gradient-text">Quién interviene en cada tramo del expediente</h2></div>
+      <div class="bg-white rounded-3xl p-8 shadow-soft border border-white/70 overflow-x-auto">
+        <div class="min-w-[980px] grid grid-cols-5 gap-5 text-sm">
+          <div class="col-span-5 flex justify-center"><div class="rounded-2xl bg-gradient-to-br from-gestex-800 to-gestex-600 text-white p-5 text-center shadow-glow w-72"><p class="text-xs uppercase tracking-[.18em] opacity-80">Promotor</p><p class="mt-2 text-xl font-black">Cabecera del expediente</p></div></div>
+          <div class="col-span-5 flex justify-center text-gestex-500 text-2xl">↓</div>
+          <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><strong>Ayuntamiento</strong><p class="mt-2 text-gray-600">Licencia de obra mayor, vía pública, primera ocupación, liquidaciones y control urbanístico.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><strong>Arquitecto + aparejador</strong><p class="mt-2 text-gray-600">Proyecto, DO/DEO, CFO, libro del edificio y cierre técnico.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><strong>Coordinación S+S + contratista</strong><p class="mt-2 text-gray-600">PSS, apertura de centro de trabajo, libros y ejecución segura.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><strong>Notaría + Registro + Catastro</strong><p class="mt-2 text-gray-600">Obra nueva terminada, división horizontal, inscripción y altas catastrales.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><strong>Asesoría fiscal</strong><p class="mt-2 text-gray-600">ICIO, AJD, autoliquidaciones, soporte de escrituras y fiscalidad final.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="calendario" class="reveal">
+      <div class="mb-8"><p class="text-sm uppercase tracking-[.22em] text-gestex-700 font-bold">Calendario</p><h2 class="mt-2 text-3xl lg:text-4xl font-black gradient-text">Trámites alineados con el cronograma de obra</h2></div>
+      <div class="grid xl:grid-cols-[1fr_.96fr] gap-6">
+        <div class="bg-white rounded-3xl p-7 shadow-soft border border-white/70 relative timeline">
+          <div class="space-y-7 pl-10">
+            <div class="relative"><span class="absolute -left-[2.55rem] top-1 w-6 h-6 rounded-full bg-gestex-500 border-4 border-white"></span><p class="text-xs uppercase tracking-[.18em] text-gestex-700 font-bold">M-4 a M0</p><h3 class="mt-1 text-lg font-black">Pre-lanzamiento administrativo</h3><p class="mt-2 text-sm text-gray-600">Unificación de ficha, geotécnico, proyecto, presupuesto base, validación jurídica y presentación de licencia.</p></div>
+            <div class="relative"><span class="absolute -left-[2.55rem] top-1 w-6 h-6 rounded-full bg-gestex-500 border-4 border-white"></span><p class="text-xs uppercase tracking-[.18em] text-gestex-700 font-bold">M0 a M6/8</p><h3 class="mt-1 text-lg font-black">Resolución de licencia y arranque</h3><p class="mt-2 text-sm text-gray-600">Pago de ICIO/tasa, designaciones, PSS, apertura de centro de trabajo, replanteo, vallado y posibles permisos de vía pública.</p></div>
+            <div class="relative"><span class="absolute -left-[2.55rem] top-1 w-6 h-6 rounded-full bg-gestex-500 border-4 border-white"></span><p class="text-xs uppercase tracking-[.18em] text-gestex-700 font-bold">M1 a M24</p><h3 class="mt-1 text-lg font-black">Ejecución de obra</h3><p class="mt-2 text-sm text-gray-600">Según PSS: excavación y sótano, cimentación, estructura, cerramientos, instalaciones y acabados. Control documental continuo.</p></div>
+            <div class="relative"><span class="absolute -left-[2.55rem] top-1 w-6 h-6 rounded-full bg-gestex-500 border-4 border-white"></span><p class="text-xs uppercase tracking-[.18em] text-gestex-700 font-bold">M20 a M26</p><h3 class="mt-1 text-lg font-black">Cierre técnico y primera ocupación</h3><p class="mt-2 text-sm text-gray-600">CFO, libro del edificio, legalizaciones, primera ocupación/habitabilidad y regularización municipal final.</p></div>
+            <div class="relative"><span class="absolute -left-[2.55rem] top-1 w-6 h-6 rounded-full bg-gestex-500 border-4 border-white"></span><p class="text-xs uppercase tracking-[.18em] text-gestex-700 font-bold">M22 a M32</p><h3 class="mt-1 text-lg font-black">Salida notarial y registral</h3><p class="mt-2 text-sm text-gray-600">Obra nueva terminada, división horizontal, Catastro, AJD, Registro y preparación de escrituras de compraventa.</p></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-3xl p-7 shadow-soft border border-white/70">
+          <h3 class="text-xl font-black">Alineación con fases de obra del PSS</h3>
+          <div class="mt-6 space-y-5 text-sm">
+            <div><div class="flex justify-between font-semibold"><span>Licencia + arranque</span><span>M-4 → M2</span></div><div class="mt-2 h-3 rounded-full bg-gray-100"><div class="h-3 rounded-full bg-gestex-700" style="width:26%"></div></div></div>
+            <div><div class="flex justify-between font-semibold"><span>Excavación y cimentación sótano</span><span>M1 → M4</span></div><div class="mt-2 h-3 rounded-full bg-gray-100"><div class="h-3 rounded-full bg-gestex-500" style="width:22%"></div></div></div>
+            <div><div class="flex justify-between font-semibold"><span>Estructura</span><span>M4 → M9</span></div><div class="mt-2 h-3 rounded-full bg-gray-100"><div class="h-3 rounded-full bg-amber-500" style="width:32%"></div></div></div>
+            <div><div class="flex justify-between font-semibold"><span>Cerramientos + instalaciones</span><span>M8 → M18</span></div><div class="mt-2 h-3 rounded-full bg-gray-100"><div class="h-3 rounded-full bg-amber-400" style="width:58%"></div></div></div>
+            <div><div class="flex justify-between font-semibold"><span>Acabados + legalizaciones</span><span>M16 → M24</span></div><div class="mt-2 h-3 rounded-full bg-gray-100"><div class="h-3 rounded-full bg-gestex-300" style="width:68%"></div></div></div>
+            <div><div class="flex justify-between font-semibold"><span>Primera ocupación + registro</span><span>M22 → M32</span></div><div class="mt-2 h-3 rounded-full bg-gray-100"><div class="h-3 rounded-full bg-emerald-500" style="width:78%"></div></div></div>
+          </div>
+          <div class="mt-6 rounded-2xl bg-amber-50 border border-amber-200 p-4 text-sm text-amber-900"><strong>Recomendación:</strong> iniciar la preparación de primera ocupación, libro del edificio y escritura de obra nueva <strong>no al final</strong>, sino desde el mes 16, cuando instalaciones y acabados ya permiten consolidar documentación final.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tabla" class="reveal">
+      <div class="mb-8"><p class="text-sm uppercase tracking-[.22em] text-gestex-700 font-bold">Tabla resumen</p><h2 class="mt-2 text-3xl lg:text-4xl font-black gradient-text">Matriz completa de trámites, organismos, plazos y costes</h2></div>
+      <div class="bg-white rounded-3xl shadow-soft border border-white/70 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[1180px] text-sm table-modern">
+            <thead class="bg-gestex-900 text-white"><tr><th class="text-left py-4 px-4">Trámite</th><th class="text-left py-4 px-4">Organismo</th><th class="text-left py-4 px-4">Documentos clave</th><th class="text-left py-4 px-4">Plazo orientativo</th><th class="text-left py-4 px-4">Coste</th><th class="text-left py-4 px-4">Responsable</th></tr></thead>
+            <tbody class="divide-y divide-gray-100 text-gray-700">
+              <tr><td class="py-3 px-4 font-semibold">Unificación ficha base</td><td class="py-3 px-4">Promotor / equipo técnico</td><td class="py-3 px-4">Programa, superficies, alturas, catastro, agentes</td><td class="py-3 px-4">1–2 semanas</td><td class="py-3 px-4">Interno</td><td class="py-3 px-4">Nexus + Gestex + técnicos</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Geotécnico</td><td class="py-3 px-4">Laboratorio / geotecnia</td><td class="py-3 px-4">Campaña, conclusiones y recomendaciones de cimentación</td><td class="py-3 px-4">2–4 semanas</td><td class="py-3 px-4">3.000–8.000 €</td><td class="py-3 px-4">Geoex + DO</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Licencia de obra mayor</td><td class="py-3 px-4">Ayto. San Miguel de Abona</td><td class="py-3 px-4">Proyecto, S+S, residuos, geotécnico, instancia</td><td class="py-3 px-4">4–8 meses</td><td class="py-3 px-4">17.890–22.363 € + ICIO</td><td class="py-3 px-4">Promotor + Gestex</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">ICIO</td><td class="py-3 px-4">Ayto. San Miguel de Abona</td><td class="py-3 px-4">Autoliquidación municipal</td><td class="py-3 px-4">Con licencia</td><td class="py-3 px-4">89.450 €</td><td class="py-3 px-4">Promotor</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Acta de replanteo e inicio</td><td class="py-3 px-4">Dirección facultativa</td><td class="py-3 px-4">Acta firmada e implantación</td><td class="py-3 px-4">Antes de obra</td><td class="py-3 px-4">0–500 €</td><td class="py-3 px-4">DO + DEO + contratista</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">PSS aprobado</td><td class="py-3 px-4">CSS / contratista</td><td class="py-3 px-4">Plan adaptado, firmas, aceptación</td><td class="py-3 px-4">Antes de obra</td><td class="py-3 px-4">1.500–3.500 €</td><td class="py-3 px-4">Segurex + contratista</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Apertura centro de trabajo</td><td class="py-3 px-4">Gobierno de Canarias</td><td class="py-3 px-4">Comunicación laboral, datos de obra y PSS</td><td class="py-3 px-4">Antes de obra</td><td class="py-3 px-4">0–300 €</td><td class="py-3 px-4">Contratista</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Ocupación vía pública</td><td class="py-3 px-4">Ayuntamiento</td><td class="py-3 px-4">Solicitud, croquis, seguro, plazos</td><td class="py-3 px-4">1–4 semanas</td><td class="py-3 px-4">2.000–8.000 €</td><td class="py-3 px-4">Contratista + Gestex</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Libros de obra</td><td class="py-3 px-4">DO / CSS / contratista</td><td class="py-3 px-4">Órdenes, incidencias, subcontratación</td><td class="py-3 px-4">Durante toda la obra</td><td class="py-3 px-4">200–600 €</td><td class="py-3 px-4">DF + CSS + contratista</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Control de calidad / residuos</td><td class="py-3 px-4">Laboratorio / gestor autorizado</td><td class="py-3 px-4">Ensayos, albaranes, certificados</td><td class="py-3 px-4">Durante la obra</td><td class="py-3 px-4">8.000–20.000 €</td><td class="py-3 px-4">Buildero + DO</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Certificado final de obra</td><td class="py-3 px-4">DO / DEO</td><td class="py-3 px-4">CFO, anexos, final de instalaciones</td><td class="py-3 px-4">1–3 semanas</td><td class="py-3 px-4">1.000–3.000 €</td><td class="py-3 px-4">DF</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Primera ocupación / habitabilidad</td><td class="py-3 px-4">Ayuntamiento</td><td class="py-3 px-4">CFO, libro, boletines, fin de obra</td><td class="py-3 px-4">1–3 meses</td><td class="py-3 px-4">1.000–3.000 €</td><td class="py-3 px-4">Gestex + promotor</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Obra nueva terminada</td><td class="py-3 px-4">Notaría</td><td class="py-3 px-4">Título, CFO, seguro, libro del edificio</td><td class="py-3 px-4">1–2 semanas</td><td class="py-3 px-4">3.000–7.000 €</td><td class="py-3 px-4">Notarex + promotor</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">División horizontal</td><td class="py-3 px-4">Notaría / Registro</td><td class="py-3 px-4">Cuotas, superficies, anejos, planos</td><td class="py-3 px-4">2–6 semanas</td><td class="py-3 px-4">5.000–10.000 €</td><td class="py-3 px-4">Notarex + Gestex</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">Alta catastral de unidades</td><td class="py-3 px-4">Catastro</td><td class="py-3 px-4">Declaración, escritura, planos, coordenadas si procede</td><td class="py-3 px-4">1–3 meses</td><td class="py-3 px-4">500–2.000 €</td><td class="py-3 px-4">Gestex</td></tr>
+              <tr><td class="py-3 px-4 font-semibold">AJD + Registro</td><td class="py-3 px-4">ATC / Registro</td><td class="py-3 px-4">Modelo tributario + escritura inscrita</td><td class="py-3 px-4">2–8 semanas</td><td class="py-3 px-4">23.000–48.000 €</td><td class="py-3 px-4">Asesoría + notaría</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="mt-6 grid lg:grid-cols-2 gap-6">
+        <article class="bg-white rounded-3xl p-7 shadow-soft border border-white/70"><h3 class="text-xl font-black">Riesgos administrativos a vigilar</h3><ul class="mt-5 space-y-3 text-sm text-gray-700"><li>• Presentar licencia con números de vivienda/superficies que no coincidan entre informes.</li><li>• Tratar el geotécnico como documento accesorio cuando, con sótano, es nuclear.</li><li>• Dejar PSS y apertura de centro para el último día.</li><li>• No prever vía pública hasta que la obra ya necesita contenedor o grúa.</li><li>• Esperar al final para preparar la división horizontal y el alta catastral.</li></ul></article>
+        <article class="bg-white rounded-3xl p-7 shadow-soft border border-white/70"><h3 class="text-xl font-black">Siguiente movimiento recomendado</h3><ol class="mt-5 space-y-3 text-sm text-gray-700"><li><strong>1.</strong> Emitir una ficha maestra del proyecto firmada internamente con el programa correcto.</li><li><strong>2.</strong> Verificar referencia/s catastral/es y titularidad actual.</li><li><strong>3.</strong> Confirmar geotécnico válido y base de PEM/PEC para autoliquidación.</li><li><strong>4.</strong> Pedir pre-chequeo municipal o preparar entrada directa con expediente cerrado.</li><li><strong>5.</strong> Diseñar desde ya el esquema registral de los 18 anejos y cuotas de división horizontal.</li></ol></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-gray-900 text-gray-400 py-12 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1fr_.9fr] gap-8 text-sm">
+      <div>
+        <p class="mb-3 text-white font-semibold">Fuentes utilizadas</p>
+        <ul class="space-y-2 list-disc list-inside">
+          <li>Proyecto PDF de Guargacho (portada, parámetros y plantas del edificio).</li>
+          <li>Informe de arquitectura: 18 viviendas, PB+2+sótano y 1.789 m² totales.</li>
+          <li>Plan de Seguridad y Salud: cronograma 18–24 meses y secuencia técnica de obra.</li>
+          <li>Informe de tasación: valor total 3.847.225 € y base de coste constructivo 2.236.250 €.</li>
+          <li>Informe jurídico previo: viabilidad urbanística, con discrepancias internas expresamente señaladas.</li>
+          <li>Sede de San Miguel de Abona: ordenanzas OF4 y OF14 vigentes desde 30/06/2025.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="mb-3 text-white font-semibold">Disclaimer</p>
+        <p class="leading-relaxed">Este informe tiene finalidad <strong>operativa interna</strong>. No sustituye la validación final con el Ayuntamiento de San Miguel de Abona, la Agencia Tributaria Canaria, notaría, Registro de la Propiedad ni asesoría jurídica/fiscal local. Las cifras de tasa urbanística, ICIO, AJD y vía pública son <strong>estimaciones prudentes</strong> y deben confirmarse con autoliquidación real y ordenanza aplicable.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    const ctx=document.getElementById('taxChart');
+    if(ctx){new Chart(ctx,{type:'doughnut',data:{labels:['ICIO','Tasa licencia (esc. medio)','Vía pública','AJD','Notaría/Registro','Catastro'],datasets:[{data:[89450,20126,5000,22000,13000,1000],backgroundColor:['#6f432d','#d4a373','#e9caa8','#875032','#b97b48','#ead6bf'],borderColor:'#fff',borderWidth:3,hoverOffset:10}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:10,padding:18,font:{family:'Inter',size:12}}},tooltip:{callbacks:{label:c=>`${c.label}: ${new Intl.NumberFormat('es-ES').format(c.raw)} €`}}},cutout:'60%'}})}
+  </script>
+</body>
+</html>

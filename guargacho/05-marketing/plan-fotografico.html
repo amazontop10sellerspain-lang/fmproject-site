@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan Fotográfico — Guargacho 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter','system-ui','sans-serif'] },
+          colors: {
+            fotex: {
+              50:'#fff7ed',100:'#ffedd5',200:'#fed7aa',300:'#fdba74',400:'#fb923c',500:'#f97316',600:'#ea580c',700:'#c2410c',800:'#9a3412',900:'#7c2d12'
+            },
+            ink:'#172033'
+          },
+          boxShadow: {
+            soft:'0 18px 45px rgba(15,23,42,.08)',
+            glow:'0 20px 55px rgba(249,115,22,.18)',
+            deep:'0 24px 70px rgba(15,23,42,.18)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(249,115,22,.08), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(245,158,11,.08), transparent 24%),
+        #fffbf8;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #7c2d12 0%, #ea580c 45%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .glass { background: rgba(255,255,255,.72); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.45); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: all .75s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .table-zebra tbody tr:nth-child(even) { background: rgba(255,247,237,.66); }
+    .table-zebra tbody tr:hover { background: rgba(254,215,170,.42); }
+    .section-anchor { scroll-margin-top: 100px; }
+    .mesh {
+      background:
+        radial-gradient(circle at 15% 20%, rgba(251,146,60,.22), transparent 22%),
+        radial-gradient(circle at 80% 15%, rgba(245,158,11,.18), transparent 26%),
+        radial-gradient(circle at 75% 80%, rgba(255,255,255,.08), transparent 26%),
+        linear-gradient(135deg, #111827 0%, #7c2d12 48%, #ea580c 100%);
+    }
+    .timeline::before {
+      content:''; position:absolute; left:11px; top:0; bottom:0; width:2px;
+      background: linear-gradient(to bottom, #fdba74, #f97316, #7c2d12);
+    }
+    .timeline-dot {
+      position:absolute; left:0; width:24px; height:24px; border-radius:9999px;
+      border:4px solid #fff; background:linear-gradient(135deg,#fb923c,#ea580c); box-shadow:0 0 0 1px rgba(249,115,22,.2);
+    }
+    .btn-3d {
+      position: relative; display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 1rem; font-weight: 800; transition: all .16s ease;
+      transform: translateY(0);
+      box-shadow: 0 8px 0 #9a3412, 0 16px 28px rgba(124,45,18,.18);
+    }
+    .btn-3d:hover { transform: translateY(2px); box-shadow: 0 6px 0 #9a3412, 0 12px 22px rgba(124,45,18,.2); }
+    .btn-3d:active { transform: translateY(6px); box-shadow: 0 2px 0 #9a3412, 0 8px 14px rgba(124,45,18,.18); }
+    .btn-alt { box-shadow: 0 8px 0 #0f766e, 0 16px 28px rgba(15,118,110,.18); }
+    .btn-alt:hover { box-shadow: 0 6px 0 #0f766e, 0 12px 22px rgba(15,118,110,.18); }
+    .btn-alt:active { box-shadow: 0 2px 0 #0f766e, 0 8px 14px rgba(15,118,110,.18); }
+    .pill { display:inline-flex; align-items:center; gap:.4rem; padding:.42rem .82rem; border-radius:9999px; font-size:.75rem; font-weight:700; }
+    .pill-warm { background:#fff7ed; color:#9a3412; border:1px solid #fed7aa; }
+    .pill-slate { background:#f8fafc; color:#334155; border:1px solid #e2e8f0; }
+    .hero-grid::after {
+      content:''; position:absolute; inset:0;
+      background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 28px 28px; opacity: .55; pointer-events:none;
+    }
+    @media print {
+      nav, .no-print { display:none !important; }
+      .reveal { opacity:1 !important; transform:none !important; }
+      body { background:#fff; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased">
+  <nav class="sticky top-0 z-50 border-b border-white/60 bg-white/82 backdrop-blur-xl shadow-soft">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="h-10 w-10 rounded-2xl bg-gradient-to-br from-fotex-500 to-amber-500 text-white flex items-center justify-center shadow-glow text-lg">📸</div>
+        <div class="min-w-0">
+          <p class="text-xs uppercase tracking-[0.24em] text-slate-400">Fotex · fotógrafo inmobiliario</p>
+          <p class="font-extrabold text-slate-900 truncate">Plan Fotográfico · Guargacho 1</p>
+        </div>
+      </div>
+      <div class="hidden xl:flex items-center gap-5 text-sm font-medium text-slate-500">
+        <a href="#resumen" class="hover:text-fotex-700 transition">Resumen</a>
+        <a href="#shotlist" class="hover:text-fotex-700 transition">Shot list</a>
+        <a href="#dron" class="hover:text-fotex-700 transition">Dron</a>
+        <a href="#tour360" class="hover:text-fotex-700 transition">Tour 360</a>
+        <a href="#equipo" class="hover:text-fotex-700 transition">Equipo</a>
+        <a href="#luz" class="hover:text-fotex-700 transition">Luz</a>
+        <a href="#presupuesto" class="hover:text-fotex-700 transition">Presupuesto</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="mesh hero-grid relative overflow-hidden text-white">
+    <div class="absolute inset-0"></div>
+    <div class="absolute -top-20 right-0 h-72 w-72 rounded-full bg-fotex-500/20 blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-amber-400/20 blur-3xl"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <div class="grid lg:grid-cols-[1.08fr_.92fr] gap-10 items-end">
+        <div class="reveal">
+          <div class="mb-5 flex flex-wrap gap-3 text-sm">
+            <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">Guargacho · San Miguel de Abona</span>
+            <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">18 viviendas + 1 local</span>
+            <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">PB + 2 + sótano</span>
+            <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">18 meses de obra</span>
+          </div>
+          <p class="text-sm font-semibold uppercase tracking-[.34em] text-orange-200">Plan visual 2026</p>
+          <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight sm:text-5xl xl:text-6xl">Sistema fotográfico integral para vender y documentar un <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-200 via-amber-100 to-white">edificio residencial urbano</span> en el sur de Tenerife.</h1>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-white/84">Plan maestro de captación visual para el proyecto <strong>Guargacho 1</strong>, alineado con arquitectura, tasación, topografía, instalaciones, cronograma de obra y marketing. Se estructura en pre-obra, seguimiento mensual, producto terminado, dron, tour virtual 360, staging digital, postproducción y entregables comerciales.</p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="#shotlist" class="btn-3d bg-white px-6 py-3 text-fotex-700">Ver shot list</a>
+            <a href="#presupuesto" class="btn-3d btn-alt bg-emerald-200 px-6 py-3 text-emerald-800">Ver inversión</a>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="glass rounded-[2rem] p-6 shadow-deep text-slate-900">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="rounded-2xl bg-white p-5 shadow-soft"><p class="text-xs uppercase tracking-[.2em] text-slate-400">Superficie total</p><p class="mt-2 text-3xl font-black text-fotex-700">1.789 m²</p><p class="mt-1 text-sm text-slate-500">incluye sótano, garaje y trasteros</p></div>
+              <div class="rounded-2xl bg-white p-5 shadow-soft"><p class="text-xs uppercase tracking-[.2em] text-slate-400">Superficie sobre rasante</p><p class="mt-2 text-3xl font-black text-fotex-700">1.349 m²</p><p class="mt-1 text-sm text-slate-500">fachadas, portal, local y viviendas</p></div>
+              <div class="rounded-2xl bg-white p-5 shadow-soft"><p class="text-xs uppercase tracking-[.2em] text-slate-400">Orientación útil</p><p class="mt-2 text-3xl font-black text-fotex-700">Sur-Sureste</p><p class="mt-1 text-sm text-slate-500">según análisis topográfico sobre TF-652</p></div>
+              <div class="rounded-2xl bg-white p-5 shadow-soft"><p class="text-xs uppercase tracking-[.2em] text-slate-400">Activos visuales</p><p class="mt-2 text-3xl font-black text-fotex-700">190+</p><p class="mt-1 text-sm text-slate-500">fotos editadas + 360 + social crops</p></div>
+            </div>
+            <div class="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-7 text-slate-700">
+              <strong>Nota de coherencia interagente:</strong> el log de tarea menciona <strong>2.847.000 €</strong>, pero el informe de tasación HTML de Valorex fija <strong>3.847.225 €</strong>. Este plan usa la fotografía como herramienta comercial y deja constancia expresa de la discrepancia sin forzar una cifra económica única donde no resulta necesaria para la operativa visual.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16 space-y-20">
+    <section id="resumen" class="section-anchor reveal">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="h-12 w-12 rounded-2xl bg-fotex-600 text-white font-black flex items-center justify-center shadow-glow">01</div>
+        <div>
+          <p class="text-sm uppercase tracking-[0.22em] text-fotex-500 font-bold">Resumen ejecutivo</p>
+          <h2 class="text-3xl md:text-4xl font-black gradient-text">Qué debe contar la fotografía de Guargacho 1</h2>
+        </div>
+      </div>
+      <div class="grid xl:grid-cols-[1.05fr_.95fr] gap-6">
+        <article class="rounded-[2rem] bg-white p-8 shadow-soft border border-orange-100">
+          <p class="text-slate-600 leading-8 text-[1.03rem]">Guargacho 1 no es un producto vacacional aislado, sino un <strong>residencial urbano de obra nueva</strong> en un enclave del sur de Tenerife muy bien conectado con TF-1, Las Galletas, Las Chafiras y el Aeropuerto Sur. La fotografía debe vender <strong>proximidad, funcionalidad, luz, obra nueva escasa y calidad percibida</strong>. No se trata solo de “bonitas fachadas”: el material visual debe explicar el contexto urbano, el acceso, el portal, las tipologías, la cubierta comunitaria, el garaje, el local comercial y la atmósfera interior contemporánea-canaria definida por Decox.</p>
+          <div class="mt-7 grid md:grid-cols-3 gap-4">
+            <div class="rounded-2xl bg-fotex-50 p-5 border border-fotex-100"><p class="text-xs uppercase tracking-[.16em] text-fotex-500 font-bold">Narrativa 1</p><p class="mt-2 font-black text-fotex-900">Ubicación útil</p><p class="mt-2 text-sm text-slate-600">Ctra. TF-652, conexión rápida, núcleo consolidado y servicio urbano real.</p></div>
+            <div class="rounded-2xl bg-amber-50 p-5 border border-amber-100"><p class="text-xs uppercase tracking-[.16em] text-amber-600 font-bold">Narrativa 2</p><p class="mt-2 font-black text-amber-900">Calidad nueva</p><p class="mt-2 text-sm text-slate-600">Portal, zonas comunes, acabados, ascensor, garaje, trasteros y cubierta.</p></div>
+            <div class="rounded-2xl bg-slate-50 p-5 border border-slate-200"><p class="text-xs uppercase tracking-[.16em] text-slate-500 font-bold">Narrativa 3</p><p class="mt-2 font-black text-slate-900">Vida cotidiana</p><p class="mt-2 text-sm text-slate-600">Salón luminoso, cocina funcional, terrazas al sur y home staging convincente.</p></div>
+          </div>
+        </article>
+        <aside class="space-y-4">
+          <div class="rounded-[2rem] bg-slate-950 text-white p-6 shadow-glow">
+            <p class="text-sm uppercase tracking-[.2em] text-orange-200 font-bold">Datos base ya documentados</p>
+            <ul class="mt-4 space-y-3 text-sm text-slate-300 leading-6">
+              <li><strong class="text-white">Arquitectura:</strong> edificio PB+2+sótano, 18 viviendas, local comercial, garaje y cubierta transitable.</li>
+              <li><strong class="text-white">Tipologías:</strong> 6 viviendas de 1D, 6 de 2D y 6 de 3D.</li>
+              <li><strong class="text-white">Topografía:</strong> parcela prácticamente llana, fachada a TF-652 y orientación útil sur-sureste.</li>
+              <li><strong class="text-white">Marketing:</strong> comprador local, peninsular e internacional con material visual multiformato.</li>
+              <li><strong class="text-white">Obra:</strong> cronograma estimado de 18 meses con hitos claros de estructura, cerramientos y acabados.</li>
+            </ul>
+          </div>
+          <div class="rounded-[2rem] bg-white p-6 shadow-soft border border-orange-100">
+            <p class="text-sm uppercase tracking-[.2em] text-fotex-500 font-bold">Buenas prácticas 2026 integradas</p>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600 leading-6">
+              <li>Producción horizontal + vertical desde origen para portales, anuncios y RRSS.</li>
+              <li>Uso de dron para contexto urbano y no solo para “efecto wow”.</li>
+              <li>Tour 360 como filtro comercial y mejora de lead cualificado.</li>
+              <li>HDR moderado, blend manual, day-to-dusk selectivo y staging digital rentable.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+        <div class="rounded-[1.7rem] bg-white p-6 shadow-soft border border-orange-100"><p class="text-xs uppercase tracking-[.2em] text-fotex-500 font-bold">Sesiones</p><p class="mt-3 text-4xl font-black text-fotex-700">15</p><p class="mt-2 text-sm text-slate-600">1 pre-obra, 10 seguimiento, 1 técnica, 2 finales y 1 360 dedicado.</p></div>
+        <div class="rounded-[1.7rem] bg-white p-6 shadow-soft border border-orange-100"><p class="text-xs uppercase tracking-[.2em] text-fotex-500 font-bold">Puntos fijos</p><p class="mt-3 text-4xl font-black text-fotex-700">7</p><p class="mt-2 text-sm text-slate-600">Mismos encuadres mensuales para comparar avance y alimentar marketing.</p></div>
+        <div class="rounded-[1.7rem] bg-white p-6 shadow-soft border border-orange-100"><p class="text-xs uppercase tracking-[.2em] text-fotex-500 font-bold">Tour 360</p><p class="mt-3 text-4xl font-black text-fotex-700">18</p><p class="mt-2 text-sm text-slate-600">Escenas por tipología y zonas comunes, no una única vuelta genérica.</p></div>
+        <div class="rounded-[1.7rem] bg-white p-6 shadow-soft border border-orange-100"><p class="text-xs uppercase tracking-[.2em] text-fotex-500 font-bold">Presupuesto</p><p class="mt-3 text-4xl font-black text-fotex-700">12.980 €</p><p class="mt-2 text-sm text-slate-600">estimación sin IGIC para toda la vida visual del proyecto.</p></div>
+      </div>
+    </section>
+
+    <section id="shotlist" class="section-anchor reveal">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="h-12 w-12 rounded-2xl bg-fotex-600 text-white font-black flex items-center justify-center shadow-glow">02</div>
+        <div>
+          <p class="text-sm uppercase tracking-[0.22em] text-fotex-500 font-bold">Shot list completa</p>
+          <h2 class="text-3xl md:text-4xl font-black gradient-text">Qué fotografiar en cada fase</h2>
+        </div>
+      </div>
+      <div class="grid xl:grid-cols-3 gap-6">
+        <article class="rounded-[2rem] bg-white p-6 shadow-soft border border-orange-100">
+          <div class="flex items-center justify-between gap-4"><h3 class="text-xl font-black text-slate-900">A. Solar actual · pre-obra</h3><span class="pill pill-warm">1 jornada</span></div>
+          <p class="mt-3 text-sm text-slate-600 leading-6">Objetivo: dejar cerrado el estado cero del solar, accesos, entorno urbano y orientación antes de excavación y cerramiento de obra.</p>
+          <ul class="mt-5 space-y-3 text-sm text-slate-700 leading-6">
+            <li><strong>PS-01 Frente TF-652:</strong> fotografía frontal del solar con lectura completa de la fachada urbana.</li>
+            <li><strong>PS-02 Esquina y profundidad:</strong> mostrar geometría de parcela y relación con alineaciones colindantes.</li>
+            <li><strong>PS-03 Accesos rodados y peatonales:</strong> entrada natural, maniobra y acera.</li>
+            <li><strong>PS-04 Contexto de barrio:</strong> edificaciones 2-4 plantas, densidad media-baja, vida cotidiana.</li>
+            <li><strong>PS-05 Sol y sombras:</strong> test de iluminación mañana / tarde en fachada y medianeras.</li>
+            <li><strong>PS-06 Servicios y urbanización:</strong> arquetas, acometidas, alumbrado, señalización y parada cercana.</li>
+            <li><strong>PS-07 Detalle de terreno:</strong> pavimentos, cotas, pendientes y estado superficial previo a movimiento de tierras.</li>
+          </ul>
+        </article>
+        <article class="rounded-[2rem] bg-white p-6 shadow-soft border border-orange-100">
+          <div class="flex items-center justify-between gap-4"><h3 class="text-xl font-black text-slate-900">B. Seguimiento de obra</h3><span class="pill pill-slate">mensual</span></div>
+          <p class="mt-3 text-sm text-slate-600 leading-6">Objetivo: material técnico-comercial estable para promotor, inversor y lanzamiento progresivo.</p>
+          <ul class="mt-5 space-y-3 text-sm text-slate-700 leading-6">
+            <li><strong>SO-01 Serie fija mensual:</strong> repetir 7 puntos predefinidos desde calle, esquina, interior y dron.</li>
+            <li><strong>SO-02 Excavación y contención:</strong> vaciado, muros, impermeabilización, arranque de sótano.</li>
+            <li><strong>SO-03 Estructura:</strong> pilares, forjados, cajas de escalera y lectura de ritmo de fachada.</li>
+            <li><strong>SO-04 Cerramientos:</strong> mampostería, carpinterías, fachada ventilada y huecos principales.</li>
+            <li><strong>SO-05 Instalaciones:</strong> cuartos técnicos, montantes, patinillos, ascensor y garaje.</li>
+            <li><strong>SO-06 Acabados:</strong> cocinas, baños, pavimentos, portal, escalera, cubierta y pasamanos.</li>
+            <li><strong>SO-07 Hitos premium:</strong> cubierta comunitaria, primeras terrazas al sur, local comercial y portal casi terminado.</li>
+          </ul>
+        </article>
+        <article class="rounded-[2rem] bg-white p-6 shadow-soft border border-orange-100">
+          <div class="flex items-center justify-between gap-4"><h3 class="text-xl font-black text-slate-900">C. Producto terminado</h3><span class="pill pill-warm">lanzamiento</span></div>
+          <p class="mt-3 text-sm text-slate-600 leading-6">Objetivo: producción comercial final para piso piloto, zonas comunes, tipologías y pieza hero del edificio completo.</p>
+          <ul class="mt-5 space-y-3 text-sm text-slate-700 leading-6">
+            <li><strong>PT-01 Fachada día:</strong> hero frontal, tres cuartos, acceso, portal y planta baja activa.</li>
+            <li><strong>PT-02 Fachada twilight:</strong> versión con iluminación interior y volumen limpio al atardecer.</li>
+            <li><strong>PT-03 Piso piloto 1D:</strong> salón-cocina, dormitorio, baño, almacenaje y terraza/balcón.</li>
+            <li><strong>PT-04 Piso piloto 2D:</strong> salón, cocina, dormitorio principal, secundario y baño completo.</li>
+            <li><strong>PT-05 Piso piloto 3D:</strong> escena familiar completa, zonas de día y dormitorios más amplios.</li>
+            <li><strong>PT-06 Zonas comunes:</strong> portal, ascensor, caja de escalera, pasillos, cubierta, garaje y trasteros.</li>
+            <li><strong>PT-07 Local comercial:</strong> espacio diáfano y lectura de visibilidad desde TF-652.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="rounded-[2rem] bg-white p-7 shadow-soft border border-orange-100 overflow-hidden">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+          <div>
+            <p class="text-sm uppercase tracking-[.22em] text-fotex-500 font-bold">Matriz operativa</p>
+            <h3 class="text-2xl font-black text-slate-900">Detalle por bloque y uso</h3>
+          </div>
+          <p class="text-sm text-slate-500 max-w-2xl">Nombrado recomendado: <strong>GUA1_[fase]_[bloque]_[punto]_[hora]_[formato]</strong>. Facilita archivo, versión y reutilización en web, dossier, RRSS y anuncios.</p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="min-w-full table-zebra text-sm">
+            <thead>
+              <tr class="bg-slate-950 text-white text-left">
+                <th class="px-4 py-3 font-semibold">Bloque</th>
+                <th class="px-4 py-3 font-semibold">Tomas imprescindibles</th>
+                <th class="px-4 py-3 font-semibold">Uso principal</th>
+                <th class="px-4 py-3 font-semibold">Focal recomendada</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-orange-100">
+              <tr><td class="px-4 py-3 font-semibold text-fotex-800">Solar actual</td><td class="px-4 py-3">Frente TF-652, esquina, profundidad, contexto urbano, detalle de cota y servicios.</td><td class="px-4 py-3">Estado cero, memoria del proyecto, teaser inicial.</td><td class="px-4 py-3">24 mm · 35 mm · dron 24 mm eq.</td></tr>
+              <tr><td class="px-4 py-3 font-semibold text-fotex-800">Seguimiento mensual</td><td class="px-4 py-3">7 puntos fijos, estructura, fachada, instalaciones, avances interiores, cubierta.</td><td class="px-4 py-3">Promotor, financiación, preventa progresiva.</td><td class="px-4 py-3">24 mm · 35 mm · 70 mm detalle</td></tr>
+              <tr><td class="px-4 py-3 font-semibold text-fotex-800">Hitos de obra</td><td class="px-4 py-3">Fin sótano, estructura coronada, fachada acabada, portal, cubierta comunitaria.</td><td class="px-4 py-3">Notas de avance, redes sociales, dossier comercial.</td><td class="px-4 py-3">24-70 mm + dron oblicuo</td></tr>
+              <tr><td class="px-4 py-3 font-semibold text-fotex-800">Tipologías piloto</td><td class="px-4 py-3">Salón, cocina, dormitorio principal, secundario, baño, terraza y detalle de materiales.</td><td class="px-4 py-3">Ficha comercial por tipología, anuncios segmentados.</td><td class="px-4 py-3">16-24 mm rectificado · 35 mm detalle</td></tr>
+              <tr><td class="px-4 py-3 font-semibold text-fotex-800">Zonas comunes</td><td class="px-4 py-3">Portal, ascensor, caja de escalera, cubierta, garaje, trasteros y local.</td><td class="px-4 py-3">Refuerzo de valor percibido y calidad de comunidad.</td><td class="px-4 py-3">17-24 mm · 35 mm</td></tr>
+              <tr><td class="px-4 py-3 font-semibold text-fotex-800">Multiformato social</td><td class="px-4 py-3">Verticales 4:5 y 9:16, detalles, lifestyle suave, mini clips y dron corto.</td><td class="px-4 py-3">Instagram, Meta Ads, WhatsApp comercial, stories.</td><td class="px-4 py-3">24 mm · 35 mm · móvil/gimbal</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="dron" class="section-anchor reveal">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="h-12 w-12 rounded-2xl bg-fotex-600 text-white font-black flex items-center justify-center shadow-glow">03</div>
+        <div>
+          <p class="text-sm uppercase tracking-[0.22em] text-fotex-500 font-bold">Dron y contexto</p>
+          <h2 class="text-3xl md:text-4xl font-black gradient-text">Plan de sesión aérea</h2>
+        </div>
+      </div>
+      <div class="grid xl:grid-cols-[.92fr_1.08fr] gap-6">
+        <article class="rounded-[2rem] bg-slate-950 text-white p-7 shadow-glow">
+          <p class="text-sm uppercase tracking-[.2em] text-orange-200 font-bold">Checklist de vuelo</p>
+          <ul class="mt-5 space-y-3 text-sm text-slate-300 leading-6">
+            <li>Verificación previa de geozonas y operativa en entorno Tenerife Sur mediante plataforma oficial vigente.</li>
+            <li>Piloto habilitado, seguro RC y protocolo específico por proximidad relativa a red viaria y tejido urbano.</li>
+            <li>Viento preferente <strong>&lt; 20 km/h</strong>; si el alisio aprieta, vuelo corto técnico y no hero comercial.</li>
+            <li>Captura RAW + bracketing para stills, vídeo 4K y, si es posible, vertical nativo para social.</li>
+            <li>Uso del dron para <strong>contexto, escala, accesos, cubierta y relación con Guargacho</strong>, no solo para cenitales decorativos.</li>
+          </ul>
+          <div class="mt-6 rounded-2xl bg-white/10 p-5 border border-white/10">
+            <p class="font-black text-white mb-3">Secuencia recomendada</p>
+            <ol class="space-y-2 text-sm text-slate-300 list-decimal pl-5">
+              <li>Plano de barrio y conexión con TF-652 / TF-1.</li>
+              <li>Oblicuo de implantación del edificio dentro del tejido urbano consolidado.</li>
+              <li>Aproximación lenta a fachada principal para portada y reel.</li>
+              <li>Cenital de cubierta, sótano y volumetría general en hitos de obra.</li>
+              <li>Pasada final de twilight para exterior hero con luz interior.</li>
+            </ol>
+          </div>
+        </article>
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft border border-orange-100">
+          <div class="overflow-x-auto">
+            <table class="min-w-full table-zebra text-sm">
+              <thead>
+                <tr class="bg-fotex-600 text-white text-left">
+                  <th class="px-4 py-3 font-semibold">Toma aérea</th>
+                  <th class="px-4 py-3 font-semibold">Altura</th>
+                  <th class="px-4 py-3 font-semibold">Momento</th>
+                  <th class="px-4 py-3 font-semibold">Objetivo</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-orange-100">
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">A1 · Entorno Guargacho</td><td class="px-4 py-3">65-90 m</td><td class="px-4 py-3">Pre-obra y final</td><td class="px-4 py-3">Explicar ubicación, escala y conectividad del activo.</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">A2 · Fachada oblicua</td><td class="px-4 py-3">20-35 m</td><td class="px-4 py-3">Tarde</td><td class="px-4 py-3">Leer volumetría, entrada y local comercial.</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">A3 · Cubierta y terrazas</td><td class="px-4 py-3">18-28 m</td><td class="px-4 py-3">Fase final</td><td class="px-4 py-3">Destacar cubierta comunitaria y orientación sur-sureste.</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">A4 · Cenital de obra</td><td class="px-4 py-3">45-70 m</td><td class="px-4 py-3">Hitos estructurales</td><td class="px-4 py-3">Comparar avance y comunicar progreso real.</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">A5 · Aproximación portal</td><td class="px-4 py-3">8-14 m</td><td class="px-4 py-3">Final</td><td class="px-4 py-3">Clip hero para landing, RRSS y dossier comercial.</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">A6 · Twilight exterior</td><td class="px-4 py-3">15-25 m</td><td class="px-4 py-3">10-18 min tras la puesta</td><td class="px-4 py-3">Imagen premium de lanzamiento y portada principal.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-6 grid md:grid-cols-2 gap-4">
+            <div class="rounded-2xl bg-fotex-50 p-5 border border-fotex-100"><p class="font-black text-fotex-900">Benchmark 2026</p><p class="mt-2 text-sm text-slate-600 leading-6">Los artículos consultados coinciden en que el dron acelera clics y mejora comprensión del activo cuando muestra entorno, accesos y relación urbana.</p></div>
+            <div class="rounded-2xl bg-amber-50 p-5 border border-amber-100"><p class="font-black text-amber-900">Entrega aérea</p><p class="mt-2 text-sm text-slate-600 leading-6">8-12 stills finales, 4 stills por hito, 4 clips cortos y 1 hero twilight de fachada + cubierta.</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="tour360" class="section-anchor reveal">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="h-12 w-12 rounded-2xl bg-fotex-600 text-white font-black flex items-center justify-center shadow-glow">04</div>
+        <div>
+          <p class="text-sm uppercase tracking-[0.22em] text-fotex-500 font-bold">Experiencia inmersiva</p>
+          <h2 class="text-3xl md:text-4xl font-black gradient-text">Plan de tour virtual 360 por tipología</h2>
+        </div>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft border border-orange-100">
+          <h3 class="text-xl font-black text-slate-900">Escenas mínimas recomendadas</h3>
+          <div class="mt-5 space-y-4 text-sm">
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Tour 1D · 5 escenas</p><p class="mt-1 text-slate-600">Acceso/salón, cocina, dormitorio, baño y balcón/terraza.</p></div>
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Tour 2D · 6 escenas</p><p class="mt-1 text-slate-600">Acceso, salón-comedor, cocina, dormitorio principal, dormitorio 2 y baño.</p></div>
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Tour 3D · 7 escenas</p><p class="mt-1 text-slate-600">Acceso, salón, cocina, dormitorio principal, dormitorio secundario, dormitorio flexible y baño.</p></div>
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Zonas comunes · 4 escenas</p><p class="mt-1 text-slate-600">Portal, caja de escalera/ascensor, cubierta comunitaria y garaje.</p></div>
+          </div>
+        </article>
+        <article class="rounded-[2rem] bg-slate-950 text-white p-7 shadow-glow">
+          <h3 class="text-xl font-black">Criterios técnicos y comerciales</h3>
+          <ul class="mt-5 space-y-3 text-sm text-slate-300 leading-6">
+            <li><strong class="text-white">18 escenas totales</strong> como paquete base: 5 + 6 + 7 + 4 comunes, pudiendo reutilizar estancias equivalentes.</li>
+            <li><strong class="text-white">Hotspots mínimos:</strong> navegación, superficies orientativas, memoria de calidades y CTA comercial.</li>
+            <li><strong class="text-white">Tour mobile-first:</strong> pensado para web, WhatsApp y campañas internacionales.</li>
+            <li><strong class="text-white">Valor 2026:</strong> el tour 360 prefiltra visitas, aumenta permanencia y reduce fricción en compra remota.</li>
+            <li><strong class="text-white">Complemento ideal:</strong> portada inicial con dron y cierre en cubierta o terraza al sur.</li>
+          </ul>
+          <div class="mt-6 rounded-2xl bg-white/10 p-5 border border-white/10">
+            <p class="font-black text-white">Recomendación Fotex</p>
+            <p class="mt-2 text-sm text-slate-300 leading-6">No conviene escanear todas las viviendas una por una si comparten matriz tipológica. Comercialmente rinde mejor un tour claro por tipología, complementado con ficha de disponibilidad y variaciones de planta.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="equipo" class="section-anchor reveal">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="h-12 w-12 rounded-2xl bg-fotex-600 text-white font-black flex items-center justify-center shadow-glow">05</div>
+        <div>
+          <p class="text-sm uppercase tracking-[0.22em] text-fotex-500 font-bold">Equipo y producción</p>
+          <h2 class="text-3xl md:text-4xl font-black gradient-text">Kit recomendado</h2>
+        </div>
+      </div>
+      <div class="grid xl:grid-cols-2 gap-6">
+        <div class="rounded-[2rem] bg-white p-7 shadow-soft border border-orange-100">
+          <h3 class="text-xl font-black text-slate-900 mb-5">Equipo principal</h3>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Cámara</p><p class="mt-2 text-slate-600">Mirrorless full frame 30-45 MP, doble tarjeta y buen rango dinámico.</p></div>
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Ópticas</p><p class="mt-2 text-slate-600">16-35 mm, 24-70 mm, 50 mm y 70-200 mm para detalles y compresión.</p></div>
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Dron</p><p class="mt-2 text-slate-600">Sensor 1” o superior, 4K/60, RAW, bracketing y vuelo estable en viento moderado.</p></div>
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Trípode</p><p class="mt-2 text-slate-600">Carbono con rótula niveladora para verticales impecables en interior y seguimiento.</p></div>
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Iluminación</p><p class="mt-2 text-slate-600">2 paneles LED bicolor, difusor y flash de apoyo ligero para interiores complejos.</p></div>
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">360 y accesorios</p><p class="mt-2 text-slate-600">Cámara 360, disparador remoto, CPL, ND, color checker, baterías y SSD.</p></div>
+          </div>
+        </div>
+        <div class="rounded-[2rem] bg-slate-950 text-white p-7 shadow-glow">
+          <h3 class="text-xl font-black mb-5">Equipo por tipo de sesión</h3>
+          <div class="space-y-4 text-sm">
+            <div class="rounded-2xl bg-white/10 p-4 border border-white/10"><p class="font-bold text-white">Pre-obra</p><p class="mt-2 text-slate-300">Cámara + 24/35 mm + dron + trípode + app solar para fijar encuadres base.</p></div>
+            <div class="rounded-2xl bg-white/10 p-4 border border-white/10"><p class="font-bold text-white">Seguimiento mensual</p><p class="mt-2 text-slate-300">Cámara + 24-70 mm + dron + trípode + EPIs básicos coordinados con seguridad de obra.</p></div>
+            <div class="rounded-2xl bg-white/10 p-4 border border-white/10"><p class="font-bold text-white">Producto terminado</p><p class="mt-2 text-slate-300">Cámara full frame + 16-35 mm + 24-70 mm + 50 mm + LEDs + dron + kit de estilismo ligero.</p></div>
+            <div class="rounded-2xl bg-white/10 p-4 border border-white/10"><p class="font-bold text-white">Tour 360 y staging</p><p class="mt-2 text-slate-300">Cámara 360 + trípode slim + software hotspots + limpieza fina + props mínimos.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="luz" class="section-anchor reveal">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="h-12 w-12 rounded-2xl bg-fotex-600 text-white font-black flex items-center justify-center shadow-glow">06</div>
+        <div>
+          <p class="text-sm uppercase tracking-[0.22em] text-fotex-500 font-bold">Planificación solar</p>
+          <h2 class="text-3xl md:text-4xl font-black gradient-text">Horarios óptimos de luz en Guargacho</h2>
+        </div>
+      </div>
+      <div class="grid xl:grid-cols-[1fr_.92fr] gap-6">
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft border border-orange-100">
+          <div class="overflow-x-auto">
+            <table class="min-w-full table-zebra text-sm">
+              <thead>
+                <tr class="bg-fotex-600 text-white text-left">
+                  <th class="px-4 py-3 font-semibold">Estación</th>
+                  <th class="px-4 py-3 font-semibold">Salida / puesta aprox.</th>
+                  <th class="px-4 py-3 font-semibold">Franja recomendada</th>
+                  <th class="px-4 py-3 font-semibold">Uso</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-orange-100">
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">Invierno</td><td class="px-4 py-3">07:42-07:58 / 18:10-18:20</td><td class="px-4 py-3">08:30-10:45 y 16:30-18:25</td><td class="px-4 py-3">Fachada, portal, cubiertas y twilight corto.</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">Primavera</td><td class="px-4 py-3">07:05-07:32 / 19:20-20:40*</td><td class="px-4 py-3">08:15-10:45 y 17:30-20:00</td><td class="px-4 py-3">Exterior comercial, dron y terrazas orientadas al sur.</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">Verano</td><td class="px-4 py-3">07:09-07:13 / 21:00-21:08</td><td class="px-4 py-3">08:15-10:00 y 19:00-21:00</td><td class="px-4 py-3">Dron, cubiertas, portadas y lifestyle exterior.</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">Otoño</td><td class="px-4 py-3">07:52-08:07 / 19:35-20:12*</td><td class="px-4 py-3">08:40-10:45 y 17:15-19:30</td><td class="px-4 py-3">Interiores cálidos, fachadas y twilight de lanzamiento.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mt-4 text-xs text-slate-500 leading-5">* Ajustar por cambio horario y confirmar 72 h antes con app solar. Tabla basada en rangos estacionales del sur de Tenerife para Guargacho y orientación útil sur-sureste documentada por Topografía.</p>
+        </article>
+        <article class="rounded-[2rem] bg-slate-950 text-white p-7 shadow-glow">
+          <h3 class="text-xl font-black">Lectura práctica de la orientación</h3>
+          <ul class="mt-5 space-y-3 text-sm text-slate-300 leading-6">
+            <li><strong class="text-white">Fachada sur-sureste:</strong> mejor lectura volumétrica en mañana tardía o última hora suave.</li>
+            <li><strong class="text-white">Interiores con terraza:</strong> programar cuando la luz exterior aún sea viva pero no queme huecos.</li>
+            <li><strong class="text-white">Portal y local:</strong> controlar reflejos por orientación a vía principal y tráfico visual.</li>
+            <li><strong class="text-white">Evitar:</strong> mediodía duro salvo seguimiento técnico o captación de obra sin ambición comercial.</li>
+            <li><strong class="text-white">Twilight:</strong> disparar 10-18 min después de la puesta para equilibrar cielo e iluminación interior.</li>
+          </ul>
+          <div class="mt-6 rounded-2xl bg-white/10 p-5 border border-white/10">
+            <p class="font-black text-white">Protocolo de luz Fotex</p>
+            <p class="mt-2 text-sm text-slate-300 leading-6">Llegar 90 min antes de la franja hero, revisar cristales y encendidos, abrir textiles, limpiar portal, coordinar ascensor y dejar libre de vehículos la lectura principal si la normativa y la operativa lo permiten.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="grid xl:grid-cols-2 gap-6">
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft border border-orange-100">
+          <p class="text-sm uppercase tracking-[.22em] text-fotex-500 font-bold">Postproducción</p>
+          <h3 class="text-2xl font-black text-slate-900 mt-2">Estilo de edición y HDR</h3>
+          <div class="mt-5 space-y-4 text-sm text-slate-700 leading-6">
+            <p><strong>Dirección estética:</strong> contemporáneo canario limpio. Color cálido controlado, blancos sin dominantes, negros suaves, textura real y sensación de obra nueva luminosa.</p>
+            <div class="rounded-2xl bg-fotex-50 border border-fotex-100 p-4">
+              <p class="font-bold text-fotex-900">Pipeline recomendado</p>
+              <ul class="mt-2 space-y-2">
+                <li>1. Revelado RAW con corrección de lente y verticales.</li>
+                <li>2. Bracketing y blend manual en interior/exterior con huecos críticos.</li>
+                <li>3. HDR moderado, sin halos ni saturación irreal.</li>
+                <li>4. Limpieza de cableado, restos de obra, huellas, manchas y matrículas si procede.</li>
+                <li>5. Exporte por canal: web, imprenta, RRSS, anuncios y backup master.</li>
+              </ul>
+            </div>
+            <p><strong>Day-to-dusk:</strong> útil en 2-3 imágenes hero si el cielo no acompaña, pero sin falsear orientación, vistas ni intensidad lumínica de forma agresiva.</p>
+          </div>
+        </article>
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft border border-orange-100">
+          <p class="text-sm uppercase tracking-[.22em] text-fotex-500 font-bold">Home staging virtual</p>
+          <h3 class="text-2xl font-black text-slate-900 mt-2">Propuesta para pisos modelo</h3>
+          <div class="mt-5 grid gap-4 text-sm">
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Concepto</p><p class="mt-2 text-slate-600">Madera clara, piedra suave, textiles arena y acentos negros mínimos para sostener la identidad contemporánea canaria de Decox.</p></div>
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Escenas prioritarias</p><p class="mt-2 text-slate-600">Salón-comedor de 1D, cocina integrada de 2D, dormitorio principal de 3D y cubierta/terraza con uso comunitario.</p></div>
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Objetivo comercial</p><p class="mt-2 text-slate-600">Ayudar a leer escala, uso y calidez sin necesidad de amueblado físico completo en todas las viviendas.</p></div>
+            <div class="rounded-2xl border border-orange-100 bg-orange-50/60 p-4"><p class="font-bold text-fotex-900">Volumen recomendado</p><p class="mt-2 text-slate-600">8-10 imágenes staged: 3 de salón, 3 de dormitorios, 2 de terraza/cubierta y 1-2 del local si se quiere mostrar fit-out conceptual.</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="presupuesto" class="section-anchor reveal">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="h-12 w-12 rounded-2xl bg-fotex-600 text-white font-black flex items-center justify-center shadow-glow">07</div>
+        <div>
+          <p class="text-sm uppercase tracking-[0.22em] text-fotex-500 font-bold">Coste estimado</p>
+          <h2 class="text-3xl md:text-4xl font-black gradient-text">Presupuesto fotográfico</h2>
+        </div>
+      </div>
+      <div class="grid xl:grid-cols-[1.04fr_.96fr] gap-6 items-start">
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft border border-orange-100">
+          <div class="overflow-x-auto">
+            <table class="min-w-full table-zebra text-sm">
+              <thead>
+                <tr class="bg-fotex-600 text-white text-left">
+                  <th class="px-4 py-3 font-semibold">Partida</th>
+                  <th class="px-4 py-3 font-semibold">Cantidad</th>
+                  <th class="px-4 py-3 font-semibold text-right">Importe</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-orange-100">
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">Sesión pre-obra solar + dron</td><td class="px-4 py-3">1 jornada</td><td class="px-4 py-3 text-right font-bold">890 €</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">Seguimiento mensual estándar</td><td class="px-4 py-3">10 sesiones × 290 €</td><td class="px-4 py-3 text-right font-bold">2.900 €</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">Hitos premium con dron ampliado</td><td class="px-4 py-3">2 sesiones × 540 €</td><td class="px-4 py-3 text-right font-bold">1.080 €</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">Sesión final exteriores + twilight</td><td class="px-4 py-3">1,5 jornadas</td><td class="px-4 py-3 text-right font-bold">1.750 €</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">Sesión interiores tipologías + comunes</td><td class="px-4 py-3">1,5 jornadas</td><td class="px-4 py-3 text-right font-bold">1.980 €</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">Tour virtual 360</td><td class="px-4 py-3">18 escenas / 4 recorridos</td><td class="px-4 py-3 text-right font-bold">1.650 €</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">Home staging virtual</td><td class="px-4 py-3">8-10 escenas</td><td class="px-4 py-3 text-right font-bold">790 €</td></tr>
+                <tr><td class="px-4 py-3 font-semibold text-fotex-900">Edición avanzada, HDR y exportes</td><td class="px-4 py-3">Lote global</td><td class="px-4 py-3 text-right font-bold">1.940 €</td></tr>
+              </tbody>
+              <tfoot>
+                <tr class="bg-slate-950 text-white"><td class="px-4 py-4 font-black" colspan="2">TOTAL ESTIMADO</td><td class="px-4 py-4 text-right font-black text-lg">12.980 €</td></tr>
+              </tfoot>
+            </table>
+          </div>
+          <p class="mt-4 text-xs text-slate-500">Importes orientativos sin IGIC. La producción visual completa es proporcionada para una promoción de 18 viviendas y encaja como inversión comercial y de trazabilidad de obra.</p>
+        </article>
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft border border-orange-100">
+          <p class="text-sm uppercase tracking-[.22em] text-fotex-500 font-bold">Visualización</p>
+          <h3 class="text-2xl font-black text-slate-900 mt-2">Peso relativo del presupuesto</h3>
+          <div class="mt-5 h-[320px]"><canvas id="budgetChart"></canvas></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="h-12 w-12 rounded-2xl bg-fotex-600 text-white font-black flex items-center justify-center shadow-glow">08</div>
+        <div>
+          <p class="text-sm uppercase tracking-[0.22em] text-fotex-500 font-bold">Calendario</p>
+          <h2 class="text-3xl md:text-4xl font-black gradient-text">Sesiones alineadas con los 18 meses de obra</h2>
+        </div>
+      </div>
+      <div class="grid xl:grid-cols-[1.08fr_.92fr] gap-6">
+        <article class="rounded-[2rem] bg-white p-7 shadow-soft border border-orange-100">
+          <div class="relative timeline pl-10">
+            <div class="relative pb-8"><span class="timeline-dot top-1"></span><p class="font-black text-fotex-900">Mes 0 · Estado inicial</p><p class="mt-1 text-sm text-slate-600">Solar, frente TF-652, entorno, dron, luz base y archivo cero.</p></div>
+            <div class="relative pb-8"><span class="timeline-dot top-1"></span><p class="font-black text-fotex-900">Meses 1-3 · Excavación y sótano</p><p class="mt-1 text-sm text-slate-600">Seguimiento técnico, contención, garaje, impermeabilización y primer cenital de obra.</p></div>
+            <div class="relative pb-8"><span class="timeline-dot top-1"></span><p class="font-black text-fotex-900">Meses 4-8 · Estructura</p><p class="mt-1 text-sm text-slate-600">Pilares, forjados, cajas de escalera, coronación y hito premium de volumen.</p></div>
+            <div class="relative pb-8"><span class="timeline-dot top-1"></span><p class="font-black text-fotex-900">Meses 9-12 · Envolvente e instalaciones</p><p class="mt-1 text-sm text-slate-600">Fachada, carpinterías, ascensor, patinillos, lectura de huecos y primeras piezas de preventa.</p></div>
+            <div class="relative pb-8"><span class="timeline-dot top-1"></span><p class="font-black text-fotex-900">Meses 13-15 · Acabados y zonas comunes</p><p class="mt-1 text-sm text-slate-600">Portal, pasillos, cocinas, baños, cubierta, garaje y staging preliminar.</p></div>
+            <div class="relative pb-8"><span class="timeline-dot top-1"></span><p class="font-black text-fotex-900">Meses 16-17 · Prelanzamiento</p><p class="mt-1 text-sm text-slate-600">Sesión tipologías piloto, 360, selects comerciales y mini clips verticales.</p></div>
+            <div class="relative"><span class="timeline-dot top-1"></span><p class="font-black text-fotex-900">Mes 18 · Lanzamiento final</p><p class="mt-1 text-sm text-slate-600">Exterior día + twilight + dron + entregables para web, dossier, anuncios y RRSS.</p></div>
+          </div>
+        </article>
+        <article class="rounded-[2rem] bg-slate-950 text-white p-7 shadow-glow">
+          <h3 class="text-xl font-black">Entregables por fase</h3>
+          <div class="mt-5 space-y-4 text-sm">
+            <div class="rounded-2xl bg-white/10 p-4 border border-white/10"><p class="font-bold">Pre-obra</p><p class="mt-1 text-slate-300">18-24 fotos editadas + 4-6 stills dron + hoja visual de arranque.</p></div>
+            <div class="rounded-2xl bg-white/10 p-4 border border-white/10"><p class="font-bold">Seguimiento</p><p class="mt-1 text-slate-300">10-14 fotos por sesión + comparativas de puntos fijos + tomas aéreas selectivas.</p></div>
+            <div class="rounded-2xl bg-white/10 p-4 border border-white/10"><p class="font-bold">Final comercial</p><p class="mt-1 text-slate-300">120-140 fotos master + 25 verticales + 18 escenas 360 + teaser clips.</p></div>
+            <div class="rounded-2xl bg-white/10 p-4 border border-white/10"><p class="font-bold">Formatos</p><p class="mt-1 text-slate-300">JPG alta, WebP web, 4:5 ads, 9:16 stories, miniaturas y copia master de edición.</p></div>
+          </div>
+          <div class="mt-6 h-[260px]"><canvas id="timelineChart"></canvas></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="h-12 w-12 rounded-2xl bg-fotex-600 text-white font-black flex items-center justify-center shadow-glow">09</div>
+        <div>
+          <p class="text-sm uppercase tracking-[0.22em] text-fotex-500 font-bold">Entregables finales</p>
+          <h2 class="text-3xl md:text-4xl font-black gradient-text">Formatos, resoluciones y usos</h2>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+        <div class="rounded-[1.75rem] bg-white p-6 shadow-soft border border-orange-100"><p class="text-3xl">🖥️</p><p class="mt-4 font-black text-slate-900">Web y portales</p><p class="mt-2 text-sm text-slate-600">JPG/WebP 2400 px lado largo, compresión equilibrada, portada hero y galerías por tipología.</p></div>
+        <div class="rounded-[1.75rem] bg-white p-6 shadow-soft border border-orange-100"><p class="text-3xl">🖨️</p><p class="mt-4 font-black text-slate-900">Imprenta y dossier</p><p class="mt-2 text-sm text-slate-600">JPG/TIFF alta 300 ppp, 5000-6000 px, imágenes limpias para flyers, vallas y brochures.</p></div>
+        <div class="rounded-[1.75rem] bg-white p-6 shadow-soft border border-orange-100"><p class="text-3xl">📱</p><p class="mt-4 font-black text-slate-900">Redes y ads</p><p class="mt-2 text-sm text-slate-600">Verticales 1080×1350, stories 1080×1920, clips de 10-20 s y carruseles de detalle.</p></div>
+        <div class="rounded-[1.75rem] bg-white p-6 shadow-soft border border-orange-100"><p class="text-3xl">🗂️</p><p class="mt-4 font-black text-slate-900">Archivo maestro</p><p class="mt-2 text-sm text-slate-600">Selección RAW + TIFF/JPG master, nomenclatura homogénea y backup por fase.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-20 bg-slate-950 text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid lg:grid-cols-[1fr_auto] gap-6 items-end">
+        <div>
+          <p class="font-black text-white text-lg">Fotex · Plan fotográfico inmobiliario</p>
+          <p class="mt-2 text-sm leading-6 max-w-4xl">Documento elaborado tras revisar el proyecto arquitectónico, la tasación, informes de arquitectura, topografía, instalaciones, seguridad, presupuesto, marketing y documentación interna del proyecto Guargacho. Criterio visual actualizado con tendencias 2026 en fotografía inmobiliaria, dron, edición asistida, staging virtual y tours 360.</p>
+        </div>
+        <div class="text-sm text-slate-500 lg:text-right">
+          <p>Proyecto: Guargacho 1</p>
+          <p>Ruta: /proyectos/guargacho/05-marketing/plan-fotografico.html</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const budgetCtx = document.getElementById('budgetChart');
+    if (budgetCtx) {
+      new Chart(budgetCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Pre-obra', 'Seguimiento', 'Hitos premium', 'Final exterior', 'Final interior', 'Tour 360', 'Staging virtual', 'Edición'],
+          datasets: [{
+            data: [890, 2900, 1080, 1750, 1980, 1650, 790, 1940],
+            backgroundColor: ['#fdba74','#fb923c','#f97316','#ea580c','#c2410c','#f59e0b','#fcd34d','#7c2d12'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 16, font: { family: 'Inter', size: 11 } } },
+            tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.parsed.toLocaleString('es-ES')} €` } }
+          },
+          cutout: '68%'
+        }
+      });
+    }
+
+    const timelineCtx = document.getElementById('timelineChart');
+    if (timelineCtx) {
+      new Chart(timelineCtx, {
+        type: 'bar',
+        data: {
+          labels: ['M0', 'M1-3', 'M4-8', 'M9-12', 'M13-15', 'M16-17', 'M18'],
+          datasets: [{
+            label: 'Peso visual / esfuerzo',
+            data: [55, 60, 72, 78, 84, 92, 100],
+            backgroundColor: ['#fed7aa','#fdba74','#fb923c','#f97316','#ea580c','#c2410c','#7c2d12'],
+            borderRadius: 12,
+            borderSkipped: false
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,.08)' }, ticks: { color: '#cbd5e1', font: { family: 'Inter', size: 11 }, callback: (v) => `${v}%` } },
+            x: { grid: { display: false }, ticks: { color: '#f8fafc', font: { family: 'Inter', size: 11 } } }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: (ctx) => ` Intensidad prevista: ${ctx.parsed.y}%` } }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

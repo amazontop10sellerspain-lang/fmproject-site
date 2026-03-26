@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentación Notarial y Contractual — Edificio Guargacho 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            notarex: { 50:'#f8f9fa', 100:'#e9ecef', 200:'#dee2e6', 300:'#ced4da', 400:'#adb5bd', 500:'#6c757d', 600:'#495057', 700:'#343A40', 800:'#212529', 900:'#1a1d21' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: all .75s cubic-bezier(.25,.46,.45,.94); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #343A40 0%, #6c757d 50%, #495057 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass { background: rgba(255,255,255,.78); backdrop-filter: blur(14px); border: 1px solid rgba(52,58,64,.1); }
+    .card-hover { transition: all .3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(52,58,64,.12); }
+    .contract-box { background: #fafaf8; border: 1px solid #e5e1d8; border-radius: 1rem; padding: 2rem; }
+    .contract-box h4 { font-size: 1rem; font-weight: 700; color: #343A40; margin-bottom: .75rem; text-transform: uppercase; letter-spacing: .05em; }
+    .contract-box .clause { margin-bottom: 1.25rem; }
+    .contract-box .clause-title { font-weight: 700; color: #495057; margin-bottom: .25rem; }
+    .contract-box .clause-body { color: #555; font-size: .875rem; line-height: 1.7; }
+    .blank { border-bottom: 1px dashed #adb5bd; display: inline-block; min-width: 120px; color: #999; font-style: italic; }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height .5s ease; }
+    .accordion-content.open { max-height: 12000px; }
+    .badge-n { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 9999px; font-size: .7rem; font-weight: 600; }
+    .badge-legal { background: #e9ecef; color: #343A40; border: 1px solid #ced4da; }
+    .badge-warn { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+    .badge-ok { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .badge-info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+    tbody tr:hover { background: rgba(52,58,64,.03); }
+    .tl-line { position: relative; padding-left: 2.5rem; border-left: 2px solid #ced4da; }
+    .tl-dot { position: absolute; left: -9px; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #343A40; background: white; }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #343A40; transition: width .3s; }
+    .nav-link:hover::after { width: 100%; }
+    .btn-3d { position: relative; display: inline-flex; align-items: center; gap: .5rem; padding: .65rem 1.5rem; border-radius: .75rem; font-weight: 700; font-size: .85rem; color: white; background: linear-gradient(180deg, #495057 0%, #343A40 100%); box-shadow: 0 4px 0 #1a1d21, 0 6px 12px rgba(0,0,0,.18); transition: all .15s ease; cursor: pointer; }
+    .btn-3d:hover { transform: translateY(-1px); box-shadow: 0 5px 0 #1a1d21, 0 8px 16px rgba(0,0,0,.22); }
+    .btn-3d:active { transform: translateY(2px); box-shadow: 0 2px 0 #1a1d21, 0 3px 6px rgba(0,0,0,.15); }
+    .btn-3d-emerald { background: linear-gradient(180deg, #059669 0%, #047857 100%); box-shadow: 0 4px 0 #065f46, 0 6px 12px rgba(0,0,0,.18); }
+    .btn-3d-emerald:hover { box-shadow: 0 5px 0 #065f46, 0 8px 16px rgba(0,0,0,.22); }
+    .btn-3d-emerald:active { box-shadow: 0 2px 0 #065f46, 0 3px 6px rgba(0,0,0,.15); }
+    .btn-3d-blue { background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%); box-shadow: 0 4px 0 #1e3a8a, 0 6px 12px rgba(0,0,0,.18); }
+    .btn-3d-blue:hover { box-shadow: 0 5px 0 #1e3a8a, 0 8px 16px rgba(0,0,0,.22); }
+    .btn-3d-blue:active { box-shadow: 0 2px 0 #1e3a8a, 0 3px 6px rgba(0,0,0,.15); }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-in { animation: fadeInUp .6s ease forwards; }
+    @media print {
+      nav, .no-print { display: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .contract-box { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-gray-200/60 shadow-sm no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-notarex-700 flex items-center justify-center text-white text-sm font-bold">⚖️</div>
+        <span class="text-lg font-bold gradient-text">Notarex</span>
+        <span class="hidden sm:inline text-xs text-gray-400 ml-1">Asesor Notarial · Guargacho 1</span>
+      </div>
+      <div class="hidden xl:flex gap-3 text-[12px] font-medium text-gray-500">
+        <a href="#resumen" class="nav-link hover:text-notarex-700">Resumen</a>
+        <a href="#contratos" class="nav-link hover:text-notarex-700">Contratos</a>
+        <a href="#clausulas" class="nav-link hover:text-notarex-700">Cláusulas</a>
+        <a href="#sobrepl" class="nav-link hover:text-notarex-700">Sobre Plano</a>
+        <a href="#fiscal" class="nav-link hover:text-notarex-700">Fiscal</a>
+        <a href="#gastos" class="nav-link hover:text-notarex-700">Gastos</a>
+        <a href="#division" class="nav-link hover:text-notarex-700">Div. Horizontal</a>
+        <a href="#estatutos" class="nav-link hover:text-notarex-700">Estatutos</a>
+        <a href="#libro" class="nav-link hover:text-notarex-700">Libro Edificio</a>
+        <a href="#documentos" class="nav-link hover:text-notarex-700">Documentos</a>
+        <a href="#cronograma" class="nav-link hover:text-notarex-700">Cronograma</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #1a1d21 0%, #343A40 40%, #495057 70%, #6c757d 100%);">
+    <div class="absolute inset-0 opacity-10">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg>
+    </div>
+    <div class="absolute top-20 right-10 w-72 h-72 rounded-full bg-white/5 blur-3xl"></div>
+    <div class="absolute bottom-10 left-10 w-56 h-56 rounded-full bg-white/5 blur-3xl"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+      <div class="max-w-4xl">
+        <div class="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 mb-6 backdrop-blur-sm border border-white/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-white/80 text-xs font-medium">Documentación Contractual Completa · Marzo 2026</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+          Modelos Notariales y<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-100">Documentación Jurídica</span>
+        </h1>
+        <p class="text-lg text-gray-300 mb-8 max-w-2xl leading-relaxed">
+          Edificio plurifamiliar de 18 viviendas + local comercial en Guargacho, San Miguel de Abona · Contratos de compraventa, arras y reserva · Régimen fiscal canario (IGIC) · División horizontal · Venta sobre plano · Libro del Edificio.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+            <div class="text-2xl font-bold text-white">18</div>
+            <div class="text-xs text-gray-300 mt-1">Viviendas</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+            <div class="text-2xl font-bold text-white">PB+2+Sót.</div>
+            <div class="text-xs text-gray-300 mt-1">Configuración</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+            <div class="text-2xl font-bold text-white">1.789 m²</div>
+            <div class="text-xs text-gray-300 mt-1">Sup. Total</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+            <div class="text-2xl font-bold text-emerald-300">15</div>
+            <div class="text-xs text-gray-300 mt-1">Modelos Documentales</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
+
+    <!-- ═══════════════════════ SECCIÓN 1: RESUMEN ═══════════════════════ -->
+    <section id="resumen" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-notarex-700 flex items-center justify-center text-white text-lg">1</div>
+        <h2 class="text-3xl font-bold gradient-text">Resumen Ejecutivo</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6 mb-8">
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm p-8 card-hover border border-gray-100">
+          <h3 class="font-bold text-notarex-700 text-lg mb-4">Alcance del Informe</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            El presente dossier reúne la <strong>documentación notarial y contractual modelo</strong> para la comercialización y formalización jurídica de un edificio plurifamiliar de <strong>18 viviendas, 1 local comercial, 18 plazas de garaje y 18 trasteros</strong> en la Ctra. General TF-652, Guargacho, San Miguel de Abona (Tenerife). El proyecto ha sido diseñado por <strong>DOS·07 Arquitectura y Diseño, S.L.</strong> (arquitectos Ignacio Galván Cañada, col. 1967 COAC, y Daniel Montesino Rodríguez, col. 1726 COAC).
+          </p>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            Se adapta íntegramente a la normativa canaria (<strong>IGIC en lugar de IVA</strong>), a la Ley 38/1999 de Ordenación de la Edificación (LOE), al RD 515/1989 sobre información al comprador, a la Ley 57/1968 de cantidades anticipadas (modificada por Ley 20/2015 y DA 1ª LOE) y al marco contractual del Código Civil y legislación de consumidores vigente.
+          </p>
+          <p class="text-gray-600 leading-relaxed">
+            Las cifras económicas se basan en los informes de <strong>Valorex</strong> (tasación: valor total promoción 3.847.225 €, 2.965 €/m² medio ponderado), <strong>Legex</strong> (informe jurídico-urbanístico), <strong>Finex</strong> (estudio financiero) y <strong>Gestex</strong> (trámites administrativos).
+          </p>
+        </div>
+        <div class="space-y-4">
+          <div class="bg-white rounded-2xl shadow-sm p-5 card-hover border-l-4 border-notarex-700">
+            <p class="font-bold text-sm text-notarex-700 mb-1">📋 3 Contratos Modelo</p>
+            <p class="text-xs text-gray-500">Compraventa plurifamiliar, arras confirmatorias y reserva — adaptados a Canarias</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm p-5 card-hover border-l-4 border-amber-500">
+            <p class="font-bold text-sm text-notarex-700 mb-1">💶 Régimen Fiscal</p>
+            <p class="text-xs text-gray-500">IGIC 7%, AJD 0,75%, plusvalía municipal · Sin IVA</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm p-5 card-hover border-l-4 border-blue-500">
+            <p class="font-bold text-sm text-notarex-700 mb-1">🏛️ División Horizontal</p>
+            <p class="text-xs text-gray-500">20 fincas registrales independientes (18 viv. + 1 local + garajes/trasteros)</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm p-5 card-hover border-l-4 border-emerald-500">
+            <p class="font-bold text-sm text-notarex-700 mb-1">🔒 Venta Sobre Plano</p>
+            <p class="text-xs text-gray-500">Aval bancario / Seguro de caución · Cuenta especial · Ley 20/2015</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm p-5 card-hover border-l-4 border-purple-500">
+            <p class="font-bold text-sm text-notarex-700 mb-1">📖 Libro del Edificio</p>
+            <p class="text-xs text-gray-500">Contenido obligatorio LOE art. 7 + normativa canaria</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Datos de la promoción -->
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+          <h3 class="font-bold text-notarex-700 mb-4">Datos del Promotor</h3>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-100"><td class="py-2.5 text-gray-500 w-40">Razón social</td><td class="py-2.5 font-medium"><span class="blank">[PROMOTORA S.L. / S.A.]</span></td></tr>
+              <tr class="border-b border-gray-100"><td class="py-2.5 text-gray-500">CIF</td><td class="py-2.5 font-medium"><span class="blank">[CIF de la mercantil]</span></td></tr>
+              <tr class="border-b border-gray-100"><td class="py-2.5 text-gray-500">Representante</td><td class="py-2.5 font-medium"><span class="blank">[Administrador/Apoderado]</span></td></tr>
+              <tr class="border-b border-gray-100"><td class="py-2.5 text-gray-500">Domicilio social</td><td class="py-2.5 font-medium"><span class="blank">[Domicilio social]</span></td></tr>
+              <tr><td class="py-2.5 text-gray-500">Registro Mercantil</td><td class="py-2.5 font-medium"><span class="blank">[RM de Santa Cruz de Tenerife]</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+          <h3 class="font-bold text-notarex-700 mb-4">Datos de la Finca</h3>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-100"><td class="py-2.5 text-gray-500 w-40">Ubicación</td><td class="py-2.5 font-medium">Ctra. General TF-652, Guargacho, San Miguel de Abona (Tenerife)</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-2.5 text-gray-500">Clasificación</td><td class="py-2.5 font-medium">Suelo Urbano Consolidado</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-2.5 text-gray-500">Superficie s/rasante</td><td class="py-2.5 font-medium">~1.349 m² · Total incl. sótano: ~1.789 m²</td></tr>
+              <tr class="border-b border-gray-100"><td class="py-2.5 text-gray-500">Ref. catastral</td><td class="py-2.5 font-medium"><span class="blank">[Referencia catastral]</span></td></tr>
+              <tr><td class="py-2.5 text-gray-500">Coordenadas</td><td class="py-2.5 font-medium">28.0486°N, -16.6281°W</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Cuadro viviendas -->
+      <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 mb-6">
+        <h3 class="font-bold text-notarex-700 mb-4">Cuadro de Unidades y Valoración (Fuente: Valorex)</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr class="bg-notarex-700 text-white text-xs">
+              <th class="px-4 py-3 text-left rounded-tl-lg">Tipología</th>
+              <th class="px-4 py-3 text-center">Uds.</th>
+              <th class="px-4 py-3 text-center">m² constr. (rango)</th>
+              <th class="px-4 py-3 text-center">€/m²</th>
+              <th class="px-4 py-3 text-right">Precio ud. (est.)</th>
+              <th class="px-4 py-3 text-center">Anejos</th>
+              <th class="px-4 py-3 text-right rounded-tr-lg">Subtotal</th>
+            </tr></thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="px-4 py-3 font-medium">🛏️ 1 dormitorio</td><td class="px-4 py-3 text-center">6</td><td class="px-4 py-3 text-center">45–52 m²</td><td class="px-4 py-3 text-center">3.150 €</td><td class="px-4 py-3 text-right font-semibold">154.350 €</td><td class="px-4 py-3 text-center text-xs">Garaje + Trastero</td><td class="px-4 py-3 text-right font-bold">926.100 €</td></tr>
+              <tr><td class="px-4 py-3 font-medium">🛏️🛏️ 2 dormitorios</td><td class="px-4 py-3 text-center">6</td><td class="px-4 py-3 text-center">60–70 m²</td><td class="px-4 py-3 text-center">2.980 €</td><td class="px-4 py-3 text-right font-semibold">193.700 €</td><td class="px-4 py-3 text-center text-xs">Garaje + Trastero</td><td class="px-4 py-3 text-right font-bold">1.162.200 €</td></tr>
+              <tr><td class="px-4 py-3 font-medium">🛏️🛏️🛏️ 3 dormitorios</td><td class="px-4 py-3 text-center">6</td><td class="px-4 py-3 text-center">88–102 m²</td><td class="px-4 py-3 text-center">2.850 €</td><td class="px-4 py-3 text-right font-semibold">270.750 €</td><td class="px-4 py-3 text-center text-xs">Garaje + Trastero</td><td class="px-4 py-3 text-right font-bold">1.624.500 €</td></tr>
+              <tr><td class="px-4 py-3 font-medium">🏪 Local comercial</td><td class="px-4 py-3 text-center">1</td><td class="px-4 py-3 text-center">~95 m²</td><td class="px-4 py-3 text-center">1.415 €</td><td class="px-4 py-3 text-right font-semibold">134.425 €</td><td class="px-4 py-3 text-center text-xs">—</td><td class="px-4 py-3 text-right font-bold">134.425 €</td></tr>
+            </tbody>
+            <tfoot><tr class="bg-notarex-700 text-white font-bold"><td class="px-4 py-3 rounded-bl-lg" colspan="6">VALOR TOTAL PROMOCIÓN</td><td class="px-4 py-3 text-right text-lg rounded-br-lg">3.847.225 €</td></tr></tfoot>
+          </table>
+        </div>
+        <p class="text-xs text-gray-400 mt-3">Valores con garaje y trastero vinculados incluidos. Fuente: Informe de Tasación de Valorex (marzo 2026). Tendencia zona: +12,3% interanual.</p>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 text-sm text-amber-800">
+        <p class="font-semibold mb-1">⚠️ Aviso Legal Importante</p>
+        <p>Los modelos contractuales contenidos en este informe tienen <strong>carácter orientativo</strong> y no sustituyen al asesoramiento jurídico profesional. Antes de su firma, deberán ser revisados por un notario del Ilustre Colegio Notarial de Canarias y adaptados a las circunstancias particulares de cada operación. Las cifras económicas son estimaciones basadas en los informes del equipo de proyecto y datos de mercado a marzo de 2026.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECCIÓN 2: CONTRATOS ═══════════════════════ -->
+    <section id="contratos" class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-notarex-700 flex items-center justify-center text-white text-lg">2</div>
+        <h2 class="text-3xl font-bold gradient-text">Modelos Contractuales</h2>
+      </div>
+      <p class="text-gray-600 mb-8 max-w-3xl">Tres modelos adaptados a la legislación canaria para edificio plurifamiliar con anejos vinculados (garaje y trastero). Pulse cada modelo para expandir el texto completo.</p>
+
+      <!-- ── A) CONTRATO DE RESERVA ── -->
+      <div class="mb-8">
+        <button onclick="toggleAccordion('reserva')" class="w-full text-left bg-white rounded-2xl shadow-sm p-6 border border-gray-100 card-hover flex items-center justify-between group">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl">📋</div>
+            <div>
+              <h3 class="font-bold text-notarex-700 text-lg">Modelo A — Contrato de Reserva</h3>
+              <p class="text-sm text-gray-500">Señal de 3.000–6.000 € · Reserva 15 días naturales · Vivienda + garaje + trastero</p>
+            </div>
+          </div>
+          <svg class="w-6 h-6 text-gray-400 group-hover:text-notarex-700 transition transform" id="icon-reserva" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div id="reserva" class="accordion-content mt-4">
+          <div class="contract-box">
+            <div class="text-center mb-6">
+              <h4 class="text-lg" style="-webkit-text-fill-color: #343A40;">CONTRATO PRIVADO DE RESERVA DE VIVIENDA</h4>
+              <p class="text-xs text-gray-500">Promoción «Edificio Guargacho 1» · San Miguel de Abona, Tenerife</p>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">En <span class="blank">[localidad]</span>, a <span class="blank">[día]</span> de <span class="blank">[mes]</span> de 20<span class="blank">[__]</span></p>
+            <div class="clause">
+              <p class="clause-title">REUNIDOS</p>
+              <div class="clause-body">
+                <p class="mb-2"><strong>De una parte</strong>, como VENDEDORA/PROMOTORA: <span class="blank">[RAZÓN SOCIAL]</span>, con CIF <span class="blank">[___]</span>, domicilio social en <span class="blank">[___]</span>, inscrita en el Registro Mercantil de Santa Cruz de Tenerife, tomo <span class="blank">[___]</span>, folio <span class="blank">[___]</span>, hoja <span class="blank">[___]</span>, representada por D./Dña. <span class="blank">[nombre]</span>, con DNI <span class="blank">[___]</span>, en calidad de <span class="blank">[Administrador/a Único/a]</span>.</p>
+                <p><strong>De otra parte</strong>, como RESERVANTE: D./Dña. <span class="blank">[nombre completo]</span>, mayor de edad, nacionalidad <span class="blank">[___]</span>, con DNI/NIE/Pasaporte nº <span class="blank">[___]</span>, domicilio en <span class="blank">[___]</span>.</p>
+              </div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">EXPONEN</p>
+              <div class="clause-body">
+                <p class="mb-2"><strong>I.</strong> Que la PROMOTORA es propietaria de un solar sito en Ctra. General TF-652, Guargacho, San Miguel de Abona (Tenerife), con referencia catastral <span class="blank">[___]</span>, inscrito en el Registro de la Propiedad de Granadilla de Abona como finca nº <span class="blank">[___]</span>.</p>
+                <p class="mb-2"><strong>II.</strong> Que la PROMOTORA tiene previsto construir un edificio de viviendas de PB + 2 plantas + sótano garaje, con 18 viviendas, 1 local comercial, 18 plazas de garaje y 18 trasteros, según proyecto de <strong>DOS·07 Arquitectura y Diseño, S.L.</strong></p>
+                <p class="mb-2"><strong>III.</strong> Que la parte RESERVANTE está interesada en la adquisición de la vivienda identificada como <strong>Unidad <span class="blank">[letra/nº]</span>, Planta <span class="blank">[PB/1ª/2ª]</span></strong>, de tipo <strong><span class="blank">[1/2/3]</span> dormitorio(s)</strong>, con su plaza de garaje nº <span class="blank">[___]</span> y trastero nº <span class="blank">[___]</span> vinculados.</p>
+                <p><strong>IV.</strong> Ambas partes acuerdan formalizar el presente CONTRATO DE RESERVA conforme a las siguientes:</p>
+              </div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">ESTIPULACIONES</p>
+              <div class="clause-body">
+                <p class="mb-3"><strong>PRIMERA. — Objeto.</strong> La PROMOTORA reserva a favor del RESERVANTE la siguiente unidad inmobiliaria:</p>
+                <ul class="list-disc pl-6 mb-3 space-y-1">
+                  <li><strong>Vivienda</strong>: Unidad <span class="blank">[___]</span>, Planta <span class="blank">[___]</span>, superficie construida aprox. <span class="blank">[___]</span> m², programa: <span class="blank">[1/2/3]</span> dormitorio(s), <span class="blank">[1/2]</span> baño(s), salón-comedor, cocina, <span class="blank">[terraza/balcón]</span></li>
+                  <li><strong>Plaza de garaje</strong> nº <span class="blank">[___]</span> en planta sótano, vinculada como anejo inseparable</li>
+                  <li><strong>Trastero</strong> nº <span class="blank">[___]</span>, vinculado como anejo inseparable</li>
+                  <li>Calificación energética prevista: B</li>
+                  <li>Memoria de calidades: Según Anexo I adjunto</li>
+                </ul>
+                <p class="mb-3"><strong>SEGUNDA. — Precio.</strong> El precio total de la compraventa de la vivienda con sus anejos vinculados (garaje y trastero) se fija en <span class="blank">[___]</span> EUROS (<span class="blank">[___]</span> €), <strong>más IGIC al tipo vigente</strong> (actualmente 7%).</p>
+                <p class="mb-3"><strong>TERCERA. — Señal de Reserva.</strong> El RESERVANTE entrega a la PROMOTORA la cantidad de <span class="blank">[3.000–6.000]</span> € como señal, mediante <span class="blank">[transferencia/cheque]</span> a la cuenta ES<span class="blank">[IBAN]</span>. Dicha cantidad se descontará del precio final.</p>
+                <p class="mb-3"><strong>CUARTA. — Plazo y Efectos.</strong> La reserva tiene validez de <strong>15 días naturales</strong>. Dentro de dicho plazo, las partes formalizarán el contrato de arras confirmatorias. Transcurrido el plazo sin formalizar:</p>
+                <ul class="list-disc pl-6 mb-3 space-y-1">
+                  <li><strong>Por causa del RESERVANTE:</strong> La PROMOTORA retendrá la señal como indemnización.</li>
+                  <li><strong>Por causa de la PROMOTORA:</strong> Devolverá el doble de la señal.</li>
+                  <li><strong>Por mutuo acuerdo o fuerza mayor:</strong> Devolución íntegra.</li>
+                </ul>
+                <p class="mb-3"><strong>QUINTA. — Información al Comprador.</strong> La PROMOTORA ha puesto a disposición del RESERVANTE, conforme al RD 515/1989 y LOE 38/1999: identificación del promotor, planos, memoria de calidades, licencia urbanística, datos registrales, seguros obligatorios, forma de pago y plazos.</p>
+                <p class="mb-3"><strong>SEXTA. — Cantidades Anticipadas.</strong> Conforme a la DA 1ª LOE (modificada por Ley 20/2015), las cantidades anticipadas estarán garantizadas mediante <strong>aval bancario o seguro de caución</strong> individual a nombre del comprador.</p>
+                <p class="mb-3"><strong>SÉPTIMA. — Jurisdicción.</strong> Juzgados y Tribunales de Santa Cruz de Tenerife, salvo consumidor (domicilio del comprador, art. 52.2 LEC).</p>
+                <p><strong>OCTAVA. — Protección de Datos.</strong> Conforme al RGPD (UE) 2016/679 y LOPDGDD 3/2018.</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-8 mt-6">
+              <div class="text-center text-sm text-gray-500"><p class="mb-8">LA PROMOTORA</p><div class="border-t border-gray-300 pt-2">Fdo.: <span class="blank">[Representante]</span></div></div>
+              <div class="text-center text-sm text-gray-500"><p class="mb-8">EL/LA RESERVANTE</p><div class="border-t border-gray-300 pt-2">Fdo.: <span class="blank">[Nombre completo]</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── B) CONTRATO DE ARRAS CONFIRMATORIAS ── -->
+      <div class="mb-8">
+        <button onclick="toggleAccordion('arras')" class="w-full text-left bg-white rounded-2xl shadow-sm p-6 border border-gray-100 card-hover flex items-center justify-between group">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl">🤝</div>
+            <div>
+              <h3 class="font-bold text-notarex-700 text-lg">Modelo B — Contrato de Arras Confirmatorias</h3>
+              <p class="text-sm text-gray-500">10% del precio · Compromiso firme · Venta sobre plano con aval bancario</p>
+            </div>
+          </div>
+          <svg class="w-6 h-6 text-gray-400 group-hover:text-notarex-700 transition transform" id="icon-arras" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div id="arras" class="accordion-content mt-4">
+          <div class="contract-box">
+            <div class="text-center mb-6">
+              <h4 class="text-lg" style="-webkit-text-fill-color: #343A40;">CONTRATO PRIVADO DE ARRAS CONFIRMATORIAS</h4>
+              <p class="text-xs text-gray-500">Promoción «Edificio Guargacho 1» · San Miguel de Abona, Tenerife</p>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">En <span class="blank">[localidad]</span>, a <span class="blank">[día]</span> de <span class="blank">[mes]</span> de 20<span class="blank">[__]</span></p>
+            <div class="clause">
+              <p class="clause-title">REUNIDOS</p>
+              <div class="clause-body">
+                <p class="mb-2"><strong>VENDEDORA:</strong> <span class="blank">[RAZÓN SOCIAL]</span>, datos identificativos del Expositivo I.</p>
+                <p><strong>COMPRADORA:</strong> D./Dña. <span class="blank">[nombre completo]</span>, DNI/NIE <span class="blank">[___]</span>, domicilio <span class="blank">[___]</span>.</p>
+              </div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">EXPONEN</p>
+              <div class="clause-body">
+                <p class="mb-2"><strong>I.</strong> Que la VENDEDORA es propietaria del solar descrito y está desarrollando la promoción conforme al proyecto de <strong>DOS·07 Arquitectura y Diseño, S.L.</strong>, con licencia de obras <span class="blank">[nº expediente / en tramitación]</span>.</p>
+                <p class="mb-2"><strong>II.</strong> Que en virtud del Contrato de Reserva de fecha <span class="blank">[___]</span>, la COMPRADORA entregó <span class="blank">[importe]</span> € como señal.</p>
+                <p class="mb-2"><strong>III.</strong> Que las partes desean formalizar arras de naturaleza <strong>confirmatoria</strong> (art. 1.124 CC), constituyendo entrega a cuenta y señal de perfección. <strong>Ninguna parte podrá desistir libremente</strong>; la parte cumplidora podrá exigir cumplimiento forzoso o resolución con indemnización.</p>
+              </div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">ESTIPULACIONES</p>
+              <div class="clause-body">
+                <p class="mb-3"><strong>PRIMERA. — Objeto.</strong> La VENDEDORA vende y la COMPRADORA compra la siguiente unidad inmobiliaria del Edificio Guargacho 1:</p>
+                <ul class="list-disc pl-6 mb-3 space-y-1">
+                  <li><strong>Vivienda</strong>: Unidad <span class="blank">[___]</span>, Planta <span class="blank">[___]</span>, <span class="blank">[___]</span> m² construidos, <span class="blank">[1/2/3]</span> dormitorio(s)</li>
+                  <li><strong>Plaza de garaje</strong> nº <span class="blank">[___]</span> en sótano (~12 m²), anejo vinculado</li>
+                  <li><strong>Trastero</strong> nº <span class="blank">[___]</span> (~5 m²), anejo vinculado</li>
+                </ul>
+                <p class="mb-3">Con las calidades descritas en Anexo I y planos de Anexo II.</p>
+
+                <p class="mb-3"><strong>SEGUNDA. — Precio y Forma de Pago.</strong></p>
+                <p class="mb-2">Precio total (vivienda + garaje + trastero): <span class="blank">[___]</span> € + IGIC 7% = <span class="blank">[___]</span> € total. Desglose:</p>
+                <table class="w-full text-sm border border-gray-200 rounded-lg overflow-hidden mb-3">
+                  <thead class="bg-gray-100"><tr><th class="px-4 py-2 text-left">Concepto</th><th class="px-4 py-2 text-right">Importe</th><th class="px-4 py-2 text-left">Momento</th></tr></thead>
+                  <tbody class="divide-y divide-gray-100">
+                    <tr><td class="px-4 py-2">a) Señal de reserva (ya entregada)</td><td class="px-4 py-2 text-right"><span class="blank">[___]</span> €</td><td class="px-4 py-2">Firma reserva</td></tr>
+                    <tr><td class="px-4 py-2">b) Arras confirmatorias (hoy)</td><td class="px-4 py-2 text-right"><span class="blank">[___]</span> €</td><td class="px-4 py-2">Firma este contrato</td></tr>
+                    <tr><td class="px-4 py-2">c) Pagos a cuenta durante obra</td><td class="px-4 py-2 text-right"><span class="blank">[___]</span> €</td><td class="px-4 py-2">Según certificaciones</td></tr>
+                    <tr class="font-semibold bg-gray-50"><td class="px-4 py-2">d) Resto a la escritura pública</td><td class="px-4 py-2 text-right"><span class="blank">[___]</span> €</td><td class="px-4 py-2">Ante Notario</td></tr>
+                  </tbody>
+                </table>
+
+                <p class="mb-3"><strong>TERCERA. — Arras Confirmatorias.</strong> Las cantidades entregadas (a+b+c) tienen carácter de arras confirmatorias (art. 1.124 CC). Incumplimiento: la parte cumplidora podrá exigir cumplimiento o resolución con indemnización de daños y perjuicios.</p>
+
+                <p class="mb-3"><strong>CUARTA. — Plazo de Entrega.</strong> Plazo máximo de <span class="blank">[18–24]</span> meses desde licencia de obras, con tolerancia de 3 meses. Retraso superior faculta resolución con devolución íntegra más intereses.</p>
+
+                <p class="mb-3"><strong>QUINTA. — Escritura Pública.</strong> Dentro de los 30 días naturales siguientes a la obtención de la <strong>Licencia de Primera Ocupación</strong> y el <strong>CFO</strong>. Notario elegido por la COMPRADORA.</p>
+
+                <p class="mb-3"><strong>SEXTA. — Anejos Vinculados (Garaje y Trastero).</strong> La plaza de garaje y el trastero identificados en la estipulación Primera son <strong>anejos inseparables</strong> de la vivienda, formarán parte de la misma finca registral o figurarán como fincas vinculadas ob rem. No podrán venderse ni transmitirse separadamente de la vivienda.</p>
+
+                <p class="mb-3"><strong>SÉPTIMA. — Garantía de Cantidades Anticipadas.</strong> Conforme a la DA 1ª LOE (Ley 38/1999, modificada por Ley 20/2015 y RD 1/2021):</p>
+                <ul class="list-disc pl-6 mb-3 space-y-1">
+                  <li>Las cantidades anticipadas se garantizarán mediante <strong>aval solidario bancario o seguro de caución individual</strong> a nombre de la COMPRADORA.</li>
+                  <li>Las cantidades se ingresarán en <strong>cuenta especial separada</strong> en entidad de crédito, con separación de fondos del promotor.</li>
+                  <li>La garantía cubrirá la devolución de cantidades más los <strong>intereses legales del dinero</strong>.</li>
+                  <li>Se entregará a la COMPRADORA el documento original del aval/seguro individualizado.</li>
+                </ul>
+
+                <p class="mb-3"><strong>OCTAVA. — Gastos e Impuestos.</strong></p>
+                <ul class="list-disc pl-6 mb-3 space-y-1">
+                  <li><strong>Vendedora:</strong> Plusvalía municipal (IIVTNU), obra nueva y DH, cancelación hipoteca, matriz escritura.</li>
+                  <li><strong>Compradora:</strong> IGIC 7%, AJD 0,75%, primera copia, inscripción RP, gestoría.</li>
+                </ul>
+
+                <p class="mb-3"><strong>NOVENA. — Seguros Obligatorios (LOE).</strong></p>
+                <ul class="list-disc pl-6 mb-3 space-y-1">
+                  <li><strong>Seguro decenal</strong> (art. 19 LOE): 10 años · Defectos estructurales.</li>
+                  <li><strong>Seguro trienal</strong> (art. 17.1.b): 3 años · Defectos de habitabilidad.</li>
+                  <li><strong>Garantía anual</strong> (art. 17.1.c): 1 año · Acabados.</li>
+                </ul>
+
+                <p class="mb-3"><strong>DÉCIMA. — Comunidad de Propietarios.</strong> La COMPRADORA se obliga a cumplir los Estatutos de la Comunidad de Propietarios del Edificio Guargacho 1 (Anexo IV), que incluyen las normas de uso de zonas comunes, garajes, trasteros, azotea y local comercial.</p>
+
+                <p class="mb-3"><strong>UNDÉCIMA. — Resolución de Conflictos.</strong> Mediación previa (Colegio de Abogados de Tenerife, 30 días), y subsidiariamente Juzgados competentes.</p>
+
+                <p><strong>DUODÉCIMA. — Protección de Datos.</strong> RGPD y LOPDGDD.</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-8 mt-6">
+              <div class="text-center text-sm text-gray-500"><p class="mb-8">LA VENDEDORA</p><div class="border-t border-gray-300 pt-2">Fdo.: <span class="blank">[Representante]</span></div></div>
+              <div class="text-center text-sm text-gray-500"><p class="mb-8">LA COMPRADORA</p><div class="border-t border-gray-300 pt-2">Fdo.: <span class="blank">[Nombre completo]</span></div></div>
+            </div>
+            <p class="text-xs text-gray-400 mt-4 text-center">Anexos: I — Memoria de Calidades · II — Planos · III — Aval/Seguro · IV — Estatutos Comunidad · V — Nota Simple</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── C) ESCRITURA PÚBLICA COMPRAVENTA ── -->
+      <div class="mb-8">
+        <button onclick="toggleAccordion('compraventa')" class="w-full text-left bg-white rounded-2xl shadow-sm p-6 border border-gray-100 card-hover flex items-center justify-between group">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl">📜</div>
+            <div>
+              <h3 class="font-bold text-notarex-700 text-lg">Modelo C — Minuta de Escritura Pública de Compraventa</h3>
+              <p class="text-sm text-gray-500">Vivienda en edificio plurifamiliar + garaje + trastero vinculados · Elevación a público</p>
+            </div>
+          </div>
+          <svg class="w-6 h-6 text-gray-400 group-hover:text-notarex-700 transition transform" id="icon-compraventa" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div id="compraventa" class="accordion-content mt-4">
+          <div class="contract-box">
+            <div class="text-center mb-6">
+              <h4 class="text-lg" style="-webkit-text-fill-color: #343A40;">MINUTA DE ESCRITURA PÚBLICA DE COMPRAVENTA</h4>
+              <p class="text-xs text-gray-500">Vivienda en Edificio Plurifamiliar · Notario del Ilustre Colegio Notarial de Canarias</p>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 text-sm text-blue-800">
+              <p class="font-semibold">📝 Nota para el Notario:</p>
+              <p>Minuta orientativa para vivienda en edificio plurifamiliar con anejos vinculados (garaje + trastero) en régimen de propiedad horizontal. Vivienda nueva de promotor en Canarias — tributa por <strong>IGIC 7%</strong> (no IVA). Se ruega adaptar a protocolo habitual.</p>
+            </div>
+            <p class="text-sm text-gray-600 mb-4 font-semibold">NÚMERO <span class="blank">[protocolo]</span> — En <span class="blank">[localidad]</span>, a <span class="blank">[fecha]</span></p>
+
+            <div class="clause">
+              <p class="clause-title">COMPARECEN</p>
+              <div class="clause-body">
+                <p class="mb-2"><strong>VENDEDORA:</strong> <span class="blank">[Representante]</span>, en nombre y representación de <span class="blank">[RAZÓN SOCIAL]</span>, CIF <span class="blank">[___]</span>, inscrita en el RM de Santa Cruz de Tenerife, con poder bastante según escritura <span class="blank">[___]</span>.</p>
+                <p><strong>COMPRADORA:</strong> D./Dña. <span class="blank">[nombre]</span>, nacionalidad <span class="blank">[___]</span>, DNI/NIE <span class="blank">[___]</span>, vecino/a de <span class="blank">[___]</span>. <em>[Si casado en gananciales, comparecerá también el cónyuge.]</em></p>
+              </div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">I. — TÍTULO</p>
+              <div class="clause-body"><p>La finca pertenece a la vendedora por título de <span class="blank">[compra/aportación]</span>, escritura ante el Notario <span class="blank">[___]</span>, fecha <span class="blank">[___]</span>, nº <span class="blank">[___]</span> de protocolo, inscrita en el RP de Granadilla de Abona.</p></div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">II. — DESCRIPCIÓN DE LA FINCA</p>
+              <div class="clause-body">
+                <p class="mb-2"><strong>FINCA:</strong> Vivienda letra/nº <span class="blank">[___]</span>, Planta <span class="blank">[PB/1ª/2ª]</span> del edificio sito en Ctra. General TF-652, Guargacho, San Miguel de Abona, que forma parte de la División Horizontal inscrita en <span class="blank">[datos registrales DH]</span>.</p>
+                <p class="mb-2">Superficie construida: <span class="blank">[___]</span> m². Superficie útil: <span class="blank">[___]</span> m². Distribución: <span class="blank">[programa]</span>.</p>
+                <p class="mb-2"><strong>ANEJOS VINCULADOS:</strong></p>
+                <ul class="list-disc pl-6 mb-2 space-y-1">
+                  <li><strong>Plaza de garaje</strong> nº <span class="blank">[___]</span>, en planta sótano, superficie ~12 m², anejo inseparable.</li>
+                  <li><strong>Trastero</strong> nº <span class="blank">[___]</span>, superficie ~5 m², anejo inseparable.</li>
+                </ul>
+                <p class="mb-2">Linda: <span class="blank">[norte, sur, este, oeste — colindantes o elementos comunes]</span>.</p>
+                <p>Referencia catastral: <span class="blank">[___]</span>. Cuota de participación: <span class="blank">[___]</span>%. Calificación energética: <span class="blank">[B]</span>.</p>
+              </div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">III. — CARGAS</p>
+              <div class="clause-body"><p>Según Nota Simple expedida en fecha <span class="blank">[___]</span>, la finca se encuentra <strong>libre de cargas</strong>. La vendedora ha cancelado la hipoteca promotor a su costa. Al corriente de IBI y cuotas de comunidad.</p></div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">IV. — COMPRAVENTA</p>
+              <div class="clause-body">
+                <p class="mb-2">La vendedora <strong>VENDE</strong> y la compradora <strong>COMPRA</strong> la finca descrita con sus anejos por precio de <span class="blank">[___]</span> € + IGIC 7% (<span class="blank">[___]</span> €) = Total <span class="blank">[___]</span> €.</p>
+                <p class="mb-2">Forma de pago:</p>
+                <ul class="list-disc pl-6 mb-2 space-y-1">
+                  <li><span class="blank">[importe]</span> € anteriormente, como reserva y arras según contrato de <span class="blank">[fecha]</span>.</li>
+                  <li><span class="blank">[importe]</span> € en este acto, mediante cheque bancario conformado / transferencia.</li>
+                </ul>
+                <p>La vendedora otorga carta de pago total.</p>
+              </div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">V. — ENTREGA</p>
+              <div class="clause-body"><p>Se transmite la posesión en este acto, con entrega de llaves (vivienda, portal, garaje, trastero, buzón) y documentación: Libro del Edificio, certificado energético, planos as-built, manuales, boletines, CFO y licencia de primera ocupación.</p></div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">VI. — IMPUESTOS Y GASTOS</p>
+              <div class="clause-body">
+                <ul class="list-disc pl-6 space-y-1">
+                  <li>Primera entrega de vivienda nueva → <strong>IGIC 7%</strong> (Ley 20/1991 REF Canario).</li>
+                  <li><strong>AJD 0,75%</strong> sobre el precio escriturado (normativa canaria).</li>
+                  <li>Plusvalía municipal a cargo de la vendedora.</li>
+                  <li>Primera copia, inscripción RP y gestoría a cargo de la compradora.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">VII. — GARANTÍAS LEGALES</p>
+              <div class="clause-body"><p>Seguro decenal: compañía <span class="blank">[___]</span>, póliza nº <span class="blank">[___]</span>. Seguro trienal y garantía anual conforme LOE. Se entrega documentación de seguros.</p></div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">VIII. — COMUNIDAD DE PROPIETARIOS</p>
+              <div class="clause-body"><p>La compradora se subroga en los Estatutos de la Comunidad del Edificio Guargacho 1, inscritos en el Registro de la Propiedad. Cuota mensual estimada: <span class="blank">[___]</span> €.</p></div>
+            </div>
+            <div class="clause">
+              <p class="clause-title">IX. — OTORGAMIENTO</p>
+              <div class="clause-body"><p>Los comparecientes, advertidos de las reservas legales y fiscales, otorgan la presente escritura, que previa lectura por mí el Notario, hallan conforme y firman.</p></div>
+            </div>
+            <p class="text-xs text-gray-400 mt-6 text-center">— Fin de la minuta · Firma de las partes y del Notario autorizante —</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLACEHOLDER PARA SECCIONES ADICIONALES -->
+    <!-- ═══════════════════════ SECCIÓN 3: CLÁUSULAS ESPECÍFICAS ═══════════════════════ -->
+    <section id="clausulas" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-notarex-700 flex items-center justify-center text-white text-lg">3</div>
+        <h2 class="text-3xl font-bold gradient-text">Cláusulas Específicas</h2>
+      </div>
+      <p class="text-gray-600 mb-8 max-w-3xl">Cláusulas modelo adaptadas a edificio plurifamiliar con garaje subterráneo y zonas comunes.</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 card-hover">
+          <div class="flex items-center gap-3 mb-4"><span class="text-2xl">🔑</span><h3 class="font-bold text-notarex-700">Entrega de Llaves</h3></div>
+          <div class="text-sm text-gray-600 space-y-2">
+            <p>«La entrega material se producirá simultáneamente al otorgamiento de la escritura. Se entregarán llaves de: vivienda, portal, garaje subterráneo, trastero y buzón.</p>
+            <p>La vivienda se entregará con todos los suministros dados de alta, Licencia de Primera Ocupación concedida y CFO inscrito. Previa visita de inspección con <strong>72 horas</strong> de antelación. Defectos de acabado subsanados en <strong>30 días</strong>.»</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 card-hover">
+          <div class="flex items-center gap-3 mb-4"><span class="text-2xl">⏰</span><h3 class="font-bold text-notarex-700">Penalizaciones por Retraso</h3></div>
+          <div class="text-sm text-gray-600 space-y-2">
+            <p>«Retraso superior a la tolerancia de 3 meses: penalización de <span class="blank">[___]</span> €/mes (equivalente a alquiler de mercado). Descontable del precio pendiente.</p>
+            <p>Retraso superior a 6 meses adicionales: resolución unilateral con devolución íntegra más intereses legales + 2 puntos, sin perjuicio de indemnización. No computa fuerza mayor (art. 1.105 CC).»</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 card-hover">
+          <div class="flex items-center gap-3 mb-4"><span class="text-2xl">🛡️</span><h3 class="font-bold text-notarex-700">Garantías LOE</h3></div>
+          <div class="text-sm text-gray-600 space-y-2">
+            <p>«La vivienda cuenta con garantías conforme a la LOE 38/1999:</p>
+            <ul class="list-disc pl-5 space-y-1">
+              <li><strong>1 año</strong> — Acabados (constructor)</li>
+              <li><strong>3 años</strong> — Habitabilidad (constructor + directores)</li>
+              <li><strong>10 años</strong> — Estructura, cimentación, muros de carga (seguro decenal obligatorio)</li>
+            </ul>
+            <p>Se entregarán pólizas y certificados OCT.»</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 card-hover">
+          <div class="flex items-center gap-3 mb-4"><span class="text-2xl">🏦</span><h3 class="font-bold text-notarex-700">Subrogación Hipotecaria</h3></div>
+          <div class="text-sm text-gray-600 space-y-2">
+            <p>«Si existe hipoteca promotor, la compradora podrá: <strong>a)</strong> Subrogarse en la parte proporcional del préstamo, descontando del precio; o <strong>b)</strong> No subrogarse, cancelando la vendedora a su costa. En cualquier caso, se entregará libre de cargas o con carga expresamente asumida.»</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 card-hover">
+          <div class="flex items-center gap-3 mb-4"><span class="text-2xl">🅿️</span><h3 class="font-bold text-notarex-700">Uso del Garaje y Trastero</h3></div>
+          <div class="text-sm text-gray-600 space-y-2">
+            <p>«El garaje y trastero son anejos vinculados e inseparables de la vivienda. El uso del garaje se limita al estacionamiento de vehículos (no almacenamiento de materiales peligrosos). El acceso al sótano será mediante rampa compartida con sistema de apertura automático. Se prohíbe la ocupación de plazas ajenas o de zonas de maniobra.»</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 card-hover">
+          <div class="flex items-center gap-3 mb-4"><span class="text-2xl">👤</span><h3 class="font-bold text-notarex-700">Consumidores y Vicios Ocultos</h3></div>
+          <div class="text-sm text-gray-600 space-y-2">
+            <p>«Si la compradora es consumidor (RDLeg. 1/2007): nulidad de cláusulas abusivas (art. 82+), fuero del domicilio (art. 52.2 LEC), prohibición de repercutir gastos ajenos. Vicios ocultos: arts. 1.484-1.490 CC (caducidad 6 meses), sin perjuicio de plazos LOE.»</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECCIÓN 4: VENTA SOBRE PLANO ═══════════════════════ -->
+    <section id="sobrepl" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-notarex-700 flex items-center justify-center text-white text-lg">4</div>
+        <h2 class="text-3xl font-bold gradient-text">Garantías en Venta Sobre Plano</h2>
+      </div>
+      <p class="text-gray-600 mb-8 max-w-3xl">Obligaciones legales del promotor cuando percibe cantidades anticipadas antes de la entrega de la vivienda. Adaptado a la Ley 57/1968, DA 1ª LOE y Ley 20/2015.</p>
+
+      <div class="grid lg:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm p-6 border-l-4 border-blue-500 card-hover">
+          <div class="text-3xl mb-3">🔒</div>
+          <h3 class="font-bold text-notarex-700 mb-2">Garantía Obligatoria</h3>
+          <p class="text-sm text-gray-600">Desde la obtención de la <strong>licencia de edificación</strong>, el promotor debe garantizar la devolución de cantidades anticipadas + intereses legales mediante:</p>
+          <ul class="text-sm text-gray-600 mt-2 space-y-1 list-disc pl-5">
+            <li><strong>Aval solidario</strong> de entidad de crédito autorizada, o</li>
+            <li><strong>Seguro de caución</strong> de aseguradora autorizada</li>
+          </ul>
+          <p class="text-xs text-gray-400 mt-3">DA 1ª LOE, apartado 1.a)</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border-l-4 border-emerald-500 card-hover">
+          <div class="text-3xl mb-3">🏦</div>
+          <h3 class="font-bold text-notarex-700 mb-2">Cuenta Especial Separada</h3>
+          <p class="text-sm text-gray-600">Las cantidades anticipadas se ingresarán en <strong>cuenta especial</strong> en entidad de crédito, separada de cualquier otro fondo del promotor. Solo podrá disponer para atenciones de la construcción.</p>
+          <p class="text-sm text-gray-600 mt-2">La entidad de crédito exigirá la garantía (aval/seguro) para abrir la cuenta.</p>
+          <p class="text-xs text-gray-400 mt-3">DA 1ª LOE, apartado 1.b)</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border-l-4 border-amber-500 card-hover">
+          <div class="text-3xl mb-3">📄</div>
+          <h3 class="font-bold text-notarex-700 mb-2">Documentación al Comprador</h3>
+          <p class="text-sm text-gray-600">En cada contrato debe constar:</p>
+          <ul class="text-sm text-gray-600 mt-2 space-y-1 list-disc pl-5">
+            <li>Obligación de devolver cantidades + intereses si no se entrega</li>
+            <li>Referencia al aval/seguro con nombre de la entidad garante</li>
+            <li>Identificación del banco y cuenta especial</li>
+          </ul>
+          <p class="text-sm text-gray-600 mt-2">Se entregará original del aval/seguro <strong>individualizado</strong>.</p>
+          <p class="text-xs text-gray-400 mt-3">DA 1ª LOE, apartado 2</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 mb-6">
+        <h3 class="font-bold text-notarex-700 mb-4">Régimen de Cancelación de Garantías</h3>
+        <div class="grid md:grid-cols-2 gap-6 text-sm text-gray-600">
+          <div>
+            <p class="font-semibold text-notarex-700 mb-2">✅ Se cancela cuando:</p>
+            <ul class="space-y-1 list-disc pl-5">
+              <li>Se expide la <strong>Licencia de Primera Ocupación</strong></li>
+              <li>Se acredita la entrega de la vivienda al comprador</li>
+              <li>El comprador otorga su conformidad</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold text-amber-700 mb-2">⚠️ Se ejecuta cuando:</p>
+            <ul class="space-y-1 list-disc pl-5">
+              <li>La construcción <strong>no se inicia</strong> en plazo</li>
+              <li>No llega a <strong>buen fin</strong> (paralización, quiebra, etc.)</li>
+              <li>No se obtiene la <strong>Licencia de Primera Ocupación</strong></li>
+            </ul>
+            <p class="mt-2 text-xs text-gray-500">El aval/seguro + acreditación del incumplimiento tiene carácter ejecutivo (art. 3 Ley 57/1968).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-red-50 border border-red-200 rounded-xl p-5 text-sm text-red-800">
+        <p class="font-semibold mb-1">🚨 Responsabilidad de la entidad financiera</p>
+        <p>La entidad de crédito que abra la cuenta especial sin exigir la garantía (aval/seguro) será <strong>responsable solidaria</strong> de la devolución de las cantidades anticipadas (art. 1.b DA 1ª LOE, jurisprudencia TS). Es esencial verificar que la cuenta está debidamente abierta y la garantía constituida antes de percibir cualquier cantidad del comprador.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECCIÓN 5: RÉGIMEN FISCAL ═══════════════════════ -->
+    <section id="fiscal" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-notarex-700 flex items-center justify-center text-white text-lg">5</div>
+        <h2 class="text-3xl font-bold gradient-text">Régimen Fiscal en Canarias</h2>
+      </div>
+      <p class="text-gray-600 mb-8 max-w-3xl">Canarias aplica <strong>IGIC</strong> (no IVA). La primera entrega de vivienda nueva tributa al <strong>7% general</strong>. Aquí todos los impuestos aplicables.</p>
+
+      <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100 mb-8">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-notarex-700 text-white text-xs">
+            <th class="px-5 py-3 text-left">Impuesto</th>
+            <th class="px-5 py-3 text-left">Base Imponible</th>
+            <th class="px-5 py-3 text-center">Tipo</th>
+            <th class="px-5 py-3 text-right">Ejemplo (193.700 €)</th>
+            <th class="px-5 py-3 text-center">Paga</th>
+            <th class="px-5 py-3 text-left">Norma</th>
+          </tr></thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr>
+              <td class="px-5 py-3 font-semibold text-notarex-700">IGIC</td>
+              <td class="px-5 py-3">Precio de venta sin IGIC</td>
+              <td class="px-5 py-3 text-center"><span class="badge-n badge-legal">7%</span></td>
+              <td class="px-5 py-3 text-right font-medium">13.559 €</td>
+              <td class="px-5 py-3 text-center">Comprador</td>
+              <td class="px-5 py-3 text-xs text-gray-500">Ley 20/1991 REF Canario</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3 font-semibold text-notarex-700">AJD</td>
+              <td class="px-5 py-3">Precio escriturado</td>
+              <td class="px-5 py-3 text-center"><span class="badge-n badge-legal">0,75%</span></td>
+              <td class="px-5 py-3 text-right font-medium">1.453 €</td>
+              <td class="px-5 py-3 text-center">Comprador</td>
+              <td class="px-5 py-3 text-xs text-gray-500">TRITPyAJD + normativa canaria</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3 font-semibold text-notarex-700">Plusvalía (IIVTNU)</td>
+              <td class="px-5 py-3">Incremento valor suelo</td>
+              <td class="px-5 py-3 text-center"><span class="badge-n badge-warn">Variable</span></td>
+              <td class="px-5 py-3 text-right font-medium">~500–1.500 €</td>
+              <td class="px-5 py-3 text-center">Vendedor</td>
+              <td class="px-5 py-3 text-xs text-gray-500">Ordenanza San Miguel de Abona</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-5 py-3 font-semibold text-gray-400">ITP (2ª mano)</td>
+              <td class="px-5 py-3 text-gray-400">Precio escriturado</td>
+              <td class="px-5 py-3 text-center"><span class="badge-n badge-info">6,5%</span></td>
+              <td class="px-5 py-3 text-right text-gray-400">N/A (obra nueva)</td>
+              <td class="px-5 py-3 text-center text-gray-400">—</td>
+              <td class="px-5 py-3 text-xs text-gray-400">Solo reventa futura</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-5">
+          <p class="font-bold text-emerald-800 mb-2">✅ Ventaja fiscal Canarias</p>
+          <p class="text-sm text-emerald-700">IGIC 7% vs IVA 10% peninsular = <strong>ahorro del 3%</strong>. Para una vivienda de 2 dorm. (193.700 €) son ~5.811 € menos.</p>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+          <p class="font-bold text-amber-800 mb-2">⚠️ AJD reducido posible</p>
+          <p class="text-sm text-amber-700">AJD general: 0,75%. Tipo reducido <strong>0,4%</strong> posible para vivienda habitual bajo ciertos requisitos de renta y valor.</p>
+        </div>
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-5">
+          <p class="font-bold text-blue-800 mb-2">💡 Local comercial</p>
+          <p class="text-sm text-blue-700">El local comercial tributa también por IGIC 7% (primera entrega). Si se vende a empresa con renuncia a exención → inversión del sujeto pasivo.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+        <h3 class="font-bold text-notarex-700 mb-4">Comparativa Fiscal: Canarias vs Península (Viv. 2 dorm., 193.700 €)</h3>
+        <div class="max-w-xl mx-auto" style="height:280px;"><canvas id="chartFiscal"></canvas></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECCIÓN 6: GASTOS ═══════════════════════ -->
+    <section id="gastos" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-notarex-700 flex items-center justify-center text-white text-lg">6</div>
+        <h2 class="text-3xl font-bold gradient-text">Gastos de Notaría, Registro y Gestoría</h2>
+      </div>
+      <p class="text-gray-600 mb-8 max-w-3xl">Estimación para tres tipologías representativas del edificio.</p>
+
+      <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100 mb-8">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-notarex-700 text-white text-xs">
+            <th class="px-4 py-3 text-left">Concepto</th>
+            <th class="px-4 py-3 text-center">1 dorm. (154.350 €)</th>
+            <th class="px-4 py-3 text-center">2 dorm. (193.700 €)</th>
+            <th class="px-4 py-3 text-center">3 dorm. (270.750 €)</th>
+            <th class="px-4 py-3 text-center">Paga</th>
+          </tr></thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="bg-gray-50"><td colspan="5" class="px-4 py-2 font-bold text-xs text-gray-600 uppercase tracking-wider">💶 Impuestos</td></tr>
+            <tr><td class="px-4 py-2.5">IGIC (7%)</td><td class="px-4 py-2.5 text-center font-semibold">10.805 €</td><td class="px-4 py-2.5 text-center font-semibold">13.559 €</td><td class="px-4 py-2.5 text-center font-semibold">18.953 €</td><td class="px-4 py-2.5 text-center"><span class="badge-n badge-info">Comprador</span></td></tr>
+            <tr><td class="px-4 py-2.5">AJD (0,75%)</td><td class="px-4 py-2.5 text-center font-semibold">1.158 €</td><td class="px-4 py-2.5 text-center font-semibold">1.453 €</td><td class="px-4 py-2.5 text-center font-semibold">2.031 €</td><td class="px-4 py-2.5 text-center"><span class="badge-n badge-info">Comprador</span></td></tr>
+            <tr class="bg-gray-50"><td colspan="5" class="px-4 py-2 font-bold text-xs text-gray-600 uppercase tracking-wider">⚖️ Notaría</td></tr>
+            <tr><td class="px-4 py-2.5">Escritura compraventa (matriz)</td><td class="px-4 py-2.5 text-center">~600–800 €</td><td class="px-4 py-2.5 text-center">~700–900 €</td><td class="px-4 py-2.5 text-center">~800–1.000 €</td><td class="px-4 py-2.5 text-center"><span class="badge-n badge-warn">Vendedor</span></td></tr>
+            <tr><td class="px-4 py-2.5">Primera copia</td><td class="px-4 py-2.5 text-center">~120–200 €</td><td class="px-4 py-2.5 text-center">~140–220 €</td><td class="px-4 py-2.5 text-center">~150–250 €</td><td class="px-4 py-2.5 text-center"><span class="badge-n badge-info">Comprador</span></td></tr>
+            <tr class="bg-gray-50"><td colspan="5" class="px-4 py-2 font-bold text-xs text-gray-600 uppercase tracking-wider">📋 Registro + Gestoría</td></tr>
+            <tr><td class="px-4 py-2.5">Inscripción RP</td><td class="px-4 py-2.5 text-center">~350–500 €</td><td class="px-4 py-2.5 text-center">~400–550 €</td><td class="px-4 py-2.5 text-center">~450–650 €</td><td class="px-4 py-2.5 text-center"><span class="badge-n badge-info">Comprador</span></td></tr>
+            <tr><td class="px-4 py-2.5">Gestoría</td><td class="px-4 py-2.5 text-center">~350–500 €</td><td class="px-4 py-2.5 text-center">~350–500 €</td><td class="px-4 py-2.5 text-center">~400–600 €</td><td class="px-4 py-2.5 text-center"><span class="badge-n badge-info">Comprador</span></td></tr>
+          </tbody>
+          <tfoot><tr class="bg-notarex-700 text-white font-bold">
+            <td class="px-4 py-3">TOTAL COMPRADOR (aprox.)</td>
+            <td class="px-4 py-3 text-center">~13.400–14.000 €</td>
+            <td class="px-4 py-3 text-center">~15.900–16.700 €</td>
+            <td class="px-4 py-3 text-center">~22.000–23.500 €</td>
+            <td class="px-4 py-3 text-center text-xs font-normal">~8–9%</td>
+          </tr></tfoot>
+        </table>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+          <h3 class="font-bold text-notarex-700 mb-3">Gastos a Cargo del Promotor (total promoción)</h3>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li class="flex justify-between border-b border-gray-100 pb-2"><span>Escritura de obra nueva</span><span class="font-medium">~2.000–3.000 €</span></li>
+            <li class="flex justify-between border-b border-gray-100 pb-2"><span>Inscripción obra nueva</span><span class="font-medium">~600–900 €</span></li>
+            <li class="flex justify-between border-b border-gray-100 pb-2"><span>División horizontal (1 escritura)</span><span class="font-medium">~3.000–4.500 €</span></li>
+            <li class="flex justify-between border-b border-gray-100 pb-2"><span>Inscripción DH (~20 fincas)</span><span class="font-medium">~2.000–3.000 €</span></li>
+            <li class="flex justify-between border-b border-gray-100 pb-2"><span>AJD sobre obra nueva</span><span class="font-medium">~14.200 €</span></li>
+            <li class="flex justify-between border-b border-gray-100 pb-2"><span>Matrices escrituras CV (×19)</span><span class="font-medium">~12.000–17.000 €</span></li>
+            <li class="flex justify-between border-b border-gray-100 pb-2"><span>Cancelación hipoteca promotor</span><span class="font-medium">~1.000–1.500 €</span></li>
+            <li class="flex justify-between font-semibold pt-1"><span>TOTAL PROMOTOR (aprox.)</span><span>~35.000–44.000 €</span></li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+          <h3 class="font-bold text-notarex-700 mb-3">Si el Comprador Pide Hipoteca</h3>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li class="flex justify-between border-b border-gray-100 pb-2"><span>Tasación oficial</span><span class="font-medium">~300–500 €</span></li>
+            <li class="flex justify-between border-b border-gray-100 pb-2"><span>Notaría hipoteca</span><span class="font-medium text-emerald-600">Paga el banco</span></li>
+            <li class="flex justify-between border-b border-gray-100 pb-2"><span>Registro hipoteca</span><span class="font-medium text-emerald-600">Paga el banco</span></li>
+            <li class="flex justify-between border-b border-gray-100 pb-2"><span>AJD hipoteca</span><span class="font-medium text-emerald-600">Paga el banco</span></li>
+            <li class="flex justify-between border-b border-gray-100 pb-2"><span>Gestoría hipoteca</span><span class="font-medium text-emerald-600">Paga el banco</span></li>
+          </ul>
+          <p class="text-xs text-gray-400 mt-3">Ley 5/2019 de Crédito Inmobiliario: gastos del préstamo a cargo de la entidad financiera (salvo tasación y copias del comprador).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECCIÓN 7: DIVISIÓN HORIZONTAL ═══════════════════════ -->
+    <section id="division" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-notarex-700 flex items-center justify-center text-white text-lg">7</div>
+        <h2 class="text-3xl font-bold gradient-text">División Horizontal</h2>
+      </div>
+      <p class="text-gray-600 mb-8 max-w-3xl">Régimen de Propiedad Horizontal (LPH 49/1960) para crear fincas registrales independientes en el edificio.</p>
+
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+          <h3 class="font-bold text-notarex-700 mb-4">Requisitos Previos a la DH</h3>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3"><span class="mt-0.5 w-6 h-6 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span><div><p class="text-sm font-medium">Licencia de obras concedida</p><p class="text-xs text-gray-500">Ayto. San Miguel de Abona</p></div></div>
+            <div class="flex items-start gap-3"><span class="mt-0.5 w-6 h-6 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span><div><p class="text-sm font-medium">Certificado Final de Obra (CFO)</p><p class="text-xs text-gray-500">Visado por COAC Tenerife — Arqs. Galván e Montesino</p></div></div>
+            <div class="flex items-start gap-3"><span class="mt-0.5 w-6 h-6 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span><div><p class="text-sm font-medium">Licencia de Primera Ocupación</p></div></div>
+            <div class="flex items-start gap-3"><span class="mt-0.5 w-6 h-6 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span><div><p class="text-sm font-medium">Seguro decenal contratado</p></div></div>
+            <div class="flex items-start gap-3"><span class="mt-0.5 w-6 h-6 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span><div><p class="text-sm font-medium">Certificado de eficiencia energética registrado</p></div></div>
+            <div class="flex items-start gap-3"><span class="mt-0.5 w-6 h-6 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">6</span><div><p class="text-sm font-medium">Coordenadas georreferenciadas (art. 202 LH)</p></div></div>
+            <div class="flex items-start gap-3"><span class="mt-0.5 w-6 h-6 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">7</span><div><p class="text-sm font-medium">Libro del Edificio depositado</p></div></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+          <h3 class="font-bold text-notarex-700 mb-4">Fincas Registrales Resultantes</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="text-xs text-gray-500"><tr><th class="text-left pb-2">Finca</th><th class="text-center pb-2">Uds.</th><th class="text-right pb-2">m² aprox.</th><th class="text-right pb-2">Cuota orient.</th></tr></thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr><td class="py-1.5">Viviendas 1 dorm.</td><td class="py-1.5 text-center">6</td><td class="py-1.5 text-right">~49 m²/ud.</td><td class="py-1.5 text-right">~3,5%/ud.</td></tr>
+                <tr><td class="py-1.5">Viviendas 2 dorm.</td><td class="py-1.5 text-center">6</td><td class="py-1.5 text-right">~65 m²/ud.</td><td class="py-1.5 text-right">~4,5%/ud.</td></tr>
+                <tr><td class="py-1.5">Viviendas 3 dorm.</td><td class="py-1.5 text-center">6</td><td class="py-1.5 text-right">~95 m²/ud.</td><td class="py-1.5 text-right">~6,5%/ud.</td></tr>
+                <tr><td class="py-1.5">Local comercial</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-right">~95 m²</td><td class="py-1.5 text-right">~3,5%</td></tr>
+                <tr class="font-semibold"><td class="py-1.5">Total fincas independientes</td><td class="py-1.5 text-center">19</td><td class="py-1.5 text-right">—</td><td class="py-1.5 text-right">100%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-gray-400 mt-3">Garajes y trasteros vinculados como anejos inseparables de cada vivienda (no constituyen fincas independientes). Las cuotas se ajustarán según medición final de obra.</p>
+
+          <div class="mt-4 bg-notarex-50 rounded-xl p-4">
+            <p class="font-bold text-sm text-notarex-700 mb-2">Elementos Comunes</p>
+            <ul class="text-sm text-gray-600 space-y-1 list-disc pl-5">
+              <li>Portal de acceso, vestíbulo, escalera y ascensor</li>
+              <li>Cubierta / azotea (no transitable o con acceso restringido)</li>
+              <li>Rampa y zona de maniobra del sótano de garaje</li>
+              <li>Instalaciones generales: electricidad, fontanería, saneamiento, telecomunicaciones</li>
+              <li>Fachadas y estructura del edificio</li>
+              <li>Cuarto de contadores y cuartos de instalaciones</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECCIÓN 8: ESTATUTOS ═══════════════════════ -->
+    <section id="estatutos" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-notarex-700 flex items-center justify-center text-white text-lg">8</div>
+        <h2 class="text-3xl font-bold gradient-text">Estatutos de la Comunidad</h2>
+      </div>
+      <p class="text-gray-600 mb-8 max-w-3xl">Resumen de los puntos clave que deben incluir los estatutos de la Comunidad de Propietarios del Edificio Guargacho 1.</p>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl shadow-sm p-5 border border-gray-100 card-hover">
+          <p class="font-bold text-sm text-notarex-700 mb-2">1. Órganos de Gobierno</p>
+          <p class="text-xs text-gray-600">Junta de Propietarios, Presidente (rotatorio por plantas), Secretario-Administrador (profesional externo). Junta ordinaria anual; extraordinarias convocadas por Presidente o 25% de cuotas.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-5 border border-gray-100 card-hover">
+          <p class="font-bold text-sm text-notarex-700 mb-2">2. Gastos Comunes</p>
+          <p class="text-xs text-gray-600">Reparto según cuota de participación (%). Fondo de reserva mínimo 10% del presupuesto anual (art. 9.1.f LPH). Morosidad: recargo de intereses legales + 2 puntos; acción monitoria.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-5 border border-gray-100 card-hover">
+          <p class="font-bold text-sm text-notarex-700 mb-2">3. Uso del Garaje</p>
+          <p class="text-xs text-gray-600">Exclusivamente estacionamiento de vehículos. Prohibido almacenar combustibles o materiales peligrosos. Velocidad máx. 10 km/h. Extintores y señalización conforme a RSCIEI.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-5 border border-gray-100 card-hover">
+          <p class="font-bold text-sm text-notarex-700 mb-2">4. Local Comercial</p>
+          <p class="text-xs text-gray-600">Actividades compatibles con uso residencial. Prohibidas actividades molestas, insalubres, nocivas o peligrosas. Horarios según normativa municipal. Obras de adaptación con comunicación previa a la Comunidad.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-5 border border-gray-100 card-hover">
+          <p class="font-bold text-sm text-notarex-700 mb-2">5. Obras y Modificaciones</p>
+          <p class="text-xs text-gray-600">Obras en elementos privativos: comunicación al Presidente. Obras que afecten estructura o fachada: acuerdo de 3/5 de propietarios y cuotas. Instalación de ascensor accesible: obligatorio si lo piden personas con discapacidad o mayores de 70 años.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-5 border border-gray-100 card-hover">
+          <p class="font-bold text-sm text-notarex-700 mb-2">6. Uso Turístico</p>
+          <p class="text-xs text-gray-600">El uso como vivienda vacacional requerirá acuerdo de 3/5 de propietarios y cuotas (art. 17.12 LPH, Ley 5/2014 Canarias de renovación turística). Se podrá limitar o condicionar dicho uso.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECCIÓN 9: LIBRO DEL EDIFICIO ═══════════════════════ -->
+    <section id="libro" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-notarex-700 flex items-center justify-center text-white text-lg">9</div>
+        <h2 class="text-3xl font-bold gradient-text">Libro del Edificio</h2>
+      </div>
+      <p class="text-gray-600 mb-8">Obligatorio según art. 7 LOE 38/1999. Debe entregarse a la Comunidad de Propietarios y a cada comprador.</p>
+      <div class="grid lg:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 card-hover">
+          <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mb-4">📐</div>
+          <h3 class="font-bold text-notarex-700 mb-2">Proyecto Ejecutivo</h3>
+          <ul class="text-xs text-gray-600 space-y-1">
+            <li>✓ Memoria descriptiva y constructiva</li><li>✓ Planos as-built definitivos</li><li>✓ Pliego de condiciones técnicas</li><li>✓ Presupuesto final de obra</li><li>✓ Estudio de Seguridad y Salud</li><li>✓ Memoria de calidades</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 card-hover">
+          <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl mb-4">📋</div>
+          <h3 class="font-bold text-notarex-700 mb-2">Documentación de Obra</h3>
+          <ul class="text-xs text-gray-600 space-y-1">
+            <li>✓ Acta de replanteo</li><li>✓ Certificaciones mensuales</li><li>✓ Acta de recepción</li><li>✓ CFO</li><li>✓ Ensayos de control (hormigón, acero)</li><li>✓ Informe OCT</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 card-hover">
+          <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl mb-4">🔧</div>
+          <h3 class="font-bold text-notarex-700 mb-2">Mantenimiento y Uso</h3>
+          <ul class="text-xs text-gray-600 space-y-1">
+            <li>✓ Manual de uso y mantenimiento</li><li>✓ Plan de mantenimiento preventivo</li><li>✓ Instrucciones de instalaciones</li><li>✓ Garantías de equipos</li><li>✓ Certificado energético</li><li>✓ Boletines (REBT, RITE, ICT2)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECCIÓN 10: DOCUMENTOS ═══════════════════════ -->
+    <section id="documentos" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-notarex-700 flex items-center justify-center text-white text-lg">10</div>
+        <h2 class="text-3xl font-bold gradient-text">Documentos para Escritura</h2>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+          <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-notarex-700 text-white rounded-xl flex items-center justify-center font-bold">V</div><h3 class="font-bold text-notarex-700 text-lg">Del Vendedor/Promotor</h3></div>
+          <div class="space-y-1.5 text-sm">
+            <p>☐ 1. Escritura de constitución + poder del representante</p>
+            <p>☐ 2. CIF sociedad + DNI representante</p>
+            <p>☐ 3. Título de propiedad del solar</p>
+            <p>☐ 4. Nota Simple actualizada (&lt;15 días) — RP Granadilla de Abona</p>
+            <p>☐ 5. Certificado al corriente IBI y tributos locales</p>
+            <p>☐ 6. Licencia de obras</p>
+            <p>☐ 7. Certificado Final de Obra (CFO) — visado COAC Tenerife</p>
+            <p>☐ 8. Licencia de Primera Ocupación</p>
+            <p>☐ 9. Escritura de Declaración de Obra Nueva inscrita</p>
+            <p>☐ 10. Escritura de División Horizontal inscrita</p>
+            <p>☐ 11. Estatutos de la Comunidad de Propietarios</p>
+            <p>☐ 12. Póliza de Seguro Decenal + certificado OCT</p>
+            <p>☐ 13. Certificado de Eficiencia Energética registrado</p>
+            <p>☐ 14. Libro del Edificio completo</p>
+            <p>☐ 15. Boletines de instalaciones (REBT, RITE, ICT2)</p>
+            <p>☐ 16. Referencia catastral de cada finca</p>
+            <p>☐ 17. Coordenadas georreferenciadas (art. 202 LH)</p>
+            <p>☐ 18. Liquidación/autoliquidación plusvalía (Ayto. San Miguel)</p>
+            <p>☐ 19. Cancelación de aval/seguro de cantidades anticipadas</p>
+            <p>☐ 20. Certificado de estar al corriente de cuotas comunidad</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+          <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center font-bold">C</div><h3 class="font-bold text-notarex-700 text-lg">Del Comprador</h3></div>
+          <div class="space-y-1.5 text-sm">
+            <p>☐ 1. DNI/NIE/Pasaporte vigente</p>
+            <p>☐ 2. Estado civil y régimen económico matrimonial</p>
+            <p>☐ 3. Contrato de arras/reserva original + justificantes de pagos</p>
+            <p>☐ 4. Justificante del medio de pago (cheque conformado/transferencia)</p>
+            <p>☐ 5. Provisión de fondos (IGIC + AJD + registro + gestoría)</p>
+          </div>
+          <div class="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4">
+            <p class="font-bold text-amber-800 text-sm mb-2">⚠️ Si financia con hipoteca</p>
+            <div class="space-y-1.5 text-sm">
+              <p>☐ 6. Escritura del préstamo (acta transparencia 10 días antes)</p>
+              <p>☐ 7. Tasación oficial homologada</p>
+              <p>☐ 8. Seguro de hogar</p>
+            </div>
+          </div>
+          <div class="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4">
+            <p class="font-bold text-blue-800 text-sm mb-2">🌍 Si es extranjero</p>
+            <div class="space-y-1 text-sm text-blue-700">
+              <p>• NIE obligatorio para tributar</p>
+              <p>• Verificar convenios de doble imposición</p>
+              <p>• Poder notarial si firma representante</p>
+              <p>• Vendedor es S.L. española → no aplica retención 3% IRNR</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECCIÓN 11: CRONOGRAMA ═══════════════════════ -->
+    <section id="cronograma" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-notarex-700 flex items-center justify-center text-white text-lg">11</div>
+        <h2 class="text-3xl font-bold gradient-text">Cronograma Notarial y Registral</h2>
+      </div>
+      <p class="text-gray-600 mb-8">Secuencia temporal desde fin de obra hasta escrituras de compraventa.</p>
+      <div class="relative pl-8">
+        <div class="tl-line pb-0"><div class="tl-dot" style="border-color:#2563eb; background:#dbeafe;"></div><div class="pb-8"><p class="font-bold text-sm text-notarex-700">Mes 14–15 (fin de obra)</p><p class="text-sm text-gray-600">Certificado Final de Obra (CFO) + Acta de Recepción</p></div></div>
+        <div class="tl-line pb-0"><div class="tl-dot" style="border-color:#d97706; background:#fef3c7;"></div><div class="pb-8"><p class="font-bold text-sm text-notarex-700">Mes 15–16</p><p class="text-sm text-gray-600">Solicitud de Licencia de Primera Ocupación — Ayto. San Miguel de Abona</p></div></div>
+        <div class="tl-line pb-0"><div class="tl-dot" style="border-color:#059669; background:#d1fae5;"></div><div class="pb-8"><p class="font-bold text-sm text-notarex-700">Mes 16–17</p><p class="text-sm text-gray-600">Escritura de Declaración de Obra Nueva + Inscripción RP Granadilla</p></div></div>
+        <div class="tl-line pb-0"><div class="tl-dot" style="border-color:#7c3aed; background:#ede9fe;"></div><div class="pb-8"><p class="font-bold text-sm text-notarex-700">Mes 17–18</p><p class="text-sm text-gray-600">Escritura de División Horizontal · Inscripción de ~20 fincas independientes</p></div></div>
+        <div class="tl-line pb-0"><div class="tl-dot" style="border-color:#2563eb; background:#dbeafe;"></div><div class="pb-8"><p class="font-bold text-sm text-notarex-700">Mes 18–19</p><p class="text-sm text-gray-600">Alta catastral individual · Referencias catastrales por finca</p></div></div>
+        <div class="tl-line pb-0"><div class="tl-dot" style="border-color:#343A40;"></div><div class="pb-8"><p class="font-bold text-sm text-notarex-700">Mes 19–22</p><p class="text-sm text-gray-600"><strong>Escrituras de Compraventa</strong> (19 unidades) · Entrega de llaves · Inscripción RP</p></div></div>
+        <div class="tl-line" style="border-left:2px solid transparent;"><div class="tl-dot" style="border-color:#059669; background:#059669;"></div><div><p class="font-bold text-sm text-emerald-700">Mes 22–24</p><p class="text-sm text-gray-600">Liquidación impuestos (IGIC + AJD) por compradores · Inscripción definitiva · Constitución Comunidad de Propietarios</p></div></div>
+      </div>
+      <p class="text-xs text-gray-400 mt-6">Plazos orientativos. Dependen del RP de Granadilla de Abona y del Ayuntamiento de San Miguel de Abona. Fuente: Gestex (trámites) + Nexus (plan de proyecto).</p>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-notarex-800 text-gray-400 py-12">
+    <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+      <p class="mb-2">Documentación generada por <strong class="text-white">Notarex</strong> — Asesor Notarial · Sistema de Agentes Inmobiliarios IA</p>
+      <p class="mb-2">Normativa: LOE 38/1999 · Ley 57/1968 mod. Ley 20/2015 · RD 515/1989 · Ley 20/1991 REF · CC arts. 1.124, 1.445-1.462 · LPH 49/1960</p>
+      <p class="text-gray-500 text-xs">Informe orientativo · No sustituye asesoramiento de notario colegiado · Cifras estimadas a marzo de 2026.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => { entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); }); }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    // Accordion
+    function toggleAccordion(id) {
+      const c = document.getElementById(id), ic = document.getElementById('icon-' + id);
+      c.classList.toggle('open');
+      ic.style.transform = c.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+    // Chart.js — Comparativa fiscal
+    const ctxF = document.getElementById('chartFiscal');
+    if (ctxF) {
+      new Chart(ctxF.getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: ['Impuesto indirecto', 'AJD', 'Total impuestos'],
+          datasets: [
+            { label: 'Canarias (IGIC 7%)', data: [13559, 1453, 15012], backgroundColor: 'rgba(52,58,64,.8)', borderRadius: 6 },
+            { label: 'Península (IVA 10%)', data: [19370, 2906, 22276], backgroundColor: 'rgba(173,181,189,.6)', borderRadius: 6 }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { position: 'top', labels: { font: { family: 'Inter', size: 12 } } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString('es-ES') + ' €' } } },
+          scales: { y: { beginAtZero: true, ticks: { callback: v => (v/1000)+'k €', font: { family: 'Inter' } }, grid: { color: 'rgba(0,0,0,.05)' } }, x: { ticks: { font: { family: 'Inter', size: 11 } }, grid: { display: false } } }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

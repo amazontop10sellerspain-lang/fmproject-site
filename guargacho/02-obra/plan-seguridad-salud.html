@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan de Seguridad y Salud — Edificio Guargacho 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            safety: { 50:'#fef2f2', 100:'#fee2e2', 200:'#fecaca', 300:'#fca5a5', 400:'#f87171', 500:'#ef4444', 600:'#dc2626', 700:'#b91c1c', 800:'#991b1b', 900:'#7f1d1d' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(.23,1,.32,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #991b1b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.4); }
+    tbody tr:hover { background-color: rgba(239,68,68,0.06); transition: background 0.2s; }
+    .risk-high { background: #fef2f2; border-left: 4px solid #dc2626; }
+    .risk-medium { background: #fef9c3; border-left: 4px solid #eab308; }
+    .risk-low { background: #f0fdf4; border-left: 4px solid #16a34a; }
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; }
+    .badge-high { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .badge-medium { background: #fef9c3; color: #854d0e; border: 1px solid #fde047; }
+    .badge-low { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+    .btn-3d { box-shadow: 0 4px 6px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.1); transition: all 0.2s; }
+    .btn-3d:hover { transform: translateY(-2px); box-shadow: 0 8px 12px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.15); }
+    .btn-3d:active { transform: translateY(0); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    @media print { .no-print{display:none} .reveal{opacity:1;transform:none} }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-lg border-b border-gray-200/60 no-print">
+    <div class="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-safety-600 to-orange-600 flex items-center justify-center text-white font-bold text-sm">⚠️</div>
+        <span class="text-lg font-bold gradient-text">SEGUREX</span>
+        <span class="hidden sm:inline text-xs text-gray-400 ml-1">Coordinador de Seguridad y Salud</span>
+      </div>
+      <div class="hidden lg:flex gap-5 text-[13px] font-medium text-gray-500">
+        <a href="#intro" class="hover:text-safety-600 transition">Introducción</a>
+        <a href="#datos" class="hover:text-safety-600 transition">Datos</a>
+        <a href="#riesgos" class="hover:text-safety-600 transition">Riesgos</a>
+        <a href="#fases" class="hover:text-safety-600 transition">Fases</a>
+        <a href="#epi" class="hover:text-safety-600 transition">EPI</a>
+        <a href="#emergencias" class="hover:text-safety-600 transition">Emergencias</a>
+        <a href="#presupuesto" class="hover:text-safety-600 transition">Presupuesto</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-safety-700 via-safety-600 to-orange-600 text-white">
+    <div class="absolute inset-0 opacity-10" style="background-image:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(255,255,255,.1) 10px,rgba(255,255,255,.1) 20px)"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-24">
+      <p class="text-safety-200 text-xs font-semibold uppercase tracking-[0.2em] mb-4">Plan de Seguridad y Salud · RD 1627/1997</p>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight">Plan de Seguridad y Salud</h1>
+      <p class="text-lg text-safety-100 leading-relaxed max-w-3xl">Edificio de Viviendas y Local Comercial — Ctra. General TF-652, Guargacho, San Miguel de Abona</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">📅 Marzo 2026</span>
+        <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">🏢 PB + 2 plantas + sótano</span>
+        <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">📐 ~1.789 m²</span>
+        <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">👷 30-40 trabajadores</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-7xl mx-auto px-6 py-16 space-y-24">
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN -->
+    <section id="intro" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-safety-100 flex items-center justify-center text-xl">📋</div>
+        <h2 class="text-3xl font-extrabold gradient-text">1. Introducción y Objeto</h2>
+      </div>
+      <div class="bg-white rounded-2xl shadow-md border border-gray-100 p-8">
+        <p class="text-gray-700 leading-relaxed mb-4">El presente <strong>Plan de Seguridad y Salud</strong> se redacta en cumplimiento del <strong>Real Decreto 1627/1997</strong> de 24 de octubre, por el que se establecen disposiciones mínimas de seguridad y salud en las obras de construcción, en el marco de la <strong>Ley 31/1995</strong> de 8 de noviembre, de Prevención de Riesgos Laborales.</p>
+        <p class="text-gray-700 leading-relaxed mb-4">Este documento constituye el instrumento básico de ordenación de las actividades de identificación, evaluación y prevención de los riesgos laborales inherentes a la construcción del <strong>edificio plurifamiliar de viviendas y local comercial</strong> situado en la Carretera General TF-652, Guargacho, municipio de San Miguel de Abona (Santa Cruz de Tenerife).</p>
+        <p class="text-gray-700 leading-relaxed">El Plan ha sido elaborado tomando como base el proyecto arquitectónico redactado por <strong>DOS·07 Arquitectura y Diseño, S.L.</strong> (arquitectos Ignacio Galván Cañada, col. nº 1967 COAC, y Daniel Montesino Rodríguez, col. nº 1726 COAC), adaptando las previsiones del Estudio Básico de Seguridad y Salud a los métodos constructivos específicos que se emplearán durante la ejecución de la obra.</p>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="bg-safety-50 rounded-xl p-5 border border-safety-200">
+          <h3 class="font-bold text-safety-800 mb-3">📜 Marco Normativo</h3>
+          <ul class="text-sm text-safety-700 space-y-1.5">
+            <li>• <strong>Ley 31/1995</strong> (Prevención Riesgos Laborales)</li>
+            <li>• <strong>RD 1627/1997</strong> (Obras de construcción)</li>
+            <li>• <strong>RD 39/1997</strong> (Servicios de Prevención)</li>
+            <li>• <strong>RD 486/1997</strong> (Lugares de trabajo)</li>
+            <li>• <strong>RD 773/1997</strong> (Equipos protección individual)</li>
+            <li>• <strong>RD 1215/1997</strong> (Equipos de trabajo)</li>
+            <li>• <strong>RD 2177/2004</strong> (Trabajos en altura)</li>
+          </ul>
+        </div>
+        <div class="bg-safety-50 rounded-xl p-5 border border-safety-200">
+          <h3 class="font-bold text-safety-800 mb-3">👥 Responsables</h3>
+          <ul class="text-sm text-safety-700 space-y-1.5">
+            <li>• <strong>Promotor:</strong> [A determinar]</li>
+            <li>• <strong>Coordinador S+S:</strong> [A designar]</li>
+            <li>• <strong>Contratista:</strong> [A determinar]</li>
+            <li>• <strong>Dirección Facultativa:</strong> DOS·07 Arquitectura</li>
+            <li>• <strong>Recurso Preventivo:</strong> Presencia obligatoria (altura >3 plantas)</li>
+          </ul>
+        </div>
+        <div class="bg-safety-50 rounded-xl p-5 border border-safety-200">
+          <h3 class="font-bold text-safety-800 mb-3">🏗️ Características Obra</h3>
+          <ul class="text-sm text-safety-700 space-y-1.5">
+            <li>• <strong>Duración estimada:</strong> 18-24 meses</li>
+            <li>• <strong>Sup. construida:</strong> ~1.789 m²</li>
+            <li>• <strong>Trabajadores punta:</strong> 30-40</li>
+            <li>• <strong>Altura máxima:</strong> ~11 m (PB+2+sótano)</li>
+            <li>• <strong>Tipo:</strong> Edificio plurifamiliar (18 viv. + local)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: DATOS DE LA OBRA -->
+    <section id="datos" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-safety-100 flex items-center justify-center text-xl">📊</div>
+        <h2 class="text-3xl font-extrabold gradient-text">2. Datos de la Obra</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="px-5 py-3 bg-gray-50 border-b"><h3 class="font-bold text-gray-800">📍 Identificación del Proyecto</h3></div>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">Obra</td><td class="py-3 px-5 font-medium text-right">Edificio de Viviendas y Local Comercial</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">Ubicación</td><td class="py-3 px-5 font-medium text-right">Ctra. General TF-652, Guargacho</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">Municipio</td><td class="py-3 px-5 font-medium text-right">San Miguel de Abona, Tenerife</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">CP</td><td class="py-3 px-5 font-medium text-right">38639</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">Coordenadas</td><td class="py-3 px-5 font-medium text-right">28.0486°N, -16.6281°W</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">Arquitectos</td><td class="py-3 px-5 font-medium text-right">I. Galván (1967 COAC) · D. Montesino (1726 COAC)</td></tr>
+              <tr><td class="py-3 px-5 text-gray-500">Estudio</td><td class="py-3 px-5 font-medium text-right">DOS·07 Arquitectura y Diseño, S.L.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="px-5 py-3 bg-gray-50 border-b"><h3 class="font-bold text-gray-800">🏗️ Características Técnicas</h3></div>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">Tipología</td><td class="py-3 px-5 font-medium text-right">Edificio plurifamiliar</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">Plantas</td><td class="py-3 px-5 font-medium text-right">Sótano + PB + P1 + P2</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">Viviendas</td><td class="py-3 px-5 font-medium text-right">18 (1, 2 y 3 dormitorios)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">Local comercial</td><td class="py-3 px-5 font-medium text-right">~95 m² (planta baja)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">Garaje vinculado</td><td class="py-3 px-5 font-medium text-right">18 plazas (~350 m²)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">Trasteros</td><td class="py-3 px-5 font-medium text-right">18 unidades (~90 m²)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-3 px-5 text-gray-500">Sup. sobre rasante</td><td class="py-3 px-5 font-medium text-right">~1.349 m²</td></tr>
+              <tr><td class="py-3 px-5 text-gray-500">Sup. total (incl. sótano)</td><td class="py-3 px-5 font-medium text-right">~1.789 m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">⏱️ Planificación Temporal de la Obra</h3>
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="text-left py-3 px-4 font-semibold text-gray-600">Fase</th>
+              <th class="text-center py-3 px-4 font-semibold text-gray-600">Duración</th>
+              <th class="text-center py-3 px-4 font-semibold text-gray-600">Trabajadores</th>
+              <th class="text-left py-3 px-4 font-semibold text-gray-600">Riesgos principales</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr><td class="py-3 px-4">Previos y vallado</td><td class="py-3 px-4 text-center">1 mes</td><td class="py-3 px-4 text-center">3-5</td><td class="py-3 px-4 text-xs">Atropellos, interferencias servicios</td></tr>
+            <tr><td class="py-3 px-4">Movimiento tierras y excavación sótano</td><td class="py-3 px-4 text-center">2 meses</td><td class="py-3 px-4 text-center">8-12</td><td class="py-3 px-4 text-xs">Atropellos, vuelcos, desprendimientos, sepultamiento</td></tr>
+            <tr><td class="py-3 px-4">Cimentación (pilotaje + muros sótano)</td><td class="py-3 px-4 text-center">2 meses</td><td class="py-3 px-4 text-center">12-18</td><td class="py-3 px-4 text-xs">Caídas zanjas, golpes, ruido, vibraciones</td></tr>
+            <tr><td class="py-3 px-4">Estructura HA (PB+2 plantas)</td><td class="py-3 px-4 text-center">5 meses</td><td class="py-3 px-4 text-center">18-25</td><td class="py-3 px-4 text-xs">Caídas altura, atrapamientos, electrocución</td></tr>
+            <tr><td class="py-3 px-4">Cerramientos y fachadas</td><td class="py-3 px-4 text-center">3 meses</td><td class="py-3 px-4 text-center">15-20</td><td class="py-3 px-4 text-xs">Caídas altura, sobreesfuerzos, polvo</td></tr>
+            <tr><td class="py-3 px-4">Cubierta plana</td><td class="py-3 px-4 text-center">1 mes</td><td class="py-3 px-4 text-center">8-12</td><td class="py-3 px-4 text-xs">Caídas altura (crítico), exposición solar</td></tr>
+            <tr><td class="py-3 px-4">Instalaciones (elec., font., clim.)</td><td class="py-3 px-4 text-center">4 meses</td><td class="py-3 px-4 text-center">15-20</td><td class="py-3 px-4 text-xs">Electrocución, quemaduras, caídas</td></tr>
+            <tr><td class="py-3 px-4">Acabados interiores</td><td class="py-3 px-4 text-center">4 meses</td><td class="py-3 px-4 text-center">20-30</td><td class="py-3 px-4 text-xs">Inhalación vapores, cortes, proyecciones</td></tr>
+            <tr><td class="py-3 px-4">Urbanización exterior</td><td class="py-3 px-4 text-center">1 mes</td><td class="py-3 px-4 text-center">8-12</td><td class="py-3 px-4 text-xs">Atropellos, proyección partículas</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-6 bg-amber-50 rounded-xl p-5 border border-amber-200 text-sm">
+        <p class="font-semibold text-amber-800 mb-1">⚠️ Determinación del tipo de Estudio de Seguridad y Salud</p>
+        <p class="text-amber-700">Según el <strong>Art. 4 del RD 1627/1997</strong>, esta obra requiere <strong>Estudio Básico de Seguridad y Salud</strong> (NO Estudio completo), al NO cumplir ninguno de los supuestos del apartado 1: PEM estimado < 450.759,08 €, duración estimada < 500 jornadas, trabajadores simultáneos punta < 50, y NO es túnel/galería/presa. El Plan desarrolla y adapta este Estudio Básico a los métodos del contratista.</p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: IDENTIFICACIÓN Y EVALUACIÓN DE RIESGOS -->
+    <section id="riesgos" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-safety-100 flex items-center justify-center text-xl">⚠️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">3. Identificación y Evaluación de Riesgos</h2>
+      </div>
+
+      <p class="text-gray-600 mb-6">Evaluación de riesgos según el método del <strong>INSST</strong> (Instituto Nacional de Seguridad y Salud en el Trabajo). Los riesgos se clasifican combinando <strong>probabilidad de ocurrencia</strong> y <strong>gravedad de las consecuencias</strong>.</p>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
+        <h3 class="font-bold text-gray-800 mb-4">📊 Matriz de Evaluación de Riesgos</h3>
+        <table class="w-full text-xs">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="py-2 px-3 text-left font-semibold">Gravedad →<br>Probabilidad ↓</th>
+              <th class="py-2 px-3 text-center font-semibold bg-green-50 text-green-700">BAJA<br>(lesión leve)</th>
+              <th class="py-2 px-3 text-center font-semibold bg-yellow-50 text-yellow-700">MEDIA<br>(lesión grave)</th>
+              <th class="py-2 px-3 text-center font-semibold bg-red-50 text-red-700">ALTA<br>(mortal/muy grave)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b">
+              <td class="py-2 px-3 font-semibold bg-red-50 text-red-700">ALTA (frecuente)</td>
+              <td class="py-2 px-3 text-center bg-yellow-100 font-medium">MEDIO</td>
+              <td class="py-2 px-3 text-center bg-red-100 font-medium">ALTO</td>
+              <td class="py-2 px-3 text-center bg-red-200 font-bold">MUY ALTO</td>
+            </tr>
+            <tr class="border-b">
+              <td class="py-2 px-3 font-semibold bg-yellow-50 text-yellow-700">MEDIA (puede ocurrir)</td>
+              <td class="py-2 px-3 text-center bg-green-100 font-medium">BAJO</td>
+              <td class="py-2 px-3 text-center bg-yellow-100 font-medium">MEDIO</td>
+              <td class="py-2 px-3 text-center bg-red-100 font-medium">ALTO</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-3 font-semibold bg-green-50 text-green-700">BAJA (difícil)</td>
+              <td class="py-2 px-3 text-center bg-green-100 font-medium">TRIVIAL</td>
+              <td class="py-2 px-3 text-center bg-green-100 font-medium">BAJO</td>
+              <td class="py-2 px-3 text-center bg-yellow-100 font-medium">MEDIO</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TABLA RIESGOS -->
+      <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+        <div class="px-6 py-4 bg-gray-50 border-b"><h3 class="font-bold text-gray-900">Riesgos Identificados por Fase de Obra</h3></div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50 text-xs">
+              <tr>
+                <th class="text-left py-2 px-4 font-semibold text-gray-600">ID</th>
+                <th class="text-left py-2 px-4 font-semibold text-gray-600">Riesgo</th>
+                <th class="text-left py-2 px-4 font-semibold text-gray-600">Fase</th>
+                <th class="text-center py-2 px-4 font-semibold text-gray-600">Prob.</th>
+                <th class="text-center py-2 px-4 font-semibold text-gray-600">Grav.</th>
+                <th class="text-center py-2 px-4 font-semibold text-gray-600">Nivel</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50 text-xs">
+              <!-- RIESGOS ALTOS -->
+              <tr class="risk-high"><td class="py-2 px-4 font-bold">R01</td><td class="py-2 px-4 font-medium">Caídas en altura desde forjados (>6m)</td><td class="py-2 px-4">Estructura</td><td class="py-2 px-4 text-center">Alta</td><td class="py-2 px-4 text-center">Mortal</td><td class="py-2 px-4 text-center"><span class="badge badge-high">ALTO</span></td></tr>
+              <tr class="risk-high"><td class="py-2 px-4 font-bold">R02</td><td class="py-2 px-4 font-medium">Caídas en altura desde cubierta (>11m)</td><td class="py-2 px-4">Cubierta</td><td class="py-2 px-4 text-center">Media</td><td class="py-2 px-4 text-center">Mortal</td><td class="py-2 px-4 text-center"><span class="badge badge-high">ALTO</span></td></tr>
+              <tr class="risk-high"><td class="py-2 px-4 font-bold">R03</td><td class="py-2 px-4 font-medium">Sepultamiento en excavación sótano (>4m prof.)</td><td class="py-2 px-4">Excavación</td><td class="py-2 px-4 text-center">Media</td><td class="py-2 px-4 text-center">Mortal</td><td class="py-2 px-4 text-center"><span class="badge badge-high">ALTO</span></td></tr>
+              <tr class="risk-high"><td class="py-2 px-4 font-bold">R04</td><td class="py-2 px-4 font-medium">Atropellos por maquinaria pesada</td><td class="py-2 px-4">Mov. tierras</td><td class="py-2 px-4 text-center">Media</td><td class="py-2 px-4 text-center">Mortal</td><td class="py-2 px-4 text-center"><span class="badge badge-high">ALTO</span></td></tr>
+              <tr class="risk-high"><td class="py-2 px-4 font-bold">R05</td><td class="py-2 px-4 font-medium">Electrocución (contacto directo/indirecto)</td><td class="py-2 px-4">Instalaciones</td><td class="py-2 px-4 text-center">Media</td><td class="py-2 px-4 text-center">Mortal</td><td class="py-2 px-4 text-center"><span class="badge badge-high">ALTO</span></td></tr>
+              <tr class="risk-high"><td class="py-2 px-4 font-bold">R06</td><td class="py-2 px-4 font-medium">Vuelco de maquinaria en borde excavación</td><td class="py-2 px-4">Excavación</td><td class="py-2 px-4 text-center">Baja</td><td class="py-2 px-4 text-center">Mortal</td><td class="py-2 px-4 text-center"><span class="badge badge-high">ALTO</span></td></tr>
+              <tr class="risk-high"><td class="py-2 px-4 font-bold">R07</td><td class="py-2 px-4 font-medium">Caída de objetos desde altura</td><td class="py-2 px-4">Estructura/Cubierta</td><td class="py-2 px-4 text-center">Alta</td><td class="py-2 px-4 text-center">Grave</td><td class="py-2 px-4 text-center"><span class="badge badge-high">ALTO</span></td></tr>
+              <tr class="risk-high"><td class="py-2 px-4 font-bold">R08</td><td class="py-2 px-4 font-medium">Colapso de encofrados/apuntalamiento</td><td class="py-2 px-4">Estructura</td><td class="py-2 px-4 text-center">Baja</td><td class="py-2 px-4 text-center">Mortal</td><td class="py-2 px-4 text-center"><span class="badge badge-high">ALTO</span></td></tr>
+
+              <!-- RIESGOS MEDIOS -->
+              <tr class="risk-medium"><td class="py-2 px-4 font-bold">R09</td><td class="py-2 px-4">Atrapamientos en maquinaria/grúa</td><td class="py-2 px-4">Estructura</td><td class="py-2 px-4 text-center">Baja</td><td class="py-2 px-4 text-center">Grave</td><td class="py-2 px-4 text-center"><span class="badge badge-medium">MEDIO</span></td></tr>
+              <tr class="risk-medium"><td class="py-2 px-4 font-bold">R10</td><td class="py-2 px-4">Sobreesfuerzos y lesiones musculoesqueléticas</td><td class="py-2 px-4">Todas</td><td class="py-2 px-4 text-center">Alta</td><td class="py-2 px-4 text-center">Leve</td><td class="py-2 px-4 text-center"><span class="badge badge-medium">MEDIO</span></td></tr>
+              <tr class="risk-medium"><td class="py-2 px-4 font-bold">R11</td><td class="py-2 px-4">Proyección de partículas (corte, amolado)</td><td class="py-2 px-4">Estructura/Acab.</td><td class="py-2 px-4 text-center">Alta</td><td class="py-2 px-4 text-center">Leve</td><td class="py-2 px-4 text-center"><span class="badge badge-medium">MEDIO</span></td></tr>
+              <tr class="risk-medium"><td class="py-2 px-4 font-bold">R12</td><td class="py-2 px-4">Inhalación de polvo (sílice cristalina)</td><td class="py-2 px-4">Albañilería</td><td class="py-2 px-4 text-center">Alta</td><td class="py-2 px-4 text-center">Leve</td><td class="py-2 px-4 text-center"><span class="badge badge-medium">MEDIO</span></td></tr>
+              <tr class="risk-medium"><td class="py-2 px-4 font-bold">R13</td><td class="py-2 px-4">Contacto sustancias químicas (disolventes)</td><td class="py-2 px-4">Acabados</td><td class="py-2 px-4 text-center">Media</td><td class="py-2 px-4 text-center">Medio</td><td class="py-2 px-4 text-center"><span class="badge badge-medium">MEDIO</span></td></tr>
+              <tr class="risk-medium"><td class="py-2 px-4 font-bold">R14</td><td class="py-2 px-4">Exposición radiación solar (golpe de calor)</td><td class="py-2 px-4">Cubierta</td><td class="py-2 px-4 text-center">Media</td><td class="py-2 px-4 text-center">Medio</td><td class="py-2 px-4 text-center"><span class="badge badge-medium">MEDIO</span></td></tr>
+              <tr class="risk-medium"><td class="py-2 px-4 font-bold">R15</td><td class="py-2 px-4">Incendio (soldadura, corte radial)</td><td class="py-2 px-4">Estructura/Inst.</td><td class="py-2 px-4 text-center">Baja</td><td class="py-2 px-4 text-center">Grave</td><td class="py-2 px-4 text-center"><span class="badge badge-medium">MEDIO</span></td></tr>
+              <tr class="risk-medium"><td class="py-2 px-4 font-bold">R16</td><td class="py-2 px-4">Ruido superior a 85 dB(A)</td><td class="py-2 px-4">Excavación/Estr.</td><td class="py-2 px-4 text-center">Alta</td><td class="py-2 px-4 text-center">Leve</td><td class="py-2 px-4 text-center"><span class="badge badge-medium">MEDIO</span></td></tr>
+
+              <!-- RIESGOS BAJOS -->
+              <tr class="risk-low"><td class="py-2 px-4 font-bold">R17</td><td class="py-2 px-4">Cortes con herramientas manuales</td><td class="py-2 px-4">Todas</td><td class="py-2 px-4 text-center">Alta</td><td class="py-2 px-4 text-center">Leve</td><td class="py-2 px-4 text-center"><span class="badge badge-low">BAJO</span></td></tr>
+              <tr class="risk-low"><td class="py-2 px-4 font-bold">R18</td><td class="py-2 px-4">Pisadas sobre objetos punzantes</td><td class="py-2 px-4">Todas</td><td class="py-2 px-4 text-center">Media</td><td class="py-2 px-4 text-center">Leve</td><td class="py-2 px-4 text-center"><span class="badge badge-low">BAJO</span></td></tr>
+              <tr class="risk-low"><td class="py-2 px-4 font-bold">R19</td><td class="py-2 px-4">Interferencias con servicios afectados</td><td class="py-2 px-4">Mov. tierras</td><td class="py-2 px-4 text-center">Baja</td><td class="py-2 px-4 text-center">Medio</td><td class="py-2 px-4 text-center"><span class="badge badge-low">BAJO</span></td></tr>
+              <tr class="risk-low"><td class="py-2 px-4 font-bold">R20</td><td class="py-2 px-4">Dermatosis por contacto con cemento</td><td class="py-2 px-4">Albañilería</td><td class="py-2 px-4 text-center">Media</td><td class="py-2 px-4 text-center">Leve</td><td class="py-2 px-4 text-center"><span class="badge badge-low">BAJO</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt-6 bg-red-50 rounded-xl p-5 border-2 border-red-200">
+        <h4 class="font-bold text-red-800 mb-2">🚨 Riesgos Críticos — Recurso Preventivo Obligatorio</h4>
+        <p class="text-sm text-red-700 mb-2">Según <strong>Art. 22 bis Ley 54/2003</strong> (modif. Ley 31/1995), la presencia de <strong>Recurso Preventivo</strong> es obligatoria cuando:</p>
+        <ul class="text-sm text-red-700 space-y-1 ml-4 list-disc">
+          <li><strong>R01, R02:</strong> Trabajos en altura con riesgo de caída >2m (RD 2177/2004) — estructura HA y cubierta</li>
+          <li><strong>R03:</strong> Trabajos con riesgo de sepultamiento (excavación sótano >4m sin entibar)</li>
+          <li><strong>R05:</strong> Trabajos en proximidad de líneas eléctricas de AT o instalaciones eléctricas en tensión</li>
+          <li><strong>R08:</strong> Montaje/desmontaje de elementos prefabricados pesados (forjados, escaleras)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: MEDIDAS PREVENTIVAS POR FASE -->
+    <section id="fases" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-safety-100 flex items-center justify-center text-xl">🏗️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">4. Medidas Preventivas por Fase de Obra</h2>
+      </div>
+      <p class="text-gray-600 mb-6">Medidas específicas para cada fase constructiva, adaptadas a los métodos de trabajo previstos.</p>
+
+      <div class="space-y-8">
+        
+        <!-- FASE 1: EXCAVACIÓN SÓTANO -->
+        <div class="bg-white rounded-2xl shadow-md border-2 border-red-500 overflow-hidden">
+          <div class="px-6 py-4 bg-gradient-to-r from-red-700 to-orange-600 text-white">
+            <h3 class="font-bold text-lg flex items-center gap-2">🚨 Fase 1: Excavación de Sótano (FASE CRÍTICA)</h3>
+            <p class="text-sm opacity-90 mt-1">Duración: 2 meses · Trabajadores: 8-12 · <strong>Recurso Preventivo OBLIGATORIO</strong> · Riesgos: R03, R04, R06, R19</p>
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="bg-red-50 rounded-lg p-4 border-2 border-red-300">
+              <p class="text-sm text-red-800 font-semibold">⚠️ EXCAVACIÓN PROFUNDA: La excavación del sótano (~4-5m de profundidad) requiere medidas especiales de entibado/talud y presencia permanente de Recurso Preventivo. Riesgo crítico de sepultamiento y vuelco de maquinaria.</p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Medidas Preventivas — Excavación</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                <li><strong>Estudio geotécnico previo:</strong> obligatorio para determinar naturaleza del terreno, presencia de agua freática y sistema de contención necesario</li>
+                <li><strong>Entibado o talud estable:</strong> Excavaciones >1,30m REQUIEREN entibado con tablestacas/pantallas o talud estable (ángulo máx. según terreno: 45° en compacto, 35° en suelto)</li>
+                <li><strong>Distancia de seguridad:</strong> mín. 2m del borde superior de excavación para acopio de tierras, materiales y circulación de maquinaria</li>
+                <li><strong>Accesos:</strong> rampas con pendiente <20% o escaleras sólidas ancladas (separadas 1m del borde, sobresaliendo 1m)</li>
+                <li><strong>Balizamiento perimetral:</strong> valla rígida h=1m o barandilla reglamentaria en todo el perímetro. Señalización nocturna con balizas luminosas</li>
+                <li><strong>Revisión diaria:</strong> del estado de paramentos, entibación y presencia de agua. Paralización inmediata si grietas o filtraciones</li>
+                <li><strong>Achique de aguas:</strong> bombas sumergidas si presencia de agua freática. Revisión diaria</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Maquinaria — Medidas Específicas</h4>
+              <table class="w-full text-xs border border-gray-200">
+                <thead class="bg-gray-50"><tr><th class="py-1 px-2 text-left">Equipo</th><th class="py-1 px-2 text-left">Medidas</th></tr></thead>
+                <tbody class="divide-y divide-gray-100">
+                  <tr><td class="py-1 px-2 font-medium">Retroexcavadora/Pala cargadora</td><td class="py-1 px-2">Señalista en maniobras. Prohibido personal a pie en radio de acción. Cabina con ROPS/FOPS. Revisión diaria frenos/dirección.</td></tr>
+                  <tr><td class="py-1 px-2 font-medium">Camiones basculantes</td><td class="py-1 px-2">Prohibida permanencia bajo tolva. Calzos en ruedas durante carga. Acceso por viales señalizados. Limitación velocidad 20 km/h.</td></tr>
+                  <tr><td class="py-1 px-2 font-medium">Martillo neumático/hidráulico</td><td class="py-1 px-2">Guantes antivibración. Protección auditiva obligatoria (>100 dB). Rotación cada 2h.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">EPI Obligatorios</h4>
+              <p class="text-sm text-gray-600">Casco, chaleco alta visibilidad, botas S3, guantes anticorte, gafas (proyección), protección auditiva (>85 dB), mascarilla FFP2 (polvo)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FASE 2: CIMENTACIÓN -->
+        <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+          <div class="px-6 py-4 bg-gradient-to-r from-orange-600 to-amber-600 text-white">
+            <h3 class="font-bold text-lg">Fase 2: Cimentación (Pilotaje + Muros Sótano)</h3>
+            <p class="text-sm opacity-90 mt-1">Duración: 2 meses · Trabajadores: 12-18 · Riesgos: R03, R07, R10, R16</p>
+          </div>
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Pilotaje (si requerido por geotécnico)</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                <li><strong>Máquina pilotadora:</strong> operario cualificado certificado. Señalista durante maniobras. Estabilización con gatos hidráulicos</li>
+                <li><strong>Ruido y vibraciones:</strong> control de niveles (típico 90-100 dB). Protección auditiva obligatoria. Rotación de operarios cada 2h</li>
+                <li><strong>Lodos bentoníticos:</strong> guantes impermeables, gafas. Contenedor estanco. Gestión como residuo especial</li>
+                <li><strong>Armaduras de pilotes:</strong> izado con grúa. Guía manual sin contacto directo. Señalista en todo momento</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Muros de Sótano y Vigas Riostras</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                <li><strong>Ferralla:</strong> guantes de cuero nivel 5, protección ocular. Esperas protegidas con tapón anticorte. Corte con cizalla o radial con carcasa</li>
+                <li><strong>Encofrados:</strong> sistema de gran superficie (paneles metálicos). Apuntalamiento según cálculo. Plataformas de trabajo estables</li>
+                <li><strong>Hormigonado:</strong> bomba con brazo distribuidor o cuba. Prohibida permanencia bajo tubo. Vibrado con vibradores clase II (doble aislamiento)</li>
+                <li><strong>Impermeabilización muros:</strong> láminas asfálticas o EPDM. Guantes nitrilo. Ventilación natural. Prohibido fumar</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">EPI Obligatorios</h4>
+              <p class="text-sm text-gray-600">Casco, chaleco, botas S3, guantes cuero/nitrilo (según tarea), gafas, protección auditiva, mascarilla FFP2, faja lumbar (cargas)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FASE 3: ESTRUCTURA HA -->
+        <div class="bg-white rounded-2xl shadow-md border-2 border-red-500 overflow-hidden">
+          <div class="px-6 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white">
+            <h3 class="font-bold text-lg flex items-center gap-2">🚨 Fase 3: Estructura de Hormigón Armado PB+2 (FASE CRÍTICA)</h3>
+            <p class="text-sm opacity-90 mt-1">Duración: 5 meses · Trabajadores: 18-25 · <strong>Recurso Preventivo OBLIGATORIO</strong> · Riesgos: R01, R07, R08, R09</p>
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="bg-red-50 rounded-lg p-4 border-2 border-red-300">
+              <p class="text-sm text-red-800 font-semibold">⚠️ TRABAJOS EN ALTURA: Edificio de 3 plantas sobre rasante (~11m altura total). Riesgo MUY ALTO de caída desde forjados. Medidas de protección colectiva PRIORITARIAS sobre EPI. Recurso Preventivo permanente según RD 2177/2004.</p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Protecciones Colectivas (PRIORITARIAS)</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                <li><strong>Barandillas perimetrales:</strong> Sistema tipo "L" o guardacuerpos (barandilla 1m + intermedia 0,45m + rodapié 0,15m). Montaje ANTES de retirar encofrado inferior</li>
+                <li><strong>Redes de seguridad:</strong> Tipo horca (S) bajo forjado en ejecución, ancladas a pilares. Ensayadas UNE-EN 1263-1. Recogida máx. 6m</li>
+                <li><strong>Andamios tubulares:</strong> europeos (EN 12810) con barandillas, acceso interior por escalera. Anclaje a fachada cada 2 plantas y 6m horizontal</li>
+                <li><strong>Grúa torre:</strong> operador certificado. Plan de montaje/desmontaje aprobado. Inspección OCA anual. Señalista en cargas. Balizamiento zona de influencia</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Encofrado y Desencofrado</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                <li>Montaje desde plataforma estable. Puntales telescópicos clase A/B según carga. Cálculo por técnico competente</li>
+                <li>Desencofrado: nunca antes plazo mínimo (15 días forjados, 7 días vigas). Secuencia planificada. Prohibido lanzar material</li>
+                <li>Acopio ordenado de tableros y puntales. Uso de eslingas certificadas para izado</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">EPI Anticaídas (cuando PC insuficiente)</h4>
+              <p class="text-sm text-gray-700">Arnés dorsal (EN 361) + eslinga absorbedor (EN 355) + mosquetón automático (EN 362). Anclaje a punto fijo estructural o línea de vida temporal (EN 795). Factor de caída ≤1. Uso supervisado por Recurso Preventivo.</p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">EPI Obligatorios</h4>
+              <p class="text-sm text-gray-600">Casco, chaleco, botas S3, guantes, gafas, arnés anticaídas (según zona), faja lumbar, protección auditiva</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FASE 4: CUBIERTA -->
+        <div class="bg-white rounded-2xl shadow-md border-2 border-red-500 overflow-hidden">
+          <div class="px-6 py-4 bg-gradient-to-r from-red-800 to-orange-700 text-white">
+            <h3 class="font-bold text-lg flex items-center gap-2">🚨 Fase 4: Cubierta Plana (FASE CRÍTICA)</h3>
+            <p class="text-sm opacity-90 mt-1">Duración: 1 mes · Trabajadores: 8-12 · <strong>Recurso Preventivo OBLIGATORIO</strong> · Riesgos: R02, R14</p>
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="bg-red-50 rounded-lg p-4 border-2 border-red-300">
+              <p class="text-sm text-red-800 font-semibold">⚠️ TRABAJO EN CUBIERTA: Riesgo MUY ALTO de caída desde ~11m. Prohibido trabajar con viento >40 km/h, lluvia o temperatura <5°C. Protecciones colectivas obligatorias.</p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Protecciones Colectivas</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                <li><strong>Línea de vida temporal:</strong> Cable Ø12mm galvanizado anclado a puntos estructurales. Certificado EN 795 clase C. Tensado con carraca. Revisión diaria</li>
+                <li><strong>Barandilla perimetral:</strong> Sistema tipo pinza en borde (1m + intermedia + rodapié). Montaje ANTES de iniciar trabajos</li>
+                <li><strong>Redes tipo bandeja:</strong> Desde borde hacia interior con soportes cada 4m. Ensayadas UNE-EN 1263-1</li>
+                <li><strong>Pasarelas de reparto:</strong> Tablones 30cm ancho para no pisar impermeabilización</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Protección Solar (Riesgo R14 — Específico Canarias)</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                <li>Horario verano (jun-sep): preferible 07:00-14:00. Evitar 14:00-17:00 (máxima radiación)</li>
+                <li>Hidratación: agua fresca abundante (2L/trabajador/día). Cada 30 min</li>
+                <li>Ropa: manga larga, color claro, transpirable. Gorra/sombrero con visera</li>
+                <li>Crema solar FPS 50+ (cara, cuello, brazos). Reaplicar cada 2h</li>
+                <li>Zona de sombra (carpa/toldo) para descansos</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">EPI Obligatorios</h4>
+              <p class="text-sm text-gray-600">Casco, chaleco, botas S3 antideslizante, guantes anticorte, gafas polarizadas, <strong>arnés anticaídas</strong> + eslinga + conector, gorra/sombrero, crema solar FPS 50+</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FASE 5: INSTALACIONES -->
+        <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+          <div class="px-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+            <h3 class="font-bold text-lg">Fase 5: Instalaciones (Eléctrica, Fontanería, Climatización)</h3>
+            <p class="text-sm opacity-90 mt-1">Duración: 4 meses · Trabajadores: 15-20 · Riesgos: R05, R15</p>
+          </div>
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Instalación Eléctrica — Medidas Específicas</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                <li><strong>Operarios autorizados:</strong> electricistas certificados (REBT ITC-BT-03). Acreditación en obra</li>
+                <li><strong>5 reglas de oro:</strong> 1) Desconectar, 2) Candado (prevenir reconexión), 3) Verificar ausencia tensión, 4) Puesta a tierra, 5) Señalizar zona</li>
+                <li><strong>Herramientas aisladas:</strong> mango 1.000V certificado (IEC 60900). Comprobador de ausencia de tensión</li>
+                <li><strong>Cuadros provisionales:</strong> diferencial 30 mA todas las líneas. Magnetotérmico por circuito. Toma tierra <80Ω. Verificación semanal</li>
+                <li><strong>Prohibido:</strong> trabajar con tensión salvo autorización expresa y EPI específico (guantes dieléctricos clase 0)</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Fontanería y Climatización</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                <li>Soldadura PVC: mascarilla FFP2, gafas, ventilación. Soplete con antirretorno</li>
+                <li>Gases refrigerantes (R-32, R-410A): solo frigorista certificado. Guantes criogénicos. Ventilación</li>
+                <li>Pruebas de presión: alejamiento del personal (riesgo reventón). Presión máx. 1,5× nominal</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">EPI Obligatorios</h4>
+              <p class="text-sm text-gray-600">Casco dieléctrico, chaleco, botas dieléctricas (electricistas), guantes dieléctricos clase 0, gafas, mascarilla FFP2, detector de tensión</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FASE 6: ACABADOS -->
+        <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+          <div class="px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+            <h3 class="font-bold text-lg">Fase 6: Acabados Interiores</h3>
+            <p class="text-sm opacity-90 mt-1">Duración: 4 meses · Trabajadores: 20-30 · Riesgos: R10, R11, R12, R13, R17</p>
+          </div>
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Alicatados y Solados</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                <li>Corte cerámica: cortadora de mesa con pantalla protectora. Disco diamantado refrigerado por agua</li>
+                <li>Radial portátil: empuñadura auxiliar, carcasa, gafas EN 166, mascarilla FFP2 (sílice)</li>
+                <li>Rodilleras ergonómicas (EN 14404) para trabajos prolongados de rodillas</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">Pintura y Revestimientos</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                <li>Pinturas al agua: ventilación natural. Guantes nitrilo</li>
+                <li>Pinturas al disolvente: mascarilla filtro A2 (vapores orgánicos). Ventilación forzada si local cerrado. Prohibido fumar</li>
+                <li>Aplicación pistola airless: presión 200 bar (riesgo inyección subcutánea). Solo operario formado. Gafas estancas</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">EPI Obligatorios</h4>
+              <p class="text-sm text-gray-600">Casco, botas S3, guantes (nitrilo/látex/cuero según tarea), gafas/pantalla facial, mascarilla FFP2 o FFP3 + filtro A2, rodilleras, ropa desechable (pistola)</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: EQUIPOS DE PROTECCIÓN INDIVIDUAL -->
+    <section id="epi" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-safety-100 flex items-center justify-center text-xl">🦺</div>
+        <h2 class="text-3xl font-extrabold gradient-text">5. Equipos de Protección Individual (EPI)</h2>
+      </div>
+      <p class="text-gray-600 mb-6">Según <strong>RD 773/1997</strong> y <strong>RD 1407/1992</strong>. Los EPI son de uso obligatorio cuando los riesgos no pueden eliminarse con protecciones colectivas. El contratista suministrará gratuitamente EPI certificados (marcado CE) y proporcionará formación sobre su uso.</p>
+
+      <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-800 text-white">
+            <tr>
+              <th class="text-left py-3 px-4 font-semibold">EPI</th>
+              <th class="text-left py-3 px-4 font-semibold">Norma</th>
+              <th class="text-left py-3 px-4 font-semibold">Descripción</th>
+              <th class="text-left py-3 px-4 font-semibold">Uso obligatorio</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 text-xs">
+            <tr><td class="py-2 px-4 font-medium">Casco seguridad</td><td class="py-2 px-4">EN 397</td><td class="py-2 px-4">Clase G (aislante 440V AC). Barboquejo si altura</td><td class="py-2 px-4">TODA LA OBRA</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Chaleco alta visibilidad</td><td class="py-2 px-4">EN ISO 20471</td><td class="py-2 px-4">Clase 2 (50 cm² fluorescente + bandas retrorreflectantes)</td><td class="py-2 px-4">TODA LA OBRA (exterior)</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Botas seguridad S3</td><td class="py-2 px-4">EN ISO 20345</td><td class="py-2 px-4">Puntera 200 J, plantilla antiperforation, suela SRC antideslizante</td><td class="py-2 px-4">TODA LA OBRA</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Botas dieléctricas</td><td class="py-2 px-4">EN 50321</td><td class="py-2 px-4">Aislamiento 1.000V AC. Sin elementos metálicos</td><td class="py-2 px-4">Electricistas (BT)</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Guantes anticorte</td><td class="py-2 px-4">EN 388</td><td class="py-2 px-4">Nivel 5. Cuero/Kevlar. Palma reforzada</td><td class="py-2 px-4">Ferrallado, chapa</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Guantes dieléctricos clase 0</td><td class="py-2 px-4">EN 60903</td><td class="py-2 px-4">Aislamiento 1.000V AC. Látex/neopreno. Revisión previa cada uso</td><td class="py-2 px-4">Electricistas (tensión)</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Guantes nitrilo</td><td class="py-2 px-4">EN 374</td><td class="py-2 px-4">Resistencia química acuosos/disolventes</td><td class="py-2 px-4">Pintores, fontaneros</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Gafas protección</td><td class="py-2 px-4">EN 166</td><td class="py-2 px-4">Montura integral estanca/ventilada. Antivaho. Clase F (45 m/s)</td><td class="py-2 px-4">Radial, sierra, proyecciones</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Pantalla facial</td><td class="py-2 px-4">EN 166</td><td class="py-2 px-4">Visor policarbonato. Protección cara completa</td><td class="py-2 px-4">Amolado intenso, soldadura</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Mascarilla FFP2</td><td class="py-2 px-4">EN 149</td><td class="py-2 px-4">Eficacia ≥94%. Válvula exhalación. Uso máx. 8h</td><td class="py-2 px-4">Polvo cemento, yeso, cerámica</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Mascarilla FFP3</td><td class="py-2 px-4">EN 149</td><td class="py-2 px-4">Eficacia ≥99%. Polvo muy fino (sílice)</td><td class="py-2 px-4">Corte piedra, demoliciones</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Mascarilla filtro A2</td><td class="py-2 px-4">EN 140 + EN 14387</td><td class="py-2 px-4">Semimáscara + filtro vapores orgánicos (marrón)</td><td class="py-2 px-4">Pinturas disolvente, barnices</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Protectores auditivos tapones</td><td class="py-2 px-4">EN 352-2</td><td class="py-2 px-4">Atenuación SNR ≥25 dB. Inserción correcta canal auditivo</td><td class="py-2 px-4">Ruido >85 dB: martillo, radial</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Protectores auditivos orejeras</td><td class="py-2 px-4">EN 352-1</td><td class="py-2 px-4">Atenuación SNR ≥30 dB. Copa envolvente. Compatible casco</td><td class="py-2 px-4">Ruido >90 dB: compresor, pilotaje</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Arnés anticaídas</td><td class="py-2 px-4">EN 361</td><td class="py-2 px-4">Punto anclaje dorsal. Cintas ajustables</td><td class="py-2 px-4">Altura >2m sin PC</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Eslinga absorbedor</td><td class="py-2 px-4">EN 355</td><td class="py-2 px-4">Longitud 1,50m o doble (tipo Y). Limita fuerza <6 kN</td><td class="py-2 px-4">Con arnés (sistema completo)</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Faja lumbar</td><td class="py-2 px-4">—</td><td class="py-2 px-4">Soporte elástico. Uso PUNTUAL cargas >25 kg</td><td class="py-2 px-4">Carga/descarga, armaduras</td></tr>
+            <tr><td class="py-2 px-4 font-medium">Rodilleras</td><td class="py-2 px-4">EN 14404</td><td class="py-2 px-4">Tipo 2 (cojín independiente). Espuma viscoelástica</td><td class="py-2 px-4">Solado, alicatado</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-6 grid md:grid-cols-2 gap-6">
+        <div class="bg-blue-50 rounded-xl p-5 border border-blue-200">
+          <h4 class="font-bold text-blue-800 mb-2">📋 Obligaciones Contratista</h4>
+          <ul class="text-sm text-blue-700 space-y-1 list-disc list-inside">
+            <li>Proporcionar gratuitamente EPI certificados (CE)</li>
+            <li>Informar por escrito sobre riesgos y obligatoriedad</li>
+            <li>Formar sobre uso, mantenimiento y limitaciones (registro firmado)</li>
+            <li>Sustituir EPI deteriorados sin coste trabajador</li>
+            <li>Verificar uso efectivo mediante controles</li>
+          </ul>
+        </div>
+        <div class="bg-amber-50 rounded-xl p-5 border border-amber-200">
+          <h4 class="font-bold text-amber-800 mb-2">⚠️ Obligaciones Trabajador</h4>
+          <ul class="text-sm text-amber-700 space-y-1 list-disc list-inside">
+            <li>Utilizar EPI cuando el riesgo lo requiera</li>
+            <li>Cuidar correctamente el EPI (no alterar prestaciones)</li>
+            <li>Revisar EPI antes de cada uso (estado, caducidad)</li>
+            <li>Comunicar inmediatamente cualquier defecto</li>
+            <li>No retirar EPI durante exposición al riesgo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: PLAN DE EMERGENCIAS -->
+    <section id="emergencias" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-safety-100 flex items-center justify-center text-xl">🚑</div>
+        <h2 class="text-3xl font-extrabold gradient-text">6. Plan de Emergencias y Primeros Auxilios</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h3 class="font-semibold text-gray-700 mb-4">🚑 Primeros Auxilios</h3>
+          <div class="space-y-3 text-sm">
+            <div>
+              <p class="font-medium text-gray-900 mb-1">Botiquín de Obra</p>
+              <p class="text-gray-600">Ubicación: caseta obra, acceso rápido señalizado. Contenido RD 486/1997 Anexo VI: desinfectante, gasas estériles, vendas, esparadrapo, tijeras, pinzas, guantes desechables, mascarilla RCP, manta térmica, suero fisiológico. <strong>Revisión mensual</strong>.</p>
+            </div>
+            <div>
+              <p class="font-medium text-gray-900 mb-1">Socorrista Laboral</p>
+              <p class="text-gray-600">Mín. 1 trabajador/turno con formación primeros auxilios (20h homologado). Identificable con brazalete verde + cruz blanca. Atención hasta llegada 112.</p>
+            </div>
+            <div>
+              <p class="font-medium text-gray-900 mb-1">Centros Médicos</p>
+              <ul class="text-gray-600 list-disc list-inside">
+                <li><strong>Centro Salud Guargacho:</strong> 3 min</li>
+                <li><strong>Hospital del Sur (Arona):</strong> 15 min (24h)</li>
+                <li><strong>Emergencias:</strong> <strong class="text-red-600">112</strong> (SOS Canarias)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h3 class="font-semibold text-gray-700 mb-4">🔥 Evacuación y Extinción</h3>
+          <div class="space-y-3 text-sm">
+            <div>
+              <p class="font-medium text-gray-900 mb-1">Vías de Evacuación</p>
+              <p class="text-gray-600">Acceso principal por Ctra. TF-652. Salida emergencia por lindero posterior. Señalización luminiscente. Iluminación emergencia en casetas.</p>
+            </div>
+            <div>
+              <p class="font-medium text-gray-900 mb-1">Punto de Reunión</p>
+              <p class="text-gray-600">Exterior vallado, zona despejada 25m de obra. Cartel "PUNTO REUNIÓN". Recuento por encargado.</p>
+            </div>
+            <div>
+              <p class="font-medium text-gray-900 mb-1">Medios de Extinción</p>
+              <ul class="text-gray-600 list-disc list-inside">
+                <li>Extintores polvo ABC 6 kg: 1 cada 15m + casetas (eficacia 21A-113B). Revisión anual</li>
+                <li>Extintor CO₂ 5 kg en cuadro eléctrico</li>
+                <li>Prohibido fumar en toda la obra</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-900 mb-4">🚨 Protocolo PAS — Actuación en Caso de Accidente</h3>
+        <div class="grid md:grid-cols-4 gap-4">
+          <div class="text-center p-4 bg-red-50 rounded-xl border border-red-200">
+            <div class="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-2">1</div>
+            <h4 class="font-semibold text-gray-900 mb-1 text-sm">Proteger</h4>
+            <p class="text-xs text-gray-600">Asegurar zona accidente. Detener trabajos. Señalizar. Evitar nuevos accidentes.</p>
+          </div>
+          <div class="text-center p-4 bg-orange-50 rounded-xl border border-orange-200">
+            <div class="w-12 h-12 rounded-full bg-orange-600 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-2">2</div>
+            <h4 class="font-semibold text-gray-900 mb-1 text-sm">Avisar</h4>
+            <p class="text-xs text-gray-600">Llamar <strong>112</strong> inmediatamente. Indicar: nº accidentados, tipo lesión, ubicación exacta.</p>
+          </div>
+          <div class="text-center p-4 bg-yellow-50 rounded-xl border border-yellow-200">
+            <div class="w-12 h-12 rounded-full bg-yellow-600 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-2">3</div>
+            <h4 class="font-semibold text-gray-900 mb-1 text-sm">Socorrer</h4>
+            <p class="text-xs text-gray-600">Socorrista atiende sin mover (salvo riesgo vital). NO agua/alimentos. Manta si frío.</p>
+          </div>
+          <div class="text-center p-4 bg-blue-50 rounded-xl border border-blue-200">
+            <div class="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-2">4</div>
+            <h4 class="font-semibold text-gray-900 mb-1 text-sm">Comunicar</h4>
+            <p class="text-xs text-gray-600">Jefe obra comunica: Coordinador S+S, Promotor, Mutua, Inspección (grave/mortal).</p>
+          </div>
+        </div>
+        <div class="mt-4 bg-gray-50 rounded-lg p-4 text-xs text-gray-600">
+          <p class="font-semibold text-gray-800 mb-1">⚠️ Accidentes Graves/Mortales — Obligaciones Legales:</p>
+          <ul class="list-disc list-inside space-y-0.5">
+            <li>Paralización inmediata zona afectada (preservar pruebas)</li>
+            <li>Comunicación Inspección Trabajo en <strong>24 horas</strong> (Art. 23 Ley 31/1995)</li>
+            <li>Parte accidente Mutua plazo <strong>máx. 5 días hábiles</strong></li>
+            <li>Investigación interna (Coordinador S+S + contratista): informe causas + medidas correctoras</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-6 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+        <h3 class="font-semibold text-gray-700 mb-4">📞 Teléfonos de Emergencia (Cartel Visible en Obra)</h3>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-red-50 rounded-lg p-4 border border-red-200 text-center">
+            <p class="text-red-800 font-bold text-2xl mb-1">112</p>
+            <p class="text-xs text-red-700">SOS Canarias (médicas, bomberos, policía) <strong>24h</strong></p>
+          </div>
+          <div class="bg-blue-50 rounded-lg p-4 border border-blue-200 text-center">
+            <p class="text-blue-800 font-bold text-xl mb-1">Centro Salud Guargacho</p>
+            <p class="text-xs text-blue-700"><strong>3 minutos</strong> desde obra · Lun-Vie 08:00-20:00</p>
+          </div>
+          <div class="bg-green-50 rounded-lg p-4 border border-green-200 text-center">
+            <p class="text-green-800 font-bold text-xl mb-1">Hospital del Sur</p>
+            <p class="text-xs text-green-700"><strong>15 minutos</strong> · Urgencias 24h</p>
+          </div>
+        </div>
+        <div class="mt-4 grid md:grid-cols-2 gap-4">
+          <div class="bg-gray-50 rounded-lg p-3 text-sm">
+            <p class="font-medium text-gray-900 mb-1">Jefe Obra / Encargado:</p>
+            <p class="text-gray-600">[A determinar] · Móvil: [XXX XXX XXX]</p>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-3 text-sm">
+            <p class="font-medium text-gray-900 mb-1">Coordinador S+S:</p>
+            <p class="text-gray-600">[A designar] · Móvil: [XXX XXX XXX]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 7: PRESUPUESTO -->
+    <section id="presupuesto" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-safety-100 flex items-center justify-center text-xl">💰</div>
+        <h2 class="text-3xl font-extrabold gradient-text">7. Presupuesto de Seguridad y Salud</h2>
+      </div>
+      <p class="text-gray-600 mb-6">Valoración económica de las medidas preventivas contempladas en este Plan. El presupuesto de S+S se incluye en el presupuesto general de la obra como capítulo independiente (Art. 5.4 RD 1627/1997).</p>
+
+      <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-800 text-white">
+            <tr>
+              <th class="text-left py-3 px-4 font-semibold">Partida</th>
+              <th class="text-center py-3 px-4 font-semibold">Ud</th>
+              <th class="text-right py-3 px-4 font-semibold">Cant.</th>
+              <th class="text-right py-3 px-4 font-semibold">Precio (€)</th>
+              <th class="text-right py-3 px-4 font-semibold">Total (€)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="bg-gray-50"><td colspan="5" class="py-2 px-4 font-bold text-gray-700 text-xs uppercase">Protecciones Colectivas</td></tr>
+            <tr><td class="py-2 px-4">Vallado perimetral h=2m</td><td class="py-2 px-4 text-center">ml</td><td class="py-2 px-4 text-right">200</td><td class="py-2 px-4 text-right">18,50</td><td class="py-2 px-4 text-right font-medium">3.700,00</td></tr>
+            <tr><td class="py-2 px-4">Barandilla protección borde forjado</td><td class="py-2 px-4 text-center">ml</td><td class="py-2 px-4 text-right">300</td><td class="py-2 px-4 text-right">15,20</td><td class="py-2 px-4 text-right font-medium">4.560,00</td></tr>
+            <tr><td class="py-2 px-4">Red seguridad tipo horca (S)</td><td class="py-2 px-4 text-center">m²</td><td class="py-2 px-4 text-right">1.200</td><td class="py-2 px-4 text-right">4,80</td><td class="py-2 px-4 text-right font-medium">5.760,00</td></tr>
+            <tr><td class="py-2 px-4">Línea vida temporal cable Ø12mm</td><td class="py-2 px-4 text-center">ml</td><td class="py-2 px-4 text-right">100</td><td class="py-2 px-4 text-right">25,00</td><td class="py-2 px-4 text-right font-medium">2.500,00</td></tr>
+            <tr><td class="py-2 px-4">Extintor polvo ABC 6kg</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">10</td><td class="py-2 px-4 text-right">45,00</td><td class="py-2 px-4 text-right font-medium">450,00</td></tr>
+            <tr><td class="py-2 px-4">Extintor CO₂ 5kg</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">2</td><td class="py-2 px-4 text-right">75,00</td><td class="py-2 px-4 text-right font-medium">150,00</td></tr>
+            <tr><td class="py-2 px-4">Señalización obra</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">50</td><td class="py-2 px-4 text-right">12,50</td><td class="py-2 px-4 text-right font-medium">625,00</td></tr>
+            <tr><td class="py-2 px-4">Cinta balizamiento</td><td class="py-2 px-4 text-center">ml</td><td class="py-2 px-4 text-right">400</td><td class="py-2 px-4 text-right">0,80</td><td class="py-2 px-4 text-right font-medium">320,00</td></tr>
+            
+            <tr class="bg-gray-50"><td colspan="5" class="py-2 px-4 font-bold text-gray-700 text-xs uppercase">Equipos Protección Individual (EPI)</td></tr>
+            <tr><td class="py-2 px-4">Casco seguridad clase G</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">40</td><td class="py-2 px-4 text-right">8,50</td><td class="py-2 px-4 text-right font-medium">340,00</td></tr>
+            <tr><td class="py-2 px-4">Chaleco alta visibilidad</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">40</td><td class="py-2 px-4 text-right">6,00</td><td class="py-2 px-4 text-right font-medium">240,00</td></tr>
+            <tr><td class="py-2 px-4">Botas seguridad S3</td><td class="py-2 px-4 text-center">par</td><td class="py-2 px-4 text-right">40</td><td class="py-2 px-4 text-right">45,00</td><td class="py-2 px-4 text-right font-medium">1.800,00</td></tr>
+            <tr><td class="py-2 px-4">Guantes anticorte nivel 5</td><td class="py-2 px-4 text-center">par</td><td class="py-2 px-4 text-right">80</td><td class="py-2 px-4 text-right">8,50</td><td class="py-2 px-4 text-right font-medium">680,00</td></tr>
+            <tr><td class="py-2 px-4">Gafas protección EN 166</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">40</td><td class="py-2 px-4 text-right">6,50</td><td class="py-2 px-4 text-right font-medium">260,00</td></tr>
+            <tr><td class="py-2 px-4">Mascarilla FFP2</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">300</td><td class="py-2 px-4 text-right">1,80</td><td class="py-2 px-4 text-right font-medium">540,00</td></tr>
+            <tr><td class="py-2 px-4">Protectores auditivos tapones</td><td class="py-2 px-4 text-center">paq</td><td class="py-2 px-4 text-right">20</td><td class="py-2 px-4 text-right">8,00</td><td class="py-2 px-4 text-right font-medium">160,00</td></tr>
+            <tr><td class="py-2 px-4">Arnés anticaídas + eslinga</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">15</td><td class="py-2 px-4 text-right">125,00</td><td class="py-2 px-4 text-right font-medium">1.875,00</td></tr>
+            <tr><td class="py-2 px-4">Guantes dieléctricos</td><td class="py-2 px-4 text-center">par</td><td class="py-2 px-4 text-right">8</td><td class="py-2 px-4 text-right">35,00</td><td class="py-2 px-4 text-right font-medium">280,00</td></tr>
+            <tr><td class="py-2 px-4">Botas dieléctricas</td><td class="py-2 px-4 text-center">par</td><td class="py-2 px-4 text-right">8</td><td class="py-2 px-4 text-right">65,00</td><td class="py-2 px-4 text-right font-medium">520,00</td></tr>
+            
+            <tr class="bg-gray-50"><td colspan="5" class="py-2 px-4 font-bold text-gray-700 text-xs uppercase">Medios Auxiliares y Formación</td></tr>
+            <tr><td class="py-2 px-4">Andamio tubular europeo h=11m (alquiler 8 meses)</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">4</td><td class="py-2 px-4 text-right">1.800,00</td><td class="py-2 px-4 text-right font-medium">7.200,00</td></tr>
+            <tr><td class="py-2 px-4">Grúa torre (montaje/desmontaje + inspección)</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">1</td><td class="py-2 px-4 text-right">3.500,00</td><td class="py-2 px-4 text-right font-medium">3.500,00</td></tr>
+            <tr><td class="py-2 px-4">Escalera metálica 2 tramos</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">6</td><td class="py-2 px-4 text-right">180,00</td><td class="py-2 px-4 text-right font-medium">1.080,00</td></tr>
+            <tr><td class="py-2 px-4">Botiquín obra completo</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">2</td><td class="py-2 px-4 text-right">85,00</td><td class="py-2 px-4 text-right font-medium">170,00</td></tr>
+            <tr><td class="py-2 px-4">Formación PRL 20h nivel básico (35 trab.)</td><td class="py-2 px-4 text-center">h</td><td class="py-2 px-4 text-right">700</td><td class="py-2 px-4 text-right">15,00</td><td class="py-2 px-4 text-right font-medium">10.500,00</td></tr>
+            <tr><td class="py-2 px-4">Reconocimiento médico inicial</td><td class="py-2 px-4 text-center">ud</td><td class="py-2 px-4 text-right">35</td><td class="py-2 px-4 text-right">50,00</td><td class="py-2 px-4 text-right font-medium">1.750,00</td></tr>
+            <tr><td class="py-2 px-4">Coordinador Seguridad y Salud (honorarios)</td><td class="py-2 px-4 text-center">mes</td><td class="py-2 px-4 text-right">22</td><td class="py-2 px-4 text-right">600,00</td><td class="py-2 px-4 text-right font-medium">13.200,00</td></tr>
+            <tr><td class="py-2 px-4">Recurso Preventivo (600h dedicación)</td><td class="py-2 px-4 text-center">h</td><td class="py-2 px-4 text-right">600</td><td class="py-2 px-4 text-right">25,00</td><td class="py-2 px-4 text-right font-medium">15.000,00</td></tr>
+            
+            <tr class="bg-safety-600 text-white font-bold text-base">
+              <td class="py-4 px-4" colspan="4">PRESUPUESTO TOTAL DE SEGURIDAD Y SALUD</td>
+              <td class="py-4 px-4 text-right">77.160,00 €</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 text-gray-600" colspan="4">Estimación % sobre PEM (valor tasación: 2.847.000 €)</td>
+              <td class="py-2 px-4 text-right font-bold text-gray-900">~2,7%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-6 bg-blue-50 rounded-xl p-5 border border-blue-200 text-sm text-blue-800">
+        <p class="font-semibold mb-1">💡 Nota sobre el presupuesto de S+S</p>
+        <p>El presupuesto de Seguridad y Salud de <strong>77.160 €</strong> (~2,7% del valor de tasación) se incluye en el presupuesto general de la obra como capítulo independiente. Cubre medidas preventivas, EPI, medios auxiliares, formación y honorarios del Coordinador S+S y Recurso Preventivo. El porcentaje está dentro del rango habitual (1,5-3%) para edificios plurifamiliares de esta envergadura.</p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 8: SEGUIMIENTO Y CONTROL -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-safety-100 flex items-center justify-center text-xl">📝</div>
+        <h2 class="text-3xl font-extrabold gradient-text">8. Seguimiento, Control y Libro de Incidencias</h2>
+      </div>
+      <div class="bg-white rounded-2xl p-8 shadow-md border border-gray-100">
+        <h3 class="font-semibold text-gray-900 mb-4">📋 Obligaciones de Seguimiento</h3>
+        <div class="space-y-4 text-sm text-gray-700">
+          <div>
+            <p class="font-medium text-gray-900 mb-2">Coordinador de Seguridad y Salud</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Visita de obra <strong>mínimo 1 vez por semana</strong> (Art. 9 RD 1627/1997)</li>
+              <li>Acta de visita con incumplimientos detectados, medidas correctoras y plazo</li>
+              <li>Paralización de trabajos si riesgo grave e inminente (comunicación inmediata Inspección)</li>
+              <li>Aprobación de modificaciones del Plan propuestas por el contratista</li>
+              <li>Custodia y apertura del <strong>Libro de Incidencias</strong> (Art. 13 RD 1627/1997)</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900 mb-2">Contratista Principal</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Entrega de este Plan a subcontratistas y autónomos antes de inicio actividad</li>
+              <li>Reunión coordinación previa a cada fase con riesgos especiales</li>
+              <li>Designación Recurso Preventivo en fases críticas (excavación, estructura, cubierta, instalaciones eléctricas)</li>
+              <li>Mantenimiento Libro de Subcontratación (Ley 32/2006) actualizado y en obra</li>
+              <li>Registro entrega EPI a trabajadores (firmado)</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-medium text-gray-900 mb-2">Dirección Facultativa</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Aprobar este Plan antes del inicio de la obra (firma y sello)</li>
+              <li>Supervisar cumplimiento del Plan durante visitas de obra</li>
+              <li>Paralización de obra si incumplimientos graves en seguridad</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 bg-amber-50 rounded-xl p-5 border border-amber-200">
+          <h4 class="font-bold text-amber-800 mb-2">📝 Libro de Incidencias</h4>
+          <p class="text-sm text-amber-700 mb-2">Según <strong>Art. 13 RD 1627/1997</strong>, en toda obra con Estudio/Estudio Básico de S+S existirá un Libro de Incidencias que constará de hojas por duplicado:</p>
+          <ul class="text-sm text-amber-700 space-y-1 list-disc list-inside ml-2">
+            <li>Facilitado por el Colegio profesional que visó el proyecto o la Oficina de Supervisión de Proyectos (Administraciones Públicas)</li>
+            <li>Custodiado por el <strong>Coordinador S+S durante ejecución</strong></li>
+            <li>Disponible en obra a disposición de: Dirección Facultativa, contratistas, subcontratistas, trabajadores autónomos, representantes de los trabajadores, Inspección de Trabajo</li>
+            <li>Anotación obligatoria de incumplimientos de medidas de S+S</li>
+            <li>Copia de anotación entregada en 24h a: contratista afectado e Inspección de Trabajo y Seguridad Social (si procede)</li>
+          </ul>
+        </div>
+
+        <div class="mt-6 bg-green-50 rounded-xl p-5 border border-green-200">
+          <h4 class="font-bold text-green-800 mb-2">✅ Aprobación del Plan</h4>
+          <p class="text-sm text-green-700 mb-3">Este Plan de Seguridad y Salud se somete a aprobación de la Dirección Facultativa antes del inicio de la obra (Art. 7.2 RD 1627/1997).</p>
+          <div class="grid md:grid-cols-2 gap-4 mt-4">
+            <div class="bg-white rounded-lg p-4 border border-green-300">
+              <p class="text-xs text-gray-500 mb-2">Redactado por:</p>
+              <p class="font-semibold text-gray-900">[Coordinador de Seguridad y Salud]</p>
+              <p class="text-xs text-gray-600">Colegiado nº: [XXXX]</p>
+              <p class="text-xs text-gray-600">Fecha: 25 de marzo de 2026</p>
+              <div class="mt-3 border-t border-gray-200 pt-2"><p class="text-xs text-gray-400">Firma:</p></div>
+            </div>
+            <div class="bg-white rounded-lg p-4 border border-green-300">
+              <p class="text-xs text-gray-500 mb-2">Aprobado por:</p>
+              <p class="font-semibold text-gray-900">DOS·07 Arquitectura y Diseño, S.L.</p>
+              <p class="text-xs text-gray-600">I. Galván (COAC 1967) · D. Montesino (COAC 1726)</p>
+              <p class="text-xs text-gray-600">Fecha aprobación: [pendiente]</p>
+              <div class="mt-3 border-t border-gray-200 pt-2"><p class="text-xs text-gray-400">Firma y sello:</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12 no-print">
+    <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+      <p class="mb-2">Plan de Seguridad y Salud generado por <strong class="text-white">SEGUREX</strong> — Coordinador de Seguridad y Salud</p>
+      <p>Obra: Edificio de Viviendas y Local Comercial · Guargacho, San Miguel de Abona · Promotor: [A determinar]</p>
+      <p class="text-gray-600 text-xs mt-2">Este Plan debe ser aprobado por la Dirección Facultativa antes del inicio de la obra. RD 1627/1997 · Ley 31/1995 PRL</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    document.querySelectorAll('.reveal').forEach(el=>{new IntersectionObserver(e=>{if(e[0].isIntersecting)el.classList.add('visible')},{threshold:.1}).observe(el)});
+    // Counter animation
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      const prefix = el.dataset.prefix || '';
+      let current = 0;
+      const step = target / 60;
+      const animate = () => {
+        current += step;
+        if(current >= target) { el.textContent = prefix + target.toLocaleString('es-ES') + suffix; return; }
+        el.textContent = prefix + Math.floor(current).toLocaleString('es-ES') + suffix;
+        requestAnimationFrame(animate);
+      };
+      const obs = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) { animate(); obs.disconnect(); }
+      });
+      obs.observe(el);
+    });
+  </script>
+</body>
+</html>

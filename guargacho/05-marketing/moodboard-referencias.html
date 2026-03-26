@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moodboard y Plan de Renders — Guargacho 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#fdf2f8',
+              100: '#fce7f3',
+              500: '#f72585', // Paleta Renderex
+              600: '#b5179e',
+              900: '#430c45',
+            }
+          },
+          boxShadow: {
+            '3d': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), inset 0 -3px 0 0 rgba(0,0,0,0.1), inset 0 1px 0 0 rgba(255,255,255,0.5)',
+            '3d-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), inset 0 -3px 0 0 rgba(0,0,0,0.1), inset 0 1px 0 0 rgba(255,255,255,0.5)',
+            '3d-active': '0 1px 2px 0 rgba(0, 0, 0, 0.05), inset 0 3px 5px 0 rgba(0,0,0,0.1)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+    .gradient-text { background: linear-gradient(135deg, #f72585, #7209b7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+    .btn-3d { transition: all 0.15s ease; }
+    .btn-3d:active { transform: translateY(3px); box-shadow: theme('boxShadow.3d-active'); }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- Navbar -->
+  <nav class="fixed w-full z-50 glass border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <div class="flex items-center gap-2">
+          <i data-lucide="image" class="text-brand-500 w-6 h-6"></i>
+          <span class="font-bold text-xl tracking-tight">Renderex<span class="text-brand-500">.</span></span>
+        </div>
+        <div class="hidden md:flex space-x-8 text-sm font-medium">
+          <a href="#moodboard" class="text-gray-600 hover:text-brand-500 transition-colors">Moodboard</a>
+          <a href="#renders" class="text-gray-600 hover:text-brand-500 transition-colors">Plan de Renders</a>
+          <a href="#produccion" class="text-gray-600 hover:text-brand-500 transition-colors">Producción</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="relative pt-32 pb-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-50 to-white -z-10"></div>
+    <div class="absolute inset-y-0 right-0 w-1/2 bg-[url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-10 rounded-l-full mask-image:linear-gradient(to_left,white,transparent)"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-600 text-sm font-medium mb-6">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+        Dirección de Arte 3D
+      </div>
+      <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+        Guargacho 1 <br>
+        <span class="gradient-text">Edificio Residencial</span>
+      </h1>
+      <p class="text-xl text-gray-600 max-w-2xl mb-10 leading-relaxed">
+        Plan de visualización arquitectónica y moodboard conceptual para edificio de 18 viviendas y local comercial en San Miguel de Abona, Tenerife Sur.
+      </p>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+          <div class="text-gray-500 text-sm font-medium mb-1">Viviendas</div>
+          <div class="text-2xl font-bold text-gray-900">18</div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+          <div class="text-gray-500 text-sm font-medium mb-1">Local Comercial</div>
+          <div class="text-2xl font-bold text-gray-900">1</div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+          <div class="text-gray-500 text-sm font-medium mb-1">Estilo</div>
+          <div class="text-lg font-bold text-gray-900 truncate">Contemporáneo</div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+          <div class="text-gray-500 text-sm font-medium mb-1">Total Renders</div>
+          <div class="text-2xl font-bold text-brand-500">10</div>
+        </div>
+      </div>
+      
+      <div class="mt-8 flex gap-4">
+          <button class="bg-brand-500 hover:bg-brand-600 text-white font-semibold py-3 px-6 rounded-xl shadow-3d hover:shadow-3d-hover btn-3d flex items-center gap-2">
+              <i data-lucide="download" class="w-5 h-5"></i>
+              Descargar Plan (PDF)
+          </button>
+          <button class="bg-white hover:bg-gray-50 text-gray-800 font-semibold py-3 px-6 rounded-xl border border-gray-200 shadow-3d hover:shadow-3d-hover btn-3d flex items-center gap-2">
+              <i data-lucide="play" class="w-5 h-5"></i>
+              Ver Previsualización
+          </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
+
+    <!-- Moodboard Conceptual -->
+    <section id="moodboard" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-brand-600">
+          <i data-lucide="palette" class="w-6 h-6"></i>
+        </div>
+        <h2 class="text-3xl font-bold text-gray-900">Concepto Visual</h2>
+      </div>
+
+      <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 mb-12">
+        <h3 class="text-xl font-bold mb-4">Edificio Contemporáneo Canario</h3>
+        <p class="text-gray-600 mb-8 leading-relaxed">
+          El concepto visual para el edificio en la Ctra. General TF-652 busca transmitir modernidad urbana integrada en el entorno del sur de Tenerife. Se enfatizan las líneas limpias, la optimización de la luz natural y el confort interior, destacando el valor añadido de las vistas y la ubicación estratégica en Guargacho. La estética será limpia, atractiva para compradores e inversores, con un toque cálido mediterráneo.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Materiales -->
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4 text-brand-500"></i> Materiales
+            </h4>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-[#FAFAFA] border border-gray-200"></div>
+                <span class="text-sm text-gray-700">Revestimiento liso blanco brillante</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-[#8C8C8C] border border-gray-200"></div>
+                <span class="text-sm text-gray-700">Detalles en hormigón gris medio</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-[#2C3E50] border border-gray-200"></div>
+                <span class="text-sm text-gray-700">Carpintería metálica gris antracita</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-[#D2B48C] border border-gray-200"></div>
+                <span class="text-sm text-gray-700">Toques cálidos en madera clara (interiores)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Atmósfera -->
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <i data-lucide="sun" class="w-4 h-4 text-brand-500"></i> Atmósfera
+            </h4>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-2 text-sm text-gray-700">
+                <i data-lucide="check" class="w-4 h-4 text-green-500"></i> Cielos despejados, luz brillante
+              </li>
+              <li class="flex items-center gap-2 text-sm text-gray-700">
+                <i data-lucide="check" class="w-4 h-4 text-green-500"></i> Vida urbana relajada (siluetas humanas)
+              </li>
+              <li class="flex items-center gap-2 text-sm text-gray-700">
+                <i data-lucide="check" class="w-4 h-4 text-green-500"></i> Iluminación cálida interior en atardeceres
+              </li>
+              <li class="flex items-center gap-2 text-sm text-gray-700">
+                <i data-lucide="check" class="w-4 h-4 text-green-500"></i> Dinamismo en la planta baja comercial
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Referencias -->
+          <div>
+             <h4 class="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <i data-lucide="link" class="w-4 h-4 text-brand-500"></i> Estilo Arquitectónico
+            </h4>
+            <p class="text-sm text-gray-600 italic border-l-2 border-brand-500 pl-3 py-1">
+              "Volumetría clara de 3 plantas (PB+2), fachadas ordenadas con balcones funcionales. Un diseño que aporta valor estético a una vía principal (TF-652), combinando uso residencial y comercial con elegancia contemporánea."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Plan de Renders -->
+    <section id="renders" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-brand-600">
+          <i data-lucide="camera" class="w-6 h-6"></i>
+        </div>
+        <h2 class="text-3xl font-bold text-gray-900">Plan de Tomas (10 Renders)</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Render 1 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover transition-all relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full bg-brand-500"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded">EXTERIOR</span>
+            <span class="text-brand-500 font-bold">R01</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Fachada Principal (TF-652)</h3>
+          <p class="text-sm text-gray-600 mb-4">Vista exterior frontal del edificio desde la carretera general, mostrando la presencia urbana, balcones y acceso al garaje.</p>
+          <div class="space-y-2 text-xs text-gray-500">
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Iluminación:</span> <span class="text-gray-800">Día claro (11:00h)</span></div>
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Lente:</span> <span class="text-gray-800">24mm (Perspectiva a pie de calle)</span></div>
+          </div>
+        </div>
+
+        <!-- Render 2 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover transition-all relative overflow-hidden">
+           <div class="absolute top-0 left-0 w-1 h-full bg-brand-500"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded">EXTERIOR</span>
+            <span class="text-brand-500 font-bold">R02</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Vista Lateral/Trasera</h3>
+          <p class="text-sm text-gray-600 mb-4">Perspectiva secundaria mostrando la volumetría completa y la relación con las parcelas colindantes.</p>
+          <div class="space-y-2 text-xs text-gray-500">
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Iluminación:</span> <span class="text-gray-800">Atardecer (Golden hour)</span></div>
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Lente:</span> <span class="text-gray-800">35mm</span></div>
+          </div>
+        </div>
+
+        <!-- Render 3 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover transition-all relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded">INTERIOR</span>
+            <span class="text-blue-500 font-bold">R03</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Salón-Comedor (3 Hab)</h3>
+          <p class="text-sm text-gray-600 mb-4">Toma amplia del piso familiar más grande (88-102 m²), mostrando amplitud, luz natural y conexión con balcón.</p>
+          <div class="space-y-2 text-xs text-gray-500">
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Iluminación:</span> <span class="text-gray-800">Luz natural cenital</span></div>
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Lente:</span> <span class="text-gray-800">24mm</span></div>
+          </div>
+        </div>
+
+        <!-- Render 4 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover transition-all relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded">INTERIOR</span>
+            <span class="text-blue-500 font-bold">R04</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Cocina Abierta (2 Hab)</h3>
+          <p class="text-sm text-gray-600 mb-4">Vista de la cocina integrada en el salón para el piso medio (60-70 m²). Diseño moderno y funcional.</p>
+          <div class="space-y-2 text-xs text-gray-500">
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Iluminación:</span> <span class="text-gray-800">Mañana (Luz difusa)</span></div>
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Lente:</span> <span class="text-gray-800">28mm</span></div>
+          </div>
+        </div>
+
+        <!-- Render 5 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover transition-all relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded">INTERIOR</span>
+            <span class="text-blue-500 font-bold">R05</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Dormitorio Principal (3 Hab)</h3>
+          <p class="text-sm text-gray-600 mb-4">Habitación en suite del piso de 3 dormitorios. Ambiente relajante, armarios empotrados y buena iluminación.</p>
+          <div class="space-y-2 text-xs text-gray-500">
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Iluminación:</span> <span class="text-gray-800">Amanecer cálido</span></div>
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Lente:</span> <span class="text-gray-800">35mm</span></div>
+          </div>
+        </div>
+
+        <!-- Render 6 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover transition-all relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded">INTERIOR</span>
+            <span class="text-blue-500 font-bold">R06</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Baño Principal</h3>
+          <p class="text-sm text-gray-600 mb-4">Diseño del baño tipo, con plato de ducha, mampara, acabados cerámicos neutros y sanitarios modernos.</p>
+          <div class="space-y-2 text-xs text-gray-500">
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Iluminación:</span> <span class="text-gray-800">Artificial + Natural difusa</span></div>
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Lente:</span> <span class="text-gray-800">24mm (Vertical/Retrato)</span></div>
+          </div>
+        </div>
+        
+        <!-- Render 7 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover transition-all relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded">INTERIOR</span>
+            <span class="text-blue-500 font-bold">R07</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Estudio / Piso 1 Hab</h3>
+          <p class="text-sm text-gray-600 mb-4">Vista optimizada del apartamento de 1 dormitorio (45-52 m²), destacando el aprovechamiento del espacio.</p>
+          <div class="space-y-2 text-xs text-gray-500">
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Iluminación:</span> <span class="text-gray-800">Día claro (Mediodía)</span></div>
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Lente:</span> <span class="text-gray-800">20mm</span></div>
+          </div>
+        </div>
+
+        <!-- Render 8 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover transition-all relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full bg-orange-500"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="px-2 py-1 bg-orange-50 text-orange-600 text-xs font-bold rounded">COMERCIAL</span>
+            <span class="text-orange-500 font-bold">R08</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Local Comercial (PB)</h3>
+          <p class="text-sm text-gray-600 mb-4">Vista exterior a pie de calle focalizada en el local de ~95 m², con escaparate acristalado e iluminación invitadora.</p>
+          <div class="space-y-2 text-xs text-gray-500">
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Iluminación:</span> <span class="text-gray-800">Anochecer (Blue hour)</span></div>
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Lente:</span> <span class="text-gray-800">35mm</span></div>
+          </div>
+        </div>
+
+         <!-- Render 9 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover transition-all relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="px-2 py-1 bg-purple-50 text-purple-600 text-xs font-bold rounded">AÉREA</span>
+            <span class="text-purple-500 font-bold">R09</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Vista Aérea del Entorno</h3>
+          <p class="text-sm text-gray-600 mb-4">Plano cenital oblicuo mostrando la ubicación del edificio en Guargacho, accesos y la proximidad a la costa/TF-1 al fondo.</p>
+          <div class="space-y-2 text-xs text-gray-500">
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Iluminación:</span> <span class="text-gray-800">Día claro, sombras cortas</span></div>
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Lente:</span> <span class="text-gray-800">Dron (Gran angular)</span></div>
+          </div>
+        </div>
+
+        <!-- Render 10 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover transition-all relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full bg-brand-500"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded">EXTERIOR</span>
+            <span class="text-brand-500 font-bold">R10</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Detalle Terraza Sur</h3>
+          <p class="text-sm text-gray-600 mb-4">Close-up de uno de los balcones/terrazas de las plantas superiores, mostrando el cerramiento de cristal y vistas.</p>
+          <div class="space-y-2 text-xs text-gray-500">
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Iluminación:</span> <span class="text-gray-800">Tarde soleada</span></div>
+            <div class="flex justify-between border-b border-gray-50 pb-1"><span>Lente:</span> <span class="text-gray-800">50mm (Enfoque selectivo)</span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Producción Técnica -->
+    <section id="produccion" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center text-brand-600">
+          <i data-lucide="cpu" class="w-6 h-6"></i>
+        </div>
+        <h2 class="text-3xl font-bold text-gray-900">Plan de Producción</h2>
+      </div>
+
+      <div class="bg-white rounded-3xl p-0 shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-gray-50 border-b border-gray-200">
+              <th class="py-4 px-6 font-semibold text-gray-900 text-sm">Prioridad</th>
+              <th class="py-4 px-6 font-semibold text-gray-900 text-sm">Fase / Tarea</th>
+              <th class="py-4 px-6 font-semibold text-gray-900 text-sm">Especificaciones Técnicas</th>
+              <th class="py-4 px-6 font-semibold text-gray-900 text-sm">Estado</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="py-4 px-6 text-sm font-bold text-brand-500">ALTA</td>
+              <td class="py-4 px-6 text-sm font-medium text-gray-900">R01, R08, R03 (Hero Shots)</td>
+              <td class="py-4 px-6 text-sm text-gray-600">Resolución 4K. Ideales para portada de dossier comercial y cartel de obra.</td>
+              <td class="py-4 px-6"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full">Modelando</span></td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="py-4 px-6 text-sm font-bold text-blue-500">MEDIA</td>
+              <td class="py-4 px-6 text-sm font-medium text-gray-900">R04, R05, R07 (Interiores Tipo)</td>
+              <td class="py-4 px-6 text-sm text-gray-600">Resolución 3K. Enfoque en tipologías (1, 2, 3 habs) para ficha web.</td>
+              <td class="py-4 px-6"><span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded-full">En cola</span></td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition-colors">
+               <td class="py-4 px-6 text-sm font-bold text-gray-500">MEDIA</td>
+              <td class="py-4 px-6 text-sm font-medium text-gray-900">R09 (Aérea Contexto)</td>
+              <td class="py-4 px-6 text-sm text-gray-600">Composición con foto de dron real del entorno + match-moving 3D.</td>
+              <td class="py-4 px-6"><span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded-full">Buscando Base</span></td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="py-4 px-6 text-sm font-bold text-gray-400">BAJA</td>
+              <td class="py-4 px-6 text-sm font-medium text-gray-900">R02, R06, R10 (Detalles/Secundarios)</td>
+              <td class="py-4 px-6 text-sm text-gray-600">Resolución HD. Material de apoyo para memoria de calidades.</td>
+              <td class="py-4 px-6"><span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded-full">En cola</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="mt-8 flex justify-end gap-4">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium">
+          <i data-lucide="monitor" class="w-4 h-4"></i>
+          Pipeline: Blender + fal-ai
+        </div>
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium shadow-3d">
+          <i data-lucide="clock" class="w-4 h-4"></i>
+          Tiempo Estimado: 7-10 Días
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+      <div class="flex items-center justify-center gap-2 mb-4">
+        <i data-lucide="image" class="w-5 h-5 text-brand-500"></i>
+        <span class="font-bold text-white text-lg tracking-tight">Renderex<span class="text-brand-500">.</span></span>
+      </div>
+      <p>Informe generado por el Agente Renderista 3D del Sistema de Desarrollo Inmobiliario.</p>
+      <p class="mt-2 text-gray-500">Proyecto: Guargacho 1 (18 Viviendas + Local) • San Miguel de Abona, Tenerife.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize icons
+    lucide.createIcons();
+    
+    // Scroll reveal logic
+    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    
+    // Animate initial reveals immediately
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach((el, i) => {
+        if(el.getBoundingClientRect().top < window.innerHeight) {
+          setTimeout(() => el.classList.add('active'), i * 150);
+        }
+      });
+    }, 100);
+  </script>
+</body>
+</html>

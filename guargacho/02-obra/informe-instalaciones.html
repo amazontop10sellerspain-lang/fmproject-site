@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto de Instalaciones — Edificio Guargacho 1 · San Miguel de Abona</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            indux: { 50:'#fff7ed', 100:'#ffedd5', 200:'#fed7aa', 300:'#fdba74', 400:'#fb923c', 500:'#f97316', 600:'#ea580c', 700:'#c2410c', 800:'#9a3412', 900:'#7c2d12' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html{scroll-behavior:smooth}
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.25,.46,.45,.94)}.reveal.visible{opacity:1;transform:translateY(0)}
+    .gt{background:linear-gradient(135deg,#ea580c 0%,#f97316 40%,#fb923c 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .glass{background:rgba(255,255,255,.75);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.45)}
+    .card-h{transition:all .3s ease}.card-h:hover{transform:translateY(-4px);box-shadow:0 20px 40px -12px rgba(234,88,12,.18)}
+    tbody tr{transition:background .2s}tbody tr:hover{background:rgba(249,115,22,.04)}
+    .nav-l{position:relative}.nav-l::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:linear-gradient(90deg,#ea580c,#fb923c);transition:width .3s}.nav-l:hover::after{width:100%}
+    .badge-n{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:9999px;font-size:.68rem;font-weight:600;background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}
+    .badge-ok{background:#dcfce7;color:#166534;border-color:#bbf7d0}
+    .badge-warn{background:#fef3c7;color:#92400e;border-color:#fde68a}
+    .badge-red{background:#fef2f2;color:#991b1b;border-color:#fecaca}
+    .btn-3d{display:inline-block;padding:10px 24px;border-radius:10px;font-weight:700;font-size:.85rem;color:#fff;cursor:pointer;border:none;transition:all .15s}
+    .btn-3d-orange{background:linear-gradient(180deg,#f97316 0%,#c2410c 100%);box-shadow:0 4px 0 #7c2d12,0 6px 12px rgba(234,88,12,.3)}.btn-3d-orange:hover{transform:translateY(-1px);box-shadow:0 5px 0 #7c2d12,0 8px 16px rgba(234,88,12,.35)}.btn-3d-orange:active{transform:translateY(2px);box-shadow:0 1px 0 #7c2d12}
+    .hero-pattern{background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+    .stat-c{background:linear-gradient(135deg,#fff 0%,#fffbf7 100%)}
+    @keyframes pulse-g{0%,100%{box-shadow:0 0 0 0 rgba(249,115,22,.3)}50%{box-shadow:0 0 20px 4px rgba(249,115,22,.15)}}.pulse-g{animation:pulse-g 3s infinite}
+    @media print{.no-print{display:none}.reveal{opacity:1;transform:none}}
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/60 shadow-sm no-print">
+    <div class="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-600 to-amber-500 flex items-center justify-center text-white font-bold text-sm" style="box-shadow:0 3px 0 #7c2d12,0 4px 8px rgba(234,88,12,.25)">⚡</div>
+        <span class="text-lg font-bold gt">Indux</span>
+        <span class="hidden sm:inline text-xs text-gray-400 ml-1">Ingeniero Industrial IA</span>
+      </div>
+      <div class="hidden xl:flex gap-3 text-[12px] font-medium text-gray-500">
+        <a href="#resumen" class="nav-l hover:text-orange-600">Resumen</a>
+        <a href="#electrica" class="nav-l hover:text-orange-600">Eléctrica</a>
+        <a href="#fontaneria" class="nav-l hover:text-orange-600">Fontanería</a>
+        <a href="#acs" class="nav-l hover:text-orange-600">ACS</a>
+        <a href="#saneamiento" class="nav-l hover:text-orange-600">Saneamiento</a>
+        <a href="#clima" class="nav-l hover:text-orange-600">Clima</a>
+        <a href="#ventilacion" class="nav-l hover:text-orange-600">Ventilación</a>
+        <a href="#telecom" class="nav-l hover:text-orange-600">Telecom</a>
+        <a href="#incendios" class="nav-l hover:text-orange-600">Incendios</a>
+        <a href="#ascensor" class="nav-l hover:text-orange-600">Ascensor</a>
+        <a href="#garaje" class="nav-l hover:text-orange-600">Garaje</a>
+        <a href="#fotovoltaica" class="nav-l hover:text-orange-600">Solar FV</a>
+        <a href="#presupuesto" class="nav-l hover:text-orange-600">Presupuesto</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-orange-900 via-orange-800 to-amber-700 text-white hero-pattern">
+    <div class="absolute inset-0 bg-gradient-to-t from-orange-950/50 to-transparent"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-24">
+      <div class="max-w-4xl">
+        <p class="text-orange-200 text-xs font-semibold uppercase tracking-[.3em] mb-4">Informe de Prediseño de Instalaciones</p>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">Edificio Guargacho 1<br><span class="text-amber-300">18 Viviendas + Local Comercial</span></h1>
+        <p class="text-lg text-orange-100 max-w-2xl mb-8">Prediseño integral de instalaciones: electricidad, fontanería, ACS con aerotermia, saneamiento, climatización, ventilación, telecomunicaciones, protección contra incendios, ascensor, ventilación de garaje y energía fotovoltaica.</p>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">📍 Guargacho, San Miguel de Abona</span>
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">🏢 PB+2 + Sótano</span>
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">⚡ ~165 kW potencia total</span>
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">☀️ Zona Climática V (Canarias)</span>
+          <span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm font-medium">📅 Marzo 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent"></div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-12 space-y-24">
+
+    <!-- ══════════════════════════════ -->
+    <!-- RESUMEN EJECUTIVO -->
+    <!-- ══════════════════════════════ -->
+    <section id="resumen" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700 uppercase tracking-wider mb-3">Resumen Ejecutivo</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">Visión General de Instalaciones</h2>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-12">
+        <div class="stat-c rounded-2xl p-5 border border-gray-100 shadow-sm card-h text-center">
+          <div class="text-2xl mb-1">⚡</div>
+          <p class="text-xl font-extrabold text-gray-900">~165 kW</p>
+          <p class="text-[10px] text-orange-600 font-medium mt-1">Potencia Total Edificio</p>
+        </div>
+        <div class="stat-c rounded-2xl p-5 border border-gray-100 shadow-sm card-h text-center">
+          <div class="text-2xl mb-1">💧</div>
+          <p class="text-xl font-extrabold text-gray-900">1.512 l/d</p>
+          <p class="text-[10px] text-blue-600 font-medium mt-1">Demanda ACS total</p>
+        </div>
+        <div class="stat-c rounded-2xl p-5 border border-gray-100 shadow-sm card-h text-center">
+          <div class="text-2xl mb-1">☀️</div>
+          <p class="text-xl font-extrabold text-gray-900">≥ 70%</p>
+          <p class="text-[10px] text-amber-600 font-medium mt-1">Contribución Solar ACS</p>
+        </div>
+        <div class="stat-c rounded-2xl p-5 border border-gray-100 shadow-sm card-h text-center">
+          <div class="text-2xl mb-1">🔋</div>
+          <p class="text-xl font-extrabold text-gray-900">20 kWp</p>
+          <p class="text-[10px] text-green-600 font-medium mt-1">Fotovoltaica Comunitaria</p>
+        </div>
+        <div class="stat-c rounded-2xl p-5 border border-gray-100 shadow-sm card-h text-center">
+          <div class="text-2xl mb-1">🛗</div>
+          <p class="text-xl font-extrabold text-gray-900">1 ud</p>
+          <p class="text-[10px] text-purple-600 font-medium mt-1">Ascensor 630 kg</p>
+        </div>
+        <div class="stat-c rounded-2xl p-5 border border-gray-100 shadow-sm card-h text-center">
+          <div class="text-2xl mb-1">🔥</div>
+          <p class="text-xl font-extrabold text-gray-900">CTE SI</p>
+          <p class="text-[10px] text-red-600 font-medium mt-1">PCI Completa</p>
+        </div>
+      </div>
+
+      <!-- Contexto inter-agentes -->
+      <div class="glass rounded-2xl p-8 border border-orange-100">
+        <h3 class="font-bold text-gray-900 mb-4 text-lg">🔗 Datos Inter-Agentes</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div>
+            <h4 class="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-sm"><span class="text-purple-500">●</span> Arqon (Arquitecto)</h4>
+            <p class="text-xs text-gray-600 leading-relaxed">Edificio PB+2+Sótano. 18 viviendas (6×1D, 6×2D, 6×3D). Local comercial 95 m² en PB. Garaje sótano ~350 m² con 18 plazas + 18 trasteros (~90 m²). Sup. construida total 1.789 m². Fachada ventilada, carpintería aluminio RPT. Cubierta plana transitable + no transitable. Calidades media-alta.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-sm"><span class="text-blue-500">●</span> Finex (Financiero)</h4>
+            <p class="text-xs text-gray-600 leading-relaxed">Valor tasación total: 2.847.000 € (Valorex). Margen promotor estimado: 18%. PEM estimado ~1.660.000 €. Capítulo instalaciones representa habitualmente 20-25% del PEM en edificio plurifamiliar con ascensor y garaje. Régimen fiscal Canarias: IGIC 7%.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-sm"><span class="text-green-500">●</span> Nexus (PM)</h4>
+            <p class="text-xs text-gray-600 leading-relaxed">Ubicación: Ctra. General TF-652, Guargacho. Suelo urbano consolidado. Plazo estimado 24-28 meses. Necesario estudio geotécnico profesional. Zona de alta demanda residencial con oferta muy limitada de obra nueva. Conexión a redes de servicios municipales disponible.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- 1. INSTALACIÓN ELÉCTRICA -->
+    <!-- ══════════════════════════════ -->
+    <section id="electrica" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700 uppercase tracking-wider mb-3">Sección 1</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">Instalación Eléctrica</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">REBT (RD 842/2002) · ITC-BT-10, 15, 16, 17, 19, 25, 28, 29</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8 mb-10">
+        <!-- Previsión de cargas -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-2">⚡ Previsión de Cargas del Edificio <span class="badge-n">ITC-BT-10</span></h4>
+          <div class="space-y-3">
+            <div class="bg-orange-50 rounded-xl p-4">
+              <h5 class="font-semibold text-orange-800 mb-2 text-sm">Grado de Electrificación</h5>
+              <p class="text-xs text-gray-600 mb-2">Todas las viviendas adoptan <strong>electrificación elevada</strong> (≥ 9.200 W) por previsión de aire acondicionado (clima subtropical, sur de Tenerife) y aerotermia para ACS.</p>
+              <table class="w-full text-xs mt-2">
+                <thead><tr class="border-b border-orange-200"><th class="text-left py-1.5 font-semibold text-orange-700">Concepto</th><th class="text-center py-1.5 font-semibold text-orange-700">Uds.</th><th class="text-right py-1.5 font-semibold text-orange-700">Potencia ud.</th><th class="text-right py-1.5 font-semibold text-orange-700">Subtotal</th></tr></thead>
+                <tbody class="divide-y divide-orange-100">
+                  <tr><td class="py-1.5">Viv. 1 dormitorio (elev.)</td><td class="py-1.5 text-center">6</td><td class="py-1.5 text-right">9.200 W</td><td class="py-1.5 text-right font-medium">55.200 W</td></tr>
+                  <tr><td class="py-1.5">Viv. 2 dormitorios (elev.)</td><td class="py-1.5 text-center">6</td><td class="py-1.5 text-right">9.200 W</td><td class="py-1.5 text-right font-medium">55.200 W</td></tr>
+                  <tr><td class="py-1.5">Viv. 3 dormitorios (elev.)</td><td class="py-1.5 text-center">6</td><td class="py-1.5 text-right">9.200 W</td><td class="py-1.5 text-right font-medium">55.200 W</td></tr>
+                </tbody>
+              </table>
+              <div class="mt-3 p-3 bg-white/80 rounded-lg text-xs text-gray-700">
+                <strong>Carga viviendas (ITC-BT-10, Tabla 1):</strong><br>
+                Media aritmética = 9.200 W · Coef. simultaneidad (n=18) = <strong>14,0</strong><br>
+                P<sub>viviendas</sub> = 9.200 × 14,0 = <strong>128.800 W</strong>
+              </div>
+            </div>
+            <div class="bg-amber-50 rounded-xl p-4">
+              <h5 class="font-semibold text-amber-800 mb-2 text-sm">Otras Cargas del Edificio</h5>
+              <table class="w-full text-xs">
+                <tbody class="divide-y divide-amber-100">
+                  <tr><td class="py-1.5">Local comercial (95 m² × 100 W/m²)</td><td class="py-1.5 text-right font-medium">9.500 W</td></tr>
+                  <tr><td class="py-1.5">Garaje sótano (350 m² × 20 W/m², vent. forzada)</td><td class="py-1.5 text-right font-medium">7.000 W</td></tr>
+                  <tr><td class="py-1.5">Ascensor eléctrico (ITA-2, 630 kg, 1 m/s)</td><td class="py-1.5 text-right font-medium">7.500 W</td></tr>
+                  <tr><td class="py-1.5">Alumbrado zonas comunes (portal, escalera, rellanos)</td><td class="py-1.5 text-right font-medium">2.500 W</td></tr>
+                  <tr><td class="py-1.5">Grupo de presión hidráulico</td><td class="py-1.5 text-right font-medium">3.000 W</td></tr>
+                  <tr><td class="py-1.5">Ventilación garaje (2 extractores × 2,2 kW)</td><td class="py-1.5 text-right font-medium">4.400 W</td></tr>
+                  <tr><td class="py-1.5">Central detección CO + incendios</td><td class="py-1.5 text-right font-medium">500 W</td></tr>
+                  <tr><td class="py-1.5">Telecomunicaciones (RITI/RITS, amplificadores)</td><td class="py-1.5 text-right font-medium">400 W</td></tr>
+                  <tr><td class="py-1.5">Aerotermia centralizada ACS</td><td class="py-1.5 text-right font-medium">6.000 W</td></tr>
+                  <tr class="font-bold bg-amber-100"><td class="py-1.5">Subtotal servicios generales + otros</td><td class="py-1.5 text-right">40.800 W</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total y suministro -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-2">🏢 Potencia Total y Suministro</h4>
+          <div class="space-y-3">
+            <div class="bg-gradient-to-br from-orange-100 to-amber-50 rounded-xl p-5 text-center pulse-g">
+              <p class="text-xs text-orange-600 font-semibold mb-1 uppercase tracking-wider">Potencia Total Edificio</p>
+              <p class="text-4xl font-black text-orange-800">169,6 kW</p>
+              <p class="text-xs text-gray-500 mt-2">128.800 (viv.) + 9.500 (local) + 7.000 (garaje) + 24.300 (SSGG) = 169.600 W</p>
+            </div>
+            <div class="bg-red-50 rounded-xl p-4">
+              <h5 class="font-semibold text-red-800 mb-2 text-sm">Centro de Transformación</h5>
+              <p class="text-xs text-gray-600 mb-2">Con 169,6 kW de previsión, es probable que el edificio requiera <strong>un centro de transformación propio</strong> (umbral habitual 100 kW en compañía), o bien una línea subterránea desde CT existente en la zona.</p>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Opción A:</strong> CT prefabricado de 250 kVA (local o caseta exterior)</li>
+                <li>• <strong>Opción B:</strong> Acometida desde CT existente de Endesa (si hay capacidad)</li>
+                <li>• <strong>Consulta obligatoria</strong> a Endesa Distribución para estudio de punto de conexión</li>
+              </ul>
+            </div>
+            <div class="bg-blue-50 rounded-xl p-4">
+              <h5 class="font-semibold text-blue-800 mb-2 text-sm">Centralización de Contadores <span class="badge-n">ITC-BT-16</span></h5>
+              <ul class="text-xs text-gray-600 space-y-1.5">
+                <li>• <strong>Ubicación:</strong> Recinto de contadores en PB, accesible desde zona común</li>
+                <li>• <strong>Contadores:</strong> 18 viviendas + 1 local + 1 SSGG + 1 garaje = <strong>21 módulos</strong></li>
+                <li>• <strong>Armario:</strong> Módulos TMF-10 normalizados por Endesa Canarias</li>
+                <li>• <strong>Dimensión recinto:</strong> Min. 2,0 × 1,5 m (pared × fondo), h > 2,30 m</li>
+                <li>• <strong>Ventilación:</strong> Superior e inferior, S ≥ 0,20 m² cada una</li>
+                <li>• <strong>Puerta:</strong> Metálica RF-30, apertura exterior, cerradura normalizada</li>
+                <li>• <strong>Iluminación:</strong> Mínimo 300 lux, interruptor exterior + emergencia</li>
+                <li>• <strong>Revestimiento:</strong> Suelo y paredes clase M0, zócalo impermeabilizado</li>
+              </ul>
+            </div>
+            <div class="bg-green-50 rounded-xl p-4">
+              <h5 class="font-semibold text-green-800 mb-2 text-sm">Derivaciones Individuales <span class="badge-n">ITC-BT-15</span></h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Tipo:</strong> Conductores Cu, XLPE, bajo tubo empotrado o en bandeja por patinillo</li>
+                <li>• <strong>Sección viviendas (9.200W / 230V):</strong> 2 × 10 mm² + TT 10 mm² (40A), tubo Ø32</li>
+                <li>• <strong>Sección local (9.500W):</strong> 2 × 10 mm² + TT 10 mm² (40A), tubo Ø32</li>
+                <li>• <strong>Sección SSGG:</strong> 4 × 16 mm² + TT 16 mm² (trifásica), tubo Ø40</li>
+                <li>• <strong>Caída de tensión máxima:</strong> 1% (ITC-BT-15)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Circuitos por vivienda -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
+        <h4 class="font-bold text-gray-900 mb-4">📐 Circuitos por Vivienda — Electrificación Elevada <span class="badge-n">ITC-BT-25</span></h4>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-gray-200 bg-orange-50/50">
+              <th class="text-left py-3 px-4 font-semibold text-gray-600 text-xs uppercase">Circuito</th>
+              <th class="text-left py-3 px-4 font-semibold text-gray-600 text-xs uppercase">Descripción</th>
+              <th class="text-center py-3 px-4 font-semibold text-gray-600 text-xs uppercase">PIA (A)</th>
+              <th class="text-center py-3 px-4 font-semibold text-gray-600 text-xs uppercase">Sección (mm²)</th>
+              <th class="text-center py-3 px-4 font-semibold text-gray-600 text-xs uppercase">Tubo Ø</th>
+              <th class="text-right py-3 px-4 font-semibold text-gray-600 text-xs uppercase">Potencia</th>
+              <th class="text-center py-3 px-4 font-semibold text-gray-600 text-xs uppercase">1D</th>
+              <th class="text-center py-3 px-4 font-semibold text-gray-600 text-xs uppercase">2D</th>
+              <th class="text-center py-3 px-4 font-semibold text-gray-600 text-xs uppercase">3D</th>
+            </tr></thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr><td class="py-2 px-4 font-medium">C1</td><td class="py-2 px-4">Iluminación</td><td class="py-2 px-4 text-center">10</td><td class="py-2 px-4 text-center">1,5</td><td class="py-2 px-4 text-center">16</td><td class="py-2 px-4 text-right">2.300 W</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td></tr>
+              <tr><td class="py-2 px-4 font-medium">C2</td><td class="py-2 px-4">Tomas uso general</td><td class="py-2 px-4 text-center">16</td><td class="py-2 px-4 text-center">2,5</td><td class="py-2 px-4 text-center">20</td><td class="py-2 px-4 text-right">3.450 W</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td></tr>
+              <tr><td class="py-2 px-4 font-medium">C3</td><td class="py-2 px-4">Cocina y horno</td><td class="py-2 px-4 text-center">25</td><td class="py-2 px-4 text-center">6</td><td class="py-2 px-4 text-center">25</td><td class="py-2 px-4 text-right">5.400 W</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td></tr>
+              <tr><td class="py-2 px-4 font-medium">C4.1</td><td class="py-2 px-4">Lavadora</td><td class="py-2 px-4 text-center">20</td><td class="py-2 px-4 text-center">4</td><td class="py-2 px-4 text-center">20</td><td class="py-2 px-4 text-right">3.450 W</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td></tr>
+              <tr><td class="py-2 px-4 font-medium">C4.2</td><td class="py-2 px-4">Lavavajillas</td><td class="py-2 px-4 text-center">20</td><td class="py-2 px-4 text-center">4</td><td class="py-2 px-4 text-center">20</td><td class="py-2 px-4 text-right">3.450 W</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td></tr>
+              <tr><td class="py-2 px-4 font-medium">C5</td><td class="py-2 px-4">Baños y auxiliar cocina</td><td class="py-2 px-4 text-center">16</td><td class="py-2 px-4 text-center">2,5</td><td class="py-2 px-4 text-center">20</td><td class="py-2 px-4 text-right">3.450 W</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td></tr>
+              <tr><td class="py-2 px-4 font-medium">C7</td><td class="py-2 px-4">Tomas adicionales (S>160 m²)</td><td class="py-2 px-4 text-center">16</td><td class="py-2 px-4 text-center">2,5</td><td class="py-2 px-4 text-center">20</td><td class="py-2 px-4 text-right">3.450 W</td><td class="py-2 px-4 text-center">—</td><td class="py-2 px-4 text-center">—</td><td class="py-2 px-4 text-center">✓</td></tr>
+              <tr><td class="py-2 px-4 font-medium">C9</td><td class="py-2 px-4">Aire acondicionado</td><td class="py-2 px-4 text-center">25</td><td class="py-2 px-4 text-center">6</td><td class="py-2 px-4 text-center">25</td><td class="py-2 px-4 text-right">5.750 W</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td></tr>
+              <tr><td class="py-2 px-4 font-medium">C10</td><td class="py-2 px-4">Secadora</td><td class="py-2 px-4 text-center">16</td><td class="py-2 px-4 text-center">2,5</td><td class="py-2 px-4 text-center">20</td><td class="py-2 px-4 text-right">3.450 W</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td></tr>
+              <tr><td class="py-2 px-4 font-medium">C12</td><td class="py-2 px-4">Domótica / automatización</td><td class="py-2 px-4 text-center">10</td><td class="py-2 px-4 text-center">1,5</td><td class="py-2 px-4 text-center">16</td><td class="py-2 px-4 text-right">500 W</td><td class="py-2 px-4 text-center">—</td><td class="py-2 px-4 text-center">✓</td><td class="py-2 px-4 text-center">✓</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-4 grid md:grid-cols-2 gap-4">
+          <div class="bg-gray-50 rounded-xl p-4 text-xs text-gray-600">
+            <strong>CGMP (Cuadro General) por vivienda:</strong> IGA 40A bipolar + Dif. general 40A/30mA clase AC + Diferenciales adicionales 40A/30mA clase A (circuitos húmedos) + PIAs según circuitos. Protector de sobretensiones Tipo 2 (ITC-BT-23).
+          </div>
+          <div class="bg-gray-50 rounded-xl p-4 text-xs text-gray-600">
+            <strong>Puesta a tierra (ITC-BT-18):</strong> Anillo perimetral de cimentación Cu desnudo 35 mm², conectado a estructura metálica. Picas Cu 2m en esquinas. R<sub>tierra</sub> ≤ 37Ω. Arqueta de puesta a tierra registrable. Conductor principal Cu 16 mm² hasta cuadro CGMP.
+          </div>
+        </div>
+      </div>
+
+      <!-- Presupuesto eléctrica -->
+      <div class="bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl p-6 border border-orange-100">
+        <h4 class="font-bold text-gray-900 mb-3">💰 Presupuesto — Instalación Eléctrica</h4>
+        <div class="grid md:grid-cols-2 gap-4">
+          <table class="w-full text-sm">
+            <tbody class="divide-y divide-orange-100">
+              <tr><td class="py-2 text-gray-600">CT o acometida BT (según estudio)</td><td class="py-2 text-right font-medium">18.000 €</td></tr>
+              <tr><td class="py-2 text-gray-600">Línea General Alimentación + centralización contadores</td><td class="py-2 text-right font-medium">12.000 €</td></tr>
+              <tr><td class="py-2 text-gray-600">18 Derivaciones individuales + CPMs</td><td class="py-2 text-right font-medium">9.000 €</td></tr>
+              <tr><td class="py-2 text-gray-600">18 CGMP + cableado interior viviendas</td><td class="py-2 text-right font-medium">72.000 €</td></tr>
+              <tr><td class="py-2 text-gray-600">Mecanismos + luminarias (18 viv.)</td><td class="py-2 text-right font-medium">36.000 €</td></tr>
+              <tr><td class="py-2 text-gray-600">Inst. eléctrica local comercial</td><td class="py-2 text-right font-medium">4.500 €</td></tr>
+              <tr><td class="py-2 text-gray-600">Inst. eléctrica garaje + SSGG</td><td class="py-2 text-right font-medium">14.000 €</td></tr>
+              <tr><td class="py-2 text-gray-600">Puesta a tierra general</td><td class="py-2 text-right font-medium">3.500 €</td></tr>
+            </tbody>
+          </table>
+          <div class="flex flex-col justify-center items-center">
+            <div class="bg-white rounded-xl p-6 text-center shadow-sm border border-orange-200 pulse-g">
+              <p class="text-xs text-orange-500 font-semibold mb-1">TOTAL ELECTRICIDAD</p>
+              <p class="text-3xl font-extrabold text-orange-700">169.000 €</p>
+              <p class="text-xs text-gray-400 mt-1">~94,5 €/m² construido</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- 2. FONTANERÍA -->
+    <!-- ══════════════════════════════ -->
+    <section id="fontaneria" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 2</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">Fontanería — Suministro de Agua</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">CTE DB-HS4 · Suministro de agua</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">💧 Acometida y Red General</h4>
+          <div class="space-y-3">
+            <div class="bg-blue-50 rounded-xl p-4">
+              <h5 class="font-semibold text-blue-800 mb-2 text-sm">Acometida</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Empresa suministradora:</strong> CIATF / entidad gestora San Miguel de Abona</li>
+                <li>• <strong>Material:</strong> PE-100, PN16, Ø 63 mm (acometida general edificio)</li>
+                <li>• <strong>Llave de corte general:</strong> Arqueta en fachada</li>
+                <li>• <strong>Filtro general:</strong> 25-50 μm tras llave de corte</li>
+                <li>• <strong>Tubo de alimentación:</strong> Ø 50 mm hasta batería de contadores</li>
+              </ul>
+            </div>
+            <div class="bg-cyan-50 rounded-xl p-4">
+              <h5 class="font-semibold text-cyan-800 mb-2 text-sm">Contadores Divisionarios</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Ubicación:</strong> Batería de contadores centralizada en PB (armario accesible)</li>
+                <li>• <strong>N.º contadores:</strong> 18 viviendas + 1 local + 1 SSGG = <strong>20 contadores</strong></li>
+                <li>• <strong>Tipo:</strong> Contadores de chorro único o volumétricos DN 15-20</li>
+                <li>• <strong>Llave de abonado:</strong> Antes y después de cada contador</li>
+                <li>• <strong>Válvula antiretorno:</strong> Después de cada contador</li>
+              </ul>
+            </div>
+            <div class="bg-indigo-50 rounded-xl p-4">
+              <h5 class="font-semibold text-indigo-800 mb-2 text-sm">Grupo de Presión</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Necesidad:</strong> Probable (P2 a ~7-8 m sobre PB → presión mínima en grifo 150 kPa para calentadores)</li>
+                <li>• <strong>Tipo:</strong> Grupo compacto 2 bombas + calderín 200L + presostato</li>
+                <li>• <strong>Caudal:</strong> ~3,5 l/s (caudal punta simultáneo estimado)</li>
+                <li>• <strong>Potencia:</strong> 2 × 1,5 kW (alternancia + reserva)</li>
+                <li>• <strong>Depósito acumulador (si presión red baja):</strong> 2.000 litros</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">🚿 Red Interior</h4>
+          <div class="space-y-3">
+            <div class="bg-gray-50 rounded-xl p-4">
+              <h5 class="font-semibold text-gray-800 mb-2 text-sm">Montantes y Distribución</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Material montantes:</strong> PE-Xc multicapa (barrera oxígeno para ACS)</li>
+                <li>• <strong>Montantes AFS:</strong> Ø 25-32 mm (2 montantes por patinillo, E/I)</li>
+                <li>• <strong>Montantes ACS:</strong> Ø 20-25 mm (aislamiento coquilla 20 mm RITE)</li>
+                <li>• <strong>Distribución interior:</strong> PE-Xc Ø 16-20 mm según aparato</li>
+                <li>• <strong>Aislamiento AFS:</strong> Coquilla 10 mm (anti-condensación)</li>
+                <li>• <strong>Llaves de corte:</strong> En cada vivienda + por aparato (cuarto húmedo)</li>
+              </ul>
+            </div>
+            <table class="w-full text-xs mt-2">
+              <thead><tr class="border-b border-gray-200"><th class="text-left py-2 font-semibold text-gray-600">Aparato tipo</th><th class="text-right py-2 font-semibold text-gray-600">Caudal AFS</th><th class="text-right py-2 font-semibold text-gray-600">Caudal ACS</th><th class="text-center py-2 font-semibold text-gray-600">Ø tub.</th></tr></thead>
+              <tbody class="divide-y divide-gray-50">
+                <tr><td class="py-1.5">Lavabo</td><td class="py-1.5 text-right">0,10 l/s</td><td class="py-1.5 text-right">0,065 l/s</td><td class="py-1.5 text-center">Ø 16</td></tr>
+                <tr><td class="py-1.5">Ducha / bañera</td><td class="py-1.5 text-right">0,20 l/s</td><td class="py-1.5 text-right">0,10 l/s</td><td class="py-1.5 text-center">Ø 20</td></tr>
+                <tr><td class="py-1.5">Inodoro cisterna</td><td class="py-1.5 text-right">0,10 l/s</td><td class="py-1.5 text-right">—</td><td class="py-1.5 text-center">Ø 16</td></tr>
+                <tr><td class="py-1.5">Fregadero cocina</td><td class="py-1.5 text-right">0,20 l/s</td><td class="py-1.5 text-right">0,10 l/s</td><td class="py-1.5 text-center">Ø 20</td></tr>
+                <tr><td class="py-1.5">Lavavajillas</td><td class="py-1.5 text-right">0,15 l/s</td><td class="py-1.5 text-right">0,10 l/s</td><td class="py-1.5 text-center">Ø 20</td></tr>
+                <tr><td class="py-1.5">Lavadora</td><td class="py-1.5 text-right">0,20 l/s</td><td class="py-1.5 text-right">0,15 l/s</td><td class="py-1.5 text-center">Ø 20</td></tr>
+              </tbody>
+            </table>
+            <div class="bg-blue-50 rounded-xl p-4 mt-3">
+              <h5 class="font-semibold text-blue-800 mb-2 text-sm">💰 Presupuesto Fontanería</h5>
+              <div class="space-y-1 text-xs text-gray-600">
+                <div class="flex justify-between"><span>Acometida + arquetas</span><span class="font-medium">3.500 €</span></div>
+                <div class="flex justify-between"><span>Batería contadores (20 ud.)</span><span class="font-medium">4.000 €</span></div>
+                <div class="flex justify-between"><span>Grupo de presión</span><span class="font-medium">5.500 €</span></div>
+                <div class="flex justify-between"><span>Montantes + distribución (18 viv.)</span><span class="font-medium">32.000 €</span></div>
+                <div class="flex justify-between"><span>Grifería + accesorios</span><span class="font-medium">27.000 €</span></div>
+                <div class="flex justify-between"><span>Local comercial + SSGG</span><span class="font-medium">3.000 €</span></div>
+                <hr class="border-blue-200 my-1">
+                <div class="flex justify-between font-bold text-blue-700"><span>Total fontanería</span><span>75.000 €</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- 3. ACS — AEROTERMIA -->
+    <!-- ══════════════════════════════ -->
+    <section id="acs" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-700 uppercase tracking-wider mb-3">Sección 3</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">ACS — Agua Caliente Sanitaria</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">CTE DB-HE4 · Contribución mínima de energía renovable para ACS</p>
+      </div>
+
+      <!-- Contribución solar obligatoria -->
+      <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 mb-10 border border-amber-200">
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-3xl flex-shrink-0">☀️</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Contribución Solar Mínima Obligatoria — Canarias, Zona V</h3>
+            <p class="text-sm text-gray-700 mb-4">Según el <strong>CTE DB-HE4</strong> (actualización junio 2022), los edificios de nueva construcción deben cubrir al menos el <strong>70%</strong> de la demanda energética anual de ACS con energía renovable. Canarias se clasifica en <strong>Zona Climática V</strong> (H > 5,0 kWh/m²·día), la de mayor exigencia solar de España. La <strong>aerotermia</strong> (bomba de calor) está aceptada como fuente renovable si COP > 2,5 (Directiva 2009/28/CE).</p>
+            <div class="grid md:grid-cols-3 gap-4">
+              <div class="bg-white/80 rounded-xl p-4 text-center">
+                <p class="text-xs text-amber-600 font-semibold mb-1">CONTRIBUCIÓN MÍNIMA</p>
+                <p class="text-4xl font-extrabold text-amber-700">70%</p>
+                <p class="text-xs text-gray-500 mt-1">Energía renovable para ACS</p>
+              </div>
+              <div class="bg-white/80 rounded-xl p-4 text-center">
+                <p class="text-xs text-amber-600 font-semibold mb-1">ZONA CLIMÁTICA</p>
+                <p class="text-4xl font-extrabold text-amber-700">V</p>
+                <p class="text-xs text-gray-500 mt-1">Canarias · H > 5,0 kWh/m²·día</p>
+              </div>
+              <div class="bg-white/80 rounded-xl p-4 text-center">
+                <p class="text-xs text-amber-600 font-semibold mb-1">SISTEMA PROPUESTO</p>
+                <p class="text-lg font-extrabold text-amber-700">Aerotermia</p>
+                <p class="text-xs text-gray-500 mt-1">Centralizada con acumuladores</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">📐 Cálculo de Demanda ACS</h4>
+          <table class="w-full text-sm">
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="py-2 text-gray-500">Viv. 1D: 1,5 personas × 6 ud</td><td class="py-2 text-right font-medium">9 personas</td></tr>
+              <tr><td class="py-2 text-gray-500">Viv. 2D: 3 personas × 6 ud</td><td class="py-2 text-right font-medium">18 personas</td></tr>
+              <tr><td class="py-2 text-gray-500">Viv. 3D: 4 personas × 6 ud</td><td class="py-2 text-right font-medium">24 personas</td></tr>
+              <tr class="font-bold"><td class="py-2 text-gray-700">Total ocupantes</td><td class="py-2 text-right text-orange-700">51 personas</td></tr>
+              <tr><td class="py-2 text-gray-500">Consumo unitario a 60°C (CTE Anejo F)</td><td class="py-2 text-right font-medium">28 l/persona·día</td></tr>
+              <tr><td class="py-2 text-gray-500">Local comercial (95 m²)</td><td class="py-2 text-right font-medium">80 l/día</td></tr>
+              <tr class="font-bold bg-orange-50"><td class="py-2 text-gray-700">Demanda diaria total</td><td class="py-2 text-right text-orange-700">1.508 + 80 ≈ 1.590 l/día</td></tr>
+              <tr><td class="py-2 text-gray-500">Temp. agua red media (Canarias)</td><td class="py-2 text-right font-medium">17°C</td></tr>
+              <tr><td class="py-2 text-gray-500">Salto térmico ΔT</td><td class="py-2 text-right font-medium">43°C (60-17)</td></tr>
+              <tr class="font-bold"><td class="py-2 text-gray-700">Demanda energética anual</td><td class="py-2 text-right text-orange-700">~28.900 kWh/año</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">🔧 Sistema de Aerotermia Centralizada</h4>
+          <div class="space-y-3">
+            <div class="bg-green-50 rounded-xl p-4">
+              <h5 class="font-semibold text-green-800 mb-2 text-sm">Configuración Propuesta</h5>
+              <ul class="text-xs text-gray-600 space-y-1.5">
+                <li>• <strong>Sistema:</strong> Bomba de calor aire-agua centralizada para producción de ACS</li>
+                <li>• <strong>Potencia térmica:</strong> 2 × 12 kW (24 kW total, redundancia N+1)</li>
+                <li>• <strong>SCOPdhw:</strong> ≥ 3,2 (esperado 3,5-4,0 en clima Canarias)</li>
+                <li>• <strong>Refrigerante:</strong> R-290 (propano) o R-32 (bajo GWP)</li>
+                <li>• <strong>Acumulación centralizada:</strong> 2 × 1.500 L = 3.000 L (depósitos inercia + ACS)</li>
+                <li>• <strong>Distribución:</strong> Red de ACS con retorno (para > 15 m de tubería)</li>
+                <li>• <strong>Contadores individuales:</strong> 18 + 1 contadores de energía térmica</li>
+                <li>• <strong>Consumo eléctrico anual:</strong> 28.900 / 3,5 ≈ <strong>8.257 kWh/año</strong></li>
+                <li>• <strong>Ubicación equipos:</strong> Cubierta (unidades exteriores) + cuarto técnico PB (acumuladores + bombas)</li>
+              </ul>
+            </div>
+            <div class="bg-amber-50 rounded-xl p-4">
+              <h5 class="font-semibold text-amber-800 mb-2 text-sm">Justificación HE4</h5>
+              <p class="text-xs text-gray-600">La aerotermia con COP >2,5 cumple como <strong>energía renovable</strong> (Directiva 2009/28/CE). Con SCOP 3,5, la energía renovable aportada es: 1 - (1/3,5) = <strong>71,4% > 70%</strong>. Se cumple HE4 sin necesidad de paneles solares térmicos complementarios.</p>
+            </div>
+            <div class="bg-orange-50 rounded-xl p-4">
+              <h5 class="font-semibold text-orange-800 mb-2 text-sm">💰 Presupuesto ACS</h5>
+              <div class="space-y-1 text-xs text-gray-600">
+                <div class="flex justify-between"><span>2 × Bomba calor 12 kW (equipos)</span><span class="font-medium">18.000 €</span></div>
+                <div class="flex justify-between"><span>Acumuladores 2 × 1.500 L</span><span class="font-medium">7.000 €</span></div>
+                <div class="flex justify-between"><span>Red distribución ACS + retorno</span><span class="font-medium">12.000 €</span></div>
+                <div class="flex justify-between"><span>Contadores energía (19 ud.)</span><span class="font-medium">5.700 €</span></div>
+                <div class="flex justify-between"><span>Circuladores, válvulas, control</span><span class="font-medium">4.300 €</span></div>
+                <div class="flex justify-between"><span>Instalación + puesta marcha</span><span class="font-medium">8.000 €</span></div>
+                <hr class="border-orange-200 my-1">
+                <div class="flex justify-between font-bold text-orange-700"><span>Total ACS</span><span>55.000 €</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- 4. SANEAMIENTO -->
+    <!-- ══════════════════════════════ -->
+    <section id="saneamiento" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700 uppercase tracking-wider mb-3">Sección 4</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">Saneamiento y Evacuación</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">CTE DB-HS5 · Evacuación de aguas</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">🔄 Sistema Separativo</h4>
+          <p class="text-sm text-gray-600 mb-4">Red separativa interior (fecales + pluviales) con posible unión en colector final de salida si la red municipal es unitaria.</p>
+          <div class="space-y-3">
+            <div class="bg-red-50 rounded-xl p-4">
+              <h5 class="font-semibold text-red-800 mb-2 text-sm">Aguas Residuales</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Bajantes fecales:</strong> 3-4 bajantes PVC Ø 110 mm (por patinillos)</li>
+                <li>• <strong>UD totales edificio:</strong> ~140 UD (18 viviendas × ~8 UD/viv aprox.)</li>
+                <li>• <strong>Colectores colgados sótano:</strong> PVC Ø 125-160 mm, pendiente ≥ 1%</li>
+                <li>• <strong>Colector enterrado:</strong> PVC SN-4, Ø 200 mm, pendiente ≥ 2%</li>
+                <li>• <strong>Arquetas:</strong> Registrables 50×50 cm, cada 15 m y en cambios de dirección</li>
+                <li>• <strong>Arqueta sifónica:</strong> Antes de acometida a red pública</li>
+              </ul>
+            </div>
+            <div class="bg-blue-50 rounded-xl p-4">
+              <h5 class="font-semibold text-blue-800 mb-2 text-sm">Aguas Pluviales</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Superficie cubierta:</strong> ~450 m² (cubierta plana)</li>
+                <li>• <strong>Zona pluviométrica Canarias:</strong> Zona A, isoyeta 30</li>
+                <li>• <strong>Intensidad:</strong> i = 90 mm/h → f = 0,90</li>
+                <li>• <strong>Sup. equivalente:</strong> 450 × 0,90 = 405 m²</li>
+                <li>• <strong>Bajantes pluviales:</strong> 4 × Ø 90 mm (~100 m² cada una)</li>
+                <li>• <strong>Sumideros cubierta:</strong> 1 cada 150 m² → mín. 3 sumideros</li>
+                <li>• <strong>Rebosaderos:</strong> 1 por zona de cubierta (seguridad)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">🏗️ Red Interior + Sótano</h4>
+          <div class="space-y-3">
+            <div class="bg-gray-50 rounded-xl p-4">
+              <h5 class="font-semibold text-gray-800 mb-2 text-sm">Saneamiento del Sótano</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Problema:</strong> El sótano está por debajo de la cota de la red pública</li>
+                <li>• <strong>Solución:</strong> Pozo de bombeo con 2 bombas sumergibles (alternancia)</li>
+                <li>• <strong>Caudal bombeo:</strong> 1,5 l/s</li>
+                <li>• <strong>Potencia:</strong> 2 × 1,1 kW</li>
+                <li>• <strong>Pozo:</strong> PE prefabricado Ø 800 mm, prof. 1,5 m</li>
+                <li>• <strong>Válvulas antirretorno:</strong> En impulsión de cada bomba</li>
+                <li>• <strong>Alarma de nivel alto:</strong> Conectada a cuadro SSGG</li>
+              </ul>
+            </div>
+            <div class="bg-green-50 rounded-xl p-4">
+              <h5 class="font-semibold text-green-800 mb-2 text-sm">Ventilación Red Saneamiento</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Ventilación primaria:</strong> Prolongación bajantes hasta 1,30 m sobre cubierta</li>
+                <li>• <strong>Ventilación secundaria:</strong> Necesaria si bajante > 7 plantas (no aplica, PB+2)</li>
+                <li>• <strong>Válvulas aireación:</strong> Opcionales en ramales largos del sótano</li>
+              </ul>
+            </div>
+            <div class="bg-orange-50 rounded-xl p-4">
+              <h5 class="font-semibold text-orange-800 mb-2 text-sm">💰 Presupuesto Saneamiento</h5>
+              <div class="space-y-1 text-xs text-gray-600">
+                <div class="flex justify-between"><span>Red interior (18 viv. + local)</span><span class="font-medium">28.000 €</span></div>
+                <div class="flex justify-between"><span>Bajantes fecales + pluviales</span><span class="font-medium">8.000 €</span></div>
+                <div class="flex justify-between"><span>Colectores colgados y enterrados</span><span class="font-medium">12.000 €</span></div>
+                <div class="flex justify-between"><span>Arquetas + acometida red pública</span><span class="font-medium">6.000 €</span></div>
+                <div class="flex justify-between"><span>Pozo bombeo sótano (2 bombas)</span><span class="font-medium">5.500 €</span></div>
+                <div class="flex justify-between"><span>Sumideros cubierta + canalones</span><span class="font-medium">3.500 €</span></div>
+                <hr class="border-orange-200 my-1">
+                <div class="flex justify-between font-bold text-orange-700"><span>Total saneamiento</span><span>63.000 €</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- 5. CLIMATIZACIÓN -->
+    <!-- ══════════════════════════════ -->
+    <section id="clima" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-cyan-100 text-cyan-700 uppercase tracking-wider mb-3">Sección 5</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">Climatización</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">RITE (RD 1027/2007) · Reglamento de Instalaciones Térmicas</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">🌡️ Condiciones de Diseño</h4>
+          <div class="space-y-3">
+            <div class="bg-cyan-50 rounded-xl p-4">
+              <h5 class="font-semibold text-cyan-800 mb-2 text-sm">Guargacho, Sur de Tenerife</h5>
+              <div class="grid grid-cols-2 gap-3 text-xs text-gray-600">
+                <div><strong>T. ext. verano:</strong> 33°C (P99%)</div>
+                <div><strong>T. ext. invierno:</strong> 14°C (P1%)</div>
+                <div><strong>Humedad relativa:</strong> 55-70%</div>
+                <div><strong>Altitud:</strong> ~60 m s.n.m.</div>
+                <div><strong>Zona climática CTE:</strong> α3</div>
+                <div><strong>Horas sol/año:</strong> >2.800 h</div>
+              </div>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4">
+              <h5 class="font-semibold text-gray-800 mb-2 text-sm">Interior (RITE IT 1.1.4.1.2)</h5>
+              <div class="grid grid-cols-2 gap-3 text-xs text-gray-600">
+                <div><strong>Verano:</strong> 25°C ± 1°C, HR 45-60%</div>
+                <div><strong>Invierno:</strong> 21°C ± 1°C, HR 40-50%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">❄️ Sistema: Splits Individuales por Vivienda</h4>
+          <div class="space-y-3">
+            <div class="bg-blue-50 rounded-xl p-4">
+              <h5 class="font-semibold text-blue-800 mb-2 text-sm">Propuesta</h5>
+              <p class="text-xs text-gray-600 mb-2">Preinstalación de conductos de refrigerante y desagüe para equipos split/multi-split individuales por vivienda. Cada propietario elige/instala su equipo.</p>
+              <table class="w-full text-xs mt-2">
+                <thead><tr class="border-b border-blue-200"><th class="text-left py-1.5 font-semibold text-blue-700">Tipología</th><th class="text-center py-1.5 font-semibold text-blue-700">Sup. clim.</th><th class="text-center py-1.5 font-semibold text-blue-700">Carga frío</th><th class="text-center py-1.5 font-semibold text-blue-700">Equipo</th></tr></thead>
+                <tbody class="divide-y divide-blue-100">
+                  <tr><td class="py-1.5">1 Dormitorio</td><td class="py-1.5 text-center">~35 m²</td><td class="py-1.5 text-center">3.150 W</td><td class="py-1.5 text-center">1 split 3,5 kW</td></tr>
+                  <tr><td class="py-1.5">2 Dormitorios</td><td class="py-1.5 text-center">~50 m²</td><td class="py-1.5 text-center">4.500 W</td><td class="py-1.5 text-center">Multi-split 2×2,5kW</td></tr>
+                  <tr><td class="py-1.5">3 Dormitorios</td><td class="py-1.5 text-center">~75 m²</td><td class="py-1.5 text-center">6.750 W</td><td class="py-1.5 text-center">Multi-split 3×2,5kW</td></tr>
+                </tbody>
+              </table>
+              <p class="text-xs text-gray-400 mt-2">Ratio: ~90 W/m² refrigeración (orientación sur, alta radiación). Local comercial: split independiente ~10 kW.</p>
+            </div>
+            <div class="bg-orange-50 rounded-xl p-4">
+              <h5 class="font-semibold text-orange-800 mb-2 text-sm">💰 Presupuesto Climatización</h5>
+              <div class="space-y-1 text-xs text-gray-600">
+                <div class="flex justify-between"><span>Preinstalación 18 viv. (tubería Cu, canalización, desagüe)</span><span class="font-medium">27.000 €</span></div>
+                <div class="flex justify-between"><span>Equipos splits/multi-split (18 viv. equipados)</span><span class="font-medium">63.000 €</span></div>
+                <div class="flex justify-between"><span>Local comercial (split 10 kW)</span><span class="font-medium">3.500 €</span></div>
+                <div class="flex justify-between"><span>Soporte unidades exteriores (fachada/cubierta)</span><span class="font-medium">4.500 €</span></div>
+                <hr class="border-orange-200 my-1">
+                <div class="flex justify-between font-bold text-orange-700"><span>Total climatización</span><span>98.000 €</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- 6. VENTILACIÓN -->
+    <!-- ══════════════════════════════ -->
+    <section id="ventilacion" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-teal-100 text-teal-700 uppercase tracking-wider mb-3">Sección 6</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">Ventilación</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">CTE DB-HS3 · Calidad del aire interior</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <h5 class="font-bold text-gray-800 mb-3 text-sm">🌬️ Caudales por Estancia (HS3)</h5>
+          <table class="w-full text-xs">
+            <thead><tr class="border-b border-gray-200"><th class="text-left py-1.5">Local</th><th class="text-right py-1.5">Caudal</th><th class="text-center py-1.5">Tipo</th></tr></thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr><td class="py-1.5">Dormitorio principal</td><td class="py-1.5 text-right">8 l/s</td><td class="py-1.5 text-center text-green-600">Admisión</td></tr>
+              <tr><td class="py-1.5">Dormitorios</td><td class="py-1.5 text-right">4 l/s c/u</td><td class="py-1.5 text-center text-green-600">Admisión</td></tr>
+              <tr><td class="py-1.5">Salón-comedor</td><td class="py-1.5 text-right">10 l/s</td><td class="py-1.5 text-center text-green-600">Admisión</td></tr>
+              <tr><td class="py-1.5">Cocina (mech. + campana)</td><td class="py-1.5 text-right">50 l/s</td><td class="py-1.5 text-center text-red-600">Extracción</td></tr>
+              <tr><td class="py-1.5">Baños</td><td class="py-1.5 text-right">15 l/s c/u</td><td class="py-1.5 text-center text-red-600">Extracción</td></tr>
+              <tr><td class="py-1.5">Trastero</td><td class="py-1.5 text-right">0,7 l/s·m²</td><td class="py-1.5 text-center text-red-600">Extracción</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <h5 class="font-bold text-gray-800 mb-3 text-sm">📋 Sistema de Ventilación</h5>
+          <ul class="text-xs text-gray-600 space-y-1.5">
+            <li>• <strong>Admisión:</strong> Aireadores higrorregulables en carpintería RPT de ventanas</li>
+            <li>• <strong>Paso entre estancias:</strong> Aberturas de paso en puertas interiores (h=10mm)</li>
+            <li>• <strong>Extracción:</strong> Conductos individuales hasta cubierta (shunt colectivo con extractor centralizado)</li>
+            <li>• <strong>Cocina:</strong> Campana extractora con conducto independiente Ø 150 mm al exterior</li>
+            <li>• <strong>Conductos:</strong> PVC rígido circular/rectangular, clase M1</li>
+            <li>• <strong>Ventilador extracción:</strong> Centrífugo en cubierta, caudal según cálculo por columna</li>
+            <li>• <strong>Rejillas:</strong> Aluminio anodizado con regulación de caudal</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <h5 class="font-bold text-gray-800 mb-3 text-sm">💰 Presupuesto Ventilación</h5>
+          <div class="space-y-1.5 text-xs text-gray-600">
+            <div class="flex justify-between"><span>Aireadores ventanas (18 viv.)</span><span class="font-medium">5.400 €</span></div>
+            <div class="flex justify-between"><span>Conductos extracción (shunts)</span><span class="font-medium">12.000 €</span></div>
+            <div class="flex justify-between"><span>Ventiladores cubierta</span><span class="font-medium">3.600 €</span></div>
+            <div class="flex justify-between"><span>Rejillas + aberturas paso</span><span class="font-medium">4.000 €</span></div>
+            <div class="flex justify-between"><span>Campanas extractoras (18 ud.)</span><span class="font-medium">9.000 €</span></div>
+            <hr class="border-gray-200 my-1">
+            <div class="flex justify-between font-bold text-orange-700"><span>Total ventilación</span><span>34.000 €</span></div>
+          </div>
+          <div class="mt-3 bg-amber-50 rounded-lg p-3 text-xs text-amber-700">
+            <strong>Nota:</strong> La ventilación del garaje sótano se trata en sección independiente por su complejidad (detección CO, ventilación forzada).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- 7. TELECOMUNICACIONES -->
+    <!-- ══════════════════════════════ -->
+    <section id="telecom" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-700 uppercase tracking-wider mb-3">Sección 7</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">Telecomunicaciones (ICT)</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">RD 346/2011 · Infraestructura Común de Telecomunicaciones</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">📡 Recintos y Canalizaciones</h4>
+          <div class="space-y-3">
+            <div class="bg-purple-50 rounded-xl p-4">
+              <h5 class="font-semibold text-purple-800 mb-2 text-sm">RITI (Recinto Inferior)</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Ubicación:</strong> PB, zona común accesible</li>
+                <li>• <strong>Dimensiones mínimas (>20 PAU):</strong> 2,0 × 1,0 × 2,30 m (ancho × fondo × alto)</li>
+                <li>• <strong>Equipamiento:</strong> Regletas de entrada, cuadro de protección eléctrica, punto de luz, toma de corriente, tierra < 10 Ω</li>
+                <li>• <strong>Ventilación:</strong> Natural directa o forzada</li>
+                <li>• <strong>Puerta:</strong> Metálica con cerradura, apertura exterior</li>
+              </ul>
+            </div>
+            <div class="bg-indigo-50 rounded-xl p-4">
+              <h5 class="font-semibold text-indigo-800 mb-2 text-sm">RITS (Recinto Superior)</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Ubicación:</strong> Cubierta o última planta</li>
+                <li>• <strong>Dimensiones:</strong> Igual que RITI (2,0 × 1,0 × 2,30 m mín.)</li>
+                <li>• <strong>Equipamiento:</strong> Cabecera TV, amplificadores FM/DAB/UHF, mezcladores FI-SAT</li>
+                <li>• <strong>Mástil:</strong> 3 m, Ø 40 mm, con anclaje y pararrayos</li>
+                <li>• <strong>Antenas:</strong> UHF + FM + DAB (1 juego para 18 viviendas)</li>
+              </ul>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4">
+              <h5 class="font-semibold text-gray-800 mb-2 text-sm">Canalización Principal (vertical)</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Tipo:</strong> Canaleta o tubos empotrados por patinillo de instalaciones</li>
+                <li>• <strong>Dimensión:</strong> 5 tubos Ø 50 mm (RTV, TLCA, STDP, reserva)</li>
+                <li>• <strong>Registros planta:</strong> 1 por planta en zona común (45 × 45 × 12 cm)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">🔌 Servicios y Tomas</h4>
+          <div class="space-y-3">
+            <div class="bg-gray-50 rounded-xl p-4">
+              <h5 class="font-semibold text-gray-800 mb-2 text-sm">Servicios ICT Obligatorios</h5>
+              <ul class="text-xs text-gray-600 space-y-1.5">
+                <li>• <strong>RTV terrestre:</strong> FM + DAB + UHF · Tomas en salón + dormitorio principal</li>
+                <li>• <strong>RTV satélite:</strong> Previsión 2 tomas/viv. (sin paraboloide comunitaria)</li>
+                <li>• <strong>Telefonía:</strong> 2 líneas/viv. (tomas en salón + dormitorio)</li>
+                <li>• <strong>Banda ancha:</strong> FTTH (fibra óptica). Operador disponible: Movistar / O2</li>
+                <li>• <strong>Red datos:</strong> Cat-6A mínimo, 2-4 tomas por vivienda</li>
+              </ul>
+            </div>
+            <table class="w-full text-xs">
+              <thead><tr class="border-b border-gray-200"><th class="text-left py-2">Tipología</th><th class="text-center py-2">RTV</th><th class="text-center py-2">TF</th><th class="text-center py-2">Datos</th><th class="text-center py-2">FTTH</th><th class="text-right py-2">Total</th></tr></thead>
+              <tbody class="divide-y divide-gray-50">
+                <tr><td class="py-1.5">Viv. 1D</td><td class="py-1.5 text-center">2</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-center">2</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-right font-medium">6</td></tr>
+                <tr><td class="py-1.5">Viv. 2D</td><td class="py-1.5 text-center">3</td><td class="py-1.5 text-center">2</td><td class="py-1.5 text-center">4</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-right font-medium">10</td></tr>
+                <tr><td class="py-1.5">Viv. 3D</td><td class="py-1.5 text-center">4</td><td class="py-1.5 text-center">2</td><td class="py-1.5 text-center">5</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-right font-medium">12</td></tr>
+                <tr class="font-bold bg-gray-50"><td class="py-1.5">Total edificio</td><td class="py-1.5 text-center">54</td><td class="py-1.5 text-center">30</td><td class="py-1.5 text-center">66</td><td class="py-1.5 text-center">18</td><td class="py-1.5 text-right">168</td></tr>
+              </tbody>
+            </table>
+            <div class="bg-orange-50 rounded-xl p-4">
+              <h5 class="font-semibold text-orange-800 mb-2 text-sm">💰 Presupuesto Telecomunicaciones</h5>
+              <div class="space-y-1 text-xs text-gray-600">
+                <div class="flex justify-between"><span>RITI + RITS (recintos + equipamiento)</span><span class="font-medium">6.000 €</span></div>
+                <div class="flex justify-between"><span>Canalización principal + registros</span><span class="font-medium">8.000 €</span></div>
+                <div class="flex justify-between"><span>Cableado (coax + Cat6A + FO)</span><span class="font-medium">14.000 €</span></div>
+                <div class="flex justify-between"><span>Cabecera antenas + mástil</span><span class="font-medium">3.000 €</span></div>
+                <div class="flex justify-between"><span>Tomas y mecanismos (168 ud.)</span><span class="font-medium">7.000 €</span></div>
+                <hr class="border-orange-200 my-1">
+                <div class="flex justify-between font-bold text-orange-700"><span>Total telecomunicaciones</span><span>38.000 €</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- 8. PROTECCIÓN CONTRA INCENDIOS -->
+    <!-- ══════════════════════════════ -->
+    <section id="incendios" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700 uppercase tracking-wider mb-3">Sección 8</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">Protección Contra Incendios</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">CTE DB-SI · Seguridad en caso de incendio · RIPCI (RD 513/2017)</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">🔥 Dotación PCI — Zonas Comunes</h4>
+          <div class="space-y-3">
+            <div class="bg-red-50 rounded-xl p-4">
+              <h5 class="font-semibold text-red-800 mb-2 text-sm">Extintores (CTE DB-SI4, tabla 1.1)</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Portal / acceso:</strong> 1 extintor 21A-113B (polvo ABC 6 kg)</li>
+                <li>• <strong>Rellano por planta:</strong> 1 extintor 21A-113B por planta (×3 = 3 ud.)</li>
+                <li>• <strong>Cuarto técnico / sala máquinas:</strong> 1 extintor CO₂ 34B (5 kg)</li>
+                <li>• <strong>Recorrido máximo a extintor:</strong> ≤ 15 m</li>
+                <li>• <strong>Señalización:</strong> Fotoluminiscente UNE 23034/35</li>
+              </ul>
+            </div>
+            <div class="bg-yellow-50 rounded-xl p-4">
+              <h5 class="font-semibold text-yellow-800 mb-2 text-sm">Garaje Sótano (> 100 m²) — CTE DB-SI</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Extintores:</strong> 2 × 21A-113B (polvo 6 kg) + 1 × CO₂ junto a cuadro eléctrico</li>
+                <li>• <strong>BIE:</strong> No obligatoria (< 500 m² de garaje)</li>
+                <li>• <strong>Sistema de detección automática:</strong> <strong class="text-red-700">SÍ obligatorio</strong> (garaje > 500 m² o > 30 plazas en CTE). Con 350 m² y 18 plazas no sería obligatorio, pero es <strong>altamente recomendable</strong></li>
+                <li>• <strong>Detectores de humo:</strong> Ópticos, 1 cada 30 m² → mín. 12 detectores</li>
+                <li>• <strong>Pulsadores manuales:</strong> 2 ud. (junto a accesos)</li>
+                <li>• <strong>Sirenas:</strong> 1 interior + 1 exterior</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">🚨 Alumbrado de Emergencia + Señalización</h4>
+          <div class="space-y-3">
+            <div class="bg-green-50 rounded-xl p-4">
+              <h5 class="font-semibold text-green-800 mb-2 text-sm">Alumbrado de Emergencia (CTE DB-SUA4)</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Ubicación:</strong> Todos los recorridos de evacuación, escaleras, pasillos, vestíbulos, salidas</li>
+                <li>• <strong>Luminancia mínima:</strong> 1 lux en suelo de recorridos</li>
+                <li>• <strong>Autonomía:</strong> ≥ 1 hora</li>
+                <li>• <strong>Unidades estimadas:</strong> ~30 luminarias (3 por planta × 4 niveles + garaje)</li>
+                <li>• <strong>Tipo:</strong> LED con batería autónoma, señalización «SALIDA»</li>
+              </ul>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4">
+              <h5 class="font-semibold text-gray-800 mb-2 text-sm">Central de Incendios</h5>
+              <ul class="text-xs text-gray-600 space-y-1">
+                <li>• <strong>Central convencional:</strong> 2-4 zonas (garaje, zonas comunes, cubierta)</li>
+                <li>• <strong>Alimentación:</strong> 230V + batería respaldo 72 h</li>
+                <li>• <strong>Ubicación:</strong> Portal / conserjería / cuadro SSGG</li>
+                <li>• <strong>Conexión CRA:</strong> Recomendada (centro recepción de alarmas)</li>
+              </ul>
+            </div>
+            <div class="bg-orange-50 rounded-xl p-4">
+              <h5 class="font-semibold text-orange-800 mb-2 text-sm">💰 Presupuesto PCI</h5>
+              <div class="space-y-1 text-xs text-gray-600">
+                <div class="flex justify-between"><span>Extintores (8 ud. polvo + 2 CO₂)</span><span class="font-medium">1.200 €</span></div>
+                <div class="flex justify-between"><span>Central detección + detectores garaje (12 ud.)</span><span class="font-medium">4.500 €</span></div>
+                <div class="flex justify-between"><span>Pulsadores + sirenas</span><span class="font-medium">1.800 €</span></div>
+                <div class="flex justify-between"><span>Alumbrado emergencia (~30 ud.)</span><span class="font-medium">3.500 €</span></div>
+                <div class="flex justify-between"><span>Señalización fotoluminiscente</span><span class="font-medium">1.000 €</span></div>
+                <hr class="border-orange-200 my-1">
+                <div class="flex justify-between font-bold text-orange-700"><span>Total PCI</span><span>12.000 €</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- 9. ASCENSOR -->
+    <!-- ══════════════════════════════ -->
+    <section id="ascensor" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-violet-100 text-violet-700 uppercase tracking-wider mb-3">Sección 9</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">Ascensor</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">RD 1314/1997 · Directiva 2014/33/UE · CTE DB-SUA</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 col-span-2">
+          <h4 class="font-bold text-gray-900 mb-4">🛗 Especificaciones Técnicas</h4>
+          <div class="grid md:grid-cols-2 gap-4">
+            <table class="w-full text-sm">
+              <tbody class="divide-y divide-gray-100">
+                <tr><td class="py-2 text-gray-500">Tipo</td><td class="py-2 text-right font-medium">Eléctrico sin cuarto de máquinas (MRL)</td></tr>
+                <tr><td class="py-2 text-gray-500">Carga nominal</td><td class="py-2 text-right font-bold text-orange-700">630 kg / 8 personas</td></tr>
+                <tr><td class="py-2 text-gray-500">Velocidad</td><td class="py-2 text-right font-medium">1,0 m/s</td></tr>
+                <tr><td class="py-2 text-gray-500">Paradas</td><td class="py-2 text-right font-medium">4 (Sótano, PB, P1, P2)</td></tr>
+                <tr><td class="py-2 text-gray-500">Recorrido</td><td class="py-2 text-right font-medium">~10,5 m</td></tr>
+                <tr><td class="py-2 text-gray-500">Accesibilidad</td><td class="py-2 text-right font-medium">Accesible CTE DB-SUA</td></tr>
+                <tr><td class="py-2 text-gray-500">Cabina interior</td><td class="py-2 text-right font-medium">1.100 × 1.400 mm (ancho × fondo)</td></tr>
+                <tr><td class="py-2 text-gray-500">Puerta cabina</td><td class="py-2 text-right font-medium">Telescópica 800 × 2.000 mm</td></tr>
+              </tbody>
+            </table>
+            <table class="w-full text-sm">
+              <tbody class="divide-y divide-gray-100">
+                <tr><td class="py-2 text-gray-500">Hueco</td><td class="py-2 text-right font-medium">1.600 × 1.700 mm (ancho × fondo)</td></tr>
+                <tr><td class="py-2 text-gray-500">Foso</td><td class="py-2 text-right font-medium">1.200 mm profundidad</td></tr>
+                <tr><td class="py-2 text-gray-500">Sobrerecorrido</td><td class="py-2 text-right font-medium">3.600 mm sobre última parada</td></tr>
+                <tr><td class="py-2 text-gray-500">Potencia motor</td><td class="py-2 text-right font-medium">5,5 – 7,5 kW (gearless)</td></tr>
+                <tr><td class="py-2 text-gray-500">Alimentación</td><td class="py-2 text-right font-medium">3F + N, 400V, 50 Hz</td></tr>
+                <tr><td class="py-2 text-gray-500">Tracción</td><td class="py-2 text-right font-medium">Gearless VVVF, sin engranajes</td></tr>
+                <tr><td class="py-2 text-gray-500">Clasificación energética</td><td class="py-2 text-right font-medium">Clase A (VDI 4707)</td></tr>
+                <tr><td class="py-2 text-gray-500">Cuarto de máquinas</td><td class="py-2 text-right font-medium">No requiere (MRL)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <h5 class="font-bold text-gray-800 mb-3 text-sm">💰 Presupuesto Ascensor</h5>
+          <div class="space-y-1.5 text-xs text-gray-600">
+            <div class="flex justify-between"><span>Equipo ascensor MRL (suministro)</span><span class="font-medium">28.000 €</span></div>
+            <div class="flex justify-between"><span>Montaje e instalación</span><span class="font-medium">8.000 €</span></div>
+            <div class="flex justify-between"><span>Puertas de rellano (4 ud.)</span><span class="font-medium">6.000 €</span></div>
+            <div class="flex justify-between"><span>Acabados cabina (acero inox + espejo)</span><span class="font-medium">3.000 €</span></div>
+            <div class="flex justify-between"><span>Proyecto + legalización OCA</span><span class="font-medium">2.500 €</span></div>
+            <hr class="border-gray-200 my-1">
+            <div class="flex justify-between font-bold text-orange-700"><span>Total ascensor</span><span>47.500 €</span></div>
+          </div>
+          <div class="mt-4 bg-amber-50 rounded-lg p-3 text-xs text-amber-700">
+            <strong>Nota:</strong> Mantenimiento: ~2.400 €/año (contrato obligatorio con empresa autorizada). Primer contrato incluido 2 años por fabricante.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- 10. VENTILACIÓN GARAJE SÓTANO -->
+    <!-- ══════════════════════════════ -->
+    <section id="garaje" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-gray-200 text-gray-700 uppercase tracking-wider mb-3">Sección 10</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">Ventilación del Garaje-Sótano</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">CTE DB-HS3 · CTE DB-SI · RITE · Detección CO</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">🅿️ Ventilación Mecánica Forzada</h4>
+          <div class="space-y-3">
+            <div class="bg-gray-50 rounded-xl p-4">
+              <h5 class="font-semibold text-gray-800 mb-2 text-sm">Cálculo de Caudales</h5>
+              <ul class="text-xs text-gray-600 space-y-1.5">
+                <li>• <strong>Superficie garaje:</strong> ~350 m²</li>
+                <li>• <strong>Plazas:</strong> 18</li>
+                <li>• <strong>Caudal mínimo CTE HS3:</strong> 120 l/s por plaza → 18 × 120 = <strong>2.160 l/s = 7.776 m³/h</strong></li>
+                <li>• <strong>Renovaciones/hora:</strong> 7.776 / (350 × 2,8) = <strong>~8 ren/h</strong> (> 6 mín. exigido)</li>
+                <li>• <strong>N.º extractores:</strong> 2 × centrífugos 4.000 m³/h c/u (funcionamiento alternante)</li>
+                <li>• <strong>Potencia:</strong> 2 × 2,2 kW = 4,4 kW (clase F400-120 si exigido por SI)</li>
+                <li>• <strong>Admisión:</strong> Natural por rampa de acceso + rejillas en muro perimetral</li>
+                <li>• <strong>Conductos extracción:</strong> Chapa galvanizada rectangular, hasta cubierta o fachada</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">💨 Detección de CO + Control</h4>
+          <div class="space-y-3">
+            <div class="bg-red-50 rounded-xl p-4">
+              <h5 class="font-semibold text-red-800 mb-2 text-sm">Sistema de Detección CO</h5>
+              <ul class="text-xs text-gray-600 space-y-1.5">
+                <li>• <strong>Detectores CO:</strong> 1 cada 200 m² → mín. 2 detectores electroquímicos</li>
+                <li>• <strong>Umbral 1ª velocidad:</strong> 50 ppm CO → ventiladores a 50% velocidad</li>
+                <li>• <strong>Umbral 2ª velocidad:</strong> 100 ppm CO → ventiladores a 100% velocidad</li>
+                <li>• <strong>Alarma evacuación:</strong> 200 ppm CO → señal sonora + visual</li>
+                <li>• <strong>Central de CO:</strong> Integrada con central de incendios</li>
+                <li>• <strong>Señalización:</strong> Panel indicador CO en accesos</li>
+              </ul>
+            </div>
+            <div class="bg-orange-50 rounded-xl p-4">
+              <h5 class="font-semibold text-orange-800 mb-2 text-sm">💰 Presupuesto Ventilación Garaje</h5>
+              <div class="space-y-1 text-xs text-gray-600">
+                <div class="flex justify-between"><span>2 extractores centrífugos (400°C/2h)</span><span class="font-medium">6.000 €</span></div>
+                <div class="flex justify-between"><span>Conductos chapa galvanizada</span><span class="font-medium">5.000 €</span></div>
+                <div class="flex justify-between"><span>Rejillas impulsión + extracción</span><span class="font-medium">2.000 €</span></div>
+                <div class="flex justify-between"><span>Detección CO (central + 2 detectores)</span><span class="font-medium">2.500 €</span></div>
+                <div class="flex justify-between"><span>Cuadro de control + variadores</span><span class="font-medium">3.500 €</span></div>
+                <hr class="border-orange-200 my-1">
+                <div class="flex justify-between font-bold text-orange-700"><span>Total ventilación garaje</span><span>19.000 €</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- 11. ENERGÍA SOLAR FOTOVOLTAICA -->
+    <!-- ══════════════════════════════ -->
+    <section id="fotovoltaica" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 uppercase tracking-wider mb-3">Sección 11</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">Energía Solar Fotovoltaica</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">CTE DB-HE5 · Generación mínima de energía eléctrica · RD 244/2019</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">🔋 Obligación CTE DB-HE5</h4>
+          <div class="space-y-3">
+            <div class="bg-green-50 rounded-xl p-4">
+              <h5 class="font-semibold text-green-800 mb-2 text-sm">Aplicabilidad</h5>
+              <p class="text-xs text-gray-600 mb-2">Edificio nuevo de uso residencial + comercial con superficie > 1.000 m². Se aplica CTE DB-HE5: potencia mínima de generación eléctrica renovable proporcional a la superficie construida.</p>
+              <table class="w-full text-xs mt-2">
+                <tbody class="divide-y divide-green-100">
+                  <tr><td class="py-1.5 text-gray-500">Sup. construida sobre rasante</td><td class="py-1.5 text-right font-medium">1.349 m²</td></tr>
+                  <tr><td class="py-1.5 text-gray-500">Factor HE5 (residencial + comercial)</td><td class="py-1.5 text-right font-medium">~0,015 kWp/m²</td></tr>
+                  <tr><td class="py-1.5 text-gray-500">Potencia mínima exigida</td><td class="py-1.5 text-right font-bold text-green-700">~20 kWp</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="bg-amber-50 rounded-xl p-4">
+              <h5 class="font-semibold text-amber-800 mb-2 text-sm">Radiación Solar — Guargacho</h5>
+              <table class="w-full text-xs">
+                <tbody class="divide-y divide-amber-100">
+                  <tr><td class="py-1.5 text-gray-500">Radiación global horizontal</td><td class="py-1.5 text-right font-medium">1.900 kWh/m²·año</td></tr>
+                  <tr><td class="py-1.5 text-gray-500">HSP media anual</td><td class="py-1.5 text-right font-medium">~5,2 h/día</td></tr>
+                  <tr><td class="py-1.5 text-gray-500">Producción específica (30° Sur)</td><td class="py-1.5 text-right font-medium">1.700-1.800 kWh/kWp·año</td></tr>
+                  <tr><td class="py-1.5 text-gray-500">Factor pérdidas (PR)</td><td class="py-1.5 text-right font-medium">0,80</td></tr>
+                  <tr><td class="py-1.5 text-gray-500">Producción neta</td><td class="py-1.5 text-right font-bold text-green-700">~1.440 kWh/kWp·año</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">⚙️ Instalación Propuesta — 20 kWp</h4>
+          <div class="space-y-3">
+            <table class="w-full text-xs">
+              <tbody class="divide-y divide-gray-100">
+                <tr><td class="py-1.5 text-gray-500">Potencia pico</td><td class="py-1.5 text-right font-bold text-green-700">20 kWp</td></tr>
+                <tr><td class="py-1.5 text-gray-500">N.º paneles (460 Wp)</td><td class="py-1.5 text-right font-medium">44 paneles</td></tr>
+                <tr><td class="py-1.5 text-gray-500">Superficie paneles</td><td class="py-1.5 text-right font-medium">~90 m² de cubierta</td></tr>
+                <tr><td class="py-1.5 text-gray-500">Inversores</td><td class="py-1.5 text-right font-medium">2 × inversores string 10 kW trifásicos</td></tr>
+                <tr><td class="py-1.5 text-gray-500">Estructura</td><td class="py-1.5 text-right font-medium">Coplanar en cubierta plana (lastrada)</td></tr>
+                <tr><td class="py-1.5 text-gray-500">Producción anual</td><td class="py-1.5 text-right font-bold text-green-700">~28.800 kWh/año</td></tr>
+                <tr><td class="py-1.5 text-gray-500">Régimen</td><td class="py-1.5 text-right font-medium">Autoconsumo colectivo con excedentes (RD 244/2019)</td></tr>
+                <tr><td class="py-1.5 text-gray-500">Reparto energía</td><td class="py-1.5 text-right font-medium">Coeficientes estáticos por cuota SSGG</td></tr>
+                <tr><td class="py-1.5 text-gray-500">Ahorro anual estimado</td><td class="py-1.5 text-right font-bold text-green-700">~4.300 €/año (a 0,15 €/kWh)</td></tr>
+                <tr><td class="py-1.5 text-gray-500">Amortización</td><td class="py-1.5 text-right font-medium">7-9 años (sin subvención)</td></tr>
+              </tbody>
+            </table>
+            <div class="bg-orange-50 rounded-xl p-4">
+              <h5 class="font-semibold text-orange-800 mb-2 text-sm">💰 Presupuesto Fotovoltaica</h5>
+              <div class="space-y-1 text-xs text-gray-600">
+                <div class="flex justify-between"><span>44 paneles 460 Wp</span><span class="font-medium">11.000 €</span></div>
+                <div class="flex justify-between"><span>2 inversores 10 kW trifásicos</span><span class="font-medium">5.000 €</span></div>
+                <div class="flex justify-between"><span>Estructura lastrada cubierta plana</span><span class="font-medium">4.400 €</span></div>
+                <div class="flex justify-between"><span>Cableado CC/CA + protecciones</span><span class="font-medium">3.600 €</span></div>
+                <div class="flex justify-between"><span>Contador bidireccional + armario</span><span class="font-medium">1.500 €</span></div>
+                <div class="flex justify-between"><span>Instalación + puesta marcha + legalización</span><span class="font-medium">6.500 €</span></div>
+                <hr class="border-orange-200 my-1">
+                <div class="flex justify-between font-bold text-orange-700"><span>Total fotovoltaica</span><span>32.000 €</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- 12. PRESUPUESTO RESUMEN -->
+    <!-- ══════════════════════════════ -->
+    <section id="presupuesto" class="reveal">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700 uppercase tracking-wider mb-3">Resumen Final</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gt">Presupuesto Total de Instalaciones</h2>
+        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Consolidación de todas las partidas — Edificio Guargacho 1</p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-10">
+        <table class="w-full text-sm">
+          <thead class="bg-gradient-to-r from-orange-600 to-amber-500 text-white">
+            <tr>
+              <th class="text-left py-4 px-5 font-semibold">Capítulo</th>
+              <th class="text-center py-4 px-5 font-semibold">Normativa</th>
+              <th class="text-right py-4 px-5 font-semibold">Importe</th>
+              <th class="text-right py-4 px-5 font-semibold">%</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-orange-50/50"><td class="py-3 px-5 font-medium">⚡ Electricidad (BT completa)</td><td class="py-3 px-5 text-center"><span class="badge-n">REBT / ITC-BT</span></td><td class="py-3 px-5 text-right font-semibold">169.000 €</td><td class="py-3 px-5 text-right text-gray-500">26,2%</td></tr>
+            <tr class="hover:bg-orange-50/50"><td class="py-3 px-5 font-medium">💧 Fontanería (AFS)</td><td class="py-3 px-5 text-center"><span class="badge-n">CTE DB-HS4</span></td><td class="py-3 px-5 text-right font-semibold">75.000 €</td><td class="py-3 px-5 text-right text-gray-500">11,6%</td></tr>
+            <tr class="hover:bg-orange-50/50"><td class="py-3 px-5 font-medium">☀️ ACS (Aerotermia centralizada)</td><td class="py-3 px-5 text-center"><span class="badge-n">CTE DB-HE4</span></td><td class="py-3 px-5 text-right font-semibold">55.000 €</td><td class="py-3 px-5 text-right text-gray-500">8,5%</td></tr>
+            <tr class="hover:bg-orange-50/50"><td class="py-3 px-5 font-medium">🔄 Saneamiento</td><td class="py-3 px-5 text-center"><span class="badge-n">CTE DB-HS5</span></td><td class="py-3 px-5 text-right font-semibold">63.000 €</td><td class="py-3 px-5 text-right text-gray-500">9,8%</td></tr>
+            <tr class="hover:bg-orange-50/50"><td class="py-3 px-5 font-medium">❄️ Climatización (splits)</td><td class="py-3 px-5 text-center"><span class="badge-n">RITE</span></td><td class="py-3 px-5 text-right font-semibold">98.000 €</td><td class="py-3 px-5 text-right text-gray-500">15,2%</td></tr>
+            <tr class="hover:bg-orange-50/50"><td class="py-3 px-5 font-medium">🌬️ Ventilación viviendas</td><td class="py-3 px-5 text-center"><span class="badge-n">CTE DB-HS3</span></td><td class="py-3 px-5 text-right font-semibold">34.000 €</td><td class="py-3 px-5 text-right text-gray-500">5,3%</td></tr>
+            <tr class="hover:bg-orange-50/50"><td class="py-3 px-5 font-medium">📡 Telecomunicaciones (ICT)</td><td class="py-3 px-5 text-center"><span class="badge-n">RD 346/2011</span></td><td class="py-3 px-5 text-right font-semibold">38.000 €</td><td class="py-3 px-5 text-right text-gray-500">5,9%</td></tr>
+            <tr class="hover:bg-orange-50/50"><td class="py-3 px-5 font-medium">🔥 Protección contra incendios</td><td class="py-3 px-5 text-center"><span class="badge-n">CTE DB-SI / RIPCI</span></td><td class="py-3 px-5 text-right font-semibold">12.000 €</td><td class="py-3 px-5 text-right text-gray-500">1,9%</td></tr>
+            <tr class="hover:bg-orange-50/50"><td class="py-3 px-5 font-medium">🛗 Ascensor (MRL 630 kg)</td><td class="py-3 px-5 text-center"><span class="badge-n">Dir. 2014/33/UE</span></td><td class="py-3 px-5 text-right font-semibold">47.500 €</td><td class="py-3 px-5 text-right text-gray-500">7,4%</td></tr>
+            <tr class="hover:bg-orange-50/50"><td class="py-3 px-5 font-medium">🅿️ Ventilación garaje + CO</td><td class="py-3 px-5 text-center"><span class="badge-n">CTE HS3 / SI</span></td><td class="py-3 px-5 text-right font-semibold">19.000 €</td><td class="py-3 px-5 text-right text-gray-500">2,9%</td></tr>
+            <tr class="hover:bg-orange-50/50"><td class="py-3 px-5 font-medium">🔋 Fotovoltaica (20 kWp)</td><td class="py-3 px-5 text-center"><span class="badge-n">CTE DB-HE5</span></td><td class="py-3 px-5 text-right font-semibold">32.000 €</td><td class="py-3 px-5 text-right text-gray-500">5,0%</td></tr>
+            <tr class="bg-gradient-to-r from-orange-600 to-amber-500 text-white font-bold text-base">
+              <td class="py-4 px-5" colspan="2">💰 TOTAL INSTALACIONES</td>
+              <td class="py-4 px-5 text-right">642.500 €</td>
+              <td class="py-4 px-5 text-right">100%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Gráfico y análisis -->
+      <div class="grid md:grid-cols-2 gap-8 mb-10">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">📊 Distribución por Capítulo</h4>
+          <canvas id="chartCapitulos" height="300"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h4 class="font-bold text-gray-900 mb-4">📈 Análisis de Incidencia</h4>
+          <table class="w-full text-sm mb-4">
+            <tbody class="divide-y divide-gray-100">
+              <tr><td class="py-2 text-gray-500">Total instalaciones</td><td class="py-2 text-right font-bold text-orange-700">642.500 €</td></tr>
+              <tr><td class="py-2 text-gray-500">€/m² construido total (1.789 m²)</td><td class="py-2 text-right font-medium">359 €/m²</td></tr>
+              <tr><td class="py-2 text-gray-500">€/m² sobre rasante (1.349 m²)</td><td class="py-2 text-right font-medium">476 €/m²</td></tr>
+              <tr><td class="py-2 text-gray-500">€/vivienda (media 18 viv.)</td><td class="py-2 text-right font-medium">~35.700 €</td></tr>
+              <tr><td class="py-2 text-gray-500">% sobre PEM estimado (~1.660k€)</td><td class="py-2 text-right font-bold text-blue-700">38,7%</td></tr>
+            </tbody>
+          </table>
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-700">
+            <strong>⚠️ Nota sobre el PEM:</strong> El ratio de instalaciones sobre PEM (38,7%) es superior al habitual (20-25%) porque este presupuesto incluye <strong>equipamiento completo</strong>: climatización con equipos (98k€), aerotermia centralizada (55k€), ascensor (47,5k€) y fotovoltaica (32k€). Si se excluyen los equipos de climatización (dejando solo preinstalación) el ratio baja al ~28%, más alineado con el mercado.
+          </div>
+        </div>
+      </div>
+
+      <!-- Observaciones finales -->
+      <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 text-white">
+        <h3 class="text-xl font-bold mb-6">📋 Observaciones y Recomendaciones</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-4">
+            <div class="bg-white/10 rounded-xl p-4">
+              <h5 class="font-semibold text-orange-300 mb-2 text-sm">🔍 Pendiente de Verificación</h5>
+              <ul class="text-xs text-gray-300 space-y-1.5">
+                <li>• Estudio de punto de conexión eléctrica (Endesa / i-DE) → CT propio o acometida</li>
+                <li>• Presión en red de suministro de agua (¿grupo de presión necesario?)</li>
+                <li>• Confirmación de red de alcantarillado municipal separativa/unitaria</li>
+                <li>• Disponibilidad de operadores de fibra óptica en Guargacho</li>
+                <li>• Informe favorable de bomberos para garaje sótano (> 15 plazas)</li>
+                <li>• Gas canalizado: <strong>no se prevé</strong> (cocinas eléctricas vitrocerámica/inducción)</li>
+              </ul>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <h5 class="font-semibold text-green-300 mb-2 text-sm">✅ Valor Añadido Propuesto</h5>
+              <ul class="text-xs text-gray-300 space-y-1.5">
+                <li>• Preinstalación de recarga V.E. en cada plaza de garaje (RD 1053/2014)</li>
+                <li>• Batería comunitaria LiFePO₄ (30 kWh) para fotovoltaica</li>
+                <li>• Domótica básica (control iluminación + persianas) en viv. 2D y 3D</li>
+                <li>• Recuperación de aguas grises/pluviales para riego comunitario</li>
+              </ul>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-white/10 rounded-xl p-4">
+              <h5 class="font-semibold text-blue-300 mb-2 text-sm">📜 Normativa Completa</h5>
+              <ul class="text-xs text-gray-300 space-y-1">
+                <li>• REBT (RD 842/2002) + ITC-BT 10, 15, 16, 17, 18, 19, 25, 28, 29, 30</li>
+                <li>• CTE DB-HS3 (ventilación), DB-HS4 (agua), DB-HS5 (evacuación)</li>
+                <li>• CTE DB-HE4 (ACS renovable), DB-HE5 (generación eléctrica)</li>
+                <li>• CTE DB-SI (incendios), DB-SUA (accesibilidad/ascensor)</li>
+                <li>• RITE (RD 1027/2007) — Instalaciones térmicas</li>
+                <li>• RD 346/2011 — ICT telecomunicaciones</li>
+                <li>• RIPCI (RD 513/2017) — Protección contra incendios</li>
+                <li>• RD 244/2019 — Autoconsumo eléctrico</li>
+                <li>• RD 1314/1997 — Ascensores</li>
+                <li>• Directiva 2014/33/UE — Seguridad ascensores</li>
+              </ul>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4">
+              <h5 class="font-semibold text-amber-300 mb-2 text-sm">⚠️ Limitaciones</h5>
+              <ul class="text-xs text-gray-300 space-y-1">
+                <li>• Prediseño orientativo, no proyecto de ejecución</li>
+                <li>• Precios estimados a marzo 2026, mercado Canarias</li>
+                <li>• Requiere proyecto firmado por ingeniero industrial colegiado</li>
+                <li>• Cargas térmicas son predimensionados (definitivo requiere CYPETHERM)</li>
+                <li>• El cálculo eléctrico definitivo requiere software específico (Dmelect, ECODIAL)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12 mt-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-amber-400 flex items-center justify-center text-white font-bold text-sm">⚡</div><span class="text-white font-bold">Indux</span></div>
+          <p class="text-sm">Agente Ingeniero Industrial IA — Sistema de Desarrollo Inmobiliario</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-2">Proyecto</h4>
+          <p class="text-sm">Edificio Guargacho 1 — 18 Viviendas + Local Comercial</p>
+          <p class="text-sm">Ctra. General TF-652, Guargacho</p>
+          <p class="text-sm">San Miguel de Abona, Tenerife · CP 38639</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-2">Normativa Aplicada</h4>
+          <p class="text-sm">REBT (RD 842/2002), CTE DB-HS3/HS4/HS5, CTE DB-HE4/HE5, CTE DB-SI, RITE, RD 346/2011, RD 1942/1993 (RIPCI)</p>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-6 text-center text-xs">
+        <p class="mb-2">Ref: INDUX-GUA1-2026-001 · Fecha: 25 de marzo de 2026 · Confidencial</p>
+        <p>Este informe tiene carácter de prediseño orientativo. El proyecto definitivo de instalaciones requiere la firma de un ingeniero industrial colegiado y visado del COIITF.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.reveal').forEach(el=>{new IntersectionObserver(e=>{if(e[0].isIntersecting)el.classList.add('visible')},{threshold:.08}).observe(el)});
+
+    // Chart.js — Distribución presupuesto
+    const ctx = document.getElementById('chartCapitulos');
+    if(ctx){
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Electricidad','Fontanería','ACS Aerotermia','Saneamiento','Climatización','Ventilación','Telecom','PCI','Ascensor','Vent. Garaje','Fotovoltaica'],
+          datasets: [{
+            data: [169000,75000,55000,63000,98000,34000,38000,12000,47500,19000,32000],
+            backgroundColor: ['#ea580c','#3b82f6','#f59e0b','#ef4444','#06b6d4','#14b8a6','#8b5cf6','#dc2626','#7c3aed','#64748b','#22c55e'],
+            borderWidth: 2,
+            borderColor: '#fff',
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position:'bottom', labels:{ padding:10, usePointStyle:true, pointStyle:'circle', font:{size:10, family:'Inter'} }},
+            tooltip: {
+              callbacks: {
+                label: function(c){
+                  const v = c.parsed;
+                  const t = c.dataset.data.reduce((a,b)=>a+b,0);
+                  return ` ${c.label}: ${v.toLocaleString('es-ES')} € (${(v/t*100).toFixed(1)}%)`;
+                }
+              }
+            }
+          },
+          cutout: '50%'
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

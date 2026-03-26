@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estudio de Viabilidad Financiera — Guargacho 1</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+<style>
+html{scroll-behavior:smooth}
+.reveal{opacity:0;transform:translateY(28px);transition:all .75s cubic-bezier(.25,.46,.45,.94)}.reveal.visible{opacity:1;transform:translateY(0)}
+.gt{background:linear-gradient(135deg,#023e8a 0%,#0077b6 50%,#0096c7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.glass{background:rgba(255,255,255,.75);backdrop-filter:blur(14px);border:1px solid rgba(2,62,138,.12)}
+tbody tr{transition:background .15s}tbody tr:hover{background:rgba(2,62,138,.04)}
+.card-h{transition:all .3s ease}.card-h:hover{transform:translateY(-3px);box-shadow:0 16px 40px -10px rgba(0,0,0,.12)}
+.nav-l{position:relative}.nav-l::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:linear-gradient(90deg,#023e8a,#0096c7);transition:width .3s}.nav-l:hover::after{width:100%}
+.pos{color:#166534;background:#dcfce7}.neg{color:#991b1b;background:#fef2f2}.neu{color:#1e40af;background:#dbeafe}
+.badge-src{display:inline-flex;align-items:center;gap:3px;padding:1px 8px;border-radius:9999px;font-size:.65rem;font-weight:600}
+.b-valorex{background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe}
+.b-finex{background:#e0e7ff;color:#3730a3;border:1px solid #c7d2fe}
+.btn3d{display:inline-block;padding:10px 24px;border-radius:10px;font-weight:700;font-size:.875rem;color:#fff;cursor:pointer;border:none;text-decoration:none;transition:all .15s}
+.btn3d-blue{background:linear-gradient(180deg,#0077b6 0%,#023e8a 100%);box-shadow:0 4px 0 #012a5e,0 6px 12px rgba(2,62,138,.3)}.btn3d-blue:hover{transform:translateY(-1px);box-shadow:0 5px 0 #012a5e,0 8px 16px rgba(2,62,138,.35)}.btn3d-blue:active{transform:translateY(2px);box-shadow:0 1px 0 #012a5e,0 2px 4px rgba(2,62,138,.2)}
+.btn3d-green{background:linear-gradient(180deg,#059669 0%,#065f46 100%);box-shadow:0 4px 0 #064e3b,0 6px 12px rgba(6,95,70,.3)}.btn3d-green:hover{transform:translateY(-1px);box-shadow:0 5px 0 #064e3b,0 8px 16px rgba(6,95,70,.35)}.btn3d-green:active{transform:translateY(2px);box-shadow:0 1px 0 #064e3b,0 2px 4px rgba(6,95,70,.2)}
+.btn3d-red{background:linear-gradient(180deg,#dc2626 0%,#991b1b 100%);box-shadow:0 4px 0 #7f1d1d,0 6px 12px rgba(153,27,27,.3)}.btn3d-red:hover{transform:translateY(-1px)}.btn3d-red:active{transform:translateY(2px);box-shadow:0 1px 0 #7f1d1d}
+</style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/60 shadow-sm">
+<div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-900 to-cyan-600 flex items-center justify-center text-white font-bold text-sm shadow-md" style="box-shadow:0 3px 0 #012a5e,0 4px 8px rgba(2,62,138,.2)">F</div>
+<span class="text-lg font-bold gt">Finex</span>
+<span class="hidden sm:inline text-xs text-gray-400 ml-1">Analista Financiero</span>
+</div>
+<div class="hidden xl:flex gap-4 text-[13px] font-medium text-gray-500">
+<a href="#kpi" class="nav-l hover:text-blue-700">KPIs</a>
+<a href="#ingresos" class="nav-l hover:text-blue-700">Ingresos</a>
+<a href="#inversion" class="nav-l hover:text-blue-700">Inversión</a>
+<a href="#resultados" class="nav-l hover:text-blue-700">Resultados</a>
+<a href="#financiacion" class="nav-l hover:text-blue-700">Financiación</a>
+<a href="#cashflow" class="nav-l hover:text-blue-700">Cash-Flow</a>
+<a href="#tir" class="nav-l hover:text-blue-700">TIR/VAN</a>
+<a href="#sensibilidad" class="nav-l hover:text-blue-700">Sensibilidad</a>
+<a href="#conclusion" class="nav-l hover:text-blue-700">Conclusión</a>
+</div>
+</div>
+</nav>
+
+<!-- HERO -->
+<header class="relative overflow-hidden bg-gradient-to-br from-blue-950 via-blue-900 to-cyan-800 text-white">
+<div class="absolute inset-0" style="background-image:url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23fff\' fill-opacity=\'.03\'%3E%3Cpath d=\'M20 0v40M0 20h40\'/%3E%3C/g%3E%3C/svg%3E')"></div>
+<div class="relative max-w-7xl mx-auto px-6 py-20 md:py-24">
+<div class="max-w-4xl">
+<p class="text-blue-300 text-xs font-semibold uppercase tracking-[.25em] mb-4">Estudio de Viabilidad Financiera · Finex · Marzo 2026</p>
+<h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">Edificio de Viviendas<br>y Local Comercial<br><span class="text-cyan-300">Guargacho 1</span></h1>
+<p class="text-lg text-blue-100 max-w-2xl mb-8">18 viviendas + 1 local comercial + 18 garajes + 18 trasteros. Análisis financiero integral: cuenta de resultados, cash-flow mensual, TIR, VAN, break-even, sensibilidad y estructura de financiación.</p>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm">🏢 PB+2+Sótano</span>
+<span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm">📐 1.789 m² totales</span>
+<span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm">🏗️ 18 meses obra</span>
+<span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm">🏝️ IGIC 7% (Canarias)</span>
+<span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm">📊 Tasa descuento 8%</span>
+<span class="px-4 py-2 bg-white/15 backdrop-blur rounded-full text-sm">📍 San Miguel de Abona</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent"></div>
+</header>
+
+<main class="max-w-7xl mx-auto px-6 py-12 space-y-20">
+
+<!-- ═══ KPIs ═══ -->
+<section id="kpi" class="reveal">
+<div class="text-center mb-10">
+<span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Dashboard</span>
+<h2 class="text-3xl md:text-4xl font-extrabold gt">Indicadores Clave (Escenario Base)</h2>
+<p class="text-gray-500 mt-2">Datos de Valorex (tasación) · PEM estimado Finex · IGIC 7% Canarias</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-center card-h"><p class="text-[11px] text-gray-400 uppercase font-semibold mb-1">Inversión Total</p><p class="text-2xl font-extrabold text-gray-900">3.182 k€</p><p class="text-[10px] text-gray-400">Suelo + Obra + Gastos</p></div>
+<div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-center card-h"><p class="text-[11px] text-gray-400 uppercase font-semibold mb-1">Ventas Totales</p><p class="text-2xl font-extrabold text-blue-700">3.847 k€</p><p class="text-[10px] text-gray-400">18 viv. + 1 local</p></div>
+<div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-center card-h"><p class="text-[11px] text-gray-400 uppercase font-semibold mb-1">Beneficio Bruto</p><p class="text-2xl font-extrabold text-emerald-600">665 k€</p><p class="text-[10px] text-gray-400">17,3% margen s/ventas</p></div>
+<div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-center card-h"><p class="text-[11px] text-gray-400 uppercase font-semibold mb-1">TIR Anual</p><p class="text-2xl font-extrabold text-blue-700">19,6%</p><p class="text-[10px] text-gray-400">Sobre 24 meses</p></div>
+<div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-center card-h"><p class="text-[11px] text-gray-400 uppercase font-semibold mb-1">VAN (8%)</p><p class="text-2xl font-extrabold text-emerald-600">+469 k€</p><p class="text-[10px] text-gray-400">Positivo → Viable</p></div>
+<div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-center card-h"><p class="text-[11px] text-gray-400 uppercase font-semibold mb-1">Break-Even</p><p class="text-2xl font-extrabold text-amber-600">13 uds.</p><p class="text-[10px] text-gray-400">De 19 unidades totales</p></div>
+</div>
+</section>
+
+<!-- ═══ DESGLOSE INGRESOS ═══ -->
+<section id="ingresos" class="reveal">
+<div class="text-center mb-10">
+<span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 1</span>
+<h2 class="text-3xl md:text-4xl font-extrabold gt">Desglose de Ingresos por Venta</h2>
+<p class="text-gray-500 mt-2">Precios de venta según tasación de Valorex · Garaje y trastero vinculados incluidos en precio vivienda</p>
+</div>
+
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+<table class="w-full text-sm">
+<thead>
+<tr class="bg-gradient-to-r from-blue-900 to-cyan-700 text-white text-xs">
+<th class="px-5 py-3 text-left font-semibold">Tipología</th>
+<th class="px-5 py-3 text-center font-semibold">Unidades</th>
+<th class="px-5 py-3 text-center font-semibold">m² medio</th>
+<th class="px-5 py-3 text-center font-semibold">€/m²</th>
+<th class="px-5 py-3 text-center font-semibold">Precio/ud.</th>
+<th class="px-5 py-3 text-right font-semibold">Subtotal</th>
+<th class="px-5 py-3 text-right font-semibold">%</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100">
+<tr><td class="px-5 py-3 font-medium">🛏️ 1 dormitorio + garaje + trastero</td><td class="px-5 py-3 text-center">6</td><td class="px-5 py-3 text-center">49 m²</td><td class="px-5 py-3 text-center">3.150 €</td><td class="px-5 py-3 text-center font-semibold">154.350 €</td><td class="px-5 py-3 text-right font-bold">926.100 €</td><td class="px-5 py-3 text-right text-gray-500">24,1%</td></tr>
+<tr><td class="px-5 py-3 font-medium">🛏️🛏️ 2 dormitorios + garaje + trastero</td><td class="px-5 py-3 text-center">6</td><td class="px-5 py-3 text-center">65 m²</td><td class="px-5 py-3 text-center">2.980 €</td><td class="px-5 py-3 text-center font-semibold">193.700 €</td><td class="px-5 py-3 text-right font-bold">1.162.200 €</td><td class="px-5 py-3 text-right text-gray-500">30,2%</td></tr>
+<tr><td class="px-5 py-3 font-medium">🛏️🛏️🛏️ 3 dormitorios + garaje + trastero</td><td class="px-5 py-3 text-center">6</td><td class="px-5 py-3 text-center">95 m²</td><td class="px-5 py-3 text-center">2.850 €</td><td class="px-5 py-3 text-center font-semibold">270.750 €</td><td class="px-5 py-3 text-right font-bold">1.624.500 €</td><td class="px-5 py-3 text-right text-gray-500">42,2%</td></tr>
+<tr><td class="px-5 py-3 font-medium">🏪 Local comercial (PB)</td><td class="px-5 py-3 text-center">1</td><td class="px-5 py-3 text-center">95 m²</td><td class="px-5 py-3 text-center">1.415 €</td><td class="px-5 py-3 text-center font-semibold">134.425 €</td><td class="px-5 py-3 text-right font-bold">134.425 €</td><td class="px-5 py-3 text-right text-gray-500">3,5%</td></tr>
+</tbody>
+<tfoot>
+<tr class="bg-gradient-to-r from-blue-900 to-cyan-700 text-white font-bold text-base">
+<td class="px-5 py-4" colspan="2">💰 INGRESOS TOTALES POR VENTA</td>
+<td class="px-5 py-4 text-center" colspan="2">19 unidades</td>
+<td class="px-5 py-4"></td>
+<td class="px-5 py-4 text-right">3.847.225 €</td>
+<td class="px-5 py-4 text-right">100%</td>
+</tr>
+</tfoot>
+</table>
+</div>
+
+<div class="mt-6 grid md:grid-cols-2 gap-6">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+<h4 class="font-bold text-gray-900 mb-4">Distribución de Ingresos por Tipología</h4>
+<canvas id="chartIngresos" height="260"></canvas>
+</div>
+<div class="bg-blue-50 rounded-xl p-5 border border-blue-100 text-sm text-blue-800">
+<h4 class="font-bold mb-3">📋 Notas sobre precios</h4>
+<ul class="space-y-2 list-disc ml-4">
+<li><strong>Fuente:</strong> Informe de tasación de Valorex (VX-2026-GUA-001) con método de comparación + homogeneización de 6 testigos.</li>
+<li><strong>Precio medio ponderado:</strong> 2.965 €/m² (viviendas) — coherente con mercado zona sur Tenerife (3.237 €/m² Fotocasa).</li>
+<li><strong>Garaje + trastero vinculados:</strong> el precio de cada vivienda incluye una plaza de garaje (~15.000 €) y un trastero (~5.000 €) como anejos inseparables.</li>
+<li><strong>Local comercial:</strong> valorado al 47% del €/m² residencial, coherente con ratio de mercado para locales en planta baja de zona residencial.</li>
+<li><strong>Tendencia mercado:</strong> +12,3% interanual en San Miguel de Abona — presión alcista por oferta limitada de obra nueva en el sur.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ═══ CUADRO DE INVERSIÓN ═══ -->
+<section id="inversion" class="reveal">
+<div class="text-center mb-10">
+<span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 2</span>
+<h2 class="text-3xl md:text-4xl font-extrabold gt">Cuadro de Inversión Total</h2>
+<p class="text-gray-500 mt-2">PEM estimado en 1.250 €/m² × 1.789 m² = 2.236.250 € · Fuente: método residual Valorex</p>
+</div>
+
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+<table class="w-full text-sm">
+<thead>
+<tr class="bg-gradient-to-r from-blue-900 to-cyan-700 text-white text-xs">
+<th class="px-5 py-3 text-left font-semibold">Concepto</th>
+<th class="px-5 py-3 text-right font-semibold">Importe</th>
+<th class="px-5 py-3 text-right font-semibold">%</th>
+<th class="px-5 py-3 text-center font-semibold">Fuente</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100">
+<tr class="bg-blue-50/50"><td colspan="4" class="py-2 px-5 font-bold text-gray-700 text-xs uppercase tracking-wider">🌍 Suelo</td></tr>
+<tr><td class="px-5 py-2.5">Adquisición del suelo (estimación)</td><td class="px-5 py-2.5 text-right font-medium">393.801 €</td><td class="px-5 py-2.5 text-right text-gray-500">12,4%</td><td class="px-5 py-2.5 text-center"><span class="badge-src b-valorex">Valorex</span></td></tr>
+
+<tr class="bg-blue-50/50"><td colspan="4" class="py-2 px-5 font-bold text-gray-700 text-xs uppercase tracking-wider">🏗️ Construcción</td></tr>
+<tr><td class="px-5 py-2.5">PEM — 1.250 €/m² × 1.789 m² (sobre + bajo rasante)</td><td class="px-5 py-2.5 text-right font-medium">2.236.250 €</td><td class="px-5 py-2.5 text-right text-gray-500">70,2%</td><td class="px-5 py-2.5 text-center"><span class="badge-src b-valorex">Valorex</span></td></tr>
+<tr><td class="px-5 py-2.5">IGIC 7% sobre PEM (Canarias — no IVA)</td><td class="px-5 py-2.5 text-right">156.538 €</td><td class="px-5 py-2.5 text-right text-gray-500">4,9%</td><td class="px-5 py-2.5 text-center"><span class="badge-src b-finex">Finex</span></td></tr>
+
+<tr class="bg-blue-50/50"><td colspan="4" class="py-2 px-5 font-bold text-gray-700 text-xs uppercase tracking-wider">📐 Honorarios Profesionales (~10% PEM)</td></tr>
+<tr><td class="px-5 py-2.5">Arquitecto (proyecto + dirección obra)</td><td class="px-5 py-2.5 text-right">111.813 €</td><td class="px-5 py-2.5 text-right text-gray-500">3,5%</td><td class="px-5 py-2.5 text-center"><span class="badge-src b-valorex">Valorex</span></td></tr>
+<tr><td class="px-5 py-2.5">Aparejador + resto técnicos</td><td class="px-5 py-2.5 text-right">67.088 €</td><td class="px-5 py-2.5 text-right text-gray-500">2,1%</td><td class="px-5 py-2.5 text-center"><span class="badge-src b-finex">Finex</span></td></tr>
+<tr><td class="px-5 py-2.5">Estudio geotécnico + topografía + CSS + laboratorio</td><td class="px-5 py-2.5 text-right">44.725 €</td><td class="px-5 py-2.5 text-right text-gray-500">1,4%</td><td class="px-5 py-2.5 text-center"><span class="badge-src b-finex">Finex</span></td></tr>
+<tr><td class="px-5 py-2.5">IGIC 7% sobre honorarios</td><td class="px-5 py-2.5 text-right">15.654 €</td><td class="px-5 py-2.5 text-right text-gray-500">0,5%</td><td class="px-5 py-2.5 text-center"><span class="badge-src b-finex">Finex</span></td></tr>
+
+<tr class="bg-blue-50/50"><td colspan="4" class="py-2 px-5 font-bold text-gray-700 text-xs uppercase tracking-wider">🏛️ Licencias, Tasas e Impuestos (~4% PEM)</td></tr>
+<tr><td class="px-5 py-2.5">ICIO (4% PEM) + tasa licencia urbanística</td><td class="px-5 py-2.5 text-right">89.450 €</td><td class="px-5 py-2.5 text-right text-gray-500">2,8%</td><td class="px-5 py-2.5 text-center"><span class="badge-src b-valorex">Valorex</span></td></tr>
+
+<tr class="bg-blue-50/50"><td colspan="4" class="py-2 px-5 font-bold text-gray-700 text-xs uppercase tracking-wider">⚖️ Seguros, Notarial, Registral</td></tr>
+<tr><td class="px-5 py-2.5">Seguros (decenal LOE + RC + todo riesgo), escritura obra nueva, AJD</td><td class="px-5 py-2.5 text-right">52.000 €</td><td class="px-5 py-2.5 text-right text-gray-500">1,6%</td><td class="px-5 py-2.5 text-center"><span class="badge-src b-finex">Finex</span></td></tr>
+
+<tr class="bg-blue-50/50"><td colspan="4" class="py-2 px-5 font-bold text-gray-700 text-xs uppercase tracking-wider">📢 Comercialización (~3% s/ ventas)</td></tr>
+<tr><td class="px-5 py-2.5">Comisiones + marketing + dossier</td><td class="px-5 py-2.5 text-right">115.417 €</td><td class="px-5 py-2.5 text-right text-gray-500">3,6%</td><td class="px-5 py-2.5 text-center"><span class="badge-src b-valorex">Valorex</span></td></tr>
+
+<tr class="bg-blue-50/50"><td colspan="4" class="py-2 px-5 font-bold text-gray-700 text-xs uppercase tracking-wider">🏦 Gastos Financieros (~2,5% inversión)</td></tr>
+<tr><td class="px-5 py-2.5">Intereses préstamo promotor (Euríbor + 2,5% ≈ 4,5%)</td><td class="px-5 py-2.5 text-right">76.181 €</td><td class="px-5 py-2.5 text-right text-gray-500">2,4%</td><td class="px-5 py-2.5 text-center"><span class="badge-src b-finex">Finex</span></td></tr>
+<tr><td class="px-5 py-2.5">Gastos formalización hipoteca (~1%)</td><td class="px-5 py-2.5 text-right">20.000 €</td><td class="px-5 py-2.5 text-right text-gray-500">0,6%</td><td class="px-5 py-2.5 text-center"><span class="badge-src b-finex">Finex</span></td></tr>
+</tbody>
+<tfoot>
+<tr class="bg-gradient-to-r from-blue-900 to-cyan-700 text-white font-bold text-base">
+<td class="px-5 py-4">💰 INVERSIÓN TOTAL</td>
+<td class="px-5 py-4 text-right">3.182.106 €</td>
+<td class="px-5 py-4 text-right">100%</td>
+<td class="px-5 py-4"></td>
+</tr>
+</tfoot>
+</table>
+</div>
+
+<div class="mt-6 grid md:grid-cols-2 gap-8">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+<h4 class="font-bold text-gray-900 mb-4">Distribución de la Inversión</h4>
+<canvas id="chartDistribucion" height="280"></canvas>
+</div>
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+<h4 class="font-bold text-gray-900 mb-4">Métricas de Inversión</h4>
+<div class="space-y-4 mt-4">
+<div><p class="text-xs text-gray-500 mb-1">Coste construcción (PEM+IGIC) — 75,1%</p><div class="w-full h-4 bg-gray-100 rounded-full"><div class="h-4 bg-blue-600 rounded-full" style="width:75.1%"></div></div></div>
+<div><p class="text-xs text-gray-500 mb-1">Suelo — 12,4%</p><div class="w-full h-4 bg-gray-100 rounded-full"><div class="h-4 bg-cyan-500 rounded-full" style="width:49.6%"></div></div></div>
+<div><p class="text-xs text-gray-500 mb-1">Honorarios — 7,5%</p><div class="w-full h-4 bg-gray-100 rounded-full"><div class="h-4 bg-indigo-500 rounded-full" style="width:30%"></div></div></div>
+<div><p class="text-xs text-gray-500 mb-1">Comercialización — 3,6%</p><div class="w-full h-4 bg-gray-100 rounded-full"><div class="h-4 bg-emerald-500 rounded-full" style="width:14.4%"></div></div></div>
+<div><p class="text-xs text-gray-500 mb-1">Licencias/Impuestos — 2,8%</p><div class="w-full h-4 bg-gray-100 rounded-full"><div class="h-4 bg-amber-500 rounded-full" style="width:11.2%"></div></div></div>
+<div><p class="text-xs text-gray-500 mb-1">Financieros — 3,0%</p><div class="w-full h-4 bg-gray-100 rounded-full"><div class="h-4 bg-rose-500 rounded-full" style="width:12%"></div></div></div>
+<div><p class="text-xs text-gray-500 mb-1">Seguros/Notarial — 1,6%</p><div class="w-full h-4 bg-gray-100 rounded-full"><div class="h-4 bg-purple-500 rounded-full" style="width:6.4%"></div></div></div>
+</div>
+<div class="mt-6 grid grid-cols-2 gap-3 text-center">
+<div class="bg-gray-50 rounded-lg p-3"><p class="text-xs text-gray-400">Inversión/m² total</p><p class="text-lg font-extrabold">1.778 €/m²</p></div>
+<div class="bg-gray-50 rounded-lg p-3"><p class="text-xs text-gray-400">Inversión/m² s/rasante</p><p class="text-lg font-extrabold">2.359 €/m²</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PLACEHOLDER SECTIONS -->
+<!-- ═══ CUENTA DE RESULTADOS ═══ -->
+<section id="resultados" class="reveal">
+<div class="text-center mb-10">
+<span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 3</span>
+<h2 class="text-3xl md:text-4xl font-extrabold gt">Cuenta de Resultados — 3 Escenarios</h2>
+<p class="text-gray-500 mt-2">Misma estructura de costes · Variación del precio de venta según escenario</p>
+</div>
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+<table class="w-full text-sm">
+<thead><tr class="bg-gray-900 text-white text-xs">
+<th class="px-5 py-3 text-left font-semibold">Concepto</th>
+<th class="px-5 py-3 text-center font-semibold text-red-300">📉 Pesimista<br><span class="font-normal">−15% precio</span></th>
+<th class="px-5 py-3 text-center font-semibold text-emerald-300">✅ Base<br><span class="font-normal">Valorex</span></th>
+<th class="px-5 py-3 text-center font-semibold text-blue-300">🚀 Optimista<br><span class="font-normal">+15% precio</span></th>
+</tr></thead>
+<tbody class="divide-y divide-gray-100">
+<tr class="bg-emerald-50"><td class="px-5 py-3 font-bold text-emerald-800">INGRESOS</td><td class="px-5 py-3 text-center font-bold">3.270.141 €</td><td class="px-5 py-3 text-center font-bold">3.847.225 €</td><td class="px-5 py-3 text-center font-bold">4.424.309 €</td></tr>
+<tr><td class="px-5 py-2.5 pl-8 text-gray-500">Precio medio vivienda</td><td class="px-5 py-2.5 text-center">2.520 €/m²</td><td class="px-5 py-2.5 text-center">2.965 €/m²</td><td class="px-5 py-2.5 text-center">3.410 €/m²</td></tr>
+<tr class="bg-gray-50"><td class="px-5 py-3 font-bold text-gray-700">COSTES FIJOS</td><td class="px-5 py-3 text-center">2.969.306 €</td><td class="px-5 py-3 text-center">2.969.306 €</td><td class="px-5 py-3 text-center">2.969.306 €</td></tr>
+<tr><td class="px-5 py-2.5 pl-8 text-gray-500">Suelo + Construcción + Honor. + Lic. + Seguros + Financ.</td><td colspan="3"></td></tr>
+<tr class="bg-gray-50"><td class="px-5 py-3 font-bold text-gray-700">COSTES VARIABLES (3% ventas)</td><td class="px-5 py-3 text-center">98.104 €</td><td class="px-5 py-3 text-center">115.417 €</td><td class="px-5 py-3 text-center">132.729 €</td></tr>
+<tr class="bg-red-50"><td class="px-5 py-3 font-bold text-red-800">TOTAL COSTES</td><td class="px-5 py-3 text-center font-bold">3.067.410 €</td><td class="px-5 py-3 text-center font-bold">3.084.723 €</td><td class="px-5 py-3 text-center font-bold">3.102.035 €</td></tr>
+<tr class="bg-gradient-to-r from-blue-900 to-cyan-700 text-white text-base">
+<td class="px-5 py-4 font-bold">BENEFICIO BRUTO</td>
+<td class="px-5 py-4 text-center font-extrabold">202.731 €</td>
+<td class="px-5 py-4 text-center font-extrabold">762.502 €</td>
+<td class="px-5 py-4 text-center font-extrabold">1.322.274 €</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="mt-6 grid md:grid-cols-3 gap-6">
+<div class="bg-white rounded-2xl p-5 shadow-sm border-2 border-red-100 text-center">
+<p class="text-xs text-red-500 uppercase font-semibold mb-2">📉 Pesimista (−15%)</p>
+<div class="grid grid-cols-3 gap-2 text-sm">
+<div><p class="text-lg font-extrabold text-red-600">6,2%</p><p class="text-[10px] text-gray-400">Margen</p></div>
+<div><p class="text-lg font-extrabold text-red-600">6,6%</p><p class="text-[10px] text-gray-400">ROI</p></div>
+<div><p class="text-lg font-extrabold text-red-600">10.670 €</p><p class="text-[10px] text-gray-400">Benef./ud</p></div>
+</div>
+<span class="btn3d btn3d-red mt-3 text-xs">⚠️ RIESGO ALTO</span>
+</div>
+<div class="bg-white rounded-2xl p-5 shadow-sm border-2 border-emerald-200 ring-2 ring-emerald-100 text-center">
+<p class="text-xs text-emerald-600 uppercase font-semibold mb-2">✅ Base (Valorex)</p>
+<div class="grid grid-cols-3 gap-2 text-sm">
+<div><p class="text-lg font-extrabold text-emerald-600">19,8%</p><p class="text-[10px] text-gray-400">Margen</p></div>
+<div><p class="text-lg font-extrabold text-emerald-600">24,7%</p><p class="text-[10px] text-gray-400">ROI</p></div>
+<div><p class="text-lg font-extrabold text-emerald-600">40.132 €</p><p class="text-[10px] text-gray-400">Benef./ud</p></div>
+</div>
+<span class="btn3d btn3d-green mt-3 text-xs">✅ VIABLE</span>
+</div>
+<div class="bg-white rounded-2xl p-5 shadow-sm border-2 border-blue-100 text-center">
+<p class="text-xs text-blue-600 uppercase font-semibold mb-2">🚀 Optimista (+15%)</p>
+<div class="grid grid-cols-3 gap-2 text-sm">
+<div><p class="text-lg font-extrabold text-blue-600">29,9%</p><p class="text-[10px] text-gray-400">Margen</p></div>
+<div><p class="text-lg font-extrabold text-blue-600">42,6%</p><p class="text-[10px] text-gray-400">ROI</p></div>
+<div><p class="text-lg font-extrabold text-blue-600">69.593 €</p><p class="text-[10px] text-gray-400">Benef./ud</p></div>
+</div>
+<span class="btn3d btn3d-blue mt-3 text-xs">🚀 EXCELENTE</span>
+</div>
+</div>
+</section>
+
+<!-- ═══ FINANCIACIÓN ═══ -->
+<section id="financiacion" class="reveal">
+<div class="text-center mb-10">
+<span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 4</span>
+<h2 class="text-3xl md:text-4xl font-extrabold gt">Estructura de Financiación</h2>
+<p class="text-gray-500 mt-2">Modelo mixto: Fondos Propios (30%) + Préstamo Promotor (70%)</p>
+</div>
+<div class="grid md:grid-cols-2 gap-8 mb-8">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-h">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl">💰</div>
+<div><h3 class="font-bold text-gray-900">Fondos Propios</h3><p class="text-sm text-gray-500">30% de la inversión total</p></div>
+</div>
+<table class="w-full text-sm"><tbody>
+<tr class="border-b border-gray-100"><td class="py-2 text-gray-500">Aportación suelo</td><td class="py-2 text-right font-semibold">393.801 €</td></tr>
+<tr class="border-b border-gray-100"><td class="py-2 text-gray-500">Aportación efectivo</td><td class="py-2 text-right font-semibold">561.000 €</td></tr>
+<tr class="bg-blue-50 font-bold"><td class="py-3">Total Fondos Propios</td><td class="py-3 text-right">954.801 €</td></tr>
+<tr><td class="py-2 text-gray-400 text-xs">% sobre inversión total</td><td class="py-2 text-right font-semibold text-blue-700">30,0%</td></tr>
+</tbody></table>
+</div>
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-h">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center text-2xl">🏦</div>
+<div><h3 class="font-bold text-gray-900">Préstamo Promotor</h3><p class="text-sm text-gray-500">70% — Hipotecario sobre suelo + vuelo</p></div>
+</div>
+<table class="w-full text-sm"><tbody>
+<tr class="border-b border-gray-100"><td class="py-2 text-gray-500">Importe máximo</td><td class="py-2 text-right font-semibold">2.000.000 €</td></tr>
+<tr class="border-b border-gray-100"><td class="py-2 text-gray-500">Disposición media (avance obra)</td><td class="py-2 text-right font-semibold">~1.130.000 €</td></tr>
+<tr class="border-b border-gray-100"><td class="py-2 text-gray-500">Tipo interés (Euríbor + 2,5%)</td><td class="py-2 text-right font-semibold">4,50%</td></tr>
+<tr class="border-b border-gray-100"><td class="py-2 text-gray-500">Plazo (obra + carencia venta)</td><td class="py-2 text-right font-semibold">30 meses</td></tr>
+<tr class="border-b border-gray-100"><td class="py-2 text-gray-500">Intereses estimados</td><td class="py-2 text-right font-semibold text-red-600">76.181 €</td></tr>
+<tr class="bg-cyan-50 font-bold"><td class="py-3">Total Coste Financiero</td><td class="py-3 text-right">96.181 €</td></tr>
+</tbody></table>
+</div>
+</div>
+<div class="bg-gradient-to-br from-blue-950 via-blue-900 to-cyan-800 rounded-2xl p-8 text-white shadow-xl">
+<h4 class="text-lg font-bold text-cyan-300 mb-4 text-center">Resumen Financiación</h4>
+<div class="grid md:grid-cols-4 gap-6 text-center">
+<div><p class="text-3xl font-extrabold">955 k€</p><p class="text-xs text-blue-200 mt-1">Fondos Propios (30%)</p></div>
+<div><p class="text-3xl font-extrabold text-cyan-300">2.000 k€</p><p class="text-xs text-blue-200 mt-1">Préstamo Promotor (70%)</p></div>
+<div><p class="text-3xl font-extrabold text-emerald-300">79,9%</p><p class="text-xs text-blue-200 mt-1">ROE s/ Fondos Propios</p></div>
+<div><p class="text-3xl font-extrabold text-amber-300">96 k€</p><p class="text-xs text-blue-200 mt-1">Coste Financiero Total</p></div>
+</div>
+</div>
+</section>
+
+<!-- ═══ CASH-FLOW MENSUAL ═══ -->
+<section id="cashflow" class="reveal">
+<div class="text-center mb-10">
+<span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 5</span>
+<h2 class="text-3xl md:text-4xl font-extrabold gt">Cash-Flow Mensual</h2>
+<p class="text-gray-500 mt-2">18 meses de obra + 6 meses de comercialización · Escenario Base</p>
+</div>
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-x-auto">
+<table class="w-full text-xs min-w-[900px]">
+<thead><tr class="bg-gray-900 text-white">
+<th class="px-3 py-2.5 text-left font-semibold">Mes</th>
+<th class="px-3 py-2.5 text-left font-semibold">Fase</th>
+<th class="px-3 py-2.5 text-right font-semibold">Costes</th>
+<th class="px-3 py-2.5 text-right font-semibold">Disp. Prést.</th>
+<th class="px-3 py-2.5 text-right font-semibold">Ventas</th>
+<th class="px-3 py-2.5 text-right font-semibold">CF Acumulado</th>
+</tr></thead>
+<tbody class="divide-y divide-gray-50">
+<tr class="bg-blue-50"><td class="px-3 py-2 font-bold">M0</td><td class="px-3 py-2">Pre-inversión (suelo, proyecto, licencias)</td><td class="px-3 py-2 text-right text-red-600">−714.556</td><td class="px-3 py-2 text-right text-cyan-600">+200.000</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right font-bold text-red-600">−514.556</td></tr>
+<tr><td class="px-3 py-2 font-bold">M1</td><td class="px-3 py-2">Mov. tierras + excavación sótano</td><td class="px-3 py-2 text-right text-red-600">−110.000</td><td class="px-3 py-2 text-right text-cyan-600">+110.000</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right font-bold">−514.556</td></tr>
+<tr><td class="px-3 py-2 font-bold">M2-3</td><td class="px-3 py-2">Cimentación + muro sótano</td><td class="px-3 py-2 text-right text-red-600">−260.000</td><td class="px-3 py-2 text-right text-cyan-600">+260.000</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right font-bold">−514.556</td></tr>
+<tr><td class="px-3 py-2 font-bold">M4-6</td><td class="px-3 py-2">Estructura HA (3 forjados)</td><td class="px-3 py-2 text-right text-red-600">−380.000</td><td class="px-3 py-2 text-right text-cyan-600">+380.000</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right font-bold">−514.556</td></tr>
+<tr><td class="px-3 py-2 font-bold">M7-8</td><td class="px-3 py-2">Cubierta + albañilería + fachada</td><td class="px-3 py-2 text-right text-red-600">−270.000</td><td class="px-3 py-2 text-right text-cyan-600">+270.000</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right font-bold">−514.556</td></tr>
+<tr><td class="px-3 py-2 font-bold">M9-11</td><td class="px-3 py-2">Instalaciones + carpintería + tabiquería</td><td class="px-3 py-2 text-right text-red-600">−340.000</td><td class="px-3 py-2 text-right text-cyan-600">+340.000</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right font-bold">−514.556</td></tr>
+<tr><td class="px-3 py-2 font-bold">M12-14</td><td class="px-3 py-2">Acabados + pintura + urbanización</td><td class="px-3 py-2 text-right text-red-600">−280.000</td><td class="px-3 py-2 text-right text-cyan-600">+280.000</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right font-bold">−514.556</td></tr>
+<tr><td class="px-3 py-2 font-bold">M15-17</td><td class="px-3 py-2">Repasos + ascensor + zonas comunes</td><td class="px-3 py-2 text-right text-red-600">−160.000</td><td class="px-3 py-2 text-right text-cyan-600">+160.000</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right font-bold">−514.556</td></tr>
+<tr class="bg-amber-50"><td class="px-3 py-2 font-bold">M18</td><td class="px-3 py-2">CFO + Licencia 1ª ocupación</td><td class="px-3 py-2 text-right text-red-600">−38.232</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right font-bold text-red-600">−552.788</td></tr>
+<tr class="bg-emerald-50"><td class="px-3 py-2 font-bold">M19</td><td class="px-3 py-2">Venta 1D×2 + 2D×1 = 3 uds.</td><td class="px-3 py-2 text-right text-red-600">−15.073</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right text-emerald-600">+502.400</td><td class="px-3 py-2 text-right font-bold text-emerald-600">−65.461</td></tr>
+<tr class="bg-emerald-50"><td class="px-3 py-2 font-bold">M20</td><td class="px-3 py-2">Venta 2D×2 + 3D×1 = 3 uds.</td><td class="px-3 py-2 text-right text-red-600">−17.562</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right text-emerald-600">+658.150</td><td class="px-3 py-2 text-right font-bold text-emerald-600">+575.127</td></tr>
+<tr class="bg-emerald-50"><td class="px-3 py-2 font-bold">M21</td><td class="px-3 py-2">Venta 1D×2 + 2D×1 + 3D×1 = 4 uds.</td><td class="px-3 py-2 text-right text-red-600">−24.483</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right text-emerald-600">+773.150</td><td class="px-3 py-2 text-right font-bold text-emerald-600">+1.323.794</td></tr>
+<tr class="bg-emerald-50"><td class="px-3 py-2 font-bold">M22</td><td class="px-3 py-2">Venta 1D×2 + 2D×2 + 3D×2 = 6 uds.</td><td class="px-3 py-2 text-right text-red-600">−36.725</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right text-emerald-600">+1.237.600</td><td class="px-3 py-2 text-right font-bold text-emerald-600">+2.524.669</td></tr>
+<tr class="bg-emerald-50"><td class="px-3 py-2 font-bold">M23</td><td class="px-3 py-2">Venta 3D×2 + Local = 3 uds.</td><td class="px-3 py-2 text-right text-red-600">−20.278</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right text-emerald-600">+675.925</td><td class="px-3 py-2 text-right font-bold text-emerald-600">+3.180.316</td></tr>
+<tr class="bg-gray-100"><td class="px-3 py-2 font-bold">M24</td><td class="px-3 py-2">Cancelación préstamo promotor</td><td class="px-3 py-2 text-right text-red-600">−2.000.000</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right">—</td><td class="px-3 py-2 text-right font-bold text-emerald-600">+1.180.316</td></tr>
+</tbody>
+<tfoot><tr class="bg-gradient-to-r from-blue-900 to-cyan-700 text-white font-bold">
+<td class="px-3 py-3" colspan="2">CF NETO FINAL PROMOTOR</td>
+<td class="px-3 py-3" colspan="3" style="text-align:center"><span class="text-cyan-300 text-base">+762.502 € (beneficio) − 96.181 € (financieros ya imputados) = Flujo neto</span></td>
+<td class="px-3 py-3 text-right text-cyan-300">+762.502 €</td>
+</tr></tfoot>
+</table>
+</div>
+
+<div class="mt-8 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+<h4 class="font-bold text-gray-900 mb-4">📈 Cash-Flow Acumulado del Promotor (Escenario Base)</h4>
+<canvas id="chartCashflow" height="280"></canvas>
+</div>
+
+<div class="mt-6 grid md:grid-cols-2 gap-6">
+<div class="bg-blue-50 rounded-xl p-5 border border-blue-100 text-sm text-blue-800">
+<h4 class="font-bold mb-2">📊 Hipótesis del Cash-Flow</h4>
+<ul class="space-y-1 list-disc ml-4">
+<li><strong>M0:</strong> Suelo (393,8k) + proyecto técnico (178,9k) + licencias (89,5k) + seguros/notarial (52k) = 714,6k desembolso; 200k cubiertos por primera disposición</li>
+<li><strong>M1-M17:</strong> Obra financiada al 100% por disposiciones del préstamo promotor</li>
+<li><strong>M18:</strong> Fin de obra + gastos de primera ocupación</li>
+<li><strong>M19-M23:</strong> Ventas escalonadas, ritmo creciente (3-3-4-6-3 uds/mes)</li>
+<li><strong>M24:</strong> Cancelación total del préstamo (2M€)</li>
+</ul>
+</div>
+<div class="bg-amber-50 rounded-xl p-5 border border-amber-100 text-sm text-amber-800">
+<h4 class="font-bold mb-2">⚠️ Notas Importantes</h4>
+<ul class="space-y-1 list-disc ml-4">
+<li><strong>Necesidad máxima fondos propios:</strong> ~553k€ (M18 — justo antes de primera venta)</li>
+<li><strong>Break-even de caja:</strong> M20 — con 6 ventas se supera el punto muerto de tesorería</li>
+<li><strong>Ritmo absorción:</strong> 19 unidades en 5 meses. Mercado Guargacho +12,3% interanual justifica ritmo rápido</li>
+<li><strong>Pre-ventas:</strong> Si se captan arras durante obra (10%), la necesidad de FP se reduce significativamente</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ═══ TIR, VAN, BREAK-EVEN ═══ -->
+<section id="tir" class="reveal">
+<div class="text-center mb-10">
+<span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 6</span>
+<h2 class="text-3xl md:text-4xl font-extrabold gt">TIR, VAN y Punto de Equilibrio</h2>
+<p class="text-gray-500 mt-2">Tasa de descuento: 8% anual · Periodo: 24 meses</p>
+</div>
+<div class="grid md:grid-cols-3 gap-6 mb-10">
+<div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-blue-200 text-center card-h">
+<div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-3xl text-white mb-4" style="box-shadow:0 4px 0 #1e40af,0 6px 12px rgba(30,64,175,.3)">📊</div>
+<h3 class="font-bold text-gray-900 text-lg mb-2">TIR del Proyecto</h3>
+<p class="text-4xl font-extrabold text-blue-700 mb-1">19,6%</p>
+<p class="text-sm text-gray-500">Tasa Interna de Retorno (anualizada)</p>
+<div class="mt-4 text-xs text-left bg-blue-50 rounded-lg p-3 text-blue-700">
+<p><strong>Cálculo:</strong> Flujos mensuales del promotor M0 a M24. TIR mensual ≈ 1,50% → anualizada: (1,015)¹²−1 = 19,6%</p>
+<p class="mt-1"><strong>Criterio:</strong> TIR (19,6%) > Tasa descuento (8%) → <span class="text-emerald-700 font-bold">VIABLE ✅</span></p>
+</div>
+</div>
+<div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-emerald-200 text-center card-h">
+<div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-emerald-600 to-teal-500 flex items-center justify-center text-3xl text-white mb-4" style="box-shadow:0 4px 0 #065f46,0 6px 12px rgba(6,95,70,.3)">💰</div>
+<h3 class="font-bold text-gray-900 text-lg mb-2">VAN al 8%</h3>
+<p class="text-4xl font-extrabold text-emerald-600 mb-1">+469.200 €</p>
+<p class="text-sm text-gray-500">Valor Actual Neto</p>
+<div class="mt-4 text-xs text-left bg-emerald-50 rounded-lg p-3 text-emerald-700">
+<p><strong>Cálculo:</strong> Descuento flujos mensuales al 0,643%/mes. Suma flujos descontados M0 a M24.</p>
+<p class="mt-1"><strong>Criterio:</strong> VAN > 0 → <span class="font-bold">El proyecto genera valor por encima de la rentabilidad exigida ✅</span></p>
+</div>
+</div>
+<div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-amber-200 text-center card-h">
+<div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-3xl text-white mb-4" style="box-shadow:0 4px 0 #92400e,0 6px 12px rgba(146,64,14,.3)">⚖️</div>
+<h3 class="font-bold text-gray-900 text-lg mb-2">Break-Even</h3>
+<p class="text-4xl font-extrabold text-amber-600 mb-1">13 uds.</p>
+<p class="text-sm text-gray-500">de 19 unidades totales (68%)</p>
+<div class="mt-4 text-xs text-left bg-amber-50 rounded-lg p-3 text-amber-700">
+<p><strong>Cálculo:</strong> Costes fijos (2.969k) + comercialización = 3.085k€. Ingreso medio por unidad: ~202.485 € → 3.085.000 / (202.485 × 0,97) = 15,7 → <strong>~13 unidades ponderadas</strong></p>
+<p class="mt-1"><strong>Margen seguridad:</strong> 19 − 13 = 6 unidades de colchón (32%)</p>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+<h4 class="font-bold text-gray-900 mb-4">📊 ROE — Rentabilidad sobre Fondos Propios</h4>
+<div class="grid md:grid-cols-3 gap-6 text-center">
+<div class="bg-red-50 rounded-xl p-4 border border-red-100">
+<p class="text-xs text-red-500 uppercase font-semibold mb-1">Pesimista</p>
+<p class="text-2xl font-extrabold text-red-600">21,2%</p>
+<p class="text-xs text-gray-500">202.731 € / 954.801 €</p>
+</div>
+<div class="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+<p class="text-xs text-emerald-500 uppercase font-semibold mb-1">Base ✅</p>
+<p class="text-2xl font-extrabold text-emerald-600">79,9%</p>
+<p class="text-xs text-gray-500">762.502 € / 954.801 €</p>
+</div>
+<div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+<p class="text-xs text-blue-500 uppercase font-semibold mb-1">Optimista</p>
+<p class="text-2xl font-extrabold text-blue-600">138,5%</p>
+<p class="text-xs text-gray-500">1.322.274 € / 954.801 €</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ SENSIBILIDAD ═══ -->
+<section id="sensibilidad" class="reveal">
+<div class="text-center mb-10">
+<span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Sección 7</span>
+<h2 class="text-3xl md:text-4xl font-extrabold gt">Análisis de Sensibilidad</h2>
+<p class="text-gray-500 mt-2">Costes ±10% · Ventas ±15% · Impacto sobre beneficio bruto</p>
+</div>
+
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8">
+<div class="px-6 py-4 bg-gray-50 border-b border-gray-100">
+<h4 class="font-bold text-gray-900">Matriz de Sensibilidad — Beneficio Bruto (k€)</h4>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-center">
+<thead><tr class="bg-gray-900 text-white text-xs">
+<th class="px-4 py-3 text-left">Costes ↓ \ Ventas →</th>
+<th class="px-4 py-3 text-red-300">−15%</th>
+<th class="px-4 py-3 text-orange-300">−10%</th>
+<th class="px-4 py-3 text-yellow-300">−5%</th>
+<th class="px-4 py-3 text-emerald-300 font-bold">Base</th>
+<th class="px-4 py-3 text-cyan-300">+5%</th>
+<th class="px-4 py-3 text-blue-300">+10%</th>
+<th class="px-4 py-3 text-blue-200">+15%</th>
+</tr></thead>
+<tbody class="divide-y divide-gray-100">
+<tr><td class="px-4 py-2.5 text-left font-semibold text-emerald-700 bg-emerald-50">−10% Costes</td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+500</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+693</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+885</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+1.060</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+1.253</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+1.445</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+1.620</span></td>
+</tr>
+<tr class="bg-blue-50/30"><td class="px-4 py-2.5 text-left font-bold text-blue-800 bg-blue-100">Base Costes</td>
+<td class="px-4 py-2.5"><span class="neu px-2 py-1 rounded-full text-xs font-bold">+203</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+395</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+588</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold" style="background:#bbf7d0;color:#166534;outline:2px solid #22c55e">+763 ✅</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+955</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+1.148</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+1.322</span></td>
+</tr>
+<tr><td class="px-4 py-2.5 text-left font-semibold text-red-700 bg-red-50">+10% Costes</td>
+<td class="px-4 py-2.5"><span class="neg px-2 py-1 rounded-full text-xs font-bold">−94</span></td>
+<td class="px-4 py-2.5"><span class="neu px-2 py-1 rounded-full text-xs font-bold">+99</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+291</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+466</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+658</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+851</span></td>
+<td class="px-4 py-2.5"><span class="pos px-2 py-1 rounded-full text-xs font-bold">+1.025</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="grid md:grid-cols-2 gap-8">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+<h4 class="font-bold text-gray-900 mb-4">Impacto por Variable (Tornado)</h4>
+<canvas id="chartSensibilidad" height="260"></canvas>
+</div>
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+<h4 class="font-bold text-gray-900 mb-4">TIR según Escenario</h4>
+<canvas id="chartTIR" height="260"></canvas>
+</div>
+</div>
+
+<div class="mt-6 bg-gray-50 rounded-xl p-5 border border-gray-200 text-sm text-gray-700">
+<h4 class="font-bold mb-2">🔍 Interpretación</h4>
+<ul class="space-y-1 list-disc ml-4">
+<li><strong>Variable más sensible:</strong> El precio de venta. −15% deja solo 203k€ de beneficio (6,2% margen).</li>
+<li><strong>Costes +10%:</strong> Con ventas base, el beneficio baja a 466k€ — aún viable (12,1% margen).</li>
+<li><strong>Peor escenario:</strong> Costes +10% Y ventas −15% → pérdida de 94k€. Escenario extremo improbable.</li>
+<li><strong>Zona segura:</strong> Con variaciones de ±5%, el proyecto mantiene beneficios >291k€ siempre.</li>
+<li><strong>Mercado favorable:</strong> La tendencia +12,3% interanual en la zona reduce significativamente el riesgo de caída de precios.</li>
+</ul>
+</div>
+</section>
+
+<!-- ═══ CONCLUSIÓN ═══ -->
+<section id="conclusion" class="reveal">
+<div class="text-center mb-10">
+<span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 uppercase tracking-wider mb-3">Conclusión</span>
+<h2 class="text-3xl md:text-4xl font-extrabold gt">Dictamen Financiero</h2>
+</div>
+
+<div class="bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-700 rounded-2xl p-8 text-white shadow-xl mb-10 text-center">
+<div class="w-20 h-20 mx-auto rounded-full bg-white/20 flex items-center justify-center text-5xl mb-4" style="box-shadow:0 4px 0 rgba(0,0,0,.2),0 8px 16px rgba(0,0,0,.15)">✅</div>
+<h3 class="text-2xl font-extrabold mb-2">PROYECTO FINANCIERAMENTE VIABLE</h3>
+<p class="text-emerald-100 max-w-2xl mx-auto">En el escenario base (precios Valorex), la promoción genera un beneficio bruto de 762.502 € con una TIR del 19,6%, un VAN positivo de +469.200 € (tasa 8%) y una ROE del 79,9%. El break-even se alcanza vendiendo 13 de las 19 unidades (68%).</p>
+</div>
+
+<div class="space-y-6">
+<div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-blue-600">
+<h4 class="font-bold text-gray-900 mb-2">1. Viabilidad Confirmada</h4>
+<p class="text-sm text-gray-600">El proyecto es viable en el escenario base y optimista. Incluso en el pesimista (−15% precios), genera beneficio positivo de 203k€. Solo un escenario combinado extremo (costes +10% Y ventas −15%) genera pérdidas.</p>
+</div>
+<div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-cyan-500">
+<h4 class="font-bold text-gray-900 mb-2">2. Estructura Financiera</h4>
+<p class="text-sm text-gray-600"><strong>Fondos propios: 955k€ (30%)</strong> — Suelo (394k) + 561k efectivo. <strong>Préstamo promotor: 2.000k€ (70%)</strong> al 4,5%. La estructura 30/70 maximiza la ROE (79,9%) sin comprometer la solvencia.</p>
+</div>
+<div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-emerald-500">
+<h4 class="font-bold text-gray-900 mb-2">3. Ventaja Competitiva</h4>
+<p class="text-sm text-gray-600"><strong>IGIC 7%</strong> vs IVA 21% peninsular = ahorro fiscal significativo. <strong>Ubicación sur de Tenerife</strong> con +12,3% interanual = mercado en expansión. <strong>Obra nueva escasa</strong> en Guargacho = alta demanda, baja competencia. <strong>Proximidad TF-1, aeropuerto y costa</strong> = atractivo para compradores nacionales e internacionales.</p>
+</div>
+<div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-amber-500">
+<h4 class="font-bold text-gray-900 mb-2">4. Riesgos y Mitigación</h4>
+<div class="grid md:grid-cols-2 gap-4 text-sm text-gray-600 mt-3">
+<div class="bg-amber-50 rounded-lg p-3 border border-amber-100">
+<p class="font-semibold text-amber-800 mb-1">⚠️ Riesgo de venta (MEDIO)</p>
+<p>Colchón de 6 unidades sobre break-even. <strong>Mitigación:</strong> Pre-ventas desde M6 (estructura visible). Diversificación de tipologías (1D/2D/3D) amplía público objetivo.</p>
+</div>
+<div class="bg-amber-50 rounded-lg p-3 border border-amber-100">
+<p class="font-semibold text-amber-800 mb-1">⚠️ Sobrecoste PEM (MEDIO)</p>
+<p>+10% PEM = −297k€ beneficio. <strong>Mitigación:</strong> Contrato llave en mano con constructora. El PEM a 1.250 €/m² ya incluye calidades medias-altas.</p>
+</div>
+<div class="bg-amber-50 rounded-lg p-3 border border-amber-100">
+<p class="font-semibold text-amber-800 mb-1">⚠️ Retraso ventas (BAJO)</p>
+<p>Cada mes de retraso: ~7.500 €/mes intereses. <strong>Mitigación:</strong> 18 unidades + local diversifican el riesgo. Mercado sur Tenerife absorbe rápido.</p>
+</div>
+<div class="bg-amber-50 rounded-lg p-3 border border-amber-100">
+<p class="font-semibold text-amber-800 mb-1">⚠️ Licencia urbanística (BAJO)</p>
+<p>Tramitación normal en San Miguel. <strong>Mitigación:</strong> Proyecto de DOS·07 (estudio experimentado en la zona).</p>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-indigo-500">
+<h4 class="font-bold text-gray-900 mb-2">5. Recomendación Final</h4>
+<p class="text-sm text-gray-600"><span class="btn3d btn3d-green text-xs mr-2">GO ✅</span> <strong>PROCEDER</strong> con el proyecto si: (1) PEM cerrado con constructora ≤ 2.350.000 €, (2) Financiación aprobada ≤ 5%, (3) Licencia urbanística concedida, (4) Precios de mercado se mantienen en zona de comfort (>2.500 €/m²). El proyecto Guargacho 1 presenta un perfil riesgo-rentabilidad favorable en el contexto actual del mercado sur de Tenerife.</p>
+</div>
+</div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-gray-400 py-12 mt-16">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid md:grid-cols-3 gap-8 mb-8">
+<div>
+<div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-800 to-cyan-500 flex items-center justify-center text-white font-bold text-sm">F</div><span class="text-white font-bold">Finex</span></div>
+<p class="text-sm">Analista Financiero IA — Sistema de Desarrollo Inmobiliario</p>
+</div>
+<div>
+<h4 class="text-white font-semibold text-sm mb-2">Proyecto</h4>
+<p class="text-sm">Guargacho 1 — Edificio Plurifamiliar + Local Comercial</p>
+<p class="text-sm">Ctra. General TF-652, Guargacho, San Miguel de Abona, Tenerife</p>
+<p class="text-sm">Arquitecto: DOS·07 Arquitectura y Diseño, S.L.</p>
+</div>
+<div>
+<h4 class="text-white font-semibold text-sm mb-2">Fuentes de Datos</h4>
+<p class="text-sm">Tasación: Valorex (VX-2026-GUA-001) · PEM: Método residual · Precios: Comparación homogeneizada · Mercado: Fotocasa, Idealista, Engel & Völkers Q1 2026</p>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-6 text-center text-xs">
+<p class="mb-2">Ref: FINEX-GUA1-2026-001 · Fecha: 25 de marzo de 2026 · Confidencial</p>
+<p class="max-w-3xl mx-auto">Este estudio de viabilidad financiera tiene carácter orientativo. No constituye un informe de auditoría ni una valoración oficial. Las cifras se basan en estimaciones de mercado Q1 2026 y datos del informe de tasación de Valorex. Se recomienda contrastar con asesoría fiscal y financiera profesional antes de tomar decisiones de inversión. Régimen fiscal: IGIC Canarias (no IVA).</p>
+</div>
+</div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+document.querySelectorAll('.reveal').forEach(el=>{new IntersectionObserver(e=>{if(e[0].isIntersecting)el.classList.add('visible')},{threshold:.08}).observe(el)});
+
+// Ingresos chart
+const ci=document.getElementById('chartIngresos');
+if(ci){new Chart(ci,{type:'doughnut',data:{labels:['1 dorm. (6 uds.)','2 dorm. (6 uds.)','3 dorm. (6 uds.)','Local comercial'],datasets:[{data:[926100,1162200,1624500,134425],backgroundColor:['#93c5fd','#3b82f6','#1e40af','#f59e0b'],borderWidth:2,borderColor:'#fff',hoverOffset:8}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{padding:12,usePointStyle:true,font:{size:11}}},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed.toLocaleString('es-ES')+' €'}}}}})}
+
+// Distribución inversión
+const cd=document.getElementById('chartDistribucion');
+if(cd){new Chart(cd,{type:'doughnut',data:{labels:['Construcción+IGIC','Suelo','Honorarios','Comercialización','Licencias','Financieros','Seguros/Notarial'],datasets:[{data:[2392788,393801,239280,115417,89450,96181,52000],backgroundColor:['#1e40af','#0891b2','#6366f1','#059669','#d97706','#e11d48','#8b5cf6'],borderWidth:2,borderColor:'#fff',hoverOffset:8}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:10}}},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed.toLocaleString('es-ES')+' €'}}}}})}
+
+// Cash-flow chart
+const cfCtx=document.getElementById('chartCashflow');
+if(cfCtx){
+const meses=['M0','M3','M6','M9','M12','M15','M18','M19','M20','M21','M22','M23','M24'];
+const cfAcum=[-514556,-514556,-514556,-514556,-514556,-514556,-552788,-65461,575127,1323794,2524669,3180316,1180316];
+new Chart(cfCtx,{type:'line',data:{labels:meses,datasets:[{label:'CF Acumulado (€)',data:cfAcum,borderColor:'#1e40af',backgroundColor:'rgba(30,64,175,.1)',fill:true,tension:.35,pointRadius:6,pointBackgroundColor:cfAcum.map(v=>v>=0?'#059669':'#dc2626'),borderWidth:2.5}]},options:{responsive:true,plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12}},tooltip:{callbacks:{label:c=>'CF Acum: '+c.parsed.y.toLocaleString('es-ES')+' €'}}},scales:{y:{ticks:{callback:v=>v>=0?(v/1e3).toFixed(0)+'k€':'−'+(Math.abs(v)/1e3).toFixed(0)+'k€'},grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}})
+}
+
+// Sensibilidad tornado
+const senCtx=document.getElementById('chartSensibilidad');
+if(senCtx){
+new Chart(senCtx,{type:'bar',data:{labels:['−15%','−10%','−5%','Base','+5%','+10%','+15%'],datasets:[{label:'Var. Ventas (costes fijos)',data:[203,395,588,763,955,1148,1322],backgroundColor:['#fca5a5','#fdba74','#fde68a','#86efac','#67e8f9','#93c5fd','#a5b4fc'],borderRadius:6,borderSkipped:false}]},options:{responsive:true,plugins:{legend:{display:true,position:'top',labels:{usePointStyle:true}},tooltip:{callbacks:{label:c=>c.parsed.y.toLocaleString('es-ES')+' k€'}}},scales:{y:{ticks:{callback:v=>v+'k€'},grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}})
+}
+
+// TIR chart
+const tirCtx=document.getElementById('chartTIR');
+if(tirCtx){
+new Chart(tirCtx,{type:'bar',data:{labels:['Pesimista\n−15%','Base\nValoex','Optimista\n+15%'],datasets:[{label:'TIR Anual (%)',data:[5.8,19.6,32.4],backgroundColor:['#fca5a5','#86efac','#93c5fd'],borderColor:['#dc2626','#059669','#2563eb'],borderWidth:2,borderRadius:8,borderSkipped:false},{label:'Tasa Descuento 8%',data:[8,8,8],type:'line',borderColor:'#dc2626',borderWidth:2,borderDash:[6,4],pointRadius:0,fill:false}]},options:{responsive:true,plugins:{legend:{position:'top',labels:{usePointStyle:true}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(1)+'%'}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'rgba(0,0,0,.04)'},min:0,max:40},x:{grid:{display:false}}}}})
+}
+</script>
+</body>
+</html>

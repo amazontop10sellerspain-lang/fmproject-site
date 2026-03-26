@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análisis de Proyecto — Edificio Guargacho 1 · Nexus PM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(.23,1,.32,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.4); }
+    tbody tr:hover { background-color: rgba(16,185,129,0.05); }
+    .card-hover { transition: all 0.3s cubic-bezier(.23,1,.32,1); }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .nav-link { position: relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:#059669; transition:width 0.3s; }
+    .nav-link:hover::after { width:100%; }
+    .phase-line { position: relative; }
+    .phase-line::before { content:''; position:absolute; left:19px; top:48px; bottom:0; width:2px; background:#e5e7eb; }
+    .phase-line:last-child::before { display:none; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    .float { animation: float 6s ease-in-out infinite; }
+    .hero-grid { background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M0 0h40v40H0V0zm1 1h38v38H1V1z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .traffic-green { background: #10b981; box-shadow: 0 0 8px rgba(16,185,129,0.5); }
+    .traffic-yellow { background: #f59e0b; box-shadow: 0 0 8px rgba(245,158,11,0.5); }
+    .traffic-red { background: #ef4444; box-shadow: 0 0 8px rgba(239,68,68,0.5); }
+    @media print { .no-print{display:none} .reveal{opacity:1;transform:none} }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-lg border-b border-gray-200/60 no-print">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex items-center justify-center text-white font-bold text-sm">NX</div>
+        <span class="text-lg font-bold gradient-text">Nexus — Director de Proyecto</span>
+      </div>
+      <div class="hidden lg:flex gap-5 text-[13px] font-medium text-gray-500">
+        <a href="#resumen" class="nav-link hover:text-emerald-600 transition">Resumen</a>
+        <a href="#ficha" class="nav-link hover:text-emerald-600 transition">Ficha</a>
+        <a href="#viabilidad" class="nav-link hover:text-emerald-600 transition">Viabilidad</a>
+        <a href="#cronograma" class="nav-link hover:text-emerald-600 transition">Cronograma</a>
+        <a href="#riesgos" class="nav-link hover:text-emerald-600 transition">Riesgos</a>
+        <a href="#equipo" class="nav-link hover:text-emerald-600 transition">Equipo</a>
+        <a href="#normativa" class="nav-link hover:text-emerald-600 transition">Normativa</a>
+        <a href="#proximos" class="nav-link hover:text-emerald-600 transition">Próximos Pasos</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-emerald-700 via-emerald-600 to-teal-700 text-white">
+    <div class="absolute inset-0 hero-grid"></div>
+    <div class="absolute top-16 right-16 w-72 h-72 bg-teal-400/15 rounded-full blur-3xl float"></div>
+    <div class="absolute bottom-8 left-8 w-56 h-56 bg-emerald-300/15 rounded-full blur-3xl float" style="animation-delay:-3s"></div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 md:py-24">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="px-3 py-1 bg-white/15 text-emerald-100 rounded-full text-xs font-semibold tracking-wider uppercase backdrop-blur-sm">📋 Análisis de Proyecto</span>
+            <span class="px-3 py-1 bg-white/10 text-white/70 rounded-full text-xs font-medium backdrop-blur-sm">v1.0</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">Edificio de Viviendas<br>y Local Comercial</h1>
+          <p class="text-emerald-100 text-lg leading-relaxed">Guargacho 1 — Análisis integral de viabilidad, cronograma maestro, matriz de riesgos y coordinación del equipo de 20 agentes especializados.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">📅 25 marzo 2026</span>
+            <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">📍 Guargacho, San Miguel de Abona</span>
+            <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">🏗️ Obra Nueva · PB+2</span>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 text-center min-w-[200px]">
+          <p class="text-emerald-900 text-xs font-semibold uppercase tracking-wider mb-2">Semáforo Global</p>
+          <div class="w-16 h-16 rounded-full traffic-green mx-auto mb-3"></div>
+          <p class="text-emerald-800 font-bold text-lg">VIABLE</p>
+          <p class="text-emerald-600 text-xs mt-1">Con condicionantes</p>
+        </div>
+      </div>
+
+      <!-- KPIs Hero -->
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+          <p class="text-2xl font-extrabold">18</p>
+          <p class="text-emerald-200 text-xs">Viviendas</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+          <p class="text-2xl font-extrabold">1.789 m²</p>
+          <p class="text-emerald-200 text-xs">Sup. Construida Total</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+          <p class="text-2xl font-extrabold">3,85 M€</p>
+          <p class="text-emerald-200 text-xs">Valor Tasación</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+          <p class="text-2xl font-extrabold">18%</p>
+          <p class="text-emerald-200 text-xs">Margen Promotor</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+          <p class="text-2xl font-extrabold">24-28 m</p>
+          <p class="text-emerald-200 text-xs">Plazo Estimado</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-16 space-y-20">
+
+    <!-- ==================== RESUMEN EJECUTIVO ==================== -->
+    <section id="resumen" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">📊</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Resumen Ejecutivo</h2>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div class="prose max-w-none text-gray-700 leading-relaxed">
+          <p class="text-lg mb-4">El proyecto <strong>Guargacho 1</strong> consiste en la promoción de un <strong>edificio plurifamiliar de viviendas y local comercial</strong> en la Carretera General TF-652, Guargacho, municipio de San Miguel de Abona (Tenerife). El edificio comprende <strong>PB + 2 plantas + sótano</strong>, con un programa funcional de:</p>
+
+          <div class="grid md:grid-cols-4 gap-4 my-6 not-prose">
+            <div class="card-hover bg-emerald-50 rounded-xl p-5 border border-emerald-100 text-center">
+              <p class="text-3xl font-black text-emerald-700">18</p>
+              <p class="text-sm text-emerald-600 font-medium">Viviendas</p>
+              <p class="text-xs text-emerald-400">6×1D + 6×2D + 6×3D</p>
+            </div>
+            <div class="card-hover bg-blue-50 rounded-xl p-5 border border-blue-100 text-center">
+              <p class="text-3xl font-black text-blue-700">1</p>
+              <p class="text-sm text-blue-600 font-medium">Local Comercial</p>
+              <p class="text-xs text-blue-400">~95 m² en PB</p>
+            </div>
+            <div class="card-hover bg-purple-50 rounded-xl p-5 border border-purple-100 text-center">
+              <p class="text-3xl font-black text-purple-700">18</p>
+              <p class="text-sm text-purple-600 font-medium">Garajes</p>
+              <p class="text-xs text-purple-400">Sótano · Vinculados</p>
+            </div>
+            <div class="card-hover bg-amber-50 rounded-xl p-5 border border-amber-100 text-center">
+              <p class="text-3xl font-black text-amber-700">18</p>
+              <p class="text-sm text-amber-600 font-medium">Trasteros</p>
+              <p class="text-xs text-amber-400">Vinculados</p>
+            </div>
+          </div>
+
+          <p class="mb-4">El proyecto está diseñado por el estudio <strong>DOS·07 Arquitectura y Diseño, S.L.</strong> (arquitectos Ignacio Galván Cañada, col. nº 1967 COAC, y Daniel Montesino Rodríguez, col. nº 1726 COAC). Las calidades previstas son <strong>media-alta</strong>: fachada ventilada, carpintería de aluminio RPT, aerotermia para ACS, ascensor, pavimento porcelánico gran formato y certificación energética estimada clase B.</p>
+
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-5 not-prose">
+            <p class="text-emerald-800 font-semibold mb-2">✅ Conclusión del PM</p>
+            <p class="text-emerald-700 text-sm leading-relaxed">El proyecto <strong>ES VIABLE</strong> desde las perspectivas urbanística, técnica, financiera y comercial. El margen de promotor del 18% es razonable para el sur de Tenerife. La demanda de obra nueva en Guargacho es alta con oferta muy limitada. Los principales condicionantes son: (1) la obtención de la licencia urbanística en un municipio con conocidos retrasos administrativos, (2) la confirmación de superficies definitivas del proyecto, y (3) la necesidad de estudio geotécnico profesional.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FICHA DEL PROYECTO ==================== -->
+    <section id="ficha" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">📋</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Ficha del Proyecto</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <!-- Datos generales -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="px-6 py-4 bg-emerald-50 border-b border-emerald-100">
+            <h3 class="font-bold text-emerald-800">🏢 Datos Generales</h3>
+          </div>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500 w-44">Denominación</td><td class="px-6 py-3 text-gray-800 font-medium">Edificio Guargacho 1</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Tipología</td><td class="px-6 py-3">Edificio plurifamiliar + local comercial</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Ubicación</td><td class="px-6 py-3">Ctra. General TF-652, Guargacho</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Municipio</td><td class="px-6 py-3">San Miguel de Abona (Tenerife)</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Código Postal</td><td class="px-6 py-3">38639</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Arquitectos</td><td class="px-6 py-3">DOS·07 Arquitectura y Diseño, S.L.<br><span class="text-xs text-gray-400">I. Galván (1967 COAC) · D. Montesino (1726 COAC)</span></td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Plantas</td><td class="px-6 py-3">Sótano + PB + 2 plantas</td></tr>
+              <tr><td class="px-6 py-3 font-semibold text-gray-500">Estado</td><td class="px-6 py-3"><span class="px-2.5 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-semibold">Fase de Proyecto</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Superficies y programa -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="px-6 py-4 bg-emerald-50 border-b border-emerald-100">
+            <h3 class="font-bold text-emerald-800">📐 Programa Funcional y Superficies</h3>
+          </div>
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-gray-100 bg-gray-50/50"><th class="px-6 py-3 text-left font-semibold text-gray-600">Elemento</th><th class="px-6 py-3 text-center font-semibold text-gray-600">Uds.</th><th class="px-6 py-3 text-center font-semibold text-gray-600">m² útil</th><th class="px-6 py-3 text-right font-semibold text-gray-600">m² constr.</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="px-6 py-2.5 font-medium">Viv. 1 dormitorio</td><td class="px-6 py-2.5 text-center">6</td><td class="px-6 py-2.5 text-center">38-44</td><td class="px-6 py-2.5 text-right">~294 m²</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-2.5 font-medium">Viv. 2 dormitorios</td><td class="px-6 py-2.5 text-center">6</td><td class="px-6 py-2.5 text-center">52-60</td><td class="px-6 py-2.5 text-right">~390 m²</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-2.5 font-medium">Viv. 3 dormitorios</td><td class="px-6 py-2.5 text-center">6</td><td class="px-6 py-2.5 text-center">75-90</td><td class="px-6 py-2.5 text-right">~570 m²</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-2.5 font-medium">Local comercial</td><td class="px-6 py-2.5 text-center">1</td><td class="px-6 py-2.5 text-center">~80</td><td class="px-6 py-2.5 text-right">~95 m²</td></tr>
+              <tr class="border-b border-gray-50 bg-emerald-50/50"><td class="px-6 py-3 font-bold text-emerald-800" colspan="3">Total sobre rasante</td><td class="px-6 py-3 text-right font-black text-emerald-700">~1.349 m²</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-2.5 font-medium text-gray-500">Garajes (sótano)</td><td class="px-6 py-2.5 text-center text-gray-500">18</td><td class="px-6 py-2.5 text-center text-gray-500">~12 c/u</td><td class="px-6 py-2.5 text-right text-gray-500">~350 m²</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-2.5 font-medium text-gray-500">Trasteros</td><td class="px-6 py-2.5 text-center text-gray-500">18</td><td class="px-6 py-2.5 text-center text-gray-500">~5 c/u</td><td class="px-6 py-2.5 text-right text-gray-500">~90 m²</td></tr>
+              <tr class="bg-gray-50"><td class="px-6 py-3 font-bold text-gray-700" colspan="3">TOTAL CONSTRUIDO</td><td class="px-6 py-3 text-right font-black text-gray-800">~1.789 m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Calidades -->
+      <div class="mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">✨ Calidades Constructivas Previstas</h3>
+        <div class="grid md:grid-cols-4 gap-4">
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <p class="font-bold text-sm text-gray-700 mb-2">🧱 Fachada</p>
+            <ul class="text-xs text-gray-500 space-y-1"><li>• Fachada ventilada oscura</li><li>• Madera tecnológica</li><li>• Carpintería aluminio RPT</li></ul>
+          </div>
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <p class="font-bold text-sm text-gray-700 mb-2">🏠 Interior</p>
+            <ul class="text-xs text-gray-500 space-y-1"><li>• Porcelánico gran formato</li><li>• Cocina abierta diseño</li><li>• Baños monomando</li></ul>
+          </div>
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <p class="font-bold text-sm text-gray-700 mb-2">⚡ Instalaciones</p>
+            <ul class="text-xs text-gray-500 space-y-1"><li>• Aerotermia ACS</li><li>• Pre-inst. A/A</li><li>• ICT2</li></ul>
+          </div>
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <p class="font-bold text-sm text-gray-700 mb-2">♿ Accesibilidad</p>
+            <ul class="text-xs text-gray-500 space-y-1"><li>• Ascensor</li><li>• Cumple DB-SUA</li><li>• Cert. energética B (est.)</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIABILIDAD ==================== -->
+    <section id="viabilidad" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">🎯</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Análisis de Viabilidad</h2>
+      </div>
+
+      <!-- Semáforos -->
+      <div class="grid md:grid-cols-4 gap-5 mb-8">
+        <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 p-6 text-center">
+          <div class="w-12 h-12 rounded-full traffic-green mx-auto mb-3"></div>
+          <h4 class="font-bold text-gray-800">Urbanística</h4>
+          <p class="text-xs text-gray-500 mt-1">Suelo urbano consolidado. PGOS publicado BOC 16/03/2026. Compatible con uso residencial.</p>
+        </div>
+        <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 p-6 text-center">
+          <div class="w-12 h-12 rounded-full traffic-green mx-auto mb-3"></div>
+          <h4 class="font-bold text-gray-800">Técnica</h4>
+          <p class="text-xs text-gray-500 mt-1">Proyecto de arquitectos colegiados. PB+2 conforme a normativa. Calidades adecuadas.</p>
+        </div>
+        <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 p-6 text-center">
+          <div class="w-12 h-12 rounded-full traffic-green mx-auto mb-3"></div>
+          <h4 class="font-bold text-gray-800">Financiera</h4>
+          <p class="text-xs text-gray-500 mt-1">Margen promotor 18%. TIR estimada >15%. Valor total 3,85 M€.</p>
+        </div>
+        <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 p-6 text-center">
+          <div class="w-12 h-12 rounded-full traffic-green mx-auto mb-3"></div>
+          <h4 class="font-bold text-gray-800">Comercial</h4>
+          <p class="text-xs text-gray-500 mt-1">Alta demanda, oferta limitada, tendencia +12% interanual. Absorción <12 meses.</p>
+        </div>
+      </div>
+
+      <!-- Dashboard financiero -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">💰 Cuadro Financiero (Datos de Valorex)</h3>
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div>
+            <table class="w-full text-sm">
+              <thead><tr class="border-b-2 border-emerald-100"><th class="py-3 text-left font-bold text-emerald-700">Concepto</th><th class="py-3 text-right font-bold text-emerald-700">Importe</th><th class="py-3 text-right font-bold text-emerald-700">%</th></tr></thead>
+              <tbody>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-medium text-emerald-700">📈 Ingresos por ventas (VM)</td><td class="py-2.5 text-right font-bold text-emerald-700">3.847.225 €</td><td class="py-2.5 text-right text-emerald-600">100%</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 pl-4 text-gray-600">Viv. 1 dorm. (6 uds.)</td><td class="py-2.5 text-right">926.100 €</td><td class="py-2.5 text-right text-gray-400">24,1%</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 pl-4 text-gray-600">Viv. 2 dorm. (6 uds.)</td><td class="py-2.5 text-right">1.162.200 €</td><td class="py-2.5 text-right text-gray-400">30,2%</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 pl-4 text-gray-600">Viv. 3 dorm. (6 uds.)</td><td class="py-2.5 text-right">1.624.500 €</td><td class="py-2.5 text-right text-gray-400">42,2%</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 pl-4 text-gray-600">Local comercial (1 ud.)</td><td class="py-2.5 text-right">134.425 €</td><td class="py-2.5 text-right text-gray-400">3,5%</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-medium text-red-700">📤 Costes totales (sin suelo)</td><td class="py-2.5 text-right font-bold text-red-700">2.760.923 €</td><td class="py-2.5 text-right text-red-600">71,8%</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 pl-4 text-gray-600">Construcción (1.250 €/m²)</td><td class="py-2.5 text-right">2.236.250 €</td><td class="py-2.5 text-right text-gray-400">58,1%</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 pl-4 text-gray-600">Honorarios técnicos (~10%)</td><td class="py-2.5 text-right">223.625 €</td><td class="py-2.5 text-right text-gray-400">5,8%</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 pl-4 text-gray-600">Licencias y tasas (~4%)</td><td class="py-2.5 text-right">89.450 €</td><td class="py-2.5 text-right text-gray-400">2,3%</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 pl-4 text-gray-600">Comercialización (~3%)</td><td class="py-2.5 text-right">115.417 €</td><td class="py-2.5 text-right text-gray-400">3,0%</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 pl-4 text-gray-600">Gastos financieros (~2,5%)</td><td class="py-2.5 text-right">96.181 €</td><td class="py-2.5 text-right text-gray-400">2,5%</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-medium text-indigo-700">🏗️ Valor residual del suelo</td><td class="py-2.5 text-right font-bold text-indigo-700">393.801 €</td><td class="py-2.5 text-right text-indigo-600">10,2%</td></tr>
+                <tr class="bg-emerald-50"><td class="py-3 font-bold text-emerald-800">✅ Margen promotor</td><td class="py-3 text-right font-black text-emerald-700">692.501 €</td><td class="py-3 text-right font-bold text-emerald-700">18,0%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-700 mb-4 text-center">Distribución de Costes e Ingresos</h4>
+            <canvas id="chartWaterfall" height="280"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Precios de venta por tipología -->
+      <div class="mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">🏷️ Precios de Venta Orientativos por Unidad</h3>
+        <div class="grid md:grid-cols-4 gap-4">
+          <div class="card-hover bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-5 border border-emerald-100 text-center">
+            <p class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-1">1 Dormitorio</p>
+            <p class="text-2xl font-black text-emerald-700">154.350 €</p>
+            <p class="text-xs text-emerald-400 mt-1">~49 m² · 3.150 €/m²</p>
+            <p class="text-xs text-emerald-400">Incl. garaje + trastero</p>
+          </div>
+          <div class="card-hover bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100 text-center">
+            <p class="text-xs font-bold uppercase tracking-wider text-blue-500 mb-1">2 Dormitorios</p>
+            <p class="text-2xl font-black text-blue-700">193.700 €</p>
+            <p class="text-xs text-blue-400 mt-1">~65 m² · 2.980 €/m²</p>
+            <p class="text-xs text-blue-400">Incl. garaje + trastero</p>
+          </div>
+          <div class="card-hover bg-gradient-to-br from-purple-50 to-fuchsia-50 rounded-xl p-5 border border-purple-100 text-center">
+            <p class="text-xs font-bold uppercase tracking-wider text-purple-500 mb-1">3 Dormitorios</p>
+            <p class="text-2xl font-black text-purple-700">270.750 €</p>
+            <p class="text-xs text-purple-400 mt-1">~95 m² · 2.850 €/m²</p>
+            <p class="text-xs text-purple-400">Incl. garaje + trastero</p>
+          </div>
+          <div class="card-hover bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-100 text-center">
+            <p class="text-xs font-bold uppercase tracking-wider text-amber-500 mb-1">Local Comercial</p>
+            <p class="text-2xl font-black text-amber-700">134.425 €</p>
+            <p class="text-xs text-amber-400 mt-1">~95 m² · 1.415 €/m²</p>
+            <p class="text-xs text-amber-400">Planta baja</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CRONOGRAMA ==================== -->
+    <section id="cronograma" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">📅</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Cronograma Maestro</h2>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <p class="text-sm text-gray-600 mb-6">Plazo total estimado: <strong>24-28 meses</strong> desde el inicio de la tramitación hasta la entrega de llaves. El Decreto-ley 3/2025 del Gobierno de Canarias prevé reducir los plazos de licencia a <strong>&lt;6 meses</strong> (vs. los 2 años anteriores) mediante mecanismos de colaboración público-privada para informes técnicos.</p>
+
+        <div class="space-y-0">
+          <!-- Fase 1 -->
+          <div class="phase-line flex gap-5 pb-8">
+            <div class="flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm">1</div>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h4 class="font-bold text-gray-800">Proyecto y Tramitación</h4>
+                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">Meses 1-8</span>
+                <span class="px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-xs">📍 Estamos aquí</span>
+              </div>
+              <div class="bg-gray-50 rounded-xl p-4 text-sm text-gray-600 space-y-1">
+                <p>• <strong>M1-2:</strong> Redacción proyecto básico + estudio geotécnico + topografía</p>
+                <p>• <strong>M2-3:</strong> Proyecto de ejecución + visado colegial</p>
+                <p>• <strong>M3:</strong> Solicitud de licencia urbanística + informe técnico colaborativo (Decreto-ley 3/2025)</p>
+                <p>• <strong>M3-8:</strong> Tramitación licencia (~3-6 meses con nuevo decreto)</p>
+                <p>• <strong>M4-6:</strong> Estudio de Seguridad y Salud + licitación constructora</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fase 2 -->
+          <div class="phase-line flex gap-5 pb-8">
+            <div class="flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-sm">2</div>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h4 class="font-bold text-gray-800">Obra — Cimentación y Estructura</h4>
+                <span class="px-2.5 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">Meses 8-14</span>
+              </div>
+              <div class="bg-gray-50 rounded-xl p-4 text-sm text-gray-600 space-y-1">
+                <p>• <strong>M8:</strong> Acta de replanteo + inicio de obra</p>
+                <p>• <strong>M8-10:</strong> Excavación de sótano + cimentación (zapatas + vigas riostras)</p>
+                <p>• <strong>M10-14:</strong> Estructura de hormigón armado (sótano + PB + P1 + P2)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fase 3 -->
+          <div class="phase-line flex gap-5 pb-8">
+            <div class="flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm">3</div>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h4 class="font-bold text-gray-800">Obra — Cerramientos e Instalaciones</h4>
+                <span class="px-2.5 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Meses 14-22</span>
+              </div>
+              <div class="bg-gray-50 rounded-xl p-4 text-sm text-gray-600 space-y-1">
+                <p>• <strong>M14-16:</strong> Fachada ventilada + cubierta + carpintería exterior</p>
+                <p>• <strong>M16-20:</strong> Instalaciones (electricidad, fontanería, saneamiento, telecomunicaciones, aerotermia)</p>
+                <p>• <strong>M18-22:</strong> Tabiquería, revestimientos, pavimentos, carpintería interior</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fase 4 -->
+          <div class="phase-line flex gap-5 pb-8">
+            <div class="flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-sm">4</div>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h4 class="font-bold text-gray-800">Acabados y Urbanización</h4>
+                <span class="px-2.5 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Meses 22-26</span>
+              </div>
+              <div class="bg-gray-50 rounded-xl p-4 text-sm text-gray-600 space-y-1">
+                <p>• <strong>M22-24:</strong> Acabados interiores, pintura, sanitarios, equipamiento cocinas</p>
+                <p>• <strong>M24-25:</strong> Urbanización exterior, zonas comunes, ascensor</p>
+                <p>• <strong>M25-26:</strong> Limpieza final + pre-entrega</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fase 5 -->
+          <div class="flex gap-5">
+            <div class="flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-sm">5</div>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h4 class="font-bold text-gray-800">Entrega y Cierre</h4>
+                <span class="px-2.5 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-semibold">Meses 26-28</span>
+              </div>
+              <div class="bg-gray-50 rounded-xl p-4 text-sm text-gray-600 space-y-1">
+                <p>• <strong>M26:</strong> Certificado final de obra + Licencia de primera ocupación</p>
+                <p>• <strong>M26-27:</strong> Escritura de obra nueva + división horizontal</p>
+                <p>• <strong>M27-28:</strong> Entrega de llaves + período de garantías</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gantt simplificado -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">📊 Diagrama de Gantt Simplificado</h3>
+        <canvas id="chartGantt" height="220"></canvas>
+      </div>
+    </section>
+
+    <!-- ==================== RIESGOS ==================== -->
+    <section id="riesgos" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">⚠️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Matriz de Riesgos</h2>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-5 py-3.5 text-left font-semibold text-gray-600">Riesgo</th>
+              <th class="px-5 py-3.5 text-center font-semibold text-gray-600">Prob.</th>
+              <th class="px-5 py-3.5 text-center font-semibold text-gray-600">Impacto</th>
+              <th class="px-5 py-3.5 text-center font-semibold text-gray-600">Nivel</th>
+              <th class="px-5 py-3.5 text-left font-semibold text-gray-600">Mitigación</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr>
+              <td class="px-5 py-3.5 font-medium">Retraso en licencia urbanística</td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-semibold">Media</span></td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-semibold">Alto</span></td>
+              <td class="px-5 py-3.5 text-center"><div class="w-4 h-4 rounded-full traffic-yellow mx-auto"></div></td>
+              <td class="px-5 py-3.5 text-gray-600 text-xs">Utilizar mecanismo de informe técnico colaborativo del Decreto-ley 3/2025 (colegios profesionales) para acelerar tramitación. Monitorizar plazos con Gestex.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-medium">Incremento costes construcción</td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-semibold">Media</span></td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-semibold">Medio</span></td>
+              <td class="px-5 py-3.5 text-center"><div class="w-4 h-4 rounded-full traffic-yellow mx-auto"></div></td>
+              <td class="px-5 py-3.5 text-gray-600 text-xs">Incluir cláusula de revisión de precios con topes (+5% max). Contratar a precio cerrado las partidas principales. Buffer del 5% en presupuesto.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-medium">Sorpresas geotécnicas en sótano</td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-semibold">Baja</span></td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-semibold">Alto</span></td>
+              <td class="px-5 py-3.5 text-center"><div class="w-4 h-4 rounded-full traffic-yellow mx-auto"></div></td>
+              <td class="px-5 py-3.5 text-gray-600 text-xs">Realizar estudio geotécnico completo ANTES de redactar proyecto de ejecución. Zona volcánica — verificar presencia de malpaís, tubos lávicos o acuíferos.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-medium">Absorción comercial lenta</td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-semibold">Baja</span></td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-semibold">Medio</span></td>
+              <td class="px-5 py-3.5 text-center"><div class="w-4 h-4 rounded-full traffic-green mx-auto"></div></td>
+              <td class="px-5 py-3.5 text-gray-600 text-xs">Mercado actual muy favorable (+12% interanual). Iniciar pre-comercialización en fase de obra (modelo sobre plano). Plan de marketing con Vendex desde mes 6.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-medium">Cambio regulatorio (vivienda protegida)</td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-semibold">Baja</span></td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-semibold">Medio</span></td>
+              <td class="px-5 py-3.5 text-center"><div class="w-4 h-4 rounded-full traffic-green mx-auto"></div></td>
+              <td class="px-5 py-3.5 text-gray-600 text-xs">Monitorizar normativa de vivienda asequible incentivada (Decreto-ley 3/2025). El proyecto actual no se ve afectado al ser suelo ya clasificado, pero vigilar con Legex.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-medium">Subida tipos de interés</td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-semibold">Baja</span></td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-semibold">Bajo</span></td>
+              <td class="px-5 py-3.5 text-center"><div class="w-4 h-4 rounded-full traffic-green mx-auto"></div></td>
+              <td class="px-5 py-3.5 text-gray-600 text-xs">BCE en tendencia bajista (2025-2026). Gastos financieros ya estimados al 2,5%. Impacto absorbible.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-6 bg-amber-50 border border-amber-200 rounded-2xl p-6">
+        <h3 class="font-bold text-amber-800 mb-3">🔑 Riesgo Principal: Licencia Urbanística</h3>
+        <p class="text-sm text-amber-700 leading-relaxed">San Miguel de Abona ha sido históricamente uno de los municipios con mayores retrasos en licencias (hasta 2 años). El nuevo <strong>Decreto-ley 3/2025</strong> (BOE-A-2025-11961, 21 de abril de 2025) introduce mecanismos de colaboración público-privada que permiten que colegios profesionales y entidades urbanísticas de colaboración emitan los informes técnicos preceptivos, reduciendo el plazo a <strong>&lt;6 meses</strong>. El nuevo PGOS de San Miguel fue publicado en el BOC el 16/03/2026. <strong>Recomendación:</strong> solicitar licencia acompañada de informe técnico colegial voluntario (art. 6 del DL 3/2025) para acelerar al máximo la tramitación.</p>
+      </div>
+    </section>
+
+    <!-- ==================== EQUIPO DE PROYECTO ==================== -->
+    <section id="equipo" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">👥</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Equipo de Proyecto</h2>
+      </div>
+
+      <p class="text-sm text-gray-600 mb-6">El proyecto cuenta con un equipo de <strong>20 agentes IA especializados</strong> que cubren toda la cadena del desarrollo inmobiliario. A continuación se detalla el rol de cada uno y su estado de aportación al proyecto.</p>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-3 text-left font-semibold text-gray-600">Agente</th>
+              <th class="px-4 py-3 text-left font-semibold text-gray-600">Rol</th>
+              <th class="px-4 py-3 text-left font-semibold text-gray-600">Responsabilidad en este proyecto</th>
+              <th class="px-4 py-3 text-center font-semibold text-gray-600">Estado</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr><td class="px-4 py-2.5 font-semibold text-emerald-700">Nexus</td><td class="px-4 py-2.5">PM / Director</td><td class="px-4 py-2.5 text-gray-600">Coordinación general, cronograma, decisiones estratégicas</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">En curso</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold text-purple-700">Arqon</td><td class="px-4 py-2.5">Arquitecto</td><td class="px-4 py-2.5 text-gray-600">Análisis del proyecto, memoria técnica, optimización de planos</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#0077B6">Trazex</td><td class="px-4 py-2.5">Delineante</td><td class="px-4 py-2.5 text-gray-600">Esquemas de planta, documentación gráfica</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#C77DFF">Decox</td><td class="px-4 py-2.5">Interiorista</td><td class="px-4 py-2.5 text-gray-600">Propuesta de acabados, materiales, moodboards</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#2D6A4F">Verdex</td><td class="px-4 py-2.5">Paisajista</td><td class="px-4 py-2.5 text-gray-600">Diseño de zonas exteriores y ajardinamiento</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#588157">Topex</td><td class="px-4 py-2.5">Topógrafo</td><td class="px-4 py-2.5 text-gray-600">Análisis topográfico del solar, pendientes, accesos</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#6C757D">Civex</td><td class="px-4 py-2.5">Ing. Estructuras</td><td class="px-4 py-2.5 text-gray-600">Pre-dimensionado estructura, cimentación</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#FF6B35">Indux</td><td class="px-4 py-2.5">Ing. Industrial</td><td class="px-4 py-2.5 text-gray-600">Instalaciones eléctricas, fontanería, climatización</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#774936">Geoex</td><td class="px-4 py-2.5">Geotécnico</td><td class="px-4 py-2.5 text-gray-600">Pre-informe geotécnico, datos IGME</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#D4A373">Buildero</td><td class="px-4 py-2.5">Jefe de Obra</td><td class="px-4 py-2.5 text-gray-600">Presupuesto PEM, planificación obra, mediciones</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#E63946">Segurex</td><td class="px-4 py-2.5">Coord. S+S</td><td class="px-4 py-2.5 text-gray-600">Estudio de Seguridad y Salud</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#1D3557">Legex</td><td class="px-4 py-2.5">Abogado</td><td class="px-4 py-2.5 text-gray-600">Viabilidad jurídica, normativa urbanística</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#D4A373">Gestex</td><td class="px-4 py-2.5">Gestor Adm.</td><td class="px-4 py-2.5 text-gray-600">Trámites, licencias, tasas</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#343A40">Notarex</td><td class="px-4 py-2.5">Asesor Notarial</td><td class="px-4 py-2.5 text-gray-600">Contratos, escritura obra nueva</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#023E8A">Finex</td><td class="px-4 py-2.5">Financiero</td><td class="px-4 py-2.5 text-gray-600">Viabilidad financiera, cash-flow, TIR</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr class="bg-emerald-50/30"><td class="px-4 py-2.5 font-semibold text-indigo-700">Valorex</td><td class="px-4 py-2.5">Tasador</td><td class="px-4 py-2.5 text-gray-600">Tasación completa del conjunto</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">✅ Completado</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#F72585">Renderex</td><td class="px-4 py-2.5">Renderista 3D</td><td class="px-4 py-2.5 text-gray-600">Renders fotorrealistas, infografías</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#FB8500">Fotex</td><td class="px-4 py-2.5">Fotógrafo</td><td class="px-4 py-2.5 text-gray-600">Fotografía IA, virtual staging</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold text-pink-600">Vendex</td><td class="px-4 py-2.5">Marketing</td><td class="px-4 py-2.5 text-gray-600">Plan de marketing, dossier comercial</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold text-emerald-700">Dealex</td><td class="px-4 py-2.5">Comercial</td><td class="px-4 py-2.5 text-gray-600">Comisiones, márgenes, distribución económica</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+            <tr><td class="px-4 py-2.5 font-semibold" style="color:#6C63FF">Auditex</td><td class="px-4 py-2.5">Auditor</td><td class="px-4 py-2.5 text-gray-600">Auditoría transversal de todos los informes</td><td class="px-4 py-2.5 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">Pendiente</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-4 grid md:grid-cols-3 gap-4">
+        <div class="bg-emerald-50 rounded-xl p-4 border border-emerald-100 text-center">
+          <p class="text-2xl font-black text-emerald-700">1</p>
+          <p class="text-sm text-emerald-600 font-medium">Informe completado</p>
+          <p class="text-xs text-emerald-400">Valorex — Tasación</p>
+        </div>
+        <div class="bg-blue-50 rounded-xl p-4 border border-blue-100 text-center">
+          <p class="text-2xl font-black text-blue-700">1</p>
+          <p class="text-sm text-blue-600 font-medium">En curso</p>
+          <p class="text-xs text-blue-400">Nexus — Análisis de Proyecto</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-4 border border-gray-200 text-center">
+          <p class="text-2xl font-black text-gray-600">18</p>
+          <p class="text-sm text-gray-500 font-medium">Pendientes</p>
+          <p class="text-xs text-gray-400">Activación según cronograma</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== NORMATIVA ==================== -->
+    <section id="normativa" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">📚</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Marco Normativo Aplicable</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">🏗️ Normativa Técnica (CTE)</h3>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>DB-SE:</strong> Seguridad Estructural (SE-AE, SE-C, SE-A)</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>DB-SI:</strong> Seguridad en caso de Incendio</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>DB-SUA:</strong> Seguridad de Utilización y Accesibilidad</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>DB-HS:</strong> Salubridad (HS1-HS5)</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>DB-HE:</strong> Ahorro de Energía (HE0-HE5)</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>DB-HR:</strong> Protección frente al Ruido</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>EHE-08:</strong> Instrucción de Hormigón Estructural</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>NCSE-02:</strong> Norma de Construcción Sismorresistente</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">📋 Normativa Urbanística y Autonómica</h3>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>Ley 4/2017:</strong> Ley del Suelo y Espacios Naturales Protegidos de Canarias</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>DL 3/2025:</strong> Agilización licencias urbanísticas Canarias (BOE-A-2025-11961)</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>PGOS:</strong> Plan General de Ordenación Supletorio de San Miguel de Abona (BOC 16/03/2026)</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>LOE:</strong> Ley de Ordenación de la Edificación (Ley 38/1999)</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>Ley 12/2023:</strong> Ley por el Derecho a la Vivienda</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>RD 314/2006:</strong> Código Técnico de la Edificación</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>REBT:</strong> Reglamento Electrotécnico de Baja Tensión</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-0.5">●</span><strong>RITE:</strong> Reglamento de Instalaciones Térmicas</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PRÓXIMOS PASOS ==================== -->
+    <section id="proximos" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">🚀</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Próximos Pasos — Hoja de Ruta</h2>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-white rounded-2xl shadow-sm border-l-4 border-red-400 border border-gray-100 p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center text-lg font-bold text-red-700">1</span>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-1">
+                <h4 class="font-bold text-gray-800">Confirmar superficies definitivas</h4>
+                <span class="px-2 py-0.5 bg-red-100 text-red-700 rounded-full text-xs font-semibold">Crítico · Inmediato</span>
+              </div>
+              <p class="text-sm text-gray-600">Solicitar al estudio DOS·07 el cuadro de superficies definitivo y la memoria de calidades. Las superficies actuales son estimaciones del análisis de planos — los informes de todos los agentes dependen de datos exactos.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border-l-4 border-red-400 border border-gray-100 p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center text-lg font-bold text-red-700">2</span>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-1">
+                <h4 class="font-bold text-gray-800">Encargar estudio geotécnico</h4>
+                <span class="px-2 py-0.5 bg-red-100 text-red-700 rounded-full text-xs font-semibold">Crítico · Semana 1-2</span>
+              </div>
+              <p class="text-sm text-gray-600">El sótano de garajes requiere un estudio geotécnico profesional obligatorio (art. 3.1.3 DB-SE-C). Zona volcánica de Tenerife sur — imprescindible verificar el sustrato antes del proyecto de ejecución. Coste estimado: 3.000-5.000 €.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border-l-4 border-amber-400 border border-gray-100 p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-lg font-bold text-amber-700">3</span>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-1">
+                <h4 class="font-bold text-gray-800">Solicitar cédula urbanística</h4>
+                <span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">Alta · Semana 1-3</span>
+              </div>
+              <p class="text-sm text-gray-600">Solicitar informe urbanístico (cédula) al Ayuntamiento de San Miguel de Abona a través de la sede electrónica para confirmar la clasificación del suelo, usos permitidos, edificabilidad y alineaciones. Disponible en: <code class="text-xs bg-gray-100 px-1 rounded">aytosanmigueldeabona.sedelectronica.es</code></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border-l-4 border-amber-400 border border-gray-100 p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-lg font-bold text-amber-700">4</span>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-1">
+                <h4 class="font-bold text-gray-800">Activar agentes de Fase 1</h4>
+                <span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">Alta · Semana 2-4</span>
+              </div>
+              <p class="text-sm text-gray-600">Con superficies confirmadas, lanzar la siguiente tanda de agentes: <strong>Arqon</strong> (memoria técnica), <strong>Legex</strong> (viabilidad jurídica), <strong>Finex</strong> (estudio financiero detallado), <strong>Gestex</strong> (trámites administrativos), <strong>Civex</strong> (pre-dimensionado estructura), <strong>Geoex</strong> (pre-informe geotécnico).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border-l-4 border-blue-400 border border-gray-100 p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-lg font-bold text-blue-700">5</span>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-1">
+                <h4 class="font-bold text-gray-800">Preparar dossier para financiación</h4>
+                <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Media · Mes 2-3</span>
+              </div>
+              <p class="text-sm text-gray-600">Compilar tasación (Valorex), estudio financiero (Finex), informe jurídico (Legex) y análisis de proyecto (Nexus) en un dossier para entidades bancarias. Pre-venta del 30-40% de unidades aconsejable antes de solicitar préstamo promotor.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-10">
+    <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+      <div class="flex items-center justify-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white font-bold text-xs">NX</div>
+        <p class="text-white font-bold">Nexus — Director de Proyecto</p>
+      </div>
+      <p class="mb-2">Edificio de Viviendas y Local Comercial · Guargacho 1 · San Miguel de Abona (Tenerife)</p>
+      <p class="text-gray-500">25 de marzo de 2026 · Generado por el Sistema de Agentes de Desarrollo Inmobiliario IA</p>
+      <p class="mt-4 text-xs text-gray-600">Este informe tiene carácter orientativo y no sustituye el asesoramiento profesional. Las cifras proceden del informe de tasación de Valorex y datos de mercado de portales inmobiliarios. Todas las decisiones de inversión deben ser validadas por profesionales cualificados.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Chart: Waterfall / Distribución costes-ingresos
+    new Chart(document.getElementById('chartWaterfall'), {
+      type: 'bar',
+      data: {
+        labels: ['Construcción', 'Honorarios', 'Licencias', 'Comercializ.', 'Financieros', 'Suelo', 'Margen', 'Ingresos'],
+        datasets: [{
+          label: '€',
+          data: [2236250, 223625, 89450, 115417, 96181, 393801, 692501, 3847225],
+          backgroundColor: ['#ef4444','#f97316','#f59e0b','#eab308','#a855f7','#6366f1','#10b981','#059669'],
+          borderRadius: 6,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ctx.parsed.y.toLocaleString('es-ES') + ' €' } }
+        },
+        scales: {
+          y: { ticks: { callback: v => (v/1000000).toFixed(1)+'M€', font:{family:'Inter',size:11} }, grid:{color:'#f3f4f6'} },
+          x: { ticks: { font:{family:'Inter',size:10}, maxRotation:45 }, grid:{display:false} }
+        }
+      }
+    });
+
+    // Chart: Gantt simplificado (horizontal bars)
+    new Chart(document.getElementById('chartGantt'), {
+      type: 'bar',
+      data: {
+        labels: ['Proyecto + Licencia', 'Cimentación/Estructura', 'Cerramientos/Instalaciones', 'Acabados/Urbanización', 'Entrega/Cierre'],
+        datasets: [
+          { label: 'Inicio (meses)', data: [0, 7, 13, 21, 25], backgroundColor: 'transparent', borderWidth: 0 },
+          { label: 'Duración (meses)', data: [8, 6, 8, 4, 3], backgroundColor: ['#10b981','#f59e0b','#3b82f6','#8b5cf6','#ef4444'], borderRadius: 6, borderSkipped: false }
+        ]
+      },
+      options: {
+        responsive: true,
+        indexAxis: 'y',
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ctx.datasetIndex===0 ? '' : 'Meses '+ctx.chart.data.datasets[0].data[ctx.dataIndex]+' a '+(ctx.chart.data.datasets[0].data[ctx.dataIndex]+ctx.parsed.x) } }
+        },
+        scales: {
+          x: { stacked: true, title:{display:true,text:'Meses',font:{family:'Inter',size:12}}, grid:{color:'#f3f4f6'}, ticks:{font:{family:'Inter',size:11}} },
+          y: { stacked: true, grid:{display:false}, ticks:{font:{family:'Inter',size:11,weight:'500'}} }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

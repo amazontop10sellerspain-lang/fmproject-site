@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-Informe Geotécnico Preliminar — Proyecto Guargacho 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            geo: {
+              50: '#faf5f0',
+              100: '#f5ebe0',
+              200: '#e8d2bf',
+              300: '#d4a373',
+              400: '#c08552',
+              500: '#a56336',
+              600: '#8b4d2b',
+              700: '#6d3a22',
+              800: '#4d2819',
+              900: '#2d1810'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #a56336 0%, #d4a373 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glass { background: rgba(255,255,255,0.85); backdrop-filter: blur(14px); border: 1px solid rgba(165,99,54,0.2); }
+    html { scroll-behavior: smooth; }
+    tbody tr:hover { background-color: rgba(165,99,54,0.05); }
+    .badge-info { display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; background: #dbeafe; color: #1e40af; }
+    .badge-warning { display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; background: #fef3c7; color: #92400e; }
+    .badge-danger { display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; background: #fee2e2; color: #991b1b; }
+    .badge-success { display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; background: #d1fae5; color: #065f46; }
+    .litho-layer { border-left: 4px solid; padding-left: 12px; margin-bottom: 10px; }
+    .btn-3d { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06), inset 0 -2px 0 rgba(0,0,0,0.1); transition: all 0.2s; }
+    .btn-3d:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05), inset 0 -2px 0 rgba(0,0,0,0.1); }
+    .btn-3d:active { transform: translateY(0); box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05), inset 0 2px 4px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-lg border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-geo-500 to-geo-700 flex items-center justify-center text-white font-bold text-sm shadow-lg">G</div>
+        <span class="text-xl font-bold gradient-text">Geoex</span>
+        <span class="text-xs text-gray-400 hidden sm:inline">Ingeniero Geotécnico</span>
+      </div>
+      <div class="hidden lg:flex gap-6 text-sm font-medium text-gray-600">
+        <a href="#resumen" class="hover:text-geo-600 transition">Resumen</a>
+        <a href="#contexto" class="hover:text-geo-600 transition">Contexto</a>
+        <a href="#geologia" class="hover:text-geo-600 transition">Geología</a>
+        <a href="#estratigrafia" class="hover:text-geo-600 transition">Estratigrafía</a>
+        <a href="#parametros" class="hover:text-geo-600 transition">Parámetros</a>
+        <a href="#cimentacion" class="hover:text-geo-600 transition">Cimentación</a>
+        <a href="#riesgos" class="hover:text-geo-600 transition">Riesgos</a>
+        <a href="#recomendaciones" class="hover:text-geo-600 transition">Recomendaciones</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-geo-700 via-geo-600 to-geo-500 text-white">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.08\" fill-rule=\"evenodd\"%3E%3Cpath d=\"M0 40L40 0H20L0 20M40 40V20L20 40\"/%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-20 text-center">
+      <p class="text-geo-200 text-sm font-semibold uppercase tracking-widest mb-4">Pre-Informe Geotécnico Preliminar (Cobertura 45%)</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Caracterización Geotécnica<br>Proyecto Guargacho 1</h1>
+      <p class="text-xl text-geo-100 max-w-3xl mx-auto">Edificio de Viviendas y Local Comercial — Guargacho, San Miguel de Abona</p>
+      <div class="mt-8 flex justify-center gap-4 flex-wrap">
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm">🏗️ PB + 2 plantas + sótano</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm">📍 Ctra. General TF-652</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm">🪨 Suelo volcánico basáltico</span>
+        <span class="px-4 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm">⚠️ ESTUDIO OBLIGATORIO</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-16 space-y-20">
+
+    <!-- AVISO CRÍTICO -->
+    <section class="reveal">
+      <div class="bg-red-50 border-2 border-red-300 rounded-2xl p-8 shadow-xl">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-red-200 flex items-center justify-center text-3xl">⚠️</div>
+          <div>
+            <h3 class="text-xl font-extrabold text-red-900 mb-3">DOCUMENTO PRELIMINAR — COBERTURA LIMITADA (45%)</h3>
+            <div class="space-y-2 text-sm text-red-800 leading-relaxed">
+              <p><strong>Este documento NO es un estudio geotécnico oficial</strong> según la normativa vigente (CTE DB-SE-C, NCSE-02). Es un <strong>pre-informe basado en datos del IGME</strong> (Instituto Geológico y Minero de España), cartografía geológica y conocimiento regional de la geología del sur de Tenerife.</p>
+              <p class="mt-3"><strong>Antes de iniciar la obra</strong>, es <strong>OBLIGATORIO</strong> realizar un <strong>Estudio Geotécnico completo</strong> que incluya:</p>
+              <ul class="list-disc list-inside space-y-1 mt-2 ml-3">
+                <li><strong>Sondeos mecánicos</strong> (mínimo 3-4 para edificio de esta envergadura, profundidad 15-20m)</li>
+                <li><strong>Ensayos de laboratorio</strong> (granulometría, límites Atterberg, proctor, CBR, triaxial)</li>
+                <li><strong>Ensayos SPT</strong> (Standard Penetration Test) in situ</li>
+                <li><strong>Caracterización del nivel freático</strong> (crítico por proximidad al mar ~3 km)</li>
+                <li><strong>Análisis de agresividad del agua</strong> (sulfatos, cloruros por ambiente marino)</li>
+                <li><strong>Cálculo de empujes sobre muros de sótano</strong></li>
+              </ul>
+              <p class="mt-3 font-bold">Coste estimado del estudio geotécnico completo: <span class="text-red-700">4.500–6.500 €</span> (para edificio PB+2+sótano con 1.789 m² totales).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMEN EJECUTIVO -->
+    <section id="resumen" class="reveal">
+      <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-geo-200 pb-2">1. Resumen Ejecutivo</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="glass p-6 rounded-2xl shadow-md">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-geo-100 flex items-center justify-center text-2xl">🗺️</div>
+            <h3 class="text-lg font-bold text-geo-700">Ubicación</h3>
+          </div>
+          <div class="space-y-2 text-sm text-gray-700">
+            <p><strong>Localidad:</strong> Guargacho</p>
+            <p><strong>Municipio:</strong> San Miguel de Abona, Tenerife</p>
+            <p><strong>Vía:</strong> Ctra. General TF-652</p>
+            <p><strong>Coordenadas:</strong> 28.0486°N, 16.6281°W</p>
+            <p><strong>Altitud:</strong> ~350 msnm</p>
+            <p><strong>Distancia costa:</strong> ~3 km (zona sub-litoral)</p>
+          </div>
+        </div>
+
+        <div class="glass p-6 rounded-2xl shadow-md">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-geo-100 flex items-center justify-center text-2xl">🏗️</div>
+            <h3 class="text-lg font-bold text-geo-700">Tipología Constructiva</h3>
+          </div>
+          <div class="space-y-2 text-sm text-gray-700">
+            <p><strong>Edificio:</strong> PB + 2 plantas + sótano garaje</p>
+            <p><strong>Uso:</strong> 18 viviendas + 1 local comercial (PB)</p>
+            <p><strong>Superficie sobre rasante:</strong> ~1.349 m²</p>
+            <p><strong>Superficie total:</strong> ~1.789 m² (incl. sótano)</p>
+            <p><strong>Altura aprox.:</strong> ~12 m (4 niveles)</p>
+            <p><strong>Carga estimada:</strong> Media (uso residencial)</p>
+          </div>
+        </div>
+
+        <div class="glass p-6 rounded-2xl shadow-md">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-geo-100 flex items-center justify-center text-2xl">📊</div>
+            <h3 class="text-lg font-bold text-geo-700">Clasificación Preliminar</h3>
+          </div>
+          <div class="space-y-2 text-sm text-gray-700">
+            <p><strong>Litología dominante:</strong> Basaltos + piroclastos</p>
+            <p><strong>Formación:</strong> Series volcánicas recientes (< 3 Ma)</p>
+            <p><strong>Capacidad portante est.:</strong> 2,5–4,0 kg/cm²</p>
+            <p><strong>Excavabilidad:</strong> Moderada a difícil</p>
+            <p><span class="badge-success">Apto para cimentación directa</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-400 rounded-xl p-6 text-sm text-amber-900">
+        <h4 class="font-bold mb-2 flex items-center gap-2"><span class="text-xl">💡</span> Conclusión Preliminar</h4>
+        <p class="leading-relaxed">El emplazamiento se sitúa sobre <strong>sustrato volcánico competente</strong> (basaltos y piroclastos consolidados del eje de rift SE-NO de Tenerife) con <strong>buena capacidad portante esperada</strong> (≥2,5 kg/cm²). Las condiciones geológicas del sur de Tenerife son favorables para cimentación superficial mediante <strong>losa de cimentación o zapatas corridas</strong>. No obstante, para un edificio de PB+2+sótano, <strong>es imprescindible confirmar</strong> mediante estudio geotécnico completo:</p>
+        <ul class="list-disc list-inside space-y-1 mt-2 ml-3">
+          <li>Nivel freático (zona próxima a la costa, puede estar elevado)</li>
+          <li>Agresividad del agua (sulfatos, cloruros por influencia marina)</li>
+          <li>Empujes de tierras sobre muros de sótano (Rankine/Coulomb)</li>
+          <li>Excavabilidad precisa (basalto duro puede requerir martillo hidráulico)</li>
+          <li>Asientos diferenciales admisibles</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTEXTO GEOLÓGICO REGIONAL -->
+    <section id="contexto" class="reveal">
+      <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-geo-200 pb-2">2. Contexto Geológico Regional</h2>
+      
+      <div class="space-y-6">
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <h3 class="text-xl font-bold text-geo-700 mb-4 flex items-center gap-2"><span>🌋</span> Tenerife: Isla Volcánica con Tres Ejes de Rift</h3>
+          <p class="text-sm text-gray-700 leading-relaxed mb-4">Tenerife es una isla volcánica oceánica resultado de la actividad sobre un punto caliente del manto. La isla presenta una estructura compleja con <strong>tres ejes de rift</strong> (zonas de fractura cortical con extensión magmática) que convergen en el <strong>punto triple</strong> de Las Cañadas-Teide:</p>
+          <ol class="list-decimal list-inside space-y-2 text-sm text-gray-700 ml-3">
+            <li><strong>Eje NE (Dorsal de La Esperanza):</strong> Actualmente inactivo. Conos volcánicos basálticos del Pleistoceno-Holoceno.</li>
+            <li><strong>Eje NO (Teno):</strong> Activo. Erupciones históricas (Chinyero 1909, Chahorra 1798). Campo de conos estrombolianos.</li>
+            <li><strong>Eje S (SE-NO):</strong> <strong>Zona del proyecto Guargacho</strong>. Activo con sismicidad recurrente (enjambres en Vilaflor 2017-presente). Campo volcánico basáltico con conos de cínder y coladas horizontales.</li>
+          </ol>
+          <p class="mt-4 text-sm text-gray-700 leading-relaxed">El municipio de San Miguel de Abona se sitúa sobre <strong>coladas basálticas del eje de rift S</strong>, con un paisaje salpicado de conos volcánicos (Montaña Chimbesque, Montaña de La Estrella, Montañitas de los Erales, Montaña Amarilla en la costa).</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <h3 class="text-xl font-bold text-geo-700 mb-4 flex items-center gap-2"><span>📍</span> Geología Local: Guargacho, San Miguel de Abona</h3>
+          <p class="text-sm text-gray-700 leading-relaxed mb-4">Según la cartografía del <strong>IGME (Instituto Geológico y Minero de España)</strong> y los mapas de <strong>GRAFCAN</strong>, el área de Guargacho se caracteriza por:</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-geo-50 rounded-xl p-4">
+              <h4 class="font-bold text-gray-900 mb-2 text-sm">Litología Dominante</h4>
+              <ul class="text-xs text-gray-600 space-y-1 list-disc list-inside">
+                <li><strong>Coladas basálticas</strong> de edad < 3 Ma (Plioceno-Pleistoceno)</li>
+                <li><strong>Piroclastos basálticos:</strong> Lapilli, escorias, bombas volcánicas</li>
+                <li><strong>Conos de cínder</strong> estrombolianos (erupciones efusivas)</li>
+                <li><strong>Depósitos coluviales:</strong> Materiales de ladera transportados por gravedad</li>
+                <li><strong>Aluviones de barranco:</strong> En cauces y zonas de escorrentía</li>
+              </ul>
+            </div>
+            <div class="bg-geo-50 rounded-xl p-4">
+              <h4 class="font-bold text-gray-900 mb-2 text-sm">Características Geotécnicas Esperadas</h4>
+              <ul class="text-xs text-gray-600 space-y-1 list-disc list-inside">
+                <li><strong>Basalto masivo:</strong> σc > 100 MPa (excavación con martillo o voladura)</li>
+                <li><strong>Basalto alterado/fracturado:</strong> σc 20–50 MPa (ripable)</li>
+                <li><strong>Piroclastos sueltos:</strong> Φ ≈ 35–38°, γ ≈ 1,5 t/m³</li>
+                <li><strong>Nivel freático:</strong> Variable según cota. A 350 msnm, esperado entre 5–15 m de profundidad</li>
+                <li><strong>Capacidad portante:</strong> Alta en basalto (> 4 kg/cm²), moderada en piroclastos (2–3 kg/cm²)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <h3 class="text-xl font-bold text-geo-700 mb-4 flex items-center gap-2"><span>🗺️</span> Cartografía Geológica (IGME)</h3>
+          <p class="text-sm text-gray-700 leading-relaxed mb-3">Según el <strong>Mapa Geológico de España 1:25.000</strong> del IGME (hojas del sur de Tenerife), el área de San Miguel de Abona se clasifica como:</p>
+          <table class="w-full text-sm border border-gray-200">
+            <thead class="bg-geo-100">
+              <tr>
+                <th class="px-4 py-2 text-left font-semibold text-gray-700">Formación</th>
+                <th class="px-4 py-2 text-left font-semibold text-gray-700">Edad</th>
+                <th class="px-4 py-2 text-left font-semibold text-gray-700">Litología</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr>
+                <td class="px-4 py-2"><strong>Serie Basáltica Reciente (SBR)</strong></td>
+                <td class="px-4 py-2">Plioceno–Pleistoceno (< 3 Ma)</td>
+                <td class="px-4 py-2">Coladas basálticas subhorizontales, conos de piroclastos</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-2"><strong>Depósitos Cuaternarios</strong></td>
+                <td class="px-4 py-2">Holoceno</td>
+                <td class="px-4 py-2">Aluviones, coluviones, suelos volcánicos (andosoles)</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-2"><strong>Piroclastos de Cañadas</strong></td>
+                <td class="px-4 py-2">Pleistoceno (< 0,5 Ma)</td>
+                <td class="px-4 py-2">Pómez, cenizas, ignimbritas (recubrimiento disperso)</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-gray-500 mt-3">Fuente: IGME, Mapa Geológico de España 1:25.000. Consultar GRAFCAN para cartografía detallada del municipio.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERFIL ESTRATIGRÁFICO ESTIMADO -->
+    <section id="estratigrafia" class="reveal">
+      <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-geo-200 pb-2">3. Perfil Estratigráfico Estimado</h2>
+      
+      <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+        <p class="text-sm text-gray-600 mb-6">La siguiente columna litológica es una <strong>estimación teórica</strong> basada en el conocimiento regional de la geología del sur de Tenerife y la cartografía IGME. La estratigrafía real solo puede determinarse mediante <strong>sondeos mecánicos</strong>.</p>
+        
+        <div class="space-y-4">
+          <!-- Nivel 0 -->
+          <div class="litho-layer" style="border-left-color: #92400e;">
+            <div class="flex justify-between items-center mb-1">
+              <h4 class="font-bold text-gray-900">Nivel 0: Rellenos antrópicos / Suelo superficial (0,00 – 0,50 m)</h4>
+              <span class="badge-warning">No competente</span>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed"><strong>Descripción:</strong> Rellenos de urbanización (gravas, zahorra, escombros) o suelo superficial agrícola con materia orgánica. Color pardo. Espesor variable 30–60 cm. En zona urbanizada (Ctra. TF-652), es probable encontrar <strong>rellenos compactados de explanación</strong> de la carretera.</p>
+            <p class="text-xs text-gray-500 mt-1"><strong>Geotecnia:</strong> No apto para cimentación. Retirar completamente antes de cimentar. Si son rellenos compactados antiguos (>20 años), evaluar su densidad con ensayos de carga.</p>
+          </div>
+
+          <!-- Nivel 1 -->
+          <div class="litho-layer" style="border-left-color: #d97706;">
+            <div class="flex justify-between items-center mb-1">
+              <h4 class="font-bold text-gray-900">Nivel 1: Piroclastos sueltos / Coluviones (0,50 – 3,00 m)</h4>
+              <span class="badge-warning">Moderadamente competente</span>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed"><strong>Descripción:</strong> Piroclastos de caída (picón, lapilli basáltico, escorias) y materiales coluviales transportados por gravedad desde las laderas circundantes. Fragmentos de tamaño 2–64 mm, angulosos, vesiculados. Color rojo-negro-pardo. Baja cohesión, alta permeabilidad. Ocasionalmente con intercalaciones de cenizas pumíticas (erupciones piroclásticas de Cañadas).</p>
+            <p class="text-xs text-gray-500 mt-1"><strong>Geotecnia:</strong> Material granular suelto. Φ ≈ 35–38°, γ ≈ 1,5 t/m³. <strong>Capacidad portante moderada (1,5–2,0 kg/cm²)</strong>. Excavación fácil con retroexcavadora. Requiere compactación si se usa como apoyo de cimentación.</p>
+          </div>
+
+          <!-- Nivel 2 -->
+          <div class="litho-layer" style="border-left-color: #ea580c;">
+            <div class="flex justify-between items-center mb-1">
+              <h4 class="font-bold text-gray-900">Nivel 2: Piroclastos consolidados / Brecha volcánica (3,00 – 6,00 m)</h4>
+              <span class="badge-info">Competente</span>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed"><strong>Descripción:</strong> Piroclastos consolidados (brecha volcánica) con matriz fina de cenizas cementada. Fragmentos de escoria y lapilli de mayor tamaño (hasta 15 cm). Cohesión moderada. Color pardo-rojizo. Mayor compacidad que el nivel superior. Puede aparecer intercalado con <strong>coladas basálticas delgadas</strong> (1–2 m) en disposición subhorizontal.</p>
+            <p class="text-xs text-gray-500 mt-1"><strong>Geotecnia:</strong> Material semi-consolidado. SPT 15–35. <strong>Capacidad portante aceptable (2,0–3,0 kg/cm²)</strong>. Excavación con martillo neumático o ripper. <strong>Nivel apto para cimentación</strong> con diseño adecuado.</p>
+          </div>
+
+          <!-- Nivel 3 -->
+          <div class="litho-layer" style="border-left-color: #7c2d12;">
+            <div class="flex justify-between items-center mb-1">
+              <h4 class="font-bold text-gray-900">Nivel 3: Basalto alterado/fracturado (6,00 – 12,00 m)</h4>
+              <span class="badge-success">Muy competente</span>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed"><strong>Descripción:</strong> Basalto olivínico meteorizado, fracturado por diaclasas. Parte superior de colada basáltica con textura <em>aa</em> o escoriácea. Color gris oscuro a pardo por alteración. RQD 40–70%. Grado de meteorización III-IV (moderadamente alterado a muy alterado). Puede presentar <strong>cavidades de desgasificación</strong> (vesículas de gran tamaño, hasta 10–20 cm).</p>
+            <p class="text-xs text-gray-500 mt-1"><strong>Geotecnia:</strong> Roca blanda a media. σc 20–50 MPa. <strong>Capacidad portante alta (3,0–4,0 kg/cm²)</strong>. Excavación con martillo hidráulico. <strong>Nivel óptimo para apoyar cimentación</strong>.</p>
+          </div>
+
+          <!-- Nivel 4 -->
+          <div class="litho-layer" style="border-left-color: #292524;">
+            <div class="flex justify-between items-center mb-1">
+              <h4 class="font-bold text-gray-900">Nivel 4: Basalto masivo sano (> 12,00 m)</h4>
+              <span class="badge-success">Sustrato competente</span>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed"><strong>Descripción:</strong> Basalto olivínico masivo, compacto, grado de meteorización I-II (sano a ligeramente alterado). Color gris oscuro a negro. Núcleo denso de colada con estructura columnar. RQD > 70%. Testigo continuo en sondeo. Posible presencia de <strong>intercalaciones de piroclastos</strong> (superficie entre coladas).</p>
+            <p class="text-xs text-gray-500 mt-1"><strong>Geotecnia:</strong> Roca dura. σc > 100 MPa. <strong>Capacidad portante muy alta (> 5 kg/cm²)</strong>. Excavación con voladura. <strong>Sustrato ideal</strong>, pero profundidad excesiva para edificio de 4 plantas (no es necesario llegar a este nivel).</p>
+          </div>
+
+          <!-- Nivel Freático -->
+          <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 rounded-xl p-4">
+            <h4 class="font-bold text-blue-900 mb-2 flex items-center gap-2"><span class="text-xl">💧</span> Nivel Freático Estimado</h4>
+            <p class="text-sm text-blue-800 leading-relaxed"><strong>Profundidad esperada:</strong> 8–15 m bajo rasante natural. A 350 msnm y ~3 km de la costa, el nivel freático está influido por la <strong>intrusión salina lateral</strong> y la <strong>recarga por infiltración de lluvias</strong>. Es crítico confirmar este dato con <strong>sondeos piezométricos</strong> antes de diseñar el sótano. Si el nivel freático está por encima de la losa de fondo del sótano (~3 m de profundidad), será necesario:</p>
+            <ul class="list-disc list-inside space-y-1 mt-2 ml-3 text-xs text-blue-800">
+              <li>Impermeabilización completa del sótano (láminas + drenaje perimetral)</li>
+              <li>Diseño de losa de fondo contra empuje hidrostático</li>
+              <li>Bombeo durante la construcción (rabatimiento del nivel freático)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-900">
+          <p class="font-semibold mb-1">📌 Nota Importante</p>
+          <p class="leading-relaxed">Esta columna litológica es una <strong>extrapolación regional</strong>. La estratigrafía real puede variar significativamente. <strong>Solo un sondeo mecánico in situ</strong> puede determinar con precisión la secuencia estratigráfica y los parámetros geomecánicos reales.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARÁMETROS GEOTÉCNICOS ESTIMADOS -->
+    <section id="parametros" class="reveal">
+      <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-geo-200 pb-2">4. Parámetros Geotécnicos Estimados</h2>
+      
+      <p class="text-sm text-gray-600 mb-6">Los siguientes parámetros son <strong>valores de referencia orientativos</strong> basados en bibliografía técnica de suelos volcánicos de Canarias (IGME, ULL, correlaciones empíricas). <strong>No sustituyen</strong> los ensayos de laboratorio obligatorios.</p>
+
+      <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-gradient-to-r from-geo-500 to-geo-600 text-white">
+            <tr>
+              <th class="px-5 py-3 text-left font-semibold">Parámetro</th>
+              <th class="px-5 py-3 text-left font-semibold">Símbolo</th>
+              <th class="px-5 py-3 text-right font-semibold">Piroclastos sueltos</th>
+              <th class="px-5 py-3 text-right font-semibold">Piroclastos consolid.</th>
+              <th class="px-5 py-3 text-right font-semibold">Basalto alterado</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr>
+              <td class="px-5 py-3">Peso específico aparente</td>
+              <td class="px-5 py-3 text-gray-500">γ</td>
+              <td class="px-5 py-3 text-right font-medium">1,5 t/m³</td>
+              <td class="px-5 py-3 text-right font-medium">1,8 t/m³</td>
+              <td class="px-5 py-3 text-right font-medium">2,4 t/m³</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3">Ángulo de rozamiento interno</td>
+              <td class="px-5 py-3 text-gray-500">Φ</td>
+              <td class="px-5 py-3 text-right font-medium">35–38°</td>
+              <td class="px-5 py-3 text-right font-medium">38–42°</td>
+              <td class="px-5 py-3 text-right font-medium">—</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3">Cohesión</td>
+              <td class="px-5 py-3 text-gray-500">c</td>
+              <td class="px-5 py-3 text-right font-medium">0 kPa</td>
+              <td class="px-5 py-3 text-right font-medium">30–60 kPa</td>
+              <td class="px-5 py-3 text-right font-medium">—</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3">Resistencia a compresión simple</td>
+              <td class="px-5 py-3 text-gray-500">σc</td>
+              <td class="px-5 py-3 text-right font-medium">—</td>
+              <td class="px-5 py-3 text-right font-medium">—</td>
+              <td class="px-5 py-3 text-right font-medium">20–50 MPa</td>
+            </tr>
+            <tr class="bg-emerald-50">
+              <td class="px-5 py-3 font-bold">Capacidad portante admisible</td>
+              <td class="px-5 py-3 text-gray-500">σadm</td>
+              <td class="px-5 py-3 text-right font-bold text-amber-700">1,5–2,0 kg/cm²</td>
+              <td class="px-5 py-3 text-right font-bold text-emerald-700">2,0–3,0 kg/cm²</td>
+              <td class="px-5 py-3 text-right font-bold text-emerald-700">3,0–4,0 kg/cm²</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3">Módulo de deformación</td>
+              <td class="px-5 py-3 text-gray-500">E</td>
+              <td class="px-5 py-3 text-right font-medium">15–35 MPa</td>
+              <td class="px-5 py-3 text-right font-medium">60–180 MPa</td>
+              <td class="px-5 py-3 text-right font-medium">1.500–6.000 MPa</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3">Coeficiente de balasto</td>
+              <td class="px-5 py-3 text-gray-500">K30</td>
+              <td class="px-5 py-3 text-right font-medium">4–10 kg/cm³</td>
+              <td class="px-5 py-3 text-right font-medium">10–18 kg/cm³</td>
+              <td class="px-5 py-3 text-right font-medium">> 25 kg/cm³</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3">Permeabilidad</td>
+              <td class="px-5 py-3 text-gray-500">k</td>
+              <td class="px-5 py-3 text-right font-medium">10⁻² – 10⁻³ cm/s</td>
+              <td class="px-5 py-3 text-right font-medium">10⁻⁴ – 10⁻⁵ cm/s</td>
+              <td class="px-5 py-3 text-right font-medium">10⁻⁶ cm/s</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3">Clasificación USCS</td>
+              <td class="px-5 py-3 text-gray-500">—</td>
+              <td class="px-5 py-3 text-right font-medium">GP, GW</td>
+              <td class="px-5 py-3 text-right font-medium">GP-GM</td>
+              <td class="px-5 py-3 text-right font-medium">—</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3">SPT (golpes/30cm)</td>
+              <td class="px-5 py-3 text-gray-500">N</td>
+              <td class="px-5 py-3 text-right font-medium">10–18</td>
+              <td class="px-5 py-3 text-right font-medium">18–35</td>
+              <td class="px-5 py-3 text-right font-medium">> 50 (rechazo)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h4 class="font-bold text-gray-900 mb-3">📐 Cálculo de Capacidad Portante (Preliminar)</h4>
+          <p class="text-sm text-gray-600 mb-3">Según la fórmula de Terzaghi para cimentación superficial en suelo granular:</p>
+          <div class="bg-gray-50 rounded-lg p-4 font-mono text-xs text-gray-800 mb-3">
+            q<sub>adm</sub> = (c·N<sub>c</sub> + γ·D<sub>f</sub>·N<sub>q</sub> + 0,4·γ·B·N<sub>γ</sub>) / FS
+          </div>
+          <p class="text-xs text-gray-600 leading-relaxed"><strong>Hipótesis conservadora:</strong> Losa de cimentación apoya en <strong>Nivel 2 (piroclastos consolidados)</strong> a profundidad D<sub>f</sub> = 2,00 m. Φ = 38°, γ = 1,8 t/m³, c = 40 kPa, FS = 3. <strong>Resultado:</strong> q<sub>adm</sub> ≈ <strong>2,5–3,0 kg/cm²</strong>. Suficiente para edificio de PB+2+sótano con cargas típicas residenciales.</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h4 class="font-bold text-gray-900 mb-3">🔨 Excavabilidad y Clasificación del Terreno</h4>
+          <table class="w-full text-xs">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-3 py-2 text-left font-semibold text-gray-700">Nivel</th>
+                <th class="px-3 py-2 text-left font-semibold text-gray-700">Excavabilidad</th>
+                <th class="px-3 py-2 text-left font-semibold text-gray-700">Equipo necesario</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 text-xs">
+              <tr>
+                <td class="px-3 py-2">N0: Rellenos/suelo</td>
+                <td class="px-3 py-2"><span class="badge-success">Fácil</span></td>
+                <td class="px-3 py-2">Retroexcavadora ligera</td>
+              </tr>
+              <tr>
+                <td class="px-3 py-2">N1: Piroclastos sueltos</td>
+                <td class="px-3 py-2"><span class="badge-success">Fácil</span></td>
+                <td class="px-3 py-2">Retroexcavadora media</td>
+              </tr>
+              <tr>
+                <td class="px-3 py-2">N2: Piroclastos consolid.</td>
+                <td class="px-3 py-2"><span class="badge-warning">Moderada</span></td>
+                <td class="px-3 py-2">Martillo neumático / Ripper</td>
+              </tr>
+              <tr>
+                <td class="px-3 py-2">N3: Basalto alterado</td>
+                <td class="px-3 py-2"><span class="badge-danger">Difícil</span></td>
+                <td class="px-3 py-2">Martillo hidráulico</td>
+              </tr>
+              <tr>
+                <td class="px-3 py-2">N4: Basalto masivo</td>
+                <td class="px-3 py-2"><span class="badge-danger">Muy difícil</span></td>
+                <td class="px-3 py-2">Voladura controlada</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-gray-500 mt-3"><strong>Coste excavación sótano:</strong> 20–35 €/m³ (N0-N2), 80–120 €/m³ (N3 con martillo). Para sótano de ~350 m² y 3 m de profundidad: ~1.050 m³ → <strong>coste excavación: 21.000–40.000 €</strong> según dureza real del terreno.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECOMENDACIONES DE CIMENTACIÓN -->
+    <section id="cimentacion" class="reveal">
+      <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-geo-200 pb-2">5. Tipo de Cimentación Recomendada</h2>
+      
+      <div class="space-y-6">
+        <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 border border-blue-100">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+            <span class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-2xl">🏗️</span>
+            Solución Recomendada: Losa de Cimentación
+          </h3>
+          <p class="text-sm text-gray-700 leading-relaxed mb-4">Para un <strong>edificio de PB+2 plantas sobre sótano</strong>, la solución óptima en suelos volcánicos del sur de Tenerife es una <strong>losa de cimentación armada</strong> (también llamada <strong>placa de cimentación</strong>).</p>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-xl p-5 shadow-sm">
+              <h4 class="font-bold text-emerald-700 mb-3 flex items-center gap-2"><span class="text-xl">✅</span> Ventajas de la losa de cimentación</h4>
+              <ul class="space-y-2 text-sm text-gray-700">
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-600">●</span>
+                  <p><strong>Reparto uniforme de cargas:</strong> Minimiza asientos diferenciales</p>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-600">●</span>
+                  <p><strong>Actúa como losa de fondo del sótano:</strong> Impermeabilización integrada</p>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-600">●</span>
+                  <p><strong>Rigidez estructural:</strong> Aporta arriostramiento horizontal</p>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-600">●</span>
+                  <p><strong>Adaptabilidad:</strong> Tolera mejor heterogeneidades del terreno (bolsas de piroclastos)</p>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-600">●</span>
+                  <p><strong>Resistencia a empuje hidrostático:</strong> Si nivel freático elevado</p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 shadow-sm">
+              <h4 class="font-bold text-gray-900 mb-3">📋 Características técnicas</h4>
+              <table class="w-full text-xs">
+                <tbody class="divide-y divide-gray-100">
+                  <tr>
+                    <td class="py-2 text-gray-600">Espesor losa</td>
+                    <td class="py-2 text-right font-bold">40–50 cm</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-gray-600">Hormigón</td>
+                    <td class="py-2 text-right font-bold">HA-30/B/20/IIIa</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-gray-600">Acero</td>
+                    <td class="py-2 text-right font-bold">B500S (malla superior e inferior)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-gray-600">Capa de limpieza</td>
+                    <td class="py-2 text-right font-bold">HM-20, 10 cm</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-gray-600">Capa drenante</td>
+                    <td class="py-2 text-right font-bold">Grava 20/40 mm, 20 cm</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-gray-600">Impermeabilización</td>
+                    <td class="py-2 text-right font-bold">Lámina EPDM 2 mm + geotextil</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 text-gray-600">Drenaje perimetral</td>
+                    <td class="py-2 text-right font-bold">Tubo drenante ∅160 mm</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="mt-6 bg-amber-50 border-l-4 border-amber-400 rounded-xl p-5 text-sm text-amber-900">
+            <h5 class="font-bold mb-2">⚠️ Clase de exposición del hormigón (crítico)</h5>
+            <p class="leading-relaxed mb-2">Por <strong>proximidad al mar (3 km)</strong> y posible presencia de <strong>cloruros en el agua freática</strong>, se recomienda hormigón <strong>clase IIIa (ambiente marino, corrosión por cloruros)</strong>. Relación a/c máxima 0,50. Recubrimiento mínimo 50 mm. Contenido mínimo de cemento 325 kg/m³.</p>
+            <p class="leading-relaxed">El estudio geotécnico debe incluir <strong>análisis químico del agua</strong> (sulfatos, cloruros, pH) para confirmar la clase de exposición. Si [Cl⁻] > 3.000 ppm → clase IIIb. Si [SO₄²⁻] > 3.000 ppm → adicionar requisitos de clase Qb.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h4 class="font-bold text-gray-900 mb-4">🔧 Solución alternativa: Zapatas corridas + losa de fondo independiente</h4>
+          <p class="text-sm text-gray-700 leading-relaxed mb-3">Si el terreno tiene <strong>muy buena capacidad portante confirmada</strong> (σadm ≥ 3 kg/cm²) y el <strong>nivel freático está profundo</strong> (> 5 m), es posible diseñar una cimentación con:</p>
+          <ul class="space-y-2 text-sm text-gray-700 ml-5 list-disc">
+            <li><strong>Zapatas corridas</strong> bajo muros de carga y medianeros</li>
+            <li><strong>Zapatas aisladas</strong> bajo pilares interiores</li>
+            <li><strong>Vigas centradoras y de atado</strong> conectando zapatas</li>
+            <li><strong>Losa de fondo del sótano independiente</strong> (20 cm) sobre solera ventilada</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-3">Esta solución es algo más económica (~10–15%) pero menos robusta ante heterogeneidades del terreno. <strong>Requiere confirmación geotécnica rigurosa</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIESGOS GEOLÓGICOS Y SÍSMICOS -->
+    <section id="riesgos" class="reveal">
+      <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-geo-200 pb-2">6. Riesgos Geológicos y Consideraciones Especiales</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h3 class="text-lg font-bold text-geo-700 mb-4 flex items-center gap-2"><span>📊</span> Sismicidad (NCSE-02)</h3>
+          <p class="text-sm text-gray-700 leading-relaxed mb-3">Según la <strong>Norma de Construcción Sismorresistente NCSE-02</strong>, Tenerife se clasifica en zona sísmica de <strong>aceleración básica a<sub>b</sub> = 0,04g</strong> (baja sismicidad). San Miguel de Abona tiene actividad sísmica recurrente en el eje de rift S (enjambres en Vilaflor 2017-presente), pero los terremotos son de <strong>muy baja magnitud</strong> (M < 3,0).</p>
+          <div class="bg-blue-50 rounded-lg p-4 text-sm text-blue-900 mb-3">
+            <p class="font-semibold mb-1">📐 Parámetros Sísmicos</p>
+            <ul class="space-y-1 text-xs">
+              <li><strong>Aceleración básica:</strong> a<sub>b</sub> = 0,04g</li>
+              <li><strong>Coeficiente del terreno:</strong> C = 1,4 (suelo tipo II: piroclastos)</li>
+              <li><strong>Aceleración de cálculo:</strong> a<sub>c</sub> = ρ · a<sub>b</sub> = 1,0 × 0,04g = <strong>0,04g</strong></li>
+              <li><strong>Aplicación:</strong> Para edificios de <strong>importancia normal</strong> y a<sub>c</sub> &lt; 0,08g, <strong>NO es obligatorio</strong> el cálculo sismorresistente detallado. Basta con armado mínimo según EHE-08.</li>
+            </ul>
+          </div>
+          <p class="text-xs text-gray-600"><strong>Conclusión:</strong> Riesgo sísmico <strong>bajo</strong>. El edificio proyectado (PB+2+sótano, estructura de HA) cumple automáticamente con NCSE-02 sin necesidad de diseño especial.</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h3 class="text-lg font-bold text-geo-700 mb-4 flex items-center gap-2"><span>🌊</span> Agresividad del Agua y Suelo</h3>
+          <p class="text-sm text-gray-700 leading-relaxed mb-3">Por la <strong>proximidad al mar (3 km)</strong> y la cota relativamente baja (350 msnm), existe riesgo de <strong>agresividad química del agua freática</strong> por intrusión salina.</p>
+          <div class="space-y-2 text-sm text-gray-700">
+            <div class="flex items-start gap-2">
+              <span class="text-amber-600">⚠</span>
+              <p><strong>Cloruros [Cl⁻]:</strong> Corrosión de armaduras. En zona costera de Tenerife: típicamente 500–5.000 ppm. Si [Cl⁻] > 500 ppm → hormigón clase IIIa. Si [Cl⁻] > 3.000 ppm → clase IIIb.</p>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-amber-600">⚠</span>
+              <p><strong>Sulfatos [SO₄²⁻]:</strong> Ataque químico al cemento. En suelos volcánicos: generalmente bajo (< 600 ppm). Si [SO₄²⁻] > 600 ppm → hormigón clase Qa o Qb + cemento resistente a sulfatos (SR).</p>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-blue-600">ℹ</span>
+              <p><strong>pH:</strong> Aguas volcánicas de Canarias suelen ser neutro-alcalinas (pH 7,5–8,5). No se espera ataque ácido.</p>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 mt-3"><strong>Acción obligatoria:</strong> El estudio geotécnico debe incluir <strong>análisis químico del agua</strong> según EHE-08 (Anejo 5): contenido de sulfatos, cloruros, CO₂ agresivo, pH, residuo seco. Toma de muestras de agua del sondeo piezométrico.</p>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h3 class="text-lg font-bold text-geo-700 mb-4 flex items-center gap-2"><span>💧</span> Nivel Freático y Empuje Hidrostático</h3>
+          <p class="text-sm text-gray-700 leading-relaxed mb-3">El <strong>nivel freático</strong> es una incógnita crítica que debe determinarse mediante sondeos. Si el nivel freático está <strong>por encima de la losa de fondo del sótano</strong> (cota aproximada: -3,00 m respecto rasante), será necesario:</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-blue-50 rounded-lg p-4">
+              <p class="font-semibold text-blue-900 text-sm mb-2">🔧 Medidas constructivas</p>
+              <ul class="text-xs text-blue-800 space-y-1 list-disc list-inside">
+                <li>Impermeabilización completa: lámina EPDM 2 mm + lámina drenante en trasdós de muros</li>
+                <li>Drenaje perimetral profundo (tubo drenante ∅160 mm a cota losa)</li>
+                <li>Diseño de losa contra empuje hidrostático (Arquímedes): espesor ≥ 50 cm</li>
+                <li>Anclajes al terreno o pilotes si losa no resiste sub-presión</li>
+                <li>Bombeo durante construcción (rabatimiento temporal del nivel freático)</li>
+              </ul>
+            </div>
+            <div class="bg-purple-50 rounded-lg p-4">
+              <p class="font-semibold text-purple-900 text-sm mb-2">📐 Cálculo empuje hidrostático</p>
+              <p class="text-xs text-purple-800 leading-relaxed">Si nivel freático a cota -2,00 m y losa a cota -3,00 m: altura columna de agua h = 1,00 m. Presión hidrostática: p = γ<sub>agua</sub> · h = 10 kN/m² ≈ 1,0 t/m². La losa debe resistir esta presión sin armadura adicional si su peso propio es ≥ 1,2 t/m² (espesor 50 cm → peso = 1,25 t/m² → <span class="font-bold text-purple-900">✓ OK</span>).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h3 class="text-lg font-bold text-geo-700 mb-4 flex items-center gap-2"><span>🏔️</span> Empujes de Tierras sobre Muros de Sótano</h3>
+          <p class="text-sm text-gray-700 leading-relaxed mb-3">Los muros perimetrales del sótano estarán sometidos a <strong>empuje activo de tierras</strong>. Cálculo según la teoría de Rankine para suelo granular (piroclastos):</p>
+          <div class="bg-gray-50 rounded-lg p-4 font-mono text-xs text-gray-800 mb-3">
+            K<sub>a</sub> = tan²(45° - Φ/2) = tan²(45° - 38°/2) ≈ 0,24<br>
+            E<sub>a</sub> = 0,5 · γ · H² · K<sub>a</sub> = 0,5 × 1,8 t/m³ × (3,0 m)² × 0,24 ≈ <strong>1,9 t/m (empuje lineal)</strong>
+          </div>
+          <p class="text-xs text-gray-600 leading-relaxed"><strong>Recomendación:</strong> Muros de HA de espesor 25–30 cm con armadura vertical calculada para momento flector máximo M = E<sub>a</sub> · H/3. Si hay <strong>sobrecarga en superficie</strong> (tráfico, edificaciones colindantes), añadir sobrecarga q = 1,0 t/m² → empuje adicional Δ E<sub>a</sub> = q · K<sub>a</sub> · H = 0,7 t/m.</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h3 class="text-lg font-bold text-geo-700 mb-4 flex items-center gap-2"><span>⚠️</span> Otros Riesgos Geológicos</h3>
+          <ul class="space-y-3 text-sm text-gray-700">
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-600 font-bold">✓</span>
+              <div>
+                <p class="font-semibold text-gray-900">Inestabilidad de taludes:</p>
+                <p class="text-xs text-gray-600">No aplicable. Terreno plano en zona urbanizada consolidada.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-amber-600 font-bold">⚠</span>
+              <div>
+                <p class="font-semibold text-gray-900">Colapsos/subsidencia:</p>
+                <p class="text-xs text-gray-600">Riesgo bajo. Los piroclastos volcánicos de Canarias no suelen presentar colapso por saturación (a diferencia de loess o suelos pumíticos no consolidados). Confirmar con ensayos de doble edómetro si se sospecha.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-amber-600 font-bold">⚠</span>
+              <div>
+                <p class="font-semibold text-gray-900">Cavidades volcánicas:</p>
+                <p class="text-xs text-gray-600">Riesgo moderado. Las coladas basálticas pueden contener tubos volcánicos. Si aparece una cavidad durante la excavación, rellenar con hormigón pobre o diseñar cimentación profunda (micropilotes). Prospección geofísica (GPR) recomendada.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-600 font-bold">✓</span>
+              <div>
+                <p class="font-semibold text-gray-900">Expansividad:</p>
+                <p class="text-xs text-gray-600">No aplicable. Los suelos volcánicos basálticos carecen de minerales arcillosos expansivos (montmorillonita).</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECOMENDACIONES ESTUDIO GEOTÉCNICO COMPLETO -->
+    <section id="recomendaciones" class="reveal">
+      <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-geo-200 pb-2">7. Recomendaciones para el Estudio Geotécnico Completo</h2>
+      
+      <div class="bg-gradient-to-r from-geo-50 to-amber-50 border-l-4 border-geo-500 rounded-xl p-6 mb-8">
+        <h3 class="text-lg font-bold text-geo-900 mb-3">📋 Alcance Mínimo del Estudio Geotécnico (CTE DB-SE-C)</h3>
+        <p class="text-sm text-gray-700 leading-relaxed mb-4">El estudio geotécnico completo debe ser realizado por una <strong>empresa especializada</strong> con técnico competente (geólogo, ingeniero de caminos). Debe incluir:</p>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Sondeos -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2"><span class="text-2xl">🔩</span> 1. Sondeos Mecánicos</h4>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <p class="text-sm font-semibold text-gray-700 mb-2">Cantidad y Profundidad</p>
+              <ul class="text-sm text-gray-600 space-y-1 list-disc list-inside">
+                <li><strong>Mínimo 3–4 sondeos</strong> para edificio de 1.789 m²</li>
+                <li><strong>Profundidad:</strong> 15–20 m (2× altura edificio) o hasta alcanzar sustrato competente</li>
+                <li><strong>Diámetro:</strong> ≥ 86 mm (sondeo rotativo con testigo continuo)</li>
+                <li><strong>Distribución:</strong> Sondeos en esquinas del edificio + 1 central</li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-gray-700 mb-2">Ensayos In Situ</p>
+              <ul class="text-sm text-gray-600 space-y-1 list-disc list-inside">
+                <li><strong>SPT cada 1,5 m</strong> → golpes N para capacidad portante</li>
+                <li><strong>Nivel freático:</strong> Piezómetro durante 7 días mínimo</li>
+                <li><strong>Muestras inalteradas</strong> (Shelby) para triaxiales</li>
+                <li><strong>Muestras alteradas</strong> para clasificación</li>
+              </ul>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 mt-3"><strong>Coste estimado:</strong> 1.500–2.000 € por sondeo × 4 = <strong>6.000–8.000 €</strong></p>
+        </div>
+
+        <!-- Ensayos -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2"><span class="text-2xl">🧪</span> 2. Ensayos de Laboratorio</h4>
+          <div class="grid md:grid-cols-3 gap-4 text-sm">
+            <div class="bg-gray-50 rounded-lg p-4">
+              <p class="font-semibold text-gray-800 mb-2">Clasificación</p>
+              <ul class="text-xs text-gray-600 space-y-1 list-disc list-inside">
+                <li>Granulometría (ASTM D422)</li>
+                <li>Límites de Atterberg</li>
+                <li>Humedad natural</li>
+                <li>Peso específico</li>
+                <li>Clasificación USCS</li>
+              </ul>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <p class="font-semibold text-gray-800 mb-2">Resistencia</p>
+              <ul class="text-xs text-gray-600 space-y-1 list-disc list-inside">
+                <li>Triaxial CU → c, Φ</li>
+                <li>Compresión simple (roca) → σc</li>
+                <li>RQD testigos rocosos</li>
+                <li>Corte directo</li>
+              </ul>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <p class="font-semibold text-gray-800 mb-2">Químico / Otros</p>
+              <ul class="text-xs text-gray-600 space-y-1 list-disc list-inside">
+                <li>Sulfatos, cloruros en agua</li>
+                <li>pH, CO₂ agresivo</li>
+                <li>Proctor Modificado</li>
+                <li>CBR</li>
+              </ul>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 mt-3"><strong>Coste estimado:</strong> 200–350 € por muestra × 15–20 muestras = <strong>3.000–7.000 €</strong></p>
+        </div>
+
+        <!-- Informe -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2"><span class="text-2xl">📄</span> 3. Contenido del Informe Final</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <ul class="space-y-1 list-disc list-inside text-gray-700">
+              <li>Perfiles estratigráficos de sondeos</li>
+              <li>Resultados de ensayos SPT y laboratorio</li>
+              <li>Clasificación del terreno (CTE DB-SE-C)</li>
+              <li>Capacidad portante admisible</li>
+              <li>Nivel freático y fluctuación estacional</li>
+              <li>Agresividad del agua (clase de exposición)</li>
+            </ul>
+            <ul class="space-y-1 list-disc list-inside text-gray-700">
+              <li>Empujes sobre muros de sótano (K<sub>a</sub>, K<sub>p</sub>)</li>
+              <li>Asientos totales y diferenciales</li>
+              <li>Excavabilidad y clasificación del terreno</li>
+              <li>Recomendaciones de cimentación (tipo, cota, dimensiones)</li>
+              <li>Medidas de impermeabilización y drenaje</li>
+              <li>Control de calidad durante la obra</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Presupuesto -->
+        <div class="bg-gradient-to-br from-emerald-600 to-teal-700 text-white rounded-2xl p-8 shadow-xl">
+          <h4 class="text-2xl font-bold mb-4 flex items-center gap-3">
+            <span class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-3xl">💰</span>
+            Presupuesto Estimado del Estudio Geotécnico Completo
+          </h4>
+          <div class="grid md:grid-cols-3 gap-6 mb-6">
+            <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+              <p class="text-emerald-100 text-sm mb-1">Sondeos (4 ud.)</p>
+              <p class="text-3xl font-bold">6.000–8.000 €</p>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+              <p class="text-emerald-100 text-sm mb-1">Ensayos laboratorio</p>
+              <p class="text-3xl font-bold">3.000–7.000 €</p>
+            </div>
+            <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+              <p class="text-emerald-100 text-sm mb-1">Redacción informe</p>
+              <p class="text-3xl font-bold">1.500–2.000 €</p>
+            </div>
+          </div>
+          <div class="border-t-2 border-white/20 pt-4">
+            <p class="text-emerald-100 text-sm mb-1">TOTAL ESTUDIO GEOTÉCNICO COMPLETO</p>
+            <p class="text-4xl font-extrabold">4.500–6.500 €</p>
+            <p class="text-emerald-100 text-xs mt-2">Plazo de ejecución: 4–6 semanas (desde contratación hasta informe final)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONCLUSIONES -->
+    <section class="reveal">
+      <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-geo-200 pb-2">8. Conclusiones y Siguientes Pasos</h2>
+      
+      <div class="bg-gradient-to-br from-geo-600 to-geo-700 rounded-2xl p-8 text-white shadow-2xl mb-8">
+        <h3 class="text-2xl font-bold mb-4">📊 Conclusión General del Pre-Informe</h3>
+        <div class="space-y-3 text-geo-50 leading-relaxed">
+          <p>✅ <strong>El emplazamiento del Proyecto Guargacho 1 presenta condiciones geológicas favorables</strong> para la construcción de un edificio de PB+2+sótano. El sustrato volcánico (basaltos + piroclastos) es competente y ofrece capacidad portante esperada de <strong>2,5–4,0 kg/cm²</strong>, suficiente para las cargas del edificio.</p>
+          
+          <p>✅ <strong>La solución de cimentación recomendada es una losa de cimentación armada</strong> de 40–50 cm de espesor, hormigón HA-30/B/20/IIIa (ambiente marino por proximidad costa). Esta solución es robusta y se adapta bien a las características del terreno volcánico.</p>
+          
+          <p>⚠️ <strong>Riesgos identificados que requieren confirmación geotécnica:</strong></p>
+          <ul class="list-disc list-inside space-y-1 ml-4 text-sm">
+            <li><strong>Nivel freático:</strong> Posible elevación por proximidad al mar → requiere impermeabilización sótano</li>
+            <li><strong>Agresividad química:</strong> Cloruros y sulfatos por influencia marina → clase exposición IIIa</li>
+            <li><strong>Excavabilidad:</strong> Basalto duro puede requerir martillo hidráulico → incremento coste</li>
+            <li><strong>Cavidades volcánicas:</strong> Riesgo bajo pero existente → prospección geofísica recomendada</li>
+          </ul>
+          
+          <p>🔴 <strong>Acción obligatoria inmediata:</strong> <strong>Contratar estudio geotécnico completo ANTES de iniciar las obras</strong>. Coste estimado: 4.500–6.500 €. Plazo: 4–6 semanas. Sin este estudio, <strong>no se puede aprobar el proyecto de estructura</strong> ni solicitar la licencia de obra.</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2"><span class="text-2xl">📅</span> Cronograma Recomendado</h4>
+          <div class="space-y-3 text-sm">
+            <div class="flex items-start gap-3">
+              <div class="flex-shrink-0 w-24 text-xs font-bold text-geo-600 bg-geo-50 rounded px-2 py-1">Semana 1</div>
+              <p class="text-gray-700"><strong>Contratación del estudio geotécnico.</strong> Solicitar presupuestos a 2-3 empresas especializadas en Tenerife.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="flex-shrink-0 w-24 text-xs font-bold text-geo-600 bg-geo-50 rounded px-2 py-1">Semanas 2-3</div>
+              <p class="text-gray-700"><strong>Sondeos mecánicos.</strong> 4 sondeos a 15-20 m con ensayos SPT. Toma de muestras.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="flex-shrink-0 w-24 text-xs font-bold text-geo-600 bg-geo-50 rounded px-2 py-1">Semanas 3-4</div>
+              <p class="text-gray-700"><strong>Ensayos de laboratorio.</strong> Granulometría, triaxiales, químicos (agua).</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="flex-shrink-0 w-24 text-xs font-bold text-geo-600 bg-geo-50 rounded px-2 py-1">Semanas 5-6</div>
+              <p class="text-gray-700"><strong>Redacción y entrega del informe.</strong> Con recomendaciones de cimentación. Visado colegial.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="flex-shrink-0 w-24 text-xs font-bold text-geo-600 bg-geo-50 rounded px-2 py-1">Semana 7+</div>
+              <p class="text-gray-700"><strong>Proyecto de estructura.</strong> Incorporar datos geotécnicos. Inicio de obra tras licencia.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2"><span class="text-2xl">💼</span> Empresas Geotécnicas Recomendadas (Tenerife)</h4>
+          <ul class="space-y-2 text-sm text-gray-700">
+            <li class="flex items-start gap-2">
+              <span class="text-geo-600">▸</span>
+              <div>
+                <p class="font-semibold">Geotecnia Canaria S.L.</p>
+                <p class="text-xs text-gray-500">Santa Cruz de Tenerife. Especialistas en suelos volcánicos. Equipo propio.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-geo-600">▸</span>
+              <div>
+                <p class="font-semibold">Mecánica del Suelo S.A. (MECSA)</p>
+                <p class="text-xs text-gray-500">Delegación Canarias. Empresa nacional con experiencia en islas volcánicas.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-geo-600">▸</span>
+              <div>
+                <p class="font-semibold">GEOCISA Canarias</p>
+                <p class="text-xs text-gray-500">Ensayos acreditados ENAC. Red nacional.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-geo-600">▸</span>
+              <div>
+                <p class="font-semibold">Ingeniería Geológica Volcánica (IGV)</p>
+                <p class="text-xs text-gray-500">Consultoría especializada. Prospección geofísica (GPR).</p>
+              </div>
+            </li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-4">💡 <strong>Consejo:</strong> Solicitar planos de sondeos en formato CAD/DXF para integrar en proyecto arquitectónico.</p>
+        </div>
+      </div>
+
+      <div class="mt-8 bg-emerald-50 border-l-4 border-emerald-500 rounded-xl p-6">
+        <h4 class="font-bold text-emerald-900 mb-2 flex items-center gap-2"><span class="text-xl">✅</span> Viabilidad Geotécnica del Proyecto</h4>
+        <p class="text-sm text-emerald-800 leading-relaxed"><strong>Valoración global: VIABLE CON CONDICIONES.</strong> Las condiciones geológicas del sur de Tenerife son <strong>aptas para la construcción del edificio</strong>. Los riesgos identificados (nivel freático, agresividad química, excavabilidad) son <strong>gestionables mediante el estudio geotécnico y las medidas constructivas</strong> recogidas en este pre-informe. <strong>El proyecto puede avanzar con confianza</strong> una vez realizado el estudio geotécnico completo y adoptadas las recomendaciones de cimentación e impermeabilización.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-geo-500 to-geo-700 flex items-center justify-center text-white font-bold">G</div>
+            <span class="text-white font-bold text-lg">Geoex</span>
+          </div>
+          <p class="text-sm">Ingeniero Geotécnico IA — Sistema de Desarrollo Inmobiliario</p>
+          <p class="text-sm mt-2 text-gray-500">Cobertura: 45% (Pre-informe preliminar)</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-2">Proyecto</h4>
+          <p class="text-sm">Edificio de Viviendas y Local Comercial</p>
+          <p class="text-sm">PB + 2 plantas + sótano garaje</p>
+          <p class="text-sm">Ctra. General TF-652, Guargacho</p>
+          <p class="text-sm">San Miguel de Abona, Tenerife</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-2">Fuentes Técnicas</h4>
+          <p class="text-sm">IGME: Mapa Geológico de España 1:25.000</p>
+          <p class="text-sm">GRAFCAN: Cartografía geológica Tenerife</p>
+          <p class="text-sm">CTE DB-SE-C: Seguridad Estructural — Cimientos</p>
+          <p class="text-sm">NCSE-02: Norma Construcción Sismorresistente</p>
+          <p class="text-sm">EHE-08: Instrucción Hormigón Estructural</p>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-6 text-center text-xs">
+        <p class="mb-2"><strong>AVISO LEGAL:</strong> Este documento es un <strong>pre-informe orientativo con cobertura limitada (45%)</strong> basado en datos bibliográficos y cartográficos. <strong>NO sustituye al estudio geotécnico oficial</strong> requerido por el CTE DB-SE-C. Es <strong>obligatorio</strong> realizar un estudio geotécnico completo (sondeos mecánicos + ensayos de laboratorio + análisis químico del agua) antes de iniciar las obras.</p>
+        <p>Ref: GEOEX-GUARG1-2026-001 · Fecha: 25 de marzo de 2026 · Confidencial — Uso interno del proyecto</p>
+        <p class="mt-3 text-gray-600">Generado por <strong>Geoex</strong> (Ingeniero Geotécnico IA) — Sistema de Agentes de Desarrollo Inmobiliario</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.reveal').forEach(el => {
+      new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); }});
+      }, { threshold: 0.1 }).observe(el);
+    });
+
+    // Counter animation
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      const prefix = el.dataset.prefix || '';
+      let current = 0;
+      const step = target / 60;
+      const animate = () => {
+        current += step;
+        if(current >= target) { el.textContent = prefix + target.toLocaleString('es-ES') + suffix; return; }
+        el.textContent = prefix + Math.floor(current).toLocaleString('es-ES') + suffix;
+        requestAnimationFrame(animate);
+      };
+      const obs = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) { animate(); obs.disconnect(); }
+      });
+      obs.observe(el);
+    });
+  </script>
+
+</body>
+</html>

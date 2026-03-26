@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diseño Paisajístico de Zonas Comunes — Proyecto Guargacho 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            verdex: {
+              50: '#edf9f2',
+              100: '#d5f1df',
+              200: '#afe2c3',
+              300: '#7dcd9f',
+              400: '#49af76',
+              500: '#2d8f5d',
+              600: '#227349',
+              700: '#1d5c3d',
+              800: '#194a34',
+              900: '#143c2b'
+            },
+            lava: '#5a4638',
+            sand: '#e8dcc8',
+            basalt: '#2f3437',
+            sun: '#f5b942'
+          },
+          boxShadow: {
+            card: '0 20px 50px rgba(15, 23, 42, .08)',
+            glow: '0 18px 45px rgba(45,143,93,.18)',
+            insetsoft: 'inset 0 1px 0 rgba(255,255,255,.65)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(73,175,118,.10), transparent 28%),
+        radial-gradient(circle at 100% 10%, rgba(232,220,200,.45), transparent 26%),
+        #f7faf7;
+    }
+    .glass {
+      background: rgba(255,255,255,.76);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.58);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: all .8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #1d5c3d 0%, #2d8f5d 55%, #7dcd9f 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .grid-overlay {
+      background-image:
+        linear-gradient(rgba(29,92,61,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(29,92,61,.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .btn-3d {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      padding: .95rem 1.4rem;
+      border-radius: 1rem;
+      font-weight: 700;
+      transform: translateY(0);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      box-shadow: 0 10px 0 rgba(20,60,43,.18), 0 20px 35px rgba(20,60,43,.16);
+    }
+    .btn-3d:hover { transform: translateY(2px); box-shadow: 0 7px 0 rgba(20,60,43,.18), 0 15px 28px rgba(20,60,43,.14); }
+    .btn-3d:active { transform: translateY(6px); box-shadow: 0 3px 0 rgba(20,60,43,.18), 0 8px 16px rgba(20,60,43,.12); }
+    .btn-primary { background: linear-gradient(180deg, #37a66a 0%, #227349 100%); color: white; }
+    .btn-secondary { background: linear-gradient(180deg, #ffffff 0%, #edf4ef 100%); color: #143c2b; border: 1px solid rgba(20,60,43,.08); }
+    .soft-pill { border: 1px solid rgba(29,92,61,.10); background: rgba(255,255,255,.82); }
+    .table-zebra tbody tr:nth-child(odd) { background: rgba(255,255,255,.86); }
+    .table-zebra tbody tr:nth-child(even) { background: rgba(237,249,242,.72); }
+    .table-zebra tbody tr:hover { background: rgba(125,205,159,.18); }
+  </style>
+</head>
+<body class="text-slate-800 antialiased">
+  <header class="sticky top-0 z-50 border-b border-white/60 bg-white/72 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.28em] text-verdex-700">Verdex · Paisajismo</p>
+        <h1 class="text-lg sm:text-xl font-bold text-slate-950">Diseño paisajístico de zonas comunes · Guargacho 1</h1>
+      </div>
+      <nav class="flex flex-wrap gap-2 text-sm">
+        <a href="#concepto" class="px-4 py-2 rounded-full soft-pill hover:bg-verdex-50 transition">Concepto</a>
+        <a href="#accesos" class="px-4 py-2 rounded-full soft-pill hover:bg-verdex-50 transition">Accesos</a>
+        <a href="#cubierta" class="px-4 py-2 rounded-full soft-pill hover:bg-verdex-50 transition">Cubierta</a>
+        <a href="#especies" class="px-4 py-2 rounded-full soft-pill hover:bg-verdex-50 transition">Especies</a>
+        <a href="#presupuesto" class="px-4 py-2 rounded-full soft-pill hover:bg-verdex-50 transition">Presupuesto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 grid-overlay opacity-70"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-verdex-900 via-verdex-800/90 to-lava/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,.18),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(245,185,66,.16),transparent_30%)]"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
+        <div class="grid lg:grid-cols-[1.2fr_.8fr] gap-8 items-start">
+          <div class="reveal text-white">
+            <div class="flex flex-wrap gap-2 mb-5">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/15 border border-white/15">18 viviendas + local comercial + garaje</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/15 border border-white/15">TF-652 · Guargacho · San Miguel de Abona</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/15 border border-white/15">Clima seco del sur de Tenerife</span>
+            </div>
+            <h2 class="text-4xl md:text-6xl font-black leading-tight tracking-tight max-w-4xl">
+              Zonas comunes con <span class="text-emerald-200">identidad canaria</span>, bajo mantenimiento y una imagen residencial sólida desde la calle hasta la cubierta.
+            </h2>
+            <p class="mt-6 text-lg md:text-xl text-emerald-50/90 max-w-3xl leading-relaxed">
+              La propuesta de Verdex transforma los espacios comunes del edificio plurifamiliar en un sistema coherente de <strong>portal, vado, rampa, jardinería xerófila, iluminación cálida y cubierta útil</strong>, respetando la topografía llana del solar, la accesibilidad exigida por CTE y el posicionamiento comercial detectado por Valorex.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a href="#concepto" class="btn-3d btn-primary">Ver propuesta completa</a>
+              <a href="#presupuesto" class="btn-3d btn-secondary">Coste y mantenimiento</a>
+            </div>
+          </div>
+
+          <div class="reveal glass rounded-[30px] shadow-card p-6 md:p-7">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="rounded-2xl bg-verdex-50 border border-verdex-100 p-4">
+                <p class="text-xs uppercase tracking-[0.2em] text-verdex-700 font-semibold">Tasación</p>
+                <p class="mt-2 text-3xl font-black text-verdex-900">2,847 M€</p>
+                <p class="mt-1 text-xs text-slate-600">Valor conjunto de referencia.</p>
+              </div>
+              <div class="rounded-2xl bg-white border border-slate-200 p-4">
+                <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">Sobre rasante</p>
+                <p class="mt-2 text-3xl font-black text-slate-900">1.349 m²</p>
+                <p class="mt-1 text-xs text-slate-600">PB + 2 plantas.</p>
+              </div>
+              <div class="rounded-2xl bg-white border border-slate-200 p-4">
+                <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">Cubierta comunitaria</p>
+                <p class="mt-2 text-3xl font-black text-slate-900">237,48 m²</p>
+                <p class="mt-1 text-xs text-slate-600">Según esquemas de planta.</p>
+              </div>
+              <div class="rounded-2xl bg-slate-900 p-4 text-white">
+                <p class="text-xs uppercase tracking-[0.2em] text-emerald-200 font-semibold">Mantenimiento</p>
+                <p class="mt-2 text-3xl font-black">Bajo</p>
+                <p class="mt-1 text-xs text-slate-300">Xerojardinería + goteo.</p>
+              </div>
+            </div>
+            <div class="mt-5 rounded-2xl bg-sand/70 border border-white p-4 text-sm leading-relaxed text-slate-700">
+              <strong>Criterio rector:</strong> en Guargacho no conviene sobrediseñar el verde. La mejor solución para una comunidad de 18 viviendas es una <strong>urbanización dura, elegante y permeable</strong>, complementada por jardinería autóctona o adaptada, con pocos puntos focales y una cubierta capaz de sumar uso vecinal real sin disparar mantenimiento.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="concepto" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+      <div class="reveal mb-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.26em] text-verdex-700">Concepto paisajístico</p>
+        <h3 class="mt-3 text-3xl md:text-5xl font-black text-slate-950">Paisajismo comunitario sobrio, funcional y canario</h3>
+        <p class="mt-4 max-w-4xl text-lg text-slate-600">El edificio tiene una condición urbana clara: frente rodado a la <strong>TF-652</strong>, acceso peatonal residencial independiente, local comercial en planta baja y una cubierta comunitaria con enorme potencial. El paisaje propuesto no compite con la arquitectura; la ordena, la humaniza y la hace más durable.</p>
+      </div>
+
+      <div class="grid xl:grid-cols-4 md:grid-cols-2 gap-5">
+        <article class="reveal glass rounded-[28px] p-6 shadow-card">
+          <div class="w-12 h-12 rounded-2xl bg-verdex-100 flex items-center justify-center text-2xl">🌿</div>
+          <h4 class="mt-4 text-xl font-bold text-slate-900">Bajo consumo hídrico</h4>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600">Se priorizan especies propias del cardonal-tabaibal y aromáticas resistentes, con riego por goteo y acolchado mineral para reducir evaporación y labores de conservación.</p>
+        </article>
+        <article class="reveal glass rounded-[28px] p-6 shadow-card">
+          <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-2xl">🪨</div>
+          <h4 class="mt-4 text-xl font-bold text-slate-900">Materialidad local</h4>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600">Baldosa hidráulica en zonas peatonales representativas, piedra volcánica en zócalos, jardineras y paños duros para reforzar el lenguaje del sur de Tenerife.</p>
+        </article>
+        <article class="reveal glass rounded-[28px] p-6 shadow-card">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-100 flex items-center justify-center text-2xl">♿</div>
+          <h4 class="mt-4 text-xl font-bold text-slate-900">Accesibilidad real</h4>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600">La urbanización se apoya en la topografía prácticamente llana del solar (&lt;3%) para resolver aceras, portal y rampa accesible sin gestos forzados ni costosos.</p>
+        </article>
+        <article class="reveal glass rounded-[28px] p-6 shadow-card">
+          <div class="w-12 h-12 rounded-2xl bg-rose-100 flex items-center justify-center text-2xl">🏘️</div>
+          <h4 class="mt-4 text-xl font-bold text-slate-900">Imagen comunitaria vendible</h4>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600">La buena presencia del acceso, la claridad del vado y una cubierta bien acabada elevan percepción de calidad y sostienen mejor el valor residencial del conjunto.</p>
+        </article>
+      </div>
+
+      <div class="reveal mt-8 grid lg:grid-cols-[1.15fr_.85fr] gap-6">
+        <div class="glass rounded-[30px] shadow-card p-6 md:p-8">
+          <h4 class="text-2xl font-bold text-slate-900">Criterios de implantación en Guargacho</h4>
+          <div class="mt-5 grid md:grid-cols-2 gap-4 text-sm text-slate-700">
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="font-semibold text-slate-900">Clima seco e insolación alta</p>
+              <p class="mt-2">El sur de Tenerife presenta gran insolación y precipitaciones limitadas. Por ello se descartan soluciones verdes extensivas de alta demanda hídrica.</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="font-semibold text-slate-900">Terreno llano</p>
+              <p class="mt-2">La topografía favorable simplifica la relación entre acera, zaguán y garaje, permitiendo urbanización limpia, itinerarios accesibles y drenaje superficial controlado.</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="font-semibold text-slate-900">Entorno residencial consolidado</p>
+              <p class="mt-2">Se requiere una imagen sobria, más urbana que turística, con verde bien dosificado y materiales robustos aptos para comunidad de propietarios.</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="font-semibold text-slate-900">Compatibilidad con arquitectura</p>
+              <p class="mt-2">La propuesta respeta la fachada ventilada, la existencia del local, la rampa de garaje y el uso de cubierta comunitaria descritos por Arqon y Trazex.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass rounded-[30px] shadow-card p-6 md:p-8">
+          <h4 class="text-2xl font-bold text-slate-900">Resumen ejecutivo Verdex</h4>
+          <ul class="mt-5 space-y-3 text-sm text-slate-700">
+            <li class="rounded-2xl bg-white border border-slate-200 p-4"><strong>Acceso residencial:</strong> espacio de llegada claro, iluminado y arropado por jardineras xerófilas de escala urbana.</li>
+            <li class="rounded-2xl bg-white border border-slate-200 p-4"><strong>Acceso rodado:</strong> resolver rampa y vado con paisajismo lateral resistente, sin invadir maniobra ni visibilidad.</li>
+            <li class="rounded-2xl bg-white border border-slate-200 p-4"><strong>Cubierta:</strong> combinar estancia, jardineras y un posible tendedero técnico sectorizado, sin contaminar la imagen del edificio.</li>
+            <li class="rounded-2xl bg-white border border-slate-200 p-4"><strong>Mantenimiento:</strong> muy contenido para el estándar del activo gracias a la minimización de césped, la elección vegetal y el riego automatizado.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="accesos" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+      <div class="reveal mb-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.26em] text-verdex-700">Accesos y urbanización dura</p>
+        <h3 class="mt-3 text-3xl md:text-5xl font-black text-slate-950">Portal, acera, rampa accesible y acceso rodado</h3>
+        <p class="mt-4 max-w-4xl text-lg text-slate-600">La urbanización exterior debe resolver dos flujos claramente diferenciados: <strong>entrada residencial peatonal</strong> y <strong>entrada/salida de garaje</strong>. El paisajismo se usa para jerarquizar esos recorridos y mejorar legibilidad, no para estorbarlos.</p>
+      </div>
+
+      <div class="grid xl:grid-cols-3 gap-5">
+        <article class="reveal xl:col-span-2 rounded-[30px] bg-slate-900 text-white p-6 md:p-8 shadow-card">
+          <p class="text-xs uppercase tracking-[0.24em] text-emerald-200">01 · Acceso peatonal</p>
+          <h4 class="mt-3 text-2xl md:text-3xl font-bold">Zaguán de llegada con escala urbana y accesible</h4>
+          <p class="mt-4 text-sm md:text-base text-slate-300 leading-relaxed">Se propone una <strong>franja de transición entre calle y portal</strong> con pavimento de baldosa hidráulica antideslizante, bandas de piedra volcánica en bordes, iluminación integrada y jardineras lineales de baja altura. La rampa accesible debe integrarse sin apariencia de solución añadida, apoyándose en la pendiente natural favorable del solar.</p>
+          <div class="mt-6 grid md:grid-cols-2 gap-4 text-sm">
+            <div class="rounded-2xl bg-white/8 border border-white/10 p-4">
+              <p class="font-semibold text-white">Pavimentación</p>
+              <p class="mt-2 text-slate-300">Baldosa hidráulica de tono arena-gris para huella peatonal principal y piedra volcánica como remate o zócalo de jardineras.</p>
+            </div>
+            <div class="rounded-2xl bg-white/8 border border-white/10 p-4">
+              <p class="font-semibold text-white">Accesibilidad</p>
+              <p class="mt-2 text-slate-300">Rampa peatonal integrada con pendiente contenida, pasamanos cuando proceda y contraste táctil/visual en arranque de escalones si existieran.</p>
+            </div>
+            <div class="rounded-2xl bg-white/8 border border-white/10 p-4">
+              <p class="font-semibold text-white">Vegetación de acceso</p>
+              <p class="mt-2 text-slate-300">Composición baja-media para no ocultar el portal: lavanda, romero, tabaiba y un drago de porte contenido como hito de llegada.</p>
+            </div>
+            <div class="rounded-2xl bg-white/8 border border-white/10 p-4">
+              <p class="font-semibold text-white">Percepción</p>
+              <p class="mt-2 text-slate-300">Debe sentirse seguro, iluminado y contemporáneo, sin caer en un exceso de elementos ornamentales ni jardineras sobredimensionadas.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="reveal glass rounded-[30px] p-6 shadow-card">
+          <p class="text-xs uppercase tracking-[0.24em] text-verdex-700">02 · Acceso rodado</p>
+          <h4 class="mt-3 text-xl font-bold text-slate-900">Rampa de garaje y vado</h4>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600">La rampa debe quedar flanqueada por vegetación resistente al reflejo térmico y a la cercanía del tráfico. Se evita plantar en ángulos de visibilidad o en zonas de barrido de vehículos.</p>
+          <ul class="mt-4 space-y-2 text-sm text-slate-700">
+            <li>• Vado con material continuo y lectura clara desde TF-652.</li>
+            <li>• Cuneta lineal o drenaje oculto en boca de rampa.</li>
+            <li>• Jardinería lateral con árido volcánico y malla geotextil.</li>
+            <li>• Balizamiento lumínico bajo para seguridad nocturna.</li>
+            <li>• Integración con bordillo reforzado y control de salpicaduras.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="reveal mt-8 overflow-hidden rounded-[30px] glass shadow-card border border-white/60">
+        <div class="px-6 md:px-8 pt-6 md:pt-8">
+          <h4 class="text-2xl font-bold text-slate-900">Matriz de zonas comunes exteriores</h4>
+          <p class="mt-2 text-sm text-slate-600">Rango orientativo de superficies a desarrollar en fase de proyecto de urbanización y detalles.</p>
+        </div>
+        <div class="overflow-x-auto px-4 md:px-8 pb-6 md:pb-8 pt-5">
+          <table class="min-w-full text-sm table-zebra rounded-2xl overflow-hidden">
+            <thead>
+              <tr class="bg-verdex-700 text-white text-left">
+                <th class="px-4 py-3 rounded-l-2xl">Zona</th>
+                <th class="px-4 py-3">Superficie orientativa</th>
+                <th class="px-4 py-3">Tratamiento propuesto</th>
+                <th class="px-4 py-3 rounded-r-2xl">Objetivo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="px-4 py-3 font-semibold">Frente peatonal y portal</td><td class="px-4 py-3">55–70 m²</td><td class="px-4 py-3">Baldosa hidráulica, piedra volcánica, jardineras lineales</td><td class="px-4 py-3">Representación y accesibilidad</td></tr>
+              <tr><td class="px-4 py-3 font-semibold">Rampa rodado + borde de vado</td><td class="px-4 py-3">45–60 m²</td><td class="px-4 py-3">Hormigón/adoquín técnico, drenaje y masas xerófilas laterales</td><td class="px-4 py-3">Seguridad y mantenimiento</td></tr>
+              <tr><td class="px-4 py-3 font-semibold">Jardineras de PB / perímetro</td><td class="px-4 py-3">35–50 m²</td><td class="px-4 py-3">Árido volcánico, rocalla ligera y especies resistentes</td><td class="px-4 py-3">Suavizar la base urbana</td></tr>
+              <tr><td class="px-4 py-3 font-semibold">Cubierta comunitaria ajardinada</td><td class="px-4 py-3">160–190 m² útiles paisajizables</td><td class="px-4 py-3">Pavimento exterior, jardineras, sombra ligera y estar</td><td class="px-4 py-3">Vida comunitaria y valor añadido</td></tr>
+              <tr><td class="px-4 py-3 font-semibold">Zona técnica de tendedero</td><td class="px-4 py-3">18–24 m²</td><td class="px-4 py-3">Pavimento drenante, celosía y barandillas</td><td class="px-4 py-3">Función doméstica ordenada</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="cubierta" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+      <div class="grid lg:grid-cols-[1.02fr_.98fr] gap-6 items-start">
+        <div class="reveal glass rounded-[30px] shadow-card p-6 md:p-8">
+          <p class="text-sm font-semibold uppercase tracking-[0.26em] text-verdex-700">Cubierta comunitaria</p>
+          <h3 class="mt-3 text-3xl font-black text-slate-950">Terraza ajardinada, estancia y posible tendedero técnico</h3>
+          <div class="mt-5 space-y-4 text-sm text-slate-700 leading-relaxed">
+            <p>Los esquemas de planta ya sitúan en cubierta una <strong>terraza comunitaria ajardinada</strong>, incluso con previsión de lámina o piscina. Desde Verdex se recomienda estructurarla por franjas de uso para evitar una azotea confusa o sobrecargada.</p>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="font-semibold text-slate-900">Franja 1 · Estancia principal</p>
+              <p class="mt-2">Zona de estar con pavimento exterior continuo, bancos de obra ligeros o mobiliario modular y jardineras con romero, lavanda canaria, verodes y bejeques.</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="font-semibold text-slate-900">Franja 2 · Borde verde / atenuación climática</p>
+              <p class="mt-2">Jardineras perimetrales de profundidad contenida, sustrato ligero, gotero y especies resistentes al sol y al viento. Evitar raíces agresivas o arbolado pesado.</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="font-semibold text-slate-900">Franja 3 · Tendedero comunitario sectorizado</p>
+              <p class="mt-2">Si la comunidad lo desea, puede reservarse un área técnica discreta, con <strong>pavimento antideslizante, barandilla, celosía o lamas de ocultación</strong> y visión controlada desde zonas nobles.</p>
+            </div>
+            <div class="rounded-2xl bg-verdex-50 border border-verdex-100 p-4 text-verdex-900">
+              <strong>Recomendación:</strong> si finalmente se materializa la piscina prevista en esquemas, conviene que el verde actúe como acompañamiento perimetral y no invada la superficie útil del solárium.
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal grid gap-6">
+          <div class="glass rounded-[30px] shadow-card p-6 md:p-8">
+            <p class="text-sm font-semibold uppercase tracking-[0.26em] text-verdex-700">Pavimentos exteriores</p>
+            <h3 class="mt-3 text-3xl font-black text-slate-950">Baldosa hidráulica + piedra volcánica</h3>
+            <ul class="mt-5 space-y-3 text-sm text-slate-700">
+              <li class="rounded-2xl bg-white border border-slate-200 p-4"><strong>Portal y acceso peatonal:</strong> baldosa hidráulica de tono arena o gris cálido, antideslizante, con formato que refuerce lectura urbana.</li>
+              <li class="rounded-2xl bg-white border border-slate-200 p-4"><strong>Jardineras y zócalos:</strong> aplacado o mampostería de piedra volcánica para continuidad visual con el contexto insular.</li>
+              <li class="rounded-2xl bg-white border border-slate-200 p-4"><strong>Cubierta:</strong> pavimento porcelánico exterior o baldosa técnica sobreelevada según solución constructiva, priorizando durabilidad y mantenimiento.</li>
+              <li class="rounded-2xl bg-white border border-slate-200 p-4"><strong>Zonas drenantes:</strong> árido volcánico con geotextil en parterres y bandas laterales para control de hierbas y evaporación.</li>
+            </ul>
+          </div>
+
+          <div class="glass rounded-[30px] shadow-card p-6 md:p-8">
+            <p class="text-sm font-semibold uppercase tracking-[0.26em] text-verdex-700">Iluminación y mobiliario</p>
+            <h3 class="mt-3 text-3xl font-black text-slate-950">Zonas comunes seguras y cálidas</h3>
+            <div class="mt-5 space-y-4 text-sm text-slate-700">
+              <div class="rounded-2xl bg-white border border-slate-200 p-4"><strong>Iluminación exterior:</strong> balizas bajas 2700–3000 K en acceso, líneas LED discretas en zócalos del portal, proyectores puntuales en drago/palmera y balizado técnico en rampa.</div>
+              <div class="rounded-2xl bg-white border border-slate-200 p-4"><strong>Mobiliario urbano:</strong> en caso de ejecutarse jardín/terraza comunitaria en cubierta, incluir 2–3 bancos de exterior y 2 papeleras compactas de acero galvanizado o aluminio lacado.</div>
+              <div class="rounded-2xl bg-white border border-slate-200 p-4"><strong>Barandillas:</strong> mantener la línea arquitectónica del edificio, con piezas limpias y resistentes al ambiente salino indirecto del sur.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="especies" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+      <div class="reveal mb-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.26em] text-verdex-700">Jardinería de zonas comunes</p>
+        <h3 class="mt-3 text-3xl md:text-5xl font-black text-slate-950">Especies autóctonas o adaptadas recomendadas</h3>
+        <p class="mt-4 max-w-4xl text-lg text-slate-600">Siguiendo la instrucción del encargo y el contraste realizado con fuentes de flora canaria, se adopta una selección apta para clima cálido-seco, exposición solar intensa y mantenimiento comunitario controlado.</p>
+      </div>
+
+      <div class="reveal grid lg:grid-cols-[.92fr_1.08fr] gap-6 items-start">
+        <div class="glass rounded-[30px] shadow-card p-6 md:p-8">
+          <h4 class="text-2xl font-bold text-slate-900">Estrategia vegetal</h4>
+          <div class="mt-5 space-y-4 text-sm text-slate-700">
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="font-semibold text-slate-900">Piezas singulares</p>
+              <p class="mt-2">Una <strong>palmera canaria</strong> o un <strong>drago</strong> en acceso, nunca ambos juntos si el espacio es escaso. La singularidad funciona mejor con aire alrededor.</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="font-semibold text-slate-900">Masa de base</p>
+              <p class="mt-2">Tabaibas, verodes, bejeques y salpicaduras de aromáticas para formar planos resistentes, estructurados y visualmente limpios.</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="font-semibold text-slate-900">Cubierta</p>
+              <p class="mt-2">Sólo especies de raíz contenida y alta tolerancia a viento/sol. Evitar árboles pesados o parterres con exceso de sustrato e irrigación.</p>
+            </div>
+            <div class="rounded-2xl bg-verdex-50 border border-verdex-100 p-4 text-verdex-900">
+              <strong>Clave de mantenimiento:</strong> el drago y la flora suculenta soportan mal el exceso de riego. El sistema debe regar poco y con sectores independientes.
+            </div>
+          </div>
+        </div>
+
+        <div class="overflow-hidden rounded-[30px] glass shadow-card border border-white/60">
+          <div class="px-6 md:px-8 pt-6 md:pt-8">
+            <h4 class="text-2xl font-bold text-slate-900">Tabla principal de especies</h4>
+            <p class="mt-2 text-sm text-slate-600">Base recomendada para proyecto de jardinería comunitaria.</p>
+          </div>
+          <div class="overflow-x-auto px-4 md:px-8 pb-6 md:pb-8 pt-5">
+            <table class="min-w-full text-sm table-zebra">
+              <thead>
+                <tr class="bg-slate-900 text-white text-left">
+                  <th class="px-4 py-3 rounded-l-2xl">Nombre</th>
+                  <th class="px-4 py-3">Tipo</th>
+                  <th class="px-4 py-3">Ubicación</th>
+                  <th class="px-4 py-3">Riego</th>
+                  <th class="px-4 py-3 rounded-r-2xl">Mantenimiento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="px-4 py-3 font-semibold">Palmera canaria <span class="text-slate-500 font-normal">(Phoenix canariensis)</span></td><td class="px-4 py-3">Arbórea singular</td><td class="px-4 py-3">Acceso principal o frente representativo</td><td class="px-4 py-3">Bajo tras implantación</td><td class="px-4 py-3">Medio-bajo</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Drago <span class="text-slate-500 font-normal">(Dracaena draco)</span></td><td class="px-4 py-3">Arbórea escultórica</td><td class="px-4 py-3">Portal, esquina noble o cubierta puntual</td><td class="px-4 py-3">Muy bajo</td><td class="px-4 py-3">Muy bajo</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Tabaiba dulce <span class="text-slate-500 font-normal">(Euphorbia balsamifera)</span></td><td class="px-4 py-3">Arbustiva autóctona</td><td class="px-4 py-3">Parterres soleados y bordes de rampa</td><td class="px-4 py-3">Muy bajo</td><td class="px-4 py-3">Muy bajo</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Verode <span class="text-slate-500 font-normal">(Kleinia neriifolia)</span></td><td class="px-4 py-3">Arbustiva estructural</td><td class="px-4 py-3">Jardineras secas y cubierta</td><td class="px-4 py-3">Muy bajo</td><td class="px-4 py-3">Bajo</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Lavanda canaria / lavanda</td><td class="px-4 py-3">Aromática</td><td class="px-4 py-3">Acceso peatonal y cubierta</td><td class="px-4 py-3">Bajo</td><td class="px-4 py-3">Bajo</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Romero <span class="text-slate-500 font-normal">(Salvia rosmarinus)</span></td><td class="px-4 py-3">Aromática</td><td class="px-4 py-3">Bordes, jardineras lineales, cubierta</td><td class="px-4 py-3">Bajo</td><td class="px-4 py-3">Bajo</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Bejeque <span class="text-slate-500 font-normal">(Aeonium spp.)</span></td><td class="px-4 py-3">Suculenta</td><td class="px-4 py-3">Rocallas y jardineras ligeras</td><td class="px-4 py-3">Muy bajo</td><td class="px-4 py-3">Muy bajo</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Limonium / siempreviva</td><td class="px-4 py-3">Floración xerófila</td><td class="px-4 py-3">Cubierta y parterres soleados</td><td class="px-4 py-3">Muy bajo</td><td class="px-4 py-3">Bajo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal mt-8 grid lg:grid-cols-2 gap-6">
+        <div class="glass rounded-[30px] shadow-card p-6 md:p-8">
+          <p class="text-sm font-semibold uppercase tracking-[0.26em] text-verdex-700">Riego eficiente</p>
+          <h3 class="mt-3 text-3xl font-black text-slate-950">Sistema por goteo con programador</h3>
+          <div class="mt-5 space-y-4 text-sm text-slate-700">
+            <div class="rounded-2xl bg-white border border-slate-200 p-4"><strong>S1 · Piezas singulares:</strong> drago/palmera con emisores independientes y caudal moderado de establecimiento.</div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4"><strong>S2 · Parterres PB:</strong> línea de goteo 16 mm, emisores autocompensantes y sector separado del resto.</div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4"><strong>S3 · Cubierta:</strong> sector autónomo con control más fino por exposición, viento y menor volumen de sustrato.</div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4"><strong>Control:</strong> programador digital, arqueta registrable, filtro, regulador de presión y posibilidad de sonda de humedad.</div>
+          </div>
+        </div>
+
+        <div class="glass rounded-[30px] shadow-card p-6 md:p-8">
+          <p class="text-sm font-semibold uppercase tracking-[0.26em] text-verdex-700">Mantenimiento comunitario</p>
+          <h3 class="mt-3 text-3xl font-black text-slate-950">Pocas intervenciones, alta estabilidad visual</h3>
+          <ul class="mt-5 space-y-3 text-sm text-slate-700">
+            <li class="rounded-2xl bg-white border border-slate-200 p-4">Revisión mensual de goteros, programador y arquetas.</li>
+            <li class="rounded-2xl bg-white border border-slate-200 p-4">Poda ligera de aromáticas y retirada de restos 2–3 veces al año.</li>
+            <li class="rounded-2xl bg-white border border-slate-200 p-4">Reposición puntual de árido y limpieza de hojas/arrastres en acceso y cubierta.</li>
+            <li class="rounded-2xl bg-white border border-slate-200 p-4">Revisión anual de iluminación, mobiliario y barandillas del área de cubierta.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="presupuesto" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+      <div class="reveal mb-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.26em] text-verdex-700">Presupuesto estimado</p>
+        <h3 class="mt-3 text-3xl md:text-5xl font-black text-slate-950">Urbanización exterior y paisajismo de zonas comunes</h3>
+        <p class="mt-4 max-w-4xl text-lg text-slate-600">Estimación orientativa para un estándar residencial medio-alto, coherente con el producto comercial del edificio y con una ejecución cuidada en accesos y cubierta. Los importes deberán ajustarse con mediciones y coordinación con el capítulo 15 de urbanización de Buildero.</p>
+      </div>
+
+      <div class="grid xl:grid-cols-[1.04fr_.96fr] gap-6">
+        <div class="reveal overflow-hidden rounded-[30px] glass shadow-card border border-white/60">
+          <div class="px-6 md:px-8 pt-6 md:pt-8">
+            <h4 class="text-2xl font-bold text-slate-900">Desglose de coste base</h4>
+          </div>
+          <div class="overflow-x-auto px-4 md:px-8 pb-6 md:pb-8 pt-5">
+            <table class="min-w-full text-sm table-zebra">
+              <thead>
+                <tr class="bg-verdex-700 text-white text-left">
+                  <th class="px-4 py-3 rounded-l-2xl">Partida</th>
+                  <th class="px-4 py-3 text-right">Importe</th>
+                  <th class="px-4 py-3 rounded-r-2xl">Alcance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="px-4 py-3 font-semibold">Acera de acceso, portal y rampa accesible</td><td class="px-4 py-3 text-right font-semibold">14.800 €</td><td class="px-4 py-3">Baldosa hidráulica, remates y encuentros</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Tratamiento de rampa de garaje y vado</td><td class="px-4 py-3 text-right font-semibold">9.400 €</td><td class="px-4 py-3">Pavimento técnico, drenaje y bordes</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Jardineras, áridos y piedra volcánica</td><td class="px-4 py-3 text-right font-semibold">12.600 €</td><td class="px-4 py-3">Rocalla ligera, zócalos y bandas ajardinadas</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Vegetación y plantación</td><td class="px-4 py-3 text-right font-semibold">8.900 €</td><td class="px-4 py-3">Especies singulares + masas xerófilas</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Riego por goteo y programador</td><td class="px-4 py-3 text-right font-semibold">3.950 €</td><td class="px-4 py-3">Tres sectores + filtrado + regulación</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Iluminación exterior zonas comunes</td><td class="px-4 py-3 text-right font-semibold">6.800 €</td><td class="px-4 py-3">Balizas, líneas LED y focos puntuales</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Mobiliario urbano y papeleras</td><td class="px-4 py-3 text-right font-semibold">3.400 €</td><td class="px-4 py-3">Solo si se ejecuta estancia comunitaria real</td></tr>
+                <tr><td class="px-4 py-3 font-semibold">Cubierta: jardineras, pavimento y zona tendedero</td><td class="px-4 py-3 text-right font-semibold">18.900 €</td><td class="px-4 py-3">Excluye vaso de piscina o refuerzos estructurales</td></tr>
+                <tr class="bg-slate-900 text-white"><td class="px-4 py-3 font-bold rounded-bl-2xl">Total orientativo de paisajismo y urbanización blanda</td><td class="px-4 py-3 text-right font-black">78.750 €</td><td class="px-4 py-3 rounded-br-2xl">≈ 2,77% del valor tasado</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="reveal grid gap-6">
+          <div class="glass rounded-[30px] shadow-card p-6 md:p-8">
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="rounded-2xl bg-verdex-50 border border-verdex-100 p-5">
+                <p class="text-xs uppercase tracking-[0.18em] text-verdex-700 font-semibold">Mantenimiento anual</p>
+                <p class="mt-2 text-4xl font-black text-verdex-900">7.950 €</p>
+                <p class="mt-2 text-sm text-slate-600">Riego, poda ligera, revisión luminarias, limpieza de jardineras y reposiciones puntuales.</p>
+              </div>
+              <div class="rounded-2xl bg-slate-900 p-5 text-white">
+                <p class="text-xs uppercase tracking-[0.18em] text-emerald-200 font-semibold">Con cubierta activa premium</p>
+                <p class="mt-2 text-4xl font-black">10.900 €</p>
+                <p class="mt-2 text-sm text-slate-300">Si se intensifica el uso comunitario de cubierta y se incorpora lámina de agua.</p>
+              </div>
+            </div>
+            <div class="mt-5 rounded-2xl bg-white border border-slate-200 p-4 text-sm text-slate-700">
+              <strong>Lectura económica:</strong> la intervención propuesta tiene un coste contenido respecto al valor del activo y mejora la primera impresión del edificio, la seguridad de uso de los accesos y el atractivo de la cubierta como elemento diferencial.
+            </div>
+          </div>
+
+          <div class="glass rounded-[30px] shadow-card p-6 md:p-8">
+            <h4 class="text-2xl font-bold text-slate-900">Distribución del presupuesto</h4>
+            <div class="mt-4 h-[300px]"><canvas id="budgetChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+      <div class="grid lg:grid-cols-[.95fr_1.05fr] gap-6 items-start">
+        <div class="reveal glass rounded-[30px] shadow-card p-6 md:p-8">
+          <p class="text-sm font-semibold uppercase tracking-[0.26em] text-verdex-700">Fases recomendadas</p>
+          <h3 class="mt-3 text-3xl font-black text-slate-950">Secuencia de ejecución</h3>
+          <div class="mt-6 space-y-4">
+            <div class="flex gap-4">
+              <div class="w-10 h-10 rounded-2xl bg-verdex-600 text-white font-bold flex items-center justify-center shrink-0">1</div>
+              <div>
+                <p class="font-semibold text-slate-900">Coordinar cotas, drenajes y accesos</p>
+                <p class="text-sm text-slate-600 mt-1">Definir con obra civil las secciones de portal, vado, boca de rampa, arquetas y encuentros con acera pública.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-10 h-10 rounded-2xl bg-verdex-600 text-white font-bold flex items-center justify-center shrink-0">2</div>
+              <div>
+                <p class="font-semibold text-slate-900">Ejecutar urbanización dura y cubierta</p>
+                <p class="text-sm text-slate-600 mt-1">Pavimentos, bordes, jardineras, barandillas, celosías y canalizaciones de riego e iluminación.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-10 h-10 rounded-2xl bg-verdex-600 text-white font-bold flex items-center justify-center shrink-0">3</div>
+              <div>
+                <p class="font-semibold text-slate-900">Instalación vegetal y puesta en marcha</p>
+                <p class="text-sm text-slate-600 mt-1">Plantación de ejemplares singulares primero; masas xerófilas después; ajuste del riego por sectores al final.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-10 h-10 rounded-2xl bg-verdex-600 text-white font-bold flex items-center justify-center shrink-0">4</div>
+              <div>
+                <p class="font-semibold text-slate-900">Mantenimiento de establecimiento</p>
+                <p class="text-sm text-slate-600 mt-1">Durante 6–12 meses deben corregirse caudales, marras y respuesta microclimática en cubierta y zonas a pie de calle.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal glass rounded-[30px] shadow-card p-6 md:p-8">
+          <p class="text-sm font-semibold uppercase tracking-[0.26em] text-verdex-700">Conclusión técnica</p>
+          <h3 class="mt-3 text-3xl font-black text-slate-950">Recomendación final de Verdex</h3>
+          <div class="mt-5 space-y-4 text-sm text-slate-700 leading-relaxed">
+            <p>Para este edificio en Guargacho, el paisajismo no debe plantearse como una gran superficie verde, sino como una <strong>infraestructura ambiental y urbana</strong>: ordena el acceso, protege la base del inmueble, mejora el confort de la cubierta y transmite una imagen de calidad que sí se percibe en comercialización y uso diario.</p>
+            <p>La combinación más adecuada es: <strong>portal duro y elegante con baldosa hidráulica, piedra volcánica en remates, una o dos piezas vegetales singulares, masas de tabaiba/verode/lavanda/romero, iluminación cálida, goteo sectorizado y una cubierta con uso comunitario claro</strong>, incluyendo si se desea una franja técnica de tendedero discreta.</p>
+            <p>La propuesta es coherente con la topografía favorable, la arquitectura ya definida, la existencia del local comercial, el carácter seco del clima del sur de Tenerife y la necesidad de un mantenimiento asumible para una comunidad de propietarios.</p>
+          </div>
+          <div class="mt-6 grid sm:grid-cols-3 gap-4">
+            <div class="rounded-2xl bg-white border border-slate-200 p-4 text-center">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">Agua</p>
+              <p class="mt-2 text-2xl font-black text-slate-900">Baja demanda</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4 text-center">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">Uso</p>
+              <p class="mt-2 text-2xl font-black text-slate-900">Comunitario real</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4 text-center">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">Imagen</p>
+              <p class="mt-2 text-2xl font-black text-verdex-700">Alta calidad</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-10 border-t border-slate-200 bg-white/72 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="grid lg:grid-cols-[1fr_.95fr] gap-6 items-start">
+        <div>
+          <p class="text-xs uppercase tracking-[0.28em] text-verdex-700 font-semibold">Fuentes y coordinación</p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600">Informe elaborado por <strong>Verdex</strong> a partir del proyecto arquitectónico Guargacho, el informe de tasación de Valorex, el análisis topográfico, el presupuesto de obra, los esquemas de planta y consultas de flora canaria y jardinería sostenible realizadas con Perplexity sobre Tenerife sur, xerojardinería y especies autóctonas/adaptadas.</p>
+        </div>
+        <div class="rounded-3xl bg-slate-900 p-5 text-sm text-slate-300">
+          <p class="font-semibold text-white">Aviso técnico</p>
+          <p class="mt-2">Esta propuesta tiene carácter de anteproyecto paisajístico. Antes de obra debe cerrarse con medición exacta de zonas comunes, detalle constructivo de jardineras y cubierta, compatibilidad estructural, autorizaciones de acceso rodado y coordinación con DB-SUA, DB-SI y soluciones de impermeabilización.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const ctx = document.getElementById('budgetChart');
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: [
+            'Acceso peatonal',
+            'Rampa y vado',
+            'Jardineras y piedra',
+            'Vegetación',
+            'Riego',
+            'Iluminación',
+            'Mobiliario',
+            'Cubierta útil'
+          ],
+          datasets: [{
+            data: [14800, 9400, 12600, 8900, 3950, 6800, 3400, 18900],
+            backgroundColor: ['#2d8f5d', '#5a4638', '#e8dcc8', '#7dcd9f', '#38bdf8', '#f5b942', '#94a3b8', '#143c2b'],
+            borderColor: '#ffffff',
+            borderWidth: 4,
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                usePointStyle: true,
+                padding: 18,
+                color: '#334155'
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const value = Number(context.parsed || 0).toLocaleString('es-ES');
+                  return `${context.label}: ${value} €`;
+                }
+              }
+            }
+          },
+          cutout: '61%'
+        }
+      });
+    }
+  </script>
+</body>
+</html>

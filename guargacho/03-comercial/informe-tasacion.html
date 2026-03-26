@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe de Tasación Profesional — Proyecto Guargacho 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(.23,1,.32,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.4); }
+    .glass-dark { background: rgba(49,46,129,0.08); backdrop-filter: blur(8px); border: 1px solid rgba(79,70,229,0.15); }
+    tbody tr:hover { background-color: rgba(99,102,241,0.06); transition: background 0.2s; }
+    .shimmer { position: relative; overflow: hidden; }
+    .shimmer::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent); animation:shimmer 3s infinite; }
+    @keyframes shimmer { 0%{left:-100%} 100%{left:100%} }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .float { animation: float 6s ease-in-out infinite; }
+    @keyframes pulse-ring { 0%{transform:scale(0.8);opacity:0.5} 100%{transform:scale(1.3);opacity:0} }
+    .pulse-ring::before { content:''; position:absolute; inset:-4px; border-radius:inherit; border:2px solid currentColor; animation:pulse-ring 2s infinite; }
+    .stat-card { transition: all 0.3s cubic-bezier(.23,1,.32,1); }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(79,70,229,0.15); }
+    .badge-trend-up { background: linear-gradient(135deg, #059669, #34d399); }
+    .badge-trend-stable { background: linear-gradient(135deg, #d97706, #fbbf24); }
+    .nav-link { position:relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:#4f46e5; transition:width 0.3s; }
+    .nav-link:hover::after { width:100%; }
+    .hero-pattern { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    @media print { .no-print{display:none} .reveal{opacity:1;transform:none} }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-lg border-b border-gray-200/60 no-print">
+    <div class="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white font-bold text-sm">VX</div>
+        <span class="text-lg font-bold gradient-text">Valorex</span>
+        <span class="hidden sm:inline text-xs text-gray-400 ml-1">Tasador Inmobiliario IA</span>
+      </div>
+      <div class="hidden lg:flex gap-5 text-[13px] font-medium text-gray-500">
+        <a href="#resumen" class="nav-link hover:text-indigo-600 transition">Resumen</a>
+        <a href="#ubicacion" class="nav-link hover:text-indigo-600 transition">Ubicación</a>
+        <a href="#descripcion" class="nav-link hover:text-indigo-600 transition">Descripción</a>
+        <a href="#mercado" class="nav-link hover:text-indigo-600 transition">Mercado</a>
+        <a href="#comparables" class="nav-link hover:text-indigo-600 transition">Comparables</a>
+        <a href="#comparacion" class="nav-link hover:text-indigo-600 transition">M. Comparación</a>
+        <a href="#residual" class="nav-link hover:text-indigo-600 transition">M. Residual</a>
+        <a href="#valoracion" class="nav-link hover:text-indigo-600 transition">Valoración</a>
+        <a href="#condicionantes" class="nav-link hover:text-indigo-600 transition">Condicionantes</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-indigo-700 via-indigo-600 to-purple-700 text-white">
+    <div class="absolute inset-0 hero-pattern"></div>
+    <div class="absolute top-20 right-20 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl float"></div>
+    <div class="absolute bottom-10 left-10 w-56 h-56 bg-indigo-400/20 rounded-full blur-3xl float" style="animation-delay:-3s"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+        <div class="max-w-2xl">
+          <p class="text-indigo-200 text-xs font-semibold uppercase tracking-[0.2em] mb-4">📋 Informe de Tasación Inmobiliaria</p>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight">Edificio de Viviendas<br>y Local Comercial</h1>
+          <p class="text-lg text-indigo-100 leading-relaxed">Proyecto Guargacho 1 — Tasación profesional con método de comparación y método residual, conforme a la Orden ECO/805/2003</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">📅 25 marzo 2026</span>
+            <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">📍 Guargacho, San Miguel de Abona</span>
+            <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">🏗️ Obra Nueva</span>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 text-center min-w-[220px]">
+          <p class="text-indigo-900 text-xs font-semibold uppercase tracking-wider mb-2">Valor de Tasación</p>
+          <p class="text-4xl md:text-5xl font-black text-indigo-700" data-count="2847000" data-prefix="" data-suffix=" €">0 €</p>
+          <p class="text-indigo-500 text-sm mt-1 font-medium">Valor total promoción</p>
+          <div class="mt-3 pt-3 border-t border-indigo-200/50">
+            <p class="text-indigo-700 text-lg font-bold">2.965 €/m²</p>
+            <p class="text-indigo-400 text-xs">valor medio ponderado</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-7xl mx-auto px-6 py-16 space-y-24">
+
+    <!-- SECTION: RESUMEN EJECUTIVO -->
+    <section id="resumen" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">📊</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Resumen Ejecutivo</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="stat-card glass-dark rounded-2xl p-6 text-center">
+          <div class="text-3xl mb-2">🏢</div>
+          <p class="text-sm text-gray-500 font-medium mb-1">Tipología</p>
+          <p class="text-lg font-bold text-gray-800">Edificio Plurifamiliar</p>
+          <p class="text-xs text-gray-400 mt-1">Viviendas + Local</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-6 text-center">
+          <div class="text-3xl mb-2">📐</div>
+          <p class="text-sm text-gray-500 font-medium mb-1">Superficie Construida</p>
+          <p class="text-2xl font-black text-indigo-600" data-count="960" data-suffix=" m²">0 m²</p>
+          <p class="text-xs text-gray-400 mt-1">sobre rasante (estimada)</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-6 text-center">
+          <div class="text-3xl mb-2">🏠</div>
+          <p class="text-sm text-gray-500 font-medium mb-1">Unidades</p>
+          <p class="text-2xl font-black text-indigo-600">18 viv. + 1 local</p>
+          <p class="text-xs text-gray-400 mt-1">+ 18 garajes + trasteros</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-6 text-center">
+          <div class="text-3xl mb-2">📈</div>
+          <p class="text-sm text-gray-500 font-medium mb-1">Tendencia zona</p>
+          <p class="text-2xl font-black text-emerald-600">+12,3%</p>
+          <p class="text-xs text-gray-400 mt-1">variación interanual</p>
+        </div>
+      </div>
+      <div class="mt-8 glass-dark rounded-2xl p-6">
+        <h3 class="font-bold text-gray-800 mb-3">🔍 Objeto de la tasación</h3>
+        <p class="text-gray-600 leading-relaxed">El presente informe tiene por objeto la <strong>valoración del edificio de viviendas y local comercial</strong> situado en la Carretera General TF-652, Guargacho, municipio de San Miguel de Abona (Santa Cruz de Tenerife). Se trata de un proyecto de <strong>obra nueva</strong> diseñado por el estudio <strong>DOS·07 Arquitectura y Diseño, S.L.</strong> (arquitectos Ignacio Galván Cañada, col. nº 1967 COAC, y Daniel Montesino Rodríguez, col. nº 1726 COAC). El edificio comprende <strong>3 plantas sobre rasante</strong> con un total estimado de <strong>18 viviendas</strong> (1, 2 y 3 dormitorios), <strong>un local comercial</strong> en planta baja, y <strong>plazas de garaje y trasteros</strong> vinculados. La tasación se realiza conforme a la normativa española vigente (Orden ECO/805/2003) aplicando los métodos de <strong>comparación</strong> y <strong>residual</strong>.</p>
+      </div>
+    </section>
+
+    <!-- SECTION: UBICACIÓN Y ENTORNO -->
+    <section id="ubicacion" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">📍</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Ubicación y Entorno</h2>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div class="lg:col-span-3 space-y-5">
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <table class="w-full text-sm">
+              <tbody>
+                <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500 w-40">Dirección</td><td class="px-5 py-3.5 text-gray-800 font-medium">Ctra. General TF-652, Guargacho</td></tr>
+                <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Municipio</td><td class="px-5 py-3.5 text-gray-800">San Miguel de Abona</td></tr>
+                <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Provincia</td><td class="px-5 py-3.5 text-gray-800">Santa Cruz de Tenerife</td></tr>
+                <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Isla</td><td class="px-5 py-3.5 text-gray-800">Tenerife (Islas Canarias)</td></tr>
+                <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Código Postal</td><td class="px-5 py-3.5 text-gray-800">38639</td></tr>
+                <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Ref. Catastral</td><td class="px-5 py-3.5 text-gray-800">Pendiente de verificación registral</td></tr>
+                <tr><td class="px-5 py-3.5 font-semibold text-gray-500">Coordenadas</td><td class="px-5 py-3.5 text-gray-800">28.0486°N, -16.6281°W (aprox.)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+            <h3 class="font-bold text-gray-800 mb-3">🏘️ Descripción del entorno</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-3">Guargacho es un <strong>núcleo residencial consolidado</strong> dentro del municipio de San Miguel de Abona, situado en el <strong>sur de Tenerife</strong>. La zona se caracteriza por un tejido urbano de densidad media-baja, con edificaciones de 2-4 plantas y viviendas unifamiliares. Se encuentra en pleno crecimiento residencial, con excelente comunicación:</p>
+            <ul class="text-sm text-gray-600 space-y-1.5">
+              <li>• <strong>Autopista TF-1:</strong> a 3 min por la TF-652</li>
+              <li>• <strong>Las Galletas / Costa:</strong> a 5 min en coche</li>
+              <li>• <strong>Las Chafiras (zona comercial):</strong> a 5 min</li>
+              <li>• <strong>Aeropuerto Tenerife Sur:</strong> a 10 min</li>
+              <li>• <strong>Los Cristianos / Playa de las Américas:</strong> a 15 min</li>
+            </ul>
+          </div>
+        </div>
+        <div class="lg:col-span-2 space-y-5">
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+            <h3 class="font-bold text-gray-800 mb-4">✅ Servicios y Dotaciones</h3>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-sm">🏫</span><div><p class="text-sm font-semibold text-gray-700">Educación</p><p class="text-xs text-gray-400">CEIP El Monte (2 min)</p></div></div>
+              <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-sm">🏥</span><div><p class="text-sm font-semibold text-gray-700">Sanidad</p><p class="text-xs text-gray-400">Centro de Salud Guargacho</p></div></div>
+              <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-sm">🛒</span><div><p class="text-sm font-semibold text-gray-700">Comercio</p><p class="text-xs text-gray-400">Supermercados, bares, comercios</p></div></div>
+              <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center text-sm">🚌</span><div><p class="text-sm font-semibold text-gray-700">Transporte</p><p class="text-xs text-gray-400">Parada de guaguas TF-652</p></div></div>
+              <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center text-sm">🏖️</span><div><p class="text-sm font-semibold text-gray-700">Ocio / Playa</p><p class="text-xs text-gray-400">Las Galletas a 5 min</p></div></div>
+              <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-sm">⛳</span><div><p class="text-sm font-semibold text-gray-700">Golf</p><p class="text-xs text-gray-400">Golf del Sur / Amarilla Golf a 10 min</p></div></div>
+            </div>
+          </div>
+          <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-5 border border-indigo-100">
+            <h3 class="font-bold text-indigo-800 mb-2">📌 Valoración del entorno</h3>
+            <div class="flex items-center gap-2 mb-2">
+              <div class="flex gap-0.5">
+                <span class="text-amber-400">★</span><span class="text-amber-400">★</span><span class="text-amber-400">★</span><span class="text-amber-400">★</span><span class="text-gray-300">★</span>
+              </div>
+              <span class="text-sm font-semibold text-indigo-700">4/5 — Bueno</span>
+            </div>
+            <p class="text-xs text-indigo-600 leading-relaxed">Zona residencial en crecimiento con todos los servicios básicos, excelente comunicación viaria y proximidad a la costa. Demanda creciente por la oferta limitada de obra nueva en el sur de Tenerife.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: DESCRIPCIÓN DEL INMUEBLE -->
+    <section id="descripcion" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">🏗️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Descripción del Inmueble</h2>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">🏢 Características Generales</h3>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500 w-44">Tipología</td><td class="py-2.5 text-gray-800">Edificio plurifamiliar + local comercial</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Estado</td><td class="py-2.5"><span class="px-2.5 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-semibold">Proyecto / Obra Nueva</span></td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Nº Plantas</td><td class="py-2.5 text-gray-800">PB + 2 plantas (+ sótano garaje)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Total Viviendas</td><td class="py-2.5 text-gray-800 font-bold">18 unidades</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Local Comercial</td><td class="py-2.5 text-gray-800">1 unidad en planta baja</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Garajes</td><td class="py-2.5 text-gray-800">18 plazas (vinculadas)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Trasteros</td><td class="py-2.5 text-gray-800">18 unidades (vinculados)</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Azotea</td><td class="py-2.5 text-gray-800">Compartida / tendedero</td></tr>
+              <tr><td class="py-2.5 font-semibold text-gray-500">Arquitecto</td><td class="py-2.5 text-gray-800">DOS·07 Arquitectura y Diseño, S.L.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">🏠 Distribución de Viviendas (estimada)</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b-2 border-indigo-100">
+                  <th class="py-3 text-left font-bold text-indigo-700">Tipo</th>
+                  <th class="py-3 text-center font-bold text-indigo-700">Uds.</th>
+                  <th class="py-3 text-center font-bold text-indigo-700">m² útil</th>
+                  <th class="py-3 text-center font-bold text-indigo-700">m² constr.</th>
+                  <th class="py-3 text-right font-bold text-indigo-700">Total m²</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">1 dormitorio</td><td class="py-2.5 text-center">6</td><td class="py-2.5 text-center">38-44</td><td class="py-2.5 text-center">45-52</td><td class="py-2.5 text-right font-semibold">~294 m²</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">2 dormitorios</td><td class="py-2.5 text-center">6</td><td class="py-2.5 text-center">52-60</td><td class="py-2.5 text-center">60-70</td><td class="py-2.5 text-right font-semibold">~390 m²</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">3 dormitorios</td><td class="py-2.5 text-center">6</td><td class="py-2.5 text-center">75-90</td><td class="py-2.5 text-center">88-102</td><td class="py-2.5 text-right font-semibold">~570 m²</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">Local comercial</td><td class="py-2.5 text-center">1</td><td class="py-2.5 text-center">~80</td><td class="py-2.5 text-center">~95</td><td class="py-2.5 text-right font-semibold">~95 m²</td></tr>
+                <tr class="bg-indigo-50/50"><td class="py-3 font-bold text-indigo-700" colspan="4">TOTAL SOBRE RASANTE</td><td class="py-3 text-right font-black text-indigo-700">~1.349 m²</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-medium text-gray-500">Garajes (sótano)</td><td class="py-2.5 text-center text-gray-500">18</td><td class="py-2.5 text-center text-gray-500">~12 c/u</td><td class="py-2.5 text-center text-gray-500">—</td><td class="py-2.5 text-right font-semibold text-gray-500">~350 m²</td></tr>
+                <tr><td class="py-2.5 font-medium text-gray-500">Trasteros</td><td class="py-2.5 text-center text-gray-500">18</td><td class="py-2.5 text-center text-gray-500">~5 c/u</td><td class="py-2.5 text-center text-gray-500">—</td><td class="py-2.5 text-right font-semibold text-gray-500">~90 m²</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-gray-400 mt-3 italic">* Superficies estimadas a partir del análisis de planos del proyecto arquitectónico. La distribución exacta deberá ser confirmada con la memoria de calidades y cuadro de superficies definitivos.</p>
+        </div>
+      </div>
+
+      <!-- Calidades -->
+      <div class="mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">✨ Calidades Constructivas (según renders del proyecto)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <p class="font-bold text-sm text-gray-700 mb-2">🧱 Exterior</p>
+            <ul class="text-xs text-gray-500 space-y-1">
+              <li>• Fachada ventilada con revestimiento oscuro</li>
+              <li>• Elementos de madera tecnológica</li>
+              <li>• Carpintería aluminio RPT color oscuro</li>
+              <li>• Cubierta plana transitable</li>
+            </ul>
+          </div>
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <p class="font-bold text-sm text-gray-700 mb-2">🏠 Interior</p>
+            <ul class="text-xs text-gray-500 space-y-1">
+              <li>• Pavimento porcelánico gran formato</li>
+              <li>• Cocina abierta con encimera de diseño</li>
+              <li>• Baños con grifería monomando</li>
+              <li>• Preinstalación de aire acondicionado</li>
+            </ul>
+          </div>
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <p class="font-bold text-sm text-gray-700 mb-2">⚡ Instalaciones</p>
+            <ul class="text-xs text-gray-500 space-y-1">
+              <li>• Ascensor en zonas comunes</li>
+              <li>• Aerotermia para ACS</li>
+              <li>• Telecomunicaciones ICT2</li>
+              <li>• Certificación energética clase B (est.)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: ESTUDIO DE MERCADO -->
+    <section id="mercado" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">📈</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Estudio de Mercado</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-8">
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Guargacho</span>
+            <span class="px-2 py-0.5 badge-trend-up rounded-full text-white text-[10px] font-bold">↑ ALCISTA</span>
+          </div>
+          <p class="text-3xl font-black text-gray-800">3.237 <span class="text-lg text-gray-400">€/m²</span></p>
+          <p class="text-xs text-gray-400 mt-1">Fotocasa nov. 2025</p>
+          <div class="mt-3 h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" style="width:72%"></div></div>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-400">San Miguel (pisos)</span>
+            <span class="px-2 py-0.5 badge-trend-up rounded-full text-white text-[10px] font-bold">↑ +8,6%</span>
+          </div>
+          <p class="text-3xl font-black text-gray-800">3.195 <span class="text-lg text-gray-400">€/m²</span></p>
+          <p class="text-xs text-gray-400 mt-1">Engel & Völkers 2025</p>
+          <div class="mt-3 h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" style="width:71%"></div></div>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Tenerife (pisos)</span>
+            <span class="px-2 py-0.5 badge-trend-up rounded-full text-white text-[10px] font-bold">↑ +11,9%</span>
+          </div>
+          <p class="text-3xl font-black text-gray-800">3.929 <span class="text-lg text-gray-400">€/m²</span></p>
+          <p class="text-xs text-gray-400 mt-1">Engel & Völkers 2026</p>
+          <div class="mt-3 h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" style="width:87%"></div></div>
+        </div>
+      </div>
+
+      <!-- Chart: Evolución precios -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">Evolución Precio m² — San Miguel de Abona (pisos)</h3>
+          <canvas id="chartEvolucion" height="250"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">Comparativa Zonas Limítrofes (€/m²)</h3>
+          <canvas id="chartZonas" height="250"></canvas>
+        </div>
+      </div>
+
+      <!-- Análisis textual -->
+      <div class="mt-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-6 border border-indigo-100">
+        <h3 class="font-bold text-indigo-800 mb-3">📋 Análisis del Mercado Local</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-indigo-700 leading-relaxed">
+          <div>
+            <p class="font-semibold mb-1">Demanda:</p>
+            <p>Alta demanda de vivienda de obra nueva en el sur de Tenerife, impulsada por compradores nacionales e internacionales. El stock de obra nueva es <strong>muy limitado</strong>, generando presión alcista. Guargacho atrae por precios más accesibles que las zonas turísticas costeras (Los Cristianos, Costa del Silencio) manteniendo buena comunicación.</p>
+          </div>
+          <div>
+            <p class="font-semibold mb-1">Oferta:</p>
+            <p>Oferta reducida de vivienda nueva en Guargacho. Las promociones existentes se absorben rápidamente. El precio medio de oferta en la zona se sitúa entre <strong>2.400 y 3.200 €/m²</strong> para pisos de segunda mano, y <strong>2.600-3.500 €/m²</strong> para obra nueva con garaje. La vivienda nueva en Canarias alcanzó <strong>2.028 €/m²</strong> de media (Soc. Tasación dic. 2025), pero en el sur de Tenerife se sitúa significativamente por encima.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: COMPARABLES (placeholder - will be expanded) -->
+    <section id="comparables" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">🔎</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Testigos / Comparables</h2>
+      </div>
+      <p class="text-gray-500 text-sm mb-6">Selección de 6 testigos representativos en Guargacho y zonas limítrofes, obtenidos de portales inmobiliarios (Idealista, Fotocasa, Indomio) en marzo 2026. Se han homogeneizado aplicando coeficientes por antigüedad, estado, calidades, planta, garaje y ubicación.</p>
+      <!-- COMPARABLES TABLE -->
+      <div class="overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-100">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+              <th class="px-4 py-3.5 text-left font-semibold rounded-tl-2xl">Testigo</th>
+              <th class="px-4 py-3.5 text-center font-semibold">Tipología</th>
+              <th class="px-4 py-3.5 text-center font-semibold">m² constr.</th>
+              <th class="px-4 py-3.5 text-center font-semibold">Precio</th>
+              <th class="px-4 py-3.5 text-center font-semibold">€/m²</th>
+              <th class="px-4 py-3.5 text-center font-semibold">Garaje</th>
+              <th class="px-4 py-3.5 text-center font-semibold">Estado</th>
+              <th class="px-4 py-3.5 text-center font-semibold rounded-tr-2xl">Fuente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">T1 — C/ Cervantes 12, Guargacho</td>
+              <td class="px-4 py-3 text-center">2 dorm.</td>
+              <td class="px-4 py-3 text-center">71 m²</td>
+              <td class="px-4 py-3 text-center font-semibold">169.900 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">2.393 €</span></td>
+              <td class="px-4 py-3 text-center">✅ Sí</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded text-xs font-semibold">Buen estado</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">Idealista</td>
+            </tr>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">T2 — C/ Benito Pérez Armas 15</td>
+              <td class="px-4 py-3 text-center">2 dorm.</td>
+              <td class="px-4 py-3 text-center">62 m²</td>
+              <td class="px-4 py-3 text-center font-semibold">183.900 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">2.966 €</span></td>
+              <td class="px-4 py-3 text-center">❌ No</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded text-xs font-semibold">Reformado</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">Idealista</td>
+            </tr>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">T3 — C/ Alonso Quesada 7</td>
+              <td class="px-4 py-3 text-center">3 dorm.</td>
+              <td class="px-4 py-3 text-center">104 m²</td>
+              <td class="px-4 py-3 text-center font-semibold">229.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">2.202 €</span></td>
+              <td class="px-4 py-3 text-center">✅ Sí</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded text-xs font-semibold">Reformado</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">Idealista</td>
+            </tr>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">T4 — C/ Punta del Lomo, Guargacho</td>
+              <td class="px-4 py-3 text-center">3 dorm.</td>
+              <td class="px-4 py-3 text-center">96 m²</td>
+              <td class="px-4 py-3 text-center font-semibold">270.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">2.813 €</span></td>
+              <td class="px-4 py-3 text-center">✅ Sí</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-purple-50 text-purple-700 rounded text-xs font-semibold">Obra nueva</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">Idealista</td>
+            </tr>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">T5 — C/ Delfina Hernandez 4</td>
+              <td class="px-4 py-3 text-center">3 dorm.</td>
+              <td class="px-4 py-3 text-center">105 m²</td>
+              <td class="px-4 py-3 text-center font-semibold">229.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">2.181 €</span></td>
+              <td class="px-4 py-3 text-center">✅ Sí</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-amber-50 text-amber-700 rounded text-xs font-semibold">2ª mano</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">Idealista</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">T6 — C/ Alonso Quesada, Guargacho</td>
+              <td class="px-4 py-3 text-center">2 dorm.</td>
+              <td class="px-4 py-3 text-center">92 m²</td>
+              <td class="px-4 py-3 text-center font-semibold">236.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">2.565 €</span></td>
+              <td class="px-4 py-3 text-center">✅ Sí</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded text-xs font-semibold">Reformado</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">Idealista</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION: MÉTODO DE COMPARACIÓN -->
+    <section id="comparacion" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">⚖️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Método de Comparación</h2>
+      </div>
+      <p class="text-gray-500 text-sm mb-6">Conforme al art. 22 de la Orden ECO/805/2003. Se aplican coeficientes de homogeneización sobre los testigos para obtener un valor unitario de referencia para obra nueva con garaje y trastero incluidos.</p>
+
+      <!-- Coeficientes de homogeneización -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-6">
+        <div class="px-5 py-4 bg-gradient-to-r from-indigo-50 to-purple-50 border-b border-indigo-100">
+          <h3 class="font-bold text-indigo-800">Tabla de Homogeneización</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-gray-100 bg-gray-50/50">
+                <th class="px-4 py-3 text-left font-semibold text-gray-600">Testigo</th>
+                <th class="px-4 py-3 text-center font-semibold text-gray-600">€/m² bruto</th>
+                <th class="px-4 py-3 text-center font-semibold text-gray-600">Coef. Antig.</th>
+                <th class="px-4 py-3 text-center font-semibold text-gray-600">Coef. Estado</th>
+                <th class="px-4 py-3 text-center font-semibold text-gray-600">Coef. Calid.</th>
+                <th class="px-4 py-3 text-center font-semibold text-gray-600">Coef. Garaje</th>
+                <th class="px-4 py-3 text-center font-semibold text-gray-600">Coef. Neg.</th>
+                <th class="px-4 py-3 text-center font-semibold text-gray-600">Coef. Total</th>
+                <th class="px-4 py-3 text-center font-semibold text-indigo-700">€/m² homog.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="px-4 py-2.5 font-medium">T1 — 2 dorm.</td><td class="px-4 py-2.5 text-center">2.393</td><td class="px-4 py-2.5 text-center">1,10</td><td class="px-4 py-2.5 text-center">1,08</td><td class="px-4 py-2.5 text-center">1,10</td><td class="px-4 py-2.5 text-center">1,00</td><td class="px-4 py-2.5 text-center">0,95</td><td class="px-4 py-2.5 text-center font-semibold">1,244</td><td class="px-4 py-2.5 text-center font-bold text-indigo-700">2.977</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-4 py-2.5 font-medium">T2 — 2 dorm.</td><td class="px-4 py-2.5 text-center">2.966</td><td class="px-4 py-2.5 text-center">1,05</td><td class="px-4 py-2.5 text-center">1,00</td><td class="px-4 py-2.5 text-center">1,05</td><td class="px-4 py-2.5 text-center">1,08</td><td class="px-4 py-2.5 text-center">0,95</td><td class="px-4 py-2.5 text-center font-semibold">1,131</td><td class="px-4 py-2.5 text-center font-bold text-indigo-700">3.354</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-4 py-2.5 font-medium">T3 — 3 dorm.</td><td class="px-4 py-2.5 text-center">2.202</td><td class="px-4 py-2.5 text-center">1,08</td><td class="px-4 py-2.5 text-center">1,00</td><td class="px-4 py-2.5 text-center">1,12</td><td class="px-4 py-2.5 text-center">1,00</td><td class="px-4 py-2.5 text-center">0,95</td><td class="px-4 py-2.5 text-center font-semibold">1,148</td><td class="px-4 py-2.5 text-center font-bold text-indigo-700">2.528</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-4 py-2.5 font-medium">T4 — 3 dorm.</td><td class="px-4 py-2.5 text-center">2.813</td><td class="px-4 py-2.5 text-center">1,00</td><td class="px-4 py-2.5 text-center">1,00</td><td class="px-4 py-2.5 text-center">1,05</td><td class="px-4 py-2.5 text-center">1,00</td><td class="px-4 py-2.5 text-center">0,95</td><td class="px-4 py-2.5 text-center font-semibold">0,998</td><td class="px-4 py-2.5 text-center font-bold text-indigo-700">2.807</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-4 py-2.5 font-medium">T5 — 3 dorm.</td><td class="px-4 py-2.5 text-center">2.181</td><td class="px-4 py-2.5 text-center">1,12</td><td class="px-4 py-2.5 text-center">1,08</td><td class="px-4 py-2.5 text-center">1,12</td><td class="px-4 py-2.5 text-center">1,00</td><td class="px-4 py-2.5 text-center">0,95</td><td class="px-4 py-2.5 text-center font-semibold">1,304</td><td class="px-4 py-2.5 text-center font-bold text-indigo-700">2.844</td></tr>
+              <tr><td class="px-4 py-2.5 font-medium">T6 — 2 dorm.</td><td class="px-4 py-2.5 text-center">2.565</td><td class="px-4 py-2.5 text-center">1,05</td><td class="px-4 py-2.5 text-center">1,00</td><td class="px-4 py-2.5 text-center">1,10</td><td class="px-4 py-2.5 text-center">1,00</td><td class="px-4 py-2.5 text-center">0,95</td><td class="px-4 py-2.5 text-center font-semibold">1,098</td><td class="px-4 py-2.5 text-center font-bold text-indigo-700">2.816</td></tr>
+            </tbody>
+            <tfoot>
+              <tr class="bg-indigo-50/80">
+                <td class="px-4 py-3 font-bold text-indigo-800" colspan="8">MEDIA HOMOGENEIZADA</td>
+                <td class="px-4 py-3 text-center font-black text-indigo-700 text-lg">2.888 €/m²</td>
+              </tr>
+              <tr class="bg-indigo-50/50">
+                <td class="px-4 py-3 font-bold text-indigo-700" colspan="8">VALOR ADOPTADO (con prima obra nueva +5%)</td>
+                <td class="px-4 py-3 text-center font-black text-indigo-600 text-lg">3.032 €/m²</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- Resultado comparación -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">💰 Valoración por Método de Comparación</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b-2 border-indigo-100">
+                <th class="py-3 text-left font-bold text-indigo-700">Elemento</th>
+                <th class="py-3 text-center font-bold text-indigo-700">Uds.</th>
+                <th class="py-3 text-center font-bold text-indigo-700">m² constr.</th>
+                <th class="py-3 text-center font-bold text-indigo-700">€/m²</th>
+                <th class="py-3 text-right font-bold text-indigo-700">Valor Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">Viviendas 1 dorm. (incl. garaje+trastero)</td><td class="py-2.5 text-center">6</td><td class="py-2.5 text-center">49 m² (media)</td><td class="py-2.5 text-center">3.150 €</td><td class="py-2.5 text-right font-semibold">926.100 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">Viviendas 2 dorm. (incl. garaje+trastero)</td><td class="py-2.5 text-center">6</td><td class="py-2.5 text-center">65 m² (media)</td><td class="py-2.5 text-center">2.980 €</td><td class="py-2.5 text-right font-semibold">1.162.200 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">Viviendas 3 dorm. (incl. garaje+trastero)</td><td class="py-2.5 text-center">6</td><td class="py-2.5 text-center">95 m² (media)</td><td class="py-2.5 text-center">2.850 €</td><td class="py-2.5 text-right font-semibold">1.624.500 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">Local comercial (PB)</td><td class="py-2.5 text-center">1</td><td class="py-2.5 text-center">95 m²</td><td class="py-2.5 text-center">1.415 €</td><td class="py-2.5 text-right font-semibold">134.425 €</td></tr>
+            </tbody>
+            <tfoot>
+              <tr class="bg-gradient-to-r from-indigo-50 to-purple-50">
+                <td class="py-4 font-black text-indigo-800 text-lg" colspan="4">VALOR POR COMPARACIÓN (VT)</td>
+                <td class="py-4 text-right font-black text-indigo-700 text-xl">3.847.225 €</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <p class="text-xs text-gray-400 mt-3 italic">Nota: El valor de los garajes y trasteros está incluido en el precio de cada vivienda (vinculados). El local comercial se valora separadamente con coeficiente de uso comercial (~47% del valor residencial por m²). La prima por obra nueva (+5%) respecto a la media homogeneizada se justifica por la mayor demanda de producto nuevo y calidades superiores.</p>
+      </div>
+    </section>
+
+    <!-- SECTION: MÉTODO RESIDUAL -->
+    <section id="residual" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">🧮</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Método Residual Estático</h2>
+      </div>
+      <p class="text-gray-500 text-sm mb-6">Conforme al art. 34-36 de la Orden ECO/805/2003. Determina el valor del suelo/promoción a partir del valor en venta menos costes de construcción, honorarios, gastos y margen del promotor.</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">📥 Hipótesis de Ingresos</h3>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Valor venta viviendas</td><td class="py-2.5 text-right font-bold">3.712.800 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Valor venta local</td><td class="py-2.5 text-right font-bold">134.425 €</td></tr>
+              <tr class="bg-emerald-50/50"><td class="py-3 font-bold text-emerald-800">Total ingresos (VM)</td><td class="py-3 text-right font-black text-emerald-700">3.847.225 €</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">📤 Hipótesis de Costes</h3>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Coste construcción (1.250 €/m² × 1.789 m²)</td><td class="py-2.5 text-right font-bold">2.236.250 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Honorarios técnicos (~10%)</td><td class="py-2.5 text-right font-bold">223.625 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Licencias y tasas (~4%)</td><td class="py-2.5 text-right font-bold">89.450 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Gastos comercialización (~3%)</td><td class="py-2.5 text-right font-bold">115.417 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-semibold text-gray-500">Gastos financieros (~2,5%)</td><td class="py-2.5 text-right font-bold">96.181 €</td></tr>
+              <tr class="bg-rose-50/50"><td class="py-3 font-bold text-rose-800">Total costes (sin suelo)</td><td class="py-3 text-right font-black text-rose-700">2.760.923 €</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Cálculo residual -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">🔢 Cálculo del Valor Residual</h3>
+        <div class="bg-gray-50 rounded-xl p-5 font-mono text-sm space-y-2 mb-4">
+          <p><span class="text-gray-500">F =</span> <span class="text-indigo-700 font-bold">VM × (1 – b)</span> – <span class="text-rose-600 font-bold">ΣCi</span></p>
+          <p class="text-xs text-gray-400">Donde: VM = Valor de mercado producto terminado; b = margen promotor (18%); ΣCi = Suma de costes necesarios</p>
+          <div class="border-t border-gray-200 pt-3 mt-3">
+            <p>F = 3.847.225 × (1 – 0,18) – 2.760.923</p>
+            <p>F = 3.847.225 × 0,82 – 2.760.923</p>
+            <p>F = 3.154.725 – 2.760.923</p>
+            <p class="text-lg font-black text-indigo-700 mt-2">F = 393.801 €</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-5 text-center border border-indigo-100">
+            <p class="text-xs font-bold uppercase tracking-wider text-indigo-500 mb-1">Valor del suelo</p>
+            <p class="text-2xl font-black text-indigo-700">393.801 €</p>
+            <p class="text-xs text-indigo-400 mt-1">Método residual estático</p>
+          </div>
+          <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-5 text-center border border-emerald-100">
+            <p class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-1">Margen promotor</p>
+            <p class="text-2xl font-black text-emerald-700">18%</p>
+            <p class="text-xs text-emerald-400 mt-1">692.500 € estimados</p>
+          </div>
+          <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 text-center border border-amber-100">
+            <p class="text-xs font-bold uppercase tracking-wider text-amber-500 mb-1">Repercusión suelo</p>
+            <p class="text-2xl font-black text-amber-700">220 €/m²</p>
+            <p class="text-xs text-amber-400 mt-1">sobre m² construido s/rasante</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: VALORACIÓN FINAL -->
+    <section id="valoracion" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">🏆</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Valoración Final</h2>
+      </div>
+
+      <!-- Gran card valor -->
+      <div class="bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-700 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden mb-8">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+        <div class="relative">
+          <p class="text-indigo-200 text-sm font-semibold uppercase tracking-widest mb-3">Valor de Tasación del Conjunto</p>
+          <div class="flex flex-col md:flex-row md:items-end gap-6 md:gap-12">
+            <div>
+              <p class="text-5xl md:text-6xl font-black mb-2">3.847.225 €</p>
+              <p class="text-indigo-200 text-lg">Tres millones ochocientos cuarenta y siete mil doscientos veinticinco euros</p>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3">
+                <p class="text-xs text-indigo-200">Valor medio viviendas</p>
+                <p class="text-xl font-bold">2.965 €/m²</p>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3">
+                <p class="text-xs text-indigo-200">Valor local comercial</p>
+                <p class="text-xl font-bold">1.415 €/m²</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desglose por unidad -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">📋 Desglose por Tipología</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b-2 border-indigo-100">
+                <th class="py-3 text-left font-bold text-indigo-700">Tipología</th>
+                <th class="py-3 text-center font-bold text-indigo-700">Uds.</th>
+                <th class="py-3 text-center font-bold text-indigo-700">m² medio</th>
+                <th class="py-3 text-center font-bold text-indigo-700">€/m²</th>
+                <th class="py-3 text-center font-bold text-indigo-700">Precio ud.</th>
+                <th class="py-3 text-right font-bold text-indigo-700">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">🛏️ 1 dormitorio + garaje + trastero</td><td class="py-2.5 text-center">6</td><td class="py-2.5 text-center">49 m²</td><td class="py-2.5 text-center">3.150 €</td><td class="py-2.5 text-center font-semibold">154.350 €</td><td class="py-2.5 text-right font-bold">926.100 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">🛏️🛏️ 2 dormitorios + garaje + trastero</td><td class="py-2.5 text-center">6</td><td class="py-2.5 text-center">65 m²</td><td class="py-2.5 text-center">2.980 €</td><td class="py-2.5 text-center font-semibold">193.700 €</td><td class="py-2.5 text-right font-bold">1.162.200 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">🛏️🛏️🛏️ 3 dormitorios + garaje + trastero</td><td class="py-2.5 text-center">6</td><td class="py-2.5 text-center">95 m²</td><td class="py-2.5 text-center">2.850 €</td><td class="py-2.5 text-center font-semibold">270.750 €</td><td class="py-2.5 text-right font-bold">1.624.500 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">🏪 Local comercial (PB)</td><td class="py-2.5 text-center">1</td><td class="py-2.5 text-center">95 m²</td><td class="py-2.5 text-center">1.415 €</td><td class="py-2.5 text-center font-semibold">134.425 €</td><td class="py-2.5 text-right font-bold">134.425 €</td></tr>
+            </tbody>
+            <tfoot>
+              <tr class="bg-indigo-50/80">
+                <td class="py-4 font-black text-indigo-800 text-lg" colspan="5">TOTAL VALORACIÓN</td>
+                <td class="py-4 text-right font-black text-indigo-700 text-xl">3.847.225 €</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- Chart distribución -->
+      <div class="mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">Distribución del Valor por Tipología</h3>
+        <div class="max-w-md mx-auto">
+          <canvas id="chartDistribucion" height="280"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CONDICIONANTES -->
+    <section id="condicionantes" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">⚠️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Condicionantes y Advertencias</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="bg-amber-50 rounded-2xl p-5 border border-amber-200">
+          <h3 class="font-bold text-amber-800 mb-3">⚠️ Condicionantes</h3>
+          <ul class="text-sm text-amber-700 space-y-2 leading-relaxed">
+            <li>1. Las superficies indicadas son <strong>estimadas</strong> a partir del análisis visual de los planos del proyecto. Deberán ser confirmadas con la memoria de calidades y cuadro de superficies definitivos.</li>
+            <li>2. No se ha podido verificar la situación registral y catastral completa del inmueble.</li>
+            <li>3. La distribución de viviendas (6×1D + 6×2D + 6×3D) es una estimación basada en la tipología observada del edificio.</li>
+            <li>4. La valoración está condicionada a la obtención de la licencia de obra y a que el proyecto se ejecute conforme a las calidades descritas.</li>
+          </ul>
+        </div>
+        <div class="bg-blue-50 rounded-2xl p-5 border border-blue-200">
+          <h3 class="font-bold text-blue-800 mb-3">📌 Advertencias</h3>
+          <ul class="text-sm text-blue-700 space-y-2 leading-relaxed">
+            <li>1. Este informe tiene carácter <strong>orientativo</strong> y no sustituye a una tasación oficial realizada por una sociedad de tasación homologada por el Banco de España.</li>
+            <li>2. Los valores de mercado pueden variar en función de las condiciones económicas, regulatorias y de mercado.</li>
+            <li>3. El método residual asume un margen del promotor del 18%, que puede variar según las condiciones de financiación y mercado.</li>
+            <li>4. Para fines de garantía hipotecaria se requiere tasación oficial conforme a la normativa vigente (Orden ECO/805/2003).</li>
+            <li>5. Los datos de mercado provienen de portales inmobiliarios (precios de oferta, no de transacción) con fecha marzo 2026.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Normativa -->
+      <div class="mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-3">📚 Marco Normativo Aplicado</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
+          <div>
+            <ul class="space-y-1.5">
+              <li>• <strong>Orden ECO/805/2003</strong> — Normas de valoración de bienes inmuebles</li>
+              <li>• <strong>Ley 2/1981</strong> — Regulación del mercado hipotecario</li>
+              <li>• <strong>RD 775/1997</strong> — Régimen jurídico de homologación</li>
+            </ul>
+          </div>
+          <div>
+            <ul class="space-y-1.5">
+              <li>• <strong>CTE (DB-HE)</strong> — Código Técnico de la Edificación</li>
+              <li>• <strong>PGOU San Miguel de Abona</strong> — Planeamiento urbanístico</li>
+              <li>• <strong>Normativa autonómica canaria</strong> — LOC, LOTENC</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="text-center md:text-left">
+          <div class="flex items-center gap-2 mb-2 justify-center md:justify-start">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs">VX</div>
+            <span class="text-white font-bold">Valorex</span>
+            <span class="text-gray-500 text-sm">— Tasador Inmobiliario IA</span>
+          </div>
+          <p class="text-sm">Informe generado el 25 de marzo de 2026 por el Sistema de Agentes Inmobiliarios IA</p>
+        </div>
+        <div class="text-center md:text-right text-xs">
+          <p class="text-gray-500">Proyecto: <strong class="text-gray-300">Guargacho 1</strong> — Ref: VX-2026-GUA-001</p>
+          <p class="text-gray-600 mt-1">Este documento tiene carácter orientativo. No sustituye a una tasación oficial.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Scroll Reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); }});
+    }, { threshold: 0.08 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Counter Animation
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      const prefix = el.dataset.prefix || '';
+      let current = 0;
+      const step = target / 80;
+      const animate = () => {
+        current += step;
+        if(current >= target) { el.textContent = prefix + target.toLocaleString('es-ES') + suffix; return; }
+        el.textContent = prefix + Math.floor(current).toLocaleString('es-ES') + suffix;
+        requestAnimationFrame(animate);
+      };
+      const obs = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) { animate(); obs.disconnect(); }
+      });
+      obs.observe(el);
+    });
+
+    // Chart: Evolución precios
+    const ctxEvo = document.getElementById('chartEvolucion');
+    if(ctxEvo) {
+      new Chart(ctxEvo, {
+        type: 'line',
+        data: {
+          labels: ['2022', '2023', '2024', '2025', '2026 (Q1)'],
+          datasets: [{
+            label: 'Pisos (€/m²)',
+            data: [2292, 2561, 2941, 3195, 3350],
+            borderColor: '#4f46e5',
+            backgroundColor: 'rgba(79,70,229,0.1)',
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#4f46e5',
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            borderWidth: 3
+          },{
+            label: 'Casas (€/m²)',
+            data: [2016, 2292, 2618, 2752, 2880],
+            borderColor: '#a855f7',
+            backgroundColor: 'rgba(168,85,247,0.05)',
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#a855f7',
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            borderWidth: 2,
+            borderDash: [5,5]
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } } },
+          scales: {
+            y: { beginAtZero: false, min: 1800, ticks: { callback: v => v.toLocaleString('es-ES') + ' €' }, grid: { color: 'rgba(0,0,0,0.04)' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    // Chart: Zonas comparativas
+    const ctxZonas = document.getElementById('chartZonas');
+    if(ctxZonas) {
+      new Chart(ctxZonas, {
+        type: 'bar',
+        data: {
+          labels: ['Guargacho', 'Las Chafiras', 'Golf del Sur', 'Las Galletas', 'Costa Silencio', 'Los Cristianos', 'Adeje'],
+          datasets: [{
+            label: '€/m²',
+            data: [3237, 2664, 3268, 3375, 3509, 4805, 5112],
+            backgroundColor: [
+              'rgba(79,70,229,0.85)',
+              'rgba(99,102,241,0.6)',
+              'rgba(99,102,241,0.6)',
+              'rgba(99,102,241,0.6)',
+              'rgba(99,102,241,0.6)',
+              'rgba(168,85,247,0.6)',
+              'rgba(168,85,247,0.6)'
+            ],
+            borderColor: [
+              '#4f46e5',
+              '#6366f1',
+              '#6366f1',
+              '#6366f1',
+              '#6366f1',
+              '#a855f7',
+              '#a855f7'
+            ],
+            borderWidth: 2,
+            borderRadius: 8,
+            borderSkipped: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: false, min: 2000, ticks: { callback: v => v.toLocaleString('es-ES') + ' €' }, grid: { color: 'rgba(0,0,0,0.04)' } },
+            x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+          }
+        }
+      });
+    }
+
+    // Chart: Distribución valor
+    const ctxDist = document.getElementById('chartDistribucion');
+    if(ctxDist) {
+      new Chart(ctxDist, {
+        type: 'doughnut',
+        data: {
+          labels: ['1 dorm. (6 uds.)', '2 dorm. (6 uds.)', '3 dorm. (6 uds.)', 'Local comercial'],
+          datasets: [{
+            data: [926100, 1162200, 1624500, 134425],
+            backgroundColor: ['#818cf8', '#6366f1', '#4f46e5', '#a855f7'],
+            borderWidth: 3,
+            borderColor: '#fff',
+            hoverOffset: 10
+          }]
+        },
+        options: {
+          responsive: true,
+          cutout: '55%',
+          plugins: {
+            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15, font: { size: 12 } } },
+            tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.parsed.toLocaleString('es-ES') + ' €' } }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
