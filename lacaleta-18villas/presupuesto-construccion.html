@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presupuesto de Construcción — La Caleta 18 Villas · Buildero</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',300:'#fcd34d',400:'#fbbf24',500:'#f59e0b',600:'#d97706',700:'#b45309',800:'#92400e',900:'#78350f' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html{scroll-behavior:smooth}
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.23,1,.32,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .gradient-text{background:linear-gradient(135deg,#d97706 0%,#b45309 50%,#92400e 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .glass{background:rgba(255,255,255,.75);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.4)}
+    .glass-dark{background:rgba(120,53,15,.06);backdrop-filter:blur(8px);border:1px solid rgba(217,119,6,.12)}
+    tbody tr:hover{background-color:rgba(245,158,11,.06);transition:background .2s}
+    .stat-card{transition:all .3s cubic-bezier(.23,1,.32,1)}.stat-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(217,119,6,.15)}
+    .nav-link{position:relative}.nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#d97706;transition:width .3s}.nav-link:hover::after{width:100%}
+    .hero-pattern{background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}.float{animation:float 6s ease-in-out infinite}
+    .timeline-item{position:relative;padding-left:2.5rem}
+    .timeline-item::before{content:'';position:absolute;left:.75rem;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#fde68a,#d97706)}
+    .timeline-item::after{content:'';position:absolute;left:.45rem;top:.5rem;width:12px;height:12px;border-radius:50%;background:#d97706;border:3px solid #fef3c7;z-index:1}
+    .gold-gradient{background:linear-gradient(135deg,#92702a 0%,#c9a84c 40%,#f0d078 60%,#c9a84c 80%,#92702a 100%)}
+    @media print{.no-print{display:none}.reveal{opacity:1;transform:none}}
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-lg border-b border-gray-200/60 no-print">
+    <div class="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-white font-bold text-sm">BD</div>
+        <span class="text-lg font-bold gradient-text">Buildero</span>
+        <span class="hidden sm:inline text-xs text-gray-400 ml-1">Jefe de Obra IA</span>
+      </div>
+      <div class="hidden lg:flex gap-5 text-[13px] font-medium text-gray-500">
+        <a href="#resumen" class="nav-link hover:text-amber-600 transition">Resumen</a>
+        <a href="#pem-villa" class="nav-link hover:text-amber-600 transition">PEM / Villa</a>
+        <a href="#pem-total" class="nav-link hover:text-amber-600 transition">PEM Total</a>
+        <a href="#contrata" class="nav-link hover:text-amber-600 transition">Contrata</a>
+        <a href="#cronograma" class="nav-link hover:text-amber-600 transition">Cronograma</a>
+        <a href="#recursos" class="nav-link hover:text-amber-600 transition">Recursos</a>
+        <a href="#graficos" class="nav-link hover:text-amber-600 transition">Gráficos</a>
+        <a href="#notas" class="nav-link hover:text-amber-600 transition">Notas</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-amber-600 via-amber-700 to-yellow-900 text-white">
+    <div class="absolute inset-0 hero-pattern"></div>
+    <div class="absolute top-20 right-20 w-72 h-72 bg-yellow-400/15 rounded-full blur-3xl float"></div>
+    <div class="absolute bottom-10 left-10 w-56 h-56 bg-amber-400/15 rounded-full blur-3xl float" style="animation-delay:-3s"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="px-3 py-1 gold-gradient text-white rounded-full text-xs font-bold tracking-wider uppercase">🏝️ Proyecto Premium</span>
+            <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium backdrop-blur-sm">Ref: BD-2026-LCV-001</span>
+          </div>
+          <p class="text-amber-200 text-xs font-semibold uppercase tracking-[0.2em] mb-4">🏗️ Presupuesto y Planificación de Obra</p>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight">La Caleta<br>18 Villas de Lujo</h1>
+          <p class="text-lg text-amber-100 leading-relaxed">Presupuesto de Ejecución Material desglosado por capítulos, presupuesto de contrata, cronograma de obra en 2 fases y necesidades de recursos para 18 villas unifamiliares independientes de gama alta premium.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">📅 Marzo 2026</span>
+            <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">📍 La Caleta, Costa Adeje</span>
+            <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">🏠 18 Villas · 527 m²/u</span>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 text-center min-w-[260px]">
+          <p class="text-amber-900 text-xs font-semibold uppercase tracking-wider mb-2">Inversión Construcción Total</p>
+          <p class="text-4xl md:text-5xl font-black text-amber-800" data-count="18081" data-prefix="" data-suffix=".000 €">0 €</p>
+          <p class="text-amber-600 text-sm mt-1 font-medium">PEC + IGIC 7%</p>
+          <div class="mt-3 pt-3 border-t border-amber-200/50 grid grid-cols-2 gap-3">
+            <div>
+              <p class="text-amber-800 text-lg font-bold">14.200.000 €</p>
+              <p class="text-amber-500 text-xs">PEM Total</p>
+            </div>
+            <div>
+              <p class="text-amber-800 text-lg font-bold">789.000 €</p>
+              <p class="text-amber-500 text-xs">PEM / Villa</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="max-w-7xl mx-auto px-6 py-16 space-y-24">
+
+    <!-- ===== RESUMEN EJECUTIVO ===== -->
+    <section id="resumen" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">📊</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Resumen Ejecutivo</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+        <div class="stat-card glass-dark rounded-2xl p-5 text-center">
+          <div class="text-2xl mb-2">🏠</div>
+          <p class="text-xs text-gray-500 font-medium mb-1">Villas</p>
+          <p class="text-2xl font-black text-amber-700">18</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-5 text-center">
+          <div class="text-2xl mb-2">📐</div>
+          <p class="text-xs text-gray-500 font-medium mb-1">m² / Villa</p>
+          <p class="text-2xl font-black text-amber-700">527</p>
+          <p class="text-[10px] text-gray-400">320 útil + 207 ext</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-5 text-center">
+          <div class="text-2xl mb-2">📏</div>
+          <p class="text-xs text-gray-500 font-medium mb-1">m² Total</p>
+          <p class="text-2xl font-black text-amber-700">9.486</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-5 text-center">
+          <div class="text-2xl mb-2">💰</div>
+          <p class="text-xs text-gray-500 font-medium mb-1">PEM Total</p>
+          <p class="text-2xl font-black text-amber-700">14,2 M€</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-5 text-center">
+          <div class="text-2xl mb-2">🏗️</div>
+          <p class="text-xs text-gray-500 font-medium mb-1">PEC</p>
+          <p class="text-2xl font-black text-amber-700">16,9 M€</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-5 text-center">
+          <div class="text-2xl mb-2">⏱️</div>
+          <p class="text-xs text-gray-500 font-medium mb-1">Plazo de Obra</p>
+          <p class="text-2xl font-black text-amber-700">20 meses</p>
+          <p class="text-[10px] text-gray-400">2 fases solapadas</p>
+        </div>
+      </div>
+
+      <div class="glass-dark rounded-2xl p-6">
+        <h3 class="font-bold text-gray-800 mb-3">🔍 Objeto del informe</h3>
+        <p class="text-gray-600 leading-relaxed text-sm">El presente documento establece el <strong>Presupuesto de Ejecución Material (PEM)</strong> desglosado por 18 capítulos, el <strong>Presupuesto de Contrata (PEC)</strong> y el <strong>Presupuesto Total con IGIC</strong> para la construcción de las 18 villas de lujo del proyecto <strong>La Caleta 18 Villas</strong>, en CL Arigue 8, La Caleta de Adeje (Tenerife). El proyecto contempla <strong>18 villas unifamiliares independientes</strong> de 527 m² cada una (320 m² útiles + 207 m² de parcela exterior ajardinada), con acabados de gama alta premium: piscina privada infinity, jardín tropical, garaje doble, domótica integral, cocina Gaggenau/Miele, suelos porcelánicos gran formato, carpintería de aluminio RPT y vidrios bajo emisivos. Las cifras son coherentes con el plan director de <strong>Nexus</strong> (NX-2026-LCV-001) que estimó un coste de obra total de 17 M€, y se fundamentan en precios de mercado de construcción de lujo en Canarias (2025-2026) con ajuste insular +15% sobre ratios peninsulares.</p>
+      </div>
+    </section>
+
+    <!-- ===== PEM POR VILLA ===== -->
+    <section id="pem-villa" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">🏠</div>
+        <h2 class="text-3xl font-extrabold gradient-text">PEM Desglosado por Villa</h2>
+      </div>
+      <p class="text-gray-500 text-sm mb-6">Presupuesto de ejecución material unitario para cada villa (527 m² construidos). Los ratios €/m² reflejan el nivel de calidades premium del proyecto: piscina infinity, domótica KNX, cocina equipada Gaggenau/Miele, carpintería RPT con vidrios bajo emisivos, aerotermia, y acabados de gama alta.</p>
+
+      <div class="overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-100">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-gradient-to-r from-amber-600 to-yellow-700 text-white">
+              <th class="px-4 py-3.5 text-left font-semibold rounded-tl-2xl w-10">Cap.</th>
+              <th class="px-4 py-3.5 text-left font-semibold">Descripción</th>
+              <th class="px-4 py-3.5 text-right font-semibold">€ / Villa</th>
+              <th class="px-4 py-3.5 text-right font-semibold rounded-tr-2xl">%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">01</td><td class="px-4 py-3 font-medium">Movimiento de tierras y excavación</td><td class="px-4 py-3 text-right font-semibold">24.500 €</td><td class="px-4 py-3 text-right text-gray-500">3,19%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">02</td><td class="px-4 py-3 font-medium">Cimentación y saneamiento enterrado</td><td class="px-4 py-3 text-right font-semibold">58.500 €</td><td class="px-4 py-3 text-right text-gray-500">7,61%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">03</td><td class="px-4 py-3 font-medium">Estructura de hormigón armado</td><td class="px-4 py-3 text-right font-semibold">112.000 €</td><td class="px-4 py-3 text-right text-gray-500">14,58%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">04</td><td class="px-4 py-3 font-medium">Albañilería: cerramientos y particiones</td><td class="px-4 py-3 text-right font-semibold">66.800 €</td><td class="px-4 py-3 text-right text-gray-500">8,70%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">05</td><td class="px-4 py-3 font-medium">Cubiertas (plana transitable + ajardinada)</td><td class="px-4 py-3 text-right font-semibold">34.200 €</td><td class="px-4 py-3 text-right text-gray-500">4,45%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">06</td><td class="px-4 py-3 font-medium">Revestimientos y acabados premium</td><td class="px-4 py-3 text-right font-semibold">89.500 €</td><td class="px-4 py-3 text-right text-gray-500">11,65%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">07</td><td class="px-4 py-3 font-medium">Carpintería ext. e int. (aluminio RPT, vidrios bajo emisivos)</td><td class="px-4 py-3 text-right font-semibold">62.000 €</td><td class="px-4 py-3 text-right text-gray-500">8,07%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">08</td><td class="px-4 py-3 font-medium">Cocina equipada (Gaggenau / Miele)</td><td class="px-4 py-3 text-right font-semibold">32.000 €</td><td class="px-4 py-3 text-right text-gray-500">4,17%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">09</td><td class="px-4 py-3 font-medium">Instalación eléctrica y domótica (KNX)</td><td class="px-4 py-3 text-right font-semibold">52.500 €</td><td class="px-4 py-3 text-right text-gray-500">6,83%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">10</td><td class="px-4 py-3 font-medium">Fontanería, ACS y saneamiento</td><td class="px-4 py-3 text-right font-semibold">36.800 €</td><td class="px-4 py-3 text-right text-gray-500">4,79%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">11</td><td class="px-4 py-3 font-medium">Climatización y ventilación (aerotermia)</td><td class="px-4 py-3 text-right font-semibold">41.200 €</td><td class="px-4 py-3 text-right text-gray-500">5,36%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">12</td><td class="px-4 py-3 font-medium">Telecomunicaciones (ICT2)</td><td class="px-4 py-3 text-right font-semibold">7.800 €</td><td class="px-4 py-3 text-right text-gray-500">1,02%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">13</td><td class="px-4 py-3 font-medium">Protección contra incendios</td><td class="px-4 py-3 text-right font-semibold">5.400 €</td><td class="px-4 py-3 text-right text-gray-500">0,70%</td></tr>
+            <tr class="border-b border-gray-50 bg-blue-50/30"><td class="px-4 py-3 font-bold text-blue-700">14</td><td class="px-4 py-3 font-medium text-blue-800">🏊 Piscina privada infinity</td><td class="px-4 py-3 text-right font-semibold text-blue-700">46.500 €</td><td class="px-4 py-3 text-right text-blue-500">6,05%</td></tr>
+            <tr class="border-b border-gray-50 bg-emerald-50/30"><td class="px-4 py-3 font-bold text-emerald-700">15</td><td class="px-4 py-3 font-medium text-emerald-800">🌴 Urbanización exterior parcela</td><td class="px-4 py-3 text-right font-semibold text-emerald-700">38.500 €</td><td class="px-4 py-3 text-right text-emerald-500">5,01%</td></tr>
+            <tr class="border-b border-gray-50 bg-emerald-50/30"><td class="px-4 py-3 font-bold text-emerald-700">16</td><td class="px-4 py-3 font-medium text-emerald-800">🌺 Jardinería tropical y riego automático</td><td class="px-4 py-3 text-right font-semibold text-emerald-700">28.800 €</td><td class="px-4 py-3 text-right text-emerald-500">3,75%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-3 font-bold text-amber-700">17</td><td class="px-4 py-3 font-medium">Seguridad y salud</td><td class="px-4 py-3 text-right font-semibold">18.500 €</td><td class="px-4 py-3 text-right text-gray-500">2,41%</td></tr>
+            <tr><td class="px-4 py-3 font-bold text-amber-700">18</td><td class="px-4 py-3 font-medium">Gestión de residuos (RCD) y control de calidad</td><td class="px-4 py-3 text-right font-semibold">14.500 €</td><td class="px-4 py-3 text-right text-gray-500">1,89%</td></tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-gradient-to-r from-amber-50 to-yellow-50">
+              <td class="px-4 py-4 font-black text-amber-900 text-lg" colspan="2">TOTAL PEM / VILLA</td>
+              <td class="px-4 py-4 text-right font-black text-amber-800 text-xl">770.000 €</td>
+              <td class="px-4 py-4 text-right font-black text-amber-700">100,00%</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- Detalle de capítulos destacados -->
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <h3 class="font-bold text-gray-800 mb-3 text-sm">🧱 Cap. 03 — Estructura (14,6%)</h3>
+          <ul class="text-xs text-gray-600 space-y-1.5">
+            <li>• HA-25/B/20/IIa para pilares, vigas y forjados</li>
+            <li>• Forjado unidireccional o losa maciza según vanos</li>
+            <li>• Acero B500SD — est. ~85 kg/m³ hormigón</li>
+            <li>• Cubierta plana transitable con pendientes al 2%</li>
+            <li>• Garaje doble integrado en estructura</li>
+            <li>• Zona sísmica baja — sin requisitos especiales</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <h3 class="font-bold text-gray-800 mb-3 text-sm">✨ Cap. 06 — Acabados premium (11,7%)</h3>
+          <ul class="text-xs text-gray-600 space-y-1.5">
+            <li>• Suelos porcelánicos gran formato (120×120 o 160×80)</li>
+            <li>• Microcemento en baños y zonas húmedas</li>
+            <li>• Piedra natural en exteriores y terraza piscina</li>
+            <li>• Pintura premium mate antimoho interior</li>
+            <li>• Fachada ventilada con panel composite/piedra</li>
+            <li>• Falsos techos con iluminación LED integrada</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <h3 class="font-bold text-gray-800 mb-3 text-sm">🪟 Cap. 07 — Carpintería (8,1%)</h3>
+          <ul class="text-xs text-gray-600 space-y-1.5">
+            <li>• Aluminio RPT serie premium (Cortizo, Schüco o equiv.)</li>
+            <li>• Vidrio doble bajo emisivo 6/16argón/6</li>
+            <li>• Grandes paños correderos de acceso a terraza</li>
+            <li>• Puertas interiores lacadas a medida</li>
+            <li>• Armarios vestidor con interiores modulares</li>
+            <li>• Barandillas de vidrio templado laminado</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <h3 class="font-bold text-gray-800 mb-3 text-sm">🍳 Cap. 08 — Cocina Gaggenau/Miele (4,2%)</h3>
+          <ul class="text-xs text-gray-600 space-y-1.5">
+            <li>• Placa inducción Gaggenau serie 400 o Miele KM</li>
+            <li>• Horno pirolitico + horno vapor combinado</li>
+            <li>• Frigorífico integrado side-by-side</li>
+            <li>• Lavavajillas integrable + campana techo</li>
+            <li>• Encimera Dekton/Neolith o piedra natural</li>
+            <li>• Mobiliario cocina a medida — lacado mate</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <h3 class="font-bold text-gray-800 mb-3 text-sm">⚡ Cap. 09 — Eléctrica + domótica (6,8%)</h3>
+          <ul class="text-xs text-gray-600 space-y-1.5">
+            <li>• Electrificación elevada (9.200W por villa)</li>
+            <li>• Sistema domótico KNX: iluminación, persianas, clima</li>
+            <li>• Control vía app/tablet + asistente de voz</li>
+            <li>• Preinstalación fotovoltaica (cubierta)</li>
+            <li>• Punto de recarga VE en garaje doble</li>
+            <li>• Videoportero IP + sistema de seguridad perimetral</li>
+          </ul>
+        </div>
+        <div class="bg-blue-50 rounded-2xl border border-blue-100 p-5">
+          <h3 class="font-bold text-blue-800 mb-3 text-sm">🏊 Cap. 14 — Piscina infinity (6,1%)</h3>
+          <ul class="text-xs text-blue-700 space-y-1.5">
+            <li>• Vaso de hormigón gunitado ~32 m² lámina</li>
+            <li>• Borde infinity (desbordante) en un lateral</li>
+            <li>• Revestimiento gresite premium o piedra Bali</li>
+            <li>• Depuradora, cloración salina, iluminación LED RGB</li>
+            <li>• Cubierta motorizada opcional (+15.000 €)</li>
+            <li>• Cascada / lámina de agua decorativa</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PEM TOTAL DEL PROYECTO ===== -->
+    <section id="pem-total" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">💰</div>
+        <h2 class="text-3xl font-extrabold gradient-text">PEM Total del Proyecto</h2>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-gradient-to-r from-amber-600 to-yellow-700 text-white">
+              <th class="px-5 py-3.5 text-left font-semibold rounded-tl-2xl">Concepto</th>
+              <th class="px-5 py-3.5 text-right font-semibold">Unitario (€)</th>
+              <th class="px-5 py-3.5 text-center font-semibold">Uds.</th>
+              <th class="px-5 py-3.5 text-right font-semibold rounded-tr-2xl">Total (€)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-100"><td class="px-5 py-3 font-medium">PEM por villa (18 capítulos)</td><td class="px-5 py-3 text-right">770.000</td><td class="px-5 py-3 text-center font-bold">×18</td><td class="px-5 py-3 text-right font-bold">13.860.000 €</td></tr>
+            <tr class="border-b border-gray-100 bg-gray-50/50"><td class="px-5 py-3 pl-8 text-gray-500" colspan="3">Urbanización general del complejo</td><td class="px-5 py-3 text-right font-semibold">340.000 €</td></tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-gradient-to-r from-amber-50 to-yellow-50"><td class="px-5 py-4 font-black text-amber-900 text-lg" colspan="3">TOTAL PEM PROYECTO</td><td class="px-5 py-4 text-right font-black text-amber-800 text-xl">14.200.000 €</td></tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- Urbanización general detalle -->
+      <div class="mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">🛣️ Urbanización General del Complejo — 340.000 €</h3>
+        <div class="grid md:grid-cols-2 gap-4 text-sm">
+          <div>
+            <p class="font-semibold text-gray-700 mb-2">Infraestructuras compartidas:</p>
+            <ul class="text-xs text-gray-600 space-y-1.5">
+              <li>• Viales internos, aceras y aparcamientos de visitas</li>
+              <li>• Red de saneamiento general y conexión a red municipal</li>
+              <li>• Acometidas generales: agua, electricidad, telecom</li>
+              <li>• Centro de transformación eléctrica (si requerido)</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-700 mb-2">Urbanización y seguridad:</p>
+            <ul class="text-xs text-gray-600 space-y-1.5">
+              <li>• Iluminación vial LED con diseño paisajístico</li>
+              <li>• Muros perimetrales del complejo y control de acceso</li>
+              <li>• Señalización y mobiliario urbano</li>
+              <li>• Red de riego general zonas comunes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- PEM por capítulo agregado (18 villas) -->
+      <div class="mt-6 overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-100">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-gray-50 border-b border-gray-200"><th class="px-4 py-3 text-left font-semibold text-gray-600">Capítulo</th><th class="px-4 py-3 text-right font-semibold text-gray-600">€ / Villa</th><th class="px-4 py-3 text-right font-semibold text-gray-600">× 18 Villas</th><th class="px-4 py-3 text-right font-semibold text-gray-600">% PEM</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">01 Movimiento de tierras</td><td class="px-4 py-2.5 text-right">24.500</td><td class="px-4 py-2.5 text-right font-semibold">441.000</td><td class="px-4 py-2.5 text-right text-gray-500">3,11%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">02 Cimentación</td><td class="px-4 py-2.5 text-right">58.500</td><td class="px-4 py-2.5 text-right font-semibold">1.053.000</td><td class="px-4 py-2.5 text-right text-gray-500">7,42%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">03 Estructura</td><td class="px-4 py-2.5 text-right">112.000</td><td class="px-4 py-2.5 text-right font-semibold">2.016.000</td><td class="px-4 py-2.5 text-right text-gray-500">14,20%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">04 Albañilería</td><td class="px-4 py-2.5 text-right">66.800</td><td class="px-4 py-2.5 text-right font-semibold">1.202.400</td><td class="px-4 py-2.5 text-right text-gray-500">8,47%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">05 Cubiertas</td><td class="px-4 py-2.5 text-right">34.200</td><td class="px-4 py-2.5 text-right font-semibold">615.600</td><td class="px-4 py-2.5 text-right text-gray-500">4,34%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">06 Acabados premium</td><td class="px-4 py-2.5 text-right">89.500</td><td class="px-4 py-2.5 text-right font-semibold">1.611.000</td><td class="px-4 py-2.5 text-right text-gray-500">11,35%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">07 Carpintería</td><td class="px-4 py-2.5 text-right">62.000</td><td class="px-4 py-2.5 text-right font-semibold">1.116.000</td><td class="px-4 py-2.5 text-right text-gray-500">7,86%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">08 Cocina equipada</td><td class="px-4 py-2.5 text-right">32.000</td><td class="px-4 py-2.5 text-right font-semibold">576.000</td><td class="px-4 py-2.5 text-right text-gray-500">4,06%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">09 Electricidad + domótica</td><td class="px-4 py-2.5 text-right">52.500</td><td class="px-4 py-2.5 text-right font-semibold">945.000</td><td class="px-4 py-2.5 text-right text-gray-500">6,66%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">10 Fontanería / ACS</td><td class="px-4 py-2.5 text-right">36.800</td><td class="px-4 py-2.5 text-right font-semibold">662.400</td><td class="px-4 py-2.5 text-right text-gray-500">4,67%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">11 Climatización</td><td class="px-4 py-2.5 text-right">41.200</td><td class="px-4 py-2.5 text-right font-semibold">741.600</td><td class="px-4 py-2.5 text-right text-gray-500">5,22%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">12 Telecomunicaciones</td><td class="px-4 py-2.5 text-right">7.800</td><td class="px-4 py-2.5 text-right font-semibold">140.400</td><td class="px-4 py-2.5 text-right text-gray-500">0,99%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">13 Incendios</td><td class="px-4 py-2.5 text-right">5.400</td><td class="px-4 py-2.5 text-right font-semibold">97.200</td><td class="px-4 py-2.5 text-right text-gray-500">0,68%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">14 Piscinas infinity</td><td class="px-4 py-2.5 text-right">46.500</td><td class="px-4 py-2.5 text-right font-semibold">837.000</td><td class="px-4 py-2.5 text-right text-gray-500">5,89%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">15 Urbanización ext. parcela</td><td class="px-4 py-2.5 text-right">38.500</td><td class="px-4 py-2.5 text-right font-semibold">693.000</td><td class="px-4 py-2.5 text-right text-gray-500">4,88%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">16 Jardinería tropical</td><td class="px-4 py-2.5 text-right">28.800</td><td class="px-4 py-2.5 text-right font-semibold">518.400</td><td class="px-4 py-2.5 text-right text-gray-500">3,65%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">17 Seguridad y salud</td><td class="px-4 py-2.5 text-right">18.500</td><td class="px-4 py-2.5 text-right font-semibold">333.000</td><td class="px-4 py-2.5 text-right text-gray-500">2,35%</td></tr>
+            <tr class="border-b border-gray-50"><td class="px-4 py-2.5">18 Residuos + calidad</td><td class="px-4 py-2.5 text-right">14.500</td><td class="px-4 py-2.5 text-right font-semibold">261.000</td><td class="px-4 py-2.5 text-right text-gray-500">1,84%</td></tr>
+            <tr class="border-b border-gray-100 bg-gray-50/50"><td class="px-4 py-2.5 font-semibold" colspan="2">Urbanización general complejo</td><td class="px-4 py-2.5 text-right font-semibold">340.000</td><td class="px-4 py-2.5 text-right text-gray-500">2,39%</td></tr>
+          </tbody>
+          <tfoot><tr class="bg-gradient-to-r from-amber-50 to-yellow-50"><td class="px-4 py-3.5 font-black text-amber-900" colspan="2">TOTAL PEM PROYECTO</td><td class="px-4 py-3.5 text-right font-black text-amber-800 text-lg">14.200.000 €</td><td class="px-4 py-3.5 text-right font-black text-amber-700">100%</td></tr></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== PRESUPUESTO DE CONTRATA Y TOTAL ===== -->
+    <section id="contrata" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">📋</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Presupuesto de Contrata y Total</h2>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-8">
+        <table class="w-full text-sm">
+          <tbody>
+            <tr class="border-b border-gray-100"><td class="px-6 py-4 font-semibold text-gray-600 w-2/3">Presupuesto de Ejecución Material (PEM)</td><td class="px-6 py-4 text-right font-bold text-gray-800 text-lg">14.200.000 €</td></tr>
+            <tr class="border-b border-gray-100 bg-gray-50/50"><td class="px-6 py-3 text-gray-500 pl-10">+ Gastos Generales (13% s/ PEM)</td><td class="px-6 py-3 text-right font-semibold text-gray-600">1.846.000 €</td></tr>
+            <tr class="border-b border-gray-100 bg-gray-50/50"><td class="px-6 py-3 text-gray-500 pl-10">+ Beneficio Industrial (6% s/ PEM)</td><td class="px-6 py-3 text-right font-semibold text-gray-600">852.000 €</td></tr>
+            <tr class="border-b border-gray-100 bg-amber-50/60"><td class="px-6 py-4 font-bold text-amber-800 text-lg">Presupuesto de Ejecución por Contrata (PEC)</td><td class="px-6 py-4 text-right font-black text-amber-700 text-xl">16.898.000 €</td></tr>
+            <tr class="border-b border-gray-100 bg-gray-50/50"><td class="px-6 py-3 text-gray-500 pl-10">+ IGIC 7% (régimen fiscal Canarias)</td><td class="px-6 py-3 text-right font-semibold text-gray-600">1.182.860 €</td></tr>
+            <tr class="bg-gradient-to-r from-amber-100 to-yellow-100"><td class="px-6 py-5 font-black text-amber-900 text-xl">PRESUPUESTO TOTAL CON IGIC</td><td class="px-6 py-5 text-right font-black text-amber-800 text-2xl">18.080.860 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- KPIs -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-5 text-center border border-amber-200">
+          <p class="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1">PEM / Villa</p>
+          <p class="text-3xl font-black text-amber-800">789.000 €</p>
+          <p class="text-xs text-amber-500 mt-1">(770k villa + 18.9k urb.gral.)</p>
+        </div>
+        <div class="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-5 text-center border border-amber-200">
+          <p class="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1">PEC / Villa</p>
+          <p class="text-3xl font-black text-amber-800">938.778 €</p>
+          <p class="text-xs text-amber-500 mt-1">incluye GG + BI</p>
+        </div>
+        <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-5 text-center border border-emerald-200">
+          <p class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">€/m² Construido (PEM)</p>
+          <p class="text-3xl font-black text-emerald-700">1.497 €</p>
+          <p class="text-xs text-emerald-500 mt-1">sobre 9.486 m² totales</p>
+        </div>
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 text-center border border-blue-200">
+          <p class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">Ratio Coste / Valor Venta</p>
+          <p class="text-3xl font-black text-blue-700">33,5%</p>
+          <p class="text-xs text-blue-500 mt-1">PEC / 50,4 M€ ingresos</p>
+        </div>
+      </div>
+
+      <!-- Coherencia con Nexus -->
+      <div class="mt-6 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl p-6 border border-amber-200">
+        <h3 class="font-bold text-amber-800 mb-3">📌 Coherencia con el Plan Director de Nexus</h3>
+        <p class="text-sm text-amber-700 leading-relaxed">Nexus estimó un coste de obra de <strong>17 M€</strong> (18 villas × 931.100 €/villa incl. gastos). Nuestro PEC de <strong>16.898.000 €</strong> es plenamente coherente (-0,6% de desviación). La diferencia de ~102.000 € se explica porque el plan de Nexus incluía un 10% de "otros gastos" (84.100 €/villa = 1.513.800 € total) que en nuestro PEM ya se incorpora parcialmente en los capítulos de Seg. y Salud, Gestión de Residuos y Control de Calidad. El margen bruto promotor estimado por Nexus del 48,4% sigue plenamente viable con estos costes detallados.</p>
+      </div>
+    </section>
+
+    <!-- ===== CRONOGRAMA ===== -->
+    <section id="cronograma" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">📅</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Cronograma de Obra — 20 Meses</h2>
+      </div>
+      <p class="text-gray-500 text-sm mb-6">La obra se estructura en <strong>2 fases de 9 villas</strong> con solapamiento de 4 meses entre fases para optimizar recursos y cash-flow. Los meses se cuentan desde el inicio de obra (tras obtención de licencia). Plazo total: 20 meses.</p>
+
+      <div class="grid lg:grid-cols-2 gap-6 mb-8">
+        <!-- Fase 1 -->
+        <div class="bg-white rounded-2xl shadow-sm border-l-4 border-amber-500 border border-gray-100 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-sm">F1</div>
+            <div>
+              <h3 class="font-bold text-gray-800">Fase 1 — Villas 1 a 9</h3>
+              <span class="text-xs text-amber-600 font-semibold">Meses 1 a 12</span>
+            </div>
+          </div>
+          <div class="space-y-2.5">
+            <div class="timeline-item pb-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 bg-amber-100 text-amber-800 rounded text-xs font-bold">M1-2</span><span class="text-sm font-medium">Urbanización general + Mov. tierras</span></div><p class="text-xs text-gray-500 mt-0.5">Viales, acometidas, excavación parcelas F1</p></div>
+            <div class="timeline-item pb-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 bg-amber-100 text-amber-800 rounded text-xs font-bold">M2-4</span><span class="text-sm font-medium">Cimentación 9 villas</span></div><p class="text-xs text-gray-500 mt-0.5">Zapatas, vigas riostras, soleras, saneamiento</p></div>
+            <div class="timeline-item pb-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 bg-red-100 text-red-800 rounded text-xs font-bold">M3-6</span><span class="text-sm font-medium">Estructura HA de 9 villas</span></div><p class="text-xs text-gray-500 mt-0.5">Pilares, forjados, cubierta — 1 villa cada 10 días</p></div>
+            <div class="timeline-item pb-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs font-bold">M5-8</span><span class="text-sm font-medium">Cerramientos + cubiertas + instalaciones</span></div><p class="text-xs text-gray-500 mt-0.5">Fachada ventilada, tabiquería, empotrados</p></div>
+            <div class="timeline-item pb-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded text-xs font-bold">M7-10</span><span class="text-sm font-medium">Acabados + carpintería + cocinas</span></div><p class="text-xs text-gray-500 mt-0.5">Suelos, pintura, carpintería, Gaggenau/Miele</p></div>
+            <div class="timeline-item"><div class="flex items-center gap-2"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs font-bold">M9-12</span><span class="text-sm font-medium">Piscinas + jardines + entrega F1</span></div><p class="text-xs text-gray-500 mt-0.5">Piscinas infinity, jardinería tropical, remates</p></div>
+          </div>
+        </div>
+
+        <!-- Fase 2 -->
+        <div class="bg-white rounded-2xl shadow-sm border-l-4 border-purple-500 border border-gray-100 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-sm">F2</div>
+            <div>
+              <h3 class="font-bold text-gray-800">Fase 2 — Villas 10 a 18</h3>
+              <span class="text-xs text-purple-600 font-semibold">Meses 9 a 20 (solapa desde M9)</span>
+            </div>
+          </div>
+          <div class="space-y-2.5">
+            <div class="timeline-item pb-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded text-xs font-bold">M9-10</span><span class="text-sm font-medium">Mov. tierras parcelas F2</span></div><p class="text-xs text-gray-500 mt-0.5">Excavación mientras F1 termina acabados</p></div>
+            <div class="timeline-item pb-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded text-xs font-bold">M10-12</span><span class="text-sm font-medium">Cimentación 9 villas</span></div><p class="text-xs text-gray-500 mt-0.5">Equipos reutilizados de F1</p></div>
+            <div class="timeline-item pb-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 bg-red-100 text-red-800 rounded text-xs font-bold">M11-14</span><span class="text-sm font-medium">Estructura HA de 9 villas</span></div><p class="text-xs text-gray-500 mt-0.5">Mismo equipo estructurista que F1</p></div>
+            <div class="timeline-item pb-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs font-bold">M13-16</span><span class="text-sm font-medium">Cerramientos + instalaciones</span></div><p class="text-xs text-gray-500 mt-0.5">Fachada, tabiquería, instalaciones empotradas</p></div>
+            <div class="timeline-item pb-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded text-xs font-bold">M15-18</span><span class="text-sm font-medium">Acabados + carpintería + cocinas</span></div><p class="text-xs text-gray-500 mt-0.5">Acabados premium, equipamiento completo</p></div>
+            <div class="timeline-item"><div class="flex items-center gap-2"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs font-bold">M17-20</span><span class="text-sm font-medium">Piscinas + jardines + entrega F2</span></div><p class="text-xs text-gray-500 mt-0.5">Entrega total del complejo en mes 20</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hitos clave -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-5">🎯 Hitos Clave</h3>
+        <div class="grid md:grid-cols-5 gap-4 text-center">
+          <div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
+            <p class="text-2xl font-black text-amber-700">M1</p>
+            <p class="text-xs text-amber-600 font-medium mt-1">Inicio de obra</p>
+            <p class="text-[10px] text-gray-500">Acta de replanteo</p>
+          </div>
+          <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+            <p class="text-2xl font-black text-red-700">M6</p>
+            <p class="text-xs text-red-600 font-medium mt-1">Estructura F1 lista</p>
+            <p class="text-[10px] text-gray-500">9 villas en pie</p>
+          </div>
+          <div class="bg-blue-50 rounded-xl p-4 border border-blue-200">
+            <p class="text-2xl font-black text-blue-700">M12</p>
+            <p class="text-xs text-blue-600 font-medium mt-1">Entrega Fase 1</p>
+            <p class="text-[10px] text-gray-500">9 villas completas</p>
+          </div>
+          <div class="bg-purple-50 rounded-xl p-4 border border-purple-200">
+            <p class="text-2xl font-black text-purple-700">M14</p>
+            <p class="text-xs text-purple-600 font-medium mt-1">Estructura F2 lista</p>
+            <p class="text-[10px] text-gray-500">Todas las villas en pie</p>
+          </div>
+          <div class="bg-emerald-50 rounded-xl p-4 border border-emerald-200">
+            <p class="text-2xl font-black text-emerald-700">M20</p>
+            <p class="text-xs text-emerald-600 font-medium mt-1">Entrega total</p>
+            <p class="text-[10px] text-gray-500">18/18 villas listas</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RECURSOS ===== -->
+    <section id="recursos" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">👷</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Necesidades de Recursos</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <!-- Recursos humanos -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="px-6 py-4 bg-amber-50 border-b border-amber-100"><h3 class="font-bold text-amber-800">👷 Recursos Humanos — Pico de obra</h3></div>
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-gray-100"><th class="px-5 py-3 text-left font-semibold text-gray-600">Categoría</th><th class="px-5 py-3 text-center font-semibold text-gray-600">Fase 1</th><th class="px-5 py-3 text-center font-semibold text-gray-600">Solape</th><th class="px-5 py-3 text-center font-semibold text-gray-600">Fase 2</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="px-5 py-2.5 font-medium">Jefe de obra</td><td class="px-5 py-2.5 text-center">1</td><td class="px-5 py-2.5 text-center font-bold text-amber-700">1</td><td class="px-5 py-2.5 text-center">1</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-2.5 font-medium">Encargados de obra</td><td class="px-5 py-2.5 text-center">1</td><td class="px-5 py-2.5 text-center font-bold text-amber-700">2</td><td class="px-5 py-2.5 text-center">1</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-2.5 font-medium">Of. estructura (ferralla + encofrado)</td><td class="px-5 py-2.5 text-center">8</td><td class="px-5 py-2.5 text-center font-bold text-amber-700">12</td><td class="px-5 py-2.5 text-center">8</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-2.5 font-medium">Of. albañilería</td><td class="px-5 py-2.5 text-center">10</td><td class="px-5 py-2.5 text-center font-bold text-amber-700">16</td><td class="px-5 py-2.5 text-center">10</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-2.5 font-medium">Electricistas</td><td class="px-5 py-2.5 text-center">6</td><td class="px-5 py-2.5 text-center font-bold text-amber-700">10</td><td class="px-5 py-2.5 text-center">6</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-2.5 font-medium">Fontaneros / climatización</td><td class="px-5 py-2.5 text-center">5</td><td class="px-5 py-2.5 text-center font-bold text-amber-700">8</td><td class="px-5 py-2.5 text-center">5</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-2.5 font-medium">Soladores / alicatadores</td><td class="px-5 py-2.5 text-center">6</td><td class="px-5 py-2.5 text-center font-bold text-amber-700">10</td><td class="px-5 py-2.5 text-center">6</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-2.5 font-medium">Pintores</td><td class="px-5 py-2.5 text-center">4</td><td class="px-5 py-2.5 text-center font-bold text-amber-700">8</td><td class="px-5 py-2.5 text-center">4</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-2.5 font-medium">Carpinteros / cristaleros</td><td class="px-5 py-2.5 text-center">4</td><td class="px-5 py-2.5 text-center font-bold text-amber-700">6</td><td class="px-5 py-2.5 text-center">4</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-2.5 font-medium">Instaladores piscinas</td><td class="px-5 py-2.5 text-center">4</td><td class="px-5 py-2.5 text-center font-bold text-amber-700">4</td><td class="px-5 py-2.5 text-center">4</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-2.5 font-medium">Jardineros / paisajistas</td><td class="px-5 py-2.5 text-center">4</td><td class="px-5 py-2.5 text-center font-bold text-amber-700">6</td><td class="px-5 py-2.5 text-center">4</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-2.5 font-medium">Peones / ayudantes</td><td class="px-5 py-2.5 text-center">12</td><td class="px-5 py-2.5 text-center font-bold text-amber-700">20</td><td class="px-5 py-2.5 text-center">12</td></tr>
+              <tr class="bg-amber-50"><td class="px-5 py-3 font-bold text-amber-800">TOTAL PICO</td><td class="px-5 py-3 text-center font-bold">65</td><td class="px-5 py-3 text-center font-black text-amber-700 text-lg">103</td><td class="px-5 py-3 text-center font-bold">65</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Maquinaria y equipos -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="px-6 py-4 bg-amber-50 border-b border-amber-100"><h3 class="font-bold text-amber-800">🚜 Maquinaria y Equipos</h3></div>
+          <div class="p-6 space-y-4">
+            <div>
+              <p class="font-semibold text-sm text-gray-700 mb-2">Fase de movimiento de tierras y cimentación:</p>
+              <ul class="text-xs text-gray-600 space-y-1.5">
+                <li>• 1 retroexcavadora mixta (JCB o similar)</li>
+                <li>• 1 miniexcavadora para parcelas individuales</li>
+                <li>• 2 camiones bañera (transporte de tierras)</li>
+                <li>• 1 dumper articulado para interior parcela</li>
+                <li>• Bomba de hormigón estacionaria o sobre camión</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-semibold text-sm text-gray-700 mb-2">Fase de estructura:</p>
+              <ul class="text-xs text-gray-600 space-y-1.5">
+                <li>• 1 grúa torre (35-40 m pluma) — toda la obra</li>
+                <li>• 1 grúa autopropulsada para montajes puntuales</li>
+                <li>• Sistema de encofrado reutilizable (DOKA/PERI)</li>
+                <li>• Vibrador de aguja + regla vibrante</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-semibold text-sm text-gray-700 mb-2">Fase de acabados e instalaciones:</p>
+              <ul class="text-xs text-gray-600 space-y-1.5">
+                <li>• 2 plataformas elevadoras para fachada</li>
+                <li>• Andamios tubulares perimetrales (18 villas)</li>
+                <li>• Equipos de soldadura y corte</li>
+                <li>• Herramientas especializadas (cizallas, dobladoras)</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-semibold text-sm text-gray-700 mb-2">Instalaciones de obra:</p>
+              <ul class="text-xs text-gray-600 space-y-1.5">
+                <li>• Casetas de obra: dirección, vestuarios, almacén</li>
+                <li>• Vallado perimetral completo del complejo</li>
+                <li>• Señalización de seguridad en todas las parcelas</li>
+                <li>• Punto limpio de gestión de residuos (RCD)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subcontratas clave -->
+      <div class="mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">🤝 Subcontratas Especializadas Recomendadas</h3>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="bg-gray-50 rounded-xl p-4"><p class="font-bold text-gray-700 mb-1">Estructura</p><p class="text-xs text-gray-500">Empresa especializada en HA con experiencia en villa unifamiliar. Mín. 5 obras similares en Canarias.</p></div>
+          <div class="bg-gray-50 rounded-xl p-4"><p class="font-bold text-gray-700 mb-1">Piscinas infinity</p><p class="text-xs text-gray-500">Instalador certificado con portfolio de piscinas desbordantes. Garantía mínima 10 años.</p></div>
+          <div class="bg-gray-50 rounded-xl p-4"><p class="font-bold text-gray-700 mb-1">Domótica KNX</p><p class="text-xs text-gray-500">Integrador KNX certificado. Programación centralizada para 18 villas con protocolo estándar.</p></div>
+          <div class="bg-gray-50 rounded-xl p-4"><p class="font-bold text-gray-700 mb-1">Carpintería RPT</p><p class="text-xs text-gray-500">Fabricante/instalador de series premium (Cortizo COR-80, Schüco ASS). Vidrio bajo emisivo certificado.</p></div>
+          <div class="bg-gray-50 rounded-xl p-4"><p class="font-bold text-gray-700 mb-1">Cocinas Gaggenau/Miele</p><p class="text-xs text-gray-500">Distribuidor oficial con servicio de diseño, suministro e instalación. Garantía de marca.</p></div>
+          <div class="bg-gray-50 rounded-xl p-4"><p class="font-bold text-gray-700 mb-1">Paisajismo tropical</p><p class="text-xs text-gray-500">Empresa de jardinería canaria con experiencia en vegetación subtropical y riego eficiente.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GRÁFICOS ===== -->
+    <section id="graficos" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">📈</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Distribución del Presupuesto</h2>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4 text-sm">Distribución PEM por Capítulo (1 villa)</h3>
+          <canvas id="chartPEM" height="340"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4 text-sm">Top 6 Capítulos por Importe</h3>
+          <canvas id="chartTop" height="340"></canvas>
+        </div>
+      </div>
+      <div class="mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4 text-sm">Cash-Flow de Certificación Mensual (20 meses)</h3>
+        <canvas id="chartCashFlow" height="260"></canvas>
+      </div>
+    </section>
+
+    <!-- ===== NOTAS TÉCNICAS ===== -->
+    <section id="notas" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">⚠️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Notas Técnicas y Condicionantes</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="bg-amber-50 rounded-2xl p-5 border border-amber-200">
+          <h3 class="font-bold text-amber-800 mb-3">📐 Hipótesis de cálculo</h3>
+          <ul class="text-sm text-amber-700 space-y-2 leading-relaxed">
+            <li>1. <strong>Ratio PEM villa:</strong> 770.000 € / 527 m² = 1.461 €/m² construido (interior + exterior ponderado). Para la parte interior: 2.000 €/m², exterior: ~350 €/m².</li>
+            <li>2. <strong>Calidades gama alta premium:</strong> Carpintería RPT, vidrios bajo emisivos, porcelánico gran formato, piscina infinity, domótica KNX, cocina Gaggenau/Miele, aerotermia.</li>
+            <li>3. <strong>Normativa:</strong> CTE (DB-SE, DB-SI, DB-SUA, DB-HE, DB-HS, DB-HR), EHE-08, RITE, ICT2, RD 105/2008 (gestión de residuos). NCSE-02 zona sísmica baja.</li>
+            <li>4. <strong>IGIC al 7%:</strong> Canarias — no aplica IVA peninsular.</li>
+            <li>5. <strong>Corrección insular:</strong> +15% sobre costes peninsulares por transporte marítimo y escasez de mano de obra especializada.</li>
+          </ul>
+        </div>
+        <div class="bg-blue-50 rounded-2xl p-5 border border-blue-200">
+          <h3 class="font-bold text-blue-800 mb-3">📌 Advertencias importantes</h3>
+          <ul class="text-sm text-blue-700 space-y-2 leading-relaxed">
+            <li>1. Presupuesto <strong>orientativo</strong>. El definitivo se obtendrá del proyecto de ejecución con mediciones reales.</li>
+            <li>2. <strong>No incluidos:</strong> suelo (9 M€), honorarios técnicos (~3-5% PEM), licencias (~5% PEM), seguros, gastos financieros, comercialización.</li>
+            <li>3. La <strong>discrepancia de superficie</strong> (8.560 m² catastral vs 9.486 m² documental) puede afectar al programa de 18 villas. Verificar antes de licitación.</li>
+            <li>4. Tolerancia de precios <strong>±10%</strong> según ofertas reales y mercado de materiales.</li>
+            <li>5. <strong>Solicitar mínimo 3 ofertas</strong> de constructoras con experiencia en obra de lujo en Tenerife.</li>
+            <li>6. Posibles <strong>economías de escala</strong> (~3-5% descuento) por compra conjunta de 18 unidades iguales en carpintería, cocinas, piscinas y domótica.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="text-center md:text-left">
+          <div class="flex items-center gap-2 mb-2 justify-center md:justify-start">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-white font-bold text-xs">BD</div>
+            <span class="text-white font-bold">Buildero</span>
+            <span class="text-gray-500 text-sm">— Jefe de Obra IA</span>
+          </div>
+          <p class="text-sm">La Caleta 18 Villas · Costa Adeje · Municipio de Adeje (Tenerife)</p>
+        </div>
+        <div class="text-center md:text-right text-xs">
+          <p class="text-gray-500">Ref: <strong class="text-gray-300">BD-2026-LCV-001</strong> · Marzo 2026</p>
+          <p class="text-gray-600 mt-1">Generado por SM PropTech — Sistema de Agentes Inmobiliarios IA</p>
+          <p class="text-gray-600 mt-1">Presupuesto orientativo. No sustituye al proyecto de ejecución con mediciones definitivas.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Scroll Reveal
+    const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.08});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    // Counter Animation
+    document.querySelectorAll('[data-count]').forEach(el=>{
+      const target=parseInt(el.dataset.count),suffix=el.dataset.suffix||'',prefix=el.dataset.prefix||'';
+      let cur=0;const step=target/80;
+      const animate=()=>{cur+=step;if(cur>=target){el.textContent=prefix+target.toLocaleString('es-ES')+suffix;return;}el.textContent=prefix+Math.floor(cur).toLocaleString('es-ES')+suffix;requestAnimationFrame(animate);};
+      const o=new IntersectionObserver(e=>{if(e[0].isIntersecting){animate();o.disconnect();}});o.observe(el);
+    });
+
+    // Chart: PEM por capítulo (Doughnut)
+    const labels=['01 Mov. tierras','02 Cimentación','03 Estructura','04 Albañilería','05 Cubiertas','06 Acabados','07 Carpintería','08 Cocina','09 Eléctrica+Domótica','10 Fontanería','11 Climatización','12 Telecom','13 Incendios','14 Piscina','15 Urban. ext.','16 Jardinería','17 Seg. Salud','18 Residuos+QC'];
+    const data=[24500,58500,112000,66800,34200,89500,62000,32000,52500,36800,41200,7800,5400,46500,38500,28800,18500,14500];
+    const colors=['#d97706','#b45309','#dc2626','#7c3aed','#0d9488','#ec4899','#f97316','#a855f7','#eab308','#06b6d4','#10b981','#6366f1','#ef4444','#3b82f6','#84cc16','#22c55e','#6b7280','#9ca3af'];
+
+    new Chart(document.getElementById('chartPEM'),{
+      type:'doughnut',
+      data:{labels,datasets:[{data,backgroundColor:colors,borderWidth:2,borderColor:'#fff',hoverOffset:8}]},
+      options:{responsive:true,cutout:'40%',plugins:{legend:{position:'right',labels:{usePointStyle:true,padding:6,font:{size:9}}},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed.toLocaleString('es-ES')+' € ('+ ((c.parsed/770000)*100).toFixed(1)+'%)'}}}}
+    });
+
+    // Chart: Top 6
+    new Chart(document.getElementById('chartTop'),{
+      type:'bar',
+      data:{labels:['03 Estructura','06 Acabados','04 Albañilería','07 Carpintería','09 Eléctrica','02 Cimentación'],
+        datasets:[{label:'€',data:[112000,89500,66800,62000,52500,58500],backgroundColor:['#dc2626','#ec4899','#7c3aed','#f97316','#eab308','#b45309'],borderRadius:8,borderSkipped:false}]},
+      options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x.toLocaleString('es-ES')+' €'}}},
+        scales:{x:{ticks:{callback:v=>(v/1000)+'k €'},grid:{color:'rgba(0,0,0,.04)'}},y:{grid:{display:false},ticks:{font:{size:11,weight:'bold'}}}}}
+    });
+
+    // Chart: Cash-Flow 20 meses (certificación mensual estimada)
+    const mensual=[420000,780000,1020000,1180000,1250000,1200000,1100000,980000,1350000,1250000,1100000,850000,780000,1050000,1100000,980000,850000,720000,580000,560000];
+    const acum=[];let a=0;mensual.forEach(v=>{a+=v;acum.push(a);});
+
+    new Chart(document.getElementById('chartCashFlow'),{
+      type:'bar',
+      data:{labels:mensual.map((_,i)=>'M'+(i+1)),
+        datasets:[
+          {label:'Certificación mensual',data:mensual,backgroundColor:'rgba(217,119,6,.7)',borderRadius:6,borderSkipped:false,yAxisID:'y'},
+          {label:'Acumulado (Curva S)',data:acum,type:'line',borderColor:'#92400e',backgroundColor:'rgba(146,64,14,.08)',fill:true,tension:.4,pointRadius:2,pointBackgroundColor:'#92400e',borderWidth:2,yAxisID:'y1'}
+        ]},
+      options:{responsive:true,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:12}},
+        tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toLocaleString('es-ES')+' €'}}},
+        scales:{y:{position:'left',ticks:{callback:v=>(v/1000)+'k €'},grid:{color:'rgba(0,0,0,.04)'}},
+          y1:{position:'right',ticks:{callback:v=>(v/1e6).toFixed(1)+'M €'},grid:{display:false}},
+          x:{grid:{display:false}}}}
+    });
+  </script>
+</body>
+</html>

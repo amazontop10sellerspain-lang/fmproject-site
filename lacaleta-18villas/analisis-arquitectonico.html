@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análisis Arquitectónico — La Caleta 18 Villas · Arqon</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <style>
+    html{scroll-behavior:smooth}
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.23,1,.32,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .gradient-text{background:linear-gradient(135deg,#7e22ce 0%,#a855f7 50%,#c084fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .glass{background:rgba(255,255,255,.8);backdrop-filter:blur(16px);border:1px solid rgba(168,85,247,.2)}
+    .card-hover{transition:all .3s cubic-bezier(.23,1,.32,1)}.card-hover:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.1)}
+    tbody tr:hover{background-color:rgba(168,85,247,.05)}
+    .nav-link{position:relative}.nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#9333ea;transition:width .3s}.nav-link:hover::after{width:100%}
+    .hero-grid{background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='.06'%3E%3Cpath d='M0 0h40v40H0V0zm1 1h38v38H1V1z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+    .gold-gradient{background:linear-gradient(135deg,#92702a 0%,#c9a84c 40%,#f0d078 60%,#c9a84c 80%,#92702a 100%)}
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-lg border-b border-purple-100 shadow-sm">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-purple-600 to-fuchsia-600 flex items-center justify-center text-white font-bold text-sm">AQ</div>
+        <span class="text-lg font-bold gradient-text">Arqon — Análisis Arquitectónico</span>
+      </div>
+      <div class="hidden lg:flex gap-5 text-[13px] font-medium text-gray-500">
+        <a href="#analisis" class="nav-link hover:text-purple-600 transition">Análisis Conceptual</a>
+        <a href="#distribucion" class="nav-link hover:text-purple-600 transition">Implantación</a>
+        <a href="#programa" class="nav-link hover:text-purple-600 transition">Programa Funcional</a>
+        <a href="#normativa" class="nav-link hover:text-purple-600 transition">Normativa RT1-B</a>
+        <a href="#materiales" class="nav-link hover:text-purple-600 transition">Acabados</a>
+        <a href="#sostenibilidad" class="nav-link hover:text-purple-600 transition">Sostenibilidad</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-purple-900 via-purple-800 to-fuchsia-900 text-white">
+    <div class="absolute inset-0 hero-grid"></div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 md:py-24 text-center">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="px-3 py-1 gold-gradient text-white rounded-full text-xs font-bold tracking-wider uppercase">💎 Residencial Lujo</span>
+        <span class="px-3 py-1 bg-white/10 text-white/70 rounded-full text-xs font-medium backdrop-blur-sm">Estudio Conceptual</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">La Caleta 18 Villas</h1>
+      <p class="text-purple-100 text-lg leading-relaxed max-w-3xl mx-auto">18 Villas Independientes en Costa Adeje. Un diseño contemporáneo orientado al Océano Atlántico, maximizando las vistas, la privacidad y la integración con el entorno privilegiado.</p>
+      
+      <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/5">
+          <p class="text-2xl font-black">18</p>
+          <p class="text-purple-200 text-xs">Villas Unifamiliares</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/5">
+          <p class="text-2xl font-black">9.486 <span class="text-lg">m²</span></p>
+          <p class="text-purple-200 text-xs">Parcela Global (doc)</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/5">
+          <p class="text-2xl font-black">320 <span class="text-lg">m²</span></p>
+          <p class="text-purple-200 text-xs">Sup. Útil Interior / Villa</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/5">
+          <p class="text-2xl font-black">207 <span class="text-lg">m²</span></p>
+          <p class="text-purple-200 text-xs">Exterior Privado / Villa</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-16 space-y-20">
+
+    <!-- 1. ANÁLISIS ARQUITECTÓNICO -->
+    <section id="analisis" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-xl">🏛️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Análisis Arquitectónico del Proyecto</h2>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 glass">
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          El concepto arquitectónico de <strong>La Caleta 18 Villas</strong> se basa en la reinterpretación de la villa mediterránea contemporánea, adaptada al clima subtropical de Tenerife Sur. El diseño prioriza la apertura visual hacia el mar, la permeabilidad interior-exterior y la privacidad de cada unidad.
+        </p>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="space-y-4">
+            <h3 class="font-bold text-purple-800 text-lg border-b border-purple-100 pb-2">Claves de Diseño</h3>
+            <ul class="space-y-3">
+              <li class="flex gap-3">
+                <span class="text-purple-600">▪</span>
+                <div>
+                  <strong class="text-gray-800 block">Orientación Sur/Sureste</strong>
+                  <span class="text-sm text-gray-600">Garantiza el máximo asoleamiento de las terrazas y piscinas, enfocando las vistas principales hacia el Océano Atlántico y protegiendo de los vientos dominantes.</span>
+                </div>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-purple-600">▪</span>
+                <div>
+                  <strong class="text-gray-800 block">Flujo Interior-Exterior (Open-Concept)</strong>
+                  <span class="text-sm text-gray-600">El salón-comedor diáfano se conecta sin umbrales con la terraza principal, difuminando los límites gracias a carpinterías minimalistas empotradas de suelo a techo.</span>
+                </div>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-purple-600">▪</span>
+                <div>
+                  <strong class="text-gray-800 block">Topografía como Ventaja</strong>
+                  <span class="text-sm text-gray-600">La pendiente natural se aprovechará para escalonar las parcelas, asegurando que las villas traseras no pierdan la vista al mar sobre las delanteras.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-purple-50 p-6 rounded-xl border border-purple-100">
+            <h3 class="font-bold text-purple-800 text-lg mb-4">El Espacio Exterior (207 m²)</h3>
+            <p class="text-sm text-gray-700 mb-4">El paisajismo y la zona de agua son tan críticos como el interior en este segmento de lujo:</p>
+            <div class="space-y-2">
+              <div class="bg-white p-3 rounded shadow-sm flex items-center justify-between">
+                <span class="font-medium text-sm text-gray-800">Piscina Infinity</span>
+                <span class="text-xs font-bold text-blue-600">~35-40 m²</span>
+              </div>
+              <div class="bg-white p-3 rounded shadow-sm flex items-center justify-between">
+                <span class="font-medium text-sm text-gray-800">Terraza Solárium / Chill-out</span>
+                <span class="text-xs font-bold text-orange-600">~80 m²</span>
+              </div>
+              <div class="bg-white p-3 rounded shadow-sm flex items-center justify-between">
+                <span class="font-medium text-sm text-gray-800">Jardín Tropical Privado</span>
+                <span class="text-xs font-bold text-green-600">~87 m²</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. IMPLANTACIÓN -->
+    <section id="distribucion" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-xl">🗺️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Distribución e Implantación</h2>
+      </div>
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-8 glass">
+          <h3 class="font-bold text-purple-800 text-lg mb-4">Análisis de la Parcela (CL Arigue 8)</h3>
+          <p class="text-gray-700 text-sm leading-relaxed mb-4">
+            La parcela cuenta con un área documentada de <strong>9.486 m²</strong> (a expensas de resolver la discrepancia catastral señalada por Nexus). Para acoger 18 villas independientes, se propone una ordenación que optimice la densidad manteniendo la exclusividad.
+          </p>
+          
+          <div class="border-l-4 border-purple-400 pl-4 py-2 my-6 bg-purple-50">
+            <p class="text-sm text-gray-800"><strong>Parcelación teórica:</strong></p>
+            <p class="text-sm text-gray-600">Si descontamos aprox. un 20% para vial interior privado e infraestructuras comunitarias (aprox. 1.897 m²), restan <strong>7.589 m² netos</strong>. Esto arroja una parcela privativa media de <strong>~420 m² por villa</strong> (que acomodará la huella de la vivienda, terrazas y piscina).</p>
+          </div>
+
+          <h4 class="font-bold text-gray-800 text-sm mb-3">Esquema de Implantación:</h4>
+          <ul class="space-y-2 text-sm text-gray-600 list-disc list-inside">
+            <li><strong>Vial central de distribución:</strong> Espina dorsal con acceso controlado y garitas/videovigilancia.</li>
+            <li><strong>Disposición en "peine" o terrazas:</strong> Hileras adaptadas a las curvas de nivel para minimizar muros ciegos y garantizar vistas al mar en el 100% de las unidades.</li>
+            <li><strong>Retranqueos perimetrales:</strong> Colocación de pantallas vegetales (flora endémica y palmeras) para garantizar privacidad visual y acústica entre villas colindantes.</li>
+          </ul>
+        </div>
+        
+        <div class="bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-md p-6 text-white flex flex-col justify-center">
+          <h3 class="font-bold text-lg mb-2 text-purple-300">Reto de Diseño</h3>
+          <p class="text-sm text-gray-300 leading-relaxed">
+            Lograr que un complejo de 18 unidades (densidad media para lujo) se perciba como "aislado" desde el interior de cada villa.
+          </p>
+          <div class="mt-6 border-t border-gray-700 pt-4">
+            <span class="block text-xs uppercase tracking-wider text-gray-500 mb-1">Solución Arqon</span>
+            <strong class="text-sm text-white">Arquitectura en 'L' o 'U'</strong>
+            <p class="text-xs text-gray-400 mt-1">El propio volumen de la vivienda protegerá el área de piscina de las vistas de los vecinos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PROGRAMA FUNCIONAL -->
+    <section id="programa" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-xl">📏</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Programa Funcional (320 m² útiles)</h2>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full text-sm text-left">
+          <thead>
+            <tr class="bg-purple-50 text-purple-900 border-b border-purple-200">
+              <th class="p-4 font-bold">Nivel / Zona</th>
+              <th class="p-4 font-bold">Estancia</th>
+              <th class="p-4 font-bold">Características</th>
+              <th class="p-4 font-bold text-right">Sup. Útil Est.</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 text-gray-700">
+            <!-- Planta Baja (Zona de Día) -->
+            <tr>
+              <td class="p-4 font-medium text-gray-900" rowspan="4">Planta Baja<br><span class="text-xs text-gray-500 font-normal">(Zona de Día)</span></td>
+              <td class="p-4 font-medium">Salón-Comedor Diáfano</td>
+              <td class="p-4 text-xs text-gray-600">Open-concept, doble altura parcial, frentes acristalados al mar.</td>
+              <td class="p-4 text-right font-bold text-purple-700">65 m²</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium">Cocina Alta Gama</td>
+              <td class="p-4 text-xs text-gray-600">Isla central, oculta o integrada, despensa/lavadero anexo.</td>
+              <td class="p-4 text-right font-bold text-purple-700">25 m²</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium">Dormitorio Invitados/Despacho</td>
+              <td class="p-4 text-xs text-gray-600">Baño en suite. Opción uso dual.</td>
+              <td class="p-4 text-right font-bold text-purple-700">18 m²</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium">Aseo Cortesía + Hall</td>
+              <td class="p-4 text-xs text-gray-600">Entrada representativa, escalera escultural, ropero.</td>
+              <td class="p-4 text-right font-bold text-purple-700">18 m²</td>
+            </tr>
+            
+            <!-- Planta Alta (Zona de Noche) -->
+            <tr class="bg-gray-50/50">
+              <td class="p-4 font-medium text-gray-900" rowspan="3">Planta Alta<br><span class="text-xs text-gray-500 font-normal">(Zona de Noche)</span></td>
+              <td class="p-4 font-medium">Master Suite Principal</td>
+              <td class="p-4 text-xs text-gray-600">Vistas frontales al mar, vestidor walk-in, baño luxury (bañera exenta).</td>
+              <td class="p-4 text-right font-bold text-purple-700">45 m²</td>
+            </tr>
+            <tr class="bg-gray-50/50">
+              <td class="p-4 font-medium">2-3 Dormitorios Secundarios</td>
+              <td class="p-4 text-xs text-gray-600">Todos con baño en suite (configuración de 4 a 5 dormitorios totales).</td>
+              <td class="p-4 text-right font-bold text-purple-700">55 m²</td>
+            </tr>
+            <tr class="bg-gray-50/50">
+              <td class="p-4 font-medium">Distribuidores</td>
+              <td class="p-4 text-xs text-gray-600">Circulaciones planta alta.</td>
+              <td class="p-4 text-right font-bold text-purple-700">14 m²</td>
+            </tr>
+
+            <!-- Planta Sótano -->
+            <tr>
+              <td class="p-4 font-medium text-gray-900" rowspan="3">Planta Sótano<br><span class="text-xs text-gray-500 font-normal">(Servicios)</span></td>
+              <td class="p-4 font-medium">Garaje Doble</td>
+              <td class="p-4 text-xs text-gray-600">2 plazas amplias, preinstalación recarga V.E.</td>
+              <td class="p-4 text-right font-bold text-purple-700">40 m²</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium">Sala Multipropósito</td>
+              <td class="p-4 text-xs text-gray-600">Gimnasio / Cine / Bodega / Spa (iluminación cenital / patio inglés).</td>
+              <td class="p-4 text-right font-bold text-purple-700">25 m²</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium">Cuartos Técnicos</td>
+              <td class="p-4 text-xs text-gray-600">Instalaciones, aerotermia, domótica, depuración piscina.</td>
+              <td class="p-4 text-right font-bold text-purple-700">15 m²</td>
+            </tr>
+            
+            <!-- TOTAL -->
+            <tr class="bg-purple-100 border-t-2 border-purple-300">
+              <td class="p-4 font-black text-purple-900 uppercase" colspan="3">Total Superficie Útil Interior Aprox.</td>
+              <td class="p-4 text-right font-black text-purple-900 text-lg">320 m²</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. NORMATIVA URBANÍSTICA RT1-B -->
+    <section id="normativa" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-xl">⚖️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Marco Normativo: PGO Adeje RT1-B</h2>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 glass">
+        <p class="text-sm text-gray-600 mb-6">
+          La calificación <strong>RT1-B (Residencial Turístico Intensidad 1 - Tipología B)</strong> es propia de los ensanches turísticos de lujo en Costa Adeje (El Duque, La Caleta). A falta de confirmación mediante Cédula Urbanística vigente, los parámetros generales estándar para esta tipología de villas aisladas son los siguientes:
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <p class="text-xs font-bold text-gray-500 uppercase mb-1">Edificabilidad</p>
+            <p class="text-lg font-black text-purple-700">~0,40 a 0,60 <span class="text-xs font-medium text-gray-500">m²/m²</span></p>
+            <p class="text-[10px] text-gray-400 mt-1">Crítico verificar para los 527m²</p>
+          </div>
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <p class="text-xs font-bold text-gray-500 uppercase mb-1">Ocupación Máx.</p>
+            <p class="text-lg font-black text-purple-700">~25% - 30%</p>
+            <p class="text-[10px] text-gray-400 mt-1">Huella del edificio en planta</p>
+          </div>
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <p class="text-xs font-bold text-gray-500 uppercase mb-1">Altura Máxima</p>
+            <p class="text-lg font-black text-purple-700">2 plantas <span class="text-xs font-medium text-gray-500">(~7,00 m)</span></p>
+            <p class="text-[10px] text-gray-400 mt-1">Sótano no computa altura</p>
+          </div>
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <p class="text-xs font-bold text-gray-500 uppercase mb-1">Retranqueos</p>
+            <p class="text-lg font-black text-purple-700">3 a 5 metros</p>
+            <p class="text-[10px] text-gray-400 mt-1">A linderos y vial</p>
+          </div>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+          <h4 class="font-bold text-amber-800 text-sm mb-1">Punto de Control Arquitectónico</h4>
+          <p class="text-xs text-amber-700">
+            Los 527 m² construidos por villa requerirán justificar qué parte computa como edificabilidad. Típicamente, terrazas descubiertas, marquesinas perimetrales y la planta sótano (si se destina a instalaciones/garaje y no excede la cota rasante normativa) no computan. <strong>Se requiere consulta técnica prioritaria al Ayuntamiento de Adeje.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. MATERIALES Y ACABADOS -->
+    <section id="materiales" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-xl">✨</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Propuesta de Materiales y Acabados Premium</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-2xl">🧱</span>
+            <h3 class="font-bold text-gray-800">Envolvente y Exteriores</h3>
+          </div>
+          <ul class="space-y-3 text-sm text-gray-600">
+            <li><strong>Fachadas:</strong> Mortero monocapa hidrófugo blanco combinado con panelados de piedra natural volcánica local (tosca) y lamas de madera sintética/tecnológica (sin mantenimiento).</li>
+            <li><strong>Carpintería Exterior:</strong> Aluminio minimalista Cortizo (Cor Vision Plus) o Schüco, perfilería oculta con rotura puente térmico. Vidrios dobles bajo emisivos con control solar (crítico por orientación Sur).</li>
+            <li><strong>Terrazas y Piscina:</strong> Pavimento porcelánico antideslizante gran formato (Porcelanosa o similar). Vaso de piscina infinity revestido en mosaico porcelánico oscuro o piedra de Bali para mimetización oceánica.</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-2xl">🛋️</span>
+            <h3 class="font-bold text-gray-800">Interiores e Instalaciones</h3>
+          </div>
+          <ul class="space-y-3 text-sm text-gray-600">
+            <li><strong>Pavimentos:</strong> Porcelánico rectificado formato XXL (mín. 120x120) unificando in/out. En dormitorios, opción a tarima de roble natural multicapa.</li>
+            <li><strong>Cocina y Baños:</strong> Mobiliario de diseño italiano (ej. Poliform o Boffi), electrodomésticos Miele/Gaggenau. Sanitarios suspendidos, griferías empotradas (Gessi/Dornbracht), encimeras Krion o Neolith.</li>
+            <li><strong>Domótica Integral:</strong> Control KNX para iluminación (DALI), clima, estores, seguridad y audiovisuales (escenas preconfiguradas).</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. SOSTENIBILIDAD -->
+    <section id="sostenibilidad" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">🍃</div>
+        <h2 class="text-3xl font-extrabold text-emerald-700">Sostenibilidad y Eficiencia Energética (CTE 2026)</h2>
+      </div>
+      <div class="bg-emerald-50 rounded-2xl shadow-sm border border-emerald-100 p-8">
+        <p class="text-sm text-emerald-800 mb-6">El proyecto aspira a obtener <strong>Calificación Energética A</strong> y cumplir estrictamente el CTE DB-HE actualizado (incluyendo el nuevo cálculo del Potencial de Calentamiento Global DB-HSA aplicable a obra nueva).</p>
+        
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white p-5 rounded-xl shadow-sm text-center">
+            <div class="w-10 h-10 mx-auto bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-3">❄️</div>
+            <strong class="block text-sm text-gray-800 mb-1">Climatización</strong>
+            <p class="text-xs text-gray-500">Sistema de Aerotermia centralizada de alta eficiencia (ACS + suelo radiante refrigerante + fancoils ocultos).</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-sm text-center">
+            <div class="w-10 h-10 mx-auto bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mb-3">☀️</div>
+            <strong class="block text-sm text-gray-800 mb-1">Energía Solar</strong>
+            <p class="text-xs text-gray-500">Paneles fotovoltaicos en cubiertas planas, totalmente ocultos a la vista para preservar estética.</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-sm text-center">
+            <div class="w-10 h-10 mx-auto bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-3">💧</div>
+            <strong class="block text-sm text-gray-800 mb-1">Gestión del Agua</strong>
+            <p class="text-xs text-gray-500">Recogida de pluviales y reaprovechamiento para riego del jardín tropical. Depuración salina en piscinas.</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-sm text-center">
+            <div class="w-10 h-10 mx-auto bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-3">🔋</div>
+            <strong class="block text-sm text-gray-800 mb-1">Movilidad</strong>
+            <p class="text-xs text-gray-500">Preinstalación integral de cargadores de vehículos eléctricos en los garajes de cada villa (CTE HE6).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-10 mt-12 border-t-4 border-purple-600">
+    <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+      <div class="flex items-center justify-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white font-bold text-xs">AQ</div>
+        <p class="text-white font-bold tracking-wider">ARQON — Arquitectura</p>
+      </div>
+      <p class="mb-2">Proyecto: La Caleta 18 Villas · Costa Adeje, Tenerife</p>
+      <p class="text-gray-500">Generado por SM PropTech — Sistema de Agentes Inmobiliarios IA</p>
+      <p class="mt-4 text-xs text-gray-600">Documento de análisis conceptual y propuesta básica. Las superficies finales, encaje urbanístico y presupuesto deben ser validados mediante Proyecto Básico y Proyecto de Ejecución visados colegialmente, sujetos a las determinaciones del Ayuntamiento de Adeje.</p>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); }});
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valoración de Terreno y Producto Terminado — La Caleta 18 Villas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(.23,1,.32,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .gradient-text { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .gold-gradient { background: linear-gradient(135deg, #92702a 0%, #c9a84c 40%, #f0d078 60%, #c9a84c 80%, #92702a 100%); }
+    .gold-text { background: linear-gradient(135deg, #92702a 0%, #c9a84c 40%, #f0d078 60%, #c9a84c 80%, #92702a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.4); }
+    .glass-dark { background: rgba(49,46,129,0.06); backdrop-filter: blur(8px); border: 1px solid rgba(79,70,229,0.12); }
+    tbody tr:hover { background-color: rgba(99,102,241,0.05); transition: background 0.2s; }
+    .stat-card { transition: all 0.3s cubic-bezier(.23,1,.32,1); }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(79,70,229,0.12); }
+    .nav-link { position: relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:#4f46e5; transition:width 0.3s; }
+    .nav-link:hover::after { width:100%; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .float { animation: float 6s ease-in-out infinite; }
+    .hero-pattern { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .shimmer { position:relative; overflow:hidden; }
+    .shimmer::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent); animation:shimmer 4s infinite; }
+    @keyframes shimmer { 0%{left:-100%} 100%{left:100%} }
+    @media print { .no-print{display:none} .reveal{opacity:1;transform:none} }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-lg border-b border-gray-200/60 no-print">
+    <div class="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white font-bold text-sm">VX</div>
+        <span class="text-lg font-bold gradient-text">Valorex</span>
+        <span class="hidden sm:inline text-xs text-gray-400 ml-1">Tasador Inmobiliario</span>
+      </div>
+      <div class="hidden xl:flex gap-5 text-[13px] font-medium text-gray-500">
+        <a href="#resumen" class="nav-link hover:text-indigo-600 transition">Resumen</a>
+        <a href="#terreno" class="nav-link hover:text-indigo-600 transition">Terreno</a>
+        <a href="#mercado" class="nav-link hover:text-indigo-600 transition">Mercado</a>
+        <a href="#comparables-terreno" class="nav-link hover:text-indigo-600 transition">Comp. Terreno</a>
+        <a href="#valoracion-terreno" class="nav-link hover:text-indigo-600 transition">Val. Terreno</a>
+        <a href="#comparables-villas" class="nav-link hover:text-indigo-600 transition">Comp. Villas</a>
+        <a href="#valoracion-villa" class="nav-link hover:text-indigo-600 transition">Val. Villa</a>
+        <a href="#demanda" class="nav-link hover:text-indigo-600 transition">Demanda</a>
+        <a href="#diferenciadores" class="nav-link hover:text-indigo-600 transition">Diferenciadores</a>
+        <a href="#condicionantes" class="nav-link hover:text-indigo-600 transition">Condicionantes</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 text-white">
+    <div class="absolute inset-0 hero-pattern"></div>
+    <div class="absolute top-16 right-16 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl float"></div>
+    <div class="absolute bottom-8 left-8 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl float" style="animation-delay:-3s"></div>
+    <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="px-3 py-1 gold-gradient text-white rounded-full text-xs font-bold tracking-wider uppercase shimmer">🏝️ Segmento Ultra-Premium</span>
+            <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium backdrop-blur-sm">Ref: VX-2026-LCV-001</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-5 leading-tight">La Caleta<br><span class="gold-text">18 Villas de Lujo</span></h1>
+          <p class="text-lg text-gray-300 leading-relaxed">Informe de valoración profesional del terreno y producto terminado. Parcela RT1-B en la ubicación más exclusiva de Costa Adeje, Tenerife Sur.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-white/10 rounded-full text-sm backdrop-blur-sm">📅 7 abril 2026</span>
+            <span class="px-4 py-2 bg-white/10 rounded-full text-sm backdrop-blur-sm">📍 CL Arigue 8, La Caleta</span>
+            <span class="px-4 py-2 bg-white/10 rounded-full text-sm backdrop-blur-sm">🏗️ 8.560 m² · RT1-B</span>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4 min-w-[260px]">
+          <div class="glass rounded-2xl p-5 text-center">
+            <p class="text-indigo-900 text-[10px] font-bold uppercase tracking-widest mb-1">Valor del Terreno</p>
+            <p class="text-3xl font-black text-indigo-700">8.990.000 €</p>
+            <p class="text-indigo-400 text-xs mt-0.5">1.050 €/m² · Método comparativo</p>
+          </div>
+          <div class="glass rounded-2xl p-5 text-center">
+            <p class="text-indigo-900 text-[10px] font-bold uppercase tracking-widest mb-1">Valor Producto Terminado</p>
+            <p class="text-3xl font-black text-indigo-700">52.164.600 €</p>
+            <p class="text-indigo-400 text-xs mt-0.5">18 villas × 2.898.033 € media</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-16 space-y-24">
+
+    <!-- ===== RESUMEN EJECUTIVO ===== -->
+    <section id="resumen" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">📊</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Resumen Ejecutivo</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div class="stat-card glass-dark rounded-2xl p-5 text-center">
+          <div class="text-2xl mb-1">📐</div>
+          <p class="text-xs text-gray-500 font-medium">Parcela</p>
+          <p class="text-2xl font-black text-gray-800">8.560 <span class="text-sm text-gray-400">m²</span></p>
+          <p class="text-[10px] text-gray-400 mt-0.5">Catastro · RT1-B</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-5 text-center">
+          <div class="text-2xl mb-1">🏠</div>
+          <p class="text-xs text-gray-500 font-medium">Producto</p>
+          <p class="text-2xl font-black text-gray-800">18 <span class="text-sm text-gray-400">villas</span></p>
+          <p class="text-[10px] text-gray-400 mt-0.5">527 m² constr. c/u</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-5 text-center">
+          <div class="text-2xl mb-1">💎</div>
+          <p class="text-xs text-gray-500 font-medium">€/m² zona lujo</p>
+          <p class="text-2xl font-black text-indigo-600">5.500 <span class="text-sm text-gray-400">€</span></p>
+          <p class="text-[10px] text-gray-400 mt-0.5">Villas premium Adeje</p>
+        </div>
+        <div class="stat-card glass-dark rounded-2xl p-5 text-center">
+          <div class="text-2xl mb-1">📈</div>
+          <p class="text-xs text-gray-500 font-medium">Tendencia</p>
+          <p class="text-2xl font-black text-emerald-600">+23%</p>
+          <p class="text-[10px] text-gray-400 mt-0.5">interanual >100m²</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-7">
+        <p class="text-gray-600 leading-relaxed mb-4">El presente informe valora la <strong>parcela de suelo urbano RT1-B</strong> (Ref. Catastral 8516001CS2181N0001QG) de <strong>8.560 m²</strong> en CL Arigue 8, La Caleta de Adeje, y el <strong>producto terminado</strong> proyectado: 18 villas unifamiliares independientes de lujo de 527 m² construidos cada una, con acabados ultra-premium, piscina infinity, domótica KNX y aerotermia.</p>
+        <p class="text-gray-600 leading-relaxed mb-4">La Caleta de Adeje es la <strong>zona residencial más exclusiva de Tenerife Sur</strong>, colindante con Playa del Duque y el corredor de lujo de Costa Adeje. El mercado de villas premium en esta zona muestra <strong>precios medios de oferta entre 5.500 y 7.000 €/m²</strong> construido, con tendencia alcista sostenida del +23% interanual para inmuebles de más de 100 m² (Fotocasa, marzo 2026).</p>
+        <div class="grid md:grid-cols-2 gap-4 mt-6">
+          <div class="bg-indigo-50 rounded-xl p-5 border border-indigo-100">
+            <p class="font-bold text-indigo-800 mb-2">🏗️ Valoración del Terreno</p>
+            <p class="text-2xl font-black text-indigo-700">8.990.000 €</p>
+            <p class="text-xs text-indigo-500 mt-1">1.050 €/m² · Método comparativo + residual</p>
+            <p class="text-xs text-gray-500 mt-2">El precio de venta solicitado (9.000.000 €) se encuentra <strong>en línea</strong> con el valor de mercado estimado.</p>
+          </div>
+          <div class="bg-emerald-50 rounded-xl p-5 border border-emerald-100">
+            <p class="font-bold text-emerald-800 mb-2">🏠 Valor Producto Terminado</p>
+            <p class="text-2xl font-black text-emerald-700">52.164.600 €</p>
+            <p class="text-xs text-emerald-500 mt-1">18 villas × 5.500 €/m² × 527 m²</p>
+            <p class="text-xs text-gray-500 mt-2">Precio medio por villa: <strong>2.898.033 €</strong> (conservador). Rango: 2,7 – 3,5 M€ según orientación/vistas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== IDENTIFICACIÓN DEL TERRENO ===== -->
+    <section id="terreno" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">📋</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Identificación del Terreno</h2>
+      </div>
+      <div class="grid lg:grid-cols-5 gap-6">
+        <div class="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500 w-44">Dirección</td><td class="px-5 py-3.5 font-medium">CL Arigue 8, La Caleta de Adeje</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Municipio</td><td class="px-5 py-3.5">Adeje, S.C. de Tenerife</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Código Postal</td><td class="px-5 py-3.5">38670</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Ref. Catastral</td><td class="px-5 py-3.5 font-mono text-xs bg-gray-50 rounded">8516001CS2181N0001QG</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Superficie (Catastro)</td><td class="px-5 py-3.5 font-bold text-indigo-700">8.560 m²</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Superficie (Documental)</td><td class="px-5 py-3.5">9.486 m² <span class="text-xs text-amber-600 font-semibold">⚠ discrepancia</span></td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Clasificación Suelo</td><td class="px-5 py-3.5"><span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-bold">Urbano · RT1-B</span></td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Uso previsto</td><td class="px-5 py-3.5">Residencial Turístico</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Estado actual</td><td class="px-5 py-3.5"><span class="px-2.5 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-semibold">Sin edificar</span></td></tr>
+              <tr class="border-b border-gray-50"><td class="px-5 py-3.5 font-semibold text-gray-500">Orientación</td><td class="px-5 py-3.5">Sur-Sureste · Vistas al océano Atlántico</td></tr>
+              <tr><td class="px-5 py-3.5 font-semibold text-gray-500">Coordenadas</td><td class="px-5 py-3.5">28.1018°N, -16.7485°W (aprox.)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lg:col-span-2 space-y-5">
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+            <h3 class="font-bold text-gray-800 mb-3">📍 Entorno Inmediato</h3>
+            <div class="space-y-2.5 text-sm text-gray-600">
+              <div class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">●</span><p><strong>Playa del Duque:</strong> 800 m — La playa más exclusiva de Tenerife</p></div>
+              <div class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">●</span><p><strong>Bahía del Duque 5★:</strong> 1 km — Hotel referente del lujo canario</p></div>
+              <div class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">●</span><p><strong>Golf Costa Adeje:</strong> 1,5 km — 18 hoyos Championship</p></div>
+              <div class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">●</span><p><strong>Autopista TF-1:</strong> 2 min — Conexión norte-sur</p></div>
+              <div class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">●</span><p><strong>Aeropuerto TFS:</strong> 15 min — Conexiones internacionales</p></div>
+              <div class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">●</span><p><strong>Puerto Deportivo:</strong> 2 km — Marina de lujo</p></div>
+            </div>
+          </div>
+          <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-5 border border-indigo-100">
+            <h3 class="font-bold text-indigo-800 mb-2">⚠️ Discrepancia de Superficie</h3>
+            <p class="text-xs text-indigo-600 leading-relaxed">Diferencia de <strong>926 m²</strong> entre catastro (8.560 m²) y documentación (9.486 m²). <strong>Adoptamos la superficie catastral (8.560 m²)</strong> como referencia para esta valoración. Se recomienda medición topográfica profesional y nota simple registral actualizada antes de cerrar la operación.</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+            <h3 class="font-bold text-gray-800 mb-2">🏗️ Calificación RT1-B</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">Suelo residencial turístico tipo B según el PGO de Adeje. Permite <strong>viviendas unifamiliares aisladas</strong> con uso turístico. Edificabilidad, alturas y retranqueos deben confirmarse con consulta urbanística. La calificación RT1-B es la más favorable para el producto villa de lujo propuesto.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ESTUDIO DE MERCADO ===== -->
+    <section id="mercado" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">📈</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Estudio de Mercado — Costa Adeje Lujo</h2>
+      </div>
+
+      <!-- Precios por zona -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">La Caleta</span>
+            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[10px] font-bold">+23% YoY</span>
+          </div>
+          <p class="text-3xl font-black text-gray-800">5.764 <span class="text-sm text-gray-400">€/m²</span></p>
+          <p class="text-[10px] text-gray-400">Fotocasa mar. 2026</p>
+          <div class="mt-2 h-1.5 bg-gray-100 rounded-full"><div class="h-full bg-indigo-500 rounded-full" style="width:82%"></div></div>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">Playa del Duque</span>
+            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[10px] font-bold">Premium</span>
+          </div>
+          <p class="text-3xl font-black text-gray-800">5.978 <span class="text-sm text-gray-400">€/m²</span></p>
+          <p class="text-[10px] text-gray-400">Fotocasa mar. 2026</p>
+          <div class="mt-2 h-1.5 bg-gray-100 rounded-full"><div class="h-full bg-indigo-500 rounded-full" style="width:85%"></div></div>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">Playa Fañabé</span>
+            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[10px] font-bold">Top zona</span>
+          </div>
+          <p class="text-3xl font-black text-gray-800">6.968 <span class="text-sm text-gray-400">€/m²</span></p>
+          <p class="text-[10px] text-gray-400">Fotocasa mar. 2026</p>
+          <div class="mt-2 h-1.5 bg-gray-100 rounded-full"><div class="h-full bg-purple-500 rounded-full" style="width:99%"></div></div>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">San Eugenio Bajo</span>
+            <span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-[10px] font-bold">Estable</span>
+          </div>
+          <p class="text-3xl font-black text-gray-800">6.398 <span class="text-sm text-gray-400">€/m²</span></p>
+          <p class="text-[10px] text-gray-400">Fotocasa mar. 2026</p>
+          <div class="mt-2 h-1.5 bg-gray-100 rounded-full"><div class="h-full bg-indigo-500 rounded-full" style="width:91%"></div></div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="grid lg:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">€/m² por Zona — Costa Adeje (mar. 2026)</h3>
+          <canvas id="chartZonas" height="260"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">Precio medio por habitaciones — La Caleta / Costa Adeje</h3>
+          <canvas id="chartHabitaciones" height="260"></canvas>
+        </div>
+      </div>
+
+      <!-- Key insights -->
+      <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-7 border border-indigo-100">
+        <h3 class="font-bold text-indigo-800 mb-4">📋 Análisis del Segmento de Lujo — Villas Costa Adeje</h3>
+        <div class="grid md:grid-cols-2 gap-6 text-sm text-indigo-700 leading-relaxed">
+          <div>
+            <p class="font-semibold mb-1.5">Precios de villas de lujo (obra nueva):</p>
+            <ul class="space-y-1.5">
+              <li>• <strong>La Caleta:</strong> Villas de diseño 300-500 m² → 2,5 a 4,5 M€ (5.000-8.500 €/m²)</li>
+              <li>• <strong>Playa del Duque:</strong> Villas premium → 3 a 6 M€ (5.500-9.000 €/m²)</li>
+              <li>• <strong>Abama Resort, Guía de Isora:</strong> Villas 198 m² → 1,85 M€ (9.343 €/m²) — referencia resort</li>
+              <li>• <strong>Precio medio adoptado</strong> para producto villa nueva de 527 m²: <strong>5.500 €/m²</strong> (conservador)</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold mb-1.5">Tendencias del mercado:</p>
+            <ul class="space-y-1.5">
+              <li>• Inmuebles >100 m² en La Caleta: <strong>+23,17% interanual</strong></li>
+              <li>• Período medio de venta Tenerife (E&V): <strong>193 días</strong></li>
+              <li>• Valor medio inmueble Costa Adeje: <strong>539.380 €</strong> (pisos), villas significativamente superior</li>
+              <li>• Stock de obra nueva villa: <strong>muy escaso</strong> en La Caleta. Demanda insatisfecha.</li>
+              <li>• El segmento >3 habitaciones cotiza a <strong>6.187 €/m²</strong> en la zona, confirmando prima por tamaño.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COMPARABLES TERRENO ===== -->
+    <section id="comparables-terreno" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">🔎</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Comparables de Terreno — Suelo Urbano Adeje</h2>
+      </div>
+      <p class="text-gray-500 text-sm mb-6">Selección de parcelas urbanas en venta/transaccionadas en el corredor Costa Adeje — La Caleta — Playa del Duque. Se homogeneizan por ubicación, superficie, clasificación urbanística y acceso a infraestructuras.</p>
+
+      <div class="overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-100">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+              <th class="px-4 py-3 text-left font-semibold rounded-tl-2xl">Testigo</th>
+              <th class="px-4 py-3 text-center font-semibold">Zona</th>
+              <th class="px-4 py-3 text-center font-semibold">m²</th>
+              <th class="px-4 py-3 text-center font-semibold">Precio</th>
+              <th class="px-4 py-3 text-center font-semibold">€/m²</th>
+              <th class="px-4 py-3 text-center font-semibold">Clasif.</th>
+              <th class="px-4 py-3 text-center font-semibold rounded-tr-2xl">Fuente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">T1 — Parcela Playa del Duque</td>
+              <td class="px-4 py-3 text-center">Playa Duque</td>
+              <td class="px-4 py-3 text-center">3.200 m²</td>
+              <td class="px-4 py-3 text-center font-semibold">4.160.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">1.300 €</span></td>
+              <td class="px-4 py-3 text-center"><span class="text-xs">Urbano RT</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">Idealista</td>
+            </tr>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">T2 — Solar CL La Caleta</td>
+              <td class="px-4 py-3 text-center">La Caleta</td>
+              <td class="px-4 py-3 text-center">1.850 m²</td>
+              <td class="px-4 py-3 text-center font-semibold">2.035.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">1.100 €</span></td>
+              <td class="px-4 py-3 text-center"><span class="text-xs">Urbano RT1</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">Idealista</td>
+            </tr>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">T3 — Parcela Fañabé Alto</td>
+              <td class="px-4 py-3 text-center">Fañabé</td>
+              <td class="px-4 py-3 text-center">5.400 m²</td>
+              <td class="px-4 py-3 text-center font-semibold">4.860.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">900 €</span></td>
+              <td class="px-4 py-3 text-center"><span class="text-xs">Urbano R</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">Fotocasa</td>
+            </tr>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">T4 — Solar Torviscas Alto</td>
+              <td class="px-4 py-3 text-center">Torviscas</td>
+              <td class="px-4 py-3 text-center">2.100 m²</td>
+              <td class="px-4 py-3 text-center font-semibold">1.680.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">800 €</span></td>
+              <td class="px-4 py-3 text-center"><span class="text-xs">Urbano R</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">Idealista</td>
+            </tr>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">T5 — Parcela Los Menores</td>
+              <td class="px-4 py-3 text-center">Los Menores</td>
+              <td class="px-4 py-3 text-center">11.824 m²</td>
+              <td class="px-4 py-3 text-center font-semibold">8.277.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">700 €</span></td>
+              <td class="px-4 py-3 text-center"><span class="text-xs">Urbano R</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">E&V</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">T6 — Parcela Candelaria (ref. macro)</td>
+              <td class="px-4 py-3 text-center">Candelaria</td>
+              <td class="px-4 py-3 text-center">4.994 m²</td>
+              <td class="px-4 py-3 text-center font-semibold">258.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs font-bold">52 €</span></td>
+              <td class="px-4 py-3 text-center"><span class="text-xs">Urbano</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">E&V</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-gray-400 mt-3 italic">T6 (Candelaria) incluido como referencia extrema inferior — localización sin prima turística. Demuestra que la prima de localización en Costa Adeje multiplica ×15-20 el valor de suelo urbano respecto a zonas no turísticas de Tenerife.</p>
+    </section>
+
+    <!-- ===== VALORACIÓN DEL TERRENO ===== -->
+    <section id="valoracion-terreno" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">⚖️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Valoración del Terreno</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6 mb-6">
+        <!-- Método comparativo -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">📊 Método de Comparación</h3>
+          <p class="text-sm text-gray-500 mb-4">Homogeneización de los testigos T1 a T5 con coeficientes por ubicación, superficie, calificación urbanística y vistas.</p>
+          <table class="w-full text-sm mb-4">
+            <thead>
+              <tr class="border-b-2 border-indigo-100">
+                <th class="py-2 text-left font-bold text-indigo-700">Testigo</th>
+                <th class="py-2 text-center font-bold text-indigo-700">€/m²</th>
+                <th class="py-2 text-center font-bold text-indigo-700">Coef.</th>
+                <th class="py-2 text-center font-bold text-indigo-700">€/m² hom.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2">T1 Playa Duque</td><td class="py-2 text-center">1.300</td><td class="py-2 text-center">0,85</td><td class="py-2 text-center font-semibold">1.105</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2">T2 La Caleta</td><td class="py-2 text-center">1.100</td><td class="py-2 text-center">0,95</td><td class="py-2 text-center font-semibold">1.045</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2">T3 Fañabé</td><td class="py-2 text-center">900</td><td class="py-2 text-center">1,10</td><td class="py-2 text-center font-semibold">990</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2">T4 Torviscas</td><td class="py-2 text-center">800</td><td class="py-2 text-center">1,18</td><td class="py-2 text-center font-semibold">944</td></tr>
+              <tr><td class="py-2">T5 Los Menores</td><td class="py-2 text-center">700</td><td class="py-2 text-center">1,30</td><td class="py-2 text-center font-semibold">910</td></tr>
+            </tbody>
+            <tfoot>
+              <tr class="bg-indigo-50"><td class="py-3 font-bold text-indigo-800" colspan="3">Media homogeneizada</td><td class="py-3 text-center font-black text-indigo-700">999 €/m²</td></tr>
+              <tr class="bg-indigo-50/50"><td class="py-3 font-bold text-indigo-700" colspan="3">Valor adoptado (+5% prima La Caleta 1ª línea)</td><td class="py-3 text-center font-black text-indigo-600">1.050 €/m²</td></tr>
+            </tfoot>
+          </table>
+          <div class="bg-indigo-50 rounded-xl p-4 text-center border border-indigo-100">
+            <p class="text-xs text-indigo-500 font-semibold uppercase tracking-wider mb-1">Valor por Comparación</p>
+            <p class="text-2xl font-black text-indigo-700">8.988.000 €</p>
+            <p class="text-xs text-indigo-400">8.560 m² × 1.050 €/m²</p>
+          </div>
+        </div>
+
+        <!-- Método residual -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">🧮 Método Residual Estático</h3>
+          <p class="text-sm text-gray-500 mb-4">F = VM × (1 – b) – ΣCi (Orden ECO/805/2003, art. 34-36)</p>
+          <table class="w-full text-sm mb-4">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2 font-semibold text-gray-500">Valor en venta (VM)</td><td class="py-2 text-right font-bold text-emerald-700">52.164.600 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 font-semibold text-gray-500">Margen promotor (b = 20%)</td><td class="py-2 text-right">10.432.920 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 font-semibold text-gray-500">VM × (1-b)</td><td class="py-2 text-right font-bold">41.731.680 €</td></tr>
+              <tr class="border-b border-gray-200 bg-gray-50"><td class="py-2 font-semibold text-gray-500" colspan="2">Costes necesarios (ΣCi):</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 pl-4 text-gray-500">Construcción (18 × 847.000 €)</td><td class="py-2 text-right">15.246.000 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 pl-4 text-gray-500">Urbanización general</td><td class="py-2 text-right">2.200.000 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 pl-4 text-gray-500">Honorarios técnicos (10%)</td><td class="py-2 text-right">1.744.600 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 pl-4 text-gray-500">Licencias y tasas (3,5%)</td><td class="py-2 text-right">610.000 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 pl-4 text-gray-500">Comercialización (4%)</td><td class="py-2 text-right">2.086.584 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2 pl-4 text-gray-500">Financieros (3%)</td><td class="py-2 text-right">1.564.938 €</td></tr>
+              <tr class="border-b border-gray-50 bg-rose-50"><td class="py-2 font-bold text-rose-700">Total Costes (ΣCi)</td><td class="py-2 text-right font-black text-rose-700">23.452.122 €</td></tr>
+            </tbody>
+          </table>
+          <div class="bg-gray-50 rounded-xl p-4 font-mono text-sm mb-4">
+            <p>F = 41.731.680 – 23.452.122 = <strong class="text-indigo-700">18.279.558 €</strong></p>
+            <p class="text-xs text-gray-400 mt-1">Nota: El residual indica el valor máximo del suelo para que la promoción sea viable al 20% de margen. Se adopta el valor de comparación por ser más conservador.</p>
+          </div>
+          <div class="bg-emerald-50 rounded-xl p-4 text-center border border-emerald-100">
+            <p class="text-xs text-emerald-500 font-semibold uppercase tracking-wider mb-1">Valor Residual del Suelo</p>
+            <p class="text-2xl font-black text-emerald-700">18.279.558 €</p>
+            <p class="text-xs text-emerald-400">2.136 €/m² — Muy holgado</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Valor adoptado -->
+      <div class="bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-700 rounded-3xl p-8 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
+        <div class="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div>
+            <p class="text-indigo-200 text-xs font-semibold uppercase tracking-widest mb-2">Valor Adoptado del Terreno</p>
+            <p class="text-4xl md:text-5xl font-black">8.990.000 €</p>
+            <p class="text-indigo-200 text-sm mt-2">Ocho millones novecientos noventa mil euros</p>
+          </div>
+          <div class="flex flex-col gap-3">
+            <div class="bg-white/10 rounded-xl px-5 py-3 backdrop-blur-sm">
+              <p class="text-xs text-indigo-200">€/m² terreno</p>
+              <p class="text-xl font-bold">1.050 €/m²</p>
+            </div>
+            <div class="bg-white/10 rounded-xl px-5 py-3 backdrop-blur-sm">
+              <p class="text-xs text-indigo-200">Vs. precio pedido (9 M€)</p>
+              <p class="text-xl font-bold text-emerald-300">≈ En línea</p>
+            </div>
+          </div>
+        </div>
+        <p class="relative text-xs text-indigo-300 mt-4">Se adopta el valor por comparación (1.050 €/m²), más conservador que el residual (2.136 €/m²). El margen entre ambos métodos confirma la <strong>alta viabilidad</strong> de la promoción. El precio solicitado de 9.000.000 € se encuentra <strong>en línea</strong> con el valor de mercado estimado (diferencia < 0,1%).</p>
+      </div>
+    </section>
+
+    <!-- ===== COMPARABLES VILLAS ===== -->
+    <section id="comparables-villas" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">🏠</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Comparables de Villas de Lujo</h2>
+      </div>
+      <p class="text-gray-500 text-sm mb-6">Villas de lujo en venta o vendidas recientemente en Costa Adeje, La Caleta, Playa del Duque y zonas limítrofes. Segmento premium con acabados de gama alta.</p>
+
+      <div class="overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-100">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+              <th class="px-4 py-3 text-left font-semibold rounded-tl-2xl">Villa</th>
+              <th class="px-4 py-3 text-center font-semibold">Zona</th>
+              <th class="px-4 py-3 text-center font-semibold">m² hab.</th>
+              <th class="px-4 py-3 text-center font-semibold">Parcela</th>
+              <th class="px-4 py-3 text-center font-semibold">Dorm.</th>
+              <th class="px-4 py-3 text-center font-semibold">Precio</th>
+              <th class="px-4 py-3 text-center font-semibold">€/m²</th>
+              <th class="px-4 py-3 text-center font-semibold">Estado</th>
+              <th class="px-4 py-3 text-center font-semibold rounded-tr-2xl">Fuente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">V1 — Villa diseño La Caleta</td>
+              <td class="px-4 py-3 text-center">La Caleta</td>
+              <td class="px-4 py-3 text-center">420 m²</td>
+              <td class="px-4 py-3 text-center">650 m²</td>
+              <td class="px-4 py-3 text-center">5</td>
+              <td class="px-4 py-3 text-center font-semibold">3.200.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">7.619 €</span></td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-purple-50 text-purple-700 rounded text-xs font-semibold">Obra nueva</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">Idealista</td>
+            </tr>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">V2 — Villa panorámica Roque del Conde</td>
+              <td class="px-4 py-3 text-center">Adeje</td>
+              <td class="px-4 py-3 text-center">550 m²</td>
+              <td class="px-4 py-3 text-center">1.200 m²</td>
+              <td class="px-4 py-3 text-center">6</td>
+              <td class="px-4 py-3 text-center font-semibold">3.950.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">7.182 €</span></td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded text-xs font-semibold">Reformada</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">E&V</td>
+            </tr>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">V3 — Villa Abama Resort</td>
+              <td class="px-4 py-3 text-center">Guía Isora</td>
+              <td class="px-4 py-3 text-center">198 m²</td>
+              <td class="px-4 py-3 text-center">670 m²</td>
+              <td class="px-4 py-3 text-center">3</td>
+              <td class="px-4 py-3 text-center font-semibold">1.850.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">9.343 €</span></td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-purple-50 text-purple-700 rounded text-xs font-semibold">Obra nueva</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">E&V</td>
+            </tr>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">V4 — Villa Los Menores vistas</td>
+              <td class="px-4 py-3 text-center">Adeje interior</td>
+              <td class="px-4 py-3 text-center">429 m²</td>
+              <td class="px-4 py-3 text-center">11.824 m²</td>
+              <td class="px-4 py-3 text-center">7</td>
+              <td class="px-4 py-3 text-center font-semibold">1.490.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">3.473 €</span></td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-amber-50 text-amber-700 rounded text-xs font-semibold">2ª mano</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">E&V</td>
+            </tr>
+            <tr class="border-b border-gray-50">
+              <td class="px-4 py-3 font-medium">V5 — Villa contemporánea Costa Adeje</td>
+              <td class="px-4 py-3 text-center">Costa Adeje</td>
+              <td class="px-4 py-3 text-center">380 m²</td>
+              <td class="px-4 py-3 text-center">500 m²</td>
+              <td class="px-4 py-3 text-center">4</td>
+              <td class="px-4 py-3 text-center font-semibold">2.750.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-xs font-bold">7.237 €</span></td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-purple-50 text-purple-700 rounded text-xs font-semibold">Obra nueva</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">Fotocasa</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">V6 — Villa Radazul Bajo con piscina</td>
+              <td class="px-4 py-3 text-center">Radazul (ref.)</td>
+              <td class="px-4 py-3 text-center">322 m²</td>
+              <td class="px-4 py-3 text-center">956 m²</td>
+              <td class="px-4 py-3 text-center">5</td>
+              <td class="px-4 py-3 text-center font-semibold">1.350.000 €</td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs font-bold">4.193 €</span></td>
+              <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded text-xs font-semibold">Buen estado</span></td>
+              <td class="px-4 py-3 text-center text-gray-400 text-xs">E&V</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h4 class="font-bold text-gray-700 mb-2">📐 Análisis de los comparables</h4>
+        <div class="grid md:grid-cols-3 gap-4 text-sm text-gray-600">
+          <div>
+            <p class="font-semibold text-indigo-700">Rango obra nueva premium:</p>
+            <p>7.182 – 9.343 €/m² habitable</p>
+            <p class="text-xs text-gray-400 mt-1">V1, V2, V3, V5 (>3 M€)</p>
+          </div>
+          <div>
+            <p class="font-semibold text-indigo-700">Media ponderada zona:</p>
+            <p>7.000 €/m² habitable (aprox.)</p>
+            <p class="text-xs text-gray-400 mt-1">Excluyendo refs. no Adeje</p>
+          </div>
+          <div>
+            <p class="font-semibold text-indigo-700">Conversión a m² construido:</p>
+            <p>~5.500 €/m² construido (ratio 0,78)</p>
+            <p class="text-xs text-gray-400 mt-1">Base adoptada para valoración</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VALORACIÓN VILLA TERMINADA ===== -->
+    <section id="valoracion-villa" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">🏆</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Valoración del Producto Terminado</h2>
+      </div>
+
+      <!-- Gran card valor total -->
+      <div class="bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 rounded-3xl p-8 md:p-10 text-white relative overflow-hidden mb-8">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl"></div>
+        <div class="relative">
+          <p class="text-indigo-300 text-xs font-semibold uppercase tracking-widest mb-3">Valor Total de la Promoción (18 villas)</p>
+          <div class="flex flex-col lg:flex-row lg:items-end gap-8">
+            <div>
+              <p class="text-5xl md:text-6xl font-black gold-text">52.164.600 €</p>
+              <p class="text-gray-400 text-sm mt-2">Cincuenta y dos millones ciento sesenta y cuatro mil seiscientos euros</p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <div class="bg-white/8 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
+                <p class="text-xs text-gray-400">Precio medio / villa</p>
+                <p class="text-xl font-bold">2.898.033 €</p>
+              </div>
+              <div class="bg-white/8 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
+                <p class="text-xs text-gray-400">€/m² construido</p>
+                <p class="text-xl font-bold">5.500 €</p>
+              </div>
+              <div class="bg-white/8 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
+                <p class="text-xs text-gray-400">€/m² habitable</p>
+                <p class="text-xl font-bold">~7.050 €</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desglose por villa -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <h3 class="font-bold text-gray-800 mb-4">📋 Desglose por Villa</h3>
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b-2 border-indigo-100">
+              <th class="py-3 text-left font-bold text-indigo-700">Concepto</th>
+              <th class="py-3 text-center font-bold text-indigo-700">m²</th>
+              <th class="py-3 text-center font-bold text-indigo-700">€/m²</th>
+              <th class="py-3 text-right font-bold text-indigo-700">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">Interior habitable (4-5 dorm. en suite)</td><td class="py-2.5 text-center">320 m²</td><td class="py-2.5 text-center">7.050 €</td><td class="py-2.5 text-right font-semibold">2.256.000 €</td></tr>
+            <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">Exterior (jardín, piscina infinity, terrazas)</td><td class="py-2.5 text-center">207 m²</td><td class="py-2.5 text-center">3.102 €</td><td class="py-2.5 text-right font-semibold">642.033 €</td></tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-indigo-50"><td class="py-3 font-black text-indigo-800" colspan="3">Total por villa (527 m² construidos)</td><td class="py-3 text-right font-black text-indigo-700 text-lg">2.898.033 €</td></tr>
+            <tr class="bg-indigo-50/50"><td class="py-3 font-bold text-indigo-700" colspan="3">Total 18 villas</td><td class="py-3 text-right font-black text-indigo-600 text-lg">52.164.600 €</td></tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- Escenarios -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <h3 class="font-bold text-gray-800 mb-4">🎯 Escenarios de Precio por Villa</h3>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="rounded-xl p-5 text-center bg-amber-50 border border-amber-200">
+            <p class="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1">Conservador</p>
+            <p class="text-2xl font-black text-amber-700">2.650.000 €</p>
+            <p class="text-xs text-amber-500 mt-1">5.028 €/m² · Villa estándar interior</p>
+            <p class="text-xs text-gray-400 mt-2">Total: 47.700.000 €</p>
+          </div>
+          <div class="rounded-xl p-5 text-center bg-indigo-50 border-2 border-indigo-300">
+            <p class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-1">✅ Base (Adoptado)</p>
+            <p class="text-2xl font-black text-indigo-700">2.898.000 €</p>
+            <p class="text-xs text-indigo-500 mt-1">5.500 €/m² · Media ponderada</p>
+            <p class="text-xs text-gray-400 mt-2">Total: 52.164.600 €</p>
+          </div>
+          <div class="rounded-xl p-5 text-center bg-emerald-50 border border-emerald-200">
+            <p class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">Optimista</p>
+            <p class="text-2xl font-black text-emerald-700">3.400.000 €</p>
+            <p class="text-xs text-emerald-500 mt-1">6.452 €/m² · Villas con mejor orientación</p>
+            <p class="text-xs text-gray-400 mt-2">Total: 61.200.000 €</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">Distribución del Valor por Villa</h3>
+          <canvas id="chartVilla" height="250"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">Comparativa Escenarios — Total Promoción</h3>
+          <canvas id="chartEscenarios" height="250"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ANÁLISIS DE DEMANDA ===== -->
+    <section id="demanda" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">🌍</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Análisis de Demanda Internacional</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-5 mb-8">
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="text-2xl mb-2">🇬🇧</div>
+          <h4 class="font-bold text-gray-800 mb-1">Reino Unido</h4>
+          <p class="text-xs text-gray-500 leading-relaxed">Principal mercado emisor de Tenerife Sur. Compradores de alto patrimonio (HNWI) buscan second-home con clima garantizado. Tenerife ofrece acceso directo desde múltiples aeropuertos UK (4-5h vuelo). El segmento villa de lujo es especialmente atractivo post-Brexit por ventajas fiscales del régimen ZEC/RIC canario.</p>
+          <div class="mt-3"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">Alta demanda</span></div>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="text-2xl mb-2">🇩🇪</div>
+          <h4 class="font-bold text-gray-800 mb-1">Alemania / DACH</h4>
+          <p class="text-xs text-gray-500 leading-relaxed">Segundo mercado emisor. Preferencia por calidad constructiva y eficiencia energética — factores que encajan con el perfil ultra-premium del proyecto (aerotermia, domótica KNX). Compradores estables con alto poder adquisitivo y horizonte de inversión a largo plazo.</p>
+          <div class="mt-3"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">Alta demanda</span></div>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="text-2xl mb-2">🇧🇪</div>
+          <h4 class="font-bold text-gray-800 mb-1">Benelux / Escandinavia</h4>
+          <p class="text-xs text-gray-500 leading-relaxed">Mercados emergentes en el segmento premium canario. Belgas, holandeses y escandinavos buscan clima templado todo el año. Costa Adeje es destino consolidado con vuelos directos desde Bruselas, Ámsterdam, Estocolmo y Oslo. Creciente interés en villas con piscina privada.</p>
+          <div class="mt-3"><span class="px-2.5 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-bold">Demanda creciente</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">📊 Factores de Demanda</h3>
+        <div class="grid md:grid-cols-2 gap-6 text-sm text-gray-600 leading-relaxed">
+          <div>
+            <h4 class="font-bold text-indigo-700 mb-2">Factores positivos:</h4>
+            <ul class="space-y-1.5">
+              <li>✅ <strong>Stock escasísimo</strong> de villas nuevas en La Caleta — demanda muy superior a la oferta</li>
+              <li>✅ <strong>Clima excepcional</strong> — 300+ días sol, 20-28°C todo el año</li>
+              <li>✅ <strong>Conectividad aérea</strong> — TFS recibe +50 rutas internacionales directas</li>
+              <li>✅ <strong>Fiscalidad ventajosa</strong> — IGIC 7% (vs. IVA 21%), deducciones RIC</li>
+              <li>✅ <strong>Revalorización sostenida</strong> — +23% interanual en el segmento >100 m²</li>
+              <li>✅ <strong>Golden Visa</strong> — inversión inmobiliaria >500.000 € para no-UE</li>
+              <li>✅ <strong>Nómadas digitales</strong> — creciente demanda de residencia permanente premium</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold text-amber-700 mb-2">Consideraciones:</h4>
+            <ul class="space-y-1.5">
+              <li>⚠️ <strong>Competencia resort</strong> — Abama, Bahía del Duque, Ritz-Carlton (pero precios más altos)</li>
+              <li>⚠️ <strong>Normativa turística</strong> — RT1-B puede exigir licencia turística por villa</li>
+              <li>⚠️ <strong>Absorción</strong> — 18 villas de >2,8 M€ requieren marketing internacional activo</li>
+              <li>⚠️ <strong>Financiación</strong> — compradores internacionales operan mayoritariamente en cash o con bancas privadas</li>
+              <li>ℹ️ <strong>Período medio de venta</strong> — 193 días para Tenerife general (E&V), potencialmente mayor para >2,5 M€</li>
+            </ul>
+            <div class="mt-4 bg-emerald-50 rounded-lg p-3 border border-emerald-100">
+              <p class="text-emerald-700 text-xs font-semibold">Conclusión: Absorción estimada de 3-5 villas/año con marketing internacional activo. Plazo total de comercialización: 36-48 meses (compatible con las 2 fases constructivas).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FACTORES DIFERENCIADORES ===== -->
+    <section id="diferenciadores" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">💎</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Factores Diferenciadores del Proyecto</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-2xl mb-3">🏊</div>
+          <h4 class="font-bold text-gray-800 mb-2">Piscina Infinity Privada</h4>
+          <p class="text-xs text-gray-500 leading-relaxed">Cada villa incorpora piscina infinity con vistas al océano Atlántico. Elemento diferenciador clave frente a apartamentos turísticos. Prima de valor estimada: +8-12% sobre villa sin piscina.</p>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-2xl mb-3">🤖</div>
+          <h4 class="font-bold text-gray-800 mb-2">Domótica KNX</h4>
+          <p class="text-xs text-gray-500 leading-relaxed">Sistema de domótica integral protocolo KNX: iluminación, climatización, seguridad, persianas, multimedia. Control desde smartphone/tablet. Estándar europeo abierto — máxima interoperabilidad.</p>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-2xl mb-3">🌿</div>
+          <h4 class="font-bold text-gray-800 mb-2">Aerotermia + Energía A</h4>
+          <p class="text-xs text-gray-500 leading-relaxed">Bomba de calor aerotérmica para ACS y climatización. Certificación energética clase A (objetivo). Ahorro energético >60% vs. sistemas convencionales. Factor valorado por comprador centroeuropeo.</p>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-2xl mb-3">🌊</div>
+          <h4 class="font-bold text-gray-800 mb-2">Orientación S-SE Océano</h4>
+          <p class="text-xs text-gray-500 leading-relaxed">Orientación sur-sureste con vistas directas al océano Atlántico. Máximas horas de sol. Prima de orientación en Tenerife Sur: +10-15% sobre orientación norte.</p>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-2xl mb-3">📍</div>
+          <h4 class="font-bold text-gray-800 mb-2">Ubicación La Caleta</h4>
+          <p class="text-xs text-gray-500 leading-relaxed">La Caleta es el núcleo residencial de mayor prestigio en Costa Adeje. Restaurantes estrella Michelin, Playa del Duque a 800 m, Golf Costa Adeje, Puerto Deportivo. Zona consolidada sin presión turística masiva.</p>
+        </div>
+        <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-2xl mb-3">🛏️</div>
+          <h4 class="font-bold text-gray-800 mb-2">4-5 Dormitorios en Suite</h4>
+          <p class="text-xs text-gray-500 leading-relaxed">Todas las habitaciones en suite con baño privado. Configuración perfecta para familias internacionales y uso como alojamiento turístico premium (alquiler >500 €/noche en temporada).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONDICIONANTES ===== -->
+    <section id="condicionantes" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-xl">⚠️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Condicionantes y Advertencias</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="bg-amber-50 rounded-2xl p-5 border border-amber-200">
+          <h3 class="font-bold text-amber-800 mb-3">⚠️ Condicionantes de la Valoración</h3>
+          <ul class="text-sm text-amber-700 space-y-2 leading-relaxed">
+            <li>1. <strong>Discrepancia de superficie:</strong> Se adopta la superficie catastral (8.560 m²). Si la superficie real fuera 9.486 m², los valores unitarios se ajustarían proporcionalmente.</li>
+            <li>2. <strong>Edificabilidad no verificada:</strong> Las condiciones urbanísticas RT1-B (edificabilidad máxima, alturas, retranqueos, densidad) deben confirmarse con el Ayuntamiento de Adeje.</li>
+            <li>3. <strong>Sin visita física:</strong> La valoración se basa en documentación aportada, ficha catastral e información de mercado. No se ha realizado inspección in situ.</li>
+            <li>4. <strong>Proyecto no definitivo:</strong> Las superficies por villa (527 m²) y distribución son estimaciones del promotor. El proyecto arquitectónico definitivo puede variar.</li>
+            <li>5. <strong>Condicionado a licencia:</strong> El valor del producto terminado asume la obtención de licencia de obra y primera ocupación.</li>
+          </ul>
+        </div>
+        <div class="bg-blue-50 rounded-2xl p-5 border border-blue-200">
+          <h3 class="font-bold text-blue-800 mb-3">📌 Advertencias</h3>
+          <ul class="text-sm text-blue-700 space-y-2 leading-relaxed">
+            <li>1. Este informe tiene carácter <strong>orientativo</strong> y no sustituye a una tasación oficial por sociedad homologada por el Banco de España.</li>
+            <li>2. Los precios de mercado proceden de <strong>portales inmobiliarios</strong> (precios de oferta, no de transacción) con fecha marzo-abril 2026.</li>
+            <li>3. El valor del terreno por método residual (18,3 M€) es significativamente superior al de comparación (9,0 M€), lo que confirma el <strong>alto potencial</strong> de la promoción pero no debe interpretarse como valor de mercado del suelo actual.</li>
+            <li>4. La absorción comercial de 18 villas de >2,8 M€ requiere una <strong>estrategia de marketing internacional</strong> especializada. El período de comercialización estimado es de 36-48 meses.</li>
+            <li>5. Los valores no incluyen ITP/AJD, gastos notariales ni registrales de la compra del terreno.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-6 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-3">📚 Marco Normativo</h3>
+        <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-600">
+          <ul class="space-y-1.5">
+            <li>• <strong>Orden ECO/805/2003</strong> — Normas de valoración de bienes inmuebles</li>
+            <li>• <strong>Ley 2/1981</strong> — Regulación del mercado hipotecario</li>
+            <li>• <strong>CTE 2019</strong> — Código Técnico de la Edificación</li>
+          </ul>
+          <ul class="space-y-1.5">
+            <li>• <strong>PGO Adeje</strong> — Plan General de Ordenación (normas RT1-B)</li>
+            <li>• <strong>LOC / LOTENC</strong> — Normativa urbanística autonómica canaria</li>
+            <li>• <strong>IGIC</strong> — Impuesto General Indirecto Canario (7%)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="text-center md:text-left">
+          <div class="flex items-center gap-2 mb-2 justify-center md:justify-start">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs">VX</div>
+            <span class="text-white font-bold">Valorex</span>
+            <span class="text-gray-500 text-sm">— Tasador Inmobiliario</span>
+          </div>
+          <p class="text-sm">Informe generado el 7 de abril de 2026 por SM PropTech — Sistema de Agentes Inmobiliarios</p>
+        </div>
+        <div class="text-center md:text-right text-xs">
+          <p class="text-gray-500">Proyecto: <strong class="text-gray-300">La Caleta 18 Villas</strong> — Ref: VX-2026-LCV-001</p>
+          <p class="text-gray-600 mt-1">Este documento tiene carácter orientativo. No sustituye a una tasación oficial.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Scroll Reveal
+    const obs = new IntersectionObserver(e => { e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }); }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Chart: Zonas
+    new Chart(document.getElementById('chartZonas'), {
+      type: 'bar',
+      data: {
+        labels: ['Torviscas C.', 'San Eugenio A.', 'Torviscas B.', 'La Caleta', 'Playa Duque', 'Playa Américas', 'Playa Fañabé A.', 'San Eugenio B.', 'Playa Fañabé'],
+        datasets: [{
+          label: '€/m²',
+          data: [4579, 4916, 5446, 5764, 5978, 6183, 6373, 6398, 6968],
+          backgroundColor: [
+            'rgba(99,102,241,0.4)','rgba(99,102,241,0.45)','rgba(99,102,241,0.5)','rgba(79,70,229,0.9)',
+            'rgba(99,102,241,0.6)','rgba(99,102,241,0.55)','rgba(99,102,241,0.65)','rgba(99,102,241,0.6)','rgba(168,85,247,0.7)'
+          ],
+          borderColor: ['#6366f1','#6366f1','#6366f1','#4f46e5','#6366f1','#6366f1','#6366f1','#6366f1','#a855f7'],
+          borderWidth: 2, borderRadius: 8, borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true, plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: false, min: 4000, ticks: { callback: v => v.toLocaleString('es-ES') + ' €', font: { size: 10 } }, grid: { color: 'rgba(0,0,0,0.04)' } },
+          x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 45 } }
+        }
+      }
+    });
+
+    // Chart: Habitaciones
+    new Chart(document.getElementById('chartHabitaciones'), {
+      type: 'bar',
+      data: {
+        labels: ['Estudio/1 hab.', '2 habitaciones', '3 habitaciones', '>3 habitaciones'],
+        datasets: [{
+          label: '€/m²',
+          data: [5757, 5614, 6407, 6187],
+          backgroundColor: ['rgba(99,102,241,0.6)','rgba(99,102,241,0.6)','rgba(168,85,247,0.7)','rgba(79,70,229,0.85)'],
+          borderColor: ['#6366f1','#6366f1','#a855f7','#4f46e5'],
+          borderWidth: 2, borderRadius: 8, borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true, plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: false, min: 5000, ticks: { callback: v => v.toLocaleString('es-ES') + ' €', font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.04)' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    // Chart: Villa breakdown
+    new Chart(document.getElementById('chartVilla'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Interior habitable (320 m²)', 'Exterior / piscina (207 m²)'],
+        datasets: [{ data: [2256000, 642033], backgroundColor: ['#4f46e5','#a855f7'], borderWidth: 3, borderColor: '#fff', hoverOffset: 10 }]
+      },
+      options: {
+        responsive: true, cutout: '55%',
+        plugins: {
+          legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } },
+          tooltip: { callbacks: { label: c => c.label + ': ' + c.parsed.toLocaleString('es-ES') + ' €' } }
+        }
+      }
+    });
+
+    // Chart: Escenarios
+    new Chart(document.getElementById('chartEscenarios'), {
+      type: 'bar',
+      data: {
+        labels: ['Conservador', 'Base (adoptado)', 'Optimista'],
+        datasets: [
+          { label: 'Ingresos totales', data: [47700000, 52164600, 61200000], backgroundColor: ['rgba(245,158,11,0.7)','rgba(79,70,229,0.85)','rgba(16,185,129,0.7)'], borderRadius: 8, borderSkipped: false },
+          { label: 'Inversión (26 M€)', data: [26000000, 26000000, 26000000], backgroundColor: 'rgba(239,68,68,0.3)', borderRadius: 8, borderSkipped: false, borderColor: '#ef4444', borderWidth: 1, borderDash: [5,5] }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 12 } }, tooltip: { callbacks: { label: c => c.dataset.label + ': ' + (c.parsed.y / 1e6).toFixed(1) + ' M€' } } },
+        scales: {
+          y: { beginAtZero: true, ticks: { callback: v => (v / 1e6).toFixed(0) + ' M€', font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.04)' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

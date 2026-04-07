@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan de Proyecto — La Caleta 18 Villas · Nexus PM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <style>
+    html{scroll-behavior:smooth}
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.23,1,.32,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .gradient-text{background:linear-gradient(135deg,#059669 0%,#0d9488 50%,#0891b2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .glass{background:rgba(255,255,255,.75);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.4)}
+    .card-hover{transition:all .3s cubic-bezier(.23,1,.32,1)}.card-hover:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.1)}
+    tbody tr:hover{background-color:rgba(16,185,129,.05)}
+    .nav-link{position:relative}.nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#059669;transition:width .3s}.nav-link:hover::after{width:100%}
+    .phase-line{position:relative}.phase-line::before{content:'';position:absolute;left:19px;top:48px;bottom:0;width:2px;background:#e5e7eb}.phase-line:last-child::before{display:none}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}.float{animation:float 6s ease-in-out infinite}
+    .hero-grid{background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='.06'%3E%3Cpath d='M0 0h40v40H0V0zm1 1h38v38H1V1z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+    .traffic-green{background:#10b981;box-shadow:0 0 8px rgba(16,185,129,.5)}
+    .traffic-yellow{background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,.5)}
+    .traffic-red{background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,.5)}
+    .gold-gradient{background:linear-gradient(135deg,#92702a 0%,#c9a84c 40%,#f0d078 60%,#c9a84c 80%,#92702a 100%)}
+    @media print{.no-print{display:none}.reveal{opacity:1;transform:none}}
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-lg border-b border-gray-200/60 no-print">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-600 flex items-center justify-center text-white font-bold text-sm">NX</div>
+        <span class="text-lg font-bold gradient-text">Nexus — Director de Proyecto</span>
+      </div>
+      <div class="hidden lg:flex gap-5 text-[13px] font-medium text-gray-500">
+        <a href="#resumen" class="nav-link hover:text-emerald-600 transition">Resumen</a>
+        <a href="#ficha" class="nav-link hover:text-emerald-600 transition">Ficha</a>
+        <a href="#programa" class="nav-link hover:text-emerald-600 transition">Programa</a>
+        <a href="#financiero" class="nav-link hover:text-emerald-600 transition">Financiero</a>
+        <a href="#cronograma" class="nav-link hover:text-emerald-600 transition">Cronograma</a>
+        <a href="#riesgos" class="nav-link hover:text-emerald-600 transition">Riesgos</a>
+        <a href="#equipo" class="nav-link hover:text-emerald-600 transition">Equipo</a>
+        <a href="#proximos" class="nav-link hover:text-emerald-600 transition">Próximos Pasos</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-emerald-800 via-teal-700 to-cyan-800 text-white">
+    <div class="absolute inset-0 hero-grid"></div>
+    <div class="absolute top-16 right-16 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl float"></div>
+    <div class="absolute bottom-8 left-8 w-64 h-64 bg-emerald-300/10 rounded-full blur-3xl float" style="animation-delay:-3s"></div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 md:py-24">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="px-3 py-1 gold-gradient text-white rounded-full text-xs font-bold tracking-wider uppercase">🏝️ Proyecto Premium</span>
+            <span class="px-3 py-1 bg-white/10 text-white/70 rounded-full text-xs font-medium backdrop-blur-sm">Plan Director v1.0</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">La Caleta<br>18 Villas de Lujo</h1>
+          <p class="text-emerald-100 text-lg leading-relaxed">Desarrollo residencial premium de 18 villas independientes en la zona más exclusiva de Costa Adeje, Tenerife Sur. Inversión total estimada 26 M€ con ingresos proyectados de 50,4 M€.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">📅 7 abril 2026</span>
+            <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">📍 La Caleta, Costa Adeje</span>
+            <span class="px-4 py-2 bg-white/15 rounded-full text-sm backdrop-blur-sm">🏗️ 18 Villas · 527 m² c/u</span>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 text-center min-w-[200px]">
+          <p class="text-emerald-900 text-xs font-semibold uppercase tracking-wider mb-2">Semáforo Global</p>
+          <div class="w-16 h-16 rounded-full traffic-green mx-auto mb-3"></div>
+          <p class="text-emerald-800 font-bold text-lg">VIABLE</p>
+          <p class="text-emerald-600 text-xs mt-1">Alta rentabilidad</p>
+        </div>
+      </div>
+
+      <!-- KPIs Hero -->
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-6 gap-3">
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+          <p class="text-2xl font-extrabold">18</p>
+          <p class="text-emerald-200 text-xs">Villas</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+          <p class="text-2xl font-extrabold">9.486 m²</p>
+          <p class="text-emerald-200 text-xs">Sup. Parcela</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+          <p class="text-2xl font-extrabold">527 m²</p>
+          <p class="text-emerald-200 text-xs">m² / Villa</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+          <p class="text-2xl font-extrabold">50,4 M€</p>
+          <p class="text-emerald-200 text-xs">Ingresos Proy.</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+          <p class="text-2xl font-extrabold">26 M€</p>
+          <p class="text-emerald-200 text-xs">Inversión Total</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+          <p class="text-2xl font-extrabold">24,4 M€</p>
+          <p class="text-emerald-200 text-xs">Beneficio Bruto</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-16 space-y-20">
+
+    <!-- ===== RESUMEN EJECUTIVO ===== -->
+    <section id="resumen" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">📊</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Resumen Ejecutivo</h2>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div class="prose max-w-none text-gray-700 leading-relaxed">
+          <p class="text-lg mb-4">El proyecto <strong>La Caleta 18 Villas</strong> consiste en el desarrollo de <strong>18 villas de lujo independientes</strong> sobre una parcela de suelo urbano de 9.486 m² (ref. catastral 8516001CS2181N0001QG) en la Calle Arigue 8, La Caleta de Adeje, municipio de Adeje (Tenerife). La parcela está clasificada como <strong>suelo urbano, uso residencial turístico RT1-B</strong>, sin edificar.</p>
+          <p class="mb-4">Cada villa se diseña con una superficie construida de <strong>527 m²</strong> (320 m² útiles + 207 m² de parcela ajardinada/exterior), con acabados de gama alta orientados al segmento de comprador internacional de alto poder adquisitivo (turismo residencial premium). El rango de precios del producto terminado en la zona de Adeje se sitúa entre <strong>4.800 y 5.500 €/m² construido</strong>.</p>
+
+          <div class="grid md:grid-cols-3 gap-4 my-6 not-prose">
+            <div class="card-hover bg-emerald-50 rounded-xl p-5 border border-emerald-100 text-center">
+              <p class="text-3xl font-black text-emerald-700">50,4 M€</p>
+              <p class="text-sm text-emerald-600 font-medium">Ingresos por ventas</p>
+              <p class="text-xs text-emerald-400">18 × 2.800.000 € (conservador)</p>
+            </div>
+            <div class="card-hover bg-red-50 rounded-xl p-5 border border-red-100 text-center">
+              <p class="text-3xl font-black text-red-700">26 M€</p>
+              <p class="text-sm text-red-600 font-medium">Inversión total</p>
+              <p class="text-xs text-red-400">9 M€ suelo + 17 M€ obra</p>
+            </div>
+            <div class="card-hover bg-amber-50 rounded-xl p-5 border border-amber-100 text-center">
+              <p class="text-3xl font-black text-amber-700">24,4 M€</p>
+              <p class="text-sm text-amber-600 font-medium">Beneficio bruto</p>
+              <p class="text-xs text-amber-400">Margen ~48,4%</p>
+            </div>
+          </div>
+
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-5 not-prose">
+            <p class="text-emerald-800 font-semibold mb-2">✅ Conclusión del Director de Proyecto</p>
+            <p class="text-emerald-700 text-sm leading-relaxed">El proyecto es <strong>ALTAMENTE VIABLE</strong> con un margen bruto del 48,4% y una ubicación premium en La Caleta de Adeje. Los principales activos son: (1) ubicación en la zona más cotizada de Tenerife Sur, (2) suelo urbano clasificado RT1-B sin restricciones aparentes, (3) demanda internacional sostenida de villas de lujo, (4) oferta limitada de obra nueva en La Caleta. Los condicionantes son: (1) confirmar edificabilidad y condiciones urbanísticas con Ayuntamiento de Adeje, (2) estudio geotécnico, (3) gestión de licencias.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FICHA DEL PROYECTO ===== -->
+    <section id="ficha" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">📋</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Ficha del Proyecto</h2>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <!-- Datos generales -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="px-6 py-4 bg-emerald-50 border-b border-emerald-100"><h3 class="font-bold text-emerald-800">🏝️ Datos Generales</h3></div>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500 w-44">Denominación</td><td class="px-6 py-3 text-gray-800 font-medium">La Caleta 18 Villas</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Tipología</td><td class="px-6 py-3">18 villas unifamiliares independientes de lujo</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Ubicación</td><td class="px-6 py-3">CL Arigue 8, La Caleta de Adeje</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Municipio</td><td class="px-6 py-3">Adeje (S.C. Tenerife)</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Código Postal</td><td class="px-6 py-3">38670</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Ref. Catastral</td><td class="px-6 py-3 font-mono text-xs">8516001CS2181N0001QG</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Clasificación Suelo</td><td class="px-6 py-3"><span class="px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">Urbano · RT1-B</span></td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Uso Actual</td><td class="px-6 py-3">Suelo sin edificar</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Sup. Parcela (catastro)</td><td class="px-6 py-3 font-bold">8.560 m²</td></tr>
+              <tr><td class="px-6 py-3 font-semibold text-gray-500">Sup. Parcela (docum.)</td><td class="px-6 py-3 font-bold">9.486 m² <span class="text-xs text-amber-500 font-normal">⚠ discrepancia a verificar</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Datos económicos -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="px-6 py-4 bg-emerald-50 border-b border-emerald-100"><h3 class="font-bold text-emerald-800">💰 Datos Económicos del Documento</h3></div>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500 w-44">Precio del terreno</td><td class="px-6 py-3 font-bold text-gray-800">9.000.000 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Coste de obra est.</td><td class="px-6 py-3 font-bold">17.000.000 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Inversión total</td><td class="px-6 py-3 font-bold text-red-700">26.000.000 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">PV mín. por villa</td><td class="px-6 py-3 font-bold">2.800.000 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Ingresos totales</td><td class="px-6 py-3 font-bold text-emerald-700">50.400.000 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Beneficio bruto</td><td class="px-6 py-3 font-bold text-emerald-700">24.400.000 €</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Margen bruto</td><td class="px-6 py-3 font-bold text-emerald-700">48,4%</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Rango precio zona</td><td class="px-6 py-3">4.800 – 5.500 €/m² construido</td></tr>
+              <tr class="border-b border-gray-50"><td class="px-6 py-3 font-semibold text-gray-500">Coste por villa</td><td class="px-6 py-3">931.100 € (desglose detallado)</td></tr>
+              <tr><td class="px-6 py-3 font-semibold text-gray-500">€/m² suelo</td><td class="px-6 py-3">~949 €/m² (sobre 9.486 m²)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Alerta discrepancia -->
+      <div class="mt-6 bg-amber-50 border border-amber-200 rounded-2xl p-5">
+        <p class="text-amber-800 font-semibold mb-2">⚠️ Discrepancia de superficie detectada</p>
+        <p class="text-sm text-amber-700">La documentación del proyecto indica <strong>9.486 m²</strong> de superficie parcelaria, pero la ficha catastral (Ref. 8516001CS2181N0001QG) registra <strong>8.560 m²</strong>. Diferencia de <strong>926 m²</strong> (~10,8%). Esta discrepancia debe resolverse antes de avanzar: solicitar nota simple registral y medición topográfica profesional. Si la superficie real es 8.560 m², la densidad de 18 villas pasa de 527 m²/parcela a 475 m²/parcela — sigue siendo viable pero más ajustada.</p>
+      </div>
+    </section>
+
+    <!-- ===== PROGRAMA FUNCIONAL ===== -->
+    <section id="programa" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">🏠</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Programa Funcional por Villa</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">📐 Superficies por Villa</h3>
+          <table class="w-full text-sm">
+            <thead><tr class="border-b-2 border-emerald-100"><th class="py-3 text-left font-bold text-emerald-700">Concepto</th><th class="py-3 text-right font-bold text-emerald-700">m²</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">Superficie útil interior</td><td class="py-2.5 text-right font-bold">320 m²</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">Parcela exterior / jardín</td><td class="py-2.5 text-right font-bold">207 m²</td></tr>
+              <tr class="bg-emerald-50"><td class="py-3 font-bold text-emerald-800">Total por villa</td><td class="py-3 text-right font-black text-emerald-700">527 m²</td></tr>
+              <tr class="border-b border-gray-50"><td class="py-2.5 font-medium text-gray-500">× 18 villas</td><td class="py-2.5 text-right font-bold text-gray-500">9.486 m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-bold text-gray-800 mb-4">💎 Perfil de Producto</h3>
+          <div class="space-y-3">
+            <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
+              <p class="font-bold text-sm text-gray-700 mb-1">🎯 Segmento</p>
+              <p class="text-xs text-gray-500">Comprador internacional de alto poder adquisitivo. Turismo residencial premium. Second-home o residencia permanente.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
+              <p class="font-bold text-sm text-gray-700 mb-1">✨ Calidades Previstas</p>
+              <p class="text-xs text-gray-500">Gama alta: piscina privada, domótica, carpintería premium, cocina equipada, terrazas amplias, jardín privado, parking.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
+              <p class="font-bold text-sm text-gray-700 mb-1">🏷️ Precio unitario</p>
+              <p class="text-xs text-gray-500">Mínimo conservador: <strong>2.800.000 €/villa</strong>. Rango potencial: 2,8 M€ – 3,2 M€ según acabados y vista.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-gray-50 border border-gray-100">
+              <p class="font-bold text-sm text-gray-700 mb-1">📍 Ubicación</p>
+              <p class="text-xs text-gray-500">La Caleta de Adeje — zona más exclusiva de Tenerife Sur. Golf, playa, gastronomía. Conexión TF-1 y aeropuerto TFS a 15 min.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CUADRO FINANCIERO ===== -->
+    <section id="financiero" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">💰</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Cuadro Financiero Preliminar</h2>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div>
+            <h3 class="font-bold text-gray-800 mb-4">Desglose de Costes por Villa</h3>
+            <table class="w-full text-sm">
+              <thead><tr class="border-b-2 border-emerald-100"><th class="py-3 text-left font-bold text-emerald-700">Concepto</th><th class="py-3 text-right font-bold text-emerald-700">€/villa</th></tr></thead>
+              <tbody>
+                <tr class="border-b border-gray-50"><td class="py-2.5">320 m² útiles × 2.000 €/m²</td><td class="py-2.5 text-right font-medium">640.000 €</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5">207 m² parcela × 1.000 €/m²</td><td class="py-2.5 text-right font-medium">207.000 €</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-medium">Subtotal construcción</td><td class="py-2.5 text-right font-bold">847.000 €</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5">Otros gastos (10%)</td><td class="py-2.5 text-right font-medium">84.100 €</td></tr>
+                <tr class="bg-emerald-50"><td class="py-3 font-bold text-emerald-800">Total por villa</td><td class="py-3 text-right font-black text-emerald-700">931.100 €</td></tr>
+              </tbody>
+            </table>
+
+            <h3 class="font-bold text-gray-800 mb-4 mt-8">Cuadro Global del Proyecto</h3>
+            <table class="w-full text-sm">
+              <tbody>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-medium text-emerald-700">📈 Ingresos (18 × 2,8 M€)</td><td class="py-2.5 text-right font-bold text-emerald-700">50.400.000 €</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 pl-4 text-gray-600">Terreno</td><td class="py-2.5 text-right">9.000.000 €</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 pl-4 text-gray-600">Construcción (18 × 931.100 €)</td><td class="py-2.5 text-right">16.759.800 €</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-2.5 font-medium text-red-700">📤 Inversión total</td><td class="py-2.5 text-right font-bold text-red-700">26.000.000 €</td></tr>
+                <tr class="bg-emerald-50"><td class="py-3 font-bold text-emerald-800">✅ Beneficio bruto</td><td class="py-3 text-right font-black text-emerald-700">24.400.000 €</td></tr>
+                <tr class="bg-emerald-50/50"><td class="py-2.5 font-semibold text-emerald-700">Margen bruto</td><td class="py-2.5 text-right font-bold text-emerald-700">48,4%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-700 mb-4 text-center">Distribución de la Inversión</h4>
+            <canvas id="chartInversion" height="260"></canvas>
+            <h4 class="font-semibold text-gray-700 mb-4 mt-8 text-center">Ingresos vs Costes</h4>
+            <canvas id="chartBalance" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 bg-blue-50 border border-blue-200 rounded-2xl p-5">
+        <p class="text-blue-800 font-semibold mb-2">ℹ️ Nota sobre cifras</p>
+        <p class="text-sm text-blue-700">Las cifras provienen del documento del promotor (<code class="text-xs bg-blue-100 px-1 rounded">LaCaleta_18Villas_FINAL.docx</code>). Se ha delegado a <strong>Finex</strong> (analista financiero) un estudio de viabilidad detallado con cash-flow, TIR, VAN y análisis de sensibilidad. A <strong>Buildero</strong> se le ha encargado un presupuesto PEM desglosado por capítulos. Los resultados de ambos agentes complementarán este plan director.</p>
+      </div>
+    </section>
+
+    <!-- ===== CRONOGRAMA ===== -->
+    <section id="cronograma" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">📅</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Cronograma Maestro</h2>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <p class="text-sm text-gray-600 mb-6">Plazo total estimado: <strong>30-36 meses</strong> desde el inicio de la tramitación hasta la entrega completa de las 18 villas. El desarrollo se plantea en <strong>2 fases</strong> de 9 villas cada una para optimizar cash-flow y reducir riesgo.</p>
+        <div class="space-y-0">
+          <div class="phase-line flex gap-5 pb-8">
+            <div class="flex-shrink-0"><div class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm">1</div></div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h4 class="font-bold text-gray-800">Due Diligence y Proyecto</h4>
+                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">Meses 1-6</span>
+                <span class="px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-xs">📍 Estamos aquí</span>
+              </div>
+              <div class="bg-gray-50 rounded-xl p-4 text-sm text-gray-600 space-y-1">
+                <p>• <strong>M1:</strong> Verificación catastral/registral, resolución discrepancia de superficie</p>
+                <p>• <strong>M1-2:</strong> Estudio geotécnico + topografía de precisión</p>
+                <p>• <strong>M2-4:</strong> Proyecto básico arquitectónico (18 villas + urbanización)</p>
+                <p>• <strong>M4-6:</strong> Proyecto de ejecución + visado colegial</p>
+                <p>• <strong>M3-6:</strong> Solicitud de licencia urbanística (Ayuntamiento de Adeje)</p>
+              </div>
+            </div>
+          </div>
+          <div class="phase-line flex gap-5 pb-8">
+            <div class="flex-shrink-0"><div class="w-10 h-10 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-sm">2</div></div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h4 class="font-bold text-gray-800">Licencia y Licitación</h4>
+                <span class="px-2.5 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">Meses 6-10</span>
+              </div>
+              <div class="bg-gray-50 rounded-xl p-4 text-sm text-gray-600 space-y-1">
+                <p>• <strong>M6-10:</strong> Tramitación de licencia (Adeje típ. 4-6 meses)</p>
+                <p>• <strong>M7-9:</strong> Licitación de constructora + negociación contratos</p>
+                <p>• <strong>M8-10:</strong> Pre-comercialización (marketing, web, renders)</p>
+              </div>
+            </div>
+          </div>
+          <div class="phase-line flex gap-5 pb-8">
+            <div class="flex-shrink-0"><div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm">3</div></div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h4 class="font-bold text-gray-800">Obra — Fase 1 (9 Villas)</h4>
+                <span class="px-2.5 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Meses 10-22</span>
+              </div>
+              <div class="bg-gray-50 rounded-xl p-4 text-sm text-gray-600 space-y-1">
+                <p>• <strong>M10-12:</strong> Urbanización, movimiento de tierras, infraestructuras generales</p>
+                <p>• <strong>M12-15:</strong> Cimentación y estructura de las 9 primeras villas</p>
+                <p>• <strong>M15-20:</strong> Cerramientos, instalaciones, acabados</p>
+                <p>• <strong>M20-22:</strong> Piscinas, jardines, entrega Fase 1</p>
+              </div>
+            </div>
+          </div>
+          <div class="phase-line flex gap-5 pb-8">
+            <div class="flex-shrink-0"><div class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-sm">4</div></div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h4 class="font-bold text-gray-800">Obra — Fase 2 (9 Villas)</h4>
+                <span class="px-2.5 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Meses 18-30</span>
+              </div>
+              <div class="bg-gray-50 rounded-xl p-4 text-sm text-gray-600 space-y-1">
+                <p>• <strong>M18-21:</strong> Cimentación y estructura (solapada con acabados Fase 1)</p>
+                <p>• <strong>M21-27:</strong> Cerramientos, instalaciones, acabados</p>
+                <p>• <strong>M27-30:</strong> Piscinas, jardines, entrega Fase 2</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-5">
+            <div class="flex-shrink-0"><div class="w-10 h-10 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-sm">5</div></div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h4 class="font-bold text-gray-800">Entrega y Cierre</h4>
+                <span class="px-2.5 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-semibold">Meses 30-36</span>
+              </div>
+              <div class="bg-gray-50 rounded-xl p-4 text-sm text-gray-600 space-y-1">
+                <p>• <strong>M30-32:</strong> Licencias de primera ocupación + escrituras obra nueva</p>
+                <p>• <strong>M32-34:</strong> Entrega de llaves últimas villas</p>
+                <p>• <strong>M34-36:</strong> Cierre contable, garantías, post-venta</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-4">📊 Diagrama de Gantt</h3>
+        <canvas id="chartGantt" height="220"></canvas>
+      </div>
+    </section>
+
+    <!-- ===== RIESGOS ===== -->
+    <section id="riesgos" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">⚠️</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Matriz de Riesgos</h2>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50">
+            <tr><th class="px-5 py-3.5 text-left font-semibold text-gray-600">Riesgo</th><th class="px-5 py-3.5 text-center font-semibold text-gray-600">Prob.</th><th class="px-5 py-3.5 text-center font-semibold text-gray-600">Impacto</th><th class="px-5 py-3.5 text-center font-semibold text-gray-600">Nivel</th><th class="px-5 py-3.5 text-left font-semibold text-gray-600">Mitigación</th></tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr>
+              <td class="px-5 py-3.5 font-medium">Discrepancia superficie (8.560 vs 9.486 m²)</td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-semibold">Alta</span></td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-semibold">Alto</span></td>
+              <td class="px-5 py-3.5 text-center"><div class="w-4 h-4 rounded-full traffic-red mx-auto"></div></td>
+              <td class="px-5 py-3.5 text-gray-600 text-xs">Solicitar nota simple registral + medición topográfica ANTES de cerrar la compra. Si son 8.560 m², replantear densidad (18 villas con 475 m²/parcela) o reducir a 16 villas.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-medium">Restricciones urbanísticas RT1-B</td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-semibold">Media</span></td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-semibold">Alto</span></td>
+              <td class="px-5 py-3.5 text-center"><div class="w-4 h-4 rounded-full traffic-yellow mx-auto"></div></td>
+              <td class="px-5 py-3.5 text-gray-600 text-xs">Suelo RT1-B (residencial turístico). Verificar edificabilidad máxima, alturas, retranqueos y densidad permitida con PGO de Adeje. Consultar urbanismo antes de proyecto básico.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-medium">Incremento costes construcción</td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-semibold">Media</span></td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-semibold">Medio</span></td>
+              <td class="px-5 py-3.5 text-center"><div class="w-4 h-4 rounded-full traffic-yellow mx-auto"></div></td>
+              <td class="px-5 py-3.5 text-gray-600 text-xs">Villas de lujo con margen del 48% — tolerancia alta al incremento. Contratos a precio cerrado con revisión máx. +7%. Buffer del 10% ya incluido en 10% "otros gastos".</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-medium">Absorción comercial lenta</td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-semibold">Baja</span></td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-semibold">Medio</span></td>
+              <td class="px-5 py-3.5 text-center"><div class="w-4 h-4 rounded-full traffic-green mx-auto"></div></td>
+              <td class="px-5 py-3.5 text-gray-600 text-xs">Mercado de lujo Costa Adeje muy activo. Desarrollo en 2 fases reduce riesgo. Iniciar pre-ventas en fase de proyecto con reserva del 10%. Marketing internacional (UK, Alemania, Benelux, Escandinavia).</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-medium">Geotécnico (zona costera volcánica)</td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-semibold">Baja</span></td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-semibold">Medio</span></td>
+              <td class="px-5 py-3.5 text-center"><div class="w-4 h-4 rounded-full traffic-green mx-auto"></div></td>
+              <td class="px-5 py-3.5 text-gray-600 text-xs">La Caleta es terreno consolidado con abundante desarrollo previo. Estudio geotécnico obligatorio antes de proyecto de ejecución.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-medium">Competencia (otros desarrollos premium)</td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-semibold">Media</span></td>
+              <td class="px-5 py-3.5 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-semibold">Bajo</span></td>
+              <td class="px-5 py-3.5 text-center"><div class="w-4 h-4 rounded-full traffic-green mx-auto"></div></td>
+              <td class="px-5 py-3.5 text-gray-600 text-xs">Diferenciación por diseño arquitectónico exclusivo, eficiencia energética A, y servicios premium. La oferta de villas nuevas en La Caleta es muy escasa.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== EQUIPO ===== -->
+    <section id="equipo" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">👥</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Equipo Activado</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-100 mx-auto mb-3 flex items-center justify-center text-xl">📋</div>
+          <h4 class="font-bold text-gray-800">Nexus</h4>
+          <p class="text-xs text-gray-500 mb-2">Director de Proyecto</p>
+          <span class="px-2.5 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">En curso</span>
+        </div>
+        <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center">
+          <div class="w-12 h-12 rounded-full bg-indigo-100 mx-auto mb-3 flex items-center justify-center text-xl">🏠</div>
+          <h4 class="font-bold text-gray-800">Valorex</h4>
+          <p class="text-xs text-gray-500 mb-2">Tasador Inmobiliario</p>
+          <span class="px-2.5 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">🚀 Delegado</span>
+        </div>
+        <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center">
+          <div class="w-12 h-12 rounded-full bg-amber-100 mx-auto mb-3 flex items-center justify-center text-xl">🏗️</div>
+          <h4 class="font-bold text-gray-800">Buildero</h4>
+          <p class="text-xs text-gray-500 mb-2">Jefe de Obra</p>
+          <span class="px-2.5 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">🚀 Delegado</span>
+        </div>
+        <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center">
+          <div class="w-12 h-12 rounded-full bg-purple-100 mx-auto mb-3 flex items-center justify-center text-xl">📐</div>
+          <h4 class="font-bold text-gray-800">Arqon</h4>
+          <p class="text-xs text-gray-500 mb-2">Arquitecto</p>
+          <span class="px-2.5 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">🚀 Delegado</span>
+        </div>
+      </div>
+      <div class="mt-4 flex justify-center">
+        <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center w-full md:w-1/4">
+          <div class="w-12 h-12 rounded-full bg-blue-100 mx-auto mb-3 flex items-center justify-center text-xl">💹</div>
+          <h4 class="font-bold text-gray-800">Finex</h4>
+          <p class="text-xs text-gray-500 mb-2">Analista Financiero</p>
+          <span class="px-2.5 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">🚀 Delegado</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRÓXIMOS PASOS ===== -->
+    <section id="proximos" class="reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">🚀</div>
+        <h2 class="text-3xl font-extrabold gradient-text">Próximos Pasos — Hoja de Ruta</h2>
+      </div>
+      <div class="space-y-4">
+        <div class="bg-white rounded-2xl shadow-sm border-l-4 border-red-400 border border-gray-100 p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center text-lg font-bold text-red-700">1</span>
+            <div><div class="flex flex-wrap items-center gap-3 mb-1"><h4 class="font-bold text-gray-800">Resolver discrepancia de superficie</h4><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded-full text-xs font-semibold">Crítico · Inmediato</span></div><p class="text-sm text-gray-600">Solicitar nota simple registral y medición topográfica profesional. Diferencia catastral: 8.560 m² vs documental: 9.486 m². Afecta directamente a la viabilidad de 18 villas.</p></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border-l-4 border-red-400 border border-gray-100 p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center text-lg font-bold text-red-700">2</span>
+            <div><div class="flex flex-wrap items-center gap-3 mb-1"><h4 class="font-bold text-gray-800">Consulta urbanística Ayuntamiento de Adeje</h4><span class="px-2 py-0.5 bg-red-100 text-red-700 rounded-full text-xs font-semibold">Crítico · Semana 1</span></div><p class="text-sm text-gray-600">Verificar edificabilidad, alturas permitidas, densidad, retranqueos y condiciones de la clasificación RT1-B. Confirmar que 18 villas son viables urbanísticamente.</p></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border-l-4 border-amber-400 border border-gray-100 p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-lg font-bold text-amber-700">3</span>
+            <div><div class="flex flex-wrap items-center gap-3 mb-1"><h4 class="font-bold text-gray-800">Revisar informes de agentes delegados</h4><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">Alta · En proceso</span></div><p class="text-sm text-gray-600">Valorex (tasación terreno + mercado), Buildero (presupuesto PEM), Arqon (análisis arquitectónico) y Finex (viabilidad económica) están generando sus informes. Consolidar resultados cuando estén listos.</p></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border-l-4 border-blue-400 border border-gray-100 p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-lg font-bold text-blue-700">4</span>
+            <div><div class="flex flex-wrap items-center gap-3 mb-1"><h4 class="font-bold text-gray-800">Estudio geotécnico profesional</h4><span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Media · Mes 1-2</span></div><p class="text-sm text-gray-600">Encargar estudio geotécnico completo. Zona costera volcánica — necesario para dimensionar cimentaciones. Coste estimado: 8.000-12.000 € (parcela grande).</p></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border-l-4 border-blue-400 border border-gray-100 p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-lg font-bold text-blue-700">5</span>
+            <div><div class="flex flex-wrap items-center gap-3 mb-1"><h4 class="font-bold text-gray-800">Negociación del terreno</h4><span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Media · Mes 1-2</span></div><p class="text-sm text-gray-600">Con los informes de Valorex y Finex, negociar el precio del terreno. El precio actual de 9 M€ (~949 €/m²) debe validarse contra comparables de la zona.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 py-10">
+    <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+      <div class="flex items-center justify-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white font-bold text-xs">NX</div>
+        <p class="text-white font-bold">Nexus — Director de Proyecto</p>
+      </div>
+      <p class="mb-2">La Caleta 18 Villas · Costa Adeje · Municipio de Adeje (Tenerife)</p>
+      <p class="text-gray-500">7 de abril de 2026 · Generado por SM PropTech — Sistema de Agentes Inmobiliarios IA</p>
+      <p class="mt-4 text-xs text-gray-600">Este informe tiene carácter orientativo y no sustituye el asesoramiento profesional. Las cifras proceden del documento del promotor y datos catastrales. Todas las decisiones de inversión deben ser validadas por profesionales cualificados.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    new Chart(document.getElementById('chartInversion'),{
+      type:'doughnut',
+      data:{labels:['Terreno','Construcción (320m² útiles)','Parcela/Exterior (207m²)','Otros gastos (10%)'],
+        datasets:[{data:[9000000,11520000,3726000,1513800],backgroundColor:['#6366f1','#ef4444','#f59e0b','#8b5cf6'],borderWidth:0,hoverOffset:8}]},
+      options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{family:'Inter',size:11},padding:12}},
+        tooltip:{callbacks:{label:c=>c.label+': '+c.parsed.toLocaleString('es-ES')+'€'}}}}
+    });
+
+    new Chart(document.getElementById('chartBalance'),{
+      type:'bar',
+      data:{labels:['Inversión Total','Ingresos Ventas','Beneficio Bruto'],
+        datasets:[{data:[26000000,50400000,24400000],backgroundColor:['#ef4444','#10b981','#059669'],borderRadius:8,borderSkipped:false}]},
+      options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:c=>c.parsed.x.toLocaleString('es-ES')+' €'}}},
+        scales:{x:{ticks:{callback:v=>(v/1e6).toFixed(0)+'M€',font:{family:'Inter',size:11}},grid:{color:'#f3f4f6'}},
+          y:{grid:{display:false},ticks:{font:{family:'Inter',size:12,weight:'500'}}}}}
+    });
+
+    new Chart(document.getElementById('chartGantt'),{
+      type:'bar',
+      data:{labels:['Due Diligence + Proyecto','Licencia + Licitación','Obra Fase 1 (9 villas)','Obra Fase 2 (9 villas)','Entrega + Cierre'],
+        datasets:[
+          {label:'Inicio',data:[0,5,9,17,29],backgroundColor:'transparent',borderWidth:0},
+          {label:'Duración',data:[6,5,13,13,7],backgroundColor:['#10b981','#f59e0b','#3b82f6','#8b5cf6','#ef4444'],borderRadius:6,borderSkipped:false}
+        ]},
+      options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:c=>c.datasetIndex===0?'':'Meses '+c.chart.data.datasets[0].data[c.dataIndex]+' a '+(c.chart.data.datasets[0].data[c.dataIndex]+c.parsed.x)}}},
+        scales:{x:{stacked:true,title:{display:true,text:'Meses',font:{family:'Inter',size:12}},grid:{color:'#f3f4f6'},ticks:{font:{family:'Inter',size:11}}},
+          y:{stacked:true,grid:{display:false},ticks:{font:{family:'Inter',size:11,weight:'500'}}}}}
+    });
+  </script>
+</body>
+</html>
